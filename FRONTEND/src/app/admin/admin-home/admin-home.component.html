@@ -1,0 +1,103 @@
+<main>
+  <h1 class="title">Dashboard</h1>
+
+  <section class="info-cards">
+    <ul class="info-data">
+      <li class="card">
+        <div class="text">
+          <div class="card-topic">Profits</div>
+          <h2>PHP543,939</h2>
+        </div>
+        <div>
+          <i class="ti ti-report-money card-icon"></i>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="text">
+          <span class="card-topic">Expenses</span>
+          <h2>PHP50,000</h2>
+        </div>
+        <div>
+          <i class="ti ti-receipt-tax card-icon"></i>
+        </div>
+      </li>
+
+      <li class="card">
+        <div class="text">
+          <span class="card-topic">Revenue</span>
+          <h2>PHP493,939</h2>
+        </div>
+        <div>
+          <i class="ti ti-chart-pie card-icon"></i>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="recent-transaction">
+    <h2 class="section-title">Recent Transactions</h2>
+
+    <div class="table-filter">
+      <div class="filter-field">
+        <label>Type</label>
+        <select name="journal-type">
+          <option value="All">All</option>
+          <option value="Journal Entry">Journal Entry</option>
+          <option value="Invoice">Invoice</option>
+          <option value="Payment">Payment</option>
+        </select>
+      </div>
+
+      <div class="filter-field">
+        <label>Date</label>
+        <select name="date-range">
+          <option value="All">All</option>
+          <option value="Today">Today</option>
+          <option value="Yesterday">Yesterday</option>
+          <option value="Last week">Last week</option>
+          <option value="Last month">Last month</option>
+        </select>
+      </div>
+
+      <div class="filter-field">
+        <label for="search-member" placeholder="Search Member">Member</label>
+        <input type="search" />
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="table-content">
+        <thead>
+          <th>Date</th>
+          <th>Type</th>
+          <th>No.</th>
+          <th>Member</th>
+          <th>Due Date</th>
+          <th>Balance</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>03/01/2023</td>
+            <td>Journal Entry</td>
+            <td>9</td>
+            <td>0005 John Concepcion</td>
+            <td>03/01/2023</td>
+            <td>P14,000.00</td>
+            <td>Overdue</td>
+          </tr>
+          <tr>
+            <td>02/28/2023</td>
+            <td>Journal Entry</td>
+            <td>8</td>
+            <td>0001 Dale Allen Liwanag</td>
+            <td>02/28/2023</td>
+            <td>P20,000.00</td>
+            <td>Pending</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
