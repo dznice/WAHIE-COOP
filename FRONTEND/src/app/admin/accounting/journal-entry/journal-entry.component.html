@@ -1,1 +1,62 @@
-<p>journal-entry works!</p>
+<div class="container">
+    
+    <div class="sub_header">
+        <div class="journdate">
+            <label> Journal Date </label>
+            <input class="inputdate" type="date" id="journaldate" required>
+        </div>
+  
+        <div class="journnumber">
+            <label>Journal Number </label>
+            <input class="numberj" type="number" id="journalnumber" required>
+        </div>
+
+        <div>
+            <button class="Add" (click)="addTable()">
+                <i class="ti ti-plus"></i>
+                <span class="btnText"> Add  </span>
+                </button>
+        </div>
+       
+    </div>
+
+            <div class="journals">
+                <table class="tablejournal">
+                     <tr>
+                            
+                            <th class="journallabel">No.</th>
+                            <th class="journallabel">Account</th>
+                            <th class="journallabel">Debits</th>
+                            <th class="journallabel">Credits</th>
+                            <th class="journallabel">Description</th>
+                            <th class="journallabel">Name</th>
+                    </tr>
+                        <tr *ngFor="let item of row; let x = index">
+                            
+                           
+                                
+                                <th class="journallabel">#</th>
+                                <td class="beneinput"><select type="text">
+                                    <option disabled selected>Select</option>
+                                    <option>Account 1</option>
+                                    <option>Account 2</option>
+                                    <option>Account 3</option>
+                                </select></td>
+                                <td class="beneinput"><input type="number"></td>
+                                <td class="beneinput"><input type="number"></td>
+                                <td class="beneinput"><input type="text"></td>
+
+                                <td class="beneinput"><select type="text">
+                                    <option disabled selected>Select</option>
+                                    <option>Name 1</option>
+                                    <option>Name 2</option>
+                                    <option>Name 3</option>
+                                </select></td>
+
+                                    <td > <button class="delbut" (click) = "deleteRow(x)">
+                                        <i class="ti ti-square-rounded-x"></i>
+                                        </button></td>
+                         </tr>         
+                </table> 
+            </div>  
+</div>
