@@ -19,59 +19,33 @@
 
   <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>"><input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
 
-  	<label >Account ID Number:</label>
-  {{-- @php
-  $rows = DB::table('members')->count();
-    $count = 1;
-       foreach ($members as $member){ 
-        if($member==$count){ 
-        $count++;
-        }
-       elseif($member!=$count){
-       $id = $count;
-       } 
-      }
-    
-      @endphp    --}}
-      @php
-      $loop = true;
-    // while($loop == true){
-    
-      // foreach ($members as $member){
-       
-      //     if($members== $count){
-      //       $count++;
-      //     }else{
-      //       $id = $count;
-      //       $loop = false;
-      //     }
+  	<label >MEMBER ID:</label>
 
-      //   }
+      @php
       $count = 1;
+      $member = 1;
+      $loop = true;
       $max = $members->max();
-      while($count<$max){
-        $id = 1;
-      foreach ($members as $member) {
-        
-        if($member==$id){
-          $id++;
-         }  
-            
-      }
-      $count++;
-    
-      //must loop until all value in account id = true
-      $member = $id;
-     
-     } 
-     echo $count;
-    echo $max;
-      @endphp
+
+    while($loop == true){ 
+      $id = 1;
+      while($count<=$max){ 
+    foreach ($members as $member) {
+      if($member==$id){
+      $id++;
+      }      
+    }
+      $count++;   
+      } 
+    $member = $id;
+    $loop = false;
+    }
+  @endphp
   
 
 
-    <input type="hidden" name="predef" value="WAH-">
-    WAH- <input  type="text" name="account_id" value={{$member}} >
+    <input type="hidden" name="predef" value="WAH">
+    WAH - <input  type="text" name="account_id" value={{$member}} >
   
     @if ($errors->has('account_id'))
     <span class="text-danger">{{ $errors->first('account_id') }}</span>

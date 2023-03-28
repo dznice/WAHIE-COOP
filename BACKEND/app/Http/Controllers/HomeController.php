@@ -63,7 +63,7 @@ class HomeController extends Controller
 
     public function approval()
     {
-        if(auth()->user()->status=='verified'){
+        if(auth()->user()->status==1){
             return redirect('home');
         }else{
         return view('approval');
