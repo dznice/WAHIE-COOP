@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:host{
+    display: flex;
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(221, 210, 210, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    position: relative;
+    width: 1450px;
+    min-height: 650px;
+    padding: 40px;
+    margin: 0 15px;
+    box-shadow: 5px 5px 5px #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+}
+    
+.container .head{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container header{
+    position: relative;
+    font-size: 28px;
+    font-weight: 600;
+    color: #3F0F88;
+}
+
+.sub_header {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+label{
+    font-size: 16px;
+    font-weight: 500;
+    color: #3F0F88;
+}
+
+.tablejournal{
+    width: 100%;
+    
+}
+
+.journdate{
+    margin-right: 650px;
+}
+
+.beneinput input, select{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 36px;
+    margin: 2px 0;
+    display: flex;
+    width: 100%;
+}
+
+ .journallabel{
+     font-size: 16px;
+     font-weight: 500;
+     color: #3F0F88;
+ }
+
+ .inputdate, .numberj{
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 14px;
+    height: 34px;
+    margin: 4px 0;
+
+ }
+
+
+
+ .Add{
+    margin-left: 10px;
+    height: 40px;
+    width:80px;
+    border: none;
+    background-color: #500ea1;
+    color: #ffffff;
+    border-radius: 5px;
+    outline: none;
+    font-weight: 600;
+ }
+
+ .delbut{
+    height: auto;
+    width:auto;
+    margin-left: 6px;
+    border: none;
+    font-size: 24px;
+    background: none;
+    background-color: none;
+    color: #ff0000;
+    border-radius: 5px;
+    outline: none;
+    font-weight: 600;
+ }
