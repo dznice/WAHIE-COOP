@@ -28,6 +28,7 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
 import { PassDoneComponent } from './pass-done/pass-done.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
 import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
