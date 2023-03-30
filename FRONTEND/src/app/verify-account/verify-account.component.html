@@ -1,1 +1,69 @@
-<p>verify-account works!</p>
+<head><title>Account Verification</title></head>
+<main>
+    <div class="box">
+        <div class="inner-box">
+            <div class="form-wrap" >    
+                <form class="verify-form">
+                    <div class="wah-logo">
+                        <img src="assets/image/coop-logo.png" alt="WAH Logo">
+                        <p>WAHIE <br> Cooperative</p>
+                    </div>
+
+                    <div class="heading">
+                        <h1>Verify Account</h1>
+                        <p>Enter the verification code sent to <br> sample@gmail.com</p>
+                    </div>
+                
+                    <div class="txt-field">
+                        <div class="txt-wrap">
+                            <h5>Verification code</h5>
+                            <input [ngClass]="show" type="email" minlength="4" class="input-field" id="text" placeholder="Enter verification code" required><br> 
+                        </div>
+                    </div>
+
+                    <div class="resend-code">
+                        <a>Resend code</a>
+                    </div>
+                        <button (click)="show(1)" class="submit">Confirm</button>
+
+                        <a href="register" class="back">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
+                            width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" 
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 12l14 0"></path>
+                            <path d="M5 12l6 6"></path>
+                            <path d="M5 12l6 -6"></path>
+                        </svg>Go Back</a>
+                    
+                </form>
+            </div>
+                <!-- VECTOR BACKGROUND -->
+                <div class="otp-vector">
+                <img src="assets/image/Two factor authentication-amico.png"> 
+                </div>
+        </div>
+    </div>
+</main>
+
+<!--OTP MODAL-->
+<section>
+    <router-outlet></router-outlet>
+    <div>
+        <div class="otp-modal" *ngIf="showModal === 1">
+            <div class="otp-content">
+                <div class="otp-header">
+                    <span class="check-icon"><i class="ti ti-circle-check-filled"></i></span>
+                </div>
+                <div class="otp-body">
+                    <h1>Email Verified!</h1>
+                    <p>An email will be sent once your account has been activated.</p>
+                </div>
+                <div class="otp-footer">
+                    <button class="backbtn">Go to Login</button>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</section>
