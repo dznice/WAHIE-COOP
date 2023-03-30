@@ -1,1 +1,50 @@
-<p>check-email works!</p>
+<head><title>Check Email</title></head>
+<main>
+    <div class="box">
+        <div class="inner-box">
+            <div class="form-wrap" >    
+                <form *ngIf="isDisplayed" @slideright>
+                    <div class="wah-logo">
+                        <img src="assets/image/coop-logo.png" alt="WAH Logo">
+                        <p>WAHIE <br> Cooperative</p>
+                    </div>
+
+                    <div class="heading">
+                        <h1>Check your email</h1>
+                        <p>We sent a password reset link to sample@gmail.com</p>
+                    </div>
+                
+                    <div class="txt-field">
+                        <div class="txt-wrap">
+                            <a href="https://mail.google.com/mail/u/0/#inbox" class="reset">Open gmail</a>
+                            <p class="did">Didn't receive the email?<a  class="signup" href="new-pass">Click to resend</a></p><br>
+                        </div>
+                       
+                        <div class="account">
+                            <a href="login" class="back">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
+                                width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" 
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M5 12l14 0"></path>
+                                <path d="M5 12l6 6"></path>
+                                <path d="M5 12l6 -6"></path>
+                            </svg>Back to log in</a>
+                        </div>
+                    </div>
+                </form>
+                    <div class="account" >
+                        <div style="text-align:center"></div>
+                            <span class="dot1">1</span>
+                            <span class="dot2">2</span>
+                            <span class="dot3">3</span>
+                            <span class="dot4">4</span>
+                    </div>
+            </div>
+            <!-- VECTOR BACKGROUND -->
+                <div class="login-vector">
+                    <img src="assets/image/Email-amico.png" class="login" *ngIf="isDisplayed" @slider>
+                </div>
+        </div>
+    </div>
+</main>
