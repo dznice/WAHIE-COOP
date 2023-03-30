@@ -1,14 +1,13 @@
 <div class="container">
-    
-    <div class="sub_header">
+    <div class="header">
         <div class="journdate">
             <label> Journal Date </label>
-            <input class="inputdate" type="date" id="journaldate" required>
+            <input class="headinput" type="date" id="journaldate" required>
         </div>
   
         <div class="journnumber">
-            <label>Journal Number </label>
-            <input class="numberj" type="number" id="journalnumber" required>
+            <label> Journal Number </label>
+            <input class="headinput" type="number" id="journalnumber" required>
         </div>
 
         <div>
@@ -17,26 +16,22 @@
                 <span class="btnText"> Add  </span>
                 </button>
         </div>
-       
+    
     </div>
-
-            <div class="journals">
                 <table class="tablejournal">
                      <tr>
-                            
                             <th class="journallabel">No.</th>
                             <th class="journallabel">Account</th>
                             <th class="journallabel">Debits</th>
                             <th class="journallabel">Credits</th>
                             <th class="journallabel">Description</th>
                             <th class="journallabel">Name</th>
-                    </tr>
+                     </tr>
+
                         <tr *ngFor="let item of row; let x = index">
-                            
-                           
                                 
-                                <th class="journallabel">#</th>
-                                <td class="beneinput"><select type="text">
+                                <td class="journallabel" id="number">#</td>
+                                <td class="beneinputt"><select type="text">
                                     <option disabled selected>Select</option>
                                     <option>Account 1</option>
                                     <option>Account 2</option>
@@ -58,5 +53,15 @@
                                         </button></td>
                          </tr>         
                 </table> 
-            </div>  
+                            
+                                <div class="buttons">
+                                    <button class="back">
+                                        <span class="btnTextb">Back</span>
+                                    </button>
+                    
+                                    <button class="save">
+                                        <span class="btnTexts">Save</span>
+                                    </button>
+                                </div>
+                                
 </div>

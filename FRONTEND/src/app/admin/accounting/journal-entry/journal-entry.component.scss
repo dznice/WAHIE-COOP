@@ -20,49 +20,34 @@
 
 .container{
     position: relative;
-    width: 1450px;
-    min-height: 650px;
+    width: 1400px;
+    min-height: 700px;
+    max-height: 700px;
     padding: 40px;
     margin: 0 15px;
     box-shadow: 5px 5px 5px #ccc;
     border-radius: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
+    overflow-y: auto;
 }
-    
-.container .head{
+
+.header {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
 }
 
-.container header{
-    position: relative;
-    font-size: 28px;
-    font-weight: 600;
-    color: #3F0F88;
-}
-
-.sub_header {
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-}
-
-label{
+label {
     font-size: 16px;
     font-weight: 500;
     color: #3F0F88;
 }
 
+
 .tablejournal{
     width: 100%;
-    
 }
 
-.journdate{
-    margin-right: 650px;
-}
-
-.beneinput input, select{
+.beneinput input, select {
     outline: none;
     font-size: 14px;
     font-weight: 400;
@@ -80,9 +65,9 @@ label{
      font-size: 16px;
      font-weight: 500;
      color: #3F0F88;
- }
-
- .inputdate, .numberj{
+ }          
+ 
+ .headinput{
     outline: none;
     font-size: 14px;
     font-weight: 400;
@@ -91,13 +76,15 @@ label{
     border: 1px solid #aaa;
     padding: 0 14px;
     height: 34px;
-    margin: 4px 0;
-
+    margin: 4px 4px;
  }
 
+ /* buttons */
 
-
- .Add{
+.Add{
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
     margin-left: 10px;
     height: 40px;
     width:80px;
@@ -122,3 +109,40 @@ label{
     outline: none;
     font-weight: 600;
  }
+
+ .buttons{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 0;
+    margin: 14px 0;
+    float: right;
+}
+
+.back{
+    height: 40px;
+    width: 80px;
+    border: none;
+    background-color: #ede9f2;
+    color: #7f7a7a;
+    border-radius: 5px;
+    outline: none;
+}
+
+.save{
+    height: 40px;
+    width: 80px;    
+    border: none;
+    margin-left: 10px;
+    align-items: end;
+    background-color: #530ea8;
+    color: #ffffff;
+    border-radius: 5px;
+    outline: none;
+}
+
+.btnTextb{
+    font-size: 14px;
+    font-weight: 600;
+    justify-content: center;
+}
