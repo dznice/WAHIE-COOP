@@ -3,7 +3,7 @@
     <div class="box">
         <div class="inner-box">
             <div class="form-wrap" >    
-                <form class="login-form"  *ngIf="isDisplayed" @slideright>
+                <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login-form"  *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -16,16 +16,26 @@
                 
                     <div class="txt-field">
                             <div class="txt-wrap">
-                                <input type="email" minlength="4" class="input-field" id="log-email" placeholder="Email" required><br>
+                                <input type="email" name="email" formControlName="email" class="input-field" id="log-email" placeholder="Email" 
+                                [ngClass]="{error : getControl('email')?.errors && getControl('email')}"><br>
                             </div>
 
                             <div class="txt-wrap">
-                                <input [type]="changetype?'password':'text'" minlength="8" class="input-field" id="log-pass" placeholder="Password" required>
+                                <input [type]="changetype?'password':'text'" name="password" formControlName="password" class="input-field" id="log-pass" placeholder="Password" 
+                                [ngClass]="{error : getControl('password')?.errors && getControl('password')}">
                                 <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span>
+                            
+                            </div>
+                            <div>
+                                <div class="text-danger" *ngIf="submitted">
+                                    <small *ngIf="getControl('email')?.errors?.['required'] || getControl('password')?.errors?.['required']">Email and Password required</small>
+                                </div>
                             </div>
         
                             <a href="forgot-pass" class="forgot-pass">Forgot Password?</a><br>
-                            <button class="submit">Login</button>
+
+                            <button type="submit" class="submit">Login</button>
+                            
 
                             <p class="account">
                                 Don't have an account? <a  onclick="clearInputField()" href="register">Sign Up</a>
