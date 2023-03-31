@@ -114,7 +114,7 @@ form {
 .text-wrap {
   position: relative;
   height: 30px;
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem;
 }
 
 input[type=text], input[type=email], input[type=password]{
@@ -334,6 +334,23 @@ input[type=checkbox]{
   }
 }
 
-small{
-    margin-bottom: 30px;
+/**PASSWORD MATCH*/
+.text-danger{
+  transform: translate(16%, -100%);
+  color: red;
+  font-size: 14px;
+  position: absolute;
+}
+
+.text-danger1{
+  transform: translate(11%, -100%);
+  color: red;
+  font-size: 14px;
+  position: absolute;
+}
+
+.text-danger2{
+  transform: translate(5%, -100%);
+  color: red;
+  font-size: 14px;
 }

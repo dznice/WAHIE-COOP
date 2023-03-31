@@ -44,9 +44,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(@Inject(DOCUMENT) private _document: any ){}
 
   registerForm = new FormGroup({
+    name : new FormControl("", [Validators.required]),
+
+    email : new FormControl("", [Validators.required]),
 
     password : new FormControl("", [Validators.required]),
-
 
     confirm_pass : new FormControl("", [Validators.required]),
 

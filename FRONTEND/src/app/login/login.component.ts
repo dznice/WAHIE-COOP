@@ -1,6 +1,7 @@
 import { Component,OnInit, OnDestroy, ViewEncapsulation, Inject  } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { formState, formState2, formState3, formState4, formState5, slideleft, slideright } from '../animation';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -30,8 +31,29 @@ export class LoginComponent implements OnInit, OnDestroy  {
     this.cchangetype = !this.cchangetype
   }
 
-  constructor(@Inject(DOCUMENT) private _document: any){  
-}
+  
+  submitted:boolean = false;
+
+  constructor(@Inject(DOCUMENT) private _document: any){}
+
+  loginForm = new FormGroup({
+  
+    email : new FormControl("", [Validators.required]),
+
+    password : new FormControl("", [Validators.required]),
+
+  })
+
+  getControl(name: any): AbstractControl | null{
+    return this.loginForm.get(name)
+  }
+
+  onSubmit(){
+    this.submitted = true;
+    if(this.loginForm.invalid){
+      return;
+    }
+  }
 
   ngOnInit() {
     this._document.body.classList.add('body');

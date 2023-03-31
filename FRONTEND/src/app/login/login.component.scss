@@ -13,6 +13,10 @@
     text-decoration: none;
     background-color: transparent;
   }
+
+  body, button, input{
+    font-family: "Poppins", sans-serif;
+  }
   
   main{
     width: 100%;
@@ -24,7 +28,6 @@
     align-items: center;
     justify-content: center;
     cursor: context-menu;
-    font-family: "Poppins", sans-serif;
   }
   
   .box{
@@ -143,7 +146,7 @@
     content: '\ea9a';
     position: absolute;
     left: 87%;
-    bottom: -15%;
+    bottom: -30%;
     cursor: pointer;
     font-size: 1.3rem;
   }
@@ -296,4 +299,10 @@
     form {
       padding: 1rem 2rem 1.5rem;
     }
+  }
+
+  .text-danger{
+    transform: translate(5%, -60%);
+    color: red;
+    position: absolute;
   }
