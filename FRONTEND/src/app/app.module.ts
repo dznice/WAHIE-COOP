@@ -30,6 +30,7 @@ import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
 import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StrengthMeterModule } from "ngx-strength-meter";
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    StrengthMeterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

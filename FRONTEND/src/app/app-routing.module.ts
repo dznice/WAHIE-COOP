@@ -5,6 +5,8 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
 import { CheckEmailComponent } from './check-email/check-email.component';
+import { ChangePassComponent } from './change-pass/change-pass.component';
+import { PassDoneComponent } from './pass-done/pass-done.component';
 
 const routes: Routes = [{
   path: 'login', 
@@ -31,6 +33,17 @@ const routes: Routes = [{
   path: 'check-email', 
   component: CheckEmailComponent
 },
+
+{
+  path: 'change-pass', 
+  component: ChangePassComponent
+},
+
+{
+  path: 'pass-done', 
+  component: PassDoneComponent
+},
+
 ];
 
 @NgModule({
