@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('lib_journals', function (Blueprint $table) {
             $table->integer('journal_number');
             $table->string('journal_name');
-            $table->string('journal_type');
+            $table->string('journal_type')->default('');
         });
     }
 
