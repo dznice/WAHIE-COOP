@@ -146,3 +146,12 @@ label {
     font-weight: 600;
     justify-content: center;
 }
+
+@media (max-height: 1200px) {
+    .container {
+        overflow-y: scroll;
+    }
+    .container::-webkit-scrollbar{
+        display: none;
+     }
+} 
