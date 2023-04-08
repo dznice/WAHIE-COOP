@@ -13,6 +13,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from
 export class LoginComponent implements OnInit, OnDestroy  {
 
   isDisplayed: boolean = true;
+
   toggleDiv(){
     this.isDisplayed = this.isDisplayed? false:true;
   }
@@ -30,7 +31,6 @@ export class LoginComponent implements OnInit, OnDestroy  {
     this.cvisible = !this.cvisible
     this.cchangetype = !this.cchangetype
   }
-
   
   submitted:boolean = false;
 

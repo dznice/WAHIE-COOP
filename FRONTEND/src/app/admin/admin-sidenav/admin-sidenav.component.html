@@ -18,7 +18,7 @@
   </div>
 
   <ul class="sidenav-nav">
-    <li class="nav-item" *ngFor="let data of navData">
+    <li class="nav-item" *ngFor="let data of aNavData">
       <a
         class="nav-link"
         [routerLink]="[data.routeLink]"
@@ -34,14 +34,14 @@
     </li>
 
     <li class="profile">
-      <div class="profile-details">
+      <div class="profile-details" @fadeInOut *ngIf="collapsed">
         <img src="assets/image/user-icon.png" alt="profile-img" />
         <div class="admin-name">
           <div class="name">Nicer Dizon</div>
           <div class="role">Admin</div>
         </div>
       </div>
-      <i class="ti ti-logout btn-logout"></i>
+      <i class="ti ti-logout btn-logout" [routerLink]="'/login'"></i>
     </li>
   </ul>
 </div>

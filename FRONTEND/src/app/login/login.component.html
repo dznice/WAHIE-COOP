@@ -34,11 +34,10 @@
         
                             <a href="forgot-pass" class="forgot-pass">Forgot Password?</a><br>
 
-                            <button type="submit" class="submit">Login</button>
-                            
+                            <button type="submit" class="submit" [routerLink]="['/admin/admin-home']">Login</button>
 
                             <p class="account">
-                                Don't have an account? <a  onclick="clearInputField()" href="register">Sign Up</a>
+                                Don't have an account? <a  onclick="clearInputField()" [routerLink]="['/register']">Sign Up</a>
                             </p>
                     </div>
                 </form>
