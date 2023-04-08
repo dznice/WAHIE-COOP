@@ -1,18 +1,6 @@
-import {
-  animate,
-  keyframes,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import {
-  Component,
-  Output,
-  EventEmitter,
-  OnInit,
-  HostListener,
-} from '@angular/core';
-import { navbarData } from './admin-navdata';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
+import { adminNavData } from './admin-navdata';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -51,7 +39,7 @@ export class AdminSidenavComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
   screenWidth = 0;
-  navData = navbarData;
+  aNavData = adminNavData;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

@@ -1,21 +1,21 @@
-export const navbarData = [
+export const adminNavData = [
     {
         routeLink: 'admin-home',
         icon: 'ti ti-smart-home',
         label: 'Dashboard'
     },
     {
-        routeLink: 'admin-accounting',
+        routeLink: 'accounting',
         icon: 'ti ti-file-invoice',
         label: 'Accounting'
     },
     {
-        routeLink: 'admin-members',
+        routeLink: 'members',
         icon: 'ti ti-users',
         label: 'Members'
     },
     {
-        routeLink: 'admin-inventory',
+        routeLink: 'inventory',
         icon: 'ti ti-archive',
         label: 'Inventory'
     }
