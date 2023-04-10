@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Journal;
+use App\Http\Controllers\JournalController;
+use App\Http\Resources\JournalResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,20 @@ Route::get('/member/{id}', function($id){
 Route::post('/members', [MemberController::class, 'store']);
 Route::put('/member/{id}', [MemberController::class, 'update']);
 Route::delete('/member/{id}', [MemberController::class, 'destroy']);
+
+Route::get('/journals', function() {
+    return JournalResource::collection(Journal::all());
+});
+
+Route::get('/journal/{id}', function($id) {
+    return new JournalResource(Journal::findOrFail($id));
+});
+
+Route::post('/journals', [JournalController::class, 'store']);
+
+Route::put('/journal/{id}', [JournalController::class, 'update']);
+
+Route::delete('/journal/{id}', [JournalController::class, 'destroy']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

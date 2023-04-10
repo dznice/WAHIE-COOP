@@ -23,7 +23,6 @@
             <div class="journals">
                 <table class="tablejournal">
                      <tr>
-                            
                             <th class="journallabel">No.</th>
                             <th class="journallabel">Account</th>
                             <th class="journallabel">Debits</th>
@@ -32,16 +31,30 @@
                             <th class="journallabel">Name</th>
                     </tr>
                         <tr *ngFor="let item of row; let x = index">
-                            
-                           
-                                
                                 <th class="journallabel">#</th>
-                                <td class="beneinput"><select type="text">
-                                    <option disabled selected>Select</option>
-                                    <option>Account 1</option>
-                                    <option>Account 2</option>
-                                    <option>Account 3</option>
-                                </select></td>
+                                <td class="try">
+                                    <ng-autocomplete
+                                        [data]="journals"
+                                        [searchKeyword]="keyword"
+                                        [itemTemplate]="itemTemplate"
+                                        [notFoundTemplate]="notFoundTemplate">
+                                    </ng-autocomplete>
+                                    <ng-template #itemTemplate let-item>
+                                        <a>
+                                            <span [innerHTML]="item.journal_number"></span>, 
+                                            <span [innerHTML]="item.journal_name"></span>, 
+                                            <span [innerHTML]="item.journal_type"></span> 
+                                        </a>
+                                    </ng-template>
+                                    <ng-template #headerTemplate>
+                                        <a>
+                                            <button>add+</button> 
+                                        </a>
+                                    </ng-template>
+                                    <ng-template #notFoundTemplate let-notFound>
+                                        <button>add+</button>
+                                    </ng-template>
+                                </td>
                                 <td class="beneinput"><input type="number"></td>
                                 <td class="beneinput"><input type="number"></td>
                                 <td class="beneinput"><input type="text"></td>

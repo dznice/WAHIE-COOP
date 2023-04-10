@@ -76,6 +76,28 @@ label{
     width: 100%;
 }
 
+.try{
+    width: 30%;
+}
+
+.try ::ng-deep .autocomplete-container {
+    box-shadow: none;
+    height: 36px;
+    }
+
+.try ::ng-deep .autocomplete-container ::ng-deep .input-container ::ng-deep input {
+    outline: none;
+    font-weight: 400;
+    border-radius: 5px;
+    font-size: 14px;
+    border: 1px solid #aaa;
+    color: #333;
+    height: 36px;
+    margin: 2px 0;
+    padding: 0 15px;
+    display: flex;
+    }
+
  .journallabel{
      font-size: 16px;
      font-weight: 500;
@@ -122,3 +144,5 @@ label{
     outline: none;
     font-weight: 600;
  }
+ 
+
