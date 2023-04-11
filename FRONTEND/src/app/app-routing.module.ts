@@ -13,6 +13,8 @@ import { AccountingComponent } from './admin/accounting/accounting.component';
 import { MembersComponent } from './admin/members/members.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { BodyComponent } from './admin/body/body.component';
+import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
+import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
 
 const routes: Routes = [
   {
@@ -49,9 +51,14 @@ const routes: Routes = [
     component: PassDoneComponent,
   },
   {
-    path: 'pass-done',
-    component: PassDoneComponent,
+    path: 'sadmin-chpass',
+    component: SadminChpassComponent,
   },
+  {
+    path: 'sadmin-passdone',
+    component: SadminPassdoneComponent,
+  },
+  
   {
     path: 'admin',
     component: AdminComponent,

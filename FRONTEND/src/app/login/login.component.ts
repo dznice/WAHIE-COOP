@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   animations: [formState, formState2, formState3, formState4, formState5, slideleft, slideright],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class LoginComponent implements OnInit, OnDestroy  {
 
