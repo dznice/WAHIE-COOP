@@ -236,17 +236,6 @@ form {
     margin: 2rem 0;
   }
 
-  form.sign-up-form {
-    transform: translateX(100%);
-  }
-
-  main.sign-up-mode form.sign-in-form {
-    transform: translateX(-100%);
-  }
-
-  main.sign-up-mode form.sign-up-form {
-    transform: translateX(0%);
-  }
 
   .login-vector {
     position: revert;
