@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
-import { BodyComponent } from './admin/body/body.component';
 import { AdminSidenavComponent } from './admin/admin-sidenav/admin-sidenav.component';
 import { AccountingComponent } from './admin/accounting/accounting.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
@@ -31,13 +30,14 @@ import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.compo
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StrengthMeterModule } from "ngx-strength-meter";
+import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
+import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
     SuperAdminComponent,
-    BodyComponent,
     AdminSidenavComponent,
     AccountingComponent,
     AdminHomeComponent,
@@ -59,7 +59,9 @@ import { StrengthMeterModule } from "ngx-strength-meter";
     ChangePassComponent,
     PassDoneComponent,
     SadminChpassComponent,
-    SadminPassdoneComponent
+    SadminPassdoneComponent,
+    AdminBodyComponent,
+    SadminBodyComponent
   ],
   imports: [
     BrowserModule,

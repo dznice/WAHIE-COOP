@@ -12,9 +12,18 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AccountingComponent } from './admin/accounting/accounting.component';
 import { MembersComponent } from './admin/members/members.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
-import { BodyComponent } from './admin/body/body.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
 import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
+import { SadminHomeComponent } from './super-admin/sadmin-home/sadmin-home.component';
+import { ActivityLogsComponent } from './super-admin/activity-logs/activity-logs.component';
+import { SadminSettingsComponent } from './super-admin/sadmin-settings/sadmin-settings.component';
+import { JournalEntryComponent } from './admin/accounting/journal-entry/journal-entry.component';
+import { AddInvoiceComponent } from './admin/members/add-invoice/add-invoice.component';
+import { AddMembersComponent } from './admin/members/add-members/add-members.component';
+import { AddPaymentComponent } from './admin/members/add-payment/add-payment.component';
+import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
+import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
+import { SuperAdminComponent } from './super-admin/super-admin.component';
 
 const routes: Routes = [
   {
@@ -58,7 +67,6 @@ const routes: Routes = [
     path: 'sadmin-passdone',
     component: SadminPassdoneComponent,
   },
-  
   {
     path: 'admin',
     component: AdminComponent,
@@ -66,9 +74,24 @@ const routes: Routes = [
       {path: '', redirectTo: 'admin-home', pathMatch: 'full'},
       {path: 'admin-home', component: AdminHomeComponent},
       {path: 'accounting', component: AccountingComponent},
+      {path: 'accounting/journal-entry', component: JournalEntryComponent},
       {path: 'members', component: MembersComponent},
+      {path: 'members/add-invoice', component: AddInvoiceComponent},
+      {path: 'members/add-members', component: AddMembersComponent},
+      {path: 'members/add-payment', component: AddPaymentComponent},
       {path: 'inventory', component: InventoryComponent},
-      {path: 'body', component: BodyComponent},
+      {path: 'admin-body', component: AdminBodyComponent},
+    ]
+  },
+  {
+    path: 'super-admin',
+    component: SuperAdminComponent,
+    children : [
+      {path: '', redirectTo: 'sadmin-home', pathMatch: 'full'},
+      {path: 'sadmin-home', component: SadminHomeComponent},
+      {path: 'activity-logs', component: ActivityLogsComponent},
+      {path: 'sadmin-settings', component: SadminSettingsComponent},
+      {path: 'sadmin-body', component: SadminBodyComponent},
     ]
   },
 ];

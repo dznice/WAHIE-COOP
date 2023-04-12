@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-body',
-  templateUrl: './body.component.html',
-  styleUrls: ['./body.component.scss']
+  selector: 'app-sadmin-body',
+  templateUrl: './sadmin-body.component.html',
+  styleUrls: ['./sadmin-body.component.scss']
 })
-export class BodyComponent {
+export class SadminBodyComponent {
 
   @Input() collapsed = false;
   @Input() screenWidth = 0;

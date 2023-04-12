@@ -5,7 +5,7 @@ import { DOCUMENT } from '@angular/common';
   selector: 'app-verify-account',
   templateUrl: './verify-account.component.html',
   styleUrls: ['./verify-account.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy{
 

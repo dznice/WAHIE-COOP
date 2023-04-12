@@ -9,7 +9,7 @@ import { passwordMatch } from '../validators/passwordMatch';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   animations: [slideleft2, slideright2],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 
 export class RegisterComponent implements OnInit, OnDestroy {

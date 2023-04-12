@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './sadmin-chpass.component.html',
   styleUrls: ['./sadmin-chpass.component.scss'],
   animations:[slideright, slider],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SadminChpassComponent implements OnInit, OnDestroy {
 

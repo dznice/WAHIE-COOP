@@ -17,10 +17,10 @@
                     <div class="txt-field">
                         <div class="txt-wrap">
                             <input type="email"  class="input-field" id="email" placeholder="Enter your email" required><br>
-                            <a (click)="toggle()" class="reset" href="check-email">Reset Password</a>         
+                            <button (click)="toggle()" class="reset" [routerLink]="['/check-email']">Reset Password</button>         
                         </div>
 
-                        <a href="login" class="back">
+                        <a [routerLink]="['/login']" class="back">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
                             width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" 
                             fill="none" stroke-linecap="round" stroke-linejoin="round">

@@ -7,7 +7,7 @@ import { slider, slideright} from '../animation';
   templateUrl: './sadmin-passdone.component.html',
   styleUrls: ['./sadmin-passdone.component.scss'],
   animations:[slideright, slider],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SadminPassdoneComponent implements OnInit, OnDestroy {
 

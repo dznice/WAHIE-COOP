@@ -1,1 +1,5 @@
-<p>super-admin works!</p>
+<app-sadmin-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sadmin-sidenav>
+<app-sadmin-body 
+    [collapsed]="isSideNavCollapsed"
+    [screenWidth]="screenWidth"
+></app-sadmin-body> 

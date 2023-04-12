@@ -7,7 +7,7 @@ import { slider, slideright} from '../animation';
   templateUrl: './pass-done.component.html',
   styleUrls: ['./pass-done.component.scss'],
   animations:[slideright, slider],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class PassDoneComponent implements OnInit, OnDestroy {
 
