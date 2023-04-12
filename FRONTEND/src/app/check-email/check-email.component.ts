@@ -8,7 +8,7 @@ import { slider, slideright} from '../animation';
   templateUrl: './check-email.component.html',
   styleUrls: ['./check-email.component.scss'],
   animations:[slideright, slider],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class CheckEmailComponent implements OnInit, OnDestroy {
 

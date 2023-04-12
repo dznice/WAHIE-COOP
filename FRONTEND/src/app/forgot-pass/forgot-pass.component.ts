@@ -6,7 +6,7 @@ import { formState, formState5, formState6, slider, slideright} from '../animati
   templateUrl: './forgot-pass.component.html',
   styleUrls: ['./forgot-pass.component.scss'],
   animations:[formState, formState5, formState6,slideright, slider],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ForgotPassComponent  implements OnInit, OnDestroy {
 

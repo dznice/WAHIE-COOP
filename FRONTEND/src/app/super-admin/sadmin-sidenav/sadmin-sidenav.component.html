@@ -1,1 +1,47 @@
-<p>sadmin-sidenav works!</p>
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <img
+      src="assets/image/coop-logo.png"
+      class="logo"
+      (click)="toggleCollapse()"
+      alt=""
+    />
+    <div class="logo-text" @fadeInOut *ngIf="collapsed">Wahffle</div>
+    <button
+      class="btn-close"
+      @rotate
+      *ngIf="collapsed"
+      (click)="closeSidenav()"
+    >
+      <i class="ti ti-x close-icon"></i>
+    </button>
+  </div>
+
+  <ul class="sidenav-nav">
+    <li class="nav-item" *ngFor="let data of saNavData">
+      <a
+        class="nav-link"
+        [routerLink]="[data.routeLink]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="link-icon" [class]="data.icon"></i>
+        <span class="link-text" @fadeInOut *ngIf="collapsed">
+          {{ data.label }}
+        </span>
+      </a>
+      <span class="tooltip">{{ data.label }}</span>
+    </li>
+
+    <li class="profile">
+      <div class="profile-details" @fadeInOut *ngIf="collapsed">
+        <img src="assets/image/user-icon.png" alt="profile-img" />
+        <div class="admin-name">
+          <div class="name">Nicer Dizon</div>
+          <div class="role">Admin</div>
+        </div>
+      </div>
+      <i class="ti ti-logout btn-logout" [routerLink]="'/login'"></i>
+    </li>
+  </ul>
+</div>

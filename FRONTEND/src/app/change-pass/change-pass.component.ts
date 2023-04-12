@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './change-pass.component.html',
   styleUrls: ['./change-pass.component.scss'],
   animations:[slideright, slider],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ChangePassComponent implements OnInit, OnDestroy {
 
