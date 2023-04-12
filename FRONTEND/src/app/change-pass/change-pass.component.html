@@ -2,8 +2,9 @@
 <main>
     <div class="box">
         <div class="inner-box">
-            <div class="form-wrap">    
-                <form *ngIf="isDisplayed" @slideright>
+            <div class="form-wrap">  
+                  
+                <form [formGroup]="form" name="form" *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -20,11 +21,11 @@
                            
                             
                             <label class="enter_pass" for="pass"> Enter Password</label>
-                            <form [formGroup]="form" name="form">
+                            
                                
                                 <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="pass" matInput placeholder="Input password"  formControlName="password" required>
                                 <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
-                            </form>     
+                             
                             <div class="meter"> <strength-meter [value]="form.value.password" (measure)="onStrengthChange($event)"></strength-meter>
                             </div>
                         </div>
