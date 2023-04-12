@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Journal;
 use App\Http\Controllers\JournalController;
 use App\Http\Resources\JournalResource;
+use App\Models\Members;
+use App\Http\Controllers\MemberController;
+use App\Http\Resources\MemberResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +21,10 @@ use App\Http\Resources\JournalResource;
 */
 
 Route::get('/members', function(){
-    return MemberResource::collection(Member::all());
+    return MemberResource::collection(Members::all());
 });
 Route::get('/member/{id}', function($id){
-    return new MemberResource(Member::findOrFail($id));
+    return new MemberResource(Members::findOrFail($id));
 });
 Route::post('/members', [MemberController::class, 'store']);
 Route::put('/member/{id}', [MemberController::class, 'update']);
