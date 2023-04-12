@@ -136,15 +136,15 @@ label{
 }
 
 .meter{
-  margin-top:.8em;
+  margin-top:3.8em;
   max-width: 500px;
-  width: 300px;
-  margin-left: .3em;
+  width: 310px;
+
 }
 .eye{
   position: absolute;
   left: 87%;
-  bottom: -45%;
+  bottom: -65%;
   cursor: pointer;
   font-size: 1.3rem;
 }
@@ -212,6 +212,10 @@ label{
 
   
 @media (max-width: 850px) {
+  .meter{
+    max-width: 500px;
+    width: 325px;
+  }
   .input-field{
     display:flex;
   }
