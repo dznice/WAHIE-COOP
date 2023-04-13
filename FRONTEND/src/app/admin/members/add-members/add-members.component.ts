@@ -60,11 +60,8 @@ export class AddMembersComponent implements OnInit  {
     this.members = this.wahieService.listMembers().subscribe(member=>{
       this.members = member;
       console.log(this.members);
-    });
-  }
 
-  idMembers(): void{
-    let count: number = 1;
+      let count: number = 1;
     let membeer: number = 1;
     let loop: boolean = true;
     let max = this.members;
@@ -79,9 +76,10 @@ export class AddMembersComponent implements OnInit  {
         }
         count++;
       }
-      member = id;
+      membeer = id;
       loop = false;
     }
+    });
   }
 
 
