@@ -38,4 +38,11 @@ class MemberResource extends JsonResource
             'mobile_number' => $this->mobile_number
         ];
     }
+
+    public function check(){
+
+        $data = DB::table('members')->pluck('account_id');
+
+            return view('member_create',['members'=> $data]);
+        }
 }

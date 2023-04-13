@@ -43,31 +43,11 @@
           <th>EMAIL ADDRESS</th>
           <th>OPEN BALANCE</th>
         </thead>
-        <tbody>
-          <tr>
-            <td>0001 Dale Allen Liwanag</td>
-            <td>liwanagdale@gmail.com</td>
-            <td>PHP20,000.00</td>
-          </tr>
-          <tr>
-            <td>0002 Nicer Dizon</td>
-            <td>dizonicer@gmail.com</td>
-            <td>PHP30,000.00</td>
-          </tr>
-          <tr>
-            <td>0003 Aljohn Richards</td>
-            <td>aj.rich@gmail.com</td>
-            <td>PHP3,000.00</td>
-          </tr>
-          <tr>
-            <td>0004 Ivan Morales</td>
-            <td>mrls.ivan@gmail.com</td>
-            <td>PHP40,000.00</td>
-          </tr>
-          <tr>
-            <td>0005 John Concepcion</td>
-            <td>john.cpn@gmail.com</td>
-            <td>PHP60,000.00</td>
+        <tbody  *ngIf="members.length">
+          <tr *ngFor="let member of members">
+            <td>{{ member.predef }}-{{ member.account_id }}  {{ member.first_name }} {{ member.middle_name }} {{ member.last_name }} {{ member.suffix }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.address }}</td>
           </tr>
         </tbody>
       </table>

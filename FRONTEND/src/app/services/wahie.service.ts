@@ -11,7 +11,7 @@ export class WahieService {
   url:string = 'http://127.0.0.1:8000';
 
   constructor(private http:HttpClient) {
-    
+
   }
 
   public listJournals(): Observable<any[]>{
@@ -22,5 +22,13 @@ export class WahieService {
     return this.http.get<any>(this.url+`/api/journals/${query}`);
   }
 
-   
+  public listMembers(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/members');
+  }
+
+  public getMemberss(query: any){
+    return this.http.get<any>(this.url+`/api/journals/${query}`);
+  }
+
+
 }

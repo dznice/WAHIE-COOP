@@ -23,6 +23,7 @@ use App\Http\Resources\MemberResource;
 Route::get('/members', function(){
     return MemberResource::collection(Members::all());
 });
+Route::post('/members', [MemberResource::class, 'check']);
 Route::get('/member/{id}', function($id){
     return new MemberResource(Members::findOrFail($id));
 });

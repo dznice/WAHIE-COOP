@@ -1,6 +1,8 @@
 <div class="container">
     <header>Member Information</header>
 
+
+
     <body>
 
     <form action="#">
@@ -25,7 +27,7 @@
                     <!----======== SUFFIX ======== -->
                     <div class="input-field4">
                         <label>Suffix</label>
-                        <input type="text" id="suffix" #sufix  >
+                        <input type="text" id="suffix" #suffix  >
                     </div>
 
                      <!----======== EMAIL ======== -->
@@ -49,22 +51,22 @@
                             <option>Others</option>
                         </select>
                     </div>
-                     <!----======== Account ID ======== -->                    
+                     <!----======== Account ID ======== -->
                     <div class="input-field9">
                         <label>Date of Birth</label>
-                        <input type="date" id="dateifbirth" #date_of_birth required>
+                        <input type="date" id="dateifbirth" #birthdate required>
                     </div>
-                     <!----======== ID TYPE ======== -->                   
+                     <!----======== ID TYPE ======== -->
                     <div class="input-field8">
                         <label>Account ID</label>
-                        <input type="number" id="account_id" #account_id required>
+                        <input type="number" id="account_id" placeholder={{members.account_id[1]}} #account_id required>
                     </div>
                     <!----======== ID NUMBER ======== -->
                     <div class="input-field10">
                         <label>TIN Number</label>
-                        <input type="number" id="tin_number" #id_number required>
+                        <input type="number" id="tin_number" #tin_number required>
                     </div>
-                     <!----======== CIVIL STATUS ======== -->               
+                     <!----======== CIVIL STATUS ======== -->
                     <div class="input-field11">
                         <label>Civil Status</label>
                         <select id="civil_status" #civil_status required>
@@ -79,13 +81,13 @@
                         <input type="text" id="spouse" #spouse required>
                     </div>
 
-                     <!----======== COMPANY ======== -->                   
+                     <!----======== COMPANY ======== -->
                      <div class="input-field13">
                         <label>Company</label>
                         <input type="text" id="company_name" #company_name required>
                     </div>
                     <!----======== DEAPARTMENT ======== -->
-                   
+
                     <div class="input-field14">
                         <label>Department</label>
                         <input type="text" id="department" #depertment required>
@@ -100,7 +102,7 @@
                             <option>Self-Employed</option>
                         </select>
                     </div>
-                    <!----======== OCCUPATION ======== -->                     
+                    <!----======== OCCUPATION ======== -->
                     <div class="input-field16">
                         <label>Occupation</label>
                         <input type="text" id="occupation" #occupation  required>
@@ -115,7 +117,7 @@
                         <input type="radio" class="tabs__radio" name="tabs-coop" id="Address" #address checked>
                         <label for="Address" class="tabs__label">Address</label>
                         <div class="tabs__content">
-                            
+
                             <div class="input-field18">
                             <!----======== ADDRESS ======== -->
                                 <label>Current Address</label>
@@ -137,7 +139,7 @@
                             <!----======== BARANGAY ======== -->
                                 <input type="text" id="barangay" placeholder="Barangay" #barangay required>
                             </div>
-                        </div>   
+                        </div>
                         <input type="radio" class="tabs__radio" name="tabs-coop" id="Beneficiaries">
                         <label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
 
@@ -150,40 +152,40 @@
                                     <th class="benelabel">Relationship</th>
                                 </tr>
                                 <tr *ngFor="let item of row; let x = index">
-                                    <td class="delbut"> 
+                                    <td class="delbut">
                                         <button class="addbut" (click)="addTable()">
                                             <i class="ti ti-square-rounded-plus"></i>
                                         </button></td>
                                     <td class="beneinput"><input type="text"></td>
                                     <td class="beneinput"><input type="date" ></td>
                                     <td class="beneinput"><input type="text"></td>
-                                    <td class="delbut"> 
+                                    <td class="delbut">
                                         <button class="delbut" (click) = "deleteRow(x)">
                                         <i class="ti ti-square-rounded-x"></i>
                                     </button></td>
                                 </tr>
-                            </table> 
-                    </div> 
+                            </table>
+                    </div>
                 <div>
             </div>
         </div>
-                
+
                     <div class="buttons">
                         <button class="back">
                             <span class="btnTextb">Back</span>
                         </button>
-        
+
                         <button class="save">
                             <span class="btnTexts">Save</span>
                         </button>
                     </div>
-              
+
                 </div>
             </div>
         </div>
     </form>
 
-<script>
+<!-- <script>
     $('#add_benificiaries').on('click', function(){
       var html = '';
       html+='<tr>';
@@ -197,7 +199,7 @@
   $(document).on('click', '#remove_benificiaries', function () {
         $(this).parents('tr').remove();
     });
-  </script>
+  </script> -->
 
 
 
