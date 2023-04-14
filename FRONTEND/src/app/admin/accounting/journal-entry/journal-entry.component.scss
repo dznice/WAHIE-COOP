@@ -28,6 +28,17 @@
     border-radius: 20px;
     background-color: #fff;
 }
+
+.modal-container{
+    position: relative;
+    width: 650px;
+    height: 400px;
+    padding: 40px;
+    margin: 0 15px;
+    box-shadow: 5px 5px 5px #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+}
     
 .container .head{
     display: flex;
@@ -76,27 +87,49 @@ label{
     width: 100%;
 }
 
-.try{
-    width: 30%;
-}
-
-.try ::ng-deep .autocomplete-container {
-    box-shadow: none;
-    height: 36px;
-    }
-
-.try ::ng-deep .autocomplete-container ::ng-deep .input-container ::ng-deep input {
+.modalinput{
     outline: none;
-    font-weight: 400;
-    border-radius: 5px;
     font-size: 14px;
-    border: 1px solid #aaa;
+    font-weight: 400;
     color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
     height: 36px;
     margin: 2px 0;
-    padding: 0 15px;
     display: flex;
-    }
+    width: 100%;
+}
+
+.autocomplete{
+    width: 30%;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 10px;
+    height: 36px;
+    margin: 2px 0;
+}
+
+// .ng-autocomplete ::ng-deep .autocomplete-container {
+//     box-shadow: none;
+//     height: 36px;
+//     }
+
+// .ng-autocomplete ::ng-deep .autocomplete-container ::ng-deep .input-container ::ng-deep input {
+//     outline: none;
+//     font-weight: 400;
+//     border-radius: 5px;
+//     font-size: 14px;
+//     border: 1px solid #aaa;
+//     color: #333;
+//     height: 36px;
+//     margin: 2px 0;
+//     padding: 0 15px;
+//     display: flex;
+//     }
 
  .journallabel{
      font-size: 16px;
@@ -144,5 +177,69 @@ label{
     outline: none;
     font-weight: 600;
  }
+
+ //
+ .check-icon{
+    content: '\f704';
+    font-size: 6rem;
+    color: #3F0F88;
+  }
+  
+  .otp-modal{
+    position: fixed;
+    background: #000000bf;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .otp-content{
+    background: #fff;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    text-align: center;
+    padding: 0 30px 30px;
+    transition: transform 0.4s, top 0.4s;
+    width: 400px;
+  }
+  
+  .otp-header{
+    padding: 20px;
+    color: #fff;
+  }
+  
+  .otp-body h1{
+    font-size: 1.8rem;
+  }
+  
+  .otp-body p{
+    color: #707070
+  }
+  
+  .otp-footer .backbtn{
+    width: 80%;
+    height: 43px;
+    background-color: #3F0F88;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.6rem;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+  
+  a:hover{
+    text-decoration: none;
+  }
+
  
 

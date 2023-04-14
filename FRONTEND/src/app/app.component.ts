@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WahieService } from './services/wahie.service';
 
 @Component({
   selector: 'app-root',

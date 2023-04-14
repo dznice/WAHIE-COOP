@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -69,6 +71,8 @@ import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.compo
     AutocompleteLibModule,
     FormsModule,
     BrowserAnimationsModule,
+    NgSelectModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

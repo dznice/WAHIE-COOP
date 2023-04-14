@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class WahieService {
+
+  showDialog=false;
 
   url:string = 'http://127.0.0.1:8000';
 
@@ -18,9 +20,19 @@ export class WahieService {
     return this.http.get<any[]>(this.url+'/api/journals');
   }
 
-  public getJounnals(query: any){
-    return this.http.get<any>(this.url+`/api/journals/${query}`);
+  httpOptions={
+    headers : new HttpHeaders({
+      'Content-Type' : 'application/json'
+    })
+  };
+
+
+  public addJournal(journal:any): Observable<any>{
+    return this.http.post<any>(this.url+'/api/journals', journal, this.httpOptions);
   }
+  // public getJournals(query: any){
+  //   return this.http.get<any>(this.url+`/api/journals/${query}`);
+  // }
 
   public listMembers(): Observable<any[]>{
     return this.http.get<any[]>(this.url+'/api/members');

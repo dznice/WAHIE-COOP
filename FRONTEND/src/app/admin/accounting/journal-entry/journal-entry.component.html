@@ -1,5 +1,5 @@
 <div class="container">
-    
+    <form [formGroup]="frm" (ngSubmit)="onPost()">
     <div class="sub_header">
         <div class="journdate">
             <label> Journal Date </label>
@@ -32,28 +32,35 @@
                     </tr>
                         <tr *ngFor="let item of row; let x = index">
                                 <th class="journallabel">#</th>
-                                <td class="try">
-                                    <ng-autocomplete
+                                <td class="autocomplete">
+                                
+                                <ng-select formControlName="selectedJournal">
+                                    <ng-template ng-header-tmp >
+                                        <button (click)="show(1)" class="submit">Add+</button>
+                                    </ng-template>
+                                    <ng-option *ngFor="let journal of journals" [value]="journal.id">
+                                         {{journal.journal_number}} {{journal.journal_name}} {{journal.journal_type}}
+                                    </ng-option>
+                                </ng-select>
+                                
+                                <!-- <ng-autocomplete
                                         [data]="journals"
                                         [searchKeyword]="keyword"
                                         [itemTemplate]="itemTemplate"
                                         [notFoundTemplate]="notFoundTemplate">
                                     </ng-autocomplete>
-                                    <ng-template #itemTemplate let-item>
+
+                                    <ng-template #itemTemplate let-journal>
                                         <a>
-                                            <span [innerHTML]="item.journal_number"></span>, 
-                                            <span [innerHTML]="item.journal_name"></span>, 
-                                            <span [innerHTML]="item.journal_type"></span> 
+                                            <span [innerHTML]="journal.journal_number"></span>, 
+                                            <span [innerHTML]="journal.journal_name"></span>, 
+                                            <span [innerHTML]="journal.journal_type"></span>
                                         </a>
                                     </ng-template>
-                                    <ng-template #headerTemplate>
-                                        <a>
-                                            <button>add+</button> 
-                                        </a>
-                                    </ng-template>
+                                    
                                     <ng-template #notFoundTemplate let-notFound>
                                         <button>add+</button>
-                                    </ng-template>
+                                    </ng-template> -->
                                 </td>
                                 <td class="beneinput"><input type="number"></td>
                                 <td class="beneinput"><input type="number"></td>
@@ -72,4 +79,32 @@
                          </tr>         
                 </table> 
             </div>  
-</div>
+        </form>
+    </div>
+
+    <section>
+        <router-outlet></router-outlet>
+        <div>
+            <div class="otp-modal" *ngIf="showModal === 1">
+                <div class="otp-content">
+                    <div class="otp-header">
+                        Add New Journal Account Entry
+                    </div>
+                    <div class="otp-body">
+                        <h3> Add New Journal Account Entry</h3>
+                        <label for="journal_number">Journal Number</label>
+                        <input class="modalinput" type="number" #journal_number>
+                        <label for="journal_name">Journal Name</label>
+                        <input class="modalinput" type="text" #journal_name>
+                        <label for="journal_type">Journal Type</label>
+                        <input class="modalinput" type="text" #journal_type>
+                    </div>
+                    <div class="otp-footer">
+                        <button class="backbtn" (click)="add(journal_number.value, journal_name.value, journal_type.value); journal_number.value=''; journal_name.value=''; journal_type.value='';" (click)="show(2)">Create</button>
+                        <button class="backbtn" (click)="show(2)">Close</button>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </section>
