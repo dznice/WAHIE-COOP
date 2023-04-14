@@ -29,11 +29,7 @@ class MemberController extends Controller
     //     return view('member_create',['members'=> $data]);
     // }
     public function store(addMember $request){
-
-        $input = $request->all();
-    Members::create($input);
-
-    return back()->with('success', 'Member created successfully.');
+        return Article::create($request->all());
     }
 
     /**

@@ -38,8 +38,8 @@ export class WahieService {
     return this.http.get<any[]>(this.url+'/api/members');
   }
 
-  public getMemberss(query: any){
-    return this.http.get<any>(this.url+`/api/journals/${query}`);
+  public addMember(members:any):Observable<any>{
+    return this.http.post<any>(this.url+'/api/members',members,this.httpOptions);
   }
 
 

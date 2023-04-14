@@ -51,15 +51,16 @@
                             <option>Others</option>
                         </select>
                     </div>
-                     <!----======== Account ID ======== -->
+                     <!----======== Birthdate ======== -->
                     <div class="input-field9">
                         <label>Date of Birth</label>
                         <input type="date" id="dateifbirth" #birthdate required>
                     </div>
-                     <!----======== ID TYPE ======== -->
+                     <!----======== Account ID  ======== -->
                     <div class="input-field8">
                         <label>Account ID</label>
-                        <input type="number" id="account_id" value={{membeer}} #account_id required>
+                        <input type="hidden"name="predef" #predef value="WAH">
+                        <input type="number" id="account_id"  #account_id required>
                     </div>
                     <!----======== ID NUMBER ======== -->
                     <div class="input-field10">
@@ -90,7 +91,7 @@
 
                     <div class="input-field14">
                         <label>Department</label>
-                        <input type="text" id="department" #depertment required>
+                        <input type="text" id="department" #department required>
                     </div>
                     <!----======== EMPLOYEMENT STATUS ======== -->
                     <div class="input-field15">
@@ -175,7 +176,52 @@
                             <span class="btnTextb">Back</span>
                         </button>
 
-                        <button class="save">
+                        <button type="button" class="save" (click)="add(predef.value,
+                                                                        account_id.value,
+                                                                        first_name.value,
+                                                                        middle_name.value,
+                                                                        last_name.value,
+                                                                        suffix.value,
+                                                                        email.value,
+                                                                        mobile_number.value,
+                                                                        gender.value,
+                                                                        birthdate.value,
+                                                                        tin_number.value,
+                                                                        civil_status.value,
+                                                                        spouse.value,
+                                                                        company_name.value,
+                                                                        department.value,
+                                                                        employement_status.value,
+                                                                        occupation.value,
+                                                                        company_address.value,
+                                                                        street.value,
+                                                                        city_town.value,
+                                                                        state_province.value,
+                                                                        postal_code.value,
+                                                                        barangay.value);
+                                                                        predef.value='';
+                                                                        first_name.value='';
+                                                                        middle_name.value='';
+                                                                        last_name.value='';
+                                                                        suffix.value='';
+                                                                        email.value='';
+                                                                        mobile_number.value='';
+                                                                        gender.value='';
+                                                                        birthdate.value='';
+                                                                        account_id.value='';
+                                                                        tin_number.value='';
+                                                                        civil_status.value='';
+                                                                        spouse.value='';
+                                                                        company_name.value='';
+                                                                        department.value='';
+                                                                        employement_status.value='';
+                                                                        occupation.value='';
+                                                                        company_address.value='';
+                                                                        street.value='';
+                                                                        city_town.value='';
+                                                                        state_province.value='';
+                                                                        postal_code.value='';
+                                                                        barangay.value=''">
                             <span class="btnTexts">Save</span>
                         </button>
                     </div>
@@ -184,6 +230,7 @@
             </div>
         </div>
     </form>
+
 
 <!-- <script>
     $('#add_benificiaries').on('click', function(){

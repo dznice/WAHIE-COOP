@@ -13,13 +13,14 @@
 
 <div class="container">
   <h2 class="text-center">Member Add Management</h2>
-  
+
   <br>
   <form action = "/member_create" method = "post" class="form-group" style="width:70%; margin-left:15%;">
 
   <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>"><input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
 
   	<label >MEMBER ID:</label>
+    <br>
 
       @php
       $count = 1;
@@ -27,26 +28,26 @@
       $loop = true;
       $max = $members->max();
 
-    while($loop == true){ 
+    while($loop == true){
       $id = 1;
-      while($count<=$max){ 
+      while($count<=$max){
     foreach ($members as $member) {
       if($member==$id){
       $id++;
-      }      
+      }
     }
-      $count++;   
-      } 
+      $count++;
+      }
     $member = $id;
     $loop = false;
     }
   @endphp
-  
+
 
 
     <input type="hidden" name="predef" value="WAH">
     WAH - <input  type="text" name="account_id" value={{$member}} >
-  
+
     @if ($errors->has('account_id'))
     <span class="text-danger">{{ $errors->first('account_id') }}</span>
 @endif
@@ -93,7 +94,7 @@
     <input type="text" class="form-control" placeholder="Enter Email" name="email">
     <label>Mobile Number:</label>
     <input type="text" class="form-control" placeholder="Enter Number" name="mobile_number"><br>
-    
+
     <br>
     <table>
       <button type="button"  class="btn btn-primary" id = "add_benificiaries"> ADD</button>
@@ -107,9 +108,9 @@
       </tbody>
   </table>
     <br>
-  
+
     <button type="submit"  value = "Add student" class="btn btn-primary">Submit</button>
-  
+
 
   </form>
 </div>

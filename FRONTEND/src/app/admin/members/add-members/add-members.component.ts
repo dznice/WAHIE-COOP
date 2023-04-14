@@ -61,27 +61,82 @@ export class AddMembersComponent implements OnInit  {
       this.members = member;
       console.log(this.members);
 
-      let count: number = 1;
-    let membeer: number = 1;
-    let loop: boolean = true;
-    let max = this.members;
-
-    while(loop == true){
-      let id: number = 1;
-      while(count<=max){
-        for (this.members of member){
-          if(membeer==id){
-            id++;
-          }
-        }
-        count++;
-      }
-      membeer = id;
-      loop = false;
-    }
     });
   }
 
+  add(predef:string,
+      account_id:string,
+      first_name:string,
+      middle_name:string,
+      last_name:string,
+      suffix:string,
+      birthdate:string,
+      street:string,
+      barangay:string,
+      city_town:string,
+      state_province:string,
+      postal_code:string,
+      spouse:string,
+      civil_status:string,
+      tin_number:string,
+      occupation:string,
+      gender:string,
+      department:string,
+      employment_status:string,
+      company_name:string,
+      company_address:string,
+      email:string,
+      mobile_number:string){
+    this.members = {
+      'predef': predef,
+		'account_id': account_id,
+		'first_name': first_name,
+		'middle_name': middle_name,
+		'last_name': last_name,
+		'suffix': suffix,
+		'birthdate': birthdate,
+		'address': street + ' , ' + barangay + ' , ' + city_town +  ' , ' + state_province + ' , ' + postal_code,
+		'spouse': spouse,
+		'civil_status': civil_status,
+		'tin_number': tin_number,
+		'occupation': occupation,
+		'gender': gender,
+		'department': department,
+		'employment_status': employment_status,
+		'company_name': company_name,
+		'company_address': company_address,
+		'email': email,
+		'mobile_number': mobile_number
+    };
+    this.wahieService.addMember(this.members as any).subscribe(member=>{
+      this.members = member;
+    });
+    console.log(this.members);
+  }
+
+//   idMembers(): void{
+
+//     var count = 1;
+//     var membeer = 1;
+//     var loop = true;
+//     var max = this.members;
+
+//     while(loop == true){
+//       var id = 1;
+//       while( count <= max){
+//         angular.forEach(){
+//        if(membeer==id){
+//         id++;
+//        }
+
+//         count++;
+//       }
+//       membeer = id;
+//       loop = false;
+//     }
+//   }
+// row[1,2,3]
+// row[1]
 
 }
 

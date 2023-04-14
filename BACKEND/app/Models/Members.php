@@ -21,7 +21,6 @@ class Members extends Model
 		'middle_name',
 		'last_name',
 		'suffix',
-		'first_name',
 		'birthdate',
 		'address',
 		'spouse',
@@ -33,7 +32,6 @@ class Members extends Model
 		'employment_status',
 		'company_name',
 		'company_address',
-		'job_title',
 		'email',
 		'mobile_number' ];
     }
