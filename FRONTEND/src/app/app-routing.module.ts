@@ -24,6 +24,8 @@ import { AddPaymentComponent } from './admin/members/add-payment/add-payment.com
 import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
 import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
+import { NotVerifiedComponent } from './not-verified/not-verified.component';
+import { DisableAccountComponent } from './disable-account/disable-account.component';
 
 const routes: Routes = [
   {
@@ -66,6 +68,14 @@ const routes: Routes = [
   {
     path: 'sadmin-passdone',
     component: SadminPassdoneComponent,
+  },
+  {
+    path: 'not-verified',
+    component: NotVerifiedComponent,
+  },
+  {
+    path: 'disable-account',
+    component: DisableAccountComponent,
   },
   {
     path: 'admin',

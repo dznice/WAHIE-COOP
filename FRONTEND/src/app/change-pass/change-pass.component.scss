@@ -157,8 +157,6 @@ label{
     font-size: 1.3rem;
 }
 
-
-
 .save{
     text-align: center;
     display: inline-block;
@@ -181,11 +179,9 @@ label{
 }
 
 .account{
-
     color: #707070;
     font-size: 0.9rem;
     text-align: center;
-
 }
 
 .back{
@@ -219,7 +215,7 @@ label{
     color: #fff;
     font-size: 10px;
     padding-top: .2rem;
-    transform: translate(50%, 50%);
+      
 }
 
   .dot1 {
@@ -246,8 +242,7 @@ label{
   
 @media (max-width: 850px) {
   .meter{
-    max-width: 500;
-    width: 330;
+    width: auto;
   }
     .box {
       height: auto;
@@ -285,17 +280,15 @@ label{
       margin: 2rem 0;
     }
 
-  
     .login-vector {
       position: revert;
       height: auto;
       width: 0%;
       padding: .5rem .5rem;
       display: flex;
+      visibility: hidden;
     }
   
-
-
   }
   
   @media (max-width: 530px) {
