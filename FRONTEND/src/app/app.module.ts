@@ -32,6 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StrengthMeterModule } from "ngx-strength-meter";
 import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
 import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
+import { NotVerifiedComponent } from './not-verified/not-verified.component';
+import { DisableAccountComponent } from './disable-account/disable-account.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.compo
     SadminChpassComponent,
     SadminPassdoneComponent,
     AdminBodyComponent,
-    SadminBodyComponent
+    SadminBodyComponent,
+    NotVerifiedComponent,
+    DisableAccountComponent
   ],
   imports: [
     BrowserModule,

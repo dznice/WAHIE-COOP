@@ -17,12 +17,10 @@
                     <div class="txt-field">
                         
                         <div class="txt-wrap">
-                           
-                            
+
                             <label class="enter_pass" for="pass"> Enter Password</label>
-                            
-                               
-                                <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="pass" placeholder="Input password"  formControlName="password" required>
+
+                                <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="sadmin-pass" placeholder="Input password"  formControlName="password" required>
                                 <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                            
                             <div class="meter"> <strength-meter [value]="form.value.password" (measure)="onStrengthChange($event)"></strength-meter>
@@ -31,7 +29,7 @@
                             
                         <div class="txt-wrap">
                             <label for="pass2"> Confirm Password</label>
-                            <input [type]="cchangetype?'password':'text'"  minlength="8" maxlength="32"  class="input-field" id="pass2" placeholder="Confirm your new password"  required>
+                            <input [type]="cchangetype?'password':'text'"  minlength="8" maxlength="32"  class="input-field" id="sadmin-confirm-pass" placeholder="Confirm your new password"  required>
                             <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                         </div>
                         
