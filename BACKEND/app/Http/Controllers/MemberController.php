@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Members;
 
 class MemberController extends Controller
 {
@@ -28,8 +29,9 @@ class MemberController extends Controller
 
     //     return view('member_create',['members'=> $data]);
     // }
-    public function store(addMember $request){
-        return Article::create($request->all());
+    public function store(Request $request)
+    {
+        return Members::create($request->all());
     }
 
     /**

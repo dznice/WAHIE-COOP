@@ -27,8 +27,8 @@ export class WahieService {
   };
 
 
-  public addJournal(journal:any): Observable<any>{
-    return this.http.post<any>(this.url+'/api/journals', journal, this.httpOptions);
+  public addJournal(journals:any): Observable<any>{
+    return this.http.post<any>(this.url+'/api/journals', journals, this.httpOptions);
   }
   // public getJournals(query: any){
   //   return this.http.get<any>(this.url+`/api/journals/${query}`);
@@ -39,7 +39,7 @@ export class WahieService {
   }
 
   public addMember(members:any):Observable<any>{
-    return this.http.post<any>(this.url+'/api/members',members,this.httpOptions);
+    return this.http.post<any>(this.url+'/api/members',members, this.httpOptions);
   }
 
 
