@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
-import { Journal } from '../../../model/journal.model';
 
 @Component({
   selector: 'app-journal-entry',
@@ -44,7 +43,6 @@ export class JournalEntryComponent implements OnInit {
   // selectedJournal: any;
   // selectedMember: any;
   // filteredJournal: any;
-  journalEntry = new Journal()
   public journals: any;
 
   //journalForm:FormGroup

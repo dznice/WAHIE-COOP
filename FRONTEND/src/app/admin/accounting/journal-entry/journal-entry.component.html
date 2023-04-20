@@ -6,13 +6,13 @@
         <div class="journdate">
             <label> Journal Date </label>
             <!-- <input class="inputdate" type="date" id="journaldate" required> -->
-            <input class="headinput" type="date" name="journal_date" [(ngModel)]="journalEntry.journal_date" required>
+            <input class="headinput" type="date" name="journal_date">
         </div>
   
         <div class="journnumber">
             <label>Journal Number </label>
             <!-- <input class="numberj" type="number" id="journalnumber" required> -->
-            <input class="headinput" type="number" name="journal_no" [(ngModel)]="journalEntry.journal_no" required>
+            <input class="headinput" type="number" name="journal_no">
         </div>
 
         <div>
@@ -38,7 +38,7 @@
                                 <th class="journallabel">#</th>
                                 <td class="beneinput">
                                     <!-- <ng-select class="try" formControlName="selectedJournal" name="account{{i}}"> -->
-                                    <ng-select class="try" formControlName="selectedJournal" [(ngModel)]="journalEntry.account">
+                                    <ng-select class="try" formControlName="selectedJournal">
                                         <ng-template ng-header-tmp >
                                             <button (click)="show(1)" class="submit">Add+</button>
                                         </ng-template>
@@ -66,12 +66,12 @@
                                         <button>add+</button>
                                     </ng-template> -->
                                 </td>
-                                <td class="beneinput"><input type="number" [(ngModel)]="journalEntry.debit"></td>
-                                <td class="beneinput"><input type="number" [(ngModel)]="journalEntry.credit"></td>
-                                <td class="beneinput"><input type="text" [(ngModel)]="journalEntry.description"></td>
+                                <td class="beneinput"><input type="number"></td>
+                                <td class="beneinput"><input type="number"></td>
+                                <td class="beneinput"><input type="text"></td>
 
                                 <td class="beneinput">
-                                    <ng-select class="try" formControlName="selectedMembers"  [(ngModel)]="journalEntry.name">
+                                    <ng-select class="try" formControlName="selectedMembers"  >
                                         <ng-option class="try" *ngFor="let member of members" [value]="member.id">
                                             {{member.account_id}} {{member.first_name}} {{member.middle_name}} {{member.last_name}}
                                         </ng-option>
