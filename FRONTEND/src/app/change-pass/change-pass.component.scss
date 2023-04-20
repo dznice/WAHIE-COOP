@@ -136,10 +136,9 @@ label{
 }
 
 .meter{
-  margin-top:4em;
+  margin-top: -1em;
   max-width: 500px;
   width: 310px;
-
 }
 .eye{
   position: absolute;
@@ -325,3 +324,9 @@ label{
     }
   }
   
+  .text-danger1{
+    transform: translate(11%, -150%);
+    color: red;
+    font-size: 14px;
+    position: absolute;
+  }

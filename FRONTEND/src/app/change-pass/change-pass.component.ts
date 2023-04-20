@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { slider, slideright} from '../animation';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-change-pass',
@@ -12,7 +12,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ChangePassComponent implements OnInit, OnDestroy {
 
-  form!: FormGroup;
 
   isDisplayed: boolean = true;
   toggleDiv(){
@@ -32,23 +31,56 @@ export class ChangePassComponent implements OnInit, OnDestroy {
     this.cvisible = !this.cvisible
     this.cchangetype = !this.cchangetype
   }
+
+  changePassForm!:FormGroup
   
   constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder){}
 
-  ngOnInit(): void {
-    this._document.body.classList.add('body');
-    this.form = this.fb.group({
-      password: ['', Validators.required],
-    });
+  passwordMatch(controlName: string, matchControlName: string){
+    return (formGroup: FormGroup)=> {
+        const control = formGroup.controls[controlName];
+        const matchControl = formGroup.controls[matchControlName];
+            if(matchControl.errors && !matchControl.errors['passwordMatch']){
+                return;
+            }
+            if(control.value !== matchControl.value){
+                matchControl.setErrors({passwordMatch:true});
+            }else{
+                matchControl.setErrors(null)
+            }
+    }
+}
+
+  get frm(){
+    return this.changePassForm.controls;
+  }
+
+  
+  ngOnInit() {
+      this._document.body.classList.add('body');
+
+      this.changePassForm = this.fb.group({
+        
+        "password": new FormControl(null, [Validators.required]),
+
+        "confirm_pass": new FormControl(null, [Validators.required])
+      }, {
+        validator: this.passwordMatch('password', 'confirm_pass')
+      })  
+    }
+
+  onSubmit(){
+    this.changePassForm.get('password')?.markAsTouched();
+
+    this.changePassForm.get('confirm_pass')?.markAsTouched();
   }
 
   ngOnDestroy() {
     this._document.body.classList.add('body');
   }
 
-  onStrengthChange(score: any) {
+  onStrengthChange(score: any){
     console.log('new score', score);
   }
-
 
 }
