@@ -2,9 +2,8 @@
 <main>
     <div class="box">
         <div class="inner-box">
-            <div class="form-wrap">  
-                  
-                <form [formGroup]="form " name="form" *ngIf="isDisplayed" @slideright>
+            <div class="form-wrap">    
+                <form [formGroup]="changePassForm" (ngSubmit)="onSubmit()" name="form" *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -15,27 +14,27 @@
                         <p>Must be at least 8 characters.</p>
                     </div>
                 
-                    <div class="txt-field">
-                        
+                    <div  class="txt-field">
                         <div class="txt-wrap">
-                           
-                            
                             <label class="enter_pass" for="pass"> Enter Password</label>
-                               
-                                <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="pass" matInput placeholder="Input password"  formControlName="password" required>
+                                <input formControlName="password" [type]="changetype?'password':'text'" name="password" id="pass" placeholder="Input password">
                                 <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
-                             
-                            <div class="meter"> <strength-meter [value]="form.value.password" (measure)="onStrengthChange($event)"></strength-meter>
-                            </div>
+                        </div>
+                        <div class="meter">
+                            <strength-meter [value]="changePassForm.value.password" (measure)="onStrengthChange($event)"></strength-meter>
                         </div>
                             
                         <div class="txt-wrap">
                             <label for="pass2"> Confirm Password</label>
-                            <input [type]="cchangetype?'password':'text'"  minlength="8" maxlength="32"  class="input-field" id="pass2" placeholder="Confirm your new password" required>
+                            <input formControlName="confirm_pass" [type]="cchangetype?'password':'text'" name="confirm_pass" id="pass2" placeholder="Confirm your new password">
                             <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                         </div>
+                        <div class="text-danger1" *ngIf="changePassForm.get('confirm_pass')!.touched && changePassForm.get('confirm_pass')!.invalid && changePassForm.controls['confirm_pass'].errors!['passwordMatch']">
+                            <small>Password not match</small>
+                        </div>
+                    
                         
-                            <a [routerLink]="['/pass-done']" class="save">Save new password</a>
+                        <a [routerLink]="['/pass-done']" type="submit" class="save">Save new password</a>
 
                             <a [routerLink]="['/login']" class="back">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
