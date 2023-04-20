@@ -19,14 +19,24 @@
 }
 
 .container{
+    // position: relative;
+    // width: 1450px;
+    // min-height: 650px;
+    // padding: 40px;
+    // margin: 0 15px;
+    // box-shadow: 5px 5px 5px #ccc;
+    // border-radius: 20px;
+    // background-color: #fff;
     position: relative;
-    width: 1450px;
-    min-height: 650px;
+    width: 1400px;
+    min-height: 700px;
+    max-height: 700px;
     padding: 40px;
     margin: 0 15px;
     box-shadow: 5px 5px 5px #ccc;
     border-radius: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
+    overflow-y: auto;
 }
 
 .modal-container{
@@ -40,23 +50,25 @@
     background-color: #fff;
 }
     
-.container .head{
+// .container .head{
+.header{
     display: flex;
-    flex-wrap: wrap;
+    //flex-wrap: wrap;
+    width: 100%;
 }
 
-.container header{
-    position: relative;
-    font-size: 28px;
-    font-weight: 600;
-    color: #3F0F88;
-}
+// .container header{
+//     position: relative;
+//     font-size: 28px;
+//     font-weight: 600;
+//     color: #3F0F88;
+// }
 
-.sub_header {
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-}
+// .sub_header {
+//     display: flex;
+//     position: relative;
+//     flex-wrap: wrap;
+// }
 
 label{
     font-size: 16px;
@@ -101,16 +113,15 @@ label{
     width: 100%;
 }
 
-.autocomplete{
-    width: 30%;
+.ng-select.try {
+    outline: none;
     font-size: 14px;
     font-weight: 400;
     color: #333;
     border-radius: 5px;
     border: 1px solid #aaa;
-    padding: 0 10px;
     height: 36px;
-    margin: 2px 0;
+    min-width: 300px;
 }
 
 // .ng-autocomplete ::ng-deep .autocomplete-container {
@@ -137,22 +148,46 @@ label{
      color: #3F0F88;
  }
 
- .inputdate, .numberj{
-    outline: none;
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    padding: 0 14px;
-    height: 34px;
-    margin: 4px 0;
+//  .inputdate, .numberj{
+//     outline: none;
+//     font-size: 14px;
+//     font-weight: 400;
+//     color: #333;
+//     border-radius: 5px;
+//     border: 1px solid #aaa;
+//     padding: 0 14px;
+//     height: 34px;
+//     margin: 4px 0;
 
- }
+//  }
+
+.headinput{
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 14px;
+  height: 34px;
+  margin: 4px 4px;
+}
 
 
 
  .Add{
+    // margin-left: 10px;
+    // height: 40px;
+    // width:80px;
+    // border: none;
+    // background-color: #500ea1;
+    // color: #ffffff;
+    // border-radius: 5px;
+    // outline: none;
+    // font-weight: 600;
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
     margin-left: 10px;
     height: 40px;
     width:80px;
@@ -179,11 +214,11 @@ label{
  }
 
  //
- .check-icon{
-    content: '\f704';
-    font-size: 6rem;
-    color: #3F0F88;
-  }
+//  .check-icon{
+//     content: '\f704';
+//     font-size: 6rem;
+//     color: #3F0F88;
+//   }
   
   .otp-modal{
     position: fixed;
@@ -240,6 +275,55 @@ label{
   a:hover{
     text-decoration: none;
   }
+
+  .buttons{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 0;
+    margin: 14px 0;
+    float: right;
+    
+}
+
+.back{
+    height: 40px;
+    width: 80px;
+    border: none;
+    background-color: #ede9f2;
+    color: #7f7a7a;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.save{
+    height: 40px;
+    width: 80px;    
+    border: none;
+    margin-left: 10px;
+    align-items: end;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.btnTextb{
+    font-size: 14px;
+    font-weight: 600;
+    justify-content: center;
+}
+
+@media (max-height: 1200px) {
+  .container {
+      overflow-y: scroll;
+  }
+  .container::-webkit-scrollbar{
+      display: none;
+   }
+} 
 
  
 

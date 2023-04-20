@@ -1,14 +1,18 @@
 <div class="container">
-    <form [formGroup]="frm" (ngSubmit)="onPost()">
-    <div class="sub_header">
+    <!-- <form> -->
+    <form (ngSubmit)="onsubmit()">
+    <!-- <div class="sub_header"> -->
+    <div class="header">
         <div class="journdate">
             <label> Journal Date </label>
-            <input class="inputdate" type="date" id="journaldate" required>
+            <!-- <input class="inputdate" type="date" id="journaldate" required> -->
+            <input class="headinput" type="date" name="journal_date" [(ngModel)]="journalEntry.journal_date" required>
         </div>
   
         <div class="journnumber">
             <label>Journal Number </label>
-            <input class="numberj" type="number" id="journalnumber" required>
+            <!-- <input class="numberj" type="number" id="journalnumber" required> -->
+            <input class="headinput" type="number" name="journal_no" [(ngModel)]="journalEntry.journal_no" required>
         </div>
 
         <div>
@@ -20,7 +24,7 @@
        
     </div>
 
-            <div class="journals">
+            <!-- <div class="journals"> -->
                 <table class="tablejournal">
                      <tr>
                             <th class="journallabel">No.</th>
@@ -30,18 +34,18 @@
                             <th class="journallabel">Description</th>
                             <th class="journallabel">Name</th>
                     </tr>
-                        <tr *ngFor="let item of row; let x = index">
+                        <tr *ngFor="let obj of row; let i = index">
                                 <th class="journallabel">#</th>
-                                <td class="autocomplete">
-                                
-                                <ng-select formControlName="selectedJournal">
-                                    <ng-template ng-header-tmp >
-                                        <button (click)="show(1)" class="submit">Add+</button>
-                                    </ng-template>
-                                    <ng-option *ngFor="let journal of journals" [value]="journal.id">
-                                         {{journal.journal_number}} {{journal.journal_name}} {{journal.journal_type}}
-                                    </ng-option>
-                                </ng-select>
+                                <td class="beneinput">
+                                    <!-- <ng-select class="try" formControlName="selectedJournal" name="account{{i}}"> -->
+                                    <ng-select class="try" formControlName="selectedJournal" [(ngModel)]="journalEntry.account">
+                                        <ng-template ng-header-tmp >
+                                            <button (click)="show(1)" class="submit">Add+</button>
+                                        </ng-template>
+                                        <ng-option class="try" *ngFor="let journal of journals" [value]="journal.id">
+                                            {{journal.journal_number}} {{journal.journal_name}} {{journal.journal_type}}
+                                        </ng-option>
+                                    </ng-select>
                                 
                                 <!-- <ng-autocomplete
                                         [data]="journals"
@@ -62,23 +66,33 @@
                                         <button>add+</button>
                                     </ng-template> -->
                                 </td>
-                                <td class="beneinput"><input type="number"></td>
-                                <td class="beneinput"><input type="number"></td>
-                                <td class="beneinput"><input type="text"></td>
+                                <td class="beneinput"><input type="number" [(ngModel)]="journalEntry.debit"></td>
+                                <td class="beneinput"><input type="number" [(ngModel)]="journalEntry.credit"></td>
+                                <td class="beneinput"><input type="text" [(ngModel)]="journalEntry.description"></td>
 
-                                <td class="beneinput"><select type="text">
-                                    <option disabled selected>Select</option>
-                                    <option>Name 1</option>
-                                    <option>Name 2</option>
-                                    <option>Name 3</option>
-                                </select></td>
+                                <td class="beneinput">
+                                    <ng-select class="try" formControlName="selectedMembers"  [(ngModel)]="journalEntry.name">
+                                        <ng-option class="try" *ngFor="let member of members" [value]="member.id">
+                                            {{member.account_id}} {{member.first_name}} {{member.middle_name}} {{member.last_name}}
+                                        </ng-option>
+                                    </ng-select>
+                                </td>
 
-                                    <td > <button class="delbut" (click) = "deleteRow(x)">
+                                    <td > <button class="delbut" (click) = "deleteRow(i)">
                                         <i class="ti ti-square-rounded-x"></i>
                                         </button></td>
                          </tr>         
-                </table> 
-            </div>  
+                </table>
+                <div class="buttons">
+                    <button class="back"(click)="backMethod()">
+                        <span class="btnTextb">Back</span>
+                    </button>
+            
+                    <button class="save"(click)="saveMethod()">
+                        <span class="btnTexts">Save</span>
+                    </button>
+                </div>
+            <!-- </div>   -->
         </form>
     </div>
 

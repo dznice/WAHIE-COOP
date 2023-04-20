@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { Journal } from '../../../model/journal.model';
 
 @Component({
   selector: 'app-journal-entry',
@@ -10,28 +10,12 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class JournalEntryComponent implements OnInit {
 
-  row = [
+  row:any = [
     {
       id : '',
       account: '',
-      debits: '',
-      credits: '',
-      description: '',
-      name: ''
-    },
-    {
-      id : '',
-      account: '',
-      debits: '',
-      credits: '',
-      description: '',
-      name: ''
-    },
-    {
-      id : '',
-      account: '',
-      debits: '',
-      credits: '',
+      debit: '',
+      credit: '',
       description: '',
       name: ''
     }
@@ -41,8 +25,8 @@ export class JournalEntryComponent implements OnInit {
     const obj = {
       id : '',
       account: '',
-      debits: '',
-      credits: '',
+      debit: '',
+      credit: '',
       description: '',
       name: ''
     }
@@ -56,78 +40,54 @@ export class JournalEntryComponent implements OnInit {
     }   
   }
 
-  samples=[
-    {id:1, name:'Asset0'},
-    {id:2, name:'Asset1'},
-    {id:3, name:'Asset2'},
-    {id:4, name:'Asset3'},
-    {id:5, name:'Asset4'},
-    {id:5, name:'Asset5'},
-  ];
-
-  CreateNew(sample:any){
-    alert("Create New Clicked : "+ sample)
-  }
-
-  isSubmitted=false;
-
-  frm!:FormGroup;
-
-  onPost= ()=>this.isSubmitted=true;
-
-  selectedJournal: any;
-
-  filteredJournal: any;
-
-  keyword1= 'journal_number';
-  keyword= 'journal_name';
-  keyword3= 'journal_type';
+  // isSubmitted=false;
+  // selectedJournal: any;
+  // selectedMember: any;
+  // filteredJournal: any;
+  journalEntry = new Journal()
   public journals: any;
 
-  constructor(private wahieService:WahieService, private fb:FormBuilder){}
+  //journalForm:FormGroup
+  constructor(private wahieService:WahieService){}
 
   ngOnInit(): void {
     this.showJournal()
-    this.frm = this.fb.group({
-      'selectedSample':[''],
-      'description':['']
-    })
+    this.showMembers()
   }
 
-  selectEvent(item:any) {
-    // do something with selected item
-  }
- 
-  onChangeSearch(val: String) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-    console.log(val);
-  }
-  
-  onFocused(e:any){
-    // do something when input is focused
-  }
+  // selectEvent(item:any) {
+  //   // do something with selected item
+  // }
+  // onChangeSearch(val: String) {
+  //   // fetch remote data from here
+  //   // And reassign the 'data' which is binded to 'data' property.
+  //   console.log(val);
+  // }
+  // onFocused(e:any){
+  //   // do something when input is focused
+  // }
 
   showJournal(): void{
     this.journals = this.wahieService.listJournals().subscribe(journal=>{
       this.journals = journal;
       console.log(this.journals);
     });
-  } 
-
-
-  journalList = [];
-
-  search($event: any){
-    console.log($event);
   }
+
+  onsubmit(){
+    console.log(this.row)
+  }
+
+  //journalList = [];
+  // search($event: any){
+  //   console.log($event);
+  // }
 
   /**MODAL*/
   showModal = -1;
   show(index: number){
     this.showModal = index;
   }
-  
 
   add(journal_number:string,journal_name:string, journal_type:string){
     this.journals={
@@ -140,8 +100,27 @@ export class JournalEntryComponent implements OnInit {
     });
     console.log(this.journals)
   }
+
+  backMethod() {
+    if(confirm("Are you sure to back? ")) {
+      console.log("Function");
+    }
+  }
+
+  saveMethod() {
+    if(confirm("Save Journal Entry? ")) {
+      console.log("Function");
+    }
+  }
+
+  public members: any ;
+
+  showMembers(): void{
+    this.members = this.wahieService.listMembers().subscribe(member=>{
+      this.members = member;
+      console.log(this.members);
+
+    });
+  }
+
 }
-
-
-
-

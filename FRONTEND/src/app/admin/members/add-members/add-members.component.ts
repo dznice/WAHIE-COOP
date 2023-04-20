@@ -88,8 +88,7 @@ export class AddMembersComponent implements OnInit  {
     barangay:string,
     city_town:string,
     state_province:string,
-    postal_code:string,
-    ){
+    postal_code:string){
     this.members = {
     'predef': predef,
 		'account_id': account_id,
