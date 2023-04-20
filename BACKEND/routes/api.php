@@ -8,6 +8,9 @@ use App\Http\Resources\JournalResource;
 use App\Models\Members;
 use App\Http\Controllers\MemberController;
 use App\Http\Resources\MemberResource;
+use App\Models\LibEntries;
+use App\Http\Controllers\JournalEntryController;
+use App\Http\Resources\JournalEntryResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +22,18 @@ use App\Http\Resources\MemberResource;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+//Journal Entry
+Route::get('/accounts', function(){
+    return JournalEntryResource::collection(LibEntries::all());
+});
+Route::get('/account/{id}', function($id){
+    return new JournalEntryResource(LibEntries::findOrFail($id));
+});
+Route::post('/accounts', [JournalEntryController::class, 'store']);
+Route::put('/account/{id}', [JournalEntryController::class, 'update']);
+Route::delete('/account/{id}', [JournalEntryController::class, 'destroy']);
 
+//Members
 Route::get('/members', function(){
     return MemberResource::collection(Members::all());
 });
@@ -30,6 +44,7 @@ Route::post('/members', [MemberController::class, 'store']);
 Route::put('/member/{id}', [MemberController::class, 'update']);
 Route::delete('/member/{id}', [MemberController::class, 'destroy']);
 
+// Journal Lib Entry
 Route::get('/journals', function() {
     return JournalResource::collection(Journal::all());
 });
