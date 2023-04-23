@@ -8,6 +8,9 @@ use App\Http\Resources\JournalResource;
 use App\Models\Members;
 use App\Http\Controllers\MemberController;
 use App\Http\Resources\MemberResource;
+use App\Models\Beneficiary;
+use App\Http\Controllers\BeneficiaryController;
+use App\Http\Resources\BeneficiaryResource;
 use App\Models\LibEntries;
 use App\Http\Controllers\JournalEntryController;
 use App\Http\Resources\JournalEntryResource;
@@ -43,6 +46,17 @@ Route::get('/member/{id}', function($id){
 Route::post('/members', [MemberController::class, 'store']);
 Route::put('/member/{id}', [MemberController::class, 'update']);
 Route::delete('/member/{id}', [MemberController::class, 'destroy']);
+
+//Beneficiary
+Route::get('/beneficiaries', function(){
+    return BeneficiaryResource::collection(Members::all());
+});
+Route::get('/beneficiary/{id}', function($id){
+    return new BeneficiaryResource(Members::findOrFail($id));
+});
+Route::post('/beneficiaries', [BeneficiaryController::class, 'store']);
+Route::put('/beneficiary/{id}', [BeneficiaryController::class, 'update']);
+Route::delete('/beneficiary/{id}', [BeneficiaryController::class, 'destroy']);
 
 // Journal Lib Entry
 Route::get('/journals', function() {

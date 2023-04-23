@@ -4,8 +4,8 @@
 
 
     <body>
-
-    <form action="#">
+<div *ngFor="let item of row; let x = index">
+    <form >
         <div class="form first">
             <div class="details personal">
                <!----======== FIRST NAME ======== -->
@@ -144,7 +144,7 @@
                         <input type="radio" class="tabs__radio" name="tabs-coop" id="Beneficiaries">
                         <label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
 
-                        <div class="tabs__content">
+                        <div class="tabs__content" >
                             <table class="tablebene">
                                 <tr>
                                     <th></th>
@@ -152,20 +152,27 @@
                                     <th class="benelabel">Date of Birth</th>
                                     <th class="benelabel">Relationship</th>
                                 </tr>
-                                <tr *ngFor="let item of row; let x = index">
+                                
+                                <tr >
                                     <td class="delbut">
                                         <button class="addbut" (click)="addTable()">
                                             <i class="ti ti-square-rounded-plus"></i>
                                         </button></td>
-                                    <td class="beneinput"><input type="text"></td>
-                                    <td class="beneinput"><input type="date" ></td>
-                                    <td class="beneinput"><input type="text"></td>
+                                        <!-- <div *ngFor="let item of row; let x = index"> -->
+                                    <td matInput class="beneinput" ><input type="text" [(ngModel)]="item.benificiary_name" [ngModelOptions]="{standalone: true}"></td>
+                                
+                                    <td matInput class="beneinput"><input type="date" [(ngModel)]="item.benificiary_birthdate" [ngModelOptions]="{standalone: true}"></td>
+                               
+                                    <td matInput class="beneinput"><input type="text" [(ngModel)]="item.benificiary_relation" [ngModelOptions]="{standalone: true}"></td>
+                                
                                     <td class="delbut">
                                         <button class="delbut" (click) = "deleteRow(x)">
                                         <i class="ti ti-square-rounded-x"></i>
                                     </button></td>
                                 </tr>
+                                <button class="delbut" (click) = "addBeneficiary()">save</button>
                             </table>
+                            
                     </div>
                 <div>
             </div>
@@ -176,7 +183,7 @@
                             <span class="btnTextb">Back</span> 
                         </button>
 
-                        <button type="button" class="save" (click)="add(predef.value,
+                        <button type="button" class="save" (click)="addBeneficiary()" (click)="add(predef.value,
                                                                         account_id.value,
                                                                         first_name.value,
                                                                         middle_name.value,
@@ -223,7 +230,8 @@
                                                                         city_town.value='';
                                                                         state_province.value='';
                                                                         postal_code.value='';
-                                                                        ">
+                                                                        "
+                                                                        >
                             <span class="btnTexts">Save</span>
                         </button>
                     </div>
@@ -232,7 +240,7 @@
             </div>
         </div>
     </form>
-
+</div>
 
 <!-- <script>
     $('#add_benificiaries').on('click', function(){

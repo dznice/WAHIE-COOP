@@ -41,6 +41,9 @@ export class WahieService {
   public addMember(members:any):Observable<any>{
     return this.http.post<any>(this.url+'/api/members',members, this.httpOptions);
   }
+  public addBeneficiary(beneficiaries:any):Observable<any>{
+    return this.http.post<any>(this.url+'/api/beneficiaries',beneficiaries, this.httpOptions);
+  }
 
 
 }

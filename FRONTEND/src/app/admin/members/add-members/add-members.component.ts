@@ -9,34 +9,55 @@ import { MaxLengthValidator } from '@angular/forms';
   providers: [WahieService]
 })
 export class AddMembersComponent implements OnInit  {
-  row = [
-    {
-      id : '',
-      name: '',
-      dateofbirth: '',
-      relationship:''
-    },
-    {
-      id : '',
-      name: '',
-      dateofbirth: '',
-      relationship:''
-    },
-    {
-      id : '',
-      name: '',
-      dateofbirth: '',
-      relationship:''
-    }
+
+  constructor(private wahieService:WahieService){}
+
+  // row:any = [
+  //   {
+  //     name: " ",
+  //     birthdate: " ",
+  //     relation:" "
+  //   }
+    row:any = [
+      {
+
+        benificiary_id: "1",
+          benificiary_name: "",
+          benificiary_birthdate: "",
+          benificiary_relation:""
+      }
+    // ,
+    // {
+      
+    //   benificiary_name: "",
+    //   benificiary_birthdate: "",
+    //   benificiary_relation:""
+    // },
+    // {
+      
+    //   benificiary_name: "",
+    //   benificiary_birthdate: "",
+    //   benificiary_relation:""
+    // }
+
 
   ];
 
+  addBeneficiary() {
+    this.row.forEach((element:any) => {
+      this.wahieService.addBeneficiary(element as any).subscribe(beneficiaries=>{
+        this.row = beneficiaries;
+      })
+      console.log(this.beneficiaries);
+    })
+      
+    }
+
   addTable() {
     const obj = {
-      id : '',
-      name: '',
-      dateofbirth: '',
-      relationship:''
+      benificiary_name: "",
+      benificiary_birthdate: "",
+      benificiary_relation:""
     }
     this.row.push(obj)
   }
@@ -48,9 +69,10 @@ export class AddMembersComponent implements OnInit  {
     }
   }
 
-  constructor(private wahieService:WahieService){}
+  
 
   members: any ;
+  beneficiaries: any;
 
   ngOnInit(): void {
     this.showMembers()
@@ -113,8 +135,12 @@ export class AddMembersComponent implements OnInit  {
     this.wahieService.addMember(this.members as any).subscribe(member=>{
       this.members = member;
     });
+
+    
     console.log(this.members);
   }
+
+  
 
 //   idMembers(): void{
 

@@ -8,4 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class BenificiaryMembers extends Model
 {
     use HasFactory;
-}
+    }
