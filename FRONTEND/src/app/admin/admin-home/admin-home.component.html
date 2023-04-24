@@ -40,29 +40,36 @@
 
     <div class="table-filter">
       <div class="filter-field">
-        <label>Type</label>
-        <select name="journal-type">
-          <option value="All">All</option>
-          <option value="Journal Entry">Journal Entry</option>
-          <option value="Invoice">Invoice</option>
-          <option value="Payment">Payment</option>
-        </select>
+        <label for="search-member" placeholder="Search Member">Member</label>
+
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search Member"
+          [(ngModel)]="term"
+        />
       </div>
 
       <div class="filter-field">
         <label>Date</label>
-        <select name="date-range">
-          <option value="All">All</option>
-          <option value="Today">Today</option>
-          <option value="Yesterday">Yesterday</option>
-          <option value="Last week">Last week</option>
-          <option value="Last month">Last month</option>
+        <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate">
+        <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">
+      </div>
+
+      <div class="filter-field">
+        <label>Type</label>
+        <select [(ngModel)]="type" name="journal-type">
+          <option [ngValue]="undefined" selected>All</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
         </select>
       </div>
 
       <div class="filter-field">
-        <label for="search-member" placeholder="Search Member">Member</label>
-        <input type="search" />
+        <label>Status</label>
+        <select [(ngModel)]="stat" name="status">
+          <option [ngValue]="undefined" selected>All</option>
+          <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>
+        </select>
       </div>
     </div>
 
@@ -78,26 +85,20 @@
           <th>Status</th>
         </thead>
         <tbody>
-          <tr>
-            <td>03/01/2023</td>
-            <td>Journal Entry</td>
-            <td>9</td>
-            <td>0005 John Concepcion</td>
-            <td>03/01/2023</td>
-            <td>P14,000.00</td>
-            <td>Overdue</td>
-          </tr>
-          <tr>
-            <td>02/28/2023</td>
-            <td>Journal Entry</td>
-            <td>8</td>
-            <td>0001 Dale Allen Liwanag</td>
-            <td>02/28/2023</td>
-            <td>P20,000.00</td>
-            <td>Pending</td>
+          <tr *ngFor="let e of item | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }">
+            <td>{{ e.date }}</td>
+            <td>{{ e.type }}</td>
+            <td>{{ e.No }}</td>
+            <td>{{ e.Member }}</td>
+            <td>{{ e.DueDate }}</td>
+            <td>{{ e.Balance }}</td>
+            <td>{{ e.Status }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
+  <div class="pagination-controls">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </main>

@@ -33,7 +33,7 @@
   <section class="members-table">
     <div class="input-box">
       <i class="ti ti-search"></i>
-      <input type="text" placeholder="Search member" />
+      <input class="form-control" type="text" placeholder="Search Member" [(ngModel)]="term"/>
     </div>
 
     <div class="table-container">
@@ -44,30 +44,10 @@
           <th>OPEN BALANCE</th>
         </thead>
         <tbody>
-          <tr>
-            <td>0001 Dale Allen Liwanag</td>
-            <td>liwanagdale@gmail.com</td>
-            <td>PHP20,000.00</td>
-          </tr>
-          <tr>
-            <td>0002 Nicer Dizon</td>
-            <td>dizonicer@gmail.com</td>
-            <td>PHP30,000.00</td>
-          </tr>
-          <tr>
-            <td>0003 Aljohn Richards</td>
-            <td>aj.rich@gmail.com</td>
-            <td>PHP3,000.00</td>
-          </tr>
-          <tr>
-            <td>0004 Ivan Morales</td>
-            <td>mrls.ivan@gmail.com</td>
-            <td>PHP40,000.00</td>
-          </tr>
-          <tr>
-            <td>0005 John Concepcion</td>
-            <td>john.cpn@gmail.com</td>
-            <td>PHP60,000.00</td>
+          <tr *ngFor="let member of memItem | filterMemName: term">
+           <td [routerLink]="['../members/member-info']">{{member.name}}</td>
+           <td>{{member.email}}</td>
+           <td>{{member.balance}}</td>
           </tr>
         </tbody>
       </table>
