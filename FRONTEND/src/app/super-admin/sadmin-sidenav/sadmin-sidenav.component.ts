@@ -1,6 +1,9 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
 import { sAdminNavData } from './sadmin-navdata';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -71,5 +74,16 @@ export class SadminSidenavComponent implements OnInit {
       collapsed: this.collapsed,
       screenWidth: this.screenWidth,
     });
+  }
+
+  public loggedIn:boolean = false;
+
+  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService) {}
+
+  logout(event:MouseEvent){
+    event.preventDefault();
+    this.auth.changeStatus(false);
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
   }
 }

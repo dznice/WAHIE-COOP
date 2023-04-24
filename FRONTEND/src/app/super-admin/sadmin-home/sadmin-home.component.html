@@ -1,3 +1,44 @@
 <main>
-  <h1 class="title">Home</h1>
+  <h1 class="title">Accounts</h1>
 </main>
+
+<div class="input-box">
+  <i class="ti ti-search"></i>
+  <input type="text" placeholder="Search member"/>
+</div>
+
+<div class="table-container">
+  <table class="table-content">
+    <thead>
+      <th>User</th>
+      <th>Email</th>
+      <th>Date Created</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userAccounts" >
+        <div *ngIf="user.role_id == 1">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <!-- <td>{{ user.datecreated }}</td> -->
+
+          <td>
+            <div *ngIf="user.status != 2">
+              <label class="switch-toggle">
+                <input type="checkbox" [(ngModel)]="selected" />
+                <input class="switch" input type="checkbox" [(ngModel)]="selected" />
+                <div class="slider"></div>
+              </label>
+            </div>
+
+            <div *ngIf="user.status == 2">
+              <button type="submit" (click)="activateUser(user)" class="btn btn-success">
+                <span>Activate</span>
+              </button>
+            </div>
+          </td>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>

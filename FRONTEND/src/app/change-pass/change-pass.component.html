@@ -2,7 +2,7 @@
 <main>
     <div class="box">
         <div class="inner-box">
-            <div class="form-wrap">    
+            <div class="form-wrap">  
                 <form [formGroup]="changePassForm" (ngSubmit)="onSubmit()" name="form" *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
@@ -17,13 +17,14 @@
                     <div  class="txt-field">
                         <div class="txt-wrap">
                             <label class="enter_pass" for="pass"> Enter Password</label>
-                                <input formControlName="password" [type]="changetype?'password':'text'" name="password" id="pass" placeholder="Input password">
-                                <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
+                            <input formControlName="password" [type]="changetype?'password':'text'" name="password" id="pass" placeholder="Input password">
+                            <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                         </div>
+
                         <div class="meter">
                             <strength-meter [value]="changePassForm.value.password" (measure)="onStrengthChange($event)"></strength-meter>
                         </div>
-                            
+
                         <div class="txt-wrap">
                             <label for="pass2"> Confirm Password</label>
                             <input formControlName="confirm_pass" [type]="cchangetype?'password':'text'" name="confirm_pass" id="pass2" placeholder="Confirm your new password">
@@ -32,29 +33,24 @@
                         <div class="text-danger1" *ngIf="changePassForm.get('confirm_pass')!.touched && changePassForm.get('confirm_pass')!.invalid && changePassForm.controls['confirm_pass'].errors!['passwordMatch']">
                             <small>Password not match</small>
                         </div>
-                    
-                        
+
                         <a [routerLink]="['/pass-done']" type="submit" class="save">Save new password</a>
 
-                            <a [routerLink]="['/login']" class="back">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
-                                width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" 
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M5 12l14 0"></path>
-                                <path d="M5 12l6 6"></path>
-                                <path d="M5 12l6 -6"></path>
-                            </svg>Back to log in</a>
+                        <a [routerLink]="['/login']" class="back">
+                            <i class="ti ti-arrow-left"></i>Back to log in
+                        </a>
                     </div>
                 </form>
-                        <div class="account">
-                            <div style="text-align:center"></div>
-                            <span class="dot1">1</span>
-                            <span class="dot2">2</span>
-                            <span class="dot3">3</span>
-                            <span class="dot4">4</span>
-                        </div> 
+                
+                <div class="account">
+                    <div style="text-align:center"></div>
+                    <span class="dot1">1</span>
+                    <span class="dot2">2</span>
+                    <span class="dot3">3</span>
+                    <span class="dot4">4</span>
+                </div> 
             </div>
+            
             <!-- VECTOR BACKGROUND -->
             <div class="login-vector ">
                 <img src="assets/image/Reset password-amico.png" class="login" *ngIf="isDisplayed" @slider>

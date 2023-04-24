@@ -1,9 +1,11 @@
-<head><title>Set new password</title></head>
+<head>
+    <title>Set new password</title>
+</head>
 <main>
     <div class="box">
         <div class="inner-box">
             <div class="form-wrap">    
-                <form [formGroup]="form" name="form" *ngIf="isDisplayed" @slideright>
+                <form name="form"  [formGroup]="chpassForm" *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -20,36 +22,48 @@
 
                             <label class="enter_pass" for="pass"> Enter Password</label>
 
-                                <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="sadmin-pass" placeholder="Input password"  formControlName="password" required>
+                                <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="sadmin-pass" placeholder="Input password"  formControlName="password" required
+                                [ngClass]="{error : getControl('password')?.errors && getControl('password')?.touched}">
                                 <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                            
-                            <div class="meter"> <strength-meter [value]="form.value.password" (measure)="onStrengthChange($event)"></strength-meter>
+                            <!-- pasword meter 
+                                <div class="meter"> <strength-meter [value]="form.value.password" (measure)="onStrengthChange($event)"></strength-meter>
+                            </div>-->
+                        </div>
+                        <div>
+                            <div class="text-danger" *ngIf="submitted && getControl('password')?.errors || getControl('password')?.errors && getControl('password')?.touched">
+                                <small *ngIf="getControl('password')?.errors?.['required']">Password field is required</small>
                             </div>
                         </div>
                             
                         <div class="txt-wrap">
                             <label for="pass2"> Confirm Password</label>
-                            <input [type]="cchangetype?'password':'text'"  minlength="8" maxlength="32"  class="input-field" id="sadmin-confirm-pass" placeholder="Confirm your new password"  required>
+                            <input [type]="cchangetype?'password':'text'"  minlength="8" maxlength="32"  class="input-field" id="sadmin-confirm-pass" placeholder="Confirm your new password"  formControlName="confirm_pass"required
+                            [ngClass]="{error : (getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched) || (chpassForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched) }">
                             <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                         </div>
-                        
-                            <a [routerLink]="['/sadmin-passdone']" class="save">Save new password</a>
-                            
 
+                        <div>
+                            <div class="text-danger1" *ngIf="submitted && getControl('confirm_pass')?.errors || getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched">
+                                <small *ngIf="getControl('confirm_pass')?.errors?.['required']">Confirm Password field is required</small>
+                            </div>
+                        </div>
+                        <div>
+                          <div class="text-danger2" *ngIf="chpassForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched">
+                            <small >Password Not Match</small>
+                          </div>
+                        </div>
+        
+                        <button type="submit" [routerLink]="['/sadmin-passdone']" class="save">Save new password</button>
                     </div>
                 </form>                                                         
                         <div class="account">
                             <a [routerLink]="['/login']" class="back">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
-                                width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"   
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M5 12l14 0"></path>
-                                <path d="M5 12l6 6"></path>
-                                <path d="M5 12l6 -6"></path>
-                            </svg>Logout</a>
+                                <i class="ti ti-arrow-left"></i>Logout
+                            </a>
                         </div> 
             </div>
+
             <!-- VECTOR BACKGROUND -->
             <div class="login-vector ">
                 <img src="assets/image/Reset password-amico.png" class="login" *ngIf="isDisplayed" @slider>

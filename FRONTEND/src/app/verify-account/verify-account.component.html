@@ -1,9 +1,11 @@
-<head><title>Account Verification</title></head>
+<head>
+    <title>Account Verification</title>
+</head>
 <main>
     <div class="box">
         <div class="inner-box">
             <div class="form-wrap" >    
-                <form class="verify-form">
+                <form class="verify-form" #loginForm="ngForm" (ngSubmit)="getOtp(loginForm)">
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -20,28 +22,20 @@
                             <input [ngClass]="show" type="email" minlength="4" class="input-field" id="text" placeholder="Enter verification code" required><br> 
                         </div>
                     </div>
-
-                    <div class="resend-code">
-                        <a>Resend code</a>
-                    </div>
-                        <button (click)="show(1)" class="submit">Confirm</button>
-
-                        <a [routerLink]="['/register']" class="back">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
-                            width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" 
-                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M5 12l14 0"></path>
-                            <path d="M5 12l6 6"></path>
-                            <path d="M5 12l6 -6"></path>
-                        </svg>Go Back</a>
                     
+                    <button type="submit"  class="submit">Confirm</button>
+                    <!-- <button (click)="show(1)" class="submit">Confirm</button> -->
                 </form>
-            </div>
-                <!-- VECTOR BACKGROUND -->
-                <div class="otp-vector">
-                <img src="assets/image/Two factor authentication-amico.png"> 
+
+                <div (click)="resendOtp()" class="resend-code">
+                    <a>Resend code</a>
                 </div>
+            </div>
+
+            <!-- VECTOR BACKGROUND -->
+            <div class="otp-vector">
+                <img src="assets/image/Two factor authentication-amico.png"> 
+            </div>
         </div>
     </div>
 </main>
@@ -64,6 +58,5 @@
                 </div>
             </div>
         </div>
-    
     </div>
 </section>

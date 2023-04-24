@@ -27,15 +27,20 @@ import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
 import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { LoggedInService } from './services/logged-in.service';
+import { NotLoggedInService } from './services/not-logged-in.service';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate : [NotLoggedInService]
   },
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate : [NotLoggedInService]
   },
   {
     path: '',
@@ -81,6 +86,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate : [LoggedInService],
     children : [
       {path: '', redirectTo: 'admin-home', pathMatch: 'full'},
       {path: 'admin-home', component: AdminHomeComponent},
@@ -98,6 +104,7 @@ const routes: Routes = [
   {
     path: 'super-admin',
     component: SuperAdminComponent,
+    canActivate : [LoggedInService],
     children : [
       {path: '', redirectTo: 'sadmin-home', pathMatch: 'full'},
       {path: 'sadmin-home', component: SadminHomeComponent},
@@ -111,5 +118,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthGuardService]
 })
 export class AppRoutingModule {}

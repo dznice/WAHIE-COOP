@@ -3,7 +3,7 @@
     <div class="box">
         <div class="inner-box">
             <div class="form-wrap" >    
-                <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login-form"  *ngIf="isDisplayed" @slideright>
+                <form (ngSubmit)="submitLogin()" [formGroup]="loginForm" class="login-form"  *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -34,7 +34,7 @@
         
                             <a [routerLink]="['/forgot-pass']" class="forgot-pass">Forgot Password?</a><br>
 
-                            <button type="submit" class="submit" [routerLink]="['/admin/admin-home']">Login</button>
+                            <button type="submit" class="submit">Login</button>
 
                             <p class="account">
                                 Don't have an account? <a  onclick="clearInputField()" [routerLink]="['/register']">Sign Up</a>

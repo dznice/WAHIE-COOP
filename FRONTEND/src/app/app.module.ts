@@ -36,6 +36,8 @@ import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
 import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuardService } from './services/auth-guard.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';  
 import { FilterPipeModule } from 'ngx-filter-pipe';
@@ -93,8 +95,9 @@ import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
     FilterPipeModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
