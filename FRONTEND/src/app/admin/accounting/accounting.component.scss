@@ -5,4 +5,160 @@ main {
   .title {
     color: var(--primary-color);
   }
+  
+}
+
+main {
+  width: 100%;
+  animation: transitionIn 0.75s;
+
+  .title {
+    color: var(--primary-color);
+  }
+}
+.Add {
+  position: absolute;
+  right: 0;
+  margin-top: 1rem;
+  margin-right: 20px;
+  margin-left: 20px;
+  height: 40px;
+  width: 160px;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  background-color: var(--primary-color);
+  color: var(--panel-color);
+  border-radius: 5px;
+  outline: none;
+  font-weight: 600;
+}
+:hover {
+  cursor: pointer;
+}
+.section-div {
+  display: flex;
+}
+
+/* Filtering */
+.recent-transaction {
+  .section-title {
+    color: var(--primary-color);
+    margin-top: 3rem;
+    font-size: 28px;
+  }
+
+  .table-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 0.7rem;
+
+    .filter-field {
+      display: flex;
+      width: calc(100% / 4 - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+  }
+}
+
+/* Table */
+.table-container {
+  margin: auto;
+  width: 100%;
+}
+.table-content {
+  width: 100%;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  overflow: hidden;
+  border-collapse: collapse;
+  border-radius: 0.625rem;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.05);
+}
+.table-content thead th {
+  position: sticky;
+  background-color: var(--primary-color);
+  color: var(--panel-color);
+  text-align: left;
+  font-weight: bold;
+}
+.table-content th,
+.table-content td {
+  text-align: left;
+  padding: 12px 15px;
+}
+.table-content thead th:nth-last-of-type(2),
+.table-content td:nth-last-of-type(2) {
+  text-align: right;
+}
+.table-content th,
+.table-content td {
+  border-right: 1px solid var(--border-color);
+}
+.table-content tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+}
+
+tr:hover td {
+  color: var(--primary-color);
+  cursor: pointer;
+  background-color: var(--panel-color);
+}
+
+.table-content tbody {
+  .status {
+    width: 1rem;
+    font-weight: 600;
+  }
+  .overdue {
+    padding: 0.5rem 1.25rem;
+    background: var(--overdue-bg);
+    color: var(--overdue-font);
+    border-radius: 0.45rem;
+    width: fit-content;
+  }
+  .pending {
+    padding: 0.5rem 1.25rem;
+    background: var(--pending-bg);
+    color: var(--pending-font);
+    border-radius: 0.45rem;
+    width: fit-content;
+  }
+  .paid {
+    padding: 0.5rem 2.15rem;
+    background: var(--paid-bg);
+    color: var(--paid-font);
+    border-radius: 0.45rem;
+    width: fit-content;
+  }
+}
+
+.pagination-controls {
+  text-align: end;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  margin: 10px 20px;
 }

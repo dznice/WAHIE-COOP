@@ -1,0 +1,135 @@
+<div class="container">
+    <div class="tabs">
+      <input
+        type="radio"
+        class="tabs__radio"
+        name="tabs-coop"
+        id="Transactions"
+        checked
+      />
+      <label for="Transactions" class="tabs__label">Transactions</label>
+  
+      <div class="tabs__content">
+        <div class="table-filter">
+          <div class="filter-field">
+            <label>Type</label>
+            <select [(ngModel)]="type" name="journal-type">
+              <option [ngValue]="undefined" selected>All</option>
+              <option *ngFor="let type of types" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+          </div>
+  
+          <div class="filter-field">
+            <label>Date</label>
+            <input type="date" />
+          </div>
+        </div>
+  
+        <table class="table-content">
+          <thead>
+            <th>Date</th>
+            <th>Type</th>
+            <th>No.</th>
+            <th>Member</th>
+            <th>Due Date</th>
+            <th>Balance</th>
+            <th>Status</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of item | filter : type">
+              <td>{{ e.date }}</td>
+              <td>{{ e.type }}</td>
+              <td>{{ e.No }}</td>
+              <td>{{ e.Member }}</td>
+              <td>{{ e.DueDate }}</td>
+              <td>{{ e.Balance }}</td>
+              <td>{{ e.Status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <input
+        type="radio"
+        class="tabs__radio"
+        name="tabs-coop"
+        id="Member Details"
+      />
+      <label for="Member Details" class="tabs__label">Member Details</label>
+      <div class="tabs__content">
+        <div class="member_information">
+          <div class="information_row">
+            <table>
+              <tr>
+                <th class="fields" width="30%">Member</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Email</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Mobile Number</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Gender</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Spouse</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Curent Address</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+            </table>
+          </div>
+  
+          <div class="information_row">
+            <table>
+              <tr>
+                <th class="fields" width="30%">Employement Status</th>
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Occupation</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Department</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Company</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Company Address</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+              <tr>
+                <th class="fields" width="30%">Beneficiaries</th>
+  
+                <td class="fieldsdata"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

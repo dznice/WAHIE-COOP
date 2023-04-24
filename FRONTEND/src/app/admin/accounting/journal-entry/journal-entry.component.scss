@@ -1,157 +1,161 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-:host{
-    display: flex;
-    position: fixed;
-    top: 0%;
-    right: 0%;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(221, 210, 210, 0.5);
-    align-items: center;
-    justify-content: center;
+:host {
+  display: flex;
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(221, 210, 210, 0.5);
+  align-items: center;
+  justify-content: center;
 }
 
-.container{
-    position: relative;
-    width: 1400px;
-    min-height: 700px;
-    max-height: 700px;
-    padding: 40px;
-    margin: 0 15px;
-    box-shadow: 5px 5px 5px #ccc;
-    border-radius: 20px;
-    background-color: #ffffff;
-    overflow-y: auto;
+.container {
+  position: relative;
+  width: 1400px;
+  min-height: 700px;
+  max-height: 700px;
+  padding: 40px;
+  margin: 0 15px;
+  box-shadow: 5px 5px 5px #ccc;
+  border-radius: 20px;
+  background-color: #ffffff;
+  overflow-y: auto;
 }
 
 .header {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
 }
 
 label {
-    font-size: 16px;
-    font-weight: 500;
-    color: #3F0F88;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
 }
 
-
-.tablejournal{
-    width: 100%;
+.tablejournal {
+  width: 100%;
 }
 
-.beneinput input, select {
-    outline: none;
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    padding: 0 15px;
-    height: 36px;
-    margin: 2px 0;
-    display: flex;
-    width: 100%;
+.beneinput input,
+select {
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 36px;
+  margin: 2px 0;
+  display: flex;
+  width: 100%;
 }
 
- .journallabel{
-     font-size: 16px;
-     font-weight: 500;
-     color: #3F0F88;
- }          
- 
- .headinput{
-    outline: none;
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    padding: 0 14px;
-    height: 34px;
-    margin: 4px 4px;
- }
-
- /* buttons */
-
-.Add{
-    position: absolute;
-    right: 0;
-    margin-right: 30px;
-    margin-left: 10px;
-    height: 40px;
-    width:80px;
-    border: none;
-    background-color: #500ea1;
-    color: #ffffff;
-    border-radius: 5px;
-    outline: none;
-    font-weight: 600;
- }
-
- .delbut{
-    height: auto;
-    width:auto;
-    margin-left: 6px;
-    border: none;
-    font-size: 24px;
-    background: none;
-    background-color: none;
-    color: #ff0000;
-    border-radius: 5px;
-    outline: none;
-    font-weight: 600;
- }
-
- .buttons{
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-    bottom: 0;
-    margin: 14px 0;
-    float: right;
+.journallabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
 }
 
-.back{
-    height: 40px;
-    width: 80px;
-    border: none;
-    background-color: #ede9f2;
-    color: #7f7a7a;
-    border-radius: 5px;
-    outline: none;
+.headinput {
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 14px;
+  height: 34px;
+  margin: 4px 4px;
 }
 
-.save{
-    height: 40px;
-    width: 80px;    
-    border: none;
-    margin-left: 10px;
-    align-items: end;
-    background-color: #530ea8;
-    color: #ffffff;
-    border-radius: 5px;
-    outline: none;
+/* buttons */
+
+.Add {
+  position: absolute;
+  right: 0;
+  margin-right: 40px;
+  margin-left: 10px;
+  height: 40px;
+  width: 80px;
+  border: none;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 5px;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.btnTextb{
-    font-size: 14px;
-    font-weight: 600;
-    justify-content: center;
+.delbut {
+  height: auto;
+  width: 22px;
+  margin-left: 6px;
+  border: none;
+  font-size: 24px;
+  background: none;
+  background-color: none;
+  color: #ff0000;
+  border-radius: 5px;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 0;
+  margin: 14px 0;
+  float: right;
+}
+
+.back {
+  height: 40px;
+  width: 80px;
+  border: none;
+  background-color: #ede9f2;
+  color: #7f7a7a;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.save {
+  height: 40px;
+  width: 80px;
+  border: none;
+  margin-left: 10px;
+  align-items: end;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.btnTextb {
+  font-size: 14px;
+  font-weight: 600;
+  justify-content: center;
 }
 
 @media (max-height: 1200px) {
-    .container {
-        overflow-y: scroll;
-    }
-    .container::-webkit-scrollbar{
-        display: none;
-     }
-} 
+  .container {
+    overflow-y: scroll;
+  }
+  .container::-webkit-scrollbar {
+    display: none;
+  }
+}

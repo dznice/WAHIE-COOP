@@ -34,6 +34,7 @@ import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
 import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
+import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { DisableAccountComponent } from './disable-account/disable-account.compo
     AdminBodyComponent,
     SadminBodyComponent,
     NotVerifiedComponent,
-    DisableAccountComponent
+    DisableAccountComponent,
+    MemberInfoComponent
   ],
   imports: [
     BrowserModule,
