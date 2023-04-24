@@ -3,55 +3,63 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-journal-entry',
   templateUrl: './journal-entry.component.html',
-  styleUrls: ['./journal-entry.component.scss']
+  styleUrls: ['./journal-entry.component.scss'],
 })
 export class JournalEntryComponent {
   row = [
     {
-      id : '',
+      id: '',
       account: '',
       debits: '',
       credits: '',
       description: '',
-      name: ''
+      name: '',
     },
     {
-      id : '',
+      id: '',
       account: '',
       debits: '',
       credits: '',
       description: '',
-      name: ''
+      name: '',
     },
     {
-      id : '',
+      id: '',
       account: '',
       debits: '',
       credits: '',
       description: '',
-      name: ''
-    }
+      name: '',
+    },
   ];
-  
+
   addTable() {
     const obj = {
-      id : '',
+      id: '',
       account: '',
       debits: '',
       credits: '',
       description: '',
-      name: ''
-    }
-    this.row.push(obj)
+      name: '',
+    };
+    this.row.push(obj);
   }
-  
-  deleteRow(x: number){
-    var delBtn = confirm(" Do you want to delete ?");
-    if ( delBtn == true ) {
-      this.row.splice(x, 1 );
-    }   
-  } 
 
+  deleteRow(x: number) {
+    var delBtn = confirm(' Do you want to delete ?');
+    if (delBtn == true) {
+      this.row.splice(x, 1);
+    }
+  }
+  backMethod() {
+    if (confirm('Are you sure to back? ')) {
+      console.log('Function');
+    }
+  }
+
+  saveMethod() {
+    if (confirm('Save Journal Entry? ')) {
+      console.log('Function');
+    }
+  }
 }
-
-

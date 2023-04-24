@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from './item';
-import { itemService } from './item.service';
+import { itemService } from '../../accounting/item.service';
 
 @Component({
-  selector: 'app-accounting',
-  templateUrl: './accounting.component.html',
-  styleUrls: ['./accounting.component.scss'],
+  selector: 'app-member-info',
+  templateUrl: './member-info.component.html',
+  styleUrls: ['./member-info.component.scss'],
   providers: [itemService],
 })
-export class AccountingComponent implements OnInit {
-
+export class MemberInfoComponent implements OnInit {
   item: Item[] = [];
   term: string = '';
   p: number = 1;
   type: string;
-  stat: string;
-
-
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
-  stats: string[]= ["Overdue", "Pending", "Closed" ];
 
   constructor(private ItemService: itemService) {}
 
@@ -26,4 +21,3 @@ export class AccountingComponent implements OnInit {
     this.item = this.ItemService.item;
   }
 }
-

@@ -1,3 +1,84 @@
 <main>
   <h1 class="title" [routerLink]="['../journal-entry']">Accounting</h1>
+  <section class="recent-transaction">
+    <div>
+      <button class="Add" onclick="">
+        <span class="btnText"> New Journal Entry </span>
+      </button>
+    </div>
+    <div class="section-div">
+      <h2 class="section-title">Recent Transactions</h2>
+    </div>
+
+    <div class="table-filter">
+      <div class="filter-field">
+        <label for="search-member" placeholder="Search Member">Member</label>
+
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search Member"
+          [(ngModel)]="term"
+        />
+      </div>
+
+      <div class="filter-field">
+        <label>Date</label>
+        <input type="text" name="datefilter" value="" />
+      </div>
+
+      <div class="filter-field">
+        <label>Type</label>
+        <select [(ngModel)]="type" name="journal-type">
+          <option [ngValue]="undefined" selected>All</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+
+      <div class="filter-field">
+        <label>Stauts</label>
+        <select [(ngModel)]="stat" name="status">
+          <option [ngValue]="undefined" selected>All</option>
+          <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="table-content">
+        <thead>
+          <th>Date</th>
+          <th>Type</th>
+          <th>No.</th>
+          <th>Member</th>
+          <th>Due Date</th>
+          <th>Balance</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let e of item
+                | filterName : term
+                | filter : type
+                | filter : stat
+                | paginate : { itemsPerPage: 5, currentPage: p }
+            "
+          >
+            <td>{{ e.date }}</td>
+            <td>{{ e.type }}</td>
+            <td>{{ e.No }}</td>
+            <td>{{ e.Member }}</td>
+            <td>{{ e.DueDate }}</td>
+            <td>{{ e.Balance }}</td>
+            <td>{{ e.Status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="pagination-controls">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </main>
+
