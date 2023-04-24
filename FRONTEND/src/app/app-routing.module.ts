@@ -26,6 +26,7 @@ import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.compo
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
+import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
 
 const routes: Routes = [
   {
@@ -89,6 +90,7 @@ const routes: Routes = [
       {path: 'members/add-invoice', component: AddInvoiceComponent},
       {path: 'members/add-members', component: AddMembersComponent},
       {path: 'members/add-payment', component: AddPaymentComponent},
+      {path: 'members/member-info', component: MemberInfoComponent},
       {path: 'inventory', component: InventoryComponent},
       {path: 'admin-body', component: AdminBodyComponent},
     ]

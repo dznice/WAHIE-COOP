@@ -17,8 +17,12 @@ export class AccountingComponent implements OnInit {
   stat: string;
 
 
+
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
   stats: string[]= ["Overdue", "Pending", "Closed" ];
+
+  startDate: string = '';
+  endDate : string = '';
 
   constructor(private ItemService: itemService) {}
 

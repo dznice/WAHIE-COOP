@@ -36,6 +36,15 @@ import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
 import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';  
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { FilterPipe } from './admin/accounting/filter.pipe';
+import { FilterDatePipe } from './admin/accounting/filter-date.pipe';
+import { FilterMemberPipe } from './admin/members/filter-member.pipe';
+import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
+import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +76,12 @@ import { MemberInfoComponent } from './admin/members/member-info/member-info.com
     SadminBodyComponent,
     NotVerifiedComponent,
     DisableAccountComponent,
-    MemberInfoComponent
+    MemberInfoComponent,
+    FilterPipe,
+    FilterDatePipe,
+    FilterMemberPipe,
+    FilterHomePipe,
+    FilterHomeDatePipe
   ],
   imports: [
     BrowserModule,
@@ -75,7 +89,10 @@ import { MemberInfoComponent } from './admin/members/member-info/member-info.com
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    StrengthMeterModule
+    StrengthMeterModule,
+    FilterPipeModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
