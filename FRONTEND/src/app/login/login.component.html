@@ -3,7 +3,7 @@
     <div class="box">
         <div class="inner-box">
             <div class="form-wrap" >    
-                <form (ngSubmit)="submitLogin()" [formGroup]="loginForm" class="login-form"  *ngIf="isDisplayed" @slideright>
+                <form #loginForms="ngForm" (ngSubmit)="submitLogin()" [formGroup]="loginForm" class="login-form"  *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -17,11 +17,11 @@
                     <div class="txt-field">
                             <div class="txt-wrap">
                                 <input type="email" name="email" formControlName="email" class="input-field" id="log-email" placeholder="Email" 
-                                [ngClass]="{error : getControl('email')?.errors && getControl('email')}"><br>
+                                [ngClass]="{error : getControl('email')?.errors && getControl('email')}"  [(ngModel)]="form.email"><br>
                             </div>
 
                             <div class="txt-wrap">
-                                <input [type]="changetype?'password':'text'" name="password" formControlName="password" class="input-field" id="log-pass" placeholder="Password" 
+                                <input [type]="changetype?'password':'text'" name="password" formControlName="password"  [(ngModel)]="form.password" class="input-field" id="log-pass" placeholder="Password" 
                                 [ngClass]="{error : getControl('password')?.errors && getControl('password')}">
                                 <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span>
                             
@@ -32,12 +32,13 @@
                                 </div>
                             </div>
         
-                            <a [routerLink]="['/forgot-pass']" class="forgot-pass">Forgot Password?</a><br>
+                            <a href="forgot-pass" class="forgot-pass">Forgot Password?</a><br>
 
-                            <button type="submit" class="submit">Login</button>
+                            <button type="submit" class="submit" >Login</button>
+                            
 
                             <p class="account">
-                                Don't have an account? <a  onclick="clearInputField()" [routerLink]="['/register']">Sign Up</a>
+                                Don't have an account? <a  onclick="clearInputField()" href="register">Sign Up</a>
                             </p>
                     </div>
                 </form>

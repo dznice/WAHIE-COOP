@@ -10,6 +10,14 @@ export class TokenService {
     this.set(token);
     console.log(this.isValid());
   }
+  verifyHandle(token:any){
+    localStorage.setItem('token',token)
+    sessionStorage.removeItem('ftoken');
+    console.log(this.isValid());
+  }
+  ftoken(token:any){
+    return sessionStorage.setItem('ftoken',token);
+  }
   set(token:any){
     return localStorage.setItem('token',token);
   }
@@ -25,6 +33,7 @@ export class TokenService {
       const payload = this.payload(token);
       if(payload){
         return (payload.iss=="http://127.0.0.1:8000/api/login")?true:false;
+
       }
     }
     return false;
@@ -39,4 +48,6 @@ export class TokenService {
  loggedIn(){
   return  this.isValid();
  }
+
+
 }
