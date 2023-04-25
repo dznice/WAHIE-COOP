@@ -1,6 +1,9 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
 import { adminNavData } from './admin-navdata';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -53,8 +56,18 @@ export class AdminSidenavComponent implements OnInit {
     }
   }
 
+  email:any
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+    // var data = this.creds.get();
+    // console.log('email', data) 
+    // this.email=sessionStorage.getItem('email')
+    // this.auth.authStatus.subscribe(
+    //   value=>{
+    //     this.loggedIn = value;
+    //   }
+    // )
   }
 
   toggleCollapse(): void {
@@ -71,5 +84,20 @@ export class AdminSidenavComponent implements OnInit {
       collapsed: this.collapsed,
       screenWidth: this.screenWidth,
     });
+  }
+
+  public loggedIn:boolean = false;
+
+  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService) {}
+
+  logout(event:MouseEvent){
+    event.preventDefault();
+    this.auth.changeStatus(false);
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
+  }
+  
+  userName(){
+    return sessionStorage.getItem('name');
   }
 }

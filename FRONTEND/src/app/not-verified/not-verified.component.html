@@ -14,28 +14,15 @@
                     </div>
                 
                     <a [routerLink]="['/login']" class="back">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" 
-                        width="25" height="25" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" 
-                        fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M5 12l14 0"></path>
-                        <path d="M5 12l6 6"></path>
-                        <path d="M5 12l6 -6"></path>
-                    </svg>Logout</a>
-                </form> 
-
-                    <div class="account">
-                        <div style="text-align:center"></div>
-                            <span class="dot1">1</span>
-                            <span class="dot2">2</span>
-                            <span class="dot3">3</span>
-                            <span class="dot4">4</span>
-                    </div>    
+                        <i class="ti ti-arrow-left"></i>Logout
+                    </a>
+                </form>   
             </div>
+
             <!-- VECTOR BACKGROUND -->
-                <div class="Nverified-vector">
-                    <img src="assets/image/notverified.png" class="login" *ngIf="isDisplayed" @slider>
-                </div>
+            <div class="Nverified-vector">
+                <img src="assets/image/notverified.png" class="login" *ngIf="isDisplayed" @slider>
+            </div>
         </div>
     </div>
 </main>

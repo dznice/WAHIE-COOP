@@ -3,6 +3,10 @@ import { DOCUMENT } from '@angular/common';
 import { slideleft2, slideright2 } from '../animation';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { passwordMatch } from '../validators/passwordMatch';
+import { BackendService } from '../services/backend.service';
+import { TokenService } from '../services/token.service';
+import { Router } from '@angular/router';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +17,6 @@ import { passwordMatch } from '../validators/passwordMatch';
 })
 
 export class RegisterComponent implements OnInit, OnDestroy {
-
   
   isDisplayed: boolean = true;
   toggleDiv(){
@@ -41,24 +44,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   submitted:boolean = false;
   
-  constructor(@Inject(DOCUMENT) private _document: any ){}
+  constructor(@Inject(DOCUMENT) private _document: any, private backend:BackendService,
+  private token:TokenService, private route:Router, private Auth:AuthGuardService ){}
 
   registerForm = new FormGroup({
     name : new FormControl("", [Validators.required]),
-
     email : new FormControl("", [Validators.required]),
-
     password : new FormControl("", [Validators.required]),
-
     confirm_pass : new FormControl("", [Validators.required]),
-
-
   }, [ passwordMatch("password", "confirm_pass") ])
 
   getControl(name: any): AbstractControl | null{
     return this.registerForm.get(name)
   }
-
 
   onSubmit(){
     this.submitted = true;
@@ -75,4 +73,30 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this._document.body.classList.add('body');
   }
 
+  public error:any= [];
+
+  public form = {
+    name:null,
+    email:null,
+    password:null,
+   confirm_pass:null
+  }
+
+  submitReg(){
+    return this.backend.register(this.form).subscribe(     
+      data=>this.handleData(data)
+      );
+  }
+
+  handleData(data:any){
+    console.log(data.access_token);
+    localStorage.setItem('userData', JSON.stringify(data.user['id']));
+    this.Auth.changeStatus(true);
+    this.token.handle(data.access_token);
+    this.route.navigateByUrl('admin/verify-account');
+  }
+
+  handleError(error:any){
+    this.error = error.error.error;
+  }
 }

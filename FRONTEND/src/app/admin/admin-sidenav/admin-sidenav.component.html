@@ -37,11 +37,11 @@
       <div class="profile-details" @fadeInOut *ngIf="collapsed">
         <img src="assets/image/user-icon.png" alt="profile-img" />
         <div class="admin-name">
-          <div class="name">Nicer Dizon</div>
+          <div class="name">{{ userName() }}</div>
           <div class="role">Admin</div>
         </div>
       </div>
-      <i class="ti ti-logout btn-logout" [routerLink]="'/login'"></i>
+      <i class="ti ti-logout btn-logout" (click)="logout($event)"></i>
     </li>
   </ul>
 </div>
