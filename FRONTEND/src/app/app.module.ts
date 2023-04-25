@@ -46,6 +46,7 @@ import { FilterDatePipe } from './admin/accounting/filter-date.pipe';
 import { FilterMemberPipe } from './admin/members/filter-member.pipe';
 import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
+import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
     FilterDatePipe,
     FilterMemberPipe,
     FilterHomePipe,
-    FilterHomeDatePipe
+    FilterHomeDatePipe,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

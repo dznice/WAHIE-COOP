@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sadmin-home.component.scss']
 })
 export class SadminHomeComponent {
+
   /* Switch declaration */
   selected: boolean = false;
 
@@ -16,6 +17,9 @@ export class SadminHomeComponent {
   userAccounts : any[] = [];
   Loaded = false;
   updateFormActive = false;
+
+  searchText = '';
+  p: number = 1;
 
   id = "";
   name: string = "";

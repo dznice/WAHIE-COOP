@@ -12,3 +12,20 @@ body {
   position: relative;
   font-family: "Poppins", sans-serif;
 }
+
+/* Custom Scroll Bar CSS */
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-alt);
+}

@@ -4,7 +4,7 @@
 
 <div class="input-box">
   <i class="ti ti-search"></i>
-  <input type="text" placeholder="Search member"/>
+  <input type="text" placeholder="Search member" [(ngModel)]="searchText"/>
 </div>
 
 <div class="table-container">
@@ -16,7 +16,7 @@
       <th>Status</th>
     </thead>
     <tbody>
-      <tr *ngFor="let user of userAccounts" >
+      <tr *ngFor="let user of userAccounts | search: searchText | paginate: { itemsPerPage: 10, currentPage: p }" >
         <div *ngIf="user.role_id == 1">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
@@ -41,4 +41,8 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="pagination-controls">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
