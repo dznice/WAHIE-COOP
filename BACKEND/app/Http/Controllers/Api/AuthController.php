@@ -11,6 +11,8 @@ use App\Mail\MailOtp;
 use App\Models\EmailOtp;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\resendOtp;
+
 
 
 class AuthController extends Controller {
@@ -42,6 +44,7 @@ class AuthController extends Controller {
             'confirm_pass' => 'required|same:password'
             
         ]);
+        
 
             $code = rand(100000,999999);
 
@@ -49,8 +52,10 @@ class AuthController extends Controller {
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'code' => $code,
+            'code' => $code,  
             ]);
+
+         
 
             $email = $request['email'];
             EmailOtp::create([
@@ -58,9 +63,35 @@ class AuthController extends Controller {
             'code' => $code
              ]);
             Mail::to($email)->send(new MailOtp($code,$email));
+            return response()->json($user); 
 
-            response()->json(['message' => "Success", 'user'=>$user,200]);
+          
+            }
 
+            public function submitOtp(Request $request, $id){
+                $users = User::find($id);
+               if($users->code==$request->code){
+                $users->code = 0;
+                $users->save();
+                return response()->json($users); 
+                // return $this->respondWithToken(true);
+               }
+            
+            }
+            
+            public function resendOtp($id){
+                $users = User::find($id);
+        
+                $email = $users->email;
+                $code = $users->code;
+        
+                    EmailOtp::create([
+                    'user_email'=> $email,
+                    'code' => $code
+                     ]);
+                    Mail::to($email)->send(new resendOtp($code,$email));
+        
+                    response()->json(['message' => "Success", 'user'=>$users,200]);
             }
 
 
