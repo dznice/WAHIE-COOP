@@ -34,6 +34,7 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
 import { PassDoneComponent } from './pass-done/pass-done.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
 import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
+import { MemberProfileComponent } from './admin/members/member-profile/member-profile.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.compo
     ChangePassComponent,
     PassDoneComponent,
     SadminChpassComponent,
-    SadminPassdoneComponent
+    SadminPassdoneComponent,
+    MemberProfileComponent
   ],
   imports: [
     BrowserModule,
