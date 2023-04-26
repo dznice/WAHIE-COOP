@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Members;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\resendOtp;
 use App\Models\EmailOtp;
@@ -31,7 +32,17 @@ class userController extends Controller
         return response()->json($users); 
     }
 
+    public function memberList(){
+        $member = Members::all();
+        return response()->json($member);
+         }
 
+         
+    public function memberInfo($id){
+        $member = Members::find($id);
+        return response()->json($member);
+             }
+     
 
                 
 }

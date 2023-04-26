@@ -44,10 +44,10 @@
           <th>OPEN BALANCE</th>
         </thead>
         <tbody>
-          <tr *ngFor="let member of memItem | filterMemName: term">
-           <td [routerLink]="['../members/member-info']">{{member.name}}</td>
+          <tr *ngFor="let member of memberList | filterMemName: term" (click) = 'memberInfo( member.account_id )'>
+           <td >{{member.first_name}}</td> <!--should be with id for member info-->
            <td>{{member.email}}</td>
-           <td>{{member.balance}}</td>
+           <td>{{member.account_id}}</td>
           </tr>
         </tbody>
       </table>

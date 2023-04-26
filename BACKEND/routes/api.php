@@ -25,6 +25,8 @@ Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::cla
 Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
 Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);
 
+Route::get('/memberList', [App\Http\Controllers\userController::class, 'memberList']);
+Route::get('/memberList/{id}', [App\Http\Controllers\userController::class, 'memberInfo']);
 
 
 
