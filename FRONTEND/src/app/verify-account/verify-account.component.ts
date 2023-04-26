@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../services/token.service';;
 import { AuthGuardService } from '../services/auth-guard.service';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-verify-account',
