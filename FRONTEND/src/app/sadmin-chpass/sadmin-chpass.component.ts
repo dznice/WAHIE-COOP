@@ -7,7 +7,6 @@ import { BackendService } from '../services/backend.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../services/token.service';
-import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-sadmin-chpass',
@@ -40,7 +39,7 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
   }
   
   submitted:boolean = false;
-  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private toast: NgToastService, private http:HttpClient, 
+  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private http:HttpClient, 
   private backend:BackendService, private route:Router, private token:TokenService){}
 
   chpassForm = new FormGroup({
