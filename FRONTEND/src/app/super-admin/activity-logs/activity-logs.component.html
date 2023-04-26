@@ -1,3 +1,35 @@
 <main>
   <h1 class="title">Activity Logs</h1>
+
+      <div class="search-bar-container">
+        <input class="form-control" type="text" placeholder=" Search" [(ngModel)]= "term" (ngModelChange)="startDate">
+        <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate">
+        <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">  
+      </div>
+
+          <div class="containertbl">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Date and Time</th>
+                  <th>Name</th>
+                  <th>Activity</th>          
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let e of item | filter: term| filterlogDate: startDate: endDate | paginate: {itemsPerPage: 5, currentPage: p} ">
+                  <td>{{e.dnt}}</td>
+                  <td>{{e.name}}</td>
+                  <td>{{e.act}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="pagination-controls">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+
+        </div>
+
 </main>

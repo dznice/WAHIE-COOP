@@ -47,6 +47,10 @@ import { FilterMemberPipe } from './admin/members/filter-member.pipe';
 import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
 import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
+import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
+import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
+
+import {NgToastModule} from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -85,7 +89,9 @@ import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
     FilterMemberPipe,
     FilterHomePipe,
     FilterHomeDatePipe,
-    SearchPipe
+    SearchPipe,
+    FilterLogDatePipe,
+    FilterLogsPipe
   ],
   imports: [
     BrowserModule,
@@ -97,7 +103,8 @@ import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
     FilterPipeModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgToastModule
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

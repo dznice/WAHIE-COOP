@@ -71,6 +71,7 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._document.body.classList.add('body');
+    this.toast.success({detail:'Success',summary:'Successfuly logged out', sticky:false,position:'false'}); 
   }
 
   onStrengthChange(score: any) {

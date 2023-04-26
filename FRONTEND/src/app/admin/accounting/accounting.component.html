@@ -11,7 +11,7 @@
     </div>
 
     <div class="table-filter">
-      <div class="filter-field">
+      <div class="filter-field1">
         <label for="search-member" placeholder="Search Member">Member</label>
 
         <input
@@ -22,13 +22,17 @@
         />
       </div>
 
-      <div class="filter-field">
-        <label>Date</label>
+      <div class="filter-field2">
+        <label> Start Date</label>
         <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate">
+      </div>
+
+      <div class="filter-field3">
+        <label>End Date</label>
         <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">
       </div>
 
-      <div class="filter-field">
+      <div class="filter-field4">
         <label>Type</label>
         <select [(ngModel)]="type" name="journal-type">
           <option [ngValue]="undefined" selected>All</option>
@@ -36,7 +40,7 @@
         </select>
       </div>
 
-      <div class="filter-field">
+      <div class="filter-field5">
         <label>Stauts</label>
         <select [(ngModel)]="stat" name="status">
           <option [ngValue]="undefined" selected>All</option>

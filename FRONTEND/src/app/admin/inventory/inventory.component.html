@@ -1,3 +1,51 @@
 <main>
   <h1 class="title">Inventory</h1>
+
+  <div class="btnDiv" >
+    <button id="btnAdd">+ Add Item</button>
+  </div>
+
+  <div class="search-bar-container">
+     
+    <input class="form-control" type="text" placeholder=" Search" [(ngModel)]= "term">
+
+    <select class="Category"[(ngModel)]="category" name="category"> 
+      <option [ngValue]="undefined" selected>Category</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>  
+    </select>
+
+    <select class="price" [(ngModel)]="pricing" (change)="change($event)">
+      <option [ngValue]="undefined" selected >Price</option>
+      <option value="low">Low-High</option>
+      <option value="high">High-Low</option>
+    </select>
+
+  </div>
+  
+  <div class="containertbl">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Unit</th>
+          <th>Stock</th>
+          <th>Price</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inv of invItem | filterInvName: term | filter: category | paginate: { itemsPerPage: 5, currentPage: p }">
+          <td>{{inv.name}}</td>
+          <td>{{inv.unit}}</td>
+          <td>{{inv.stock}}</td>
+          <td>{{inv.price}}</td>
+          <td>{{inv.category}}</td>  
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="pagination-controls">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
 </main>
