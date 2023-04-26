@@ -47,6 +47,8 @@ import { FilterMemberPipe } from './admin/members/filter-member.pipe';
 import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
 import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
+import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
+import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
 
 import {NgToastModule} from 'ng-angular-popup';
 
@@ -87,7 +89,9 @@ import {NgToastModule} from 'ng-angular-popup';
     FilterMemberPipe,
     FilterHomePipe,
     FilterHomeDatePipe,
-    SearchPipe
+    SearchPipe,
+    FilterLogDatePipe,
+    FilterLogsPipe
   ],
   imports: [
     BrowserModule,

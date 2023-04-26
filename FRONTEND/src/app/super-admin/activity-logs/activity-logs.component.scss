@@ -6,3 +6,121 @@ main {
     color: var(--primary-color);
   }
 }
+
+.form-control{
+  padding: 10px;
+  }
+  
+  .search-bar-container{
+    align-items: center;
+    margin-top: 40px;
+    font-size: 20px; 
+    height: 80px;
+    max-width: 1080px;
+    border-radius: 15px 15px 15px 15px;
+    background-color: #3F0F88;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+  }
+  
+  form-control, input{
+    margin-left: 20px;
+    margin-top: 25px;
+    width: auto;
+    border-radius: 10px;
+    // margin-right: 280px;
+  }
+  
+  
+  .COOP {
+    border-radius: 10px;
+    margin-right: 10px;
+    width: auto;
+  }
+  
+  .category  {
+    border-radius: 10px;
+    margin-right: 10px;
+    width: auto;
+  }
+  
+  .price {
+    border-radius: 10px;
+    margin-right: 10px;
+    width: auto;
+  }
+  
+  //table
+  .containertbl{
+    
+    margin-left: auto;
+    margin-top: 30px;
+  }
+  
+  
+  .table {
+    width: 1080px;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+    ;
+  }
+    
+  .table thead tr {
+    background-color:#3F0F88;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+    
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px 15px;
+  }
+  
+  .table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .table tbody tr:last-of-type {
+    border-bottom: 10px solid #3F0F88;
+  }
+  
+  .table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+  }
+
+  //pagination
+
+  .ngx-pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ngx-pagination li{
+    width: 35px;
+    height: 35px;
+    border-radius: 50% !important;
+    background: #ffffff;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    &.small-screen{
+      display: none !important;
+    }
+  }
+  .pagination-controls{
+    text-align: right;
+    margin-right: 380px;
+  }
