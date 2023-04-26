@@ -39,7 +39,8 @@
     <h2 class="section-title">Recent Transactions</h2>
 
     <div class="table-filter">
-      <div class="filter-field">
+      <div class="filter-field1"> 
+        <!-- MEMBER -->
         <label for="search-member" placeholder="Search Member">Member</label>
 
         <input
@@ -49,22 +50,26 @@
           [(ngModel)]="term"
         />
       </div>
-
-      <div class="filter-field">
-        <label>Date</label>
+      <!-- DATE Start -->
+      <div class="filter-field2">
+        <label>Start Date</label>
         <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate">
+      </div>
+      <!-- DATE End -->
+      <div class="filter-field3">
+        <label>End Date</label>
         <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">
       </div>
-
-      <div class="filter-field">
+      <!-- Type -->
+      <div class="filter-field4">
         <label>Type</label>
         <select [(ngModel)]="type" name="journal-type">
           <option [ngValue]="undefined" selected>All</option>
           <option *ngFor="let type of types" [value]="type">{{ type }}</option>
         </select>
       </div>
-
-      <div class="filter-field">
+      <!-- Status -->
+      <div class="filter-field5">
         <label>Status</label>
         <select [(ngModel)]="stat" name="status">
           <option [ngValue]="undefined" selected>All</option>

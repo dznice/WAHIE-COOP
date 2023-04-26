@@ -1,69 +1,72 @@
-<div class="container">
-  <div class="header">
-    <div class="journdate">
-      <label> Journal Date </label>
-      <input class="headinput" type="date" id="journaldate" required />
-    </div>
+<main>
+  <h1 class="title">Journal Entry</h1>
+  <div>
+    <div class="header">
+      <div class="journdate">
+        <label> Journal Date </label>
+        <input class="headinput" type="date" id="journaldate" required />
+      </div>
 
-    <div class="journnumber">
-      <label> Journal Number </label>
-      <input class="headinput" type="number" id="journalnumber" required />
+      <div class="journnumber">
+        <label> Journal Number </label>
+        <input class="headinput" type="number" id="journalnumber" required />
+      </div>
+      <div>
+        <div>
+          <a class="Add" (click)="addTable()">
+            <span class="btnText"><i class="ti ti-plus"></i> Add </span>
+          </a>
+        </div>
+      </div>
     </div>
+    <table class="tablejournal">
+      <tr>
+        <th class="journallabel">No.</th>
+        <th class="journallabel">Account</th>
+        <th class="journallabel">Debits</th>
+        <th class="journallabel">Credits</th>
+        <th class="journallabel">Description</th>
+        <th class="journallabel">Name</th>
+      </tr>
 
-    <div>
-      <button class="Add" (click)="addTable()">
-        <i class="ti ti-plus"></i>
-        <span class="btnText"> Add </span>
+      <tr *ngFor="let item of row; let x = index">
+        <td class="journallabel" id="number">#</td>
+        <td class="beneinputt">
+          <select type="text">
+            <option disabled selected>Select</option>
+            <option>Account 1</option>
+            <option>Account 2</option>
+            <option>Account 3</option>
+          </select>
+        </td>
+        <td class="beneinput"><input type="number" /></td>
+        <td class="beneinput"><input type="number" /></td>
+        <td class="beneinput"><input type="text" /></td>
+
+        <td class="beneinput">
+          <select type="text">
+            <option disabled selected>Select</option>
+            <option>Name 1</option>
+            <option>Name 2</option>
+            <option>Name 3</option>
+          </select>
+        </td>
+
+        <td>
+          <button class="delbut" (click)="deleteRow(x)">
+            <i class="ti ti-square-rounded-x"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+    <div class="buttons">
+      <button class="back" (click)="backMethod()">
+        <span class="btnTextb">Back</span>
+      </button>
+
+      <button class="save" (click)="saveMethod()">
+        <span class="btnTexts">Save</span>
       </button>
     </div>
   </div>
-  <table class="tablejournal">
-    <tr>
-      <th class="journallabel">No.</th>
-      <th class="journallabel">Account</th>
-      <th class="journallabel">Debits</th>
-      <th class="journallabel">Credits</th>
-      <th class="journallabel">Description</th>
-      <th class="journallabel">Name</th>
-    </tr>
-
-    <tr *ngFor="let item of row; let x = index">
-      <td class="journallabel" id="number">#</td>
-      <td class="beneinputt">
-        <select type="text">
-          <option disabled selected>Select</option>
-          <option>Account 1</option>
-          <option>Account 2</option>
-          <option>Account 3</option>
-        </select>
-      </td>
-      <td class="beneinput"><input type="number" /></td>
-      <td class="beneinput"><input type="number" /></td>
-      <td class="beneinput"><input type="text" /></td>
-
-      <td class="beneinput">
-        <select type="text">
-          <option disabled selected>Select</option>
-          <option>Name 1</option>
-          <option>Name 2</option>
-          <option>Name 3</option>
-        </select>
-      </td>
-
-      <td>
-        <button class="delbut" (click)="deleteRow(x)">
-          <i class="ti ti-square-rounded-x"></i>
-        </button>
-      </td>
-    </tr>
-  </table>
-  <div class="buttons">
-    <button class="back" (click)="backMethod()">
-      <span class="btnTextb">Back</span>
-    </button>
-
-    <button class="save" (click)="saveMethod()">
-      <span class="btnTexts">Save</span>
-    </button>
-  </div>
-</div>
+</main>

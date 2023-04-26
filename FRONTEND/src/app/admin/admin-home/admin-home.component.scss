@@ -73,9 +73,114 @@ main {
     flex-wrap: wrap;
     margin-top: 0.7rem;
 
-    .filter-field {
+    .filter-field1 {
       display: flex;
-      width: calc(100% / 3 - 15px);
+      width: calc(30% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+
+    .filter-field2 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+    .filter-field3 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+    .filter-field4 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+    .filter-field5 {
+      display: flex;
+      width: calc(18% - 10px);
       flex-direction: column;
       margin: 8px 0;
 
@@ -147,4 +252,12 @@ tr:hover td {
   color: var(--primary-color);
   cursor: pointer;
   background-color: var(--panel-color);
+}
+
+.pagination-controls {
+  text-align: end;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  margin: 10px 20px;
+  padding: 4px 0px;
 }
