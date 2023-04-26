@@ -3,6 +3,10 @@ import { DOCUMENT } from '@angular/common';
 import { slider, slideright} from '../animation';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { passwordMatch } from '../validators/passwordMatch';
+import { BackendService } from '../services/backend.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { TokenService } from '../services/token.service';
 import { NgToastService } from'ng-angular-popup';
 
 @Component({
@@ -36,7 +40,8 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
   }
   
   submitted:boolean = false;
-  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private toast: NgToastService){}
+  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private toast: NgToastService, private http:HttpClient, 
+  private backend:BackendService, private route:Router, private token:TokenService){}
 
   chpassForm = new FormGroup({
 

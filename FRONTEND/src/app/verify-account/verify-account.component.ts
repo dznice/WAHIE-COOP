@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angula
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { TokenService } from '../services/token.service';;
+import { AuthGuardService } from '../services/auth-guard.service';
 
 @Component({
   selector: 'app-verify-account',
@@ -10,11 +12,9 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy {
-  constructor(
-    @Inject(DOCUMENT) private _document: any,
-    private route: Router,
-    private http: HttpClient
-  ) {}
+  constructor(@Inject(DOCUMENT) private _document: any, private token:TokenService, private Auth:AuthGuardService,
+  private backend:BackendService, private route:Router, private http:HttpClient
+  ){}
 
   ngOnInit() {
     this._document.body.classList.add('body');
