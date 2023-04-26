@@ -8,14 +8,6 @@ main {
   
 }
 
-main {
-  width: 100%;
-  animation: transitionIn 0.75s;
-
-  .title {
-    color: var(--primary-color);
-  }
-}
 .Add {
   position: absolute;
   right: 0;
@@ -53,10 +45,114 @@ main {
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 0.7rem;
-
-    .filter-field {
+    .filter-field1 {
       display: flex;
-      width: calc(100% / 4 - 10px);
+      width: calc(30% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+
+    .filter-field2 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+    .filter-field3 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+    .filter-field4 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        border-radius: 0.45rem;
+        border: 1px solid #aaa;
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+    .filter-field5 {
+      display: flex;
+      width: calc(18% - 10px);
       flex-direction: column;
       margin: 8px 0;
 
@@ -162,3 +258,5 @@ tr:hover td {
   font-size: 14px;
   margin: 10px 20px;
 }
+
+
