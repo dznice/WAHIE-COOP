@@ -3,6 +3,8 @@ import { DOCUMENT } from '@angular/common';
 import { BackendService } from '../services/backend.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { TokenService } from '../services/token.service';;
+import { AuthGuardService } from '../services/auth-guard.service';
 
 @Component({
   selector: 'app-verify-account',
@@ -11,12 +13,9 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class VerifyAccountComponent implements OnInit, OnDestroy {
-  constructor(
-    @Inject(DOCUMENT) private _document: any,
-    private backend: BackendService,
-    private route: Router,
-    private http: HttpClient
-  ) {}
+  constructor(@Inject(DOCUMENT) private _document: any, private token:TokenService, private Auth:AuthGuardService,
+  private backend:BackendService, private route:Router, private http:HttpClient
+  ){}
 
   ngOnInit() {
     this._document.body.classList.add('body');
@@ -39,28 +38,32 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   }
 
   otp: string = "";
+
+  email = sessionStorage.getItem('email');
   getOtp(data: any) {
-    this.id = localStorage.getItem('userData'),
-    this.otp = (<HTMLInputElement>document.getElementById('otp')).value;
+    this.id = sessionStorage.getItem('userData'),
+    this.otp = (<HTMLInputElement>document.getElementById("otp")).value;
     this.updateData();
   }
 
   updateData() {
     let body = {
       'code': this.otp,
-      'id': this.id,
+      'id' : this.id
     }
-    console.log(this.otp);
+    
+    console.log(this.otp)
     this.http.post('http://127.0.0.1:8000/api/users/updateOtp' + '/' + this.id, body).subscribe(
-      (res: any) => {
-        console.log(res);
-        if (res.status == 2) {
-          this.route.navigateByUrl('not-verified');
-        } else if (res.status == 1) {
-          this.route.navigateByUrl('disable-account');
-        } else if (res.status == 1) {
-          this.route.navigateByUrl('admin/admin-home');
-        }
+      (res:any)=>{
+      if(res.status==2) {
+       this.route.navigateByUrl('not-verified');
+      } else if(res.status==0) {
+        this.route.navigateByUrl('disable-account');
+      } else if(res.status==1) {
+        this.token.verifyHandle(sessionStorage.getItem('ftoken'));  
+        this.Auth.changeStatus(true);
+        this.route.navigateByUrl('admin/admin-home');
+      }
       }
     )
   }

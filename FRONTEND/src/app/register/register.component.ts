@@ -89,11 +89,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   handleData(data:any){
-    console.log(data.access_token);
-    localStorage.setItem('userData', JSON.stringify(data.user['id']));
-    this.Auth.changeStatus(true);
-    this.token.handle(data.access_token);
-    this.route.navigateByUrl('admin/verify-account');
+    sessionStorage.setItem('email', JSON.stringify(data['email']));
+    sessionStorage.setItem('userData', JSON.stringify(data['id']));
+    this.route.navigateByUrl('verify-account');
   }
 
   handleError(error:any){

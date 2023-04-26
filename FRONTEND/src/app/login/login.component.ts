@@ -7,11 +7,6 @@ import {TokenService} from '../services/token.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
 
-
-
-
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

@@ -3,7 +3,7 @@
     <div class="layout" >
         <div class ="inner-box">
             <div class="reg-wrap">
-                <form (ngSubmit)="submitReg()" [formGroup]="registerForm" class="register-form" *ngIf="isDisplayed" @slideright2>
+                <form (ngSubmit)="submitReg()" #registrationForm="ngForm" [formGroup]="registerForm" class="register-form" *ngIf="isDisplayed" @slideright2>
                     <div class="whlogo"> 
                         <img src="assets/image/coop-logo.png" alt="WAH Logo"> 
                         <p>WAHIE <br> Cooperative</p>
@@ -17,7 +17,7 @@
                     <div class="text_field" >
                         <div class="text-wrap" >
                             <input type="text" name="name" formControlName="name" id="reg-name" placeholder="Name"
-                            [ngClass]="{error : getControl('name')?.errors && getControl('name')?.touched}"> <br>
+                           [(ngModel)]="form.name" [ngClass]="{error : getControl('name')?.errors && getControl('name')?.touched}"> <br>
                         </div>
                         <div>
                             <div class="text-danger" *ngIf="submitted && getControl('name')?.errors || getControl('name')?.errors && getControl('name')?.touched">
@@ -27,7 +27,7 @@
 
                         <div class="text-wrap">
                             <input type="email" name="email" formControlName="email" id="reg-email" placeholder="Email"
-                            [ngClass]="{error : getControl('email')?.errors && getControl('email')?.touched}"> <br>
+                            [(ngModel)]="form.email" [ngClass]="{error : getControl('email')?.errors && getControl('email')?.touched}"> <br>
                         </div>
                         <div>
                             <div class="text-danger" *ngIf="submitted && getControl('email')?.errors || getControl('email')?.errors && getControl('email')?.touched">
@@ -37,7 +37,7 @@
 
                         <div class="text-wrap" >
                             <input [type]="changetype?'password':'text'" name="password" formControlName="password" id="reg-pass" placeholder="Password" 
-                            [ngClass]="{error : getControl('password')?.errors && getControl('password')?.touched}">
+                            [(ngModel)]="form.password" [ngClass]="{error : getControl('password')?.errors && getControl('password')?.touched}">
                             <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
                         </div>
                         <div>
@@ -48,7 +48,7 @@
                         
                         <div class="text-wrap">
                             <input [type]="cchangetype?'password':'text'" name="confirm_pass" formControlName="confirm_pass" id= "con-pass" placeholder="Confirm Password" 
-                            [ngClass]="{error : (getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched) || (registerForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched) }">
+                            [(ngModel)]="form.confirm_pass"   [ngClass]="{error : (getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched) || (registerForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched) }">
                             <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></span>
                         </div>
                         <div>
@@ -68,11 +68,11 @@
                     </div>
 
                         <div class="terms">
-                            <span class="check" (click)="checkBox()"><i [ngClass]="checkvisible?'ti ti-square-rounded':'ti ti-square-rounded-check-filled'"></i></span>  
+                            <span class="check" (click)="checkBox()" required><i [ngClass]="checkvisible?'ti ti-square':'ti ti-square-check-filled'"></i></span>  
                             <p>I agree to the <a href="#" class="condition"> Terms & Condition</a></p>
                         </div>
                             <button type="submit" class="submit"> Sign Up </button>
-                            <p class="account">Already have an account? <a [routerLink]="['/login']">Login</a></p>
+                            <p class="account">Already have an account? <a href="login">Login</a></p>
                 </form>
             </div>    
                 <!-- VECTOR BACKGROUND -->
@@ -82,4 +82,3 @@
         </div>
     </div>
 </main>
-

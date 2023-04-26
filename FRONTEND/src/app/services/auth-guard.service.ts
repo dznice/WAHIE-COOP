@@ -13,9 +13,18 @@ export class AuthGuardService  {
   private loggedIn = new BehaviorSubject<boolean>(this.token.loggedIn());
   authStatus = this.loggedIn.asObservable();
   
+  private role = new  BehaviorSubject<boolean>(this.token.loggedIn());
+  authRole = this.role.asObservable();
+
   changeStatus(value:boolean){
     this.loggedIn.next(value);
   }
+
+  changeRole(value:boolean){
+    this.role.next(value);
+  }
+
+
 
   // getAuthUser() : Observable<any> {
   //   return this.http.get(this.email)

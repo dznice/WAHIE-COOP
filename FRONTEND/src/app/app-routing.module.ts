@@ -31,6 +31,9 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { LoggedInService } from './services/logged-in.service';
 import { NotLoggedInService } from './services/not-logged-in.service';
 
+import { AdminOnlyService } from './services/admin-only.service';
+import { SuperadminOnlyService } from './services/superadmin-only.service';
+
 const routes: Routes = [
   {
     path: 'login',
@@ -86,7 +89,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate : [LoggedInService],
+    canActivate : [LoggedInService , AdminOnlyService],
     children : [
       {path: '', redirectTo: 'admin-home', pathMatch: 'full'},
       {path: 'admin-home', component: AdminHomeComponent},
@@ -104,7 +107,7 @@ const routes: Routes = [
   {
     path: 'super-admin',
     component: SuperAdminComponent,
-    canActivate : [LoggedInService],
+    canActivate : [LoggedInService, SuperadminOnlyService],
     children : [
       {path: '', redirectTo: 'sadmin-home', pathMatch: 'full'},
       {path: 'sadmin-home', component: SadminHomeComponent},

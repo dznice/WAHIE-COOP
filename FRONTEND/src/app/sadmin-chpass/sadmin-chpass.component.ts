@@ -3,6 +3,10 @@ import { DOCUMENT } from '@angular/common';
 import { slider, slideright} from '../animation';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { passwordMatch } from '../validators/passwordMatch';
+import { BackendService } from '../services/backend.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-sadmin-chpass',
@@ -33,21 +37,24 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
     this.cvisible = !this.cvisible
     this.cchangetype = !this.cchangetype
   }
+
   
   submitted:boolean = false;
-  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder){}
+  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private http:HttpClient, 
+  private backend:BackendService, private route:Router, private token:TokenService){}
 
   chpassForm = new FormGroup({
 
     password : new FormControl("", [Validators.required]),
-    confirm_pass : new FormControl("", [Validators.required])
+
+    confirm_pass : new FormControl("", [Validators.required]),
+
 
   }, [ passwordMatch("password", "confirm_pass") ])
 
   getControl(name: any): AbstractControl | null{
     return this.chpassForm.get(name)
   }
-
   onSubmit(){
     this.submitted = true;
     if(this.chpassForm.invalid){
@@ -70,12 +77,20 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
     console.log('new score', score);
   }
 
+  id = localStorage.getItem('userData');
   public chform = {
+    id : null,
     password:null,
-    confirm_pass:null
+   confirm_pass:null
   }
 
-  submitCh(){
 
+  submitPass(){
+    this.http.post('http://127.0.0.1:8000/api/users/superChange' + '/' + this.id, this.chform).subscribe(
+      (res:any)=>{
+        console.log(res.id)
+        this.token.handle(sessionStorage.getItem('ftoken'));
+        this.route.navigateByUrl('super-admin/sadmin-home');
+    }); 
   }
 }

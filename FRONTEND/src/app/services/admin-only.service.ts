@@ -6,20 +6,27 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class LoggedInService {
-
+export class AdminOnlyService {
   canActivate(route:Router,state:RouterStateSnapshot):boolean | Observable<boolean>{
 
-    
-    return this.token.loggedIn();
+  
+   let role = localStorage.getItem('userRole');
+   if(role=='1'){
+    return true;
+    this.route.navigateByUrl('/admin/admin-home');
+   }
+   alert("For Admin Only")
+   this.route.navigateByUrl('/super-admin/sadmin-home');
+   return false;
 
-   
+
+
+
 
   }
     
-      constructor(private token:TokenService, private backPage:Location,private route:Router) { }
-    }
+  constructor(private token:TokenService, private backPage:Location,private route:Router) { }
+}
