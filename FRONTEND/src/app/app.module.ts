@@ -48,6 +48,8 @@ import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
 import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
 
+import {NgToastModule} from 'ng-angular-popup';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +99,8 @@ import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
     FilterPipeModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgToastModule
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

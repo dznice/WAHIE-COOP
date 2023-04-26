@@ -6,6 +6,7 @@ import {BackendService} from '../services/backend.service';
 import {TokenService} from '../services/token.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
+import { NgToastService } from'ng-angular-popup';
 
 
 
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
   submitted:boolean = false;
 
   constructor(@Inject(DOCUMENT) private _document: any , private backend:BackendService,
-   private token:TokenService, private route:Router , private Auth:AuthGuardService ){
+   private token:TokenService, private route:Router , private Auth:AuthGuardService, private toast: NgToastService ){
     localStorage.clear();
     sessionStorage.clear();
    }
@@ -127,6 +128,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
       if(user.user['code']!=0){
         this.token.ftoken(user.access_token);
         this.route.navigateByUrl('sadmin-chpass');
+        this.toast.success({detail:'Success',summary:'Successfuly logged in', sticky:false,position:'false'});  
       }else{
         this.token.handle(user.access_token);
         this.route.navigateByUrl('super-admin/sadmin-home');

@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { slider, slideright} from '../animation';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { passwordMatch } from '../validators/passwordMatch';
+import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-sadmin-chpass',
@@ -35,7 +36,7 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
   }
   
   submitted:boolean = false;
-  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder){}
+  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private toast: NgToastService){}
 
   chpassForm = new FormGroup({
 
@@ -64,6 +65,7 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._document.body.classList.add('body');
+    this.toast.success({detail:'Success',summary:'Successfuly logged out', sticky:false,position:'false'}); 
   }
 
   onStrengthChange(score: any) {
