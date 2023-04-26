@@ -96,7 +96,7 @@ const routes: Routes = [
       {path: 'members/add-invoice', component: AddInvoiceComponent},
       {path: 'members/add-members', component: AddMembersComponent},
       {path: 'members/add-payment', component: AddPaymentComponent},
-      {path: 'members/member-info', component: MemberInfoComponent},
+      {path: 'members/member-info/:memberId', component: MemberInfoComponent},
       {path: 'inventory', component: InventoryComponent},
       {path: 'admin-body', component: AdminBodyComponent},
     ]

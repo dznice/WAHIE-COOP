@@ -59,73 +59,77 @@
       />
       <label for="Member Details" class="tabs__label">Member Details</label>
       <div class="tabs__content">
-        <div class="member_information">
+        <div class="member_information"  >
           <div class="information_row">
-            <table>
+            <table  *ngFor="let info of item">
+            <div *ngIf="id==info.account_id">
               <tr>
                 <th class="fields" width="30%">Member</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.first_name }} {{ info.middle_name }} {{ info.last_name }} {{ info.suffix }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Email</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.email }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Mobile Number</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.mobile_number }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Gender</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.gender }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Spouse</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.spouse }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Curent Address</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.address }}</td>
               </tr>
+            </div>
             </table>
           </div>
   
           <div class="information_row">
-            <table>
+            <table *ngFor="let info of item">
+              <div *ngIf="id==info.account_id">
               <tr>
                 <th class="fields" width="30%">Employement Status</th>
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.employment_status }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Occupation</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.occupation }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Department</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.department }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Company</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.company_name }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Company Address</th>
   
-                <td class="fieldsdata"></td>
+                <td class="fieldsdata">{{ info.company_address }}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <th class="fields" width="30%">Beneficiaries</th>
   
                 <td class="fieldsdata"></td>
-              </tr>
+              </tr> -->
+            </div>
             </table>
           </div>
         </div>

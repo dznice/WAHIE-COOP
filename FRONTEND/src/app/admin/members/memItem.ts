@@ -1,5 +1,6 @@
 export class memItem{
-    name : string;
+    account_id: number;
+    first_name : string;
     email : string;
     balance: string;
 

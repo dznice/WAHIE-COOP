@@ -14,7 +14,7 @@ export class FilterMemberPipe implements PipeTransform{
         } else{
             return name.filter((name) =>
             {
-                return name.name.trim().toLowerCase().includes(term.toLowerCase());
+                return name.first_name.trim().toLowerCase().includes(term.toLowerCase());
             })
         }
         
