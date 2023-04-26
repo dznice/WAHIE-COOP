@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { BackendService } from '../services/backend.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,7 +12,6 @@ import { HttpClient } from '@angular/common/http';
 export class VerifyAccountComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private _document: any,
-    private backend: BackendService,
     private route: Router,
     private http: HttpClient
   ) {}

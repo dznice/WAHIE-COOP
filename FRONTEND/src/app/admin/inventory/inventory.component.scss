@@ -6,3 +6,114 @@ main {
     color: var(--primary-color);
   }
 }
+
+.formp-control {
+  padding: 20px;
+}
+
+.btnDiv button {
+  background-color: #3f0f88;
+  border-radius: 8px;
+  margin-left: 1160px;
+  margin-top: 40px;
+  height: 40px;
+  width: 150px;
+  font-size: larger;
+  color: #dddddd;
+}
+
+.btnDiv button:hover {
+  cursor: pointer;
+}
+
+.search-bar-container {
+  align-items: center;
+  margin-top: 40px;
+  font-size: 20px;
+  height: 80px;
+  max-width: 1080px;
+  border-radius: 15px 15px 15px 15px;
+  background-color: #3f0f88;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  overflow: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+}
+
+form-control,
+input {
+  margin-left: 20px;
+  margin-top: 25px;
+  width: auto;
+  border-radius: 10px;
+  margin-right: 280px;
+}
+
+.COOP {
+  border-radius: 10px;
+  margin-right: 10px;
+  width: auto;
+}
+
+.Category {
+  border-radius: 10px;
+  margin-right: 10px;
+  width: auto;
+}
+
+.price {
+  border-radius: 10px;
+  margin-right: 10px;
+  width: auto;
+}
+
+
+// Table
+.containertbl {
+  margin-left: auto;
+  margin-top: 30px;
+}
+
+.table {
+  width: 1080px;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table thead tr {
+  background-color: #3f0f88;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.table tbody tr:last-of-type {
+  border-bottom: 10px solid #3f0f88;
+}
+
+.table tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
+
+// Pagination
+.pagination-controls {
+  text-align: right;
+  margin-right: 220px;
+}
