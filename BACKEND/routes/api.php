@@ -2,7 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Members;
+use App\Http\Controllers\MemberController;
+use App\Http\Resources\MemberResource;
+use App\Models\Beneficiary;
+use App\Http\Controllers\BeneficiaryController;
+use App\Http\Resources\BeneficiaryResource;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,6 +30,29 @@ Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activate
 Route::post('/users/resendOtp/{id}', [App\Http\Controllers\userController::class, 'resendOtp']);
 
 
+//Members
+Route::get('/members', function(){
+    return MemberResource::collection(Members::all());
+});
+Route::get('/members', function(){
+    return MemberResource::collection(Members::all());
+});
+Route::get('/memberId', [MemberResource::class, 'showid']);
+
+Route::post('/members', [MemberController::class, 'store']);
+Route::put('/member/{id}', [MemberController::class, 'update']);
+Route::delete('/member/{id}', [MemberController::class, 'destroy']);
+
+//Beneficiary
+Route::get('/beneficiaries', function(){
+    return BeneficiaryResource::collection(Members::all());
+});
+Route::get('/beneficiary/{id}', function($id){
+    return new BeneficiaryResource(Members::findOrFail($id));
+});
+Route::post('/beneficiaries', [BeneficiaryController::class, 'store']);
+Route::put('/beneficiary/{id}', [BeneficiaryController::class, 'update']);
+Route::delete('/beneficiary/{id}', [BeneficiaryController::class, 'destroy']);
 
 
 
@@ -42,12 +70,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //     // Route::post('me', [App\Http\Controllers\AuthController::class, 'login']);
 
 // });
-// //superadmin 
+// //superadmin
 // Route::middleware(['auth','notAdmin'])->group(function () {
 //     Route::get('/superadmin/first-change-password', [App\Http\Controllers\HomeController::class, 'fChangPass'])->name('fChangPass');
 //     Route::post('/superadmin/first-change-password', [App\Http\Controllers\superadminController::class, 'fChange']);
 //     Route::middleware(['fChange'])->group(function () {
-   
+
 //     Route::get('/superadmin/home', [App\Http\Controllers\HomeController::class, 'superHome'])->name('super.home');
 //     Route::get('/superadmin/admin-table', [App\Http\Controllers\HomeController::class, 'adminTable']);
 
@@ -59,7 +87,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // //---------------------------------------------------------------------------------------------------------------------------
- 
+
 // //admin
 // Route::middleware(['auth','notSuperadmin'])->group(function () {
 //     Route::get('/approval', [App\Http\Controllers\HomeController::class, 'approval'])->name('approval'); //check if verified
