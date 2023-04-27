@@ -1,69 +1,160 @@
 <div class="container">
-  <div class="header">
-    <div class="journdate">
-      <label> Journal Date </label>
-      <input class="headinput" type="date" id="journaldate" required />
-    </div>
+  <!-- <form (ngSubmit)="onsubmit()"> -->
+  <form [formGroup]="journalEntryForm" (ngSubmit)="saveEntry()">
+    <div class="header">
+      <div class="journdate">
+        <label> Journal Date </label>
+        <!-- <input class="headinput" type="date" id="journaldate" required /> -->
+        <input class="headinput" type="date" formControlName="journal_date" />
+      </div>
 
-    <div class="journnumber">
-      <label> Journal Number </label>
-      <input class="headinput" type="number" id="journalnumber" required />
-    </div>
+      <div class="journnumber">
+        <label> Journal Number </label>
+        <!-- <input class="headinput" type="number" id="journalnumber" required /> -->
+        <input class="headinput" type="number" formControlName="journal_no" />
+      </div>
 
-    <div>
-      <button class="Add" (click)="addTable()">
+      <div>
+        <!-- <button class="Add" (click)="addTable()">
         <i class="ti ti-plus"></i>
         <span class="btnText"> Add </span>
-      </button>
+      </button> -->
+        <a class="Add" (click)="addRow()">
+          <i class="ti ti-plus"></i>
+          <span class="btnText">Add</span>
+        </a>
+      </div>
     </div>
-  </div>
-  <table class="tablejournal">
-    <tr>
-      <th class="journallabel">No.</th>
-      <th class="journallabel">Account</th>
-      <th class="journallabel">Debits</th>
-      <th class="journallabel">Credits</th>
-      <th class="journallabel">Description</th>
-      <th class="journallabel">Name</th>
-    </tr>
-
-    <tr *ngFor="let item of row; let x = index">
-      <td class="journallabel" id="number">#</td>
-      <td class="beneinputt">
-        <select type="text">
+    <!-- <table class="tablejournal"> -->
+    <table class="tablejournal" formArrayName="entries">
+      <thead>
+        <tr>
+          <th class="journallabel">No.</th>
+          <th class="journallabel">Account</th>
+          <th class="journallabel">Debits</th>
+          <th class="journallabel">Credits</th>
+          <th class="journallabel">Description</th>
+          <th class="journallabel">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr *ngFor="let item of row; let x = index"> -->
+        <tr
+          *ngFor="let item of entryRow.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <th class="journallabel">{{ i + 1 }}</th>
+          <td class="beneinput">
+            <!-- <select type="text">
           <option disabled selected>Select</option>
           <option>Account 1</option>
           <option>Account 2</option>
           <option>Account 3</option>
-        </select>
-      </td>
-      <td class="beneinput"><input type="number" /></td>
-      <td class="beneinput"><input type="number" /></td>
-      <td class="beneinput"><input type="text" /></td>
+        </select> -->
+            <ng-select class="try" formControlName="account">
+              <ng-template ng-header-tmp>
+                <a (click)="show(1)" class="submit"
+                  ><i>Click here to Add+</i></a
+                >
+              </ng-template>
+              <ng-option
+                class="try"
+                *ngFor="let journal of journals"
+                [value]="journal.id"
+              >
+                {{ journal.journal_number }} {{ journal.journal_name }}
+                {{ journal.journal_type }}
+              </ng-option>
+            </ng-select>
+          </td>
 
-      <td class="beneinput">
-        <select type="text">
+          <!-- <td class="beneinput"><input type="number" /></td>
+      <td class="beneinput"><input type="number" /></td>
+      <td class="beneinput"><input type="text" /></td> -->
+
+          <td class="beneinput">
+            <input type="number" formControlName="debit" />
+          </td>
+          <td class="beneinput">
+            <input type="number" formControlName="credit" />
+          </td>
+          <td class="beneinput">
+            <input type="text" formControlName="description" />
+          </td>
+
+          <td class="beneinput">
+            <!-- <select type="text">
           <option disabled selected>Select</option>
           <option>Name 1</option>
           <option>Name 2</option>
           <option>Name 3</option>
-        </select>
-      </td>
-
-      <td>
-        <button class="delbut" (click)="deleteRow(x)">
+        </select> -->
+            <ng-select class="try" formControlName="name">
+              <ng-option
+                class="try"
+                *ngFor="let member of members"
+                [value]="member.id"
+              >
+                {{ member.account_id }} {{ member.first_name }}
+                {{ member.middle_name }} {{ member.last_name }}
+              </ng-option>
+            </ng-select>
+          </td>
+          <td>
+            <!-- <button class="delbut" (click)="deleteRow(x)">
           <i class="ti ti-square-rounded-x"></i>
-        </button>
-      </td>
-    </tr>
-  </table>
-  <div class="buttons">
-    <button class="back" (click)="backMethod()">
-      <span class="btnTextb">Back</span>
-    </button>
+        </button> -->
+            <a (click)="removeRow(i)" class="delbut">
+              <i class="ti ti-square-rounded-x"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+    <div class="buttons">
+      <a class="back">
+        <span class="btnTextb">Back</span>
+      </a>
 
-    <button class="save" (click)="saveMethod()">
-      <span class="btnTexts">Save</span>
-    </button>
-  </div>
+      <button class="save" type="submit">
+        <span class="btnTexts">Save</span>
+      </button>
+    </div>
+  </form>
 </div>
+
+<section>
+  <router-outlet></router-outlet>
+  <div>
+    <div class="otp-modal" *ngIf="showModal === 1">
+      <div class="otp-content">
+        <div class="otp-header">Add New Journal Account Entry</div>
+        <div class="otp-body">
+          <h3>Add New Journal Account Entry</h3>
+          <label for="journal_number">Journal Number</label>
+          <input class="modalinput" type="number" #journal_number />
+          <label for="journal_name">Journal Name</label>
+          <input class="modalinput" type="text" #journal_name />
+          <label for="journal_type">Journal Type</label>
+          <input class="modalinput" type="text" #journal_type />
+        </div>
+        <div class="otp-footer">
+          <button
+            class="backbtn"
+            (click)="
+              add(journal_number.value, journal_name.value, journal_type.value);
+              journal_number.value = '';
+              journal_name.value = '';
+              journal_type.value = ''
+            "
+            (click)="show(2)"
+          >
+            Create
+          </button>
+          <button class="backbtn" (click)="show(2)">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

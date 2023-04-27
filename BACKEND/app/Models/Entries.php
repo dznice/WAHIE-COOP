@@ -5,14 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Journal extends Model
+class Entries extends Model
 {
     use HasFactory;
-    protected $table = 'journals';
+    protected $table = 'entries';
     protected $primaryKey = 'id';
     protected $fillable = 
     [
-        'journal_no',
-        'journal_date',
+        //'journal_no',
+        //'journal_date',
+        'account', 
+        'debit', 
+        'credit', 
+        'description', 
+        'name'
     ];
 }

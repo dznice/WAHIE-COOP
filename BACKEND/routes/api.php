@@ -8,6 +8,13 @@ use App\Http\Resources\MemberResource;
 use App\Models\Beneficiary;
 use App\Http\Controllers\BeneficiaryController;
 use App\Http\Resources\BeneficiaryResource;
+use App\Models\Entries;
+use App\Http\Controllers\JournalEntryController;
+use App\Http\Resources\JournalEntryResource;
+use App\Models\Journal;
+use App\Models\LibJournal;
+use App\Http\Controllers\LibJournalController;
+use App\Http\Resources\LibJournalResource;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,6 +35,33 @@ Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
 Route::post('/users/updateOtp/{id}', [App\Http\Controllers\userController::class, 'submitOtp']);
 Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);
 Route::post('/users/resendOtp/{id}', [App\Http\Controllers\userController::class, 'resendOtp']);
+
+//LibJournal Accounts
+Route::get('/journals', function() {
+    return LibJournalResource::collection(LibJournal::all());
+});
+
+Route::get('/journal/{id}', function($id) {
+    return new LibJournalResource(LibJournal::findOrFail($id));
+});
+
+Route::post('/journals', [LibJournalController::class, 'store']);
+
+Route::put('/journal/{id}', [LibJournalController::class, 'update']);
+
+Route::delete('/journal/{id}', [LibJournalController::class, 'destroy']);
+
+//Journal Entry
+Route::get('/accounts', function(){
+    return JournalEntryResource::collection(Entries::all());
+});
+Route::get('/account/{id}', function($id){
+    return new JournalEntryResource(Entries::findOrFail($id));
+});
+// Route::post('/account', [JournalEntryController::class, 'store']);
+Route::post('/accounts', [JournalEntryController::class, 'store']);
+Route::put('/account/{id}', [JournalEntryController::class, 'update']);
+Route::delete('/account/{id}', [JournalEntryController::class, 'destroy']);
 
 
 //Members

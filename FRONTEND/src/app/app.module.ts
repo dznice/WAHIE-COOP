@@ -46,6 +46,7 @@ import { FilterDatePipe } from './admin/accounting/filter-date.pipe';
 import { FilterMemberPipe } from './admin/members/filter-member.pipe';
 import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
     FilterPipeModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
+    NgSelectModule,
     HttpClientModule
   ],
   providers: [AuthGuardService],

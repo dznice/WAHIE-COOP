@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class WahieService {
 
-  showDialog=false;
+  // showDialog=false;
 
   url:string = 'http://127.0.0.1:8000';
 
   constructor(private http:HttpClient) {
 
-  }
+  } 
 
   public listJournals(): Observable<any[]>{
     return this.http.get<any[]>(this.url+'/api/journals');
@@ -45,9 +45,12 @@ export class WahieService {
   public addMember(members:any):Observable<any>{
     return this.http.post<any>(this.url+'/api/members',members, this.httpOptions);
   }
+
   public addBeneficiary(beneficiaries:any):Observable<any>{
     return this.http.post<any>(this.url+'/api/beneficiaries',beneficiaries, this.httpOptions);
   }
 
-
+  public saveJournalEntry(trial:any):Observable<any>{
+    return this.http.post<any>(this.url+'/api/accounts', trial, this.httpOptions) 
+  }
 }

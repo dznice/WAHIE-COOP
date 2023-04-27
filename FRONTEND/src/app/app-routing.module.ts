@@ -86,7 +86,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate : [LoggedInService],
+    // canActivate : [LoggedInService],
     children : [
       {path: '', redirectTo: 'admin-home', pathMatch: 'full'},
       {path: 'admin-home', component: AdminHomeComponent},
@@ -104,7 +104,7 @@ const routes: Routes = [
   {
     path: 'super-admin',
     component: SuperAdminComponent,
-    canActivate : [LoggedInService],
+    // canActivate : [LoggedInService],
     children : [
       {path: '', redirectTo: 'sadmin-home', pathMatch: 'full'},
       {path: 'sadmin-home', component: SadminHomeComponent},
