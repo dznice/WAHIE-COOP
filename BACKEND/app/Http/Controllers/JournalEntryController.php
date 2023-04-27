@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Entries;
 use App\Models\Journal;
+use DB;
 
 class JournalEntryController extends Controller
 {

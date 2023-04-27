@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LibJournal;
+use DB;
 
 class LibJournalController extends Controller
 {

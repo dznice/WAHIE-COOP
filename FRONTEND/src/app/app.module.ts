@@ -27,15 +27,14 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
 import { PassDoneComponent } from './pass-done/pass-done.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
 import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StrengthMeterModule } from "ngx-strength-meter";
 import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
 import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
 import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
 
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -47,6 +46,8 @@ import { FilterMemberPipe } from './admin/members/filter-member.pipe';
 import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { StrengthMeterModule } from "ngx-strength-meter";
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgxPaginationModule,
     Ng2SearchPipeModule,
     NgSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

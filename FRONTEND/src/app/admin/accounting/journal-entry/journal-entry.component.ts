@@ -19,6 +19,13 @@ export class JournalEntryComponent implements OnInit {
     this.showMembers()
   }
 
+  // showJournal(): void{
+  //   this.journals = this.wahieService.listJournals().subscribe(journal=>{
+  //     this.journals = journal;
+  //     console.log(this.journals);
+  //   });
+  // }
+
   showJournal(): void{
     this.journals = this.wahieService.listJournals().subscribe(journal=>{
       this.journals = journal;
@@ -37,7 +44,6 @@ export class JournalEntryComponent implements OnInit {
     this.members = this.wahieService.listMembers().subscribe(member=>{
       this.members = member;
       console.log(this.members);
-
     });
   }
 

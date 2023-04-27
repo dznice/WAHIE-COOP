@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class WahieService {
 
-  // showDialog=false;
-
   url:string = 'http://127.0.0.1:8000';
 
   constructor(private http:HttpClient) {
