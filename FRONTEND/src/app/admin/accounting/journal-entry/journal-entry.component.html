@@ -130,11 +130,12 @@
       <div class="otp-content">
         <div class="otp-header">Add New Journal Account Entry</div>
         <div class="otp-body">
-          <h3>Add New Journal Account Entry</h3>
           <label for="journal_number">Journal Number</label>
           <input class="modalinput" type="number" #journal_number />
+          <br />
           <label for="journal_name">Journal Name</label>
           <input class="modalinput" type="text" #journal_name />
+          <br />
           <label for="journal_type">Journal Type</label>
           <input class="modalinput" type="text" #journal_type />
         </div>
@@ -151,9 +152,10 @@
           >
             Create
           </button>
-          <button class="backbtn" (click)="show(2)">Close</button>
+          <button class="closebtn" (click)="show(2)">Close</button>
         </div>
       </div>
     </div>
   </div>
 </section>
+

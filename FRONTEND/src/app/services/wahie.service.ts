@@ -48,7 +48,7 @@ export class WahieService {
     return this.http.post<any>(this.url+'/api/beneficiaries',beneficiaries, this.httpOptions);
   }
 
-  public saveJournalEntry(trial:any):Observable<any>{
-    return this.http.post<any>(this.url+'/api/accounts', trial, this.httpOptions) 
+  public saveJournalEntry(entries:any):Observable<any>{
+    return this.http.post<any>(this.url+'/api/accounts', entries, this.httpOptions) 
   }
 }
