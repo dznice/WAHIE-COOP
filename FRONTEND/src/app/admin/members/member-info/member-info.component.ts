@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MemberInfoComponent implements OnInit {
   item: any[] = [];
+  ben: any[] = [];
   term: string = '';
   p: number = 1;
   type: string;
@@ -22,6 +23,7 @@ export class MemberInfoComponent implements OnInit {
 
   constructor(private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute) {
     this.personalInfo();
+    this.benInfo();
   }
 
   id:number = 0;
@@ -41,10 +43,21 @@ export class MemberInfoComponent implements OnInit {
     this.http.get('http://127.0.0.1:8000/api/memberList').subscribe(
       (res:any)=>
       { 
-    
+
         console.log(res)
         console.log('marlon', this.id);
         this.item = res;  
+
+      }
+    )
+  }
+
+  benInfo(){
+    this.http.get('http://127.0.0.1:8000/api/beneficiaries').subscribe(
+      (res:any)=>
+      { 
+        console.log(res)
+        this.ben = res;  
 
       
       }
