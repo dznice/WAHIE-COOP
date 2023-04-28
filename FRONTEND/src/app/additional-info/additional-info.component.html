@@ -1,0 +1,52 @@
+<p>additional-info works!</p>
+
+<form (ngSubmit)="memberInfo()" #memInformation="ngForm" [formGroup]="memberInformation" class="additional-info" *ngIf="isDisplayed" @slideright2>
+<div class="text_field" >
+
+
+<div class="text-wrap">
+    <input [(ngModel)]="form.tin_number" type="text" name="tin_number" placeholder="tin_number">
+</div>
+
+<div class="text-wrap">
+<select [(ngModel)]="form.civil_status" id="civil_status" name="civil_status"required>
+    <option disabled selected>Select</option>
+    <option>Single</option>
+    <option>Maried</option>
+  </select>
+</div>
+
+<div class="text-wrap">
+    <input [(ngModel)]="form.spouse" type="text" name="spouse" placeholder="spouse">
+</div>
+
+
+<div class="text-wrap">
+<label>Employement Status</label>
+<select [(ngModel)]="form.employment_status" id="employement_status" name="employement_status" required>
+  <option disabled selected>Select</option>
+  <option>Employed</option>
+  <option>Unemployed</option>
+  <option>Self-Employed</option>
+</select>
+</div>
+
+<div class="text-wrap">
+    <input [(ngModel)]="form.occupation" type="text" name="occupation" placeholder="occupation">
+</div>
+
+<div class="text-wrap">
+    <input [(ngModel)]="form.company_address" type="text" name="company_address" placeholder="company_address">
+</div>
+
+<div class="text-wrap">
+    <input [(ngModel)]="form.address" type="text" name="address" placeholder="address">
+</div>
+<div class="text-wrap">
+    <input [(ngModel)]="form.job_title" type="text" name="job_title" placeholder="job_title">
+</div>
+
+
+</div>
+<button type="submit" class="submit"> Update </button>
+</form>

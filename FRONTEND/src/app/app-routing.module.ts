@@ -30,9 +30,12 @@ import { MemberInfoComponent } from './admin/members/member-info/member-info.com
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoggedInService } from './services/logged-in.service';
 import { NotLoggedInService } from './services/not-logged-in.service';
-
 import { AdminOnlyService } from './services/admin-only.service';
 import { SuperadminOnlyService } from './services/superadmin-only.service';
+import { RegMembersComponent } from './reg-members/reg-members.component';
+import { MembersHomeComponent } from './members-home/members-home.component';
+import { AdditionalInfoComponent } from './additional-info/additional-info.component';
+
 
 const routes: Routes = [
   {
@@ -44,6 +47,11 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate : [NotLoggedInService]
+  },
+  {
+    path: 'register-member',
+    component: RegMembersComponent,
+
   },
   {
     path: '',
@@ -87,6 +95,14 @@ const routes: Routes = [
     component: DisableAccountComponent,
   },
   {
+    path: 'members-home',
+    component: MembersHomeComponent,
+  },
+  {
+    path: 'additional-info',
+    component: AdditionalInfoComponent,
+  },
+  {
     path: 'admin',
     component: AdminComponent,
     canActivate : [LoggedInService , AdminOnlyService],
@@ -104,6 +120,7 @@ const routes: Routes = [
       {path: 'admin-body', component: AdminBodyComponent},
     ]
   },
+
   {
     path: 'super-admin',
     component: SuperAdminComponent,

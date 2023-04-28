@@ -41,7 +41,7 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
   
   submitted:boolean = false;
   constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private http:HttpClient, 
-  private backend:BackendService, private route:Router, private token:TokenService){}
+  private backend:BackendService, private route:Router, private token:TokenService ){}
 
   chpassForm = new FormGroup({
 
@@ -71,7 +71,7 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._document.body.classList.add('body');
-    this.toast.success({detail:'Success',summary:'Successfuly logged out', sticky:false,position:'false'}); 
+    // this.toast.success({detail:'Success',summary:'Successfuly logged out', sticky:false,position:'false'}); 
   }
 
   onStrengthChange(score: any) {

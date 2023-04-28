@@ -17,8 +17,13 @@ Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 
 Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 
+
+
 Route::post('/users/updateOtp/{id}', [App\Http\Controllers\Api\AuthController::class, 'submitOtp']);
 Route::post('/users/resendOtp/{id}', [App\Http\Controllers\Api\AuthController::class, 'resendOtp']);
+
+Route::get('/members', [App\Http\Controllers\Api\AuthController::class, 'members']);
+Route::post('/members/memberInfo/{id}', [App\Http\Controllers\Api\AuthController::class, 'memberInfo']);
 
 Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::class, 'superChange']);
 

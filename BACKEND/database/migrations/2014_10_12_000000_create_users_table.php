@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->unsignedBigInteger('role_id')->unsigned()->nullable()->default('1');
             $table->integer('status')->default('2');
+            $table->integer('fillInfo');
             $table->integer('code');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

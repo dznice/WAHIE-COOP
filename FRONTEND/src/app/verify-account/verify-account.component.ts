@@ -40,7 +40,9 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
   otp: string = "";
 
   email = sessionStorage.getItem('email');
+
   getOtp(data: any) {
+    console.log(data);
     this.id = sessionStorage.getItem('userData'),
     this.otp = (<HTMLInputElement>document.getElementById("otp")).value;
     this.updateData();
@@ -62,7 +64,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       } else if(res.status==1) {
         this.token.verifyHandle(sessionStorage.getItem('ftoken'));  
         this.Auth.changeStatus(true);
-        this.route.navigateByUrl('admin/admin-home');
+        this.route.navigateByUrl('members-home');
       }
       }
     )

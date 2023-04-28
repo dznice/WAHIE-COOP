@@ -131,6 +131,36 @@ export class LoginComponent implements OnInit, OnDestroy  {
      
     }
    
+    //members
+    else if(user.user['role_id']==3){
+      if(user.user['code']!=0){
+        sessionStorage.setItem('email', user.user['email'])
+        this.token.ftoken(user.access_token);
+        this.route.navigateByUrl('verify-account');//code not yet input
+      }
+      else if(user.user['code']==0){
+        //verified
+          if(user.user['status']==2){
+            this.route.navigateByUrl('not-verified');//not verified
+          }
+          else if(user.user['status']==1){
+            if(user.user['fillInfo']==1){
+              sessionStorage.setItem('email', user.user['email'])
+              this.token.ftoken(user.access_token);
+              this.route.navigateByUrl('additional-info');// not complete information
+            }else if(user.user['fillInfo']==0){
+              this.token.handle(user.access_token);
+              this.Auth.changeStatus(true);
+              this.route.navigateByUrl('members-home');//verified  
+            }
+           
+          } 
+          else if(user.user['status']==0){
+            this.route.navigateByUrl('disable-account');//disabled
+          }
+      }
+     
+    }
  
   }
   handleError(error:any){

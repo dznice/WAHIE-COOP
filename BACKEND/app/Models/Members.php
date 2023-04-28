@@ -15,13 +15,10 @@ class Members extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		 'predef',
-		 'account_id',
 		'first_name',
 		'middle_name',
 		'last_name',
 		'suffix',
-		'first_name',
 		'birthdate',
 		'address',
 		'spouse',

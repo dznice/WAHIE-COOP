@@ -52,6 +52,9 @@ import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
 import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
 
 import {NgToastModule} from 'ng-angular-popup';
+import { RegMembersComponent } from './reg-members/reg-members.component';
+import { MembersHomeComponent } from './members-home/members-home.component';
+import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +96,10 @@ import {NgToastModule} from 'ng-angular-popup';
     SearchPipe,
     FilterLogDatePipe,
     FilterLogsPipe,
-    FilterInvPipe
+    FilterInvPipe,
+    RegMembersComponent,
+    MembersHomeComponent,
+    AdditionalInfoComponent
   ],
   imports: [
     BrowserModule,

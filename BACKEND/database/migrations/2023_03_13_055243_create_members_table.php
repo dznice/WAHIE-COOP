@@ -17,24 +17,22 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('predef')->default('WAH');
-            $table->integer('account_id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name')->nullable();
             $table->string('suffix')->nullable();
             $table->date('birthdate');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('spouse')->nullable();
-            $table->string('civil_status');
-            $table->string('tin_number');
-            $table->string('occupation');
+            $table->string('civil_status')->nullable();
+            $table->string('tin_number')->nullable();
+            $table->string('occupation')->nullable();
             $table->string('gender', 10);
             $table->string('department');
-            $table->string('employment_status');
+            $table->string('employment_status')->nullable();
             $table->string('company_name');
-            $table->string('company_address');
-            $table->string('job_title');
+            $table->string('company_address')->nullable();
+            $table->string('job_title')->nullable();
             $table->string('email');
             $table->string('mobile_number');
             $table->timestamp('time_date_created')->nullable();

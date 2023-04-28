@@ -44,6 +44,9 @@ class userController extends Controller
         return response()->json($beneficiary);
              }
      
-
+    public function memberInfo($id){
+        $member = Members::find($id);
+        return response()->json($member);
+         }
                 
 }
