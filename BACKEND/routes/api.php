@@ -28,6 +28,8 @@ Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activate
 Route::get('/memberList', [App\Http\Controllers\userController::class, 'memberList']);
 Route::get('/memberList/{id}', [App\Http\Controllers\userController::class, 'memberInfo']);
 
+Route::get('/beneficiaries', [App\Http\Controllers\userController::class, 'beneficiaries']);
+
 
 
 

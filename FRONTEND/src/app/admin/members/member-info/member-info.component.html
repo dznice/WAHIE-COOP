@@ -132,6 +132,17 @@
             </div>
             </table>
           </div>
+          <div class="information_row">
+          <table *ngFor="let b of ben">
+            <div *ngIf="id==b.benificiary_id">
+              <tr>
+                <th class="fields" width="30%">Beneficiaries</th>
+                <td class="fieldsdata">{{b.benificiary_name}} </td>
+
+              </tr>
+            </div>
+          </table>
+        </div>
         </div>
       </div>
     </div>
