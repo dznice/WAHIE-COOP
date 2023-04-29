@@ -77,7 +77,7 @@ class AuthController extends Controller {
                 'suffix' => $request['suffix'],
                 'email' => $request['email'],
                 'gender' => $request['gender'],
-                'mobile_number' => $request['email'],
+                'mobile_number' => $request['mobile_number'],
                 'birthdate' => $request['birthdate'],
                 'department' => $request['department'],
                 'company_name' => $request['company_name'],
@@ -130,7 +130,6 @@ class AuthController extends Controller {
             public function memberInfo(Request $request, $email){
 
                 $members = Members::where('email', '=', $email)->first();
-                if($members->email == $request->email){
                     $members->spouse = $request->spouse;
                     $members->address = $request->address;
                     $members->civil_status = $request->civil_status;
@@ -141,7 +140,7 @@ class AuthController extends Controller {
                     $members->job_title = $request->job_title;     
                     $members->save();
                     return response()->json($members); 
-                }
+                
               
             }
 
