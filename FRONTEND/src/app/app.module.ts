@@ -35,11 +35,21 @@ import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.compo
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
 import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
+import { RegMembersComponent } from './reg-members/reg-members.component';
+import { AdditionalInfoComponent } from './member/additional-info/additional-info.component';
+import { MemberComponent } from './member/member.component';
+import { MemberProfileComponent } from './member/member-profile/member-profile.component';
+import { MemberHomeComponent } from './member/member-home/member-home.component';
+import { MemberBodyComponent } from './member/member-body/member-body.component';
+import { MemberSidenavComponent } from './member/member-sidenav/member-sidenav.component';
+import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
+import { AdminPassdoneComponent } from './admin-passdone/admin-passdone.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';  
+import { NgToastModule}  from 'ng-angular-popup';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from './admin/accounting/filter.pipe';
 import { FilterDatePipe } from './admin/accounting/filter-date.pipe';
@@ -50,11 +60,8 @@ import { FilterInvPipe } from './admin/inventory/filter-inv.pipe';
 import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
 import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
 import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
+import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
 
-import {NgToastModule} from 'ng-angular-popup';
-import { RegMembersComponent } from './reg-members/reg-members.component';
-import { MembersHomeComponent } from './members-home/members-home.component';
-import { AdditionalInfoComponent } from './additional-info/additional-info.component';
 
 @NgModule({
   declarations: [
@@ -98,8 +105,15 @@ import { AdditionalInfoComponent } from './additional-info/additional-info.compo
     FilterLogsPipe,
     FilterInvPipe,
     RegMembersComponent,
-    MembersHomeComponent,
-    AdditionalInfoComponent
+    AdditionalInfoComponent,
+    MemberComponent,
+    MemberProfileComponent,
+    MemberHomeComponent,
+    MemberBodyComponent,
+    MemberSidenavComponent,
+    AdminChpassComponent,
+    AdminPassdoneComponent,
+    FilterMemHomeDatePipe
   ],
   imports: [
     BrowserModule,

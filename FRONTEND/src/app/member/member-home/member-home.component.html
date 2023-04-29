@@ -1,0 +1,73 @@
+<main>
+  <h1 class="title">Home</h1>
+
+  <section class="recent-transaction">
+    <h2 class="section-title">Recent Transactions</h2>
+
+    <div class="table-filter">
+      <!-- DATE Start -->
+      <div class="filter-field2">
+        <label>Start Date</label>
+        <input
+          class="form-control"
+          type="date"
+          [(ngModel)]="startDate"
+          name="sDate"
+        />
+      </div>
+      <!-- DATE End -->
+      <div class="filter-field3">
+        <label>End Date</label>
+        <input
+          class="form-control"
+          type="date"
+          [(ngModel)]="endDate"
+          name="eDate"
+        />
+      </div>
+      <!-- Type -->
+      <div class="filter-field4">
+        <label>Type</label>
+        <select [(ngModel)]="type" name="journal-type">
+          <option [ngValue]="undefined" selected>All</option>
+          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      <!-- Status -->
+      <div class="filter-field5">
+        <label>Status</label>
+        <select [(ngModel)]="stat" name="status">
+          <option [ngValue]="undefined" selected>All</option>
+          <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="table-content">
+        <thead>
+          <th>Date</th>
+          <th>Type</th>
+          <th>No.</th>
+          <th>Due Date</th>
+          <th>Balance</th>
+          <th>Status</th>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let e of memItem | filter : type | filter : stat | filterMhDate : startDate : endDate | paginate : { itemsPerPage: 5, currentPage: p }">
+            <td>{{ e.date }}</td>
+            <td>{{ e.type }}</td>
+            <td>{{ e.No }}</td>
+            <td>{{ e.DueDate }}</td>
+            <td>{{ e.Balance }}</td>
+            <td>{{ e.Status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="pagination-controls">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</main>

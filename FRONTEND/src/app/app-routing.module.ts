@@ -33,8 +33,11 @@ import { NotLoggedInService } from './services/not-logged-in.service';
 import { AdminOnlyService } from './services/admin-only.service';
 import { SuperadminOnlyService } from './services/superadmin-only.service';
 import { RegMembersComponent } from './reg-members/reg-members.component';
-import { MembersHomeComponent } from './members-home/members-home.component';
-import { AdditionalInfoComponent } from './additional-info/additional-info.component';
+import { MemberHomeComponent } from './member/member-home/member-home.component';
+import { AdditionalInfoComponent } from './member/additional-info/additional-info.component';
+import { MemberComponent } from './member/member.component';
+import { MemberProfileComponent } from './member/member-profile/member-profile.component';
+import { MemberBodyComponent } from './member/member-body/member-body.component';
 
 
 const routes: Routes = [
@@ -95,8 +98,8 @@ const routes: Routes = [
     component: DisableAccountComponent,
   },
   {
-    path: 'members-home',
-    component: MembersHomeComponent,
+    path: 'member-home',
+    component: MemberHomeComponent,
   },
   {
     path: 'additional-info',
@@ -120,7 +123,18 @@ const routes: Routes = [
       {path: 'admin-body', component: AdminBodyComponent},
     ]
   },
-
+  {
+    path: 'member',
+    component: MemberComponent,
+    canActivate : [LoggedInService],
+    children : [
+      {path: '', redirectTo: 'member-home', pathMatch: 'full'},
+      {path: 'member-home', component: MemberHomeComponent},
+      {path: 'additional-info', component: AdditionalInfoComponent},
+      {path: 'member-profile', component: MemberProfileComponent},
+      {path: 'member-body', component: MemberBodyComponent},
+    ]
+  },
   {
     path: 'super-admin',
     component: SuperAdminComponent,
@@ -132,7 +146,7 @@ const routes: Routes = [
       {path: 'sadmin-settings', component: SadminSettingsComponent},
       {path: 'sadmin-body', component: SadminBodyComponent},
     ]
-  },
+  }
 ];
 
 @NgModule({

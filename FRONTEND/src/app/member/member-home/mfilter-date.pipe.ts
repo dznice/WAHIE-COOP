@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Item } from './hItem';
+import { memItem } from './mItem';
 
 @Pipe({
-  name: 'filterHDate',
+  name: 'filterMhDate',
 })
-export class FilterHomeDatePipe implements PipeTransform {
-  transform(item: Item[], sDate: string, eDate: string) {
+export class FilterMemHomeDatePipe implements PipeTransform {
+  transform(item: memItem[], sDate: string, eDate: string) {
     console.log('filter pipe called');
     if (!sDate || !eDate) {
       return item;

@@ -81,18 +81,16 @@ export class LoginComponent implements OnInit, OnDestroy  {
   public error = null;
 
   submitLogin(){
-
-
     return this.backend.login(this.form).subscribe( 
-    data=>this.handleResponse(data),
-  )
-    }
-    get f() { return this.loginForm.controls; } 
+      data=>this.handleResponse(data),
+    )
+  }
+  get f() { return this.loginForm.controls; } 
 
   handleResponse(user:any){
     console.log(user.access_token);
     localStorage.setItem('userData', JSON.stringify(user.user['id']))
-   localStorage.setItem('userRole', JSON.stringify(user.user['role_id']))
+    localStorage.setItem('userRole', JSON.stringify(user.user['role_id']))
 
     //admin
     if(user.user['role_id']==1){
@@ -151,7 +149,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
             }else if(user.user['fillInfo']==0){
               this.token.handle(user.access_token);
               this.Auth.changeStatus(true);
-              this.route.navigateByUrl('members-home');//verified  
+              this.route.navigateByUrl('member/member-home');//verified  
             }
            
           } 

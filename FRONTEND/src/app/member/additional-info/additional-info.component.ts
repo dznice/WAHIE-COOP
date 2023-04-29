@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { slideleft2, slideright2 } from '../animation';
+import { slideleft2, slideright2 } from '../../animation';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-import { TokenService } from '../services/token.service';
+import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -87,17 +87,15 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     company_address:null,
     address:null,
     job_title:null
-
-
   }
 
   memberInfo(){
-console.log(this.updateMemberform)
+    console.log(this.updateMemberform)
     this.http.post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform).subscribe(
       (res:any)=>{
         console.log(res)
         this.token.handle(sessionStorage.getItem('ftoken'));
-        this.route.navigateByUrl('members-home');
+        this.route.navigateByUrl('member/member-home');
     }); 
   }
 }
