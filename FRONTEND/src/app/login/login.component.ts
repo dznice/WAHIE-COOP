@@ -145,7 +145,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
             if(user.user['fillInfo']==1){
               sessionStorage.setItem('email', user.user['email'])
               this.token.ftoken(user.access_token);
-              this.route.navigateByUrl('additional-info');// not complete information
+              this.route.navigateByUrl('member/additional-info');// not complete information
             }else if(user.user['fillInfo']==0){
               this.token.handle(user.access_token);
               this.Auth.changeStatus(true);

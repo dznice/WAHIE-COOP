@@ -102,10 +102,6 @@ const routes: Routes = [
     component: MemberHomeComponent,
   },
   {
-    path: 'additional-info',
-    component: AdditionalInfoComponent,
-  },
-  {
     path: 'admin',
     component: AdminComponent,
     canActivate : [LoggedInService , AdminOnlyService],
