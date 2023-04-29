@@ -50,7 +50,8 @@ export class JournalEntryComponent implements OnInit {
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control('',Validators.required),
     journal_no:this.builder.control('',Validators.required),
-    // total_debit:this.builder.control(''),
+    totaldebit:this.builder.control({ value: 0, disabled: true }),
+    totalcredit:this.builder.control({ value: 0, disabled: true }),
     entries:this.builder.array([])
   })
   
@@ -71,6 +72,8 @@ export class JournalEntryComponent implements OnInit {
   addRow(){
     this.journalEntryRow=this.journalEntryForm.get("entries") as FormArray;
     this.journalEntryRow.push(this.Generaterow());
+    this.balance_summary();
+    
   }
 
   removeRow(index:any){
@@ -86,21 +89,42 @@ export class JournalEntryComponent implements OnInit {
   Generaterow(){
     return this.builder.group({
       account:this.builder.control(''),
-      debit:this.builder.control(''),
-      credit:this.builder.control(''),
+      debit:this.builder.control({ value: 0, disabled: false }),
+      credit:this.builder.control({ value: 0, disabled: false }),
       description:this.builder.control(''),
       name:this.builder.control(''),
     });
   }
 
-  // balance_summary(){
-  //   let array=this.journalEntryForm.getRawValue().try;
-  //   let total_debit= 0;
-  //   array.forEach((x:any)=>{
-  //     total_debit=total_debit+x.debit;
-  //   })
-  //   this.journalEntryForm.get("debit")?.setValue(total_debit);
+  // autoZero(index: any) {
+  //   this.invoicedetail = this.invoiceform.get("details") as FormArray;
+  //   this.invoiceproduct = this.invoicedetail.at(index) as FormGroup;
+  //   let qty = this.invoiceproduct.get("qty")?.value;
+  //   let price = this.invoiceproduct.get("salesPrice")?.value;
+  //   let total = qty * price;
+  //   this.invoiceproduct.get("total")?.setValue(total);
+
+  //   this.summarycalculation();
   // }
+
+  getDebit()
+  {
+    
+  }
+
+  balance_summary(){
+    let array=this.journalEntryForm.getRawValue().entries;
+    let total_debit = 0;
+    let total_credit = 0;
+    
+    array.forEach((x:any)=>{
+      total_debit=total_debit+x.debit;
+      total_credit=total_credit+x.credit;
+    });
+    this.journalEntryForm.get("totaldebit")?.setValue(total_debit);
+    this.journalEntryForm.get("totalcredit")?.setValue(total_credit);
+  }
+
 
   add(journal_number:string,journal_name:string, journal_type:string){
     this.journals={
