@@ -102,6 +102,10 @@ const routes: Routes = [
     component: MemberHomeComponent,
   },
   {
+  path: 'additional-info', 
+  component: AdditionalInfoComponent
+  },
+  {
     path: 'admin',
     component: AdminComponent,
     canActivate : [LoggedInService , AdminOnlyService],
@@ -126,7 +130,6 @@ const routes: Routes = [
     children : [
       {path: '', redirectTo: 'member-home', pathMatch: 'full'},
       {path: 'member-home', component: MemberHomeComponent},
-      {path: 'additional-info', component: AdditionalInfoComponent},
       {path: 'member-profile', component: MemberProfileComponent},
       {path: 'member-body', component: MemberBodyComponent},
     ]

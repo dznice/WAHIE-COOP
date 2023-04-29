@@ -1,8 +1,7 @@
 <p>additional-info works!</p>
 
-<form (ngSubmit)="memberInfo()" #updatememInfo="ngForm"  class="additional-info" *ngIf="isDisplayed">
+<form #updatememInfo="ngForm"  class="additional-info" *ngIf="isDisplayed">
 <div class="text_field" >
-
 
 <div class="text-wrap">
     <input [(ngModel)]="updateMemberform.tin_number" type="text" name="tin_number" placeholder="tin_number">
@@ -48,5 +47,40 @@
 
 
 </div>
-<button type="submit" class="submit"> Update </button>
+
+
+
+<label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
+<div class="tabs__content">
+  <table class="tablebene">
+    <br />
+    <tr>
+      <th></th>
+      <th class="benelabel">Name</th>
+      <th class="benelabel">Date of Birth</th>
+      <th class="benelabel">Relationship</th>
+    </tr>
+
+    <tr *ngFor="let item of row; let x = index">
+      <td class="delbut">
+        <button class="addbut" (click)="addTable()">
+          <i class="ti ti-square-rounded-plus"></i>
+        </button>
+      </td>
+      
+      <td class="beneinput" ><input type="text" [(ngModel)]="item.benificiary_name" [ngModelOptions]="{standalone: true}"></td>
+
+       <td class="beneinput"><input type="date" [(ngModel)]="item.benificiary_birthdate" [ngModelOptions]="{standalone: true}"></td>
+
+       <td class="beneinput"><input type="text" [(ngModel)]="item.benificiary_relation" [ngModelOptions]="{standalone: true}"></td>
+
+      <td class="delbut">
+        <button class="delbut" (click)="deleteRow(x)">
+          <i class="ti ti-square-rounded-x"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+<button type="submit" (click)="memberInfo()"  class="submit"> Update </button>
 </form>

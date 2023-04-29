@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Members;
+use App\Models\BenificiaryMembers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\MailOtp;
@@ -34,10 +35,20 @@ class AuthController extends Controller {
 
        } 
 
+       public function beneficiaries(){
+        $bene = BenificiaryMembers::all();
+        return response()->json($bene);
+         }
     
        public function members(){
         $member = Members::all();
         return response()->json($member);
+         }
+
+        public function getmemberId($email){
+         $members = Members::where('email', '=', $email)->first();
+            $memberId = $members->id;
+         return response()->json($memberId); 
          }
 
     public function register(Request $request){
@@ -143,9 +154,19 @@ class AuthController extends Controller {
                     $user = User::where('email', '=', $email)->first();
                     $user->fillInfo = 0;
                     $user->save();
-                    return response()->json($members); 
+
+                    $bene = $request->input();
+                    foreach($bene['row'] as $key=>$value)
+                    {
+                             BenificiaryMembers::create([ 
+                            'benificiary_id' =>  $value['benificiary_id'],
+                            'benificiary_name' =>  $value['benificiary_name'],
+                            'benificiary_birthdate'=>  $value['benificiary_birthdate'],
+                            'benificiary_relation' =>  $value['benificiary_relation'],
+                            ]);  
+                     }
+                return response()->json($members); 
                 
-              
             }
 
             

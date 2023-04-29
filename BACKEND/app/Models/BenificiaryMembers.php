@@ -9,6 +9,10 @@ class BenificiaryMembers extends Model
 {
     use HasFactory;
     protected $table = 'benificiary_members';
-    protected $primaryKey = 'id';
-    protected $fillable = ['benificiary_id','benificiary_name', 'benificiary_birthdate', 'benificiary_relation'];
+    protected $fillable = [
+    'benificiary_id',
+    'benificiary_name', 
+    'benificiary_birthdate',
+    'benificiary_relation'
+];
 }

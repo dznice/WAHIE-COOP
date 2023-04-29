@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
+  
   selector: 'app-additional-info',
+  
   templateUrl: './additional-info.component.html',
   styleUrls: ['./additional-info.component.scss'],
   animations: [slideleft2, slideright2],
@@ -42,7 +44,9 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   submitted:boolean = false;
   
   constructor(@Inject(DOCUMENT) private _document: any, private http:HttpClient,
-  private token:TokenService, private route:Router ){}
+  private token:TokenService, private route:Router ){
+   this.getmemberId()
+  }
 
   // updateMemberInfo = new FormGroup({
   //   tin_number : new FormControl("", [Validators.required]),
@@ -73,10 +77,64 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   }
 
   public error:any= [];
-
-  id = localStorage.getItem('userData');
+  
   email = sessionStorage.getItem('email');
   
+    getmemberId(){
+    this.http.get('http://127.0.0.1:8000/api/members/' + this.email).subscribe(
+      (res:any)=>{
+       sessionStorage.setItem('memberid', res) 
+    }); 
+  }
+  memberId = sessionStorage.getItem('memberid')
+  id = localStorage.getItem('userData');
+  
+
+ 
+
+
+  //bene
+   row = [
+    {
+      benificiary_id: this.memberId,
+      benificiary_name: "",
+      benificiary_birthdate: "",
+      benificiary_relation:""
+    },
+    {
+      benificiary_id: this.memberId,
+      benificiary_name: "",
+      benificiary_birthdate: "",
+      benificiary_relation:""
+    },
+    {
+      benificiary_id: this.memberId,
+      benificiary_name: "",
+      benificiary_birthdate: "",
+      benificiary_relation:""
+    },
+  ];
+
+  addTable() {
+    const obj = {
+      benificiary_id: this.memberId,
+      benificiary_name: "",
+      benificiary_birthdate: "",
+      benificiary_relation:""
+    };
+    this.row.push(obj);
+  }
+
+  deleteRow(x: number) {
+    var delBtn = confirm(' Do you want to delete ?');
+    if (delBtn == true) {
+      this.row.splice(x, 1);
+    }
+  }
+
+
+
+
   public updateMemberform = {
     email:this.email,
     tin_number:null,
@@ -86,16 +144,20 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     occupation:null,
     company_address:null,
     address:null,
-    job_title:null
+    job_title:null,
+    row: this.row
   }
 
   memberInfo(){
-    console.log(this.updateMemberform)
-    this.http.post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform).subscribe(
+    console.log(this.row)
+    this.getmemberId();
+    this.http.post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform,).subscribe(
       (res:any)=>{
         console.log(res)
         this.token.handle(sessionStorage.getItem('ftoken'));
         this.route.navigateByUrl('member/member-home');
     }); 
   }
+
+
 }
