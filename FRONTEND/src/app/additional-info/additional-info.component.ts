@@ -92,7 +92,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   }
 
   memberInfo(){
-    this.http.post('http://127.0.0.1:8000/api/members/memberInfo' + '/' + this.email, this.form).subscribe(
+    this.http.post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.form).subscribe(
       (res:any)=>{
         console.log(res.id)
         this.token.handle(sessionStorage.getItem('ftoken'));

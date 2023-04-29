@@ -81,14 +81,14 @@ class AuthController extends Controller {
                 'birthdate' => $request['birthdate'],
                 'department' => $request['department'],
                 'company_name' => $request['company_name'],
-                'spouse' => null,
-                'address' => null,
-                'civil_status' => null,
-                'tin_number' => null,
-                'occupation' => null,
-                'employment_status' => null,
-                'company_address' => null,
-                'job_title' => null,
+                'spouse' => "",
+                'address' => "",
+                'civil_status' => "",
+                'tin_number' => "",
+                'occupation' => "",
+                'employment_status' => "",
+                'company_address' => "",
+                'job_title' => "",
 
                 ]);
                 return response()->json($user); 
@@ -127,19 +127,22 @@ class AuthController extends Controller {
    
 
 
-            public function memberInfo(Request $request, $id){
+            public function memberInfo(Request $request, $email){
 
-                $members = Members::find($id);
-                $members->spouse = $request->spouse;
-                $members->address = $request->address;
-                $members->civil_status = $request->civil_status;
-                $members->tin_number = $request->tin_number;
-                $members->occupation = $request->occupation;
-                $members->employment_status = $request->employment_status;
-                $members->company_address = $request->company_address;
-                $members->job_title = $request->job_title;     
-                $members->save();
-                return response()->json($members);  
+                $members = Members::where('email', '=', $email)->first();
+                if($members->email == $request->email){
+                    $members->spouse = $request->spouse;
+                    $members->address = $request->address;
+                    $members->civil_status = $request->civil_status;
+                    $members->tin_number = $request->tin_number;
+                    $members->occupation = $request->occupation;
+                    $members->employment_status = $request->employment_status;
+                    $members->company_address = $request->company_address;
+                    $members->job_title = $request->job_title;     
+                    $members->save();
+                    return response()->json($members); 
+                }
+              
             }
 
             
