@@ -44,25 +44,25 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   constructor(@Inject(DOCUMENT) private _document: any, private http:HttpClient,
   private token:TokenService, private route:Router ){}
 
-  memberInformation = new FormGroup({
-    tin_number : new FormControl("", [Validators.required]),
-    spouse : new FormControl(""),
-    employment_status : new FormControl("", [Validators.required]),
-    occupation : new FormControl(""),
-    company_address : new FormControl("",[Validators.required]),
-    address : new FormControl(""),
-  })
+  // updateMemberInfo = new FormGroup({
+  //   tin_number : new FormControl("", [Validators.required]),
+  //   spouse : new FormControl(""),
+  //   employment_status : new FormControl("", [Validators.required]),
+  //   occupation : new FormControl(""),
+  //   company_address : new FormControl("",[Validators.required]),
+  //   address : new FormControl("", [Validators.required]),
+  // })
 
-  getControl(name: any): AbstractControl | null{
-    return this.memberInformation.get(name)
-  }
+  // getControl(name: any): AbstractControl | null{
+  //   return this.updateMemberInfo.get(name)
+  // }
 
-  onSubmit(){
-    this.submitted = true;
-    if(this.memberInformation.invalid){
-      return;
-    }
-  }
+  // onSubmit(){
+  //   this.submitted = true;
+  //   if(this.updateMemberInfo.invalid){
+  //     return;
+  //   }
+  // }
 
   ngOnInit() {
     this._document.body.classList.add('body');
@@ -76,9 +76,9 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   id = localStorage.getItem('userData');
   email = sessionStorage.getItem('email');
-  public form = {
+  
+  public updateMemberform = {
     email:this.email,
-    id:null,
     tin_number:null,
     civil_status:null,
     spouse:null,
@@ -92,9 +92,10 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   }
 
   memberInfo(){
-    this.http.post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.form).subscribe(
+console.log(this.updateMemberform)
+    this.http.post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform).subscribe(
       (res:any)=>{
-        console.log(res.id)
+        console.log(res)
         this.token.handle(sessionStorage.getItem('ftoken'));
         this.route.navigateByUrl('members-home');
     }); 

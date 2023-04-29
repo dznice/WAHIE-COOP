@@ -139,6 +139,10 @@ class AuthController extends Controller {
                     $members->company_address = $request->company_address;
                     $members->job_title = $request->job_title;     
                     $members->save();
+
+                    $user = User::where('email', '=', $email)->first();
+                    $user->fillInfo = 0;
+                    $user->save();
                     return response()->json($members); 
                 
               
