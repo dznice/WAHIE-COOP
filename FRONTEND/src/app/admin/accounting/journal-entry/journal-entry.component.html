@@ -12,7 +12,7 @@
         <label> Journal Number </label>
         <!-- <input class="headinput" type="number" id="journalnumber" required /> -->
         <input class="headinput" type="number" formControlName="journal_no" />
-        {{journalEntryForm.get('journal_no')?.value}}
+        
       </div>
 
       <div>
@@ -73,11 +73,11 @@
       <td class="beneinput"><input type="text" /></td> --> 
 
           <td class="beneinput">
-            <input type="number" formControlName="debit" />
-            {{journalEntryForm.get('debit')}}
+            <input type="number" formControlName="debit" (change) = "balance_summary()"/>
+            
           </td>
           <td class="beneinput">
-            <input type="number" formControlName="credit" />
+            <input type="number" formControlName="credit"(change) = "balance_summary()"/>
           </td>
           <td class="beneinput">
             <input type="text" formControlName="description" />
@@ -116,11 +116,11 @@
     <div class="buttons">
       <div class="journdate">
         <label> Total Debit </label>
-        <input class="headinput" type="number" formControlName="totaldebit" />
+        <input class="headinput" type="number" formControlName="totaldebit"  />
       </div>
       <div class="journdate">
         <label> Total Credit </label>
-        <input class="headinput" type="number" formControlName="totalcredit" />
+        <input class="headinput" type="number" formControlName="totalcredit"  />
       </div>
       <a class="back">
         <span class="btnTextb">Back</span>

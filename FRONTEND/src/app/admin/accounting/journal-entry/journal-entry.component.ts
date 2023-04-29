@@ -8,6 +8,8 @@ import {FormBuilder, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./journal-entry.component.scss'],
 })
 export class JournalEntryComponent implements OnInit {
+  deb: string= '';
+  cred: string='';
 
   constructor(private builder:FormBuilder, private wahieService:WahieService){
   }
@@ -17,6 +19,7 @@ export class JournalEntryComponent implements OnInit {
   ngOnInit(): void{
     this.showJournal()
     this.showMembers()
+    
   }
 
   // showJournal(): void{
@@ -72,7 +75,7 @@ export class JournalEntryComponent implements OnInit {
   addRow(){
     this.journalEntryRow=this.journalEntryForm.get("entries") as FormArray;
     this.journalEntryRow.push(this.Generaterow());
-    this.balance_summary();
+    
     
   }
 
@@ -89,8 +92,8 @@ export class JournalEntryComponent implements OnInit {
   Generaterow(){
     return this.builder.group({
       account:this.builder.control(''),
-      debit:this.builder.control({ value: 0, disabled: false }),
-      credit:this.builder.control({ value: 0, disabled: false }),
+      debit:this.builder.control({ value: null, disabled: false }),
+      credit:this.builder.control({ value: null, disabled: false }),
       description:this.builder.control(''),
       name:this.builder.control(''),
     });
