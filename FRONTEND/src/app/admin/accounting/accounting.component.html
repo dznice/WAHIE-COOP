@@ -2,7 +2,7 @@
   <h1 class="title" [routerLink]="['../journal-entry']">Accounting</h1>
   <section class="recent-transaction">
     <div>
-      <button class="Add" onclick="">
+      <button class="Add" [routerLink]="['../accounting/journal-entry']">
         <span class="btnText"> New Journal Entry </span>
       </button>
     </div>
@@ -37,7 +37,7 @@
       </div>
 
       <div class="filter-field">
-        <label>Stauts</label>
+        <label>Status</label>
         <select [(ngModel)]="stat" name="status">
           <option [ngValue]="undefined" selected>All</option>
           <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>

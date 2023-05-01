@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Credits extends Model
 {
     use HasFactory;
+    protected $table = 'credits';
+    protected $primaryKey = 'id';
+    protected $fillable = 
+    [
+        'users_id',
+        'journals_id',
+        'payables_id',
+        'amount',
+    ];
 }

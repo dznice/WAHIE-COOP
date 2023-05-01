@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('members_id');
             $table->integer('transaction_number');
             $table->timestamp('transaction_date');
+            $table->timestamps();
 
             $table->foreign('users_id')-> references('id')->on('users');
             $table->foreign('members_id')-> references('id')->on('members');

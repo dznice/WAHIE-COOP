@@ -18,9 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('journals_id');
             $table->unsignedBigInteger('payables_id');
-            $table->timestamp('time_date');
-            $table->double('interest');
-            $table->double('amount');
+            $table->datetime('due_date')->nullable();
+            $table->double('interest')->nullable();
+            $table->double('credit_amount')->nullable();
+            $table->double('debit_amount')->nullable();
+            $table->timestamps();
 
             $table->foreign('users_id')-> references('id')->on('users');
             $table->foreign('journals_id')-> references('id')->on('lib_journals');

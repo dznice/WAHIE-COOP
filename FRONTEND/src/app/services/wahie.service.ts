@@ -28,9 +28,6 @@ export class WahieService {
   public addJournal(journals:any): Observable<any>{
     return this.http.post<any>(this.url+'/api/journals', journals, this.httpOptions);
   }
-  // public getJournals(query: any){
-  //   return this.http.get<any>(this.url+`/api/journals/${query}`);
-  // }
 
   public listMembers(): Observable<any[]>{
     return this.http.get<any[]>(this.url+'/api/members');
@@ -50,5 +47,25 @@ export class WahieService {
 
   public saveJournalEntry(entries:any):Observable<any>{
     return this.http.post<any>(this.url+'/api/accounts', entries, this.httpOptions) 
+  }
+
+  public debits(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/debits');
+  }
+
+  public credits(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/credits');
+  }
+
+  public payables(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/payables');
+  }
+
+  public transactions(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/transactions');
+  }
+
+  public listEntries(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/entries');
   }
 }

@@ -15,6 +15,16 @@ use App\Models\Journal;
 use App\Models\LibJournal;
 use App\Http\Controllers\LibJournalController;
 use App\Http\Resources\LibJournalResource;
+use App\Http\Resources\DebitsResource;
+use App\Models\Debits;
+use App\Http\Resources\CreditsResource;
+use App\Models\Credits;
+use App\Http\Resources\PayablesResource;
+use App\Models\Payables;
+use App\Http\Resources\TransactionsResource;
+use App\Models\Transactions;
+use App\Http\Resources\LibEntriesResource;
+use App\Models\LibEntries;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,8 +38,6 @@ use App\Http\Resources\LibJournalResource;
 Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 
 Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
-
-
 
 Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
 Route::post('/users/updateOtp/{id}', [App\Http\Controllers\userController::class, 'submitOtp']);
@@ -96,6 +104,56 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//LibEntries
+Route::get('/entries', function() {
+    return LibEntriesResource::collection(LibEntries::all());
+});
+
+Route::get('/entry/{id}', function($id) {
+    return new LibEntriesResource(LibEntries::findOrFail($id));
+});
+
+//Credits
+Route::get('/credits', function() {
+    return CreditsResource::collection(Credits::all());
+});
+
+Route::get('/credit/{id}', function($id) {
+    return new CreditsResource(Credits::findOrFail($id));
+});
+
+//Debits
+Route::get('/debits', function() {
+    return DebitsResource::collection(Debits::all());
+});
+
+Route::get('/debit/{id}', function($id) {
+    return new DebitsResource(Debits::findOrFail($id));
+});
+
+//Payables
+Route::get('/payables', function() {
+    return PayablesResource::collection(Payables::all());
+});
+
+Route::get('/payable/{id}', function($id) {
+    return new PayablesResource(Payables::findOrFail($id));
+});
+
+//Transactions
+Route::get('/transactions', function() {
+    return TransactionsResource::collection(Transactions::all());
+});
+
+Route::get('/transaction/{id}', function($id) {
+    return new TransactionsResource(Transactions::findOrFail($id));
+});
+
+
+
+
+
 // Route::group([ 'middleware' => 'api'], function ($router) {
 
 

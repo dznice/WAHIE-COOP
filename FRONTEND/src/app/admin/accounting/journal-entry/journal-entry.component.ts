@@ -55,6 +55,7 @@ export class JournalEntryComponent implements OnInit {
   })
   
   saveEntry(){
+    
     if(this.journalEntryForm.valid){
       this.wahieService.saveJournalEntry(this.journalEntryForm.getRawValue()).subscribe(res=>{
         let result:any;

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('benificiary_name');
             $table->date('benificiary_birthdate');
             $table->string('benificiary_relation');
+            $table->timestamps();
 
             $table->foreign('benificiary_id')-> references('id')->on('members');
         });

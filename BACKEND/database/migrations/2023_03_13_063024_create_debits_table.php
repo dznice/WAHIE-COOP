@@ -20,6 +20,7 @@ return new class extends Migration
             $table->double('payment');
             $table->date('pay_date');
             $table->integer('status');
+            $table->timestamps();
 
             $table->foreign('credits_id')-> references('id')->on('credits');
         });

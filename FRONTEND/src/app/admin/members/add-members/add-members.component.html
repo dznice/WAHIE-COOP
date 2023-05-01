@@ -240,8 +240,8 @@
       </div>
   </form>
   <div class="buttons">
-    <button class="back">
-        <span class="btnTextb">Back</span>
+    <button class="back" >
+        <span class="btnTextb" [routerLink]="['./admin/members']">Back</span>
     </button>
 
     <button type="button" class="save" (click)="addBeneficiary()"
@@ -293,7 +293,7 @@
                                                     state_province.value='';
                                                     postal_code.value='';
                                                     "
-                                                    >
+                                                    [routerLink]="['../members']">
         <span class="btnTexts">Save</span>
     </button>
 </div>

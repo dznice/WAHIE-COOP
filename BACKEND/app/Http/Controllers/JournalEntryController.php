@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Entries;
 use App\Models\Journal;
+use App\Models\Transactions;
+use App\Models\Payables;
+use App\Models\Credits;
+use App\Models\Debits;
 use DB;
 
 class JournalEntryController extends Controller
@@ -34,23 +38,82 @@ class JournalEntryController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         if($request->isMethod('post')){
-            $journals = new Journal;
-            $journals->journal_no = $request->journal_no;
-            $journals->journal_date = $request->journal_date;
-            $journals->save();
+
             $entryData = $request->input();
+            $journals = new Transactions;
+            $credits = new Credits;
+            
             foreach ($entryData['entries'] as $key => $value)
             {
-                $entry = new Entries;
-                $entry->journal_no = $request->journal_no;
-                $entry->account = $value['account'];
-                $entry->debit = $value['debit'];
-                $entry->credit = $value['credit'];
-                $entry->description = $value['description'];
-                $entry->name = $value['name'];
-                $entry->save();
+                // $credits-> journals_id =$value['account'];
+                // $credits-> amount = $value['credit'];
+                // $credits->payables_id = $payables;
+                // $credits->save();
+                
+
+                
+                // $filter = collect($memberid)->filter()->all();
+                $members_id = $value['name'];
             }
+           
+            
+            $journals->members_id = $members_id;
+            $journals->transaction_number = $request->journal_no;
+            $journals->transaction_date = $request->journal_date;
+            $journals->save();
+            $jorn = $journals->id;
+
+            
+
+            $payables = new Payables;
+            $payables->transaction_id = $jorn;
+            $payables->entry_id = "1";
+            $payables->transaction_number = $request->journal_no;
+            $payables->save();
+            $pays = $payables->id;
+
+            foreach ($entryData['entries'] as $key => $value)
+            {
+                if ( $value['credit'] == null ){
+                    // continue;
+                }else{
+                $credits-> journals_id = $value['account'];
+                $credits-> amount = $value['credit'];
+                $credits-> payables_id = $pays;
+                $credits->save();
+                }
+
+                $credi = $value['credit'];
+                $cred = $credi + $credi;
+                $debii = $value['debit'];
+                $debi = $debii + $debii;
+                
+            }
+            echo $debi;
+            // $credits->users_id="1";
+            // $credits->journals_id = $journals_id;
+           
+            $creds = $credits->id;
+
+                $balance = $cred - $debi;
+                if( $balance == 0 ){
+                    $status = "0";
+                }else{
+                    $status = "1";
+                }
+
+            $debits = new Debits;
+            $debits->credits_id = $creds;
+            $debits->open_balance = $balance;
+            $debits->payment = $debi;
+            $debits->status = $status;
+
+            $debits->save();
+
+
             return response()->json(['message'=>'Entry added successfully!']);
         }
     }
