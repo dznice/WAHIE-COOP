@@ -60,16 +60,16 @@ Route::put('/journal/{id}', [LibJournalController::class, 'update']);
 Route::delete('/journal/{id}', [LibJournalController::class, 'destroy']);
 
 //Journal Entry
-Route::get('/accounts', function(){
-    return JournalEntryResource::collection(Entries::all());
+Route::get('/journal-entry', function(){
+    return JournalEntryResource::collection(Journal::all());
 });
-Route::get('/account/{id}', function($id){
+Route::get('/journal-entry/{id}', function($id){
     return new JournalEntryResource(Entries::findOrFail($id));
 });
 // Route::post('/account', [JournalEntryController::class, 'store']);
-Route::post('/accounts', [JournalEntryController::class, 'store']);
-Route::put('/account/{id}', [JournalEntryController::class, 'update']);
-Route::delete('/account/{id}', [JournalEntryController::class, 'destroy']);
+Route::post('/journal-entry', [JournalEntryController::class, 'store']);
+Route::put('/journal-entry/{id}', [JournalEntryController::class, 'update']);
+Route::delete('/journal-entry/{id}', [JournalEntryController::class, 'destroy']);
 
 
 //Members

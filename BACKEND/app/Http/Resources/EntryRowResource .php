@@ -32,7 +32,14 @@ class JournalEntryResource extends JsonResource
         return [
             'id' => $this->id,
             'journal_no' => $this->journal_no,
-            'journal_date' => $this->journal_date,
+            'account' => $this->account,
+            'debit' => $this->debit,
+            'credit' => $this->credit,
+            'description' => $this->description,
+            'name' => $this->name,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+
         ];
     }
 }

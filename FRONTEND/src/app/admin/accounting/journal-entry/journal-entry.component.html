@@ -60,10 +60,10 @@
               </ng-template>
               <ng-option
                 class="try"
-                *ngFor="let journal of journals"
-                [value]="journal.id"
+                *ngFor="let libJournal of libJournals"
+                [value]="libJournal.id"
               >
-                {{ journal.journal_number }} {{ journal.journal_name }}
+                {{ libJournal.journal_number }} {{ libJournal.journal_name }}
               </ng-option>
             </ng-select>
           </td>
@@ -73,11 +73,11 @@
       <td class="beneinput"><input type="text" /></td> --> 
 
           <td class="beneinput">
-            <input type="number" formControlName="debit" (change) = "balance_summary()"/>
+            <input type="number" formControlName="debit" (change) = "autoZero(i)"/>
             
           </td>
           <td class="beneinput">
-            <input type="number" formControlName="credit"(change) = "balance_summary()"/>
+            <input type="number" formControlName="credit" (change) = "autoZero(i)"/>
           </td>
           <td class="beneinput">
             <input type="text" formControlName="description" />
