@@ -1,1 +1,70 @@
-<p>admin-chpass works!</p>
+<head>
+    <title>Set new password</title>
+</head>
+<main>
+    <div class="box">
+        <div class="inner-box">
+            <div class="form-wrap">    
+                <form name="form" (ngSubmit)="submitPass()" #changpassForm="ngForm" [formGroup]="chpassForm" *ngIf="isDisplayed" @slideright>
+                    <div class="wah-logo">
+                        <img src="assets/image/coop-logo.png" alt="WAH Logo">
+                        <p>WAHIE <br> Cooperative</p>
+                    </div>
+
+                    <div class="heading">
+                        <h1>Set new password</h1>
+                        <p>Must be at least 8 characters.</p>
+                    </div>
+                
+                    <div class="txt-field">
+                        
+                        <div class="txt-wrap">
+
+                            <label class="enter_pass" for="pass"> Enter Password</label>
+                            <input type="hidden" name="id" id="id" value='{{ id }}'>
+                            <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="sadmin-pass" placeholder="Input password"  formControlName="password" required
+                            [(ngModel)]="chform.password"  [ngClass]="{error : getControl('password')?.errors && getControl('password')?.touched}">
+                            <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
+                           
+                        </div>
+                        <div>
+                            <div class="text-danger" *ngIf="submitted && getControl('password')?.errors || getControl('password')?.errors && getControl('password')?.touched">
+                                <small *ngIf="getControl('password')?.errors?.['required']">Password field is required</small>
+                            </div>
+                        </div>
+                            
+                        <div class="txt-wrap">
+                            <label for="pass2"> Confirm Password</label>
+                            <input [type]="cchangetype?'password':'text'"  minlength="8" maxlength="32"  class="input-field" id="sadmin-confirm-pass" placeholder="Confirm your new password"  formControlName="confirm_pass"required
+                            [(ngModel)]="chform.confirm_pass" [ngClass]="{error : (getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched) || (chpassForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched) }">
+                            <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
+                        </div>
+
+                        <div>
+                            <div class="text-danger1" *ngIf="submitted && getControl('confirm_pass')?.errors || getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched">
+                                <small *ngIf="getControl('confirm_pass')?.errors?.['required']">Confirm Password field is required</small>
+                            </div>
+                        </div>
+                        <div>
+                          <div class="text-danger2" *ngIf="chpassForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched">
+                            <small >Password Not Match</small>
+                          </div>
+                        </div>
+                        
+                        <button type="submit" class="save">Save new password</button> 
+
+                    </div>
+                </form>                                                         
+                <div class="account">
+                    <a [routerLink]="['/login']" class="back">
+                    <i class="ti ti-arrow-left"></i>Logout
+                    </a>
+                </div> 
+            </div>
+            <!-- VECTOR BACKGROUND -->
+            <div class="login-vector ">
+                <img src="assets/image/Reset password-amico.png" class="login" *ngIf="isDisplayed" @slider>
+            </div>
+        </div>
+    </div>
+</main>

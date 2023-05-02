@@ -113,32 +113,28 @@
   
   
   .reset{
-
-    text-align: center;
     display: inline-block;
     width: 100%;
     height: 43px;
     background-color: #3F0F88;
     color: #fff;
     border: none;
+    cursor: pointer;
     border-radius: 0.6rem;
-    font-size: 1.1rem;
-    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    margin-top: 2rem;
     margin-bottom: 1rem;
-    padding-top: .5rem;
     text-decoration: none;
   }
   
   .reset:hover{
-    opacity: 80%;
+    background-color: var(--primary-alt);
   }
   
   .account{
-
     color: #707070;
     font-size: 0.9rem;
     text-align: center;
-  
   }
   
   span{

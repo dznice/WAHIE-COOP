@@ -1,1 +1,36 @@
-<p>admin-passdone works!</p>
+<main>
+    <div class="box">
+        <div class="inner-box">
+            <div class="form-wrap">    
+                <form  *ngIf="isDisplayed" @slideright>
+                    <div class="wah-logo">
+                        <img src="assets/image/coop-logo.png" alt="WAH Logo">
+                        <p>WAHIE <br> Cooperative</p>
+                    </div>
+
+                    <div class="heading">
+                        <h1>All done!</h1>
+                        <p>Your password has been reset. Click continue to log in. </p>
+                    </div>
+                
+                    <div class="txt-field">
+                        <div class="txt-wrap">
+                            <a [routerLink]="['/login']" class="reset">Continue</a>
+                        </div>     
+                    </div>
+                </form> 
+
+                    <div class="account">
+                        <a [routerLink]="['/sadmin-chpass']" class="back">
+                            <i class="ti ti-arrow-left"></i>Back
+                        </a>
+                    </div>   
+            </div>
+            
+            <!-- VECTOR BACKGROUND -->
+            <div class="login-vector">
+                <img src="assets/image/Completed-amico.png" class="login" *ngIf="isDisplayed" @slider>
+            </div>
+        </div>
+    </div>
+</main>

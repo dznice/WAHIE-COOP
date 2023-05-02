@@ -138,9 +138,9 @@ input {
 }
 
 .meter {
-  margin-top: -1em;
+  margin-top: -0.5em;
   max-width: 500px;
-  width: 310px;
+  width: 100%;
 }
 .eye {
   position: absolute;
@@ -159,23 +159,22 @@ input {
 }
 
 .save {
-  text-align: center;
   display: inline-block;
   width: 100%;
-  height: 41px;
-  background-color: #3f0f88;
+  height: 43px;
+  background-color: #3F0F88;
   color: #fff;
   border: none;
+  cursor: pointer;
   border-radius: 0.6rem;
   font-size: 0.9rem;
-  margin-top: 0.5rem;
+  margin-top: 0.24rem;
   margin-bottom: 3rem;
-  padding-top: 0.5rem;
   text-decoration: none;
 }
 
-.reset:hover {
-  opacity: 80%;
+.save:hover {
+  background-color: var(--primary-alt);
 }
 
 .account {

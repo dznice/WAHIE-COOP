@@ -131,7 +131,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'member-home', pathMatch: 'full'},
       {path: 'member-home', component: MemberHomeComponent},
       {path: 'member-profile', component: MemberProfileComponent},
-      {path: 'member-body', component: MemberBodyComponent},
+      {path: 'member-body', component: MemberBodyComponent}
     ]
   },
   {
