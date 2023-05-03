@@ -22,22 +22,32 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.coop }}</td>
+          <td>{{ user.status }}</td>
+
           <!-- <td>{{ user.datecreated }}</td> -->
 
-          <td>
-            <div *ngIf="user.status != 2">
-              <label class="switch-toggle">
-                <input type="checkbox" [(ngModel)]="selected" />
-                <input class="switch" input type="checkbox" [(ngModel)]="selected" />
+            <td>
+              <div *ngIf="user.status == 0">
+                <label class="switch-toggle">
+                
+                <input class="switch" input type="checkbox" [(ngModel)]="isChecked2" (click)="deactivateTOactivate(user)"   click="getValue"/>
                 <div class="slider"></div>
               </label>
             </div>
+            <div *ngIf="user.status == 1">
+              <label class="switch-toggle">
+                
+              <input class="switch" input type="checkbox" [(ngModel)]="isChecked" (click)="activateUser(user)" click="getValue" />
+              <div class="slider"></div>
+            </label>
+          </div>
+              
 
             <div *ngIf="user.status == 2">
               <button type="submit" (click)="activateUser(user)" class="btn btn-success">
                 <span>Activate</span>
-              </button>
-            </div>
+              </button> 
+           </div>
           </td>
         </div>
       </tr>
