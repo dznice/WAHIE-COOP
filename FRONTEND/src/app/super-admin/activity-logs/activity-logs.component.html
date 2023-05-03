@@ -13,6 +13,7 @@
                 <tr>
                   <th>Date and Time</th>
                   <th>Name</th>
+                  <th>Department</th>
                   <th>Activity</th>          
                 </tr>
               </thead>
@@ -21,6 +22,7 @@
                 <tr *ngFor="let e of item | filter: term| filterlogDate: startDate: endDate | paginate: {itemsPerPage: 5, currentPage: p} ">
                   <td>{{e.dnt}}</td>
                   <td>{{e.name}}</td>
+                  <td>{{e.coop}}</td>
                   <td>{{e.act}}</td>
                 </tr>
               </tbody>

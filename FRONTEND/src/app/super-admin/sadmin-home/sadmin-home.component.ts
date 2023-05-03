@@ -24,6 +24,7 @@ export class SadminHomeComponent {
   id = "";
   name: string = "";
   email: string = "";
+  coop: string = "";
   status: number = 0;
   
   ngOnInit(): void {
@@ -51,6 +52,7 @@ export class SadminHomeComponent {
     this.status = 1,
     this.name = data.name,
     this.email = data.email
+    this.coop = data.coop
     this.activated();
   }
 
@@ -59,7 +61,8 @@ export class SadminHomeComponent {
      'status': 1,
      'id' : this.id,
      'name': this.name,
-     'email': this.email
+     'email': this.email,
+     'coop': this.coop
     }
     this.http.put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus).subscribe(
       (res:any)=>{
@@ -69,6 +72,7 @@ export class SadminHomeComponent {
         this.status = 0;
         this.name = '';
         this.email = '';
+        this.coop = '';
       }
     )
   }

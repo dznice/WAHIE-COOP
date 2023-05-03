@@ -12,6 +12,7 @@
     <thead>
       <th>User</th>
       <th>Email</th>
+      <th>Department</th>
       <th>Date Created</th>
       <th>Status</th>
     </thead>
@@ -20,6 +21,7 @@
         <div *ngIf="user.role_id == 1">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.coop }}</td>
           <!-- <td>{{ user.datecreated }}</td> -->
 
           <td>

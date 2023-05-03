@@ -61,7 +61,7 @@ import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
 import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
 import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
 import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
-
+import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.pipe';
 
 @NgModule({
   declarations: [
@@ -113,7 +113,8 @@ import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
     MemberSidenavComponent,
     AdminChpassComponent,
     AdminPassdoneComponent,
-    FilterMemHomeDatePipe
+    FilterMemHomeDatePipe,
+    FilterPaymentDatePipe
   ],
   imports: [
     BrowserModule,
