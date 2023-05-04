@@ -48,6 +48,7 @@ import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { StrengthMeterModule } from "ngx-strength-meter";
 import { CommonModule } from '@angular/common';
+import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.pipe';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { CommonModule } from '@angular/common';
     FilterDatePipe,
     FilterMemberPipe,
     FilterHomePipe,
-    FilterHomeDatePipe
+    FilterHomeDatePipe, 
+    FilterPaymentDatePipe
   ],
   imports: [
     BrowserModule,

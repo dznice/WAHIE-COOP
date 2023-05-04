@@ -1,0 +1,237 @@
+main {
+    width: 100%;
+  }
+
+input, select{
+    font-family: "Poppins", sans-serif;
+}
+
+.sticky-div{
+    display: flex;
+    padding: 10px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color:#3F0F88;
+    height: 60px;
+    width: auto;
+    flex-wrap: wrap;
+    color:#fff9f9;
+    padding-left: 2rem;
+    margin:-20px -35px 0px -35px ;
+}
+
+.invo-number{
+display: flex;
+font-size: 26px;
+font-weight: 500;
+flex-wrap: wrap;
+color:#fff9f9;
+}
+
+.exit{
+align-self: end;
+
+}
+.close{
+cursor: pointer;
+font-size: 1.8rem;
+padding: auto;
+}
+
+.amount label{
+    display: flex;
+    flex-wrap: wrap;
+    float: right;
+}
+
+.amounts{
+    color: #aaa;
+}
+
+.amounts2{
+    font-size: 30px;
+    color: #3F0F88;
+}
+
+.sub_header {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    color: #3F0F88;  
+    
+
+    .customerPayment{
+        margin: 0 40px 20px 0;
+        width: calc(56% / 2.3 - 20px);
+
+        select, input[type=email]{
+            height: 36px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 10px;
+            
+        }
+    }
+
+}
+
+.sub_header2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #3F0F88;
+    width: 100%;
+
+    .customerPayment2{
+        margin: 0 0 90px 0;
+        width: calc(56% / 2.3 - 20px);
+
+        select, input[type=date], input[type=number]{
+            height: 36px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 10px;
+        }
+    }
+
+}
+
+.outsTransac{
+    font-size: 30px;
+    font-weight: 500;
+    color: #3F0F88;
+}
+
+.sub_header3 {
+    display: flex;
+    flex-wrap: wrap;
+    color: #3F0F88;
+    width: 100%;
+
+    .customerPayment3{
+        margin: 0 40px 20px 0;
+        width: calc(56% / 2.3 - 20px);
+
+        input, input[type=date]{
+            height: 36px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            font-weight: 400;
+            color: #333;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 10px;
+        }
+    }
+
+}
+
+table{
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-style: hidden;
+    border-color: #aaa;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 2rem;
+}
+
+table td{
+    padding: 0.5rem;
+}
+
+table th{
+    padding: 0.5rem;
+    color: #3F0F88;
+}
+
+.tablePayment input{
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    height: 36px;
+    margin: 2px 0;
+    display: flex;
+    width: 100%;
+}
+
+.total{
+    float: right;
+    margin-top: 2rem;
+}
+
+.totals{
+    margin-right: 5rem;
+    font-weight: 1000;
+}
+
+.totals2{
+    margin-left: .17rem;
+}
+
+.total button{
+    border: 1px solid #aaa;
+    border-radius: 25px;
+    padding: 10px 25px 10px;
+    margin: 1rem 0 0rem 10rem;
+    font-size: 15px;
+}
+
+.total button:hover{
+    background-color: #3F0F88;
+    color: #fff9f9;
+}
+
+    .footer{
+    margin-top: 10rem;
+    float: inline-end;
+    
+    }
+    .cancel{
+    margin-bottom: 1rem;
+    margin-left: 10px;
+    height: 40px;
+    width:80px;
+    border: none;
+    background-color: #ede9f2;
+    color: #7f7a7a;
+    border-radius: 5px;
+    outline: none;
+    font-weight: 600;
+    font-size: 15px;
+    }
+    .cancel:hover{
+    opacity: 80%;
+    }
+
+    .save{
+    margin-left: 10px;
+    height: 40px;
+    width:80px;
+    border: none;
+    background-color: #500ea1;
+    color: #ffffff;
+    border-radius: 5px;
+    outline: none;
+    font-weight: 600;
+    float: right;
+    font-size: 15px;
+    }
+
+    .save:hover{
+    opacity: 80%;
+    }

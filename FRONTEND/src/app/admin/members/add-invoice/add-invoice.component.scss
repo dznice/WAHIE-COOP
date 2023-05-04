@@ -1,0 +1,303 @@
+
+main {
+    width: 100%;
+   
+  }
+
+
+
+.sticky-div{
+display: flex;
+padding: 10px;
+position: -webkit-sticky;
+position: sticky;
+top: 0;
+background-color:#3F0F88;
+height: 60px;
+width: auto;
+flex-wrap: wrap;
+color:#fff9f9;
+padding-left: 2rem;
+margin:-20px -35px 0px -35px ;
+
+
+}
+
+.invo-number{
+display: flex;
+font-size: 26px;
+font-weight: 500;
+flex-wrap: wrap;
+color:#fff9f9;
+}
+
+.exit{
+float: right;
+align-items: right;
+
+}
+.close{
+cursor: pointer;
+font-size: 1.8rem;
+
+float: right;
+align-items: right;
+}
+
+.sub_header {
+display: flex;
+flex-wrap: wrap;
+float: left;
+padding-bottom: 50px;
+}
+.sub_header2 {
+display: flex;
+float: right;
+transform: translate(5%, -15%);
+}
+.in-label{
+display: flex;
+flex-wrap: wrap;
+
+}
+label{
+font-size: 16px;
+font-weight: 500;
+color: #3F0F88;
+}
+
+.tablejournal{
+width: 100%;
+
+}
+.tablejournal2{
+width: 100%;
+padding-right: 20px;
+}
+
+.journdate{
+display: flex;
+flex-wrap: wrap;
+float: left;
+}
+
+.amounts{
+display: flex;
+flex-wrap: wrap;
+float: right;
+font-size: 15px;
+color: #aaa;
+}
+.amounts2{
+display: flex;
+flex-wrap: wrap;
+float: right;
+font-size: 30px;
+}
+.journdate2{
+display: flex;
+flex-wrap: wrap;
+float: left;
+}
+/**.sub-main {
+margin-top: 5rem;
+
+position: relative;
+
+}
+.bill{
+
+float: left;
+
+}
+.term{
+
+float: left;
+}
+
+.invoice{
+
+float: left;
+}
+
+.due{
+
+float: left;
+}*/
+
+.bill{
+background-color: #3F0F88;
+float: left;
+
+}
+.inputbill{
+outline: none;
+font-size: 14px;
+font-weight: 400;
+color: #333;
+border-radius: 5px;
+border: 1px solid #aaa;
+padding: 0 15px;
+height: 136px;
+margin: 2px 0;
+display: flex;
+width: 75%;
+
+}
+.beneinput2 input, select{
+outline: none;
+font-size: 14px;
+font-weight: 400;
+color: #333;
+border-radius: 5px;
+border: 1px solid #aaa;
+height: 36px;
+
+margin-bottom: 100px;
+width: 80%;
+}
+.beneinput input, .selected{
+outline: none;
+font-size: 14px;
+font-weight: 400;
+color: #333;
+border-radius: 5px;
+border: 1px solid #aaa;
+padding: 0 15px;
+height: 36px;
+margin: 2px 0;
+display: flex;
+width: 80%;
+margin-bottom: 100px;
+}
+.beneinput input, select{
+outline: none;
+font-size: 14px;
+font-weight: 400;
+color: #333;
+border-radius: 5px;
+border: 1px solid #aaa;
+padding: 0 15px;
+height: 36px;
+margin: 2px 0;
+display: flex;
+width: 100%;
+}
+.invo{
+display:block;
+margin-bottom: 5rem;
+
+}
+.journals{
+overflow-y: scroll;
+
+border-radius: 50;
+height:280px;
+
+}
+.journallabel{
+ font-size: 16px;
+ font-weight: 500;
+ color: #3F0F88;
+ text-align: left;
+}
+
+.journallabel2{
+font-size: 16px;
+font-weight: 500;
+color: #3F0F88;
+text-align: justify;
+
+}
+
+.inputdate, .numberj{
+outline: none;
+font-size: 14px;
+font-weight: 400;
+color: #333;
+border-radius: 5px;
+border: 1px solid #aaa;
+padding: 0 14px;
+height: 34px;
+margin: 4px 10;
+
+}
+
+
+.Add{
+margin-left: 10px;
+height: 40px;
+width:80px;
+border: none;
+background-color: #500ea1;
+color: #ffffff;
+border-radius: 5px;
+outline: none;
+font-weight: 600;
+}
+
+
+.delbut{
+height: auto;
+width:auto;
+margin-left: 6px;
+border: none;
+font-size: 24px;
+background: none;
+background-color: none;
+color: #ff0000;
+border-radius: 5px;
+outline: none;
+font-weight: 600;
+}
+.total{
+margin-top: 2rem;
+}
+.totals{
+display: flex;
+flex-wrap: wrap;
+float: right;
+font-size: 15px;
+color: #aaa;
+}
+.totals2{
+display: flex;
+flex-wrap: wrap;
+float: right;
+font-size: 20px;
+}
+.footer{
+margin: 20px;
+
+}
+.cancel{
+margin-left: 10px;
+height: 40px;
+width:80px;
+border: none;
+background-color: #ede9f2;
+color: #7f7a7a;
+border-radius: 5px;
+outline: none;
+font-weight: 600;
+}
+.cancel:hover{
+background-color: #575454;
+}
+
+.save{
+margin-left: 10px;
+height: 40px;
+width:80px;
+border: none;
+background-color: #500ea1;
+color: #ffffff;
+border-radius: 5px;
+outline: none;
+font-weight: 600;
+float: right;
+}
+
+.save:hover{
+opacity: 80%;
+}

@@ -1,1 +1,147 @@
-<p>add-invoice works!</p>
+<div class="sticky-div">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history-toggle" width="34" height="34" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M10 20.777a8.942 8.942 0 0 1 -2.48 -.969"></path>
+        <path d="M14 3.223a9.003 9.003 0 0 1 0 17.554"></path>
+        <path d="M4.579 17.093a8.961 8.961 0 0 1 -1.227 -2.592"></path>
+        <path d="M3.124 10.5c.16 -.95 .468 -1.85 .9 -2.675l.169 -.305"></path>
+        <path d="M6.907 4.579a8.954 8.954 0 0 1 3.093 -1.356"></path>
+        <path d="M12 8v4l3 3"></path>
+     </svg>
+      <label class="invo-number"> Invoice no. 0001 </label> 
+     <div class="exit"> 
+       
+        <span class="close" (click)="close($event)"><i class="ti ti-square-rounded-x" ></i></span>
+    </div>
+</div>
+<main>
+
+    
+    <div class="container">
+    <br/><br/>
+    <label class="amounts"> BALANCE </label> <br/>
+    <label class="amounts2" id="balance"> PHP 69.00</label>
+    
+            <div class="sub_header">
+                <div class="journdate">
+                    <label> Customer </label><select type="text">
+                        <option  selected>Aljuan Xclavia</option>
+                        <option>Alejo Alucard</option>
+                        <option>Juan Alejo</option>
+                        <option>Aljuwahn</option>
+                    </select> 
+                 </div>       
+            </div> 
+
+            <div class="journals1">
+                <table class="tablejournal2">
+                     <tr>
+                            <th class="journallabel2">Terms</th>
+                            <th class="journallabel2">Invoice date</th>
+                            <th class="journallabel2">Due date</th>
+                    </tr>
+                        <tr>
+                                <th class="beneinput2">
+                                    <select type="text" class="selected">
+                                        <option disabled selected>NET 15</option>
+                                        <option>NET 30</option>
+                                        <option>NET 60</option>
+                                    </select>
+                                </th>
+                                <td class="beneinput2"><input type="date" id="invoice_input"></td>
+                                <td class="beneinput2"><input type="date" id="due_date"></td>
+                                
+                                <div class="sub_header2">
+                                    <div class="invo">
+                                        <tr>
+                                            <th class="journallabel2">Invoice No.</th>
+                                        </tr>
+                                        <input class="numberj" type="number" value="0001" id="journalnumber" required>
+                                       <button class="Add" (click)="addTable()">
+                                             <i class="ti ti-plus"></i>
+                                            <span class="btnText"> Add  </span>
+                                        </button>
+                                    </div>
+                                </div>
+                         </tr>
+                                     
+                </table> 
+            </div> 
+            
+
+         <!--<div class="sub-main">
+                <div class="bill">
+                    <label> Billing Address </label> 
+                    <textarea class="inputbill" type="text" id="journaldate" required>  </textarea>               
+                </div>
+                
+                <div class="term">
+                    <label for="term"> Terms </label><select type="text">
+                        <option disabled selected>Select</option>
+                        <option>Account 1</option>
+                        <option>Account 2</option>
+                        <option>Account 3</option>
+                    </select>
+                
+                </div>
+
+                <div class="invoice">
+                    <label for="invoice"> Invoice Date </label>
+                    <input class="inputdate" type="date" id="journaldate" required>  
+                </div>
+
+                <div class="due">
+                    <label for="due">DueDate </label>
+                    <input class="inputdate" type="date" id="journaldate" required>
+                </div>
+         </div> -->
+
+                    <div class="journals">
+                        <table class="tablejournal">
+                             <tr>
+                                        <th class="journallabel">No.</th>
+                                        <th class="journallabel">Service/Product</th>
+                                        <th class="journallabel">Description</th>
+                                        <th class="journallabel">Quantity</th>
+                                        <th class="journallabel">Rate</th>
+                                        <th class="journallabel">Amount</th>
+                            </tr>
+                            
+                                <tr *ngFor="let item of row; let x = index">
+                                    
+                                        <th class="journallabel">#</th>
+                                        <td class="beneinput">
+                                            <select type="text">
+                                                <option disabled selected>Select</option>
+                                                <option>Account 1</option>
+                                                <option>Account 2</option>
+                                                <option>Account 3</option>
+                                            </select>
+                                        </td>
+                                        <td class="beneinput"><input type="text"></td>
+                                        <td class="beneinput"><input type="number"></td>
+                                        <td class="beneinput"><input type="number"></td>
+                                        <td class="beneinput"><input type="number"></td>
+
+                                            <td > 
+                                                <button class="delbut" (click) = "deleteRow(x)">
+                                                    <i class="ti ti-square-rounded-x"></i>
+                                                </button>
+                                            </td>
+                                            
+                                 </tr>         
+                        </table> 
+                    </div>
+                    
+            <div class="total">
+                <label class="totals"> Total </label> <br/>
+                <label class="totals2" id="total"> PHP 0.00</label>
+            </div>
+       
+            <div class="footer">
+                <button class="cancel"> Cancel </button>
+                <button class="save">Save </button>
+            </div>  
+
+        </div>
+</main>
