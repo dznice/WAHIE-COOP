@@ -29,9 +29,9 @@ export class AddInvoiceComponent {
     },
 
   ];
-  
+
   addTable() {
-    
+
     const obj = {
       id : '',
       account: '',
@@ -51,27 +51,27 @@ export class AddInvoiceComponent {
     }
     this.row.push(obj)
     this.row.push(obj2)
-   
+
 
   }
-  
+
   deleteRow(x: number){
-    
+
     var delBtn = confirm(" Do you want to delete ?");
-    
+
     if ( delBtn == true ) {
       this.row.splice(x, 1 );
-      this.toast.success({detail:'Removed',summary:'Successfuly removed', sticky:false,position:'false'});  
-    }   
+      this.toast.success({detail:'Removed',summary:'Successfuly removed', sticky:false,position:'false'});
+    }
   }
 
   deleteRowAll(x: number){
     var delBtn = confirm(" Do you want to delete ?");
     if ( delBtn == true ) {
       this.row.splice(x, 1000 );
-      
-    }   
-  } 
+
+    }
+  }
 
   close(event:MouseEvent){
     event.preventDefault();
@@ -80,7 +80,7 @@ export class AddInvoiceComponent {
 
   ngOnInit() {
     this._document.body.classList.add('body');
-   
+
   }
 
 }

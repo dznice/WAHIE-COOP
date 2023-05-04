@@ -13,4 +13,5 @@ export class Item{
     entry_id: any;
     entries: any;
     transac: any;
+    memberss_id: any;
 }

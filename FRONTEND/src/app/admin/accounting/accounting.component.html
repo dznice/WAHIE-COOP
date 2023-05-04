@@ -73,7 +73,7 @@
                 | filterName : term
                 | filter : type
                 | filter : stat
-                | filterDate : startDate: endDate
+                | filterDate : transaction_date: endDate
                 | paginate : { itemsPerPage: 10, currentPage: p }
             "
 
@@ -81,7 +81,7 @@
             <td >{{ acc.transac.transaction_date }}</td>
             <td >{{ acc.entries.entry_name }}</td>
             <td >{{ acc.transaction_number }}</td>
-            <td>{{ acc.Member }}</td>
+            <td>{{ acc.transac.member.first_name +" "+ acc.transac.member.last_name }}</td>
             <td>{{ acc.DueDate }}</td>
             <td>{{ acc.Balance }}</td>
             <td>{{ acc.Status }}</td>

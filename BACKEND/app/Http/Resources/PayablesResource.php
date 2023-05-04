@@ -20,6 +20,7 @@ class PayablesResource extends JsonResource
             'entry_id ' => $this->entry_id ,
             'entries' => $this->whenLoaded('entries'),
             'transac' => $this->whenLoaded('transac'),
+            'member' => $this->whenLoaded('member'),
             'transaction_number' => $this->transaction_number,
             'description' => $this->description,
             'created_at' => $this->created_at,

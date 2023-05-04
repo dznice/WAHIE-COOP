@@ -18,6 +18,7 @@ export class AccountingComponent implements OnInit {
   type: string;
   stat: string;
   transaction_number: string ="";
+  transaction_date: string;
   id: any;
 
 

@@ -154,6 +154,8 @@ Route::get('/transaction/{id}', function($id) {
 
 Route::get('/account', [App\Http\Controllers\AccountingController::class, 'index']);
 
+Route::get('/account/{id}', [App\Http\Controllers\AccountingController::class, 'index']);
+
 
 
 
