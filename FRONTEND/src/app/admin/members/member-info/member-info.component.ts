@@ -57,9 +57,8 @@ export class MemberInfoComponent implements OnInit {
       (res:any)=>
       { 
         console.log(res)
-        this.ben = res;  
-
-      
+        this.ben = res;
+          
       }
     )
   }

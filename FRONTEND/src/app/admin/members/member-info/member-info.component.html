@@ -62,7 +62,7 @@
         <div class="member_information"  >
           <div class="information_row">
             <table  *ngFor="let info of item">
-            <div *ngIf="id==info.account_id">
+            <div *ngIf="id==info.id">
               <tr>
                 <th class="fields" width="30%">Member</th>
   
@@ -99,7 +99,7 @@
   
           <div class="information_row">
             <table *ngFor="let info of item">
-              <div *ngIf="id==info.account_id">
+              <div *ngIf="id==info.id">
               <tr>
                 <th class="fields" width="30%">Employement Status</th>
                 <td class="fieldsdata">{{ info.employment_status }}</td>
@@ -133,15 +133,23 @@
             </table>
           </div>
           <div class="information_row">
-          <table *ngFor="let b of ben">
-            <div *ngIf="id==b.benificiary_id">
-              <tr>
-                <th class="fields" width="30%">Beneficiaries</th>
-                <td class="fieldsdata">{{b.benificiary_name}} </td>
+            <th class="fields" >Beneficiaries</th>
 
-              </tr>
+            <thead> 
+            <th width="30%">Name</th>
+            <th width="30%">Date of Birth</th>
+            <th width="30%">Relationship</th>
+          </thead>
+          <tbody>
+          <table  *ngFor="let b of ben">
+            <div *ngIf="id==b.benificiary_id">                
+                <td class="fieldsdata" width="30%">{{b.benificiary_name}} </td>       
+                <td class="fieldsdata" width="30%">{{b.benificiary_birthdate}} </td>
+                <td class="fieldsdata" width="30%">{{b.benificiary_relation}} </td>
+              <br>
             </div>
           </table>
+        </tbody>
         </div>
         </div>
       </div>

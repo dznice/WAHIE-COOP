@@ -7,7 +7,8 @@ use App\Models\User;
 use App\Models\Members;
 use App\Models\BenificiaryMembers;
 use Illuminate\Support\Facades\Hash;
-use App\Mail\resendOtp;
+use App\Mail\enableAdmin;
+use App\Mail\MailOtp;
 use App\Models\EmailOtp;
 use Illuminate\Support\Facades\Mail;
 
@@ -21,8 +22,31 @@ class userController extends Controller
     public function activateUser(Request $request, $id){
         $users = User::find($id);
         $users->update($request->all());
-        return response()->json($users); 
+        $email = $users->email;
+        $code = $users->code;
+        if($users->status == '1'){
+        if($code!=0){    
+            EmailOtp::create([
+                'user_email'=> $email,
+                'code' => $code
+            ]);
+            Mail::to($email)->send(new MailOtp($code,$email));
+            }
+
+            elseif($code==0){
+                EmailOtp::create([
+                    'user_email'=> $email,
+                    'code' => $code
+                ]);
+                Mail::to($email)->send(new enableAdmin($code,$email));
+            }
+
+        }
+          
+            return response()->json($users); 
+
     }
+    
 
     public function superChange(Request $request, $id){
 

@@ -91,6 +91,8 @@ export class LoginComponent implements OnInit, OnDestroy  {
     console.log(user.access_token);
     localStorage.setItem('userData', JSON.stringify(user.user['id']))
     localStorage.setItem('userRole', JSON.stringify(user.user['role_id']))
+    sessionStorage.setItem('name', (user.user['name']))
+
 
     //admin
     if(user.user['role_id']==1){
@@ -116,6 +118,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
       }
 
     }
+    
     //superadmin
     else if(user.user['role_id']==2){
       if(user.user['code']!=0){
@@ -145,7 +148,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
             if(user.user['fillInfo']==1){
               sessionStorage.setItem('email', user.user['email'])
               this.token.ftoken(user.access_token);
-              this.route.navigateByUrl('member/additional-info');// not complete information
+              this.route.navigateByUrl('additional-info');// not complete information
             }else if(user.user['fillInfo']==0){
               this.token.handle(user.access_token);
               this.Auth.changeStatus(true);

@@ -83,7 +83,7 @@ class AuthController extends Controller {
 
             $members = Members::create([ 
                 'first_name' => $request['first_name'], 
-                'middle_name' => $request['first_name'],
+                'middle_name' => $request['middle_name'],
                 'last_name' => $request['last_name'],
                 'suffix' => $request['suffix'],
                 'email' => $request['email'],

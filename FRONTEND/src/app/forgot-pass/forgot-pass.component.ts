@@ -10,18 +10,18 @@ import { formState, formState5, formState6, slider, slideright} from '../animati
 })
 export class ForgotPassComponent  implements OnInit, OnDestroy {
 
-  state = 'forgot-pass';
-  toggle() {
-    this.state = this.state == 'forgot-pass'?'check-email':'new-pass';
-  }
+  // state = 'forgot-pass';
+  // toggle() {
+  //   this.state = this.state == 'forgot-pass'?'check-email':'new-pass';
+  // }
 
-  get forgotpassState() {
-    return this.state == 'forgot-pass'?'show':'hide';
-  }
+  // get forgotpassState() {
+  //   return this.state == 'forgot-pass'?'show':'hide';
+  // }
 
-  get checkemailState() {
-    return this.state == 'check-email'?'show':'hide';
-  }
+  // get checkemailState() {
+  //   return this.state == 'check-email'?'show':'hide';
+  // }
 
   isDisplayed: boolean = true;
   toggleDiv(){
@@ -36,6 +36,10 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._document.body.classList.add('body');
+  }
+
+  submitEmail(){
+
   }
 
 }

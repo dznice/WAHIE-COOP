@@ -44,10 +44,10 @@
           <th>OPEN BALANCE</th>
         </thead>
         <tbody>
-          <tr *ngFor="let member of memberList | filterMemName: term" (click) = 'memberInfo( member.account_id )'>
+          <tr *ngFor="let member of memberList | filterMemName: term" (click) = 'memberInfo( member.id )'>
            <td >{{member.first_name}}</td> <!--should be with id for member info-->
            <td>{{member.email}}</td>
-           <td>{{member.account_id}}</td>
+           <td>{{member.id}}</td>
           </tr>
         </tbody>
       </table>

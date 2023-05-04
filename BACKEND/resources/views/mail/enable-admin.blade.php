@@ -1,7 +1,7 @@
 <x-mail::message>
 # ACCOUNT VERIFICATION
 
-Na balik na ang iyong account, buksan mo na pakyu
+Account enable-----
 
 
 Thanks,<br>

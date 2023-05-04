@@ -17,9 +17,12 @@ export class SuperadminOnlyService {
      return true;
      this.route.navigateByUrl('/super-admin/sadmin-home');
     }
-    alert("For superAdmin Only")
-    this.route.navigateByUrl('/admin/admin-home');
-    return false;
+
+      else{
+        alert("For superAdmin Only")
+        this.backPage.back();
+        return false;   
+      }
  
  
  

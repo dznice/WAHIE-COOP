@@ -18,13 +18,11 @@ export class AdminOnlyService {
     return true;
     this.route.navigateByUrl('/admin/admin-home');
    }
-   alert("For Admin Only")
-   this.route.navigateByUrl('/super-admin/sadmin-home');
-   return false;
-
-
-
-
+   else{
+    alert("For Admin Only")
+    this.backPage.back();
+    return false;  
+   }
 
   }
     

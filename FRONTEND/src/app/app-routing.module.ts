@@ -38,6 +38,7 @@ import { AdditionalInfoComponent } from './member/additional-info/additional-inf
 import { MemberComponent } from './member/member.component';
 import { MemberProfileComponent } from './member/member-profile/member-profile.component';
 import { MemberBodyComponent } from './member/member-body/member-body.component';
+import { MemberOnlyService } from './services/member-only.service';
 
 
 const routes: Routes = [
@@ -126,7 +127,7 @@ const routes: Routes = [
   {
     path: 'member',
     component: MemberComponent,
-    canActivate : [LoggedInService],
+    canActivate : [LoggedInService, MemberOnlyService],
     children : [
       {path: '', redirectTo: 'member-home', pathMatch: 'full'},
       {path: 'member-home', component: MemberHomeComponent},

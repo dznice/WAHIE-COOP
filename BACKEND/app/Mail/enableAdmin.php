@@ -31,8 +31,7 @@ class enableAdmin extends Mailable
 
         $code = $this->code;
         $email = $this ->email;
-        return $this->to($email)->subject($code)
-        ->view('superadmin.admin-table');
+        return $this->to($email)->subject($code);
     }
 
     public function envelope()
