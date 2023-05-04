@@ -45,8 +45,17 @@
       </div>
     </div>
 
+    <!-- table-->
+
+<!--
+  <div *ngIf="transac.id == payables.entry_id">
+
+
+      <div *ngIf="entry.id == payables.entry_id"> -->
+        <!-- <div > -->
     <div class="table-container">
       <table class="table-content">
+
         <thead>
           <th>Date</th>
           <th>Type</th>
@@ -57,27 +66,35 @@
           <th>Status</th>
         </thead>
         <tbody>
+
           <tr
             *ngFor="
-              let e of item
+              let acc of account
                 | filterName : term
                 | filter : type
                 | filter : stat
                 | filterDate : startDate: endDate
-                | paginate : { itemsPerPage: 5, currentPage: p }
+                | paginate : { itemsPerPage: 10, currentPage: p }
             "
+
           >
-            <td>{{ e.date }}</td>
-            <td>{{ e.type }}</td>
-            <td>{{ e.No }}</td>
-            <td>{{ e.Member }}</td>
-            <td>{{ e.DueDate }}</td>
-            <td>{{ e.Balance }}</td>
-            <td>{{ e.Status }}</td>
+            <td >{{ acc.transac.transaction_date }}</td>
+            <td >{{ acc.entries.entry_name }}</td>
+            <td >{{ acc.transaction_number }}</td>
+            <td>{{ acc.Member }}</td>
+            <td>{{ acc.DueDate }}</td>
+            <td>{{ acc.Balance }}</td>
+            <td>{{ acc.Status }}</td>
           </tr>
+
         </tbody>
-      </table>
-    </div>
+
+</table>
+  </div>
+  <!-- </div> -->
+
+  <!-- </div> -->
+<!-- </div> -->
   </section>
   <div class="pagination-controls">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>

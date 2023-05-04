@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
 import { Item } from './item';
 import { itemService } from './item.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-accounting',
@@ -10,12 +11,14 @@ import { itemService } from './item.service';
   providers: [itemService],
 })
 export class AccountingComponent implements OnInit {
-
-  item: Item[] = [];
   term: string = '';
+  transactions: any[] = [];
+
   p: number = 1;
   type: string;
   stat: string;
+  transaction_number: string ="";
+  id: any;
 
 
 
@@ -24,23 +27,26 @@ export class AccountingComponent implements OnInit {
 
   startDate: string = '';
   endDate : string = '';
+  listentries: any;
 
-  constructor(private ItemService: itemService, private wahieService:WahieService) {}
+  constructor(private ItemService: itemService, private wahieService:WahieService,private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.item = this.ItemService.item;
+    // this.item = this.ItemService.item;
     this.showDebits()
     this.showCredits()
     this.showPayables()
     this.showTransactions()
     this.showEntries()
+    this.showAccounting()
   }
 // Try to Import in one TS in Accounting
   public debits:any;
   public credits:any;
   public payables:any;
-  public transactions:any;
+  // public transactions:any;
   public entries:any;
+  public account: any;
 
   showDebits(): void{
     this.debits = this.wahieService.debits().subscribe(debit=>{
@@ -57,25 +63,45 @@ export class AccountingComponent implements OnInit {
   }
 
   showPayables(): void{
-    this.payables = this.wahieService.payables().subscribe(payable=>{
-      this.payables = payable;
-      console.log(this.payables);
+    this.http.get('http://127.0.0.1:8000/api/payables').subscribe(
+      (res:any)=>
+      {
+        console.log(res);
+        this.payables = res
     });
   }
 
   showTransactions(): void{
-    this.transactions = this.wahieService.transactions().subscribe(transaction=>{
-      this.transactions = transaction;
-      console.log(this.transactions);
+    this.http.get('http://127.0.0.1:8000/api/transactions').subscribe(
+      (res:any)=>
+      {
+        console.log(res);
+        this.transactions = res
+    });
+  }
+// this.transactions = this.wahieService.transactions().subscribe(transaction=>{
+    //   this.transactions = transaction;
+    //   console.log(this.transactions);
+  showEntries(): void{
+
+    this.http.get('http://127.0.0.1:8000/api/entries').subscribe(
+      (res:any)=>
+      {
+        console.log(res);
+        this.entries = res
     });
   }
 
-  showEntries(): void{
-    this.entries = this.wahieService.listEntries().subscribe(entry=>{
-      this.entries = entry;
-      console.log(this.entries);
+  showAccounting(): void{
+    this.http.get('http://127.0.0.1:8000/api/account').subscribe(
+      (res:any)=>
+      {
+        console.log(res);
+        this.account = res
     });
   }
+
+
 
   // Try to Import in one TS in Accounting
 

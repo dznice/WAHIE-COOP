@@ -18,6 +18,7 @@ class TransactionsResource extends JsonResource
             'id' => $this->id,
             'users_id' => $this->users_id,
             'members_id' => $this->members_id,
+            'member' => $this->whenLoaded('member'),
             'transaction_number' => $this->transaction_number,
             'transaction_date' => $this->transaction_date,
             'created_at' => $this->created_at,

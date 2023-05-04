@@ -25,6 +25,7 @@ use App\Http\Resources\TransactionsResource;
 use App\Models\Transactions;
 use App\Http\Resources\LibEntriesResource;
 use App\Models\LibEntries;
+use App\Http\Controllers\AccountingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -149,6 +150,9 @@ Route::get('/transactions', function() {
 Route::get('/transaction/{id}', function($id) {
     return new TransactionsResource(Transactions::findOrFail($id));
 });
+
+
+Route::get('/account', [App\Http\Controllers\AccountingController::class, 'index']);
 
 
 
