@@ -34,15 +34,6 @@ class Payables extends Model
         return $this->belongsTo(Transactions::class, 'transaction_id', 'id');
     }
 
-    public function creds() {
-        $id=Payables::all();
-
-       return $creditAmountSum = Payables::join('credits', 'payables_id', '=', 'credits.payables_id')
-                    ->where('payables.id', $id) // replace $id with the specific payables ID you want to get the sum for
-                    ->sum('credits.credit_amount');
-
-    }
 
 }
-
 

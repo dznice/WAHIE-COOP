@@ -71,13 +71,13 @@
                 | paginate : { itemsPerPage: 5, currentPage: p }
             "
           >
-            <td >{{ acc.transac.transaction_date }}</td>
-            <td >{{ acc.entries.entry_name }}</td>
-            <td >{{ acc.transaction_number }}</td>
-            <td>{{ acc.transac.member.first_name +" "+ acc.transac.member.last_name }}</td>
-            <td>{{ acc.DueDate }}</td>
-            <td>{{ acc.Balance }}</td>
-            <td>{{ acc.Status }}</td>
+            <td >{{ acc.debit.cred.transac.transaction_date }}</td>
+            <td >{{ acc.debit.cred.entries.entry_name }}</td>
+            <td >{{ acc.debit.cred.transac.transaction_number }}</td>
+            <td>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
+            <td>{{ acc.debit.cred.due_date }}</td>
+            <td>{{ acc.open_balance }}</td>
+            <td>{{ acc.status }}</td>
           </tr>
         </tbody>
       </table>

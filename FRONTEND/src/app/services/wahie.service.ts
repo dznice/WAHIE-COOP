@@ -12,7 +12,7 @@ export class WahieService {
 
   constructor(private http:HttpClient) {
 
-  } 
+  }
 
   public listLibJournals(): Observable<any[]>{
     return this.http.get<any[]>(this.url+'/api/journals');
@@ -46,7 +46,7 @@ export class WahieService {
   }
 
   public saveJournalEntry(entries:any):Observable<any>{
-    return this.http.post<any>(this.url+'/api/journal-entry', entries, this.httpOptions) 
+    return this.http.post<any>(this.url+'/api/journal-entry', entries, this.httpOptions)
   }
 
   public listJournalEntry(): Observable<any[]>{

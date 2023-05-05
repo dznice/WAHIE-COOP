@@ -19,4 +19,8 @@ export class Item{
     entries: any;
     transac: any;
     memberss_id: any;
+    debit: any;
+    open_balance: any;
+    cred: any;
+    status: any;
 }

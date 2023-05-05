@@ -74,6 +74,8 @@ class JournalEntryController extends Controller
             $payables->save();
             $pays = $payables->id;
 
+            $creditss = 0;
+
             foreach ($entryData['entries'] as $key => $value)
             {
                 $credits = new Credits;
@@ -85,24 +87,22 @@ class JournalEntryController extends Controller
                 $credits->save();
 
 
+                $creditssd = $value['credit'];
+            $cre = $creditss + $creditssd;
+
+
             }
 
-            // $creds = $credits->id;
 
-            //     $balance = $cred - $debi;
-            //     if( $balance == 0 ){
-            //         $status = "0";
-            //     }else{
-            //         $status = "1";
-            //     }
+            $creds = $credits->id;
 
-            // $debits = new Debits;
-            // $debits->credits_id = $creds;
-            // $debits->open_balance = $balance;
-            // $debits->payment = $debi;
-            // $debits->status = $status;
+            $debits = new Debits;
+            $debits->credits_id = $creds;
+            $debits->open_balance = $request->totalcredit;
+            $debits->payment = 0;
+            $debits->status = 1;
 
-            // $debits->save();
+            $debits->save();
 
 
             return response()->json(['message'=>'Entry added successfully!']);
@@ -112,9 +112,27 @@ class JournalEntryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function journId()
     {
-        //
+
+        $count = 1;
+        $member = 1;
+        $loop = true;
+        $max = $members->max();
+
+      while($loop == true){
+        $id = 1;
+        while($count<=$max){
+      foreach ($members as $member) {
+        if($member==$id){
+        $id++;
+        }
+      }
+        $count++;
+        }
+      $member = $id;
+      $loop = false;
+      }
     }
 
     /**

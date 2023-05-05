@@ -17,6 +17,11 @@ class DebitsResource extends JsonResource
         return [
             'id' => $this->id,
             'credits_id' => $this->credits_id,
+            'debit' => $this->whenLoaded('debt'),
+            'cred' => $this->whenLoaded('cred'),
+            'entries' => $this->whenLoaded('entries'),
+            'transac' => $this->whenLoaded('transac'),
+            'member' => $this->whenLoaded('member'),
             'open_balance' => $this->open_balance,
             'payment' => $this->payment,
             'pay_date' => $this->pay_date,
