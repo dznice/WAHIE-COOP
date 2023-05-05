@@ -30,21 +30,21 @@
               <div *ngIf="user.status == 0">
                 <label class="switch-toggle">
                 
-                <input class="switch" input type="checkbox" [(ngModel)]="isChecked2" (click)="deactivateTOactivate(user)"   click="getValue"/>
+                <input  class="switch" input type="checkbox"  (click)="deactivateTOactivate(user)" />
                 <div class="slider"></div>
               </label>
             </div>
             <div *ngIf="user.status == 1">
               <label class="switch-toggle">
                 
-              <input class="switch" input type="checkbox" [(ngModel)]="isChecked" (click)="activateUser(user)" click="getValue" />
+              <input id={{user.role_id}} class="switch" input type="checkbox"  [(ngModel)]="isChecked" (click)="activateUser(user)" (change)="changeSelection ($event,index)" />
               <div class="slider"></div>
             </label>
           </div>
               
 
             <div *ngIf="user.status == 2">
-              <button type="submit" (click)="activateUser(user)" class="btn btn-success">
+              <button type="submit" (click)="activateUser2(user)" class="btn btn-success">
                 <span>Activate</span>
               </button> 
            </div>

@@ -19,9 +19,11 @@ export class SadminHomeComponent {
   Loaded = false;
   updateFormActive = false;
 
+    
   searchText = '';
   p: number = 1;
 
+  index:number;
   id = "";
   name: string = "";
   email: string = "";
@@ -43,12 +45,22 @@ export class SadminHomeComponent {
     )
   }
   isChecked: boolean=true ;
-  isChecked2: boolean=false ;
 
+  
        
 
   getValue() {
     this.isChecked = !this.isChecked;
+  }
+
+
+  selectIndex: number;
+  changeSelection(event:any, index:any){
+  this.selectIndex = event?.target.checked ? index : undefined;
+  if(this.status = 1){
+    this.isChecked=true;
+  }
+  else{this.isChecked=false;}
   }
 
   activateUser(data:any) {
@@ -58,7 +70,7 @@ export class SadminHomeComponent {
     this.email = data.email
     this.coop = data.coop
     this.activated();
-    this.isChecked=false
+    
   }
   deactivateTOactivate(data:any) {
     this.id = data.id,
@@ -66,7 +78,7 @@ export class SadminHomeComponent {
     this.name = data.name,
     this.email = data.email
     this.deactivated();
-    this.isChecked2=false;
+    
 
     
   }
@@ -85,11 +97,11 @@ export class SadminHomeComponent {
         console.log(res);
         this.showUsers();
         this.id = '';
-        this.status = 0;
+        this.status = 1;
         this.name = '';
         this.email = '';
         this.coop = '';
-        this.isChecked=false;
+        
       }
     )
     }
@@ -108,11 +120,44 @@ export class SadminHomeComponent {
         console.log(res);
         this.showUsers();
         this.id = '';
-        this.status = 1;
+        this.status = 0;
         this.name = '';
         this.email = '';
-        this.isChecked=true;
+        
       }
     )
+    }
+    activateUser2(data:any) {
+      this.id = data.id,
+      this.status = 1,
+      this.name = data.name,
+      this.email = data.email
+      this.coop = data.coop
+      this.activated2();
+      
+    }
+    activated2(){
+  
+      let updateStatus = {
+       'status': 1,   
+       'id' : this.id,
+       'name': this.name,
+       'email': this.email,
+       'coop': this.coop
+      }
+      this.http.put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus).subscribe(
+        (res:any)=>{
+          console.log(res);
+          this.showUsers();
+          this.id = '';
+          this.status = 0;
+          this.name = '';
+          this.email = '';
+          this.coop = '';
+          this.isChecked=false;
+        }
+      )
+      }
+
   }
-}
+
