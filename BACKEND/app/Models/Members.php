@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Members extends Model
 {
+    protected $primaryKey = 'id';
     protected $table = 'members';
 	public $timestamps = true;
 	/**
@@ -15,10 +16,13 @@ class Members extends Model
 	 * @var array
 	 */
 	protected $fillable = [
+		'predef',
+		'account_id',
 		'first_name',
 		'middle_name',
 		'last_name',
 		'suffix',
+		'first_name',
 		'birthdate',
 		'address',
 		'spouse',

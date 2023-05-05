@@ -27,7 +27,7 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
 import { PassDoneComponent } from './pass-done/pass-done.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
 import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, NgSelectOption, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StrengthMeterModule } from "ngx-strength-meter";
 import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
@@ -50,6 +50,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';  
 import { NgToastModule}  from 'ng-angular-popup';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from './admin/accounting/filter.pipe';
 import { FilterDatePipe } from './admin/accounting/filter-date.pipe';
@@ -62,6 +63,7 @@ import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
 import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
 import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
 import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.pipe';
+
 
 @NgModule({
   declarations: [
@@ -127,7 +129,8 @@ import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.
     NgxPaginationModule,
     Ng2SearchPipeModule,
     HttpClientModule,
-    NgToastModule
+    NgToastModule,
+    NgSelectModule
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

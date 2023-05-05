@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('benificiary_members', function (Blueprint $table) {
             $table->id('id');
-            $table->unsignedBigInteger('benificiary_id');//should not be unique
+            $table->unsignedBigInteger('benificiary_id');
             $table->string('benificiary_name');
             $table->date('benificiary_birthdate');
             $table->string('benificiary_relation');
+            $table->timestamps();
+
             $table->foreign('benificiary_id')-> references('id')->on('members');
         });
     }

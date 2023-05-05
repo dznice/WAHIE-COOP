@@ -7,24 +7,6 @@ main {
   }
 }
 
-.add-member {
-  text-align: right;
-
-  .btn-add {
-    cursor: pointer;
-    border: none;
-    border-radius: 0.5rem;
-    background: var(--primary-color);
-    color: var(--panel-color);
-    padding: 12px 20px 12px 14px;
-
-    .ti-plus {
-      margin-right: 4px;
-      font-size: 14px;
-    }
-  }
-}
-
 .input-box {
   position: relative;
   height: 46px;

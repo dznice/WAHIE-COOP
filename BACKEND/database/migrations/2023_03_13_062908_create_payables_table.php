@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_id');
             $table->unsignedBigInteger('entry_id');
             $table->integer('transaction_number');
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->timestamps();
 
             $table->foreign('transaction_id')-> references('id')->on('transactions');
             $table->foreign('entry_id')-> references('id')->on('lib_entries');

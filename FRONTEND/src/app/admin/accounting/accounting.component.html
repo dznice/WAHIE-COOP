@@ -2,7 +2,7 @@
   <h1 class="title" [routerLink]="['../journal-entry']">Accounting</h1>
   <section class="recent-transaction">
     <div>
-      <button class="Add" onclick="">
+      <button class="Add" [routerLink]="['../accounting/journal-entry']">
         <span class="btnText"> New Journal Entry </span>
       </button>
     </div>
@@ -41,7 +41,7 @@
       </div>
 
       <div class="filter-field5">
-        <label>Stauts</label>
+        <label>Status</label>
         <select [(ngModel)]="stat" name="status">
           <option [ngValue]="undefined" selected>All</option>
           <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>
@@ -63,21 +63,21 @@
         <tbody>
           <tr
             *ngFor="
-              let e of item
+              let acc of account
                 | filterName : term
                 | filter : type
                 | filter : stat
-                | filterDate : startDate: endDate
+                | filterDate : transaction_date: endDate
                 | paginate : { itemsPerPage: 5, currentPage: p }
             "
           >
-            <td>{{ e.date }}</td>
-            <td>{{ e.type }}</td>
-            <td>{{ e.No }}</td>
-            <td>{{ e.Member }}</td>
-            <td>{{ e.DueDate }}</td>
-            <td>{{ e.Balance }}</td>
-            <td>{{ e.Status }}</td>
+            <td >{{ acc.transac.transaction_date }}</td>
+            <td >{{ acc.entries.entry_name }}</td>
+            <td >{{ acc.transaction_number }}</td>
+            <td>{{ acc.transac.member.first_name +" "+ acc.transac.member.last_name }}</td>
+            <td>{{ acc.DueDate }}</td>
+            <td>{{ acc.Balance }}</td>
+            <td>{{ acc.Status }}</td>
           </tr>
         </tbody>
       </table>

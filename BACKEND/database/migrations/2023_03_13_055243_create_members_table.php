@@ -32,7 +32,6 @@ return new class extends Migration
             $table->string('employment_status')->nullable();
             $table->string('company_name');
             $table->string('company_address')->nullable();
-            $table->string('job_title')->nullable();
             $table->string('email');
             $table->string('mobile_number');
             $table->timestamp('time_date_created')->nullable();

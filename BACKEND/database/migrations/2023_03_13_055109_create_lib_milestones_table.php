@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('milestone_count');
             $table->integer('milestone_goal');
             $table->timestamp('date_achieved');
+            $table->timestamps();
         });
     }
 
