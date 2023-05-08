@@ -60,6 +60,7 @@ class JournalEntryController extends Controller
 
 
             $journals->members_id = $members_id;
+            $journals->users_id = $request->userId;
             $journals->transaction_number = $request->journal_no;
             $journals->transaction_date = $request->journal_date;
             $journals->save();
@@ -80,8 +81,9 @@ class JournalEntryController extends Controller
             {
                 $credits = new Credits;
 
-                    $credits-> journals_id = $value['account'];
-                    $credits-> debit_amount = $value['debit'];
+                $credits->users_id = $request->userId;
+                $credits-> journals_id = $value['account'];
+                $credits-> debit_amount = $value['debit'];
                 $credits-> credit_amount = $value['credit'];
                 $credits-> payables_id = $pays;
                 $credits->save();
@@ -100,7 +102,7 @@ class JournalEntryController extends Controller
             $debits->credits_id = $creds;
             $debits->open_balance = $request->totalcredit;
             $debits->payment = 0;
-            $debits->status = 1;
+            $debits->status = "Open";
 
             $debits->save();
 

@@ -3,6 +3,7 @@ import { WahieService } from '../../services/wahie.service';
 import { Item } from './item';
 import { itemService } from './item.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accounting',
@@ -30,7 +31,7 @@ export class AccountingComponent implements OnInit {
   endDate : string = '';
   listentries: any;
 
-  constructor(private ItemService: itemService, private wahieService:WahieService,private http: HttpClient) {}
+  constructor(private ItemService: itemService, private wahieService:WahieService,private http: HttpClient, private route:Router) {}
 
   ngOnInit(): void {
     // this.item = this.ItemService.item;
@@ -48,6 +49,16 @@ export class AccountingComponent implements OnInit {
   // public transactions:any;
   public entries:any;
   public account: any;
+
+  memberInfo(data : any){
+    this.http.get('http://127.0.0.1:8000/api/memberList/' + data).subscribe(
+      (res:any)=>
+      {
+        this.route.navigateByUrl('admin/members/member-info/' + data)
+      }
+      )}
+
+
 
   showDebits(): void{
     this.debits = this.wahieService.debits().subscribe(debit=>{

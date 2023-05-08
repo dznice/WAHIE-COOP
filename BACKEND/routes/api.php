@@ -26,6 +26,7 @@ use App\Models\Transactions;
 use App\Http\Resources\LibEntriesResource;
 use App\Models\LibEntries;
 use App\Http\Controllers\AccountingController;
+use App\Http\Controllers\userController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,6 +47,9 @@ Route::post('/users/resendOtp/{id}', [App\Http\Controllers\Api\AuthController::c
 Route::get('/members', [App\Http\Controllers\Api\AuthController::class, 'members']);
 Route::get('/members/{email}', [App\Http\Controllers\Api\AuthController::class, 'getmemberId']);
 Route::post('/memberInfo/{email}', [App\Http\Controllers\Api\AuthController::class, 'memberInfo']);
+
+Route::get('/memberList', [App\Http\Controllers\userController::class, 'memberList']);
+Route::get('/memberList/{id}', [App\Http\Controllers\userController::class, 'memberInfo']);
 
 
 Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::class, 'superChange']);

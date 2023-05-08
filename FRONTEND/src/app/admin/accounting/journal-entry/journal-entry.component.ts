@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-journal-entry',
@@ -11,7 +12,10 @@ export class JournalEntryComponent implements OnInit {
   deb: string= '';
   cred: string='';
 
-  constructor(private builder:FormBuilder, private wahieService:WahieService){
+   useid = localStorage.getItem('userData');
+
+
+  constructor(private builder:FormBuilder, private wahieService:WahieService, private route:Router){
   }
   journalEntryRow !: FormArray<any>;
   amount !: FormGroup<any>;
@@ -22,10 +26,11 @@ export class JournalEntryComponent implements OnInit {
     this.showLibJournal()
     this.showMembers()
     this.showJournalEntry()
+    this.getJournalNo()
   }
 
   getJournalNo(){
-    
+    console.log(this.useid)
   }
 
   showLibJournal(): void{
@@ -61,9 +66,10 @@ export class JournalEntryComponent implements OnInit {
     journal_no:this.builder.control('',Validators.required),
     totaldebit:this.builder.control({ value: 0, disabled: true }),
     totalcredit:this.builder.control({ value: 0, disabled: true }),
+    userId:this.builder.control(this.useid),
     entries:this.builder.array([])
   })
-  
+
   saveEntry(){
     let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     let total_credit = this.journalEntryForm.get("totalcredit")?.value;
@@ -77,13 +83,14 @@ export class JournalEntryComponent implements OnInit {
       console.log("Error: Fill all input or need balance the amount to submit");
     }
     console.log(this.journalEntryForm.value);
+    this.route.navigateByUrl('admin/accounting')
   }
 
 
   addRow(){
     this.journalEntryRow=this.journalEntryForm.get("entries") as FormArray;
     this.journalEntryRow.push(this.Generaterow());
-    
+
   }
 
   removeRow(index:any){
@@ -133,18 +140,19 @@ export class JournalEntryComponent implements OnInit {
   //   let total = qty * price;
   //   this.invoiceproduct.get("total")?.setValue(total);
   }
-  
+
   balance_summary(){
     let array=this.journalEntryForm.getRawValue().entries;
     let total_debit = 0;
     let total_credit = 0;
-    
+
     array.forEach((x:any)=>{
       total_debit=total_debit+x.debit;
       total_credit=total_credit+x.credit;
     });
     this.journalEntryForm.get("totaldebit")?.setValue(total_debit);
     this.journalEntryForm.get("totalcredit")?.setValue(total_credit);
+
   }
 
 
@@ -158,5 +166,9 @@ export class JournalEntryComponent implements OnInit {
       this.libJournals = libjournal
     });
     console.log(this.libJournals)
+  }
+
+  back(){
+    this.route.navigateByUrl('admin/accounting')
   }
 }

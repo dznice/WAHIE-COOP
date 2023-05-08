@@ -19,11 +19,13 @@ export class MemberInfoComponent implements OnInit {
   type: string;
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
  private urlId : Subscription;
+ public account: any;
 
 
   constructor(private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute) {
     this.personalInfo();
     this.benInfo();
+    this.showAccounting()
   }
 
   id:number = 0;
@@ -35,18 +37,18 @@ export class MemberInfoComponent implements OnInit {
       console.log(params);
       console.log(params['memberId'])
       this.id = params['memberId']
-    })     
+    })
   }
 
 
   personalInfo(){
     this.http.get('http://127.0.0.1:8000/api/memberList').subscribe(
       (res:any)=>
-      { 
+      {
 
         console.log(res)
         console.log('marlon', this.id);
-        this.item = res;  
+        this.item = res;
 
       }
     )
@@ -55,11 +57,20 @@ export class MemberInfoComponent implements OnInit {
   benInfo(){
     this.http.get('http://127.0.0.1:8000/api/beneficiaries').subscribe(
       (res:any)=>
-      { 
+      {
         console.log(res)
         this.ben = res;
-          
+
       }
     )
+  }
+
+  showAccounting(): void{
+    this.http.get('http://127.0.0.1:8000/api/account').subscribe(
+      (res:any)=>
+      {
+        console.log(res);
+        this.account = res
+    });
   }
 }

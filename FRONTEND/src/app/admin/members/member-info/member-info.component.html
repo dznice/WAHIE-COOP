@@ -8,7 +8,7 @@
         checked
       />
       <label for="Transactions" class="tabs__label">Transactions</label>
-  
+
       <div class="tabs__content">
         <div class="table-filter">
           <div class="filter-field">
@@ -20,13 +20,13 @@
               </option>
             </select>
           </div>
-  
+
           <div class="filter-field">
             <label>Date</label>
             <input type="date" />
           </div>
         </div>
-  
+
         <table class="table-content">
           <thead>
             <th>Date</th>
@@ -37,20 +37,28 @@
             <th>Balance</th>
             <th>Status</th>
           </thead>
-          <tbody>
-            <tr *ngFor="let e of item | filter : type">
-              <td>{{ e.date }}</td>
-              <td>{{ e.type }}</td>
-              <td>{{ e.No }}</td>
-              <td>{{ e.Member }}</td>
-              <td>{{ e.DueDate }}</td>
-              <td>{{ e.Balance }}</td>
-              <td>{{ e.Status }}</td>
-            </tr>
+          <tbody *ngFor="
+          let acc of account
+            | filterName : term
+        ">
+            <tr
+
+
+            *ngIf="id==acc.debit.cred.transac.member.id"
+
+          >
+            <td >{{ acc.debit.cred.transac.transaction_date }}</td>
+            <td >{{ acc.debit.cred.entries.entry_name }}</td>
+            <td >{{ acc.debit.cred.transac.transaction_number }}</td>
+            <td>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
+            <td>{{ acc.debit.cred.due_date }}</td>
+            <td>{{ acc.open_balance }}</td>
+            <td>{{ acc.status }}</td>
+          </tr>
           </tbody>
         </table>
       </div>
-  
+
       <input
         type="radio"
         class="tabs__radio"
@@ -65,38 +73,38 @@
             <div *ngIf="id==info.id">
               <tr>
                 <th class="fields" width="30%">Member</th>
-  
+
                 <td class="fieldsdata">{{ info.first_name }} {{ info.middle_name }} {{ info.last_name }} {{ info.suffix }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Email</th>
-  
+
                 <td class="fieldsdata">{{ info.email }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Mobile Number</th>
-  
+
                 <td class="fieldsdata">{{ info.mobile_number }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Gender</th>
-  
+
                 <td class="fieldsdata">{{ info.gender }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Spouse</th>
-  
+
                 <td class="fieldsdata">{{ info.spouse }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Curent Address</th>
-  
+
                 <td class="fieldsdata">{{ info.address }}</td>
               </tr>
             </div>
             </table>
           </div>
-  
+
           <div class="information_row">
             <table *ngFor="let info of item">
               <div *ngIf="id==info.id">
@@ -106,27 +114,27 @@
               </tr>
               <tr>
                 <th class="fields" width="30%">Occupation</th>
-  
+
                 <td class="fieldsdata">{{ info.occupation }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Department</th>
-  
+
                 <td class="fieldsdata">{{ info.department }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Company</th>
-  
+
                 <td class="fieldsdata">{{ info.company_name }}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Company Address</th>
-  
+
                 <td class="fieldsdata">{{ info.company_address }}</td>
               </tr>
               <!-- <tr>
                 <th class="fields" width="30%">Beneficiaries</th>
-  
+
                 <td class="fieldsdata"></td>
               </tr> -->
             </div>
@@ -135,15 +143,15 @@
           <div class="information_row">
             <th class="fields" >Beneficiaries</th>
 
-            <thead> 
+            <thead>
             <th width="30%">Name</th>
             <th width="30%">Date of Birth</th>
             <th width="30%">Relationship</th>
           </thead>
           <tbody>
           <table  *ngFor="let b of ben">
-            <div *ngIf="id==b.benificiary_id">                
-                <td class="fieldsdata" width="30%">{{b.benificiary_name}} </td>       
+            <div *ngIf="id==b.benificiary_id">
+                <td class="fieldsdata" width="30%">{{b.benificiary_name}} </td>
                 <td class="fieldsdata" width="30%">{{b.benificiary_birthdate}} </td>
                 <td class="fieldsdata" width="30%">{{b.benificiary_relation}} </td>
               <br>
@@ -155,4 +163,3 @@
       </div>
     </div>
   </div>
-  

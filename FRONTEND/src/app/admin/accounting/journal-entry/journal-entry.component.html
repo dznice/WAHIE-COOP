@@ -12,8 +12,14 @@
         <label> Journal Number </label>
         <!-- <input class="headinput" type="number" id="journalnumber" required /> -->
         <input class="headinput" type="number" formControlName="journal_no" />
-        
+
+
       </div>
+      <div class="userid">
+        <input class="headinput" type="hidden" formControlName="useid" [value]="this.useid" />
+      </div>
+
+
 
       <div>
         <!-- <button class="Add" (click)="addTable()">
@@ -70,11 +76,11 @@
 
           <!-- <td class="beneinput"><input type="number" /></td>
       <td class="beneinput"><input type="number" /></td>
-      <td class="beneinput"><input type="text" /></td> --> 
+      <td class="beneinput"><input type="text" /></td> -->
 
           <td class="beneinput">
             <input type="number" formControlName="debit" (change) = "autoZero(i)"/>
-            
+
           </td>
           <td class="beneinput">
             <input type="number" formControlName="credit" (change) = "autoZero(i)"/>
@@ -123,7 +129,7 @@
         <input class="headinput" type="number" formControlName="totalcredit"  />
       </div>
       <a class="back">
-        <span class="btnTextb">Back</span>
+        <span class="btnTextb" (click)="back()">Back</span>
       </a>
 
       <button class="save" type="submit">

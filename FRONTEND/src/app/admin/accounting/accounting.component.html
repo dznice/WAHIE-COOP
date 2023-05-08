@@ -70,6 +70,7 @@
                 | filterDate : transaction_date: endDate
                 | paginate : { itemsPerPage: 5, currentPage: p }
             "
+            (click) = 'memberInfo( acc.debit.cred.transac.member.id )'
           >
             <td >{{ acc.debit.cred.transac.transaction_date }}</td>
             <td >{{ acc.debit.cred.entries.entry_name }}</td>
