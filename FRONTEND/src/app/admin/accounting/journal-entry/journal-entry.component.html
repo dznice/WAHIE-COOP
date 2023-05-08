@@ -1,143 +1,131 @@
-<div class="container">
-  <!-- <form (ngSubmit)="onsubmit()"> -->
-  <form [formGroup]="journalEntryForm" (ngSubmit)="saveEntry()">
-    <div class="header">
-      <div class="journdate">
-        <label> Journal Date </label>
-        <!-- <input class="headinput" type="date" id="journaldate" required /> -->
-        <input class="headinput" type="date" formControlName="journal_date" />
-      </div>
+<main>
+  <h1 class="title">Journal Entry</h1>
+  <div>
+    <form [formGroup]="journalEntryForm" (ngSubmit)="saveEntry()">
+      <div class="header">
+        <div class="journdate">
+          <label> Journal Date </label>
+          <input class="headinput" type="date" formControlName="journal_date" />
+        </div>
 
-      <div class="journnumber">
-        <label> Journal Number </label>
-        <!-- <input class="headinput" type="number" id="journalnumber" required /> -->
-        <input class="headinput" type="number" formControlName="journal_no" />
-
-
-      </div>
-      <div class="userid">
-        <input class="headinput" type="hidden" formControlName="useid" [value]="this.useid" />
-      </div>
-
-
-
-      <div>
-        <!-- <button class="Add" (click)="addTable()">
-        <i class="ti ti-plus"></i>
-        <span class="btnText"> Add </span>
-      </button> -->
-        <a class="Add" (click)="addRow()">
-          <i class="ti ti-plus"></i>
-          <span class="btnText">Add</span>
-        </a>
-      </div>
-    </div>
-    <!-- <table class="tablejournal"> -->
-    <table class="tablejournal" formArrayName="entries">
-      <thead>
-        <tr>
-          <th class="journallabel">No.</th>
-          <th class="journallabel">Account</th>
-          <th class="journallabel">Debits</th>
-          <th class="journallabel">Credits</th>
-          <th class="journallabel">Description</th>
-          <th class="journallabel">Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- <tr *ngFor="let item of row; let x = index"> -->
-        <tr
-          *ngFor="let item of entryRow.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <th class="journallabel">{{ i + 1 }}</th>
-          <td class="beneinput">
-            <!-- <select type="text">
-          <option disabled selected>Select</option>
-          <option>Account 1</option>
-          <option>Account 2</option>
-          <option>Account 3</option>
-        </select> -->
-            <ng-select class="try" formControlName="account">
-              <ng-template ng-header-tmp>
-                <a (click)="show(1)" class="submit"
-                  ><i>Click here to Add+</i></a
-                >
-              </ng-template>
-              <ng-option
-                class="try"
-                *ngFor="let libJournal of libJournals"
-                [value]="libJournal.id"
-              >
-                {{ libJournal.journal_number }} {{ libJournal.journal_name }}
-              </ng-option>
-            </ng-select>
-          </td>
-
-          <!-- <td class="beneinput"><input type="number" /></td>
-      <td class="beneinput"><input type="number" /></td>
-      <td class="beneinput"><input type="text" /></td> -->
-
-          <td class="beneinput">
-            <input type="number" formControlName="debit" (change) = "autoZero(i)"/>
-
-          </td>
-          <td class="beneinput">
-            <input type="number" formControlName="credit" (change) = "autoZero(i)"/>
-          </td>
-          <td class="beneinput">
-            <input type="text" formControlName="description" />
-          </td>
-
-          <td class="beneinput">
-            <!-- <select type="text">
-          <option disabled selected>Select</option>
-          <option>Name 1</option>
-          <option>Name 2</option>
-          <option>Name 3</option>
-        </select> -->
-            <ng-select class="try" formControlName="name">
-              <ng-option
-                class="try"
-                *ngFor="let member of members"
-                [value]="member.id"
-              >
-                {{ member.account_id }} {{ member.first_name }}
-                {{ member.middle_name }} {{ member.last_name }}
-              </ng-option>
-            </ng-select>
-          </td>
-          <td>
-            <!-- <button class="delbut" (click)="deleteRow(x)">
-          <i class="ti ti-square-rounded-x"></i>
-        </button> -->
-            <a (click)="removeRow(i)" class="delbut">
-              <i class="ti ti-square-rounded-x"></i>
+        <div class="journnumber">
+          <label> Journal Number </label>
+          <input class="headinput" type="number" formControlName="journal_no" />
+        </div>
+        <div class="userid">
+          <input class="headinput" type="hidden" formControlName="useid" [value]="this.useid" />
+        </div>
+        <div>
+          <div>
+            <a class="add" (click)="addRow()">
+              <i class="ti ti-plus"></i>
+              <span class="btnText">Add</span>
             </a>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot></tfoot>
-    </table>
-    <div class="buttons">
-      <div class="journdate">
-        <label> Total Debit </label>
-        <input class="headinput" type="number" formControlName="totaldebit"  />
+          </div>
+        </div>
       </div>
-      <div class="journdate">
-        <label> Total Credit </label>
-        <input class="headinput" type="number" formControlName="totalcredit"  />
-      </div>
-      <a class="back">
-        <span class="btnTextb" (click)="back()">Back</span>
-      </a>
+      <div class="journals">
+        <table class="tablejournal" formArrayName="entries">
+          <thead>
+            <tr>
+              <th class="journallabel">No.</th>
+              <th class="journallabel">Account</th>
+              <th class="journallabel">Debits</th>
+              <th class="journallabel">Credits</th>
+              <th class="journallabel">Description</th>
+              <th class="journallabel">Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of entryRow.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <td class="journallabel">{{ i + 1 }}</td>
+              <td class="beneinputt">
+                <ng-select class="try" formControlName="account">
+                  <ng-template ng-header-tmp>
+                    <a (click)="show(1)" class="submit"
+                      ><i>Click here to Add+</i></a
+                    >
+                  </ng-template>
+                  <ng-option
+                    class="try"
+                    *ngFor="let libJournal of libJournals"
+                    [value]="libJournal.id"
+                  >
+                    {{ libJournal.journal_number }}
+                    {{ libJournal.journal_name }}
+                  </ng-option>
+                </ng-select>
+              </td>
 
-      <button class="save" type="submit">
-        <span class="btnTexts">Save</span>
-      </button>
-    </div>
-  </form>
-</div>
+              <td class="beneinput">
+                <input
+                  type="number"
+                  formControlName="debit"
+                  (change)="autoZero(i)"
+                />
+              </td>
+              <td class="beneinput">
+                <input
+                  type="number"
+                  formControlName="credit"
+                  (change)="autoZero(i)"
+                />
+              </td>
+              <td class="beneinput">
+                <input type="text" formControlName="description" />
+              </td>
+
+              <td class="beneinput">
+                <ng-select class="try" formControlName="name">
+                  <ng-option
+                    class="try"
+                    *ngFor="let member of members"
+                    [value]="member.id"
+                  >
+                    {{ member.id }} {{ member.first_name }}
+                    {{ member.middle_name }} {{ member.last_name }}
+                  </ng-option>
+                </ng-select>
+              </td>
+
+              <td>
+                <a (click)="removeRow(i)" class="delbut">
+                  <i class="ti ti-square-rounded-x"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="totals">
+        <div class="journdate">
+          <label> Total Debit </label>
+          <input class="headinput" type="number" formControlName="totaldebit" />
+        </div>
+        <div class="journdate">
+          <label> Total Credit </label>
+          <input
+            class="headinput"
+            type="number"
+            formControlName="totalcredit"
+          />
+        </div>
+      </div>
+      <div class="buttons">
+        <a class="back">
+          <span class="btnTextb" (click)="back()">Back</span>
+        </a>
+
+        <button class="save" type="submit">
+          <span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
 
 <section>
   <router-outlet></router-outlet>
@@ -174,4 +162,3 @@
     </div>
   </div>
 </section>
-

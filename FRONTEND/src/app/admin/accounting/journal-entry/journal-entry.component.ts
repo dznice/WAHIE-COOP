@@ -9,11 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./journal-entry.component.scss'],
 })
 export class JournalEntryComponent implements OnInit {
-  deb: string= '';
-  cred: string='';
 
-   useid = localStorage.getItem('userData');
-
+  useid = localStorage.getItem('userData');
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private route:Router){
   }
@@ -21,6 +18,7 @@ export class JournalEntryComponent implements OnInit {
   amount !: FormGroup<any>;
   public libJournals: any;
   public journalEntries: any;
+  
 
   ngOnInit(): void{
     this.showLibJournal()
@@ -28,6 +26,7 @@ export class JournalEntryComponent implements OnInit {
     this.showJournalEntry()
     this.getJournalNo()
   }
+
 
   getJournalNo(){
     console.log(this.useid)
@@ -61,13 +60,21 @@ export class JournalEntryComponent implements OnInit {
     });
   }
 
+  rowArray=this.builder.group({
+    account:this.builder.control('', Validators.required),
+    debit:this.builder.control('', Validators.required),
+    credit:this.builder.control('', Validators.required),
+    description:this.builder.control('', Validators.required),
+    name:this.builder.control('',Validators.required),
+  });
+
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control('',Validators.required),
     journal_no:this.builder.control('',Validators.required),
-    totaldebit:this.builder.control({ value: 0, disabled: true }),
-    totalcredit:this.builder.control({ value: 0, disabled: true }),
+    entries:this.builder.array([this.journalEntryRow]),
     userId:this.builder.control(this.useid),
-    entries:this.builder.array([])
+    totaldebit:this.builder.control({ value: 0, disabled: true }),
+    totalcredit:this.builder.control({ value: 0, disabled: true })
   })
 
   saveEntry(){
@@ -106,11 +113,11 @@ export class JournalEntryComponent implements OnInit {
 
   Generaterow(){
     return this.builder.group({
-      account:this.builder.control(''),
-      debit:this.builder.control(''),
-      credit:this.builder.control(''),
-      description:this.builder.control(''),
-      name:this.builder.control(''),
+      account:this.builder.control('', Validators.required),
+      debit:this.builder.control('', Validators.required),
+      credit:this.builder.control('', Validators.required),
+      description:this.builder.control('', Validators.required),
+      name:this.builder.control('',Validators.required),
     });
   }
 
@@ -119,26 +126,27 @@ export class JournalEntryComponent implements OnInit {
     this.amount = this.journalEntryRow.at(index) as FormGroup;
     let debit = this.amount.get("debit")?.value;
     let credit = this.amount.get("credit")?.value;
-    let num = 0;
-    if(debit > 0){
+    if((debit==null || credit==null)){
+      if(debit==null){
+        this.amount.get("credit")?.setValue(null);
+        this.amount.get("credit")?.setValue('');
+        this.amount.get("debit")?.setValue('');
+      }
+      else if(credit==null){
+        this.amount.get("debit")?.setValue(null);
+        this.amount.get("debit")?.setValue('');
+        this.amount.get("credit")?.setValue('');
+      }
+    }
+
+    else if(debit > 0){
       this.amount.get("credit")?.setValue(0);
     }
-    else if(debit==null){
-      this.amount.get("credit")?.setValue('');
-    }
-    if(credit > 0){
+    else if(credit > 0){
       this.amount.get("debit")?.setValue(0);
     }
-    else if(credit==null){
-      this.amount.get("debit")?.setValue('');
-    }
+
     this.balance_summary();
-  //   this.invoicedetail = this.invoiceform.get("details") as FormArray;
-  //   this.invoiceproduct = this.invoicedetail.at(index) as FormGroup;
-  //   let qty = this.invoiceproduct.get("qty")?.value;
-  //   let price = this.invoiceproduct.get("salesPrice")?.value;
-  //   let total = qty * price;
-  //   this.invoiceproduct.get("total")?.setValue(total);
   }
 
   balance_summary(){
