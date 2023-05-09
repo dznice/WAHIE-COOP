@@ -39,6 +39,7 @@ import { MemberComponent } from './member/member.component';
 import { MemberProfileComponent } from './member/member-profile/member-profile.component';
 import { MemberBodyComponent } from './member/member-body/member-body.component';
 import { MemberOnlyService } from './services/member-only.service';
+import { NullPageComponent } from './null-page/null-page.component';
 
 
 const routes: Routes = [
@@ -59,8 +60,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
     pathMatch: 'full',
+    component: NullPageComponent,
   },
   {
     path: 'forgot-pass',
@@ -75,7 +76,7 @@ const routes: Routes = [
     component: CheckEmailComponent,
   },
   {
-    path: 'change-pass',
+    path: 'change-pass/:id/:token',
     component: ChangePassComponent,
   },
   {

@@ -63,6 +63,7 @@ import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
 import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
 import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
 import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.pipe';
+import { NullPageComponent } from './null-page/null-page.component';
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.
     AdminChpassComponent,
     AdminPassdoneComponent,
     FilterMemHomeDatePipe,
-    FilterPaymentDatePipe
+    FilterPaymentDatePipe,
+    NullPageComponent
   ],
   imports: [
     BrowserModule,

@@ -41,8 +41,14 @@ Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 
 Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 
+
+Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
+Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);
+
 Route::post('/users/updateOtp/{id}', [App\Http\Controllers\Api\AuthController::class, 'submitOtp']);
 Route::post('/users/resendOtp/{id}', [App\Http\Controllers\Api\AuthController::class, 'resendOtp']);
+Route::post('/users/forgotPass/{email}', [App\Http\Controllers\Api\AuthController::class, 'forgotPass']);
+Route::post('/users/forgotChange/{id}', [App\Http\Controllers\Api\AuthController::class, 'forgotChange']);
 
 Route::get('/members', [App\Http\Controllers\Api\AuthController::class, 'members']);
 Route::get('/members/{email}', [App\Http\Controllers\Api\AuthController::class, 'getmemberId']);

@@ -166,6 +166,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
   }
   handleError(error:any){
     this.error = error.error.error;
+    
   }
 
 }
