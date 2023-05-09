@@ -117,15 +117,18 @@ class JournalEntryController extends Controller
     public function journId()
     {
 
+        $data = DB::table('transactions')->pluck('transaction_number');
+        $memberid = $data;
+
         $count = 1;
         $member = 1;
         $loop = true;
-        $max = $members->max();
+        $max = $memberid->max();
 
       while($loop == true){
         $id = 1;
         while($count<=$max){
-      foreach ($members as $member) {
+      foreach ($memberid as $member) {
         if($member==$id){
         $id++;
         }
@@ -135,6 +138,8 @@ class JournalEntryController extends Controller
       $member = $id;
       $loop = false;
       }
+
+      return response()->json([$member]);
     }
 
     /**

@@ -19,8 +19,10 @@
 <main>
 
 
-    <div class="container">
+    <div class="container" *ngFor="let info of item">
         <br /><br />
+
+        <div *ngIf="id==info.id">
         <div class="amount">
             <label class="amounts"> AMOUNT RECEIVED </label> <br />
             <label class="amounts2" id="balance"> PHP 69.00</label>
@@ -28,17 +30,11 @@
 
         <div class="sub_header">
             <div class="customerPayment">
-                <label> Customer </label><select type="text">
-                    <option selected>Aljuan Xclavia</option>
-                    <option>Alejo Alucard</option>
-                    <option>Juan Alejo</option>
-                    <option>Aljuwahn</option>
-                </select>
+                <label> {{ info.first_name }} {{ info.middle_name }} {{ info.last_name }} {{ info.suffix }} </label>
             </div>
 
             <div class="customerPayment">
-                <label> Email </label>
-                <input type="email" placeholder="Email">
+                <label> {{ info.email}} </label>
             </div>
         </div>
 
@@ -71,7 +67,8 @@
                     <option>3</option>
                 </select>
             </div>
-        </div>   
+        </div>
+      </div>
 
         <div class="journals">
 
@@ -86,7 +83,7 @@
                     <label>Invoice No.</label>
                     <input class="field" type="number" placeholder="Find Invoice No.">
                 </div>
-        
+
                 <div class="customerPayment3">
                     <label>Date</label>
                     <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate">
@@ -97,7 +94,7 @@
                     <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">
                 </div>
             </div>
-              
+
             <table rules="all">
                 <tr>
                     <th>.</th>
@@ -108,14 +105,24 @@
                     <th>Payment</th>
                 </tr>
 
-                <tr *ngFor="let e of item | filterPDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }">
-                    <td>{{ e.select }}</td>
-                    <td>{{ e.description }}</td>
-                    <td>{{ e.dueDate }}</td>
-                    <td>{{ e.originalAmount }}</td>
-                    <td>{{ e.openBalance }}</td>
+                <tbody *ngFor="
+          let acc of account
+            | filterName : term
+        ">
+            <tr
+
+
+            *ngIf="id==acc.debit.cred.transac.member.id"
+
+          >
+                    <td>{{ acc.debit.cred.transac.transaction_number }}</td>
+                    <td>{{ acc.debit.cred.entries.entry_name }}</td>
+                    <td>{{ acc.debit.cred.due_date }}</td>
+                    <td>{{ acc.debit.cred.credit_amount }}</td>
+                    <td>{{ acc.open_balance }}</td>
                     <td class="tablePayment"><input type="text"></td>
                 </tr>
+                </tbody>
             </table>
         </div>
         <div class="pagination-controls">
@@ -132,7 +139,7 @@
             <button>Clear Payment</button>
         </div>
 
-        
+
 
     </div>
 

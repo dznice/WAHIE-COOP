@@ -70,14 +70,14 @@
                 | filterDate : transaction_date: endDate
                 | paginate : { itemsPerPage: 5, currentPage: p }
             "
-            (click) = 'memberInfo( acc.debit.cred.transac.member.id )'
+
           >
             <td >{{ acc.debit.cred.transac.transaction_date }}</td>
             <td >{{ acc.debit.cred.entries.entry_name }}</td>
             <td >{{ acc.debit.cred.transac.transaction_number }}</td>
-            <td>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
+            <td  (click) = 'memberInfo( acc.debit.cred.transac.member.id )'>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
             <td>{{ acc.debit.cred.due_date }}</td>
-            <td>{{ acc.open_balance }}</td>
+            <td (click) = 'payment( acc.debit.cred.transac.member.id )'>{{ acc.open_balance }}</td>
             <td>{{ acc.status }}</td>
           </tr>
         </tbody>

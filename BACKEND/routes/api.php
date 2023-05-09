@@ -170,6 +170,8 @@ Route::get('/account', [App\Http\Controllers\AccountingController::class, 'index
 
 Route::get('/account/{id}', [App\Http\Controllers\AccountingController::class, 'index']);
 
+Route::get('/journ', [App\Http\Controllers\JournalEntryController::class, 'journId']);
+
 
 
 

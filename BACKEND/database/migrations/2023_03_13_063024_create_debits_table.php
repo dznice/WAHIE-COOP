@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id('id');
             $table->unsignedBigInteger('credits_id');
             $table->double('open_balance');
-            $table->double('payment');
-            $table->date('pay_date');
-            $table->integer('status');
+            $table->double('payment')->nullable();
+            $table->date('pay_date')->nullable();
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('credits_id')-> references('id')->on('credits');

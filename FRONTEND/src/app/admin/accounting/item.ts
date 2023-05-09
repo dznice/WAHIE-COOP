@@ -23,4 +23,5 @@ export class Item{
     open_balance: any;
     cred: any;
     status: any;
+    acc: any;
 }

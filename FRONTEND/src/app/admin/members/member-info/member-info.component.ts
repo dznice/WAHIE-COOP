@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from './item';
+// import { Item } from './item';
 import { itemService } from '../../accounting/item.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
@@ -47,7 +47,6 @@ export class MemberInfoComponent implements OnInit {
       {
 
         console.log(res)
-        console.log('marlon', this.id);
         this.item = res;
 
       }

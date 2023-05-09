@@ -103,7 +103,7 @@ const routes: Routes = [
     component: MemberHomeComponent,
   },
   {
-  path: 'additional-info', 
+  path: 'additional-info',
   component: AdditionalInfoComponent
   },
   {
@@ -120,6 +120,7 @@ const routes: Routes = [
       {path: 'members/add-members', component: AddMembersComponent},
       {path: 'members/add-payment', component: AddPaymentComponent},
       {path: 'members/member-info/:memberId', component: MemberInfoComponent},
+      {path: 'members/add-payment/:memberId', component: AddPaymentComponent},
       {path: 'inventory', component: InventoryComponent},
       {path: 'admin-body', component: AdminBodyComponent},
     ]

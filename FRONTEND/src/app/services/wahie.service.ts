@@ -72,4 +72,8 @@ export class WahieService {
   public listEntries(): Observable<any[]>{
     return this.http.get<any[]>(this.url+'/api/entries');
   }
+
+  public journId(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/journ');
+  }
 }

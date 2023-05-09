@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,22 +16,32 @@ export class JournalEntryComponent implements OnInit {
    useid = localStorage.getItem('userData');
 
 
-  constructor(private builder:FormBuilder, private wahieService:WahieService, private route:Router){
+  constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,private route:Router){
   }
   journalEntryRow !: FormArray<any>;
   amount !: FormGroup<any>;
   public libJournals: any;
   public journalEntries: any;
+  public journId: any;
 
   ngOnInit(): void{
     this.showLibJournal()
     this.showMembers()
     this.showJournalEntry()
     this.getJournalNo()
+    this.showJourn()
   }
 
   getJournalNo(){
     console.log(this.useid)
+  }
+
+  showJourn(){
+    this.journId = this.wahieService.journId().subscribe(jorunIds=>{
+      this.journId = jorunIds;
+      console.log(this.journId);
+    });
+
   }
 
   showLibJournal(): void{
@@ -78,12 +89,13 @@ export class JournalEntryComponent implements OnInit {
         let result:any;
         result=res;
         console.log(result);
+        this.route.navigateByUrl('admin/accounting')
       })
     }else{
       console.log("Error: Fill all input or need balance the amount to submit");
     }
     console.log(this.journalEntryForm.value);
-    this.route.navigateByUrl('admin/accounting')
+
   }
 
 
