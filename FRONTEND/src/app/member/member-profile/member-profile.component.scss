@@ -137,8 +137,12 @@ display: none;
 }
 
   .input-field {
-    padding-right: 1230px;
+    padding-right: 800px;
     text-align: right;
+    margin-top: 8px;
+  }
+  h5{
+    margin-top: 14px;
   }
 
   .btn-add {
@@ -148,4 +152,5 @@ display: none;
     background-color:var(--primary-color);
     color: var(--panel-color);
     padding: 12px 20px 12px 14px;
+    margin-top: 8px;
   }
