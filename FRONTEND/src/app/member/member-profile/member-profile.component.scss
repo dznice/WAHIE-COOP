@@ -1,0 +1,151 @@
+main {
+  width: 100%;
+  animation: transitionIn 0.75s;
+
+  .title,
+  h3,
+  h5 {
+    color: var(--primary-color);
+  }
+
+  .container {
+    border-radius: 8px;
+    margin: 14px 80px;
+    padding: 1px 30px;
+    background-color: var(--grey);
+  }
+}
+.fields {
+  display: flex;
+  width: calc(100%);
+  flex-direction: column;
+  text-align: left;
+  margin: 8px 0px;
+  padding: 0px 20px;
+
+  th {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .fields {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border-color);
+    margin: 1px 8px;
+    color: var(--primary-color);
+  }
+  .fieldsdata {
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+h4 {
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: right;
+
+  }
+  input {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    border-radius: 0.45rem;
+    border: 1px solid #aaa;
+    padding: 0 10px;
+    height: 36px;
+    margin: 8px 0 0;
+    margin-left: 20px;
+  }
+
+/* Accordion styles */
+.tabs {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.tab {
+  width: 100%;
+  color: white;
+  overflow: hidden;
+  &-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: var(--grey);
+    font-weight: bold;
+    cursor: pointer;
+
+    /* Icon */
+    &:hover {
+      background-color: var(--grey);
+    }
+    &::after {
+      content: "\276F";
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      transition: all .35s;
+    }
+  }
+
+  &-content {
+    max-height: 0;
+    padding: 0 1em;
+    background-color: var(--grey);
+    transition: all .35s; 
+  }
+
+  &-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    background-color: var(--grey);
+    
+    &:hover {
+      background-color: var(--grey);
+    }
+  }
+}
+
+// :checked
+input:checked {
+  + .tab-label {
+    background-color: var(--grey);
+    &::after {
+      transform: rotate(90deg);
+    }
+  }
+
+  ~ .tab-content {
+    max-height: 100vh;
+    padding: 1em;
+  }
+}
+
+input#chck1{
+display: none;
+}
+
+  .input-field {
+    padding-right: 1230px;
+    text-align: right;
+  }
+
+  .btn-add {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    background-color:var(--primary-color);
+    color: var(--panel-color);
+    padding: 12px 20px 12px 14px;
+  }

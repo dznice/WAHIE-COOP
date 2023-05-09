@@ -2,6 +2,50 @@
   <h1 class="title">Accounts</h1>
 </main>
 
+<section>
+  <router-outlet></router-outlet>
+  <div>
+    <div class="otp-modal" *ngIf="showModal === 1">
+      <div class="otp-content">
+        <div class="otp-header">Add New Admin Account</div>
+        <div class="otp-body">
+          <label for="admin_username">Username</label>
+          <input class="modalinput" type="number" #admin_username />
+          <br />
+          <label for="admin_email">Email Address</label>
+          <input class="modalinput" type="text" #admin_email />
+          <br />
+          <label for="admin_password">Password</label>
+          <input class="modalinput" type="text" #admin_password />
+        </div>
+        <div class="otp-footer">
+          <button
+            class="backbtn"
+            (click)="
+              add(admin_username.value, admin_email.value, admin_password.value);
+              admin_username.value = '';
+              admin_email.value = '';
+              admin_password.value = ''
+            "
+            (click)="show(2)"
+          >
+            Create
+          </button>
+          <button class="closebtn" (click)="show(2)">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="add-account">
+  <button class="btn-add">
+    <i class="ti ti-plus"></i>
+    New Account
+  </button>
+</div>
+
 <div class="input-box">
   <i class="ti ti-search"></i>
   <input type="text" placeholder="Search member" [(ngModel)]="searchText"/>

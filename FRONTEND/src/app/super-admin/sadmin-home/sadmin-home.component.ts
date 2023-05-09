@@ -160,4 +160,24 @@ export class SadminHomeComponent {
       }
 
   }
+  showModal = -1;
+  show(index: number){
+    this.showModal = index;
+  }
+
+  SuperAccounts:any;
+
+  add(admin_username:string,admin_email:string, admin_password:string){
+    this.SuperAccounts={
+      'admin_username': admin_username,
+      'admin_email': admin_email,
+      'admin_password': admin_password,
+    };
+    // this.wahieService.addSuperAccount(this.SuperAccounts as any).subscribe(SuperAccount=>{
+    //   this.SuperAccounts = SuperAccount
+    // });
+    console.log(this.SuperAccounts)
+  }
+}
+
 

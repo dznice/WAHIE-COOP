@@ -7,6 +7,53 @@ main {
   }
 }
 
+/*modal*/
+.otp-modal {
+  position: fixed;
+  background: #000000bf;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.otp-content {
+  background: #fff;
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  text-align: center;
+  padding: 0 30px 30px;
+  transition: transform 0.4s, top 0.4s;
+  width: 400px;
+}
+
+/*add button */
+.add-account {
+  text-align: right;
+  margin-left: 121px;
+  margin-top: 1px;
+}
+
+  .btn-add {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--primary-color);
+    color: var(--panel-color);
+    padding: 12px 20px 12px 14px;
+    
+  }
+    .ti-plus {
+      margin-right: 14px;
+      font-size: 14px;
+      
+    }
+  
 
 /* Search box */
 .input-box {
@@ -140,3 +187,6 @@ input:checked {
 input:checked::after {
   left: 70%;
 }
+
+
+
