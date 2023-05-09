@@ -97,13 +97,18 @@
             <td>{{ e.Member }}</td>
             <td>{{ e.DueDate }}</td>
             <td>{{ e.Balance }}</td>
-            <td>{{ e.Status }}</td>
+            <td class="status">
+              <span [ngClass]="{'pending': e.Status == 'Pending',
+                                'overdue': e.Status == 'Overdue', 
+                                'paid': e.Status == 'Paid',
+                                'closed': e.Status == 'Closed'}">
+              {{ e.Status }}</span></td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div class="pagination-controls">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </section>
-  <div class="pagination-controls">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
 </main>

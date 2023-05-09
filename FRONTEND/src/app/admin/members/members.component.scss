@@ -7,6 +7,79 @@ main {
   }
 }
 
+.payables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: .2rem;
+  margin: 10px 0px;
+
+  .unpaid-container {    
+
+    .card-merge {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: .2rem;
+      margin-top: 1rem;
+
+      .overdue {
+        border-radius: 0.645rem;
+        background: var(--red);
+      }
+
+      .open-inv {
+        border-radius: 0.645rem;
+        background: var(--yellow);
+      }
+
+      .card-amount {
+        font-weight: 500;
+        font-size: 36px;
+      }
+    }
+  }
+
+  .paid-container {
+    .paid {
+      margin-top: 1rem;
+      border-radius: 0.645rem;
+      background: var(--green);
+    }
+
+    .card-amount {
+      font-weight: 500;
+      font-size: 36px;
+    }
+  }
+
+  label {
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--dark-grey);
+  }
+
+  .card {
+    padding: 2rem 1rem;
+    background: var(--grey);
+    color: var(--panel-color);
+  }
+
+  .card-subtext {
+    font-size: 18px;
+  }
+}
+
+.payables > * {
+  padding: .75rem 1.5rem .75rem 0;
+}
+
+@media (min-width: 768px) {
+  .payables {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 .input-box {
   position: relative;
   height: 46px;
