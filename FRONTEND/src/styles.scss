@@ -29,3 +29,20 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-alt);
 }
+
+.ng-dropdown-panel{
+  background-color: aliceblue;
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid #aaa; 
+  margin: 2px 0;
+  
+}
+
+
+
+

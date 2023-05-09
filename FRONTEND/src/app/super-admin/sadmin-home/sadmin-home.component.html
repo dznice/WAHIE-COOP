@@ -40,6 +40,16 @@
   <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
 </div>
 
+<div class="">
+  <label>Type</label>
+  <select  name="journal-type">
+    <option [ngValue]="undefined" selected>All</option>
+    
+  </select>
+</div>
+
+
+
 <div class="table-container">
   <table class="table-content">
     <thead>

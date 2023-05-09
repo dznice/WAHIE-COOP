@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-journal-entry',
   templateUrl: './journal-entry.component.html',
   styleUrls: ['./journal-entry.component.scss'],
+ 
 })
 export class JournalEntryComponent implements OnInit {
 
