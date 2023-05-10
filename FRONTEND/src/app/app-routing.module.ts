@@ -10,7 +10,6 @@ import { PassDoneComponent } from './pass-done/pass-done.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AccountingComponent } from './admin/accounting/accounting.component';
-import { MembersComponent } from './admin/members/members.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
 import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
@@ -18,15 +17,14 @@ import { SadminHomeComponent } from './super-admin/sadmin-home/sadmin-home.compo
 import { ActivityLogsComponent } from './super-admin/activity-logs/activity-logs.component';
 import { SadminSettingsComponent } from './super-admin/sadmin-settings/sadmin-settings.component';
 import { JournalEntryComponent } from './admin/accounting/journal-entry/journal-entry.component';
-import { AddInvoiceComponent } from './admin/members/add-invoice/add-invoice.component';
-import { AddMembersComponent } from './admin/members/add-members/add-members.component';
-import { AddPaymentComponent } from './admin/members/add-payment/add-payment.component';
+import { AddInvoiceComponent } from './admin/accounting/add-invoice/add-invoice.component';
+import { AddPaymentComponent } from './admin/accounting/add-payment/add-payment.component';
 import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
 import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
-import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
+import { MemberInfoComponent } from './admin/accounting/member-info/member-info.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoggedInService } from './services/logged-in.service';
 import { NotLoggedInService } from './services/not-logged-in.service';
@@ -117,15 +115,13 @@ const routes: Routes = [
       {path: 'admin-home', component: AdminHomeComponent},
       {path: 'accounting', component: AccountingComponent},
       {path: 'accounting/journal-entry', component: JournalEntryComponent},
-      {path: 'members', component: MembersComponent},
-      {path: 'members/add-invoice', component: AddInvoiceComponent},
-      {path: 'members/add-members', component: AddMembersComponent},
-      {path: 'members/add-payment', component: AddPaymentComponent},
-      {path: 'members/member-info/:memberId', component: MemberInfoComponent},
-      {path: 'members/add-payment/:memberId', component: AddPaymentComponent},
+      {path: 'accounting/add-invoice', component: AddInvoiceComponent},
+      {path: 'accounting/add-payment', component: AddPaymentComponent},
+      {path: 'accounting/add-payment/:memberId', component: AddPaymentComponent},
+      {path: 'accounting/member-info/:memberId', component: MemberInfoComponent},
       {path: 'manage-members', component: ManageMembersComponent},
       {path: 'inventory', component: InventoryComponent},
-      {path: 'admin-body', component: AdminBodyComponent},
+      {path: 'admin-body', component: AdminBodyComponent}
     ]
   },
   {

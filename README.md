@@ -14,7 +14,6 @@ npm i ng-angular-popup --legacy-peer-deps
 
 
 
-
 To serve backend run the following commands:
 
 composer install
@@ -24,3 +23,5 @@ npm run dev
 
 php artisan migrate
 php artisan serve
+
+composer require spatie/laravel-query-builder

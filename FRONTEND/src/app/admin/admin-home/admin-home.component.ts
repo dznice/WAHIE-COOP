@@ -17,7 +17,7 @@ export class AdminHomeComponent implements OnInit {
 
 
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
-  stats: string[]= ["Overdue", "Pending", "Closed, Paid" ];
+  stats: string[]= ["Overdue", "Pending", "Closed", "Paid" ];
 
   startDate: string = '';
   endDate : string = '';

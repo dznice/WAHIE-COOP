@@ -1,89 +1,63 @@
 <main>
-  <h1 class="title" [routerLink]="['../journal-entry']">Accounting</h1>
-  <section class="recent-transaction">
-    <div>
-      <button class="Add" [routerLink]="['../accounting/journal-entry']">
-        <span class="btnText"> New Journal Entry </span>
-      </button>
+  <h1 class="title">Accounting</h1>
+  
+  <div class="new-transac">
+    <button class="btn-add" [routerLink]="['../journal-entry']">
+      <i class="ti ti-plus"></i>
+      New journal entry
+    </button>
+  </div>
+  
+  <section class="payables">
+    <div class="unpaid-container">
+      <label>Unpaid Last 365 Days</label>
+      <div class="card-merge">
+        <div class="card overdue">
+          <h3 class="card-amount">PHP0</h3>
+          <span class="card-subtext">0 OVERDUE</span>
+        </div>
+        <div class="card open-inv">
+          <h3 class="card-amount">PHP1,000</h3>
+          <span class="card-subtext">5 OPEN INVOICES</span>
+        </div>
+      </div>
     </div>
-    <div class="section-div">
-      <h2 class="section-title">Recent Transactions</h2>
+
+    <div class="paid-container">
+      <label>Paid</label>
+      <div class="card paid">
+        <h3 class="card-amount">PHP2,000</h3>
+        <span class="card-subtext">7 PAID LAST 30 DAYS</span>
+      </div>
     </div>
+  </section>
 
-    <div class="table-filter">
-      <div class="filter-field1">
-        <label for="search-member" placeholder="Search Member">Member</label>
-
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Search Member"
-          [(ngModel)]="term"
-        />
-      </div>
-
-      <div class="filter-field2">
-        <label> Start Date</label>
-        <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate">
-      </div>
-
-      <div class="filter-field3">
-        <label>End Date</label>
-        <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">
-      </div>
-
-      <div class="filter-field4">
-        <label>Type</label>
-        <select [(ngModel)]="type" name="journal-type">
-          <option [ngValue]="undefined" selected>All</option>
-          <option *ngFor="let type of types" [value]="type">{{ type }}</option>
-        </select>
-      </div>
-
-      <div class="filter-field5">
-        <label>Status</label>
-        <select [(ngModel)]="stat" name="status">
-          <option [ngValue]="undefined" selected>All</option>
-          <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>
-        </select>
-      </div>
+  <section class="members-table">
+    <div class="input-box">
+      <i class="ti ti-search"></i>
+      <input class="form-control" type="text" placeholder="Search Member" [(ngModel)]="term"/>
     </div>
 
     <div class="table-container">
       <table class="table-content">
         <thead>
-          <th>Date</th>
-          <th>Type</th>
-          <th>No.</th>
-          <th>Member</th>
-          <th>Due Date</th>
-          <th>Balance</th>
-          <th>Status</th>
+          <th>MEMBERS</th>
+          <th>EMAIL ADDRESS</th>
+          <th>OPEN BALANCE</th>
+          <th>ACTION</th>
         </thead>
         <tbody>
-          <tr
-            *ngFor="
-              let acc of account
-                | filterName : term
-                | filter : type
-                | filter : stat
-                | filterDate : transaction_date: endDate
-                | paginate : { itemsPerPage: 5, currentPage: p }
-            "
-
-          >
-            <td >{{ acc.debit.cred.transac.transaction_date }}</td>
-            <td >{{ acc.debit.cred.entries.entry_name }}</td>
-            <td >{{ acc.debit.cred.transac.transaction_number }}</td>
-            <td  (click) = 'memberInfo( acc.debit.cred.transac.member.id )'>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
-            <td>{{ acc.debit.cred.due_date }}</td>
-            <td (click) = 'payment( acc.debit.cred.transac.member.id )'>{{ acc.open_balance }}</td>
-            <td>{{ acc.status }}</td>
+          <tr *ngFor="let member of memberList | filterMemName: term | paginate : { itemsPerPage: 5, currentPage: p }" >
+           <td (click) = 'memberInfo( member.id )'>{{member.id}} {{member.first_name}}</td>
+           <td (click) = 'memberInfo( member.id )'>{{member.email}}</td>
+           <td (click) = 'memberInfo( member.id )'>{{member.id}}</td>
+           <td class="action-td"><a [routerLink]="['../accounting/add-payment']">Receive payment</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
+
   <div class="pagination-controls">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>

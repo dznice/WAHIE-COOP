@@ -10,11 +10,6 @@ export const adminNavData = [
         label: 'Accounting'
     },
     {
-        routeLink: 'members',
-        icon: 'ti ti-users',
-        label: 'Members-Old'
-    },
-    {
         routeLink: 'manage-members',
         icon: 'ti ti-users',
         label: 'Members'
