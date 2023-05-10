@@ -11,9 +11,14 @@ export class SadminHomeComponent {
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
+  type: string[] = ["Admin", "Member"];
+  types: string
+
+  
 
   constructor(private http: HttpClient, private wahieService:WahieService) {
     this.showUsers();
+    this.showMan();
   }
   userAccounts: any[] = [];
   Loaded = false;
@@ -38,6 +43,17 @@ export class SadminHomeComponent {
       this.Loaded = true;
       console.log(res);
       this.userAccounts = res;
+    });
+  }
+
+  showMan() {
+    this.http.get('http://127.0.0.1:8000/api/users').subscribe((res: any) => {
+      this.Loaded = true;
+      console.log(res);
+      this.types =res;
+      
+      
+      
     });
   }
   isChecked: boolean = true;

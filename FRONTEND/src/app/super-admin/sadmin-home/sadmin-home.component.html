@@ -42,18 +42,16 @@
 
 <div class="">
   <label>Type</label>
-  <ng-select class="try">
-    <ng-option
-    class="idnk"
-    *ngFor="let user of userAccounts">
-      {{ user.name }}
-    </ng-option>
-  </ng-select>
+  <select [(ngModel)]="type" name="journal-type">
+    <option [ngValue]="undefined" selected>All</option>
+    <option *ngFor="let sType of type" [value]="type" > {{sType}}</option>
+  </select>
 </div>
 
 
 
 <div class="table-container">
+  <div>
   <table class="table-content">
     <thead>
       <th>User</th>
@@ -63,12 +61,12 @@
       <th>Status</th>
       <th>Activate</th>
     </thead>
-    <tbody *ngFor="let user of userAccounts | search: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+   
+    <tbody *ngFor="let user of userAccounts | search: searchText | paginate: { itemsPerPage: 10, currentPage: p }" >
       <tr  *ngIf="user.role_id != 2">
-
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.coop }}</td>
+          <!-- <td>{{ user.coop }}</td> -->
           <td>{{ user.created_at | date: 'MM-dd-yyyy' }}</td>
           <td>{{ user.status }}</td>
           <!-- <td>{{ user.datecreated }}</td> -->
@@ -96,11 +94,11 @@
               </button>
            </div>
           </td>
-
       </tr>
     </tbody>
+    
   </table>
-
+</div>
   <div class="pagination-controls">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
