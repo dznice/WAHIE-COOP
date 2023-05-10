@@ -20,7 +20,7 @@ export class SadminHomeComponent {
 
   constructor(private http: HttpClient, private wahieService:WahieService) {
     this.showUsers();
-    this.showMan();
+    
   }
 
   userAccounts: any[] = [];
@@ -49,16 +49,8 @@ export class SadminHomeComponent {
     });
   }
 
-  showMan() {
-    this.http.get('http://127.0.0.1:8000/api/users').subscribe((res: any) => {
-      this.Loaded = true;
-      console.log(res);
-
-
-
-
-    });
-  }
+  
+  
   isChecked: boolean = true;
 
   getValue() {

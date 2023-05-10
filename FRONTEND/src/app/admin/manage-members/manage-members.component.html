@@ -3,14 +3,14 @@
 
   <div class="input-box">
     <i class="ti ti-search"></i>
-    <!-- <input type="text" placeholder="Search" [(ngModel)]="searchText" /> -->
+    <input type="text" placeholder="Search" [(ngModel)]="searchText" />
   </div>
 
-  <!-- <div class="table-container">
+  <div class="table-container">
     <div>
       <table class="table-content">
         <thead>
-          <th>Role</th>
+          <!-- <th>Role</th> -->
           <th>Name</th>
           <th>Email</th>
           <th>Department</th>
@@ -20,19 +20,19 @@
 
         <tbody
           *ngFor="
-            let user of userAccounts
+            let user of memAccounts
               | search : searchText
               | filter : type
               | paginate : { itemsPerPage: 10, currentPage: p }
           "
         >
-          <tr *ngIf="user.userrole.id != 2 || user.userrole.user_type == type">
-            <td>{{ user.userrole.user_type }}</td>
+          <tr *ngIf="user.userrole.id == 3">
+            <!-- <td>{{ user.userrole.user_type }}</td> -->
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.coop }}</td>
             <td>{{ user.created_at | date : "MM-dd-yyyy" }}</td>
-            <td>{{ user.status }}</td>
+            <!-- <td>{{ user.status }}</td>  -->
 
             <td>
               <div *ngIf="user.status == 0">
@@ -74,9 +74,9 @@
         </tbody>
       </table>
     </div>
-  </div> -->
+  </div>
 
   <div class="pagination-controls">
-    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </main>
