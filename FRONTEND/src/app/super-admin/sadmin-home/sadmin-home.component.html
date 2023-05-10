@@ -42,10 +42,13 @@
 
 <div class="">
   <label>Type</label>
-  <select  name="journal-type">
-    <option [ngValue]="undefined" selected>All</option>
-    
-  </select>
+  <ng-select class="try">
+    <ng-option
+    class="idnk"
+    *ngFor="let user of userAccounts">
+      {{ user.name }}
+    </ng-option>
+  </ng-select>
 </div>
 
 
@@ -58,10 +61,11 @@
       <th>Department</th>
       <th>Date Created</th>
       <th>Status</th>
+      <th>Activate</th>
     </thead>
-    <tbody>
-      <tr *ngFor="let user of userAccounts | search: searchText | paginate: { itemsPerPage: 10, currentPage: p }" >
-        <div *ngIf="user.role_id != 2">
+    <tbody *ngFor="let user of userAccounts | search: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+      <tr  *ngIf="user.role_id != 2">
+
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.coop }}</td>
@@ -72,27 +76,27 @@
             <td>
               <div *ngIf="user.status == 0">
                 <label class="switch-toggle">
-                
+
                 <input  class="switch" input type="checkbox"  (click)="deactivateTOactivate(user)" />
                 <div class="slider"></div>
               </label>
             </div>
             <div *ngIf="user.status == 1">
               <label class="switch-toggle">
-                
+
               <input class="switch" input type="checkbox"  [(ngModel)]="isChecked" (click)="activateUser(user)" (change)="changeSelection ($event,index)" />
               <div class="slider"></div>
             </label>
           </div>
-              
+
 
             <div *ngIf="user.status == 2">
               <button type="submit" (click)="activateUser2(user)" class="btn btn-success">
                 <span>Activate</span>
-              </button> 
+              </button>
            </div>
           </td>
-        </div>
+
       </tr>
     </tbody>
   </table>

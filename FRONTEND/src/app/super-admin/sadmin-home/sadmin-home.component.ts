@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { WahieService } from '../../services/wahie.service';
 
 @Component({
   selector: 'app-sadmin-home',
@@ -9,8 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class SadminHomeComponent {
   /* Switch declaration */
   selected: boolean;
+  libJournals: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private wahieService:WahieService) {
     this.showUsers();
   }
   userAccounts: any[] = [];
@@ -26,6 +28,8 @@ export class SadminHomeComponent {
   email: string = '';
   coop: string = '';
   status: number = 0;
+
+  AccountType: string;
 
   ngOnInit(): void {}
 
@@ -50,6 +54,13 @@ export class SadminHomeComponent {
     } else {
       this.isChecked = false;
     }
+  }
+
+  showLibJournal(): void{
+    this.libJournals = this.wahieService.listLibJournals().subscribe(libjournal=>{
+      this.libJournals = libjournal;
+      console.log(this.libJournals);
+    });
   }
 
   activateUser(data: any) {
@@ -137,7 +148,7 @@ export class SadminHomeComponent {
       });
   }
 
-  
+
 }
 
 // showModal = -1;

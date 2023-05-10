@@ -23,6 +23,7 @@ class DebitsResource extends JsonResource
             'transac' => $this->whenLoaded('transac'),
             'member' => $this->whenLoaded('member'),
             'open_balance' => $this->open_balance,
+            'orig_amount' => $this->orig_amount,
             'payment' => $this->payment,
             'pay_date' => $this->pay_date,
             'status' => $this->status,

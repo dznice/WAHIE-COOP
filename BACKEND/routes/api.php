@@ -172,7 +172,11 @@ Route::get('/transaction/{id}', function($id) {
 });
 
 
+Route::get('/userrole', [App\Http\Controllers\userController::class, 'userRole']);
+
 Route::get('/account', [App\Http\Controllers\AccountingController::class, 'index']);
+
+Route::get('/total', [App\Http\Controllers\AccountingController::class, 'total']);
 
 Route::get('/account/{id}', [App\Http\Controllers\AccountingController::class, 'index']);
 

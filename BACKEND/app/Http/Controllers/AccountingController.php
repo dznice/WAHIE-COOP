@@ -8,6 +8,7 @@ use App\Models\Credits;
 use App\Models\Transactions;
 use App\Models\Payables;
 use App\Models\Debits;
+use App\Models\LibJournal;
 use App\Http\Resources\TransactionsResource;
 use App\Http\Resources\PayablesResource;
 use App\Http\Resources\CreditsResource;
@@ -43,6 +44,19 @@ class AccountingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+     public function total()
+    {
+        $totals = LibJournal::join('credits', 'lib_journals.id', '=', 'credits.journals_id')
+            ->groupBy('lib_journals.id')
+            ->select('lib_journals.id', DB::raw('SUM(credits.credit_amount) as total_credit_amount'))
+            ->get();
+
+            return response()->json($totals);
+
+
+    }
+
     public function store(Request $request)
     {
         //

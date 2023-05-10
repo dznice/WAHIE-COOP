@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Users;
 use App\Models\Members;
+use App\Http\Resources\UsersResource;
 use App\Models\BenificiaryMembers;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\enableAdmin;
 use App\Mail\MailOtp;
 use App\Models\EmailOtp;
 use Illuminate\Support\Facades\Mail;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class userController extends Controller
 {
@@ -25,7 +28,7 @@ class userController extends Controller
         $email = $users->email;
         $code = $users->code;
         if($users->status == '1'){
-        if($code!=0){    
+        if($code!=0){
             EmailOtp::create([
                 'user_email'=> $email,
                 'code' => $code
@@ -42,11 +45,11 @@ class userController extends Controller
             }
 
         }
-          
-            return response()->json($users); 
+
+            return response()->json($users);
 
     }
-    
+
 
     public function superChange(Request $request, $id){
 
@@ -54,7 +57,7 @@ class userController extends Controller
         $users->password = Hash::make($request['password']);
         $users->code = 0;
         $users->save();
-        return response()->json($users); 
+        return response()->json($users);
     }
 
     public function memberList(){
@@ -62,15 +65,22 @@ class userController extends Controller
         return response()->json($member);
          }
 
-         
+
     public function beneficiaries(){
         $beneficiary = BenificiaryMembers::all();
         return response()->json($beneficiary);
              }
-     
+
     public function memberInfo($id){
         $member = Members::find($id);
         return response()->json($member);
          }
-                
+
+         public function userrole()
+         {
+             $query = Users::query()->with('userrole');
+             $users = QueryBuilder::for($query);
+                 return UsersResource::collection($users->get());
+         }
+
 }

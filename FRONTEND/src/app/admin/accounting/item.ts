@@ -24,4 +24,5 @@ export class Item{
     cred: any;
     status: any;
     acc: any;
+    orig_amount: any;
 }

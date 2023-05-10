@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
   selector: 'app-journal-entry',
   templateUrl: './journal-entry.component.html',
   styleUrls: ['./journal-entry.component.scss'],
- 
 })
 export class JournalEntryComponent implements OnInit {
 
   useid = localStorage.getItem('userData');
+  journ: any;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,private route:Router){
   }
@@ -20,15 +20,20 @@ export class JournalEntryComponent implements OnInit {
   amount !: FormGroup<any>;
   public libJournals: any;
   public journalEntries: any;
-  public journId: any;
+  public journId:any;
+  public member:any;
 
   ngOnInit(): void{
     this.showLibJournal()
     this.showMembers()
     this.showJournalEntry()
     this.getJournalNo()
+    this.getJournalNot()
     this.showJourn()
   }
+
+
+
 
 
   getJournalNo(){
@@ -36,12 +41,20 @@ export class JournalEntryComponent implements OnInit {
   }
 
   showJourn(){
-    this.journId = this.wahieService.journId().subscribe(jorunIds=>{
-      this.journId = jorunIds;
-      console.log(this.journId);
-    });
+    this.http.get('http://127.0.0.1:8000/api/journ').subscribe(
+      (res:any)=>
+      {
 
+        this.journId = res;
+        console.log(this.journId);
+    });
   }
+
+  getJournalNot(){
+    console.log(this.journId)
+  }
+
+
 
   showLibJournal(): void{
     this.libJournals = this.wahieService.listLibJournals().subscribe(libjournal=>{
@@ -75,20 +88,24 @@ export class JournalEntryComponent implements OnInit {
     account:this.builder.control('', Validators.required),
     debit:this.builder.control('', Validators.required),
     credit:this.builder.control('', Validators.required),
-    description:this.builder.control('', Validators.required),
+    description:this.builder.control(''),
     name:this.builder.control('',Validators.required),
   });
+
+
 
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control('',Validators.required),
     journal_no:this.builder.control('',Validators.required),
-    entries:this.builder.array([this.journalEntryRow]),
+    entries:this.builder.array([]),
     userId:this.builder.control(this.useid),
     totaldebit:this.builder.control({ value: 0, disabled: true }),
     totalcredit:this.builder.control({ value: 0, disabled: true })
   })
 
+
   saveEntry(){
+    this.journalEntryForm.controls.journal_no.setValue( this.journId )
     let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     let total_credit = this.journalEntryForm.get("totalcredit")?.value;
     if(this.journalEntryForm.valid && total_debit == total_credit){
@@ -128,7 +145,7 @@ export class JournalEntryComponent implements OnInit {
       account:this.builder.control('', Validators.required),
       debit:this.builder.control('', Validators.required),
       credit:this.builder.control('', Validators.required),
-      description:this.builder.control('', Validators.required),
+      description:this.builder.control(''),
       name:this.builder.control('',Validators.required),
     });
   }
