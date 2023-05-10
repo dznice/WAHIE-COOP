@@ -12,6 +12,11 @@ export const adminNavData = [
     {
         routeLink: 'members',
         icon: 'ti ti-users',
+        label: 'Members-Old'
+    },
+    {
+        routeLink: 'manage-members',
+        icon: 'ti ti-users',
         label: 'Members'
     },
     {

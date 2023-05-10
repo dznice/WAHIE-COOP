@@ -40,6 +40,7 @@ import { MemberProfileComponent } from './member/member-profile/member-profile.c
 import { MemberBodyComponent } from './member/member-body/member-body.component';
 import { MemberOnlyService } from './services/member-only.service';
 import { NullPageComponent } from './null-page/null-page.component';
+import { ManageMembersComponent } from './admin/manage-members/manage-members.component';
 
 
 const routes: Routes = [
@@ -122,6 +123,7 @@ const routes: Routes = [
       {path: 'members/add-payment', component: AddPaymentComponent},
       {path: 'members/member-info/:memberId', component: MemberInfoComponent},
       {path: 'members/add-payment/:memberId', component: AddPaymentComponent},
+      {path: 'manage-members', component: ManageMembersComponent},
       {path: 'inventory', component: InventoryComponent},
       {path: 'admin-body', component: AdminBodyComponent},
     ]
