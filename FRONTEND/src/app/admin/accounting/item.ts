@@ -25,4 +25,5 @@ export class Item{
     status: any;
     acc: any;
     orig_amount: any;
+    paystats: any;
 }

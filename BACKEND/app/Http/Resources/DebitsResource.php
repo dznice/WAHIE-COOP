@@ -18,6 +18,7 @@ class DebitsResource extends JsonResource
             'id' => $this->id,
             'credits_id' => $this->credits_id,
             'debit' => $this->whenLoaded('debt'),
+            'debit' => $this->whenLoaded('debt'),
             'cred' => $this->whenLoaded('cred'),
             'entries' => $this->whenLoaded('entries'),
             'transac' => $this->whenLoaded('transac'),
@@ -27,6 +28,7 @@ class DebitsResource extends JsonResource
             'payment' => $this->payment,
             'pay_date' => $this->pay_date,
             'status' => $this->status,
+            'paystats' => $this->paystats,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

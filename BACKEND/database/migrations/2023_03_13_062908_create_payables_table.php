@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id');
             $table->unsignedBigInteger('transaction_id');
             $table->unsignedBigInteger('entry_id');
-            $table->integer('transaction_number');
+            $table->integer('transaction_number')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id');
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('members_id');
-            $table->integer('transaction_number');
+            $table->integer('transaction_number')->nullable();
             $table->date('transaction_date');
             $table->timestamps();
 
