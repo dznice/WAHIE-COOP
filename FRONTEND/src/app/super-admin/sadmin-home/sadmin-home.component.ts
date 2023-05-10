@@ -11,15 +11,18 @@ export class SadminHomeComponent {
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
-  type: string[] = ["Admin", "Member"];
-  types: string
+  types: string[] = ["Admin", "Member"];
+  type: string;
 
-  
+  userrole: number[] = [1,3];
+
+
 
   constructor(private http: HttpClient, private wahieService:WahieService) {
     this.showUsers();
     this.showMan();
   }
+
   userAccounts: any[] = [];
   Loaded = false;
   updateFormActive = false;
@@ -39,7 +42,7 @@ export class SadminHomeComponent {
   ngOnInit(): void {}
 
   showUsers() {
-    this.http.get('http://127.0.0.1:8000/api/users').subscribe((res: any) => {
+    this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
       this.Loaded = true;
       console.log(res);
       this.userAccounts = res;
@@ -50,10 +53,10 @@ export class SadminHomeComponent {
     this.http.get('http://127.0.0.1:8000/api/users').subscribe((res: any) => {
       this.Loaded = true;
       console.log(res);
-      this.types =res;
-      
-      
-      
+
+
+
+
     });
   }
   isChecked: boolean = true;

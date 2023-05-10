@@ -44,7 +44,7 @@
   <label>Type</label>
   <select [(ngModel)]="type" name="journal-type">
     <option [ngValue]="undefined" selected>All</option>
-    <option *ngFor="let sType of type" [value]="type" > {{sType}}</option>
+    <option *ngFor="let type of types" [value]="type" > {{type}}</option>
   </select>
 </div>
 
@@ -54,16 +54,21 @@
   <div>
   <table class="table-content">
     <thead>
-      <th>User</th>
+      <th>Role</th>
+      <th>Name</th>
       <th>Email</th>
       <th>Department</th>
       <th>Date Created</th>
       <th>Status</th>
-      <th>Activate</th>
     </thead>
-   
-    <tbody *ngFor="let user of userAccounts | search: searchText | paginate: { itemsPerPage: 10, currentPage: p }" >
-      <tr  *ngIf="user.role_id != 2">
+
+    <tbody *ngFor="let user of userAccounts
+              | search: searchText
+              | filter: type
+              | paginate: { itemsPerPage: 10, currentPage: p }" >
+      <tr  *ngIf="user.userrole.id != 2 || user.userrole.user_type==type">
+
+          <td>{{ user.userrole.user_type }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <!-- <td>{{ user.coop }}</td> -->
@@ -94,9 +99,10 @@
               </button>
            </div>
           </td>
+
       </tr>
     </tbody>
-    
+
   </table>
 </div>
   <div class="pagination-controls">
