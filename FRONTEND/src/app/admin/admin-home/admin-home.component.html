@@ -5,8 +5,8 @@
     <ul class="info-data">
       <li class="card">
         <div class="text">
-          <div class="card-topic">Profits</div>
-          <h2>PHP543,939</h2>
+          <div class="card-topic">Profit</div>
+          <h2>PHP5,000</h2>
         </div>
         <div>
           <i class="ti ti-report-money card-icon"></i>
@@ -16,7 +16,7 @@
       <li class="card">
         <div class="text">
           <span class="card-topic">Expenses</span>
-          <h2>PHP50,000</h2>
+          <h2>PHP10,000</h2>
         </div>
         <div>
           <i class="ti ti-receipt-tax card-icon"></i>
@@ -26,7 +26,7 @@
       <li class="card">
         <div class="text">
           <span class="card-topic">Revenue</span>
-          <h2>PHP493,939</h2>
+          <h2>PHP49,000</h2>
         </div>
         <div>
           <i class="ti ti-chart-pie card-icon"></i>
@@ -97,13 +97,18 @@
             <td>{{ e.Member }}</td>
             <td>{{ e.DueDate }}</td>
             <td>{{ e.Balance }}</td>
-            <td>{{ e.Status }}</td>
+            <td class="status">
+              <span [ngClass]="{'pending': e.Status == 'Pending',
+                                'overdue': e.Status == 'Overdue', 
+                                'paid': e.Status == 'Paid',
+                                'closed': e.Status == 'Closed'}">
+              {{ e.Status }}</span></td>
           </tr>
         </tbody>
       </table>
     </div>
+    <div class="pagination-controls">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
   </section>
-  <div class="pagination-controls">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
 </main>

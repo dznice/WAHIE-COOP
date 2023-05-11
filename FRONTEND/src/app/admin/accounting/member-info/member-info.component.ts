@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { Item } from './item';
-import { itemService } from '../../accounting/item.service';
+import { itemService } from './item.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

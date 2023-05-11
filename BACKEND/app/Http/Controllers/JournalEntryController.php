@@ -100,6 +100,7 @@ class JournalEntryController extends Controller
 
             $debits = new Debits;
             $debits->credits_id = $creds;
+            $debits->orig_amount = $request->totalcredit;
             $debits->open_balance = $request->totalcredit;
             $debits->payment = 0;
             $debits->status = "Open";
@@ -139,7 +140,7 @@ class JournalEntryController extends Controller
       $loop = false;
       }
 
-      return response()->json([$member]);
+      return $member;
     }
 
     /**

@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Members;
+use App\Models\forgotPass;
 use App\Models\BenificiaryMembers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\MailOtp;
+use App\Mail\forgotPassword;
 use App\Models\EmailOtp;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\resendOtp;
+use Illuminate\Support\Str;
+use Tymon\JWTAuth\Contracts\Providers\JWT;
 
 
 
@@ -107,7 +111,49 @@ class AuthController extends Controller {
              }
 
             
-            public function submitOtp(Request $request, $id){
+    public function forgotPass(Request $request,$email){
+        $user = User::where('email', '=', $email)->first();
+        $url = Str::random(30);
+        $token = $user->password;   
+        $id = $user->id;
+        $link = 'http://localhost:4200/change-pass/'. $id . '/' .  $url;
+
+        $secret = forgotPass::create([
+            'userId' => $id,
+            'secret' => $token       
+        ]);
+      
+
+        EmailOtp::create([
+        'user_email'=> $email,
+        'code' => 0
+         ]);
+        Mail::to($email)->send(new forgotPassword($link,$email));
+
+   
+        return response()->json($user); 
+    }
+
+    public function forgotChange(Request $request,$id){
+        $secret = forgotPass::where('userId', '=',$id)->first();
+        $users = User::where('id', '=',$id)->first();
+        if($secret){
+            if($secret->secret == $users->password){   
+            $secret->delete();
+            $users->password = Hash::make($request->password);
+            $users->save();
+            return response()->json($users); 
+        }
+        }
+    
+
+
+    }
+
+
+
+
+    public function submitOtp(Request $request, $id){
                 $users = User::find($id);
                if($users->code==$request->code){
                 $users->code = 0;
@@ -118,7 +164,7 @@ class AuthController extends Controller {
             
             }
             
-            public function resendOtp($id){
+    public function resendOtp($id){
                 $users = User::find($id);
         
                 $email = $users->email;

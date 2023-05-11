@@ -2,12 +2,12 @@
   <h1 class="title">Accounts</h1>
 </main>
 
-<section>
+<!-- <section>
   <router-outlet></router-outlet>
   <div>
-    <div class="otp-modal" *ngIf="showModal === 1">
+    <div class="otp-modal">
       <div class="otp-content">
-        <div class="otp-header">Add New Admin Account</div>
+        <div class="otp-header">Add admin account</div>
         <div class="otp-body">
           <label for="admin_username">Username</label>
           <input class="modalinput" type="number" #admin_username />
@@ -19,24 +19,13 @@
           <input class="modalinput" type="text" #admin_password />
         </div>
         <div class="otp-footer">
-          <button
-            class="backbtn"
-            (click)="
-              add(admin_username.value, admin_email.value, admin_password.value);
-              admin_username.value = '';
-              admin_email.value = '';
-              admin_password.value = ''
-            "
-            (click)="show(2)"
-          >
-            Create
-          </button>
-          <button class="closebtn" (click)="show(2)">Close</button>
+          <button class="backbtn">Create</button>
+          <button class="closebtn">Close</button>
         </div>
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
 <div class="add-account">
@@ -48,56 +37,73 @@
 
 <div class="input-box">
   <i class="ti ti-search"></i>
-  <input type="text" placeholder="Search member" [(ngModel)]="searchText"/>
+  <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
 </div>
 
+<div class="">
+  <label>Type</label>
+  <select [(ngModel)]="type" name="journal-type">
+    <option [ngValue]="undefined" selected>All</option>
+    <option *ngFor="let type of types" [value]="type" > {{type}}</option>
+  </select>
+</div>
+
+
+
 <div class="table-container">
+  <div>
   <table class="table-content">
     <thead>
-      <th>User</th>
+      <th>Role</th>
+      <th>Name</th>
       <th>Email</th>
       <th>Department</th>
       <th>Date Created</th>
       <th>Status</th>
     </thead>
-    <tbody>
-      <tr *ngFor="let user of userAccounts | search: searchText | paginate: { itemsPerPage: 10, currentPage: p }" >
-        <div *ngIf="user.role_id == 1">
+
+    <tbody *ngFor="let user of userAccounts
+              | search: searchText
+              | filter: type
+              | paginate: { itemsPerPage: 10, currentPage: p }" >
+      <tr  *ngIf="user.userrole.id != 2 || user.userrole.user_type==type">
+
+          <td>{{ user.userrole.user_type }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.coop }}</td>
-          <td>{{ user.status }}</td>
-
-          <!-- <td>{{ user.datecreated }}</td> -->
+          <!-- <td>{{ user.coop }}</td> -->
+          <td>{{ user.created_at | date: 'MM-dd-yyyy' }}</td>
+          <td></td>
 
             <td>
               <div *ngIf="user.status == 0">
                 <label class="switch-toggle">
-                
+
                 <input  class="switch" input type="checkbox"  (click)="deactivateTOactivate(user)" />
                 <div class="slider"></div>
               </label>
             </div>
             <div *ngIf="user.status == 1">
               <label class="switch-toggle">
-                
-              <input id={{user.role_id}} class="switch" input type="checkbox"  [(ngModel)]="isChecked" (click)="activateUser(user)" (change)="changeSelection ($event,index)" />
+
+              <input class="switch" input type="checkbox"  [(ngModel)]="isChecked" (click)="activateUser(user)" (change)="changeSelection ($event,index)" />
               <div class="slider"></div>
             </label>
           </div>
-              
+
 
             <div *ngIf="user.status == 2">
               <button type="submit" (click)="activateUser2(user)" class="btn btn-success">
                 <span>Activate</span>
-              </button> 
+              </button>
            </div>
           </td>
-        </div>
+
       </tr>
     </tbody>
-  </table>
 
+  </table>
+</div>
   <div class="pagination-controls">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddMembersComponent } from './add-members.component';
+import { NullPageComponent } from './null-page.component';
 
-describe('AddMembersComponent', () => {
-  let component: AddMembersComponent;
-  let fixture: ComponentFixture<AddMembersComponent>;
+describe('NullPageComponent', () => {
+  let component: NullPageComponent;
+  let fixture: ComponentFixture<NullPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddMembersComponent ]
+      declarations: [ NullPageComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddMembersComponent);
+    fixture = TestBed.createComponent(NullPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

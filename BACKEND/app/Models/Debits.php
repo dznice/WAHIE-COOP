@@ -16,6 +16,7 @@ class Debits extends Model
     [
         'credits_id',
         'open_balance',
+        'orig_amount',
         'payment',
         'pay_date',
         'status'

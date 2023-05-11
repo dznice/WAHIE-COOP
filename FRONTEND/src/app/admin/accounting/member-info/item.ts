@@ -19,4 +19,5 @@ export class Item{
     open_balance: any;
     cred: any;
     status: any;
+    orig_amount: any;
 }

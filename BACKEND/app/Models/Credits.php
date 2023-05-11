@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\LibJournal;
 use App\Models\Payables;
 
 class Credits extends Model
@@ -23,5 +24,10 @@ class Credits extends Model
     public function cred(): BelongsTo
     {
         return $this->belongsTo(Payables::class, 'payables_id', 'id');
+    }
+
+    public function journ(): BelongsTo
+    {
+        return $this->belongsTo(LibJournal::class, 'journals_id', 'id');
     }
 }

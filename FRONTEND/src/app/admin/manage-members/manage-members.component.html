@@ -1,0 +1,82 @@
+<main>
+  <h1 class="title">Member Accounts</h1>
+
+  <div class="input-box">
+    <i class="ti ti-search"></i>
+    <input type="text" placeholder="Search" [(ngModel)]="searchText" />
+  </div>
+
+  <div class="table-container">
+    <div>
+      <table class="table-content">
+        <thead>
+          <!-- <th>Role</th> -->
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Date Created</th>
+          <th>Status</th>
+        </thead>
+
+        <tbody
+          *ngFor="
+            let user of memAccounts
+              | search : searchText
+              | filter : type
+              | paginate : { itemsPerPage: 10, currentPage: p }
+          "
+        >
+          <tr *ngIf="user.userrole.id == 3">
+            <!-- <td>{{ user.userrole.user_type }}</td> -->
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.coop }}</td>
+            <td>{{ user.created_at | date : "MM-dd-yyyy" }}</td>
+            <!-- <td>{{ user.status }}</td>  -->
+
+            <td>
+              <div *ngIf="user.status == 0">
+                <label class="switch-toggle">
+                  <input
+                    class="switch"
+                    input
+                    type="checkbox"
+                    (click)="deactivateTOactivate(user)"
+                  />
+                  <div class="slider"></div>
+                </label>
+              </div>
+              <div *ngIf="user.status == 1">
+                <label class="switch-toggle">
+                  <input
+                    class="switch"
+                    input
+                    type="checkbox"
+                    [(ngModel)]="isChecked"
+                    (click)="activateUser(user)"
+                    (change)="changeSelection($event, index)"
+                  />
+                  <div class="slider"></div>
+                </label>
+              </div>
+
+              <div *ngIf="user.status == 2">
+                <button
+                  type="submit"
+                  (click)="activateUser2(user)"
+                  class="btn btn-success"
+                >
+                  <span>Activate</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="pagination-controls">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</main>

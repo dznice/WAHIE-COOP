@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class LoggedInService {
 
   canActivate(route:Router,state:RouterStateSnapshot):boolean | Observable<boolean>{
-
       return this.token.loggedIn(); 
 
   }

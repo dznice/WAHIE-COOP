@@ -2,6 +2,10 @@ import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angula
 import { DOCUMENT } from '@angular/common';
 import { slider, slideright } from '../animation';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { BackendService } from '../services/backend.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-change-pass',
@@ -35,7 +39,8 @@ export class ChangePassComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(DOCUMENT) private _document: any,
-    private fb: FormBuilder
+    private fb: FormBuilder, private backend:BackendService, private http:HttpClient,
+    private aRouter: ActivatedRoute, private route:Router
   ) {}
 
   passwordMatch(controlName: string, matchControlName: string) {
@@ -56,8 +61,23 @@ export class ChangePassComponent implements OnInit, OnDestroy {
   get frm() {
     return this.changePassForm.controls;
   }
-
+  private urlId : Subscription;
+  id:string = '';
+  token:string = '';
+  
   ngOnInit() {
+    this.aRouter.url.subscribe(console.log);
+    this.urlId = this.aRouter.params.subscribe(
+      params=>{
+
+      console.log(params);
+      console.log(params['id'])
+      this.id = params['id']
+      console.log(params['token'])
+      this.token = params['token']
+     
+    })  
+    
     this._document.body.classList.add('body');
 
     this.changePassForm = this.fb.group(
@@ -85,4 +105,23 @@ export class ChangePassComponent implements OnInit, OnDestroy {
   onStrengthChange(score: any) {
     console.log('new score', score);
   }
+
+
+  public fpform ={
+    password: null,
+    confirm_pass:null,
+    token: this.token,
+    id: this.id
+  }
+
+
+  changePass(){
+      this.http.post('http://127.0.0.1:8000/api/users/forgotChange' + '/' + this.id, this.fpform).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.route.navigateByUrl('login');
+        });
+    }
+
+  
 }

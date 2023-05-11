@@ -39,21 +39,18 @@ main {
   margin-top: 1px;
 }
 
-  .btn-add {
-    cursor: pointer;
-    border: none;
-    border-radius: 0.5rem;
-    background: var(--primary-color);
-    color: var(--panel-color);
-    padding: 12px 20px 12px 14px;
-    
-  }
-    .ti-plus {
-      margin-right: 14px;
-      font-size: 14px;
-      
-    }
-  
+.btn-add {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--primary-color);
+  color: var(--panel-color);
+  padding: 12px 20px 12px 14px;
+}
+.ti-plus {
+  margin-right: 14px;
+  font-size: 14px;
+}
 
 /* Search box */
 .input-box {
@@ -96,7 +93,6 @@ main {
   }
 }
 
-
 /* Table */
 .table-container {
   margin: auto;
@@ -129,12 +125,12 @@ main {
       tr {
         border-bottom: 1px solid var(--border-color);
         background-color: var(--panel-color);
-          td {
-            text-align: left;
-            font-weight: 500;
-            padding: 16px 16px;
-            border-right: 1px solid var(--border-color);
-          }
+        td {
+          text-align: left;
+          font-weight: 500;
+          padding: 16px 16px;
+          border-right: 1px solid var(--border-color);
+        }
       }
 
       tr:hover {
@@ -152,7 +148,6 @@ main {
   text-align: right;
   margin-right: 0px;
 }
-
 
 /* Switch */
 .switch {
@@ -187,6 +182,3 @@ input:checked {
 input:checked::after {
   left: 70%;
 }
-
-
-

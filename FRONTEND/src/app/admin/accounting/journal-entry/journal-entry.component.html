@@ -10,7 +10,7 @@
 
         <div class="journnumber">
           <label> Journal Number </label>
-          <input class="headinput" type="number" formControlName="journal_no" />
+          <input class="headinput" type="number" formControlName="journal_no" [value]="this.journId"/>
         </div>
         <div class="userid">
           <input class="headinput" type="hidden" formControlName="useid" [value]="this.useid" />
@@ -51,8 +51,8 @@
                       ><i>Click here to Add+</i></a
                     >
                   </ng-template>
-                  <ng-option
-                    class="try"
+                  <ng-option 
+                    class="idnk"
                     *ngFor="let libJournal of libJournals"
                     [value]="libJournal.id"
                   >
@@ -82,11 +82,7 @@
 
               <td class="beneinput">
                 <ng-select class="try" formControlName="name">
-                  <ng-option
-                    class="try"
-                    *ngFor="let member of members"
-                    [value]="member.id"
-                  >
+                  <ng-option class="try" *ngFor="let member of members"[value]="member.id">
                     {{ member.id }} {{ member.first_name }}
                     {{ member.middle_name }} {{ member.last_name }}
                   </ng-option>
@@ -105,7 +101,10 @@
       <div class="totals">
         <div class="journdate">
           <label> Total Debit </label>
-          <input class="headinput" type="number" formControlName="totaldebit" />
+          <input
+          class="headinput"
+          type="number"
+          formControlName="totaldebit" />
         </div>
         <div class="journdate">
           <label> Total Credit </label>

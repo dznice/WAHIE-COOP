@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
 
 @Component({
-  selector: 'app-sadmin-home',
-  templateUrl: './sadmin-home.component.html',
-  styleUrls: ['./sadmin-home.component.scss'],
+  selector: 'app-manage-members',
+  templateUrl: './manage-members.component.html',
+  styleUrls: ['./manage-members.component.scss']
 })
-export class SadminHomeComponent {
+export class ManageMembersComponent {
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
@@ -16,14 +16,6 @@ export class SadminHomeComponent {
 
   userrole: number[] = [1,3];
 
-
-
-  constructor(private http: HttpClient, private wahieService:WahieService) {
-    this.showUsers();
-    
-  }
-
-  userAccounts: any[] = [];
   Loaded = false;
   updateFormActive = false;
 
@@ -37,20 +29,21 @@ export class SadminHomeComponent {
   coop: string = '';
   status: number = 0;
 
-  AccountType: string;
+  constructor(private http: HttpClient, private wahieService:WahieService) {
+    this.showUsers();
+   
+  }
 
-  ngOnInit(): void {}
+  
+  memAccounts: any[] = [];
 
   showUsers() {
     this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
       this.Loaded = true;
       console.log(res);
-      this.userAccounts = res;
+      this.memAccounts = res;
     });
   }
-
-  
-  
   isChecked: boolean = true;
 
   getValue() {
@@ -162,21 +155,6 @@ export class SadminHomeComponent {
 
 }
 
-// showModal = -1;
-// show(index: number){
-//   this.showModal = index;
-// }
 
-// SuperAccounts:any;
 
-// add(admin_username:string,admin_email:string, admin_password:string){
-//   this.SuperAccounts={
-//     'admin_username': admin_username,
-//     'admin_email': admin_email,
-//     'admin_password': admin_password,
-//   };
-//   // this.wahieService.addSuperAccount(this.SuperAccounts as any).subscribe(SuperAccount=>{
-//   //   this.SuperAccounts = SuperAccount
-//   // });
-//   console.log(this.SuperAccounts)
-// }
+

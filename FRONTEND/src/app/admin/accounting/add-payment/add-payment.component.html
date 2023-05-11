@@ -19,9 +19,9 @@
 <main>
 
 
-    <div class="container" *ngFor="let info of item">
+    <div class="container" >
         <br /><br />
-
+      <div *ngFor="let info of item">
         <div *ngIf="id==info.id">
         <div class="amount">
             <label class="amounts"> AMOUNT RECEIVED </label> <br />
@@ -69,6 +69,7 @@
             </div>
         </div>
       </div>
+    </div>
 
         <div class="journals">
 
@@ -118,7 +119,7 @@
                     <td>{{ acc.debit.cred.transac.transaction_number }}</td>
                     <td>{{ acc.debit.cred.entries.entry_name }}</td>
                     <td>{{ acc.debit.cred.due_date }}</td>
-                    <td>{{ acc.debit.cred.credit_amount }}</td>
+                    <td>{{ acc.orig_amount }}</td>
                     <td>{{ acc.open_balance }}</td>
                     <td class="tablePayment"><input type="text"></td>
                 </tr>

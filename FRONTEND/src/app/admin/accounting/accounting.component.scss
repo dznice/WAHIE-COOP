@@ -8,174 +8,143 @@ main {
   
 }
 
-.Add {
-  position: absolute;
-  right: 0;
-  margin-top: 1rem;
-  margin-right: 20px;
-  margin-left: 20px;
-  height: 40px;
-  width: 160px;
-  border: none;
-  font-family: "Poppins", sans-serif;
-  background-color: var(--primary-color);
-  color: var(--panel-color);
-  border-radius: 5px;
-  outline: none;
-  font-weight: 600;
-}
-:hover {
-  cursor: pointer;
-}
-.section-div {
-  display: flex;
-}
 
-/* Filtering */
-.recent-transaction {
-  .section-title {
-    color: var(--primary-color);
-    margin-top: 3rem;
-    font-size: 28px;
+/* Add Button */
+.new-transac {
+  text-align: right;
+
+  .btn-add {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--primary-color);
+    color: var(--panel-color);
+    padding: 12px 20px 12px 14px;
+
+    .ti-plus {
+      margin-right: 4px;
+      font-size: 14px;
+    }
   }
 
-  .table-filter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 0.7rem;
-    .filter-field1 {
-      display: flex;
-      width: calc(30% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
+  .btn-add:hover {
+    background-color: var(--primary-alt);
+  }
+}
 
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--dark-grey);
+
+/* Payables */
+.payables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: .2rem;
+  margin: 10px 0px;
+
+  .unpaid-container {    
+
+    .card-merge {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: .2rem;
+      margin-top: 1rem;
+
+      .overdue {
+        border-radius: 0.645rem;
+        background: var(--red);
       }
 
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-        border-radius: 0.45rem;
-        border: 1px solid #aaa;
-        padding: 0 10px;
-        height: 36px;
-        margin: 8px 0 0;
-      }
-    }
-
-    .filter-field2 {
-      display: flex;
-      width: calc(18% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
-
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--dark-grey);
+      .open-inv {
+        border-radius: 0.645rem;
+        background: var(--yellow);
       }
 
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
+      .card-amount {
         font-weight: 500;
-        color: #333;
-        border-radius: 0.45rem;
-        border: 1px solid #aaa;
-        padding: 0 10px;
-        height: 36px;
-        margin: 8px 0 0;
+        font-size: 36px;
       }
     }
-    .filter-field3 {
-      display: flex;
-      width: calc(18% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
+  }
 
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--dark-grey);
-      }
-
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-        border-radius: 0.45rem;
-        border: 1px solid #aaa;
-        padding: 0 10px;
-        height: 36px;
-        margin: 8px 0 0;
-      }
+  .paid-container {
+    .paid {
+      margin-top: 1rem;
+      border-radius: 0.645rem;
+      background: var(--green);
     }
-    .filter-field4 {
-      display: flex;
-      width: calc(18% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
 
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--dark-grey);
-      }
-
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-        border-radius: 0.45rem;
-        border: 1px solid #aaa;
-        padding: 0 10px;
-        height: 36px;
-        margin: 8px 0 0;
-      }
+    .card-amount {
+      font-weight: 500;
+      font-size: 36px;
     }
-    .filter-field5 {
-      display: flex;
-      width: calc(18% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
+  }
 
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--dark-grey);
-      }
+  label {
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--dark-grey);
+  }
 
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-        border-radius: 0.45rem;
-        border: 1px solid #aaa;
-        padding: 0 10px;
-        height: 36px;
-        margin: 8px 0 0;
-      }
-    }
+  .card {
+    padding: 2rem 1rem;
+    background: var(--grey);
+    color: var(--panel-color);
+  }
+
+  .card-subtext {
+    font-size: 18px;
+  }
+}
+
+.payables > * {
+  padding: .75rem 1.5rem .75rem 0;
+}
+
+@media (min-width: 768px) {
+  .payables {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+
+/* Search box */
+.input-box {
+  position: relative;
+  height: 46px;
+  max-width: 300px;
+  width: 100%;
+  background: var(--panel-color);
+  margin-top: 1rem;
+  border-radius: 0.625rem;
+  border: 1.6px solid var(--border-color);
+
+  i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ti-search {
+    left: 16px;
+    font-size: 22px;
+    color: var(--dark-grey-2);
+  }
+
+  input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    padding: 0 20px 0 50px;
+    background-color: transparent;
+  }
+
+  input::placeholder {
+    color: var(--dark-grey-2);
   }
 }
 
@@ -183,80 +152,64 @@ main {
 .table-container {
   margin: auto;
   width: 100%;
-}
-.table-content {
-  width: 100%;
-  margin: 20px 0;
-  font-size: 0.9rem;
-  overflow: hidden;
-  border-collapse: collapse;
-  border-radius: 0.625rem;
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.05);
-}
-.table-content thead th {
-  position: sticky;
-  background-color: var(--primary-color);
-  color: var(--panel-color);
-  text-align: left;
-  font-weight: bold;
-}
-.table-content th,
-.table-content td {
-  text-align: left;
-  padding: 12px 15px;
-}
-.table-content thead th:nth-last-of-type(2),
-.table-content td:nth-last-of-type(2) {
-  text-align: right;
-}
-.table-content th,
-.table-content td {
-  border-right: 1px solid var(--border-color);
-}
-.table-content tbody tr {
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--panel-color);
-}
 
-tr:hover td {
-  color: var(--primary-color);
-  cursor: pointer;
-  background-color: var(--panel-color);
-}
+  .table-content {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    overflow: hidden;
+    border-collapse: collapse;
+    border-radius: 0.625rem;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px var(--border-color);
 
-.table-content tbody {
-  .status {
-    width: 1rem;
-    font-weight: 600;
-  }
-  .overdue {
-    padding: 0.5rem 1.25rem;
-    background: var(--overdue-bg);
-    color: var(--overdue-font);
-    border-radius: 0.45rem;
-    width: fit-content;
-  }
-  .pending {
-    padding: 0.5rem 1.25rem;
-    background: var(--pending-bg);
-    color: var(--pending-font);
-    border-radius: 0.45rem;
-    width: fit-content;
-  }
-  .paid {
-    padding: 0.5rem 2.15rem;
-    background: var(--paid-bg);
-    color: var(--paid-font);
-    border-radius: 0.45rem;
-    width: fit-content;
+    thead {
+      th {
+        position: sticky;
+        background-color: var(--grey);
+        color: var(--primary-color);
+        text-align: left;
+        font-weight: bold;
+        padding: 12px 16px;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--border-color);
+        background-color: var(--panel-color);
+        td {
+          text-align: left;
+          font-weight: 500;
+          padding: 12px 16px;
+          border-right: 1px solid var(--border-color);
+        }
+        .action-td {
+          a {
+            color: var(--primary-color);
+            font-weight: 600;
+          }
+        }
+      }
+
+      tr:hover {
+        td {
+          cursor: pointer;
+          color: var(--primary-color);
+          background-color: var(--panel-color);
+        }
+      }
+    }
   }
 }
 
+
+/* Pagination */
 .pagination-controls {
   text-align: end;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   margin: 10px 20px;
 }
-
-

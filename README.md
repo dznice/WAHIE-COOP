@@ -11,8 +11,7 @@ npm i ngx-pagination --legacy-peer-deps
 npm i ngx-strength-meter --legacy-peer-deps
 npm i @ng-select/ng-select --legacy-peer-deps
 npm i ng-angular-popup --legacy-peer-deps
-
-
+npm install bn-ng-idle --legacy-peer-deps
 
 
 To serve backend run the following commands:
@@ -24,3 +23,5 @@ npm run dev
 
 php artisan migrate
 php artisan serve
+
+composer require spatie/laravel-query-builder

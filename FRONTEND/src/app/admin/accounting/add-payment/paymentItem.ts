@@ -4,6 +4,7 @@ export class Item{
     dueDate : any;
     originalAmount : any;
     openBalance : any
+    orig_amount: any;
 
     date: any;
     type: any;
@@ -25,4 +26,5 @@ export class Item{
     open_balance: any;
     cred: any;
     status: any;
+
 }

@@ -8,12 +8,10 @@ import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { AdminSidenavComponent } from './admin/admin-sidenav/admin-sidenav.component';
 import { AccountingComponent } from './admin/accounting/accounting.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
-import { MembersComponent } from './admin/members/members.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { JournalEntryComponent } from './admin/accounting/journal-entry/journal-entry.component';
-import { AddInvoiceComponent } from './admin/members/add-invoice/add-invoice.component';
-import { AddMembersComponent } from './admin/members/add-members/add-members.component';
-import { AddPaymentComponent } from './admin/members/add-payment/add-payment.component';
+import { AddInvoiceComponent } from './admin/accounting/add-invoice/add-invoice.component';
+import { AddPaymentComponent } from './admin/accounting/add-payment/add-payment.component';
 import { SadminSidenavComponent } from './super-admin/sadmin-sidenav/sadmin-sidenav.component';
 import { SadminHomeComponent } from './super-admin/sadmin-home/sadmin-home.component';
 import { ActivityLogsComponent } from './super-admin/activity-logs/activity-logs.component';
@@ -34,7 +32,7 @@ import { AdminBodyComponent } from './admin/admin-body/admin-body.component';
 import { SadminBodyComponent } from './super-admin/sadmin-body/sadmin-body.component';
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { DisableAccountComponent } from './disable-account/disable-account.component';
-import { MemberInfoComponent } from './admin/members/member-info/member-info.component';
+import { MemberInfoComponent } from './admin/accounting/member-info/member-info.component';
 import { RegMembersComponent } from './reg-members/reg-members.component';
 import { AdditionalInfoComponent } from './member/additional-info/additional-info.component';
 import { MemberComponent } from './member/member.component';
@@ -44,6 +42,8 @@ import { MemberBodyComponent } from './member/member-body/member-body.component'
 import { MemberSidenavComponent } from './member/member-sidenav/member-sidenav.component';
 import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
 import { AdminPassdoneComponent } from './admin-passdone/admin-passdone.component';
+import { NullPageComponent } from './null-page/null-page.component';
+import { ManageMembersComponent } from './admin/manage-members/manage-members.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -53,8 +53,6 @@ import { NgToastModule}  from 'ng-angular-popup';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from './admin/accounting/filter.pipe';
-import { FilterDatePipe } from './admin/accounting/filter-date.pipe';
-import { FilterMemberPipe } from './admin/members/filter-member.pipe';
 import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
 import { FilterInvPipe } from './admin/inventory/filter-inv.pipe';
@@ -62,8 +60,9 @@ import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
 import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
 import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
 import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
-import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.pipe';
-
+import { FilterPaymentDatePipe } from './admin/accounting/add-payment/pfilter-date.pipe';
+import { FilterMemberPipe } from './admin/accounting/filter-member.pipe';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   declarations: [
@@ -73,11 +72,9 @@ import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.
     AdminSidenavComponent,
     AccountingComponent,
     AdminHomeComponent,
-    MembersComponent,
     InventoryComponent,
     JournalEntryComponent,
     AddInvoiceComponent,
-    AddMembersComponent,
     AddPaymentComponent,
     SadminSidenavComponent,
     SadminHomeComponent,
@@ -98,8 +95,6 @@ import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.
     DisableAccountComponent,
     MemberInfoComponent,
     FilterPipe,
-    FilterDatePipe,
-    FilterMemberPipe,
     FilterHomePipe,
     FilterHomeDatePipe,
     SearchPipe,
@@ -116,7 +111,10 @@ import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.
     AdminChpassComponent,
     AdminPassdoneComponent,
     FilterMemHomeDatePipe,
-    FilterPaymentDatePipe
+    FilterPaymentDatePipe,
+    NullPageComponent,
+    ManageMembersComponent,
+    FilterMemberPipe
   ],
   imports: [
     BrowserModule,
@@ -132,7 +130,7 @@ import { FilterPaymentDatePipe } from './admin/members/add-payment/pfilter-date.
     NgToastModule,
     NgSelectModule
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, BnNgIdleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
