@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { passwordMatch } from '../../validators/passwordMatch';
+import { BackendService } from '../../services/backend.service';
 
 @Component({
   selector: 'app-sadmin-home',
@@ -16,14 +19,19 @@ export class SadminHomeComponent {
   type: string;
 
   userrole: number[] = [1,3];
-  
 
 
 
-  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router) {
+
+  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,) {
     this.showUsers();
-    
+
   }
+
+  autoAdminForm = new FormGroup({
+    username : new FormControl("", [Validators.required]),
+    email : new FormControl("", [Validators.required])
+  })
 
   userAccounts: any[] = [];
   Loaded = false;
@@ -57,7 +65,22 @@ export class SadminHomeComponent {
 
 
 
+  public form = {
+    username:null,
+    email:null
+  }
 
+  autoAdmin(){
+    console.log(this.form)
+    return this.backend.adminadd(this.form).subscribe(
+      data=>this.handleData(data)
+
+      );
+  }
+
+  handleData(data:any){
+    sessionStorage.setItem('email', JSON.stringify(data['email']));
+  }
 
 
   showUsers() {
@@ -68,8 +91,8 @@ export class SadminHomeComponent {
     });
   }
 
-  
-  
+
+
   isChecked: boolean = true;
 
   getValue() {

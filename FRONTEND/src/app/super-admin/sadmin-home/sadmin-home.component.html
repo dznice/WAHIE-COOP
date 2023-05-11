@@ -20,8 +20,8 @@
       <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
     </div>
   </div>
-  
-  
+
+
   <div class="filter-role">
     <label>User Role</label>
     <select [(ngModel)]="type" name="journal-type">
@@ -97,25 +97,24 @@
 <section>
   <router-outlet></router-outlet>
   <div>
-    
+    <form (ngSubmit)="autoAdmin()" #memberRegistration="ngForm" [formGroup]="autoAdminForm" class="register-form">
     <div class="otp-modal"  *ngIf="showModal === 1">
       <div class="otp-content">
         <div class="otp-header">Add admin account</div>
         <div class="otp-body">
           <label for="admin_username">Username</label>
-          <input class="modalinput" type="number" #admin_username />
+          <input class="modalinput" type="text" [(ngModel)]="form.username" formControlName="username"/>
           <br/>
           <label for="admin_email">Email Address</label>
-          <input class="modalinput" type="text" #admin_email />
+          <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
           <br />
-          <label for="admin_password">Password</label>
-          <input class="modalinput" type="text" #admin_password />
         </div>
         <div class="otp-footer">
-          <button class="backbtn">Create</button>
+          <button class="backbtn" > Create </button>
           <button class="closebtn" (click)="show(2)">Close</button>
         </div>
       </div>
     </div>
+  </form>
   </div>
 </section>
