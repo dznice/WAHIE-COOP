@@ -1,35 +1,12 @@
 <main>
   <h1 class="title">Accounts</h1>
+
 </main>
 
-<!-- <section>
-  <router-outlet></router-outlet>
-  <div>
-    <div class="otp-modal">
-      <div class="otp-content">
-        <div class="otp-header">Add admin account</div>
-        <div class="otp-body">
-          <label for="admin_username">Username</label>
-          <input class="modalinput" type="number" #admin_username />
-          <br />
-          <label for="admin_email">Email Address</label>
-          <input class="modalinput" type="text" #admin_email />
-          <br />
-          <label for="admin_password">Password</label>
-          <input class="modalinput" type="text" #admin_password />
-        </div>
-        <div class="otp-footer">
-          <button class="backbtn">Create</button>
-          <button class="closebtn">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 
 <div class="add-account">
-  <button class="btn-add">
+  <button class="btn-add" (click)="show(1)">
     <i class="ti ti-plus"></i>
     New Account
   </button>
@@ -113,3 +90,32 @@
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>
+
+
+
+
+<section>
+  <router-outlet></router-outlet>
+  <div>
+    
+    <div class="otp-modal"  *ngIf="showModal === 1">
+      <div class="otp-content">
+        <div class="otp-header">Add admin account</div>
+        <div class="otp-body">
+          <label for="admin_username">Username</label>
+          <input class="modalinput" type="number" #admin_username />
+          <br/>
+          <label for="admin_email">Email Address</label>
+          <input class="modalinput" type="text" #admin_email />
+          <br />
+          <label for="admin_password">Password</label>
+          <input class="modalinput" type="text" #admin_password />
+        </div>
+        <div class="otp-footer">
+          <button class="backbtn">Create</button>
+          <button class="closebtn" (click)="show(2)">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

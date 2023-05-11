@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sadmin-home',
@@ -15,10 +16,11 @@ export class SadminHomeComponent {
   type: string;
 
   userrole: number[] = [1,3];
+  
 
 
 
-  constructor(private http: HttpClient, private wahieService:WahieService) {
+  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router) {
     this.showUsers();
     
   }
@@ -40,6 +42,23 @@ export class SadminHomeComponent {
   AccountType: string;
 
   ngOnInit(): void {}
+
+
+  showModal = -1;
+  show(index: number){
+    this.showModal = index;
+  }
+
+
+  back(){
+    this.route.navigateByUrl('super-admin/sadmin-home')
+  }
+
+
+
+
+
+
 
   showUsers() {
     this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
