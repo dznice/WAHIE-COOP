@@ -12,22 +12,22 @@ export class NullPageComponent implements OnInit {
   }
   role= localStorage.getItem('userRole')
   ngOnInit() {
-  localStorage.clear()
-  sessionStorage.clear()
-  this.route.navigateByUrl('login')
-  // if(this.role=='1'){
-  //   this.route.navigateByUrl('admin/admin-home')
-  // }
-  // else if(this.role=='2')
-  // {
-  //   this.route.navigateByUrl('super-admin/sadmin-home')
-  // }
-  // else if(this.role=='3')
-  // {
-  //   this.route.navigateByUrl('member/member-home')
-  // }else{
-  //   this.route.navigateByUrl('login')
-  // }
+  // localStorage.clear()
+  // sessionStorage.clear()
+  // this.route.navigateByUrl('login')
+  if(this.role=='1'){
+    this.route.navigateByUrl('admin/admin-home')
+  }
+  else if(this.role=='2')
+  {
+    this.route.navigateByUrl('super-admin/sadmin-home')
+  }
+  else if(this.role=='3')
+  {
+    this.route.navigateByUrl('member/member-home')
+  }else{
+    this.route.navigateByUrl('login')
+  }
  
   }
 

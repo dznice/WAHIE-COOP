@@ -62,7 +62,7 @@ import { FilterLogsPipe } from './super-admin/activity-logs/filterLog.pipe';
 import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
 import { FilterPaymentDatePipe } from './admin/accounting/add-payment/pfilter-date.pipe';
 import { FilterMemberPipe } from './admin/accounting/filter-member.pipe';
-
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   declarations: [
@@ -130,7 +130,7 @@ import { FilterMemberPipe } from './admin/accounting/filter-member.pipe';
     NgToastModule,
     NgSelectModule
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, BnNgIdleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
