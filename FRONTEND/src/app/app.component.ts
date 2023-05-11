@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'WAHffle';
   constructor(private bnIdle: BnNgIdleService, private route:Router) { // initiate it in your component constructor
-    this.bnIdle.startWatching(30).subscribe((res) => {
+    this.bnIdle.startWatching(3600).subscribe((res) => {
       if(res) {
           console.log("session expired");
           localStorage.clear();

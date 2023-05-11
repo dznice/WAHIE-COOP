@@ -35,19 +35,24 @@
   </button>
 </div>
 
-<div class="input-box">
-  <i class="ti ti-search"></i>
-  <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
+<div class="filter-field">
+  <div class="filter-search">
+    <label>Search User</label>
+    <div class="input-box">
+      <i class="ti ti-search"></i>
+      <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
+    </div>
+  </div>
+  
+  
+  <div class="filter-role">
+    <label>User Role</label>
+    <select [(ngModel)]="type" name="journal-type">
+      <option [ngValue]="undefined" selected>All</option>
+      <option *ngFor="let type of types" [value]="type">{{type}}</option>
+    </select>
+  </div>
 </div>
-
-<div class="">
-  <label>Type</label>
-  <select [(ngModel)]="type" name="journal-type">
-    <option [ngValue]="undefined" selected>All</option>
-    <option *ngFor="let type of types" [value]="type" > {{type}}</option>
-  </select>
-</div>
-
 
 
 <div class="table-container">
