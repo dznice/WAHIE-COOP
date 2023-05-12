@@ -1,4 +1,14 @@
-<main>
+<div class="wrapper" *ngIf="loader2">
+  <div class="circle" ></div>
+  <div class="circle" ></div>
+  <div class="circle" ></div>
+  <div class="shadow" ></div>
+  <div class="shadow" ></div>
+  <div class="shadow" ></div>
+</div>
+
+
+<main *ngIf="loader">
   <h1 class="title">Dashboard</h1>
 
   <section class="info-cards">

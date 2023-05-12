@@ -11,7 +11,12 @@ import { Router } from '@angular/router';
   providers: [itemService]
 })
 export class AdminHomeComponent implements OnInit {
-  item: any[] = [];
+
+  loader = false;
+  loader2 = true;
+
+  
+  item: Item[] = [];
   term: string = '';
   p: number = 1;
   type: string;
@@ -32,6 +37,12 @@ export class AdminHomeComponent implements OnInit {
     this.item = this.ItemService.item;
       // this.showEntries();
       this.showAccounting();
+    setTimeout(() => {
+      this.loader = true;
+    }, 2000);
+    setTimeout(() => {
+      this.loader2 = false;
+    }, 2000);
   }
 
   

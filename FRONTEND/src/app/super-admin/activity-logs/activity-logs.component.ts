@@ -11,6 +11,9 @@ import { itemService } from './logItem.service';
 })
 export class ActivityLogsComponent implements OnInit{
   
+  loader = false;
+  loader2 = true;
+
   item: logItem[] = [];
   term: string = '';
   p: number = 1;
@@ -31,6 +34,12 @@ export class ActivityLogsComponent implements OnInit{
 
 ngOnInit():void{
   this.item = this.ItemService.item;
+  setTimeout(() => {
+    this.loader = true;
+  }, 2000);
+  setTimeout(() => {
+    this.loader2 = false;
+  }, 2000);
    
 
 
