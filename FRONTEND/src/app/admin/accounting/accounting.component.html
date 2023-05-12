@@ -60,7 +60,7 @@
            <td (click) = 'memberInfo( member.id )'>{{member.id}} {{member.first_name}}</td>
            <td (click) = 'memberInfo( member.id )'>{{member.email}}</td>
            <td (click) = 'memberInfo( member.id )'>{{member.id}}</td>
-           <td class="action-td"><a [routerLink]="['../accounting/add-payment']">Receive payment</a></td>
+           <td class="action-td" (click) = 'memberAccounting( member.id )'><a>Receive payment</a></td>
           </tr>
         </tbody>
       </table>

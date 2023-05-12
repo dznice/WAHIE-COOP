@@ -167,4 +167,12 @@ export class AccountingComponent implements OnInit {
         this.route.navigateByUrl('admin/accounting/member-info/' + data);
       });
   }
+
+  memberAccounting(data: any) {
+    this.http
+      .get('http://127.0.0.1:8000/api/memberList/' + data)
+      .subscribe((res: any) => {
+        this.route.navigateByUrl('admin/accounting/add-payment/' + data);
+      });
+  }
 }

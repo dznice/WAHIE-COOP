@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     use HasFactory;
+    protected $table = 'trial';
+    protected $primaryKey = 'id';
+    protected $fillable = 
+    [
+        'journal_no',
+        'journal_date',
+    ];
 }
