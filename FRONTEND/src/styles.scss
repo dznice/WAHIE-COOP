@@ -30,6 +30,8 @@ body {
   background: var(--primary-alt);
 }
 
+
+/* Dropdown */
 .ng-dropdown-panel{
   background-color: aliceblue;
   outline: none;
@@ -40,9 +42,33 @@ body {
   border-bottom-left-radius: 5px;
   border: 1px solid #aaa; 
   margin: 2px 0;
-  
 }
 
+/* Select Dropdown */
+select {
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  appearance: none;
+  border: 1px solid var(--border-color);
+  border-radius: 0.45rem;
+  padding: 0 10px;
+  margin: 8px 4px 0;
+  height: 36px;
+  min-width: 15ch;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 
+  align-items: center;
+  display: grid;
+  grid-template-areas: "select";
+}
 
-
+select,
+.select:after {
+  grid-area: select;
+}

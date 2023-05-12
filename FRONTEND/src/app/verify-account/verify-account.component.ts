@@ -27,8 +27,8 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
 
   /**MODAL*/
   showModal = -1;
-  show(index: number) {
-    this.showModal = index;
+  show() {
+    this.showModal = 1;
   }
 
   id = localStorage.getItem('userData');
@@ -43,7 +43,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
 
   getOtp(data: any) {
     console.log(data);
-    this.id = sessionStorage.getItem('userData'),
+    this.id = localStorage.getItem('userData'),
     this.otp = (<HTMLInputElement>document.getElementById("otp")).value;
     this.updateData();
   }
@@ -57,6 +57,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     console.log(this.otp)
     this.http.post('http://127.0.0.1:8000/api/users/updateOtp' + '/' + this.id, body).subscribe(
       (res:any)=>{
+        this.show()
       if(res.status==2) {
        this.route.navigateByUrl('not-verified');
       } else if(res.status==0) {

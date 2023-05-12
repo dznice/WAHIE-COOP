@@ -24,7 +24,6 @@
                     </div>
                     
                     <button type="submit"  class="submit">Confirm</button>
-                    <!-- <button (click)="show(1)" class="submit">Confirm</button> -->
                 </form>
 
                 <div (click)="resendOtp()" class="resend-code">
@@ -42,7 +41,6 @@
 
 <!--OTP MODAL-->
 <section>
-    <router-outlet></router-outlet>
     <div>
         <div class="otp-modal" *ngIf="showModal === 1">
             <div class="otp-content">

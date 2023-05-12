@@ -81,7 +81,7 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
   public chform = {
     id : null,
     password:null,
-   confirm_pass:null
+    confirm_pass:null
   }
 
 

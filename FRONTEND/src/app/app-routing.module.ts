@@ -39,6 +39,8 @@ import { MemberBodyComponent } from './member/member-body/member-body.component'
 import { MemberOnlyService } from './services/member-only.service';
 import { NullPageComponent } from './null-page/null-page.component';
 import { ManageMembersComponent } from './admin/manage-members/manage-members.component';
+import { AdminPassdoneComponent } from './admin-passdone/admin-passdone.component';
+import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
 
 
 const routes: Routes = [
@@ -105,6 +107,14 @@ const routes: Routes = [
   {
   path: 'additional-info',
   component: AdditionalInfoComponent
+  },
+  {
+    path: 'admin-chpass',
+    component: AdminChpassComponent,
+  },
+  {
+    path: 'admin-passdone',
+    component: AdminPassdoneComponent,
   },
   {
     path: 'admin',
