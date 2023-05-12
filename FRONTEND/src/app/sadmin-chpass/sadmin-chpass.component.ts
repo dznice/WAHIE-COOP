@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { slider, slideright} from '../animation';
-import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { passwordMatch } from '../validators/passwordMatch';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BackendService } from '../services/backend.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -16,8 +15,6 @@ import { TokenService } from '../services/token.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class SadminChpassComponent implements OnInit, OnDestroy {
-
-  form!: FormGroup;
 
   isDisplayed: boolean = true;
   toggleDiv(){
@@ -38,35 +35,53 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
     this.cchangetype = !this.cchangetype
   }
 
+  chpassForm!: FormGroup;
   
-  submitted:boolean = false;
   constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private http:HttpClient, 
   private backend:BackendService, private route:Router, private token:TokenService ){}
 
-  chpassForm = new FormGroup({
-
-    password : new FormControl("", [Validators.required]),
-
-    confirm_pass : new FormControl("", [Validators.required]),
-
-
-  }, [ passwordMatch("password", "confirm_pass") ])
-
-  getControl(name: any): AbstractControl | null{
-    return this.chpassForm.get(name)
+  passwordMatch(controlName: string, matchControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchControl = formGroup.controls[matchControlName];
+      if (matchControl.errors && !matchControl.errors['passwordMatch']) {
+        return;
+      }
+      if (control.value !== matchControl.value) {
+        matchControl.setErrors({ passwordMatch: true });
+      } else {
+        matchControl.setErrors(null);
+      }
+    };
   }
-  onSubmit(){
-    this.submitted = true;
-    if(this.chpassForm.invalid){
-      return;
-    }
+
+  get frm() {
+    return this.chpassForm.controls;
   }
+
   ngOnInit(): void {
     this._document.body.classList.add('body');
+
+    this.chpassForm = this.fb.group(
+      {
+        password: new FormControl(null, [Validators.required]),
+
+        confirm_pass: new FormControl(null, [Validators.required]),
+      },
+      {
+        validator: this.passwordMatch('password', 'confirm_pass'),
+      }
+    );
 
     /*this.form = this.fb.group({
       password: ['', Validators.required],
     });*/
+  }
+
+  onSubmit() {
+    this.chpassForm.get('password')?.markAsTouched();
+
+    this.chpassForm.get('confirm_pass')?.markAsTouched();
   }
 
   ngOnDestroy() {

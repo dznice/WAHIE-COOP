@@ -108,6 +108,10 @@ form {
   font-size: 0.96rem;
 }
 
+.txt-field{
+  margin-top: 1rem;
+}
+
 .txt-wrap {
   position: relative;
   height: 40px;
@@ -137,12 +141,12 @@ input {
   flex-direction: column;
 }
 
-/*.meter{
+.meter{
 margin-top:3.8em;
 max-width: 500px;
 width: 310px;
+}
 
-}*/
 .eye {
   position: absolute;
   left: 87%;
@@ -169,13 +173,26 @@ width: 310px;
   border: none;
   border-radius: 0.6rem;
   font-size: 1rem;
-
-  margin-bottom: 2rem;
+  margin-bottom: .5rem;
   text-decoration: none;
 }
 
-.reset:hover {
-  opacity: 80%;
+.logout{
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  height: 43px;
+  background-color: #707070;
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  text-decoration: none;
+}
+
+.logout:hover{
+  background-color: var(--primary-alt);
 }
 
 .account {
@@ -313,4 +330,11 @@ width: 310px;
   transform: translate(5%, -150%);
   color: red;
   font-size: 14px;
+}
+
+.notMatch{
+    transform: translate(11%, -130%);
+    color: red;
+    font-size: 16px;
+    position: absolute;
 }
