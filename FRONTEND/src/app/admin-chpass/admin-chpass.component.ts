@@ -88,7 +88,7 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
   submitPass(){
     this.http.post('http://127.0.0.1:8000/api/users/superChange' + '/' + this.id, this.chform).subscribe(
       (res:any)=>{
-        console.log(res.id)
+        console.log(res.id);
         this.token.handle(sessionStorage.getItem('ftoken'));
         this.route.navigateByUrl('super-admin/sadmin-home');
     }); 
