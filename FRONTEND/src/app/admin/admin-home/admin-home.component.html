@@ -90,19 +90,19 @@
           <th>Status</th>
         </thead>
         <tbody>
-          <tr *ngFor="let e of item | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }">
-            <td>{{ e.date }}</td>
-            <td>{{ e.type }}</td>
-            <td>{{ e.No }}</td>
-            <td>{{ e.Member }}</td>
-            <td>{{ e.DueDate }}</td>
-            <td>{{ e.Balance }}</td>
+          <tr *ngFor="let e of account | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }">
+            <td>{{ e.debit.cred.transac.transaction_date }}</td>
+            <td>{{ e.debit.cred.entries.entry_name }}</td>
+            <td>{{ e.debit.cred.transac.transaction_number }}</td>
+            <td>{{ e.debit.cred.transac.member.first_name }} {{ e.debit.cred.transac.member.last_name }}</td>
+            <td>{{ e.debit.cred.due_date }}</td>
+            <td>{{ e.open_balance }}</td>
             <td class="status">
-              <span [ngClass]="{'pending': e.Status == 'Pending',
-                                'overdue': e.Status == 'Overdue', 
-                                'paid': e.Status == 'Paid',
-                                'closed': e.Status == 'Closed'}">
-              {{ e.Status }}</span></td>
+              <span [ngClass]="{'pending': e.status == 'Open',
+                                'overdue': e.status == 'Overdue', 
+                                'paid': e.status == 'Paid',
+                                'closed': e.status == 'Closed'}">
+              {{ e.status }}</span></td>
           </tr>
         </tbody>
       </table>
