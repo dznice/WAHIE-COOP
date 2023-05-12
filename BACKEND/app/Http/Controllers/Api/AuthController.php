@@ -105,7 +105,7 @@ class AuthController extends Controller {
                 'occupation' => "",
                 'employment_status' => "",
                 'company_address' => "",
-                'job_title' => "",
+
 
                 ]);
                 return response()->json($user);
@@ -227,7 +227,8 @@ class AuthController extends Controller {
                     $members->occupation = $request->occupation;
                     $members->employment_status = $request->employment_status;
                     $members->company_address = $request->company_address;
-                    $members->job_title = $request->job_title;
+                    $members->address = $request->current_address.' ' . $request->barangay .' ' .
+                     $request->city .' ' . $request->province .' ' . $request->postal_code;
                     $members->save();
 
                     $user = User::where('email', '=', $email)->first();
@@ -238,7 +239,7 @@ class AuthController extends Controller {
                     foreach($bene['row'] as $key=>$value)
                     {
                              BenificiaryMembers::create([
-                            'benificiary_id' =>  $value['benificiary_id'],
+                            'benificiary_id' => $request->memId ,
                             'benificiary_name' =>  $value['benificiary_name'],
                             'benificiary_birthdate'=>  $value['benificiary_birthdate'],
                             'benificiary_relation' =>  $value['benificiary_relation'],

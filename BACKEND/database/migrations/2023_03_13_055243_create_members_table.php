@@ -34,7 +34,6 @@ return new class extends Migration
             $table->string('company_address')->nullable();
             $table->string('email');
             $table->string('mobile_number');
-            $table->timestamp('time_date_created')->nullable();
             $table->timestamps();
         });
     }

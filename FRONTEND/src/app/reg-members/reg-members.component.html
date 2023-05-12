@@ -128,7 +128,7 @@
            
             <div class="reg-wrap">
                     
-                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" (ngSubmit)="regMember()" #memberRegistration="ngForm" *ngIf="isDisplayed" @slideright2>
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"  #memberRegistration="ngForm" *ngIf="isDisplayed" @slideright2>
                         <div class="fullNamePage">
 
                         <div class="info1"  [@formState2]="info1State" >
@@ -223,7 +223,7 @@
                                         </div>
                                     </div>
                                 
-                                    <button class="submit"> Submit </button>
+                                    <button class="submit" (click)="regMember()"> Submit </button>
                                     <button class="back" (click)="toggle2()"> Back </button>
                                         
                                 </div>

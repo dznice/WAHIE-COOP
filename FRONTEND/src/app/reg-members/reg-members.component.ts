@@ -99,8 +99,25 @@ ngOnInit() {
   this._document.body.classList.add('body');
 
   this.registerForm = this.fb.group({
-    "name": new FormControl(null, [Validators.required]),
     
+    "first_name": new FormControl(null, [Validators.required]),
+
+    "last_name": new FormControl(null, [Validators.required]),
+
+    "middle_name": new FormControl(null, [Validators.required]),
+
+    "suffix": new FormControl(null, [Validators.required]),
+
+    "gender": new FormControl(null, [Validators.required]),
+
+    "birthdate": new FormControl(null, [Validators.required]),
+
+    "mobile_number": new FormControl(null, [Validators.required]),
+
+    "company_name": new FormControl(null, [Validators.required]),
+
+    "department": new FormControl(null, [Validators.required]),
+
     "email": new FormControl(null, [Validators.required]),
 
     "pass": new FormControl(null, [Validators.required]),
@@ -148,6 +165,7 @@ onSubmit(){
      birthdate:null,
      company_name:null,
      department:null,
+     
 
     }
 

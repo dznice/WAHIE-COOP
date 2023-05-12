@@ -99,13 +99,13 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   public error: any = [];
 
   email = sessionStorage.getItem('email');
-
-  getmemberId() {
-    this.http
-      .get('http://127.0.0.1:8000/api/members/' + this.email)
-      .subscribe((res: any) => {
-        sessionStorage.setItem('memberid', res);
-      });
+  
+    getmemberId(){
+    this.http.get('http://127.0.0.1:8000/api/members/' + this.email).subscribe(
+      (res:any)=>{
+       sessionStorage.setItem('memberid', res) 
+   
+    }); 
   }
   memberId = sessionStorage.getItem('memberid');
   id = localStorage.getItem('userData');
@@ -125,7 +125,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
       benificiary_relation: '',
     },
     {
-      benificiary_id: this.memberId,
+      benificiary_id:  this.memberId,
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
@@ -134,7 +134,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   addTable() {
     const obj = {
-      benificiary_id: this.memberId,
+      benificiary_id:  this.memberId,
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
@@ -149,23 +149,28 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
+
   public updateMemberform = {
-    email: this.email,
-    tin_number: null,
-    civil_status: null,
-    spouse: null,
-    employment_status: null,
-    occupation: null,
-    company_address: null,
-    address: null,
-    job_title: null,
+    email:this.email,
+    tin_number:null,
+    civil_status:null,
+    spouse:null,
+    employment_status:null,
+    occupation:null,
+    company_address:null,
+    address:null,
+    job_title:null,
+    row: this.row,
+    memId: this.memberId,
+
     current_address:null,
     city_town:null,
     province:null,
     postal_code:null,
     barangay:null,
-    row: this.row,
-  };
+  }
 
   memberInfo() {
     console.log(this.row);
