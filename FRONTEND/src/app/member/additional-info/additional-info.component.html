@@ -1,86 +1,234 @@
-<p>additional-info works!</p>
+<main>
+  <div class="modal_container">
+    <header>Additional Information</header>
 
-<form #updatememInfo="ngForm"  class="additional-info" *ngIf="isDisplayed">
-<div class="text_field" >
+    <form #updatememInfo="ngForm" class="additional-info" *ngIf="isDisplayed">
+      <div class="fields">
+        <div class="text-wrap">
+          <label for="civil_status">Civil Status</label>
+          <select
+            [(ngModel)]="updateMemberform.civil_status"
+            [ngModelOptions]="{ standalone: true }"
+            id="civil_status"
+            name="civil_status"
+            required
+          >
+            <option disabled selected>Select</option>
+            <option>Single</option>
+            <option>Maried</option>
+          </select>
+        </div>
+        <div class="text-wrap">
+          <label for="tin_number">TIN Number </label>
+          <input
+            [(ngModel)]="updateMemberform.tin_number"
+            [ngModelOptions]="{ standalone: true }"
+            name="tin_number"
+            type="text"
+            placeholder="TIN Number"
+          />
+        </div>
 
-<div class="text-wrap">
-    <input [(ngModel)]="updateMemberform.tin_number" type="text" name="tin_number" placeholder="tin_number">
-</div>
+        <div class="text-wrap">
+          <label for="spouse">Spouse</label>
+          <input
+            [(ngModel)]="updateMemberform.spouse"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            name="spouse"
+            placeholder="spouse"
+          />
+        </div>
 
-<div class="text-wrap">
-<select [(ngModel)]="updateMemberform.civil_status" id="civil_status" name="civil_status"required>
-    <option disabled selected>Select</option>
-    <option>Single</option>
-    <option>Maried</option>
-  </select>
-</div>
+        <div class="text-wrap">
+          <label>Employement Status</label>
+          <select
+            [(ngModel)]="updateMemberform.employment_status"
+            [ngModelOptions]="{ standalone: true }"
+            id="employement_status"
+            name="employement_status"
+            required
+          >
+            <option disabled selected>Select</option>
+            <option>Employed</option>
+            <option>Unemployed</option>
+            <option>Self-Employed</option>
+          </select>
+        </div>
 
-<div class="text-wrap">
-    <input [(ngModel)]="updateMemberform.spouse" type="text" name="spouse" placeholder="spouse">
-</div>
+        <div class="text-wrap">
+          <label for="occupation">Occupation</label>
+          <input
+            [(ngModel)]="updateMemberform.occupation"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            name="occupation"
+            placeholder="occupation"
+          />
+        </div>
 
+        <div class="text-wrap">
+          <label for="company_address">Company Address</label>
+          <input
+            [(ngModel)]="updateMemberform.company_address"
+            [ngModelOptions]="{ standalone: true }"
+            type="text"
+            name="company_address"
+            placeholder="company_address"
+          />
+        </div>
 
-<div class="text-wrap">
-<label>Employement Status</label>
-<select [(ngModel)]="updateMemberform.employment_status" id="employement_status" name="employement_status" required>
-  <option disabled selected>Select</option>
-  <option>Employed</option>
-  <option>Unemployed</option>
-  <option>Self-Employed</option>
-</select>
-</div>
+        <!-- <div class="text-wrap">
+          <label for="adress">Address</label>
+          <input
+            [(ngModel)]="updateMemberform.address"
+            type="text"
+            name="address"
+            placeholder="address"
+          />
+        </div>
+        <div class="text-wrap1">
+          <label for="job_title">Job Title</label>
+          <input
+            [(ngModel)]="updateMemberform.job_title"
+            type="text"
+            name="job_title"
+            placeholder="job_title"
+          />
+        </div> -->
 
-<div class="text-wrap">
-    <input [(ngModel)]="updateMemberform.occupation" type="text" name="occupation" placeholder="occupation">
-</div>
+        <div class="tabs">
+          <input
+            type="radio"
+            class="tabs__radio"
+            name="tabs-coop"
+            id="Address"
+            checked
+          />
+          <label for="Address" class="tabs__label">Address</label>
+          <div class="tabs__content">
+            <div class="input-field18">
+              <br />
+              <label>Current Address</label>
+              <input
+                [(ngModel)]="updateMemberform.current_address"
+                [ngModelOptions]="{ standalone: true }"
+                name="current_address"
+                type="text"
+                placeholder="Street/Block/House number"
+                required
+              />
+            </div>
 
-<div class="text-wrap">
-    <input [(ngModel)]="updateMemberform.company_address" type="text" name="company_address" placeholder="company_address">
-</div>
+            <div class="input-field19">
+              <input
+                [(ngModel)]="updateMemberform.city_town"
+                [ngModelOptions]="{ standalone: true }"
+                name="city_town"
+                type="text"
+                placeholder="City/Town"
+                required
+              />
+            </div>
 
-<div class="text-wrap">
-    <input [(ngModel)]="updateMemberform.address" type="text" name="address" placeholder="address">
-</div>
-<div class="text-wrap">
-    <input [(ngModel)]="updateMemberform.job_title" type="text" name="job_title" placeholder="job_title">
-</div>
+            <div class="input-field20">
+              <input
+                [(ngModel)]="updateMemberform.province"
+                [ngModelOptions]="{ standalone: true }"
+                name="province"
+                type="text"
+                placeholder="State/Province"
+                required
+              />
+            </div>
+            <div class="input-field21">
+              <input
+                [(ngModel)]="updateMemberform.postal_code"
+                [ngModelOptions]="{ standalone: true }"
+                name="postal_code"
+                type="text"
+                placeholder="Postal Code"
+                required
+              />
+            </div>
+            <div class="input-field22">
+              <input
+                [(ngModel)]="updateMemberform.barangay"
+                [ngModelOptions]="{ standalone: true }"
+                name="barangay"
+                type="text"
+                placeholder="Barangay"
+                required
+              />
+            </div>
+          </div>
+          <input
+            type="radio"
+            class="tabs__radio"
+            name="tabs-coop"
+            id="Beneficiaries"
+          />
 
+          <label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
+          <div class="tabs__content">
+            <table class="tablebene">
+              <br />
+              <tr>
+                <th></th>
+                <th class="benelabel">Name</th>
+                <th class="benelabel">Date of Birth</th>
+                <th class="benelabel">Relationship</th>
+              </tr>
 
-</div>
+              <tr *ngFor="let item of row; let x = index">
+                <td class="delbut">
+                  <button class="addbut" (click)="addTable()">
+                    <i class="ti ti-square-rounded-plus"></i>
+                  </button>
+                </td>
 
+                <td class="beneinput">
+                  <input
+                    type="text"
+                    [(ngModel)]="item.benificiary_name"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </td>
 
+                <td class="beneinput">
+                  <input
+                    type="date"
+                    [(ngModel)]="item.benificiary_birthdate"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </td>
 
-<label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
-<div class="tabs__content">
-  <table class="tablebene">
-    <br />
-    <tr>
-      <th></th>
-      <th class="benelabel">Name</th>
-      <th class="benelabel">Date of Birth</th>
-      <th class="benelabel">Relationship</th>
-    </tr>
+                <td class="beneinput">
+                  <input
+                    type="text"
+                    [(ngModel)]="item.benificiary_relation"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                </td>
 
-    <tr *ngFor="let item of row; let x = index">
-      <td class="delbut">
-        <button class="addbut" (click)="addTable()">
-          <i class="ti ti-square-rounded-plus"></i>
-        </button>
-      </td>
-      
-      <td class="beneinput" ><input type="text" [(ngModel)]="item.benificiary_name" [ngModelOptions]="{standalone: true}"></td>
+                <td class="delbut">
+                  <button class="delbut" (click)="deleteRow(x)">
+                    <i class="ti ti-square-rounded-x"></i>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
 
-       <td class="beneinput"><input type="date" [(ngModel)]="item.benificiary_birthdate" [ngModelOptions]="{standalone: true}"></td>
+      <button class="logout">
+        <span class="btnTextb">Logout</span>
+      </button>
 
-       <td class="beneinput"><input type="text" [(ngModel)]="item.benificiary_relation" [ngModelOptions]="{standalone: true}"></td>
-
-      <td class="delbut">
-        <button class="delbut" (click)="deleteRow(x)">
-          <i class="ti ti-square-rounded-x"></i>
-        </button>
-      </td>
-    </tr>
-  </table>
-</div>
-<button type="submit" (click)="memberInfo()"  class="submit"> Update </button>
-</form>
+      <button type="submit" (click)="memberInfo()" class="submit">
+        Update
+      </button>
+    </form>
+  </div>
+</main>

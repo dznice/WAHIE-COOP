@@ -1,60 +1,80 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewEncapsulation,
+  Inject,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { slideleft2, slideright2 } from '../../animation';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+  AbstractControl,
+} from '@angular/forms';
 import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  
   selector: 'app-additional-info',
-  
+
   templateUrl: './additional-info.component.html',
   styleUrls: ['./additional-info.component.scss'],
   animations: [slideleft2, slideright2],
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AdditionalInfoComponent implements OnInit, OnDestroy {
-     
   isDisplayed: boolean = true;
-  toggleDiv(){
-    this.isDisplayed = this.isDisplayed? false:true;
-  }
-  
-  visible:boolean = true;
-  changetype:boolean = true;
-  viewpass(){
-    this.visible = !this.visible
-    this.changetype = !this.changetype
+  toggleDiv() {
+    this.isDisplayed = this.isDisplayed ? false : true;
   }
 
-  cvisible:boolean = true;
-  cchangetype:boolean = true;
-  cviewpass(){
-    this.cvisible = !this.cvisible
-    this.cchangetype = !this.cchangetype
+  visible: boolean = true;
+  changetype: boolean = true;
+  viewpass() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
   }
 
-  checkvisible:boolean = true;
-  checkBox(){
-    this.checkvisible = !this.checkvisible
+  cvisible: boolean = true;
+  cchangetype: boolean = true;
+  cviewpass() {
+    this.cvisible = !this.cvisible;
+    this.cchangetype = !this.cchangetype;
   }
 
-  submitted:boolean = false;
-  
-  constructor(@Inject(DOCUMENT) private _document: any, private http:HttpClient,
-  private token:TokenService, private route:Router ){
-   this.getmemberId()
+  checkvisible: boolean = true;
+  checkBox() {
+    this.checkvisible = !this.checkvisible;
+  }
+
+  submitted: boolean = false;
+
+  constructor(
+    @Inject(DOCUMENT) private _document: any,
+    private http: HttpClient,
+    private token: TokenService,
+    private route: Router
+  ) {
+    this.getmemberId();
   }
 
   // updateMemberInfo = new FormGroup({
-  //   tin_number : new FormControl("", [Validators.required]),
-  //   spouse : new FormControl(""),
-  //   employment_status : new FormControl("", [Validators.required]),
-  //   occupation : new FormControl(""),
-  //   company_address : new FormControl("",[Validators.required]),
-  //   address : new FormControl("", [Validators.required]),
+  // tin_number : new FormControl("", [Validators.required]),
+  // spouse : new FormControl(""),
+  // employment_status : new FormControl("", [Validators.required]),
+  // occupation : new FormControl(""),
+  // company_address : new FormControl("",[Validators.required]),
+  // address : new FormControl("", [Validators.required]),
+  // current_address : new FormControl("", [Validators.required]),
+  // city_town : new FormControl("", [Validators.required]),
+  // province : new FormControl("", [Validators.required]),
+  // postal_code : new FormControl("", [Validators.required]),
+  // barangay : new FormControl("", [Validators.required]),
+
   // })
 
   // getControl(name: any): AbstractControl | null{
@@ -76,51 +96,48 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     this._document.body.classList.add('body');
   }
 
-  public error:any= [];
-  
+  public error: any = [];
+
   email = sessionStorage.getItem('email');
-  
-    getmemberId(){
-    this.http.get('http://127.0.0.1:8000/api/members/' + this.email).subscribe(
-      (res:any)=>{
-       sessionStorage.setItem('memberid', res) 
-    }); 
+
+  getmemberId() {
+    this.http
+      .get('http://127.0.0.1:8000/api/members/' + this.email)
+      .subscribe((res: any) => {
+        sessionStorage.setItem('memberid', res);
+      });
   }
-  memberId = sessionStorage.getItem('memberid')
+  memberId = sessionStorage.getItem('memberid');
   id = localStorage.getItem('userData');
-  
-
- 
-
 
   //bene
-   row = [
+  row = [
     {
       benificiary_id: this.memberId,
-      benificiary_name: "",
-      benificiary_birthdate: "",
-      benificiary_relation:""
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
     },
     {
       benificiary_id: this.memberId,
-      benificiary_name: "",
-      benificiary_birthdate: "",
-      benificiary_relation:""
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
     },
     {
       benificiary_id: this.memberId,
-      benificiary_name: "",
-      benificiary_birthdate: "",
-      benificiary_relation:""
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
     },
   ];
 
   addTable() {
     const obj = {
       benificiary_id: this.memberId,
-      benificiary_name: "",
-      benificiary_birthdate: "",
-      benificiary_relation:""
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
     };
     this.row.push(obj);
   }
@@ -132,32 +149,36 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
-
   public updateMemberform = {
-    email:this.email,
-    tin_number:null,
-    civil_status:null,
-    spouse:null,
-    employment_status:null,
-    occupation:null,
-    company_address:null,
-    address:null,
-    job_title:null,
-    row: this.row
-  }
+    email: this.email,
+    tin_number: null,
+    civil_status: null,
+    spouse: null,
+    employment_status: null,
+    occupation: null,
+    company_address: null,
+    address: null,
+    job_title: null,
+    current_address:null,
+    city_town:null,
+    province:null,
+    postal_code:null,
+    barangay:null,
+    row: this.row,
+  };
 
-  memberInfo(){
-    console.log(this.row)
+  memberInfo() {
+    console.log(this.row);
     this.getmemberId();
-    this.http.post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform,).subscribe(
-      (res:any)=>{
-        console.log(res)
+    this.http
+      .post(
+        'http://127.0.0.1:8000/api/memberInfo' + '/' + this.email,
+        this.updateMemberform
+      )
+      .subscribe((res: any) => {
+        console.log(res);
         this.token.handle(sessionStorage.getItem('ftoken'));
         this.route.navigateByUrl('member/member-home');
-    }); 
+      });
   }
-
-
 }

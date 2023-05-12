@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+main {
+  display: flex;
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_container {
+  position: relative;
+  width: 1200px;
+  max-height: 552px;
+  padding: 40px;
+  overflow-y: scroll;
+  margin: 0 15px;
+  border-radius: 20px;
+  background-color: #fff;
+
+  header {
+    position: relative;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+}
+.modal_container form {
+  position: relative;
+  margin-top: 12px;
+  min-height: 400px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.modal_container form .fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+form .fields .text-wrap {
+  display: flex;
+  width: calc(34% - 10px);
+  flex-direction: column;
+  margin: 4px 0;
+}
+
+.text-wrap input,
+select {
+  outline-color: #3f0f88;
+  border: 1px solid #959494;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  padding: 0 15px;
+  height: 36px;
+  margin: 2px 0;
+}
+
+.text-wrap1 input {
+  outline-color: #3f0f88;
+  border: 1px solid #959494;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  padding: 0 15px;
+  height: 36px;
+  margin: 2px 0;
+}
+
+form .fields .input-field18 {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: auto;
+}
+form .fields .input-field19 {
+  display: flex;
+  width: calc(50%);
+  flex-direction: column;
+  margin: auto;
+}
+form .fields .input-field20 {
+  display: flex;
+  width: calc(49%);
+  flex-direction: column;
+  margin: auto;
+}
+form .fields .input-field21 {
+  display: flex;
+  width: calc(50%);
+  flex-direction: column;
+  margin: auto;
+}
+form .fields .input-field22 {
+  display: flex;
+  width: calc(49%);
+  flex-direction: column;
+  margin: auto;
+}
+
+.input-field18 input,
+.input-field19 input,
+.input-field20 input,
+.input-field21 input,
+.input-field22 input,
+select {
+  outline-color: #3f0f88;
+  border: 1px solid #959494;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  padding: 0 15px;
+  height: 36px;
+  margin: 2px 0;
+}
+
+//TABS
+form .fields .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+form .fields .tabs__label {
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+form .fields .tabs__radio {
+  display: none;
+}
+
+form .fields .tabs__content {
+  order: 1;
+  width: 100%;
+  line-height: 1.5;
+  font-size: 0.9em;
+  display: none;
+}
+
+form .fields .tabs__radio:checked + .tabs__label {
+  font-weight: bold;
+  color: var(--primary-color);
+  border-bottom: 4px solid var(--primary-color);
+}
+form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
+  display: flex;
+  width: 100%;
+
+  flex-wrap: wrap;
+}
+
+.tablebene {
+  width: 100%;
+}
+.beneinput input {
+  outline-color: #3f0f88;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 15px;
+  height: 36px;
+  display: flex;
+  width: 100%;
+}
+
+.benelabel {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+.tablebene .addbut {
+  height: auto;
+  width: 22px;
+  margin-right: 8px;
+  border: none;
+  font-size: 24px;
+  background: none;
+  background-color: none;
+  color: #530ea8;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.delbut {
+  height: auto;
+  width: 22px;
+  margin-left: 4px;
+  border: none;
+  font-size: 24px;
+  background: none;
+  background-color: none;
+  color: #ff0000;
+  border-radius: 5px;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+.submit {
+  height: 40px;
+  width: 80px;
+  border: none;
+  align-items: end;
+  color: #fff;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  outline: none;
+  float: right;
+  margin-top: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.logout {
+  margin-left: 8px;
+  margin-top: 20px;
+  height: 40px;
+  width: 90px;
+  border: none;
+  background-color: var(--grey-alt);
+  color: var(--dark-grey);
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-height: 1200px) {
+  .modal_container form {
+    overflow-y: scroll;
+  }
+  .modal_container form::-webkit-scrollbar {
+    display: none;
+  }
+  form .fields .input-field {
+    width: calc(100% / 2 - 15px);
+  }
+}
