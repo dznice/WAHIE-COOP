@@ -12,6 +12,9 @@ import { BackendService } from '../../services/backend.service';
   styleUrls: ['./sadmin-home.component.scss'],
 })
 export class SadminHomeComponent {
+  loader = false;
+  loader2 = true;
+
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
@@ -37,6 +40,7 @@ export class SadminHomeComponent {
   Loaded = false;
   updateFormActive = false;
 
+
   searchText = '';
   p: number = 1;
 
@@ -49,7 +53,13 @@ export class SadminHomeComponent {
 
   AccountType: string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {    
+    setTimeout(() => {
+      this.loader = true;
+    }, 2000);
+    setTimeout(() => {
+      this.loader2 = false;
+    }, 2000);}
 
 
   showModal = -1;
@@ -81,6 +91,38 @@ export class SadminHomeComponent {
   handleData(data:any){
     sessionStorage.setItem('email', JSON.stringify(data['email']));
   }
+
+
+
+  // showModal = -1;
+  // show(index: number){
+  //   this.showModal = index;
+  // }
+
+
+  // back(){
+  //   this.route.navigateByUrl('super-admin/sadmin-home')
+  // }
+
+
+
+
+  // public form = {
+  //   username:null,
+  //   email:null
+  // }
+
+  // autoAdmin(){
+  //   console.log(this.form)
+  //   return this.backend.adminadd(this.form).subscribe(
+  //     data=>this.handleData(data)
+
+  //     );
+  // }
+
+  // handleData(data:any){
+  //   sessionStorage.setItem('email', JSON.stringify(data['email']));
+  // }
 
 
   showUsers() {

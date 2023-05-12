@@ -1,28 +1,55 @@
-<main>
-  <h1 class="title">Accounts</h1>
 
+
+  <!--LOADER CAT--> 
+  <!--
+  <div class="cat" *ngIf="loader2">
+    <div class="ear ear--left"></div>
+    <div class="ear ear--right"></div>
+    <div class="face">
+      <div class="eye eye--left">
+        <div class="eye-pupil"></div>
+      </div>
+      <div class="eye eye--right">
+        <div class="eye-pupil"></div>
+      </div>
+      <div class="muzzle"></div>
+    </div>
+  </div>--> 
+
+  <!--LOADER BOUNCING--> 
+  <div class="wrapper" *ngIf="loader2">
+      <div class="circle" ></div>
+      <div class="circle" ></div>
+      <div class="circle" ></div>
+      <div class="shadow" ></div>
+      <div class="shadow" ></div>
+      <div class="shadow" ></div>
+  </div>
+
+
+
+<main *ngIf="loader">
+  <h1 class="title">Accounts</h1>
 </main>
 
-
-
-<div class="add-account">
+<div class="add-account" *ngIf="loader">
   <button class="btn-add" (click)="show(1)">
     <i class="ti ti-plus"></i>
     New Account
   </button>
 </div>
 
-<div class="filter-field">
+<div class="filter-field" *ngIf="loader">
   <div class="filter-search">
     <label>Search User</label>
-    <div class="input-box">
+    <div class="input-box" *ngIf="loader">
       <i class="ti ti-search"></i>
       <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
     </div>
   </div>
 
 
-  <div class="filter-role">
+  <div class="filter-role"  *ngIf="loader">
     <label>User Role</label>
     <select [(ngModel)]="type" name="journal-type">
       <option [ngValue]="undefined" selected>All</option>
@@ -31,9 +58,7 @@
   </div>
 </div>
 
-
-<div class="table-container">
-  <div>
+<div class="table-container"  *ngIf="loader">
   <table class="table-content">
     <thead>
       <th>Role</th>
@@ -86,10 +111,38 @@
 
   </table>
 </div>
-  <div class="pagination-controls">
+  <div class="pagination-controls" *ngIf="loader">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
-</div>
+
+
+
+
+
+<section>
+  <router-outlet></router-outlet>
+  <div>
+    <form (ngSubmit)="autoAdmin()" #memberRegistration="ngForm" [formGroup]="autoAdminForm" class="register-form">
+    <div class="otp-modal"  *ngIf="showModal === 1">
+      <div class="otp-content">
+        <div class="otp-header">Add admin account</div>
+        <div class="otp-body">
+          <label for="admin_username">Username</label>
+          <input class="modalinput" type="text" [(ngModel)]="form.username" formControlName="username"/>
+          <br/>
+          <label for="admin_email">Email Address</label>
+          <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
+          <br />
+        </div>
+        <div class="otp-footer">
+          <button class="backbtn" > Create </button>
+          <button class="closebtn" (click)="show(2)">Close</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+</section>
 
 
 

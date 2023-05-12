@@ -8,6 +8,11 @@ import { WahieService } from '../../services/wahie.service';
   styleUrls: ['./manage-members.component.scss']
 })
 export class ManageMembersComponent {
+
+  loader = false;
+  loader2 = true;
+
+  
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
@@ -32,6 +37,16 @@ export class ManageMembersComponent {
   constructor(private http: HttpClient, private wahieService:WahieService) {
     this.showUsers();
    
+  }
+
+  ngOnInit(): void {
+
+    setTimeout(() => {
+      this.loader = true;
+    }, 1000);
+    setTimeout(() => {
+      this.loader2 = false;
+    }, 1000);
   }
 
   
