@@ -122,7 +122,9 @@ export class JournalEntryComponent implements OnInit {
         this.route.navigateByUrl('admin/accounting')
       })
     }else{
+      this.toast.error({detail:'Failed',summary:'Fill all inputs',duration:2000, sticky:false,position:'tr'});
       console.log("Error: Fill all input or need balance the amount to submit");
+
     }
     console.log(this.journalEntryForm.value);
     //this.route.navigateByUrl('admin/accounting')
