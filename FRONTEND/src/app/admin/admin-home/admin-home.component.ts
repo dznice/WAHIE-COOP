@@ -8,6 +8,11 @@ import { itemService } from './hItem.service';
   providers: [itemService]
 })
 export class AdminHomeComponent implements OnInit {
+
+  loader = false;
+  loader2 = true;
+
+  
   item: Item[] = [];
   term: string = '';
   p: number = 1;
@@ -25,6 +30,12 @@ export class AdminHomeComponent implements OnInit {
   constructor(private ItemService: itemService) {}
   ngOnInit(): void {
     this.item = this.ItemService.item;
+    setTimeout(() => {
+      this.loader = true;
+    }, 2000);
+    setTimeout(() => {
+      this.loader2 = false;
+    }, 2000);
   }
   
 

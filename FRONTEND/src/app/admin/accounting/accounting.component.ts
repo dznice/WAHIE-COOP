@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
   providers: [itemService],
 })
 export class AccountingComponent implements OnInit {
+  loader = false;
+  loader2 = true;
+
   // term: string = '';
   // transactions: any[] = [];
 
@@ -138,7 +141,15 @@ export class AccountingComponent implements OnInit {
     this.showMembers();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.loader = true;
+    }, 1000);
+    setTimeout(() => {
+      this.loader2 = false;
+    }, 1000);
+
+  }
 
   showMembers() {
     this.http
