@@ -1,0 +1,51 @@
+<main>
+  <h1 class="title">Members</h1>
+
+  <section class="payables">
+    <div class="unpaid-container">
+      <label>Unpaid Last 365 Days</label>
+      <div class="card-merge">
+        <div class="card overdue">
+          <h3 class="card-amount">PHP0</h3>
+          <span class="card-subtext">0 OVERDUE</span>
+        </div>
+        <div class="card open-inv">
+          <h3 class="card-amount">PHP153,000</h3>
+          <span class="card-subtext">5 OPEN INVOICES</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="paid-container">
+      <label>Paid</label>
+      <div class="card paid">
+        <h3 class="card-amount">PHP280,000</h3>
+        <span class="card-subtext">7 PAID LAST 30 DAYS</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="members-table">
+    <div class="input-box">
+      <i class="ti ti-search"></i>
+      <input class="form-control" type="text" placeholder="Search Member" [(ngModel)]="term"/>
+    </div>
+
+    <div class="table-container">
+      <table class="table-content">
+        <thead>
+          <th>MEMBERS</th>
+          <th>EMAIL ADDRESS</th>
+          <th>OPEN BALANCE</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of memberList | filterMemName: term" (click) = 'memberInfo( member.id )'>
+           <td >{{member.first_name}} {{member.middle_name}} {{member.last_name}}</td> <!--should be with id for member info-->
+           <td>{{member.email}}</td>
+           <td>{{member.balance}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>

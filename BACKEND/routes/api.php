@@ -58,6 +58,7 @@ Route::post('/memberInfo/{email}', [App\Http\Controllers\Api\AuthController::cla
 
 Route::get('/memberList', [App\Http\Controllers\userController::class, 'memberList']);
 Route::get('/memberList/{id}', [App\Http\Controllers\userController::class, 'memberInfo']);
+Route::get('/memberAccounting/{id}', [App\Http\Controllers\Api\AuthController::class, 'memberAccounting']);
 
 
 Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::class, 'superChange']);
@@ -177,6 +178,7 @@ Route::get('/transaction/{id}', function($id) {
 Route::get('/userrole', [App\Http\Controllers\userController::class, 'userRole']);
 
 Route::get('/account', [App\Http\Controllers\AccountingController::class, 'index']);
+Route::get('/accounts', [App\Http\Controllers\AccountingController::class, 'getAccounts']);
 
 Route::get('/total', [App\Http\Controllers\AccountingController::class, 'total']);
 

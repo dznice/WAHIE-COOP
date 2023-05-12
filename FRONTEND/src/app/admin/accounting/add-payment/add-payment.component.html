@@ -1,151 +1,196 @@
 <div class="sticky-div">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history-toggle" width="34" height="34"
-        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M10 20.777a8.942 8.942 0 0 1 -2.48 -.969"></path>
-        <path d="M14 3.223a9.003 9.003 0 0 1 0 17.554"></path>
-        <path d="M4.579 17.093a8.961 8.961 0 0 1 -1.227 -2.592"></path>
-        <path d="M3.124 10.5c.16 -.95 .468 -1.85 .9 -2.675l.169 -.305"></path>
-        <path d="M6.907 4.579a8.954 8.954 0 0 1 3.093 -1.356"></path>
-        <path d="M12 8v4l3 3"></path>
-    </svg>
-    <label class="invo-number"> Receive Payment </label>
-    <div class="exit">
-
-        <span class="close"><i class="ti ti-square-rounded-x"></i></span>
-    </div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon icon-tabler icon-tabler-history-toggle"
+    width="34"
+    height="34"
+    viewBox="0 0 24 24"
+    stroke-width="2"
+    stroke="currentColor"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M10 20.777a8.942 8.942 0 0 1 -2.48 -.969"></path>
+    <path d="M14 3.223a9.003 9.003 0 0 1 0 17.554"></path>
+    <path d="M4.579 17.093a8.961 8.961 0 0 1 -1.227 -2.592"></path>
+    <path d="M3.124 10.5c.16 -.95 .468 -1.85 .9 -2.675l.169 -.305"></path>
+    <path d="M6.907 4.579a8.954 8.954 0 0 1 3.093 -1.356"></path>
+    <path d="M12 8v4l3 3"></path>
+  </svg>
+  <label class="invo-number"> Receive Payment </label>
+  <div class="exit">
+    <span class="close"><i class="ti ti-square-rounded-x"></i></span>
+  </div>
 </div>
 <main>
-
-
-    <div class="container" >
+  <form *ngIf="tryForm"
+  [formGroup]="tryForm">
+    <div class="container">
+      <div class="container">
         <br /><br />
-      <div *ngFor="let info of item">
-        <div *ngIf="id==info.id">
+        <!-- <div *ngFor="let member of members"> -->
+        <!-- <div *ngIf="id == member.id"> -->
         <div class="amount">
-            <label class="amounts"> AMOUNT RECEIVED </label> <br />
-            <label class="amounts2" id="balance"> PHP 69.00</label>
+          <label class="amounts"> AMOUNT RECEIVED </label> <br />
+          <!-- <label class="amounts2" id="balance"> PHP 69.00</label> -->
+          <div class="received">
+            <input type="text" formControlName="amountReceived" value="69.00"/>
+          </div>
         </div>
 
         <div class="sub_header">
-            <div class="customerPayment">
-                <label> {{ info.first_name }} {{ info.middle_name }} {{ info.last_name }} {{ info.suffix }} </label>
-            </div>
-
-            <div class="customerPayment">
-                <label> {{ info.email}} </label>
-            </div>
-        </div>
-
-
-        <div class="sub_header2">
-            <div class="customerPayment2">
-                <label> Payment Date </label>
-                <input type="date">
-            </div>
-
-            <div class="customerPayment2">
-                <label> Payment Method </label><select type="text">
-                    <option disabled selected hidden>Choose Payment Method</option>
-                    <option>Payment 1</option>
-                    <option>Payment 2</option>
-                    <option>Payment 3</option>
-                </select>
-            </div>
-
-            <div class="customerPayment2">
-                <label> Reference No. </label>
-                <input type="number">
-            </div>
-
-            <div class="customerPayment2">
-                <label> Deposit to </label><select type="text">
-                    <option disabled selected hidden>Cash and cash equivalents</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-            </div>
-        </div>
-      </div>
-    </div>
-
-        <div class="journals">
-
-        </div>
-
-        <div class="journals">
-
-            <label class="outsTransac"> Outstanding Transactions</label>
-
-            <div class="sub_header3">
-                <div class="customerPayment3">
-                    <label>Invoice No.</label>
-                    <input class="field" type="number" placeholder="Find Invoice No.">
-                </div>
-
-                <div class="customerPayment3">
-                    <label>Date</label>
-                    <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate">
-                </div>
-
-                <div class="customerPayment3">
-                    <label>Date</label>
-                    <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">
-                </div>
-            </div>
-
-            <table rules="all">
-                <tr>
-                    <th>.</th>
-                    <th>Description</th>
-                    <th>Due Date</th>
-                    <th>Original Amount</th>
-                    <th>Open Balance</th>
-                    <th>Payment</th>
-                </tr>
-
-                <tbody *ngFor="
-          let acc of account
-            | filterName : term
-        ">
-            <tr
-
-
-            *ngIf="id==acc.debit.cred.transac.member.id"
-
-          >
-                    <td>{{ acc.debit.cred.transac.transaction_number }}</td>
-                    <td>{{ acc.debit.cred.entries.entry_name }}</td>
-                    <td>{{ acc.debit.cred.due_date }}</td>
-                    <td>{{ acc.orig_amount }}</td>
-                    <td>{{ acc.open_balance }}</td>
-                    <td class="tablePayment"><input type="text"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="pagination-controls">
-            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <div class="customerPayment">
+            <!-- <label>
+                {{ member.first_name }} {{ member.middle_name }}
+                {{ member.last_name }} {{ member.suffix }}
+              </label> -->
+            <label> Customer </label> <br />
+            <input type="text" formControlName="customer" />
           </div>
 
-        <div class="total">
-            <label class="totals"> Amount to Apply </label>
-            <label class="totals2"> PHP 0.00</label>
-            <br>
-            <label class="totals"> Amount to Credit </label>
-            <label> PHP 0.00</label>
-            <br>
-            <button>Clear Payment</button>
+          <div class="customerPayment">
+            <!-- <label> {{ member.email }} </label> -->
+            <label> Email</label> <br />
+            <input type="email" formControlName="email" />
+          </div>
         </div>
 
+        <div class="sub_header2">
+          <div class="customerPayment2">
+            <label> Payment Date </label>
+            <!-- <input type="date" formControlName="paymentDate"> -->
+            <input type="date" />
+          </div>
 
+          <div class="customerPayment2">
+            <label> Payment Method </label>
+            <select type="text" formControlName="paymentMethod">
+            <!-- <select type="text"> -->
+              <option disabled selected hidden>Choose Payment Method</option>
+              <option>Payment 1</option>
+              <option>Payment 2</option>
+              <option>Payment 3</option>
+            </select>
+          </div>
 
+          <div class="customerPayment2">
+            <label> Reference No. </label>
+            <!-- <input type="number" /> -->
+            <input type="number" formControlName="referenceNo">
+          </div>
+
+          <div class="customerPayment2">
+            <label> Deposit to </label>
+            <!-- <select type="text"> -->
+              <select type="text" formControlName="depositTo">
+              <option disabled selected hidden>
+                Cash and cash equivalents
+              </option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+            </select>
+          </div>
+        </div>
+        <!-- </div>
+      </div> -->
+
+        <div class="journals">
+          <label class="outsTransac"> Outstanding Transactions</label>
+
+          <div class="sub_header3">
+            <div class="customerPayment3">
+              <label>Invoice No.</label>
+              <input
+                class="field"
+                type="number"
+                placeholder="Find Invoice No."
+              />
+              <!-- <input class="field" type="number" placeholder="Find Invoice No." formControlName="depositTo"> -->
+            </div>
+
+            <div class="customerPayment3">
+              <label>Date</label>
+              <input
+                class="form-control"
+                type="date"
+                [(ngModel)]="startDate"
+                name="sDate"
+              />
+              <!-- <input class="form-control" type="date" [(ngModel)]="startDate" formControlName="depositTo"> -->
+            </div>
+
+            <div class="customerPayment3">
+              <label>Date</label>
+              <input
+                class="form-control"
+                type="date"
+                [(ngModel)]="endDate"
+                name="eDate"
+              />
+              <!-- <input class="form-control" type="date" [(ngModel)]="endDate" formControlName="depositTo"> -->
+            </div>
+          </div>
+
+          <table rules="all"  formArrayName="testing">
+            <tr>
+              <th>.</th>
+              <th>Description</th>
+              <th>Due Date</th>
+              <th>Original Amount</th>
+              <th>Open Balance</th>
+              <th>Payment</th>
+            </tr>
+
+            <!-- <tbody
+              *ngFor="let trial of tryForm.controls['testing'].controls; let i = index" [formGroupName]="i"
+            > -->
+            <!-- <tbody
+              *ngFor="let account of accounts; let i = index" [formGroupName]="i"
+            > -->
+            <tbody
+            *ngFor="let trial of tryRow.controls; let i = index" [formGroupName]="i"
+            >
+              <tr>
+                <td><input type="checkbox" value="" />{{i}}</td>
+                <!-- <td>{{ account.debit.cred.entries.entry_name }}</td>
+                <td>{{ account.debit.cred.due_date }}</td>
+                <td>{{ account.orig_amount }}</td> -->
+        
+                
+                <!-- <td>{{ account.open_balance }}</td> -->
+                <td class="tablePayment"><input type="text" formControlName="description"/></td>
+                <td class="tablePayment"><input type="text" formControlName="dueDate"/></td>
+                <td class="tablePayment"><input type="text" formControlName="origAmount"/></td>
+                <td class="tablePayment"><input type="text" formControlName="openBalance"/></td>
+                <td class="tablePayment"><input type="text" formControlName="payment"/></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination-controls">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+
+        <div class="total">
+          <label class="totals"> Amount to Apply </label>
+          <!-- <label class="totals2"> PHP 0.00</label> -->
+          <input type="email" formControlName="amountReceived" />
+          <br />
+          <label class="totals"> Amount to Credit </label>
+          <!-- <label> PHP 0.00</label> -->
+          <input type="email" formControlName="amountReceived" />
+          <br />
+          <button>Clear Payment</button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <button class="cancel">Cancel</button>
+        <button class="save">Save</button>
+      </div>
     </div>
-
-    <div class="footer">
-        <button class="cancel"> Cancel </button>
-        <button class="save">Save </button>
-    </div>
+  </form>
 </main>

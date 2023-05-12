@@ -15,6 +15,7 @@ class DebitsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'member' => $this->whenLoaded('member'),
             'id' => $this->id,
             'credits_id' => $this->credits_id,
             'debit' => $this->whenLoaded('debt'),
@@ -22,7 +23,6 @@ class DebitsResource extends JsonResource
             'cred' => $this->whenLoaded('cred'),
             'entries' => $this->whenLoaded('entries'),
             'transac' => $this->whenLoaded('transac'),
-            'member' => $this->whenLoaded('member'),
             'open_balance' => $this->open_balance,
             'orig_amount' => $this->orig_amount,
             'payment' => $this->payment,

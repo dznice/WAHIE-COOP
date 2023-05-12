@@ -30,7 +30,11 @@ export class WahieService {
   }
 
   public listMembers(): Observable<any[]>{
-    return this.http.get<any[]>(this.url+'/api/members');
+    return this.http.get<any[]>(this.url+'/api/memberList');
+  }
+
+  public getMemberInfo(id:any): Observable<any>{
+    return this.http.get<any[]>(this.url+'/api/memberList/'+id);
   }
 
   public memberId(): Observable<any[]>{
@@ -73,7 +77,15 @@ export class WahieService {
     return this.http.get<any[]>(this.url+'/api/entries');
   }
 
+  public listTransactions(): Observable<any[]>{
+    return this.http.get<any[]>(this.url+'/api/account');
+  }
+
   public journId(): Observable<any[]>{
     return this.http.get<any[]>(this.url+'/api/journ');
+  }
+
+  public getListAccount(mem_id:any){
+    return this.http.get<any[]>(this.url+'/api/accounts?open_balance=1&&id='+mem_id);
   }
 }

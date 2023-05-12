@@ -210,9 +210,12 @@ class AuthController extends Controller {
             }
 
 
-
-
-
+            
+   
+            public function memberAccounting($id){
+                $mem = Members::find($id);
+                return response()->json($mem);
+            }
 
             public function memberInfo(Request $request, $email){
 

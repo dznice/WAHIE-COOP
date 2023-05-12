@@ -11,8 +11,8 @@ import { NgToastService } from'ng-angular-popup';
   styleUrls: ['./journal-entry.component.scss'],
 })
 export class JournalEntryComponent implements OnInit {
-
-  useid = localStorage.getItem('userData');
+  
+  useid = localStorage.getItem('userData'); 
   journ: any;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,private route:Router, private toast: NgToastService){
@@ -106,7 +106,7 @@ export class JournalEntryComponent implements OnInit {
     userId:this.builder.control(this.useid),
     totaldebit:this.builder.control({ value: 0, disabled: true }),
     totalcredit:this.builder.control({ value: 0, disabled: true })
-  })
+  });
 
 
   saveEntry(){
@@ -124,7 +124,7 @@ export class JournalEntryComponent implements OnInit {
       console.log("Error: Fill all input or need balance the amount to submit");
     }
     console.log(this.journalEntryForm.value);
-
+    //this.route.navigateByUrl('admin/accounting')
   }
 
 

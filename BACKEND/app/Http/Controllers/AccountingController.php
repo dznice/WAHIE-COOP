@@ -51,9 +51,22 @@ class AccountingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function getAccounts(Request $request)
     {
-        //
+        $Dquery = Debits::with(['debt.cred.entries', 'debt.cred.transac.member']);
+        if($request->open_balance){
+            $Dquery->where('open_balance', '>=', $request->open_balance);
+    }
+        if($request->id){
+            $Dquery->whereHAs('debt.cred.transac.member', function($query) use($request){
+                $query->where('id', $request->id);
+            });
+        }
+        $debit = QueryBuilder::for($Dquery);
+        return DebitsResource::collection($debit->get());
+        // $debit = $Dquery->get();
+        // return response()->json($debit
+        // ,200);
     }
 
     /**
