@@ -1,4 +1,4 @@
-<head><title>Sign Up</title></head>
+<!-- <head><title>Sign Up</title></head>
 <main> 
     <div class="layout" >
         <div class ="inner-box">
@@ -44,11 +44,11 @@
                     </div>
 
 
-                 <br> <!-- ------------------------------------------------------ -->
+                 <br> ------------------------------------------------------ -->
 
 
                    
-                 <div class="text-wrap" >
+                 <!-- <div class="text-wrap" >
                     <input type="text" name="mobile_number" formControlName="mobile_number" id="mobile_number" placeholder="mobile_number"
                    [(ngModel)]="form.mobile_number"> <br>
                 </div>
@@ -65,9 +65,9 @@
                 </div>
 
 
-                <br> <!-- ------------------------------------------------------ -->
+                <br> ------------------------------------------------------ -->
 
-
+<!-- 
                 <div class="text-wrap">
                     <input type="email" name="email" formControlName="email" id="reg-email" placeholder="Email"
                     [(ngModel)]="form.email" [ngClass]="{error : getControl('email')?.errors && getControl('email')?.touched}"> <br>
@@ -120,4 +120,120 @@
         </div>
     </div>
 
+</main> -->
+
+<main> 
+    <div class="layout" >
+        <div class ="inner-box">
+           
+            <div class="reg-wrap">
+                    
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" (ngSubmit)="regMember()" #memberRegistration="ngForm" *ngIf="isDisplayed" @slideright2>
+                        <div class="fullNamePage">
+
+                        <div class="info1"  [@formState2]="info1State" >
+                         
+                            <div class="whlogo"> 
+                                <img src="assets/image/coop-logo.png">
+                                <p>WAH <br> Cooperative</p>
+                            </div>
+                            <div class="heading">
+                                <h1>Get Started</h1>
+                                <p>Create an account to login</p>
+                            </div>
+                                 
+                                <div class="text_field1" >
+                                    <div class="text-wrap">
+                                        <input type="text" name="email" formControlName="email" id="reg-email" placeholder="Email"
+                                        [(ngModel)]="form.email"> <br>
+                                    </div> 
+                                    <div class="text-wrap">
+                                        <input formControlName="pass" [type]="changetype?'password':'text'" name="pass" id="reg-pass" placeholder="Password" 
+                                        [(ngModel)]="form.password">
+                                        <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+                                    </div>
+
+                                    <div>
+                                        <strength-meter [value]="registerForm.value.pass" (measure)="onStrengthChange($event)"></strength-meter>
+                                    </div> 
+
+                                    <div class="text-wrap">
+                                        <input formControlName="cpass" [type]="cchangetype?'password':'text'" name="cpass" id= "con-pass" placeholder="Confirm Password" 
+                                        [(ngModel)]="form.confirm_pass">
+                                        <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></span>
+                                    </div>
+                                    <div class="notMatch" *ngIf="registerForm.get('cpass')!.touched && registerForm.get('cpass')!.invalid && registerForm.controls['cpass'].errors!['passwordMatch']"><small> Password not match </small></div>
+                                </div>
+                            
+                                <button class="submit" (click)="toggle()"> Next </button>
+
+                                <div class="terms">
+                                    <span class="check" (click)="checkBox()" required><i [ngClass]="checkvisible?'ti ti-square':'ti ti-square-check-filled'"></i></span>  
+                                    <p>I agree to the <a href="#" class="condition">Terms & Condition</a></p>
+                                </div>
+                            <div id="account">
+                                Already have an account? <a [routerLink]="['/login']" class="login">Login</a>
+                            </div>
+                        </div>
+                                  
+
+                                <div class="info2" [@formState2]="info2State"  >
+                                    <div class="text_field2" >
+                                        <div class="text-wrap">
+                                            <input type="text" name="last_name" formControlName="last_name" id="reg_last_name" placeholder="Last Name" 
+                                            [(ngModel)]="form.last_name"> <br>
+                                        </div>
+
+                                        <div class="text-wrap">
+                                            <input type="text" name="first_name" formControlName="first_name" id="reg-first-name" placeholder="First Name" 
+                                            [(ngModel)]="form.first_name"> <br>
+                                        </div>
+
+                                        <div class="text-wrap" class="text-wrap2">
+                                            <input class="mName" type="text" name="middle_name" formControlName="middle_name" id="reg-middle_name"
+                                            [(ngModel)]="form.middle_name" placeholder="Middle Name">
+                                            <input class="nSuffix" type="text" name="suffix" formControlName="suffix" id="reg-suffix"
+                                            [(ngModel)]="form.suffix" placeholder="Suffix"><br>
+                                        </div> 
+
+                                        <div class="text-wrap" class="text-wrap3">
+                                            <select [(ngModel)]="form.gender" id="gender" name="gender"  formControlName="gender">
+                                                <option value="gender" disabled selected hidden>Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="pref">Others</option>
+                                            </select>
+                                            <input class="dateOfBirth" type="date" name="birthdate" formControlName="birthdate" id="birthdate"
+                                            [(ngModel)]="form.birthdate" placeholder="Date of Birth" required><br>
+                                        </div> 
+
+                                        <div class="text-wrap">
+                                            <input type="number" name="mobile_number" formControlName="mobile_number" id="mobile_number" placeholder="Mobile Number"
+                                            [(ngModel)]="form.mobile_number"> <br>
+                                        </div>
+
+                                        <div class="text-wrap">
+                                            <input type="text" name="company_name" formControlName="company_name" id="company_name" placeholder="Company Name"
+                                            [(ngModel)]="form.company_name"> <br>
+                                        </div>
+
+                                        <div class="text-wrap" class="text-wrap2">
+                                            <input type="text" name="department" formControlName="department" id="department" placeholder="Department"
+                                            [(ngModel)]="form.department"><br>
+                                        </div>
+                                    </div>
+                                
+                                    <button class="submit"> Submit </button>
+                                    <button class="back" (click)="toggle2()"> Back </button>
+                                        
+                                </div>
+                        </div>
+            </form>
+            </div>
+            <div class="reg-vector" *ngIf="isDisplayed" @slideleft2>
+                <img src="assets/image/register.png" class="register"> 
+            </div>
+        </div>
+    </div>
 </main>
+

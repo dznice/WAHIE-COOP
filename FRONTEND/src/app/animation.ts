@@ -12,8 +12,8 @@ export let formState = trigger('formState', [
     state('hide', style({opacity: 1, display: 'none',})),
     state('show', style({opacity: 1,})),
     transition('show <=> hide', 
-    animate('1500ms ease-in-out', 
-    style({ opacity: 1, transform: 'translateX(-420px)'  })))
+    animate('500ms ease-in-out', 
+    style({ opacity: 0, transform: 'translateX(-420px)'  })))
   ])
 
   export let formState3 = trigger('formState3', [
