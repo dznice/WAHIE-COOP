@@ -48,7 +48,7 @@ import { ManageMembersComponent } from './admin/manage-members/manage-members.co
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';  
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgToastModule}  from 'ng-angular-popup';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FilterPipeModule } from 'ngx-filter-pipe';

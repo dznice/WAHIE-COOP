@@ -41,6 +41,8 @@ Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 
 Route::post('register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 
+Route::post('adminadd', [App\Http\Controllers\Api\AuthController::class, 'adminadd']);
+
 
 Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
 Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);

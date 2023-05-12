@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { passwordMatch } from '../../validators/passwordMatch';
+import { BackendService } from '../../services/backend.service';
 
 @Component({
   selector: 'app-sadmin-home',
@@ -8,6 +12,9 @@ import { WahieService } from '../../services/wahie.service';
   styleUrls: ['./sadmin-home.component.scss'],
 })
 export class SadminHomeComponent {
+  loader = false;
+  loader2 = true;
+
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
@@ -18,14 +25,21 @@ export class SadminHomeComponent {
 
 
 
-  constructor(private http: HttpClient, private wahieService:WahieService) {
+
+  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,) {
     this.showUsers();
-    
+
   }
+
+  autoAdminForm = new FormGroup({
+    username : new FormControl("", [Validators.required]),
+    email : new FormControl("", [Validators.required])
+  })
 
   userAccounts: any[] = [];
   Loaded = false;
   updateFormActive = false;
+
 
   searchText = '';
   p: number = 1;
@@ -39,7 +53,77 @@ export class SadminHomeComponent {
 
   AccountType: string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {    
+    setTimeout(() => {
+      this.loader = true;
+    }, 2000);
+    setTimeout(() => {
+      this.loader2 = false;
+    }, 2000);}
+
+
+  showModal = -1;
+  show(index: number){
+    this.showModal = index;
+  }
+
+
+  back(){
+    this.route.navigateByUrl('super-admin/sadmin-home')
+  }
+
+
+
+
+  public form = {
+    username:null,
+    email:null
+  }
+
+  autoAdmin(){
+    console.log(this.form)
+    return this.backend.adminadd(this.form).subscribe(
+      data=>this.handleData(data)
+
+      );
+  }
+
+  handleData(data:any){
+    sessionStorage.setItem('email', JSON.stringify(data['email']));
+  }
+
+
+
+  // showModal = -1;
+  // show(index: number){
+  //   this.showModal = index;
+  // }
+
+
+  // back(){
+  //   this.route.navigateByUrl('super-admin/sadmin-home')
+  // }
+
+
+
+
+  // public form = {
+  //   username:null,
+  //   email:null
+  // }
+
+  // autoAdmin(){
+  //   console.log(this.form)
+  //   return this.backend.adminadd(this.form).subscribe(
+  //     data=>this.handleData(data)
+
+  //     );
+  // }
+
+  // handleData(data:any){
+  //   sessionStorage.setItem('email', JSON.stringify(data['email']));
+  // }
+
 
   showUsers() {
     this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
@@ -49,8 +133,8 @@ export class SadminHomeComponent {
     });
   }
 
-  
-  
+
+
   isChecked: boolean = true;
 
   getValue() {

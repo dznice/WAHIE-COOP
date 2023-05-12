@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('identifier');
         });
 
-        DB::table('lib_users')->insert(array('user_type' => 'admin', 'identifier'=>0));
-        DB::table('lib_users')->insert(array('user_type' => 'superadmin', 'identifier'=>1));
-        DB::table('lib_users')->insert(array('user_type' => 'member', 'identifier'=>2));
+        DB::table('lib_users')->insert(array('user_type' => 'Admin', 'identifier'=>0));
+        DB::table('lib_users')->insert(array('user_type' => 'Superadmin', 'identifier'=>1));
+        DB::table('lib_users')->insert(array('user_type' => 'Member', 'identifier'=>2));
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('role_id')-> references('id')->on('lib_users');
-           
+
         });
     }
 

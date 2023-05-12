@@ -26,19 +26,6 @@ class AccountingController extends Controller
         $Dquery = Debits::query()->with(['debt.cred.entries', 'debt.cred.transac.member']);
         $debit = QueryBuilder::for($Dquery);
             return DebitsResource::collection($debit->get());
-
-    //     $Cquery = Credits::query()->with(['cred.entries', 'cred.transac.member']);
-    //     $credit = QueryBuilder::for($Cquery);
-    //         return CreditsResource::collection($credit->get());
-    //     $Pquery = Payables::query()->with(['entries', 'transac.member']);
-    //     $payables = QueryBuilder::for($Pquery);
-    //         return PayablesResource::collection($payables->get());
-
-
-
-    //     $Tquery = Transactions::query()->with('member');
-    //     $transac = QueryBuilder::for($Tquery);
-    //         return TransactionsResource::collection($transac->get());
     }
 
     /**
@@ -48,14 +35,13 @@ class AccountingController extends Controller
      public function total()
     {
         $totals = LibJournal::join('credits', 'lib_journals.id', '=', 'credits.journals_id')
-            ->groupBy('lib_journals.id')
-            ->select('lib_journals.id', DB::raw('SUM(credits.credit_amount) as total_credit_amount'))
+            ->groupBy('lib_journals.id', 'lib_journals.journal_name')
+            ->select('lib_journals.id','lib_journals.journal_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
             ->get();
 
-            return response()->json($totals);
-
-
+        return response()->json($totals);
     }
+
 
     public function store(Request $request)
     {

@@ -3,6 +3,7 @@ import { WahieService } from '../../../services/wahie.service';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-journal-entry',
@@ -14,7 +15,7 @@ export class JournalEntryComponent implements OnInit {
   useid = localStorage.getItem('userData');
   journ: any;
 
-  constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,private route:Router){
+  constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,private route:Router, private toast: NgToastService){
   }
   journalEntryRow !: FormArray<any>;
   amount !: FormGroup<any>;
@@ -33,6 +34,10 @@ export class JournalEntryComponent implements OnInit {
   }
 
 
+  close(event:MouseEvent){
+    event.preventDefault();
+    this.toast.warning({detail:'Incomplete ',summary:' Fill all input or need balance the amount to submit ', sticky:false,position:'tr', duration:1500});
+   }
 
 
 

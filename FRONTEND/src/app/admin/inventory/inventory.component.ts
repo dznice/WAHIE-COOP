@@ -9,6 +9,9 @@ import { itemService } from './invItem.service';
   providers: [itemService],
 })
 export class InventoryComponent {
+  loader = false;
+  loader2 = true;
+
   
   invItem: invItem[] = [];
   term: string = '';
@@ -22,6 +25,13 @@ export class InventoryComponent {
   constructor(private ItemService: itemService) {}
 
   ngOnInit() {
+    setTimeout(() => {
+      this.loader = true;
+    }, 1000);
+    setTimeout(() => {
+      this.loader2 = false;
+    }, 1000);
+
     this.invItem = this.ItemService.invItemArr.sort(
       (low, high) => low.price - high.price
     );
