@@ -29,7 +29,7 @@
     <div class="container">
       <div class="container">
         <br /><br />
-        <!-- <div *ngFor="let member of members"> -->
+        <!-- <div *ngFor="let account of accounts"> -->
         <!-- <div *ngIf="id == member.id"> -->
         <div class="amount">
           <label class="amounts"> AMOUNT RECEIVED </label> <br />
@@ -46,7 +46,7 @@
                 {{ member.last_name }} {{ member.suffix }}
               </label> -->
             <label> Customer </label> <br />
-            <input type="text" formControlName="customer" />
+            <input type="text" formControlName="member"/>
           </div>
 
           <div class="customerPayment">
@@ -93,8 +93,8 @@
             </select>
           </div>
         </div>
-        <!-- </div>
-      </div> -->
+      <!-- </div> -->
+      <!--</div> -->
 
         <div class="journals">
           <label class="outsTransac"> Outstanding Transactions</label>
@@ -150,7 +150,7 @@
               *ngFor="let account of accounts; let i = index" [formGroupName]="i"
             > -->
             <tbody
-            *ngFor="let trial of tryRow.controls; let i = index" [formGroupName]="i"
+            *ngFor="let trial of payablesRow.controls; let i = index" [formGroupName]="i"
             >
               <tr>
                 <td><input type="checkbox" value="" />{{i}}</td>

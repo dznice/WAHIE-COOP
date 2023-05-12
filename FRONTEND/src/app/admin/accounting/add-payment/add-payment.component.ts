@@ -24,6 +24,7 @@ export class AddPaymentComponent implements OnInit {
   public accounts: any;
   public members: any;
   paymentForm: FormGroup;
+  paymentRow !: FormArray<any>;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute){
 
@@ -78,10 +79,14 @@ export class AddPaymentComponent implements OnInit {
 
   showAccounting(): void{
     this.accounts = this.wahieService.getListAccount(this.id).subscribe((account:any[])=>{
+        this.accounts = account;
         this.paymentForm=this.builder.group({
           amountReceived:this.builder.control({value: 69.00, disabled: true}),
-          member:this.builder.control(''),
-          email:this.builder.control(''),
+          member:this.builder.control({value: account[0].debit.cred.transac.member.first_name 
+            +' '+ account[0].debit.cred.transac.member.middle_name 
+            +' '+ account[0].debit.cred.transac.member.last_name
+            +' '+ account[0].debit.cred.transac.member.suffix, disabled: true}),
+          email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
           paymentDate:this.builder.control(''),
           paymentMethod:this.builder.control(''),
           referenceNo:this.builder.control(''),
@@ -107,7 +112,7 @@ export class AddPaymentComponent implements OnInit {
     });
   }
 
-  get tryRow(){
+  get payablesRow(){
     return this.paymentForm.get("payables") as FormArray;
   }
 
