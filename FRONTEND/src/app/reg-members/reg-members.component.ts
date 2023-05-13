@@ -181,7 +181,7 @@ onSubmit(){
     handleData(data:any){
   
       sessionStorage.setItem('email', JSON.stringify(data['email']));
-      sessionStorage.setItem('userData', JSON.stringify(data['id']));
+      localStorage.setItem('userData', JSON.stringify(data['id']));
       this.route.navigateByUrl('verify-account');
     }
   
@@ -280,13 +280,7 @@ onSubmit(){
    
     //     );
     // }
-  
-    // handleData(data:any){
-  
-    //   sessionStorage.setItem('email', JSON.stringify(data['email']));
-    //   sessionStorage.setItem('userData', JSON.stringify(data['id']));
-    //   this.route.navigateByUrl('verify-account');
-    // }
+
   
     // handleError(error:any){
     //   this.error = error.error.error;

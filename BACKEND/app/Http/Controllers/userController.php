@@ -69,18 +69,33 @@ class userController extends Controller
     public function beneficiaries(){
         $beneficiary = BenificiaryMembers::all();
         return response()->json($beneficiary);
-             }
+    }
 
     public function memberInfo($id){
         $member = Members::find($id);
         return response()->json($member);
          }
 
-         public function userrole()
-         {
-             $query = Users::query()->with('userrole');
-             $users = QueryBuilder::for($query);
-                 return UsersResource::collection($users->get());
-         }
+    public function myProfile($id){
+    $user = Users::find($id);
+    $email = $user->email;
+    $myProf = Members::where('email','=',$email)->first();
+    return response()->json($myProf);
+    }
+
+    
+
+    public function userrole()
+    {
+     $query = Users::query()->with('userrole');
+     $users = QueryBuilder::for($query);
+     return UsersResource::collection($users->get());
+    }
+
+    public function memberAccount($email){
+        $member = Members::where('email', '=', $email)->first();
+        $memberId = $member->id;
+        return response()->json($memberId);
+    }
 
 }

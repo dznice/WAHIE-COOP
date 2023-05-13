@@ -4,14 +4,14 @@
   <div class="container">
     <h3>Name and Email</h3>
     <div class="fields">
-      <table>
+      <table >
         <tr>
           <th class="fields">Name</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ first_name }} {{ middle_name }} {{ last_name }} {{ suffix }}</td>
         </tr>
         <tr>
           <th class="fields">Email</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ email }}</td>
         </tr>
       </table>
     </div>
@@ -23,11 +23,11 @@
       <table>
         <tr>
           <th class="fields">Mobile Number</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ mobile_number }}</td>
         </tr>
         <tr>
           <th class="fields">Gender</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ gender }}</td>
         </tr>
         <tr>
           <th class="fields">Birthday</th>
@@ -39,15 +39,15 @@
         </tr>
         <tr>
           <th class="fields">Spouse</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ spouse }}</td>
         </tr>
         <tr>
           <th class="fields">Current Address</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ address }}</td>
         </tr>
         <tr>
           <th class="fields">Employement Status</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ employment_status }}</td>
         </tr>
         <tr>
           <th class="fields">TIN Number</th>
@@ -55,19 +55,19 @@
         </tr>
         <tr>
           <th class="fields">Occupation</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ occupation }}</td>
         </tr>
         <tr>
           <th class="fields">Department</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ department }}</td>
         </tr>
         <tr>
           <th class="fields">Company</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ company_name }}</td>
         </tr>
         <tr>
           <th class="fields">Company Address</th>
-          <td class="fieldsdata"></td>
+          <td class="fieldsdata">{{ company_address }}</td>
         </tr>
       </table>
     </div>
@@ -76,10 +76,12 @@
   <div class="container">
     <h3>Beneficiary</h3>
     <div class="fields">
-      <table>
-        <tr>
-          <th class="fields"></th>
-          <td class="fieldsdata"></td>
+      <table  *ngFor="let b of ben">
+        <tr *ngIf="memId==b.benificiary_id">
+            <td class="fieldsdata" width="30%">{{b.benificiary_name}} </td>
+            <td class="fieldsdata" width="30%">{{b.benificiary_birthdate}} </td>
+            <td class="fieldsdata" width="30%">{{b.benificiary_relation}} </td>
+          <br>
         </tr>
       </table>
     </div>

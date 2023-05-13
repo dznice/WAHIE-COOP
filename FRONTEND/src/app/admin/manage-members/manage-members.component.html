@@ -23,7 +23,6 @@
           <!-- <th>Role</th> -->
           <th>Name</th>
           <th>Email</th>
-          <th>Department</th>
           <th>Date Created</th>
           <th>Status</th>
         </thead>
@@ -32,15 +31,13 @@
           *ngFor="
             let user of memAccounts
               | search : searchText
-              | filter : type
               | paginate : { itemsPerPage: 10, currentPage: p }
           "
         >
-          <tr *ngIf="user.userrole.id == 3">
+          <tr *ngIf="user.role_id == 3">
             <!-- <td>{{ user.userrole.user_type }}</td> -->
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.coop }}</td>
+            <td (click)='memberInfo(user.email)'>{{ user.name }}</td>
+            <td (click)='memberInfo(user.email)'>{{ user.email }}</td>
             <td>{{ user.created_at | date : "MM-dd-yyyy" }}</td>
             <!-- <td>{{ user.status }}</td>  -->
 

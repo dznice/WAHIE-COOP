@@ -11,6 +11,11 @@ import { ActivatedRoute } from '@angular/router';
   providers: [itemService],
 })
 export class MemberInfoComponent implements OnInit {
+  constructor(private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute) {
+    this.personalInfo();
+    this.benInfo();
+    this.showAccounting()
+  }
   item: any[] = [];
   ben: any[] = [];
   term: string = '';
@@ -21,11 +26,7 @@ export class MemberInfoComponent implements OnInit {
  public account: any;
 
 
-  constructor(private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute) {
-    this.personalInfo();
-    this.benInfo();
-    this.showAccounting()
-  }
+
 
   id:number = 0;
   ngOnInit(): void {
@@ -58,7 +59,6 @@ export class MemberInfoComponent implements OnInit {
       {
         console.log(res)
         this.ben = res;
-
       }
     )
   }

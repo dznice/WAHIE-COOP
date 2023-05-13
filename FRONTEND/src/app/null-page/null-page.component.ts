@@ -12,8 +12,7 @@ export class NullPageComponent implements OnInit {
   }
   role= localStorage.getItem('userRole')
   ngOnInit() {
-  // localStorage.clear()
-  // sessionStorage.clear()
+ 
   // this.route.navigateByUrl('login')
   if(this.role=='1'){
     this.route.navigateByUrl('admin/admin-home')
@@ -26,6 +25,8 @@ export class NullPageComponent implements OnInit {
   {
     this.route.navigateByUrl('member/member-home')
   }else{
+    localStorage.clear()
+    sessionStorage.clear()
     this.route.navigateByUrl('login')
   }
  

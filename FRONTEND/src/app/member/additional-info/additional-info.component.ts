@@ -53,12 +53,8 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   submitted: boolean = false;
 
-  constructor(
-    @Inject(DOCUMENT) private _document: any,
-    private http: HttpClient,
-    private token: TokenService,
-    private route: Router
-  ) {
+  constructor( @Inject(DOCUMENT) private _document: any, private http: HttpClient, 
+  private token: TokenService, private route: Router) {
     this.getmemberId();
   }
 

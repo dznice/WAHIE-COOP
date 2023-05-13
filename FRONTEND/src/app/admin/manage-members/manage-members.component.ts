@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-members',
@@ -16,17 +17,15 @@ export class ManageMembersComponent {
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
-  types: string[] = ["Admin", "Member"];
   type: string;
 
-  userrole: number[] = [1,3];
 
   Loaded = false;
   updateFormActive = false;
 
   searchText = '';
   p: number = 1;
-
+  ben: any[] = [];
   index: number;
   id = '';
   name: string = '';
@@ -34,9 +33,8 @@ export class ManageMembersComponent {
   coop: string = '';
   status: number = 0;
 
-  constructor(private http: HttpClient, private wahieService:WahieService) {
+  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router) {
     this.showUsers();
-   
   }
 
   ngOnInit(): void {
@@ -53,7 +51,7 @@ export class ManageMembersComponent {
   memAccounts: any[] = [];
 
   showUsers() {
-    this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
+    this.http.get('http://127.0.0.1:8000/api/users').subscribe((res: any) => {
       this.Loaded = true;
       console.log(res);
       this.memAccounts = res;
@@ -166,6 +164,14 @@ export class ManageMembersComponent {
         this.isChecked = false;
       });
   }
+
+  memberInfo(data: any) {
+    this.http.get('http://127.0.0.1:8000/api/memberAccount/' + data)
+      .subscribe((res: any) => {
+        this.route.navigateByUrl('admin/accounting/member-info/' + res);
+      });
+  } 
+
 
 
 }

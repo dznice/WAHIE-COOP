@@ -51,22 +51,26 @@ Route::post('/users/updateOtp/{id}', [App\Http\Controllers\Api\AuthController::c
 Route::post('/users/resendOtp/{id}', [App\Http\Controllers\Api\AuthController::class, 'resendOtp']);
 Route::post('/users/forgotPass/{email}', [App\Http\Controllers\Api\AuthController::class, 'forgotPass']);
 Route::post('/users/forgotChange/{id}', [App\Http\Controllers\Api\AuthController::class, 'forgotChange']);
+Route::get('/users/myProfile/{id}', [App\Http\Controllers\userController::class, 'myProfile']);
+
 
 Route::get('/members', [App\Http\Controllers\Api\AuthController::class, 'members']);
 Route::get('/members/{email}', [App\Http\Controllers\Api\AuthController::class, 'getmemberId']);
 Route::post('/memberInfo/{email}', [App\Http\Controllers\Api\AuthController::class, 'memberInfo']);
+Route::get('/beneficiaries', [App\Http\Controllers\userController::class, 'beneficiaries']);
 
 Route::get('/memberList', [App\Http\Controllers\userController::class, 'memberList']);
 Route::get('/memberList/{id}', [App\Http\Controllers\userController::class, 'memberInfo']);
 Route::get('/memberAccounting/{id}', [App\Http\Controllers\Api\AuthController::class, 'memberAccounting']);
+Route::get('/memberAccount/{email}', [App\Http\Controllers\userController::class, 'memberAccount']);
 
 
 Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::class, 'superChange']);
 
-Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
-Route::post('/users/updateOtp/{id}', [App\Http\Controllers\userController::class, 'submitOtp']);
-Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);
-Route::post('/users/resendOtp/{id}', [App\Http\Controllers\userController::class, 'resendOtp']);
+// Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
+// Route::post('/users/updateOtp/{id}', [App\Http\Controllers\userController::class, 'submitOtp']);
+// Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);
+// Route::post('/users/resendOtp/{id}', [App\Http\Controllers\userController::class, 'resendOtp']);
 
 //LibJournal Accounts
 Route::get('/journals', function() {
@@ -110,15 +114,15 @@ Route::put('/member/{id}', [MemberController::class, 'update']);
 Route::delete('/member/{id}', [MemberController::class, 'destroy']);
 
 //Beneficiary
-Route::get('/beneficiaries', function(){
-    return BeneficiaryResource::collection(Members::all());
-});
-Route::get('/beneficiary/{id}', function($id){
-    return new BeneficiaryResource(Members::findOrFail($id));
-});
-Route::post('/beneficiaries', [BeneficiaryController::class, 'store']);
-Route::put('/beneficiary/{id}', [BeneficiaryController::class, 'update']);
-Route::delete('/beneficiary/{id}', [BeneficiaryController::class, 'destroy']);
+// Route::get('/beneficiaries', function(){
+//     return BeneficiaryResource::collection(Members::all());
+// });
+// Route::get('/beneficiary/{id}', function($id){
+//     return new BeneficiaryResource(Members::findOrFail($id));
+// });
+// Route::post('/beneficiaries', [BeneficiaryController::class, 'store']);
+// Route::put('/beneficiary/{id}', [BeneficiaryController::class, 'update']);
+// Route::delete('/beneficiary/{id}', [BeneficiaryController::class, 'destroy']);
 
 
 
