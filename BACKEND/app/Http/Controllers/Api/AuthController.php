@@ -17,6 +17,7 @@ use App\Models\EmailOtp;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\resendOtp;
+use Hamcrest\Core\HasToString;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Contracts\Providers\JWT;
 
@@ -73,7 +74,7 @@ class AuthController extends Controller {
             'fillInfo' => '1',
             'password' => Hash::make($request['password']),
             'code' => $code,
-            'status' => '1',
+            'status' => '2',
             ]);
 
 
@@ -230,23 +231,25 @@ class AuthController extends Controller {
                     $members->employment_status = $request->employment_status;
                     $members->company_address = $request->company_address;
                     $members->address = $request->current_address.' ' . $request->barangay .' ' .
-                     $request->city .' ' . $request->province .' ' . $request->postal_code;
+                    $request->city .' ' . $request->province .' ' . $request->postal_code;
                     $members->save();
 
                     $user = User::where('email', '=', $email)->first();
                     $user->fillInfo = 0;
                     $user->save();
+                    
 
                     $bene = $request->input();
                     foreach($bene['row'] as $key=>$value)
                     {
                              BenificiaryMembers::create([
-                            'benificiary_id' => $value['benificiary_id'],
+                            'benificiary_id' =>  $members->id,
                             'benificiary_name' =>  $value['benificiary_name'],
                             'benificiary_birthdate'=>  $value['benificiary_birthdate'],
                             'benificiary_relation' =>  $value['benificiary_relation'],
                             ]);
                      }
+                     
                 return response()->json($members);
 
             }

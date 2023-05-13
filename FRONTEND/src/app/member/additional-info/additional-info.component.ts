@@ -56,6 +56,8 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   constructor( @Inject(DOCUMENT) private _document: any, private http: HttpClient, 
   private token: TokenService, private route: Router) {
     this.getmemberId();
+   
+   
   }
 
   // updateMemberInfo = new FormGroup({
@@ -86,7 +88,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._document.body.classList.add('body');
-    this.getmemberId();
+
   }
 
   ngOnDestroy() {
@@ -96,33 +98,32 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   public error: any = [];
 
   email = sessionStorage.getItem('email');
-  
+  memberId:string = '';
+
     getmemberId(){
     this.http.get('http://127.0.0.1:8000/api/members/' + this.email).subscribe(
-      (res:any)=>{
-       sessionStorage.setItem('memberid', res) 
-   
+      (res:any)=>{    
+        console.log('mem' + res);
+        this.memberId = res;
+        
     }); 
   }
-  memberId = sessionStorage.getItem('memberid');
+ 
   id = localStorage.getItem('userData');
-
+  
   //bene
   row = [
     {
-      benificiary_id: this.memberId,
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
     },
     {
-      benificiary_id: this.memberId,
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
     },
     {
-      benificiary_id:  this.memberId,
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
@@ -131,7 +132,6 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   addTable() {
     const obj = {
-      benificiary_id:  this.memberId,
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
@@ -159,9 +159,9 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     company_address:null,
     address:null,
     job_title:null,
-    row: this.row,
+   
     memId: this.memberId,
-
+    row: this.row,
     current_address:null,
     city_town:null,
     province:null,
@@ -170,14 +170,11 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   }
 
   memberInfo() {
+
     console.log(this.row);
-    this.getmemberId();
-    this.http
-      .post(
-        'http://127.0.0.1:8000/api/memberInfo' + '/' + this.email,
-        this.updateMemberform
-      )
-      .subscribe((res: any) => {
+    this.http .post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform)
+      .subscribe((res: any) => 
+      {
         console.log(res);
         this.token.handle(sessionStorage.getItem('ftoken'));
         this.route.navigateByUrl('member/member-home');
