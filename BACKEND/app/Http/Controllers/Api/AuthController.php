@@ -217,6 +217,8 @@ class AuthController extends Controller {
                 return response()->json($mem);
             }
 
+
+
             public function memberInfo(Request $request, $email){
 
                 $members = Members::where('email', '=', $email)->first();
@@ -239,7 +241,7 @@ class AuthController extends Controller {
                     foreach($bene['row'] as $key=>$value)
                     {
                              BenificiaryMembers::create([
-                            'benificiary_id' => $request->memId ,
+                            'benificiary_id' => $value['benificiary_id'],
                             'benificiary_name' =>  $value['benificiary_name'],
                             'benificiary_birthdate'=>  $value['benificiary_birthdate'],
                             'benificiary_relation' =>  $value['benificiary_relation'],

@@ -86,6 +86,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._document.body.classList.add('body');
+    this.getmemberId();
   }
 
   ngOnDestroy() {
