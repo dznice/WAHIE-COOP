@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 })
 export class ManageMembersComponent {
 
-  loader = false;
-  loader2 = true;
 
   
   /* Switch declaration */
@@ -39,12 +37,6 @@ export class ManageMembersComponent {
 
   ngOnInit(): void {
 
-    setTimeout(() => {
-      this.loader = true;
-    }, 1000);
-    setTimeout(() => {
-      this.loader2 = false;
-    }, 1000);
   }
 
   
