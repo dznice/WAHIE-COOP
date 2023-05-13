@@ -9,6 +9,7 @@ use App\Models\Transactions;
 use App\Models\Payables;
 use App\Models\Debits;
 use App\Models\Payment;
+use App\Models\Payment1;
 use App\Http\Resources\TransactionsResource;
 use App\Http\Resources\PayablesResource;
 use App\Http\Resources\CreditsResource;
@@ -33,7 +34,32 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        {
+            if($request->isMethod('post')){
+                $payment = new Payment;
+                $payment->received = $request->amountReceived;
+                $payment->member = $request->member;
+                $payment->email = $request->email;
+                $payment->payment_date = $request->paymentDate;
+                $payment->payment_method = $request->paymentMethod;
+                $payment->reference_no = $request->referenceNo;
+                $payment->deposit_to = $request->depositTo;
+                $payment->save();
+                $paymentData = $request->input();
+                foreach ($paymentData['payables'] as $key => $value)
+                {
+                    $pay = new Payment1;
+                    $pay->member = $request->member;
+                    $pay->description = $value['description'];
+                    $pay->due_date = $value['dueDate'];
+                    $pay->open_balance = $value['openBalance'];
+                    $pay->original_amount = $value['origAmount'];
+                    $pay->payment = $value['payment'];
+                    $pay->save();
+                }
+                return response()->json(['message'=>'Entry added successfully!']);
+            }
+        }
     }
 
     /**

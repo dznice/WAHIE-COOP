@@ -190,6 +190,8 @@ Route::get('/account/{id}', [App\Http\Controllers\AccountingController::class, '
 
 Route::get('/journ', [App\Http\Controllers\JournalEntryController::class, 'journId']);
 
+Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'store']);
+
 
 
 

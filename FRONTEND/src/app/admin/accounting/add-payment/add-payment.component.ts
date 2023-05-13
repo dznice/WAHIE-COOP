@@ -83,9 +83,7 @@ export class AddPaymentComponent implements OnInit {
         this.paymentForm=this.builder.group({
           amountReceived:this.builder.control({value: 69.00, disabled: true}),
           member:this.builder.control({value: account[0].debit.cred.transac.member.first_name 
-            +' '+ account[0].debit.cred.transac.member.middle_name 
-            +' '+ account[0].debit.cred.transac.member.last_name
-            +' '+ account[0].debit.cred.transac.member.suffix, disabled: true}),
+            +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
           paymentDate:this.builder.control(''),
           paymentMethod:this.builder.control(''),
@@ -105,7 +103,7 @@ export class AddPaymentComponent implements OnInit {
   private generateFormGroup(trial:any) {
     return this.builder.group({
       description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
-      dueDate: this.builder.control({ value: trial.debit.cred.due_date, disabled: true }),
+      dueDate: this.builder.control({ value: null, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
       openBalance: this.builder.control({ value: trial.open_balance , disabled: true }),
       payment: this.builder.control({value: 0, disabled: false})
@@ -124,20 +122,21 @@ export class AddPaymentComponent implements OnInit {
   }
 
   savePayment(){
+    //this.paymentForm.get("entries") as FormArray;
     // this.paymentForm.controls.journal_no.setValue( this.journId )
     // let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     // let total_credit = this.journalEntryForm.get("totalcredit")?.value;
-    // if(this.paymentForm.valid){
-    //   this.wahieService.saveJournalEntry(this.paymentForm.getRawValue()).subscribe(res=>{
-    //     let result:any;
-    //     result=res;
-    //     console.log(result);
-    //     //this.route.navigateByUrl('admin/accounting')
-    //   })
-    // }else{
-    //   console.log("Error: Fill all input or need balance the amount to submit");
-    // }
-    console.log(this.paymentForm.getRawValue().value);
+    if(this.paymentForm.valid){
+      this.wahieService.savePayment(this.paymentForm.getRawValue()).subscribe(res=>{
+        let result:any;
+        result=res;
+        console.log(result);
+        //this.route.navigateByUrl('admin/accounting')
+      })
+    }else{
+      console.log("Error: Fill all input or need balance the amount to submit");
+    }
+    console.log(this.paymentForm.getRawValue());
     //this.route.navigateByUrl('admin/accounting')
   }
 
