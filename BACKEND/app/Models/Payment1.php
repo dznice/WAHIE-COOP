@@ -6,22 +6,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class Payment1 extends Model
 {
     use HasFactory;
-    protected $table = 'trial';
+    protected $table = 'test';
     protected $primaryKey = 'id';
     protected $fillable = 
     [
-        'received',
         'member',
-        'email',
-        'payment_date',
-        'payment_method',
-        'reference_no',
-        'deposit_to',
         'description',
         'original_amount',
+        'due_date',
         'open_balance',
         'payment',
     ];
