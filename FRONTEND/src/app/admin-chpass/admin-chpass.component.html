@@ -17,20 +17,25 @@
                     </div>
                 
                     <div class="txt-field">
+                     
+                            <input type="hidden" name="id" id="id" value='{{ id }}'>
+                         
+          
+                        
                         <div class="txt-wrap">
 
                             <label class="enter_pass" for="pass">Enter Name</label>
-                            <input type="hidden" name="id" id="id" value='{{ id }}'>
-                            <input [type]="changetype?'':'text'" class="input-field" id="sadmin-pass" placeholder="Enter name"  formControlName="name"
-                            [(ngModel)]="chform.password"> 
+                         
+                            <input [type]="changetype?'':'text'" class="input-field" id="name" placeholder="Enter name"  formControlName="name"
+                            [(ngModel)]="chform.name"> 
                            
                         </div>
-
+                        
                         <div class="txt-wrap">
 
                             <label class="enter_pass" for="pass">Enter Password</label>
                             <input type="hidden" name="id" id="id" value='{{ id }}'>
-                            <input [type]="changetype?'password':'text'" class="input-field" id="sadmin-pass" placeholder="Enter password"  formControlName="password"
+                            <input [type]="changetype?'password':'text'" class="input-field" id="admin-pass" placeholder="Enter password"  formControlName="password"
                             [(ngModel)]="chform.password">
                             <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                            
@@ -41,7 +46,7 @@
                             
                         <div class="txt-wrap">
                             <label for="pass2">Confirm Password</label>
-                            <input [type]="cchangetype?'password':'text'" class="input-field" id="sadmin-confirm-pass" placeholder="Confirm new password"  formControlName="confirm_pass"
+                            <input [type]="cchangetype?'password':'text'" class="input-field" id="admin-confirm-pass" placeholder="Confirm new password"  formControlName="confirm_pass"
                             [(ngModel)]="chform.confirm_pass">
                             <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                         </div>

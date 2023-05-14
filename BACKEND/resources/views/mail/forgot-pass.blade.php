@@ -2,8 +2,8 @@
 # FORGOT PASSWORD
 
 Link for change password, <br>
-{{ $link }}
 
+<a href='{{ $link }}' >{{ $link }}</a>
 
 Thanks,<br>
 {{ config('app.name') }}

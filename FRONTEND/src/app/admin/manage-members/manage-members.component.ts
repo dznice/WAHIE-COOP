@@ -153,7 +153,7 @@ export class ManageMembersComponent {
         this.name = '';
         this.email = '';
         this.coop = '';
-        this.isChecked = false;
+        this.isChecked = true;
       });
   }
 

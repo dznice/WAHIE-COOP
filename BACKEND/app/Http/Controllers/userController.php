@@ -60,6 +60,16 @@ class userController extends Controller
         return response()->json($users);
     }
 
+    public function adminChange(Request $request, $id){
+
+        $users = User::find($id);
+        $users->name = $request->name; 
+        $users->password = Hash::make($request['password']);
+        $users->code = 0;
+        $users->save();
+        return response()->json($users);
+    }
+
     public function memberList(){
         $member = Members::all();
         return response()->json($member);

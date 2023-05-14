@@ -1,3 +1,5 @@
+import { concat } from "rxjs";
+
 export class Item{
     date: any;
     type: any;
@@ -7,6 +9,7 @@ export class Item{
     Balance: any;
     Status: any;
 debit: any;
+
 
     account_id: number;
     first_name : string;
