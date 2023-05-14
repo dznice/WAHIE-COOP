@@ -35,7 +35,7 @@
           <label class="amounts"> AMOUNT RECEIVED </label> <br />
           <!-- <label class="amounts2" id="balance"> PHP 69.00</label> -->
           <div class="received">
-            <input type="text" formControlName="amountReceived" value="69.00"/>
+            <input type="text" formControlName="amountReceived"/>
           </div>
         </div>
 
@@ -106,6 +106,7 @@
                 class="field"
                 type="number"
                 placeholder="Find Invoice No."
+                formControlName="depositTo"
               />
               <!-- <input class="field" type="number" placeholder="Find Invoice No." formControlName="depositTo"> -->
             </div>
@@ -153,7 +154,7 @@
             *ngFor="let trial of payablesRow.controls; let i = index" [formGroupName]="i"
             >
               <tr>
-                <td><input type="checkbox" value="" />{{i}}</td>
+                <td><input type="checkbox" value="" /></td>
                 <!-- <td>{{ account.debit.cred.entries.entry_name }}</td>
                 <td>{{ account.debit.cred.due_date }}</td>
                 <td>{{ account.orig_amount }}</td> -->
@@ -164,7 +165,7 @@
                 <td class="tablePayment"><input type="text" formControlName="dueDate"/></td>
                 <td class="tablePayment"><input type="text" formControlName="origAmount"/></td>
                 <td class="tablePayment"><input type="text" formControlName="openBalance"/></td>
-                <td class="tablePayment"><input type="text" formControlName="payment"/></td>
+                <td class="tablePayment"><input type="number" formControlName="payment" (change)="ammountClick(i)"/></td>
               </tr>
             </tbody>
           </table>
@@ -182,7 +183,7 @@
           <!-- <label> PHP 0.00</label> -->
           <input type="number" formControlName="amountCredit" />
           <br />
-          <button>Clear Payment</button>
+          <a><span>Clear Payment</span></a>
         </div>
       </div>
 

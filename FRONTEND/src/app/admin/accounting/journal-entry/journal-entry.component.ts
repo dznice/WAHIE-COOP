@@ -89,16 +89,6 @@ export class JournalEntryComponent implements OnInit {
     });
   }
 
-  rowArray=this.builder.group({
-    account:this.builder.control('', Validators.required),
-    debit:this.builder.control('', Validators.required),
-    credit:this.builder.control('', Validators.required),
-    description:this.builder.control(''),
-    name:this.builder.control('',Validators.required),
-  });
-
-
-
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control('',Validators.required),
     journal_no:this.builder.control('',Validators.required),
@@ -142,6 +132,7 @@ export class JournalEntryComponent implements OnInit {
   }
 
   removeRow(index:any){
+    this.journalEntryRow = this.journalEntryForm.get("entries") as FormArray;
     if(confirm('Do you want to remove?')){
       this.journalEntryRow.removeAt(index);
       this.balance_summary();

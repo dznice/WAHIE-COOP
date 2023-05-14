@@ -198,7 +198,7 @@ table th{
     margin-left: .17rem;
 }
 
-.total button{
+.total a{
     border: 1px solid #aaa;
     border-radius: 25px;
     padding: 10px 25px 10px;
@@ -206,7 +206,7 @@ table th{
     font-size: 15px;
 }
 
-.total button:hover{
+.total a:hover{
     background-color: #3F0F88;
     color: #fff9f9;
 }
