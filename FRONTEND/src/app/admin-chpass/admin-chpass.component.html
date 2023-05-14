@@ -21,58 +21,39 @@
 
                             <label class="enter_pass" for="pass">Enter Name</label>
                             <input type="hidden" name="id" id="id" value='{{ id }}'>
-                            <input [type]="changetype?'':'text'" minlength="8" maxlength="32" class="input-field" id="sadmin-pass" placeholder="Enter name"  formControlName="name" required
-                            [(ngModel)]="chform.password"  [ngClass]="{error : getControl('password')?.errors && getControl('password')?.touched}"> 
+                            <input [type]="changetype?'':'text'" class="input-field" id="sadmin-pass" placeholder="Enter name"  formControlName="name"
+                            [(ngModel)]="chform.password"> 
                            
-                        </div>
-                        <div>
-                            <div class="text-danger" *ngIf="submitted && getControl('password')?.errors || getControl('password')?.errors && getControl('password')?.touched">
-                                <small *ngIf="getControl('password')?.errors?.['required']">Name is required</small>
-                            </div>
                         </div>
 
                         <div class="txt-wrap">
 
                             <label class="enter_pass" for="pass">Enter Password</label>
                             <input type="hidden" name="id" id="id" value='{{ id }}'>
-                            <input [type]="changetype?'password':'text'" minlength="8" maxlength="32" class="input-field" id="sadmin-pass" placeholder="Enter password"  formControlName="password" required
-                            [(ngModel)]="chform.password"  [ngClass]="{error : getControl('password')?.errors && getControl('password')?.touched}">
+                            <input [type]="changetype?'password':'text'" class="input-field" id="sadmin-pass" placeholder="Enter password"  formControlName="password"
+                            [(ngModel)]="chform.password">
                             <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                            
                         </div>
-                        <div>
-                            <div class="text-danger" *ngIf="submitted && getControl('password')?.errors || getControl('password')?.errors && getControl('password')?.touched">
-                                <small *ngIf="getControl('password')?.errors?.['required']">Password is required</small>
-                            </div>
+                        <div class="meter">
+                            <strength-meter [value]="chpassForm.value.password" (measure)="onStrengthChange($event)"></strength-meter>
                         </div>
                             
                         <div class="txt-wrap">
                             <label for="pass2">Confirm Password</label>
-                            <input [type]="cchangetype?'password':'text'"  minlength="8" maxlength="32"  class="input-field" id="sadmin-confirm-pass" placeholder="Confirm new password"  formControlName="confirm_pass"required
-                            [(ngModel)]="chform.confirm_pass" [ngClass]="{error : (getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched) || (chpassForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched) }">
+                            <input [type]="cchangetype?'password':'text'" class="input-field" id="sadmin-confirm-pass" placeholder="Confirm new password"  formControlName="confirm_pass"
+                            [(ngModel)]="chform.confirm_pass">
                             <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                         </div>
-
-                        <div>
-                            <div class="text-danger1" *ngIf="submitted && getControl('confirm_pass')?.errors || getControl('confirm_pass')?.errors && getControl('confirm_pass')?.touched">
-                                <small *ngIf="getControl('confirm_pass')?.errors?.['required']">Confirm password is required</small>
-                            </div>
-                        </div>
-                        <div>
-                          <div class="text-danger2" *ngIf="chpassForm.errors?.['passwordMismatchError'] && getControl('confirm_pass')?.touched">
-                            <small >Password do not match</small>
-                          </div>
+                        <div class="notMatch" *ngIf="chpassForm.get('confirm_pass')!.touched && chpassForm.get('confirm_pass')!.invalid && chpassForm.controls['confirm_pass'].errors!['passwordMatch']">
+                            <small>Password not match</small>
                         </div>
                         
                         <button type="submit" class="save">Save new password</button> 
+                        <button [routerLink]="['/login']" type="submit" class="logout">Logout</button>
 
                     </div>
-                </form>                                                         
-                <div class="account">
-                    <a [routerLink]="['/login']" class="back">
-                    <i class="ti ti-arrow-left"></i> Logout
-                    </a>
-                </div> 
+                </form>        
             </div>
             <!-- VECTOR BACKGROUND -->
             <div class="login-vector ">

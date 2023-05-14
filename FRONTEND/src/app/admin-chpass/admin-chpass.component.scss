@@ -74,6 +74,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-top: 1rem;
 }
 
 .wah-logo {
@@ -135,12 +136,12 @@ input {
   flex-direction: column;
 }
 
-/*.meter{
-margin-top:3.8em;
+.meter{
+margin-top:3em;
 max-width: 500px;
 width: 310px;
+}
 
-}*/
 .eye {
   position: absolute;
   left: 87%;
@@ -168,11 +169,29 @@ width: 310px;
   border-radius: 0.6rem;
   font-size: 0.9rem;
   margin-top: 0.24rem;
-  margin-bottom: 3rem;
+  margin-bottom: .5rem;
   text-decoration: none;
 }
 
 .save:hover {
+  background-color: var(--primary-alt);
+}
+
+.logout{
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  height: 43px;
+  background-color: #707070;
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  margin-bottom: .5rem;
+  text-decoration: none;
+}
+
+.logout:hover{
   background-color: var(--primary-alt);
 }
 
@@ -314,4 +333,11 @@ a:hover{
   transform: translate(5%, -150%);
   color: red;
   font-size: 14px;
+}
+
+.notMatch{
+  transform: translate(11%, -90%);
+  color: red;
+  font-size: 16px;
+  position: absolute;
 }

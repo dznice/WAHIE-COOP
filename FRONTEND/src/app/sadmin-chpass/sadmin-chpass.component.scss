@@ -142,7 +142,7 @@ input {
 }
 
 .meter{
-margin-top:3.8em;
+margin-top:3em;
 max-width: 500px;
 width: 310px;
 }
@@ -175,6 +175,10 @@ width: 310px;
   font-size: 1rem;
   margin-bottom: .5rem;
   text-decoration: none;
+}
+
+.save:hover {
+  background-color: var(--primary-alt);
 }
 
 .logout{
