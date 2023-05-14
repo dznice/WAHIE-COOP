@@ -6,6 +6,7 @@ import { itemService } from '../../accounting/item.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-add-payment',
@@ -27,7 +28,7 @@ export class AddPaymentComponent implements OnInit {
   paymentForm: FormGroup;
   paymentRow !: FormArray<any>;
 
-  constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute){
+  constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute, private toast: NgToastService){
 
   }
 
@@ -134,9 +135,11 @@ export class AddPaymentComponent implements OnInit {
         let result:any;
         result=res;
         console.log(result);
+        this.toast.success({detail:'Success',summary:'Payment saved',duration:2000, sticky:false,position:'tr'});
         //this.route.navigateByUrl('admin/accounting')
       })
     }else{
+      this.toast.error({detail:'Failed',summary:'Fill all inputs',duration:2000, sticky:false,position:'tr'});
       console.log("Error: Fill all input or need balance the amount to submit");
     }
     console.log(this.paymentForm.getRawValue());
