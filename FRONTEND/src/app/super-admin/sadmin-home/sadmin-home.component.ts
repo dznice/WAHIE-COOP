@@ -23,9 +23,6 @@ export class SadminHomeComponent {
 
   userrole: number[] = [1,3];
 
-
-
-
   constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,) {
     this.showUsers();
 
@@ -39,7 +36,6 @@ export class SadminHomeComponent {
   userAccounts: any[] = [];
   Loaded = false;
   updateFormActive = false;
-
 
   searchText = '';
   p: number = 1;
@@ -72,9 +68,6 @@ export class SadminHomeComponent {
     this.route.navigateByUrl('super-admin/sadmin-home')
   }
 
-
-
-
   public form = {
     username:null,
     email:null
@@ -85,45 +78,12 @@ export class SadminHomeComponent {
     return this.backend.adminadd(this.form).subscribe(
       data=>this.handleData(data)
 
-      );
+    );
   }
 
   handleData(data:any){
     sessionStorage.setItem('email', JSON.stringify(data['email']));
   }
-
-
-
-  // showModal = -1;
-  // show(index: number){
-  //   this.showModal = index;
-  // }
-
-
-  // back(){
-  //   this.route.navigateByUrl('super-admin/sadmin-home')
-  // }
-
-
-
-
-  // public form = {
-  //   username:null,
-  //   email:null
-  // }
-
-  // autoAdmin(){
-  //   console.log(this.form)
-  //   return this.backend.adminadd(this.form).subscribe(
-  //     data=>this.handleData(data)
-
-  //     );
-  // }
-
-  // handleData(data:any){
-  //   sessionStorage.setItem('email', JSON.stringify(data['email']));
-  // }
-
 
   showUsers() {
     this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
@@ -132,8 +92,6 @@ export class SadminHomeComponent {
       this.userAccounts = res;
     });
   }
-
-
 
   isChecked: boolean = true;
 
@@ -242,25 +200,4 @@ export class SadminHomeComponent {
         this.isChecked = false;
       });
   }
-
-
 }
-
-// showModal = -1;
-// show(index: number){
-//   this.showModal = index;
-// }
-
-// SuperAccounts:any;
-
-// add(admin_username:string,admin_email:string, admin_password:string){
-//   this.SuperAccounts={
-//     'admin_username': admin_username,
-//     'admin_email': admin_email,
-//     'admin_password': admin_password,
-//   };
-//   // this.wahieService.addSuperAccount(this.SuperAccounts as any).subscribe(SuperAccount=>{
-//   //   this.SuperAccounts = SuperAccount
-//   // });
-//   console.log(this.SuperAccounts)
-// }

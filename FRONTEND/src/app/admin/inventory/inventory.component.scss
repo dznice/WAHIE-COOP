@@ -1,34 +1,49 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
 main {
   width: 100%;
   animation: transitionIn 0.75s;
 
-  .title {
-    color: var(--primary-color);
-  }
-}
+  .header {
+    display: grid;
+    margin-bottom: 1rem;
 
-/* Add Button */
-.add-member {
-  text-align: right;
+    .left-cont {
+      grid-column: 1;
 
-  .btn-add {
-    cursor: pointer;
-    border: none;
-    border-radius: 0.5rem;
-    background: var(--primary-color);
-    color: var(--panel-color);
-    padding: 12px 20px 12px 14px;
+      .title {
+        color: var(--primary-color);
+      }
+    }
+    
+    /* Add Button */
+    .right-cont {
+      text-align: right;
+      margin-top: 1px;
+      grid-column: 2;
 
-    .ti-plus {
-      margin-right: 4px;
-      font-size: 14px;
+      .btn-add {
+        cursor: pointer;
+        border: none;
+        border-radius: 0.5rem;
+        background: var(--primary-color);
+        color: var(--panel-color);
+        padding: 12px 20px 12px 14px;
+      }
+      .ti-plus {
+        margin-right: 5px;
+        font-size: 14px;
+      }
+
+      .btn-add:hover {
+        background-color: var(--primary-alt);
+      }
     }
   }
-
-  .btn-add:hover {
-    background-color: var(--primary-alt);
-  }
 }
+
 
 /* Filtering */
 .table-filter {

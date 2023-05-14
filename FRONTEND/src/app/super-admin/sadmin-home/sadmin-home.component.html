@@ -1,173 +1,120 @@
-
-
-  <!--LOADER CAT--> 
-  <!--
-  <div class="cat" *ngIf="loader2">
-    <div class="ear ear--left"></div>
-    <div class="ear ear--right"></div>
-    <div class="face">
-      <div class="eye eye--left">
-        <div class="eye-pupil"></div>
-      </div>
-      <div class="eye eye--right">
-        <div class="eye-pupil"></div>
-      </div>
-      <div class="muzzle"></div>
-    </div>
-  </div>--> 
-
-  <!--LOADER BOUNCING--> 
-  <div class="wrapper" *ngIf="loader2">
-      <div class="circle" ></div>
-      <div class="circle" ></div>
-      <div class="circle" ></div>
-      <div class="shadow" ></div>
-      <div class="shadow" ></div>
-      <div class="shadow" ></div>
-  </div>
-
-
+<!--LOADER BOUNCING-->
+<div class="wrapper" *ngIf="loader2">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="shadow"></div>
+  <div class="shadow"></div>
+  <div class="shadow"></div>
+</div>
 
 <main *ngIf="loader">
-  <h1 class="title">Accounts</h1>
-</main>
+  <div class="header">
+    <div class="left-cont">
+      <h1 class="title">Accounts</h1>
+    </div>
 
-<div class="add-account" *ngIf="loader">
-  <button class="btn-add" (click)="show(1)">
-    <i class="ti ti-plus"></i>
-    New Account
-  </button>
-</div>
-
-<div class="filter-field" *ngIf="loader">
-  <div class="filter-search">
-    <label>Search User</label>
-    <div class="input-box" *ngIf="loader">
-      <i class="ti ti-search"></i>
-      <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
+    <div class="right-cont" *ngIf="loader">
+      <button class="btn-add" (click)="show(1)">
+        <i class="ti ti-plus"></i>New Account
+      </button>
     </div>
   </div>
 
+  <div class="filter-field" *ngIf="loader">
+    <div class="filter-search">
+      <label>Search User</label>
+      <div class="input-box" *ngIf="loader">
+        <i class="ti ti-search"></i>
+        <input type="text" placeholder="Search" [(ngModel)]="searchText" />
+      </div>
+    </div>
 
-  <div class="filter-role"  *ngIf="loader">
-    <label>User Role</label>
-    <select [(ngModel)]="type" name="journal-type">
-      <option [ngValue]="undefined" selected>All</option>
-      <option *ngFor="let type of types" [value]="type">{{type}}</option>
-    </select>
+    <div class="filter-role" *ngIf="loader">
+      <label>User Role</label>
+      <select [(ngModel)]="type" name="journal-type">
+        <option [ngValue]="undefined" selected>All</option>
+        <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+      </select>
+    </div>
   </div>
-</div>
 
-<div class="table-container"  *ngIf="loader">
-  <table class="table-content">
-    <thead>
-      <th>Role</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Department</th>
-      <th>Date Created</th>
-      <th>Status</th>
-    </thead>
+  <div class="table-container" *ngIf="loader">
+    <table class="table-content">
+      <thead>
+        <th>Role</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Date Created</th>
+        <th>Status</th>
+      </thead>
 
-    <tbody *ngFor="let user of userAccounts
-              | search: searchText
-              | filter: type
-              | paginate: { itemsPerPage: 10, currentPage: p }" >
-      <tr  *ngIf="user.userrole.id != 2 || user.userrole.user_type==type">
-
+      <tbody
+        *ngFor="
+          let user of userAccounts
+            | search : searchText
+            | filter : type
+            | paginate : { itemsPerPage: 10, currentPage: p }
+        "
+      >
+        <tr *ngIf="user.userrole.id != 2 || user.userrole.user_type == type">
           <td>{{ user.userrole.user_type }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <!-- <td>{{ user.coop }}</td> -->
-          <td>{{ user.created_at | date: 'MM-dd-yyyy' }}</td>
+          <td>{{ user.created_at | date : "MM-dd-yyyy" }}</td>
           <td></td>
 
-            <td>
-              <div *ngIf="user.status == 0">
-                <label class="switch-toggle">
-
-                <input  class="switch" input type="checkbox"  (click)="deactivateTOactivate(user)" />
+          <td>
+            <div *ngIf="user.status == 0">
+              <label class="switch-toggle">
+                <input class="switch" input type="checkbox" (click)="deactivateTOactivate(user)"/>
                 <div class="slider"></div>
               </label>
             </div>
             <div *ngIf="user.status == 1">
               <label class="switch-toggle">
-
-              <input class="switch" input type="checkbox"  [(ngModel)]="isChecked" (click)="activateUser(user)" (change)="changeSelection ($event,index)" />
-              <div class="slider"></div>
-            </label>
-          </div>
-
+                <input class="switch" input type="checkbox" [(ngModel)]="isChecked" (click)="activateUser(user)" (change)="changeSelection($event, index)"/>
+                <div class="slider"></div>
+              </label>
+            </div>
 
             <div *ngIf="user.status == 2">
               <button type="submit" (click)="activateUser2(user)" class="btn btn-success">
                 <span>Activate</span>
               </button>
-           </div>
+            </div>
           </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-      </tr>
-    </tbody>
-
-  </table>
-</div>
   <div class="pagination-controls" *ngIf="loader">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
-
-
-
-
+</main>
 
 <section>
-  <router-outlet></router-outlet>
   <div>
     <form (ngSubmit)="autoAdmin()" #memberRegistration="ngForm" [formGroup]="autoAdminForm" class="register-form">
-    <div class="otp-modal"  *ngIf="showModal === 1">
-      <div class="otp-content">
-        <div class="otp-header">Add admin account</div>
-        <div class="otp-body">
-          <label for="admin_username">Username</label>
-          <input class="modalinput" type="text" [(ngModel)]="form.username" formControlName="username"/>
-          <br/>
-          <label for="admin_email">Email Address</label>
-          <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
-          <br />
-        </div>
-        <div class="otp-footer">
-          <button class="backbtn" > Create </button>
-          <button class="closebtn" (click)="show(2)">Close</button>
-        </div>
-      </div>
-    </div>
-  </form>
-  </div>
-</section>
-
-
-
-
-<section>
-  <router-outlet></router-outlet>
-  <div>
-    <form (ngSubmit)="autoAdmin()" #memberRegistration="ngForm" [formGroup]="autoAdminForm" class="register-form">
-    <div class="otp-modal"  *ngIf="showModal === 1">
-      <div class="otp-content">
-        <div class="otp-header">Add admin account</div>
-        <div class="otp-body">
-          <label for="admin_username">Username</label>
-          <input class="modalinput" type="text" [(ngModel)]="form.username" formControlName="username"/>
-          <br/>
-          <label for="admin_email">Email Address</label>
-          <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
-          <br />
-        </div>
-        <div class="otp-footer">
-          <button class="backbtn" > Create </button>
-          <button class="closebtn" (click)="show(2)">Close</button>
+      <div class="otp-modal" *ngIf="showModal === 1">
+        <div class="otp-content">
+          <div class="otp-header">Add Admin Account</div>
+          <div class="otp-body">
+            <label for="admin_username">Username</label>
+            <input class="modalinput" type="text" [(ngModel)]="form.username" formControlName="username"/>
+            <br/>
+            <label for="admin_email">Email Address</label>
+            <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
+            <br/>
+          </div>
+          <div class="otp-footer">
+            <button class="closebtn" (click)="show(2)">Close</button>
+            <button class="backbtn">Create</button>
+          </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
   </div>
 </section>

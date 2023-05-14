@@ -1,13 +1,47 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
 main {
   width: 100%;
   animation: transitionIn 0.75s;
 
-  .title {
-    color: var(--primary-color);
+  .header {
+    display: grid;
+    margin-bottom: 1rem;
+
+    .left-cont {
+      grid-column: 1;
+
+      .title {
+        color: var(--primary-color);
+      }
+    }
+    
+    /* Add Button */
+    .right-cont {
+      text-align: right;
+      margin-top: 1px;
+      grid-column: 2;
+
+      .btn-add {
+        cursor: pointer;
+        border: none;
+        border-radius: 0.5rem;
+        background: var(--primary-color);
+        color: var(--panel-color);
+        padding: 12px 20px 12px 14px;
+      }
+      .ti-plus {
+        margin-right: 5px;
+        font-size: 14px;
+      }
+    }
   }
 }
 
-/*modal*/
+
+/* Modal */
 .otp-modal {
   position: fixed;
   background: #000000bf;
@@ -15,43 +49,91 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
+
+  .otp-content {
+    background: #fff;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    text-align: center;
+    padding: 0 30px 30px;
+    transition: transform 0.4s, top 0.4s;
+    max-width: 400px;
+    width: 100%;
+
+    .otp-header {
+      padding: 30px 10px;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--primary-color);
+    }
+
+    .otp-body {
+      
+      label {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--primary-color);
+      }
+
+      .modalinput {
+        display: flex;
+        width: calc(90%);
+        flex-direction: column;
+        margin: auto;
+        outline: none;
+        font-size: 14px;
+        font-weight: 400;
+        color: #333;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        padding: 0 14px;
+        height: 36px;
+      }
+    }
+
+    .otp-footer {
+      .backbtn {
+        width: 45%;
+        margin: 10px 10px;
+        height: 43px;
+        background-color: #3f0f88;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.6rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        transition: 0.3s;
+        text-decoration: none;
+      }
+
+      .closebtn {
+        width: 45%;
+        margin: 10px 10px;
+        height: 43px;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.6rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        transition: 0.3s;
+        text-decoration: none;
+        background-color: #ede9f2;
+        color: #7f7a7a;
+      }
+    }
+  }
 }
 
-.otp-content {
-  background: #fff;
-  width: 50%;
-  margin: 0 auto;
-  border-radius: 1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  text-align: center;
-  padding: 0 30px 30px;
-  transition: transform 0.4s, top 0.4s;
-  width: 400px;
-}
 
-/*add button */
-.add-account {
-  text-align: right;
-  margin-left: 121px;
-  margin-top: 1px;
-}
-
-.btn-add {
-  cursor: pointer;
-  border: none;
-  border-radius: 0.5rem;
-  background: var(--primary-color);
-  color: var(--panel-color);
-  padding: 12px 20px 12px 14px;
-}
-.ti-plus {
-  margin-right: 14px;
-  font-size: 14px;
-}
-
+/* Filter Fields */
 .filter-field {
   display: flex;
   align-items: center;
@@ -59,8 +141,8 @@ main {
 
   // Search box
   .filter-search {
+    margin-right: 10px;
     
-
     label {
       font-size: 14px;
       font-weight: 500;
@@ -100,6 +182,7 @@ main {
         border: none;
         padding: 0 20px 0 50px;
         background-color: transparent;
+        caret-color: var(--dark-grey);
       }
   
       input::placeholder {
@@ -110,7 +193,6 @@ main {
   
   // Filter Role
   .filter-role {
-    margin-left: 10px;
 
     label {
       font-size: 14px;
@@ -131,7 +213,7 @@ main {
       margin-top: .5rem;
       border-radius: 0.625rem;
       border: 1.6px solid #d1cccc;
-      padding: 0 5px 0 5px;
+      padding: 0 15px 0 15px;
 
       option:hover {
         background-color: var(--primary-color);
@@ -139,8 +221,6 @@ main {
     }
   }
 }
-
-
 
 /* Table */
 .table-container {
@@ -233,36 +313,7 @@ input:checked::after {
 }
 
 
-/*
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3f0f88;
-  width: 120px;
-  height: 120px;
-  position: fixed;
-  left: 50%;
-  top: 35%;
-  z-index: 1000;
-  -webkit-animation: spin 2s linear infinite; 
- animation: spin 2s linear infinite;
-}
-
-/* Safari */
-
-/*
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-*/
-
+/* Loader */
 .wrapper{
 	width: 200px;
 	height: 60px;
@@ -312,7 +363,6 @@ input:checked::after {
 	animation-delay: .3s;
 }
 
-
 .shadow{
 	width: 20px;
 	height: 4px;
@@ -354,6 +404,3 @@ input:checked::after {
 	right: 15%;	
 	animation-delay: .3s;
 }
-
-
-

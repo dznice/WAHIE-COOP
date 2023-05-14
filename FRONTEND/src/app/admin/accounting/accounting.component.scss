@@ -1,34 +1,46 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
 main {
   width: 100%;
   animation: transitionIn 0.75s;
 
-  .title {
-    color: var(--primary-color);
-  }
-  
-}
+  .header {
+    display: grid;
+    margin-bottom: 1rem;
 
+    .left-cont {
+      grid-column: 1;
 
-/* Add Button */
-.new-transac {
-  text-align: right;
-
-  .btn-add {
-    cursor: pointer;
-    border: none;
-    border-radius: 0.5rem;
-    background: var(--primary-color);
-    color: var(--panel-color);
-    padding: 12px 20px 12px 14px;
-
-    .ti-plus {
-      margin-right: 4px;
-      font-size: 14px;
+      .title {
+        color: var(--primary-color);
+      }
     }
-  }
+    
+    /* Add Button */
+    .right-cont {
+      text-align: right;
+      margin-top: 1px;
+      grid-column: 2;
 
-  .btn-add:hover {
-    background-color: var(--primary-alt);
+      .btn-add {
+        cursor: pointer;
+        border: none;
+        border-radius: 0.5rem;
+        background: var(--primary-color);
+        color: var(--panel-color);
+        padding: 12px 20px 12px 14px;
+      }
+      .ti-plus {
+        margin-right: 5px;
+        font-size: 14px;
+      }
+
+      .btn-add:hover {
+        background-color: var(--primary-alt);
+      }
+    }
   }
 }
 
@@ -46,16 +58,16 @@ main {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: .2rem;
-      margin-top: 1rem;
-
+      margin-top: .5rem;
+  
       .overdue {
         border-radius: 0.645rem;
-        background: var(--red);
+        background: #ff8000;
       }
 
       .open-inv {
         border-radius: 0.645rem;
-        background: var(--yellow);
+        background: #0077c5;
       }
 
       .card-amount {
@@ -67,7 +79,7 @@ main {
 
   .paid-container {
     .paid {
-      margin-top: 1rem;
+      margin-top: .5rem;
       border-radius: 0.645rem;
       background: var(--green);
     }
@@ -80,7 +92,7 @@ main {
 
   label {
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--dark-grey);
   }
 
@@ -114,10 +126,7 @@ main {
   height: 46px;
   max-width: 300px;
   width: 100%;
-  background: var(--panel-color);
   margin-top: 1rem;
-  border-radius: 0.625rem;
-  border: 1.6px solid var(--border-color);
 
   i {
     position: absolute;
@@ -134,17 +143,32 @@ main {
   input {
     height: 100%;
     width: 100%;
-    outline: none;
     font-size: 15px;
     font-weight: 400;
-    font-family: "Poppins", sans-serif;
-    border: none;
     padding: 0 20px 0 50px;
+    border-radius: 0.625rem;
+    border: 1.6px solid var(--border-color);
+    outline-color: #3f0f88;
     background-color: transparent;
   }
 
   input::placeholder {
     color: var(--dark-grey-2);
+  }
+
+  input:hover {
+    border: 2px solid var(--primary-color);
+  }
+}
+
+.input-box:hover {
+
+  .ti-search {
+    color: var(--primary-color);
+  }
+
+  input {
+    border: 2px solid var(--primary-color);
   }
 }
 
