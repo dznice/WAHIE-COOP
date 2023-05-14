@@ -134,8 +134,9 @@ class AuthController extends Controller {
                 'email' => $request['email'],
                 'role_id' => '1',
                 'fillInfo' => '0',
+                'status' => '1',
                 'password' =>$pass,
-                'code' => '0',
+                'code' => '1',
                 ]);
 
             return response()->json($password);
@@ -176,8 +177,6 @@ class AuthController extends Controller {
             return response()->json($users);
         }
         }
-
-
 
     }
 

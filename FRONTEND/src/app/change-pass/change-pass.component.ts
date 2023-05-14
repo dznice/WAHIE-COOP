@@ -41,7 +41,9 @@ export class ChangePassComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private _document: any,
     private fb: FormBuilder, private backend:BackendService, private http:HttpClient,
     private aRouter: ActivatedRoute, private route:Router
-  ) {}
+  ) {
+
+  }
 
   passwordMatch(controlName: string, matchControlName: string) {
     return (formGroup: FormGroup) => {

@@ -64,6 +64,7 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
 
     this.chpassForm = this.fb.group(
       {
+        name: new FormControl(null, [Validators.required]),
         password: new FormControl(null, [Validators.required]),
 
         confirm_pass: new FormControl(null, [Validators.required]),
@@ -96,17 +97,21 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
   id = localStorage.getItem('userData');
   public chform = {
     id : null,
-    password:null,
-    confirm_pass:null
+    name: null,
+    password: null,
+    confirm_pass: null
   }
 
 
   submitPass(){
-    this.http.post('http://127.0.0.1:8000/api/users/superChange' + '/' + this.id, this.chform).subscribe(
+    this.http.post('http://127.0.0.1:8000/api/users/adminChange' + '/' + this.id, this.chform).subscribe(
       (res:any)=>{
         console.log(res.id);
+
         this.token.handle(sessionStorage.getItem('ftoken'));
-        this.route.navigateByUrl('super-admin/sadmin-home');
+        sessionStorage.clear();
+        sessionStorage.setItem('name', res.name);
+        this.route.navigateByUrl('admin/admin-home');
     }); 
   }
 }
