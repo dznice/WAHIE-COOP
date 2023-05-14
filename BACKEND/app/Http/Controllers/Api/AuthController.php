@@ -145,26 +145,27 @@ class AuthController extends Controller {
 
     public function forgotPass(Request $request,$email){
         $user = User::where('email', '=', $email)->first();
-        $url = Str::random(30);
-        $token = $user->password;
-        $id = $user->id;
-        $link = 'http://localhost:4200/change-pass/'. $id . '/' .  $url;
 
-        $secret = forgotPass::create([
-            'userId' => $id,
-            'secret' => $token
-        ]);
-
-
-        EmailOtp::create([
-        'user_email'=> $email,
-        'code' => 0
-         ]);
-        Mail::to($email)->send(new forgotPassword($link,$email));
-
-
-        return response()->json($user);
+            $url = Str::random(30);
+            $token = $user->password;
+            $id = $user->id;
+            $link = 'http://localhost:4200/change-pass/'. $id . '/' .  $url;
+    
+            $secret = forgotPass::create([
+                'userId' => $id,
+                'secret' => $token
+            ]);
+    
+    
+            EmailOtp::create([
+            'user_email'=> $email,
+            'code' => 0
+             ]);
+            Mail::to($email)->send(new forgotPassword($link,$email));
+            return response()->json($user);
+        
     }
+
 
     public function forgotChange(Request $request,$id){
         $secret = forgotPass::where('userId', '=',$id)->first();
