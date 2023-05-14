@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -86,7 +86,11 @@ export class WahieService {
   }
 
   public getListAccount(mem_id:any){
-    return this.http.get<any[]>(this.url+'/api/accounts?open_balance=1&&id='+mem_id);
+    const params = new HttpParams()
+                   .set('open_balance', '1')
+                   .set('paymentIdentifier', 'Paid');
+
+                   return this.http.get<any[]>(`${this.url}/api/accounts?id=${mem_id}`, { params });
   }
 
   public savePayment(payment:any):Observable<any>{

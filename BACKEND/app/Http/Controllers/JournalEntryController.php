@@ -47,14 +47,6 @@ class JournalEntryController extends Controller
 
             foreach ($entryData['entries'] as $key => $value)
             {
-                // $credits-> journals_id =$value['account'];
-                // $credits-> amount = $value['credit'];
-                // $credits->payables_id = $payables;
-                // $credits->save();
-
-
-
-                // $filter = collect($memberid)->filter()->all();
                 $members_id = $value['name'];
             }
 

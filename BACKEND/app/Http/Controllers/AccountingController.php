@@ -55,7 +55,8 @@ class AccountingController extends Controller
     {
         $Dquery = Debits::with(['debt.cred.entries', 'debt.cred.transac.member']);
         if($request->open_balance){
-            $Dquery->where('open_balance', '>=', $request->open_balance);
+            $Dquery->where('open_balance', '>=', $request->open_balance)
+                    ->where('paymentIdentifier', '!=', $request->paymentIdentifier);;
     }
         if($request->id){
             $Dquery->whereHAs('debt.cred.transac.member', function($query) use($request){

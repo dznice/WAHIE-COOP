@@ -21,6 +21,8 @@ return new class extends Migration
             $table->double('payment')->nullable();
             $table->date('pay_date')->nullable();
             $table->string('status');
+            $table->string('paymentMethod')->default('');
+            $table->string('paymentIdentifier')->default('');
             $table->timestamps();
 
             $table->foreign('credits_id')-> references('id')->on('credits');

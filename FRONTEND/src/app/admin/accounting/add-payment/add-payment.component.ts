@@ -18,6 +18,7 @@ export class AddPaymentComponent implements OnInit {
   term: string = '';
   p: number = 1;
   private urlId : Subscription;
+  useid = localStorage.getItem('userData');
 
   startDate: string = '';
   endDate: string = '';
@@ -88,8 +89,8 @@ export class AddPaymentComponent implements OnInit {
           paymentDate:this.builder.control(''),
           paymentMethod:this.builder.control(''),
           referenceNo:this.builder.control(''),
-          depositTo:this.builder.control(''),
-          // invoiceNo:this.builder.control(''),
+          memberId:this.builder.control(this.id),
+          userId:this.builder.control(this.useid),
           // startDate:this.builder.control(''),
           // endDate:this.builder.control(''),
           payables: this.builder.array(account.map(trial => this.generateFormGroup(trial))),
@@ -102,6 +103,8 @@ export class AddPaymentComponent implements OnInit {
 
   private generateFormGroup(trial:any) {
     return this.builder.group({
+      debitId: this.builder.control({ value: trial.id , disabled: true }),
+      creditId: this.builder.control({ value: trial.credits_id , disabled: true }),
       description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
       dueDate: this.builder.control({ value: null, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),

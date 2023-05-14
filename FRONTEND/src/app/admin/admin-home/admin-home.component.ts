@@ -15,7 +15,7 @@ export class AdminHomeComponent implements OnInit {
   loader = false;
   loader2 = true;
 
-  
+  nullcheck: number = 0;
   item: any[] = [];
   term: string = '';
   p: number = 1;
