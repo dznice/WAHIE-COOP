@@ -74,14 +74,12 @@ class PaymentController extends Controller
                         $debits->status = "Open";
                     }
                     $debits->save();
-
-                    
-
-                }
-
                     $debiti = Debits::find($value['debitId']);
                     $debiti->paymentIdentifier = "Paid";
                     $debiti->save();
+                }
+
+                    
                     
             }
 
