@@ -6,6 +6,8 @@ import { itemService } from '../../accounting/item.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-add-payment',
@@ -27,7 +29,7 @@ export class AddPaymentComponent implements OnInit {
   paymentForm: FormGroup;
   paymentRow !: FormArray<any>;
 
-  constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute){
+  constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute, private route:Router, private toast: NgToastService){
 
   }
 
@@ -86,8 +88,8 @@ export class AddPaymentComponent implements OnInit {
           member:this.builder.control({value: account[0].debit.cred.transac.member.first_name 
             +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
-          paymentDate:this.builder.control(''),
-          paymentMethod:this.builder.control(''),
+          paymentDate:this.builder.control('',Validators.required),
+          paymentMethod:this.builder.control('',Validators.required),
           referenceNo:this.builder.control(''),
           memberId:this.builder.control(this.id),
           userId:this.builder.control(this.useid),
@@ -109,7 +111,7 @@ export class AddPaymentComponent implements OnInit {
       dueDate: this.builder.control({ value: null, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
       openBalance: this.builder.control({ value: trial.open_balance , disabled: true }),
-      payment: this.builder.control({value: 0, disabled: false})
+      payment: this.builder.control({value: 0, disabled: false} ,Validators.required)
     });
   }
 
@@ -134,9 +136,11 @@ export class AddPaymentComponent implements OnInit {
         let result:any;
         result=res;
         console.log(result);
-        //this.route.navigateByUrl('admin/accounting')
+        this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
+        this.route.navigateByUrl('admin/accounting')
       })
     }else{
+      this.toast.error({detail:'Failed',summary:'Fill all inputs',duration:2000, sticky:false,position:'tr'});
       console.log("Error: Fill all input or need balance the amount to submit");
     }
     console.log(this.paymentForm.getRawValue());

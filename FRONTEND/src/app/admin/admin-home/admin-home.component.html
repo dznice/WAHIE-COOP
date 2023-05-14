@@ -97,18 +97,20 @@
           <th>Member</th>
           <th>Due Date</th>
           <th>Balance</th>
+          <th>Payment</th>
           <th>Status</th>
         </thead>
         <tbody>
-          <tr *ngFor="let e of account | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }">
+          <tr *ngFor="let e of account.slice().reverse() | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }">
             <td>{{ e.debit.cred.transac.transaction_date }}</td>
             <td>{{ e.debit.cred.entries.entry_name }}</td>
             <td>{{ e.debit.cred.transac.transaction_number }}</td>
             <td>{{ e.debit.cred.transac.member.first_name }} {{ e.debit.cred.transac.member.last_name }}</td>
             <td>{{ e.debit.cred.due_date }}</td>
             <td>{{ e.open_balance }}</td>
+            <td>{{ e.payment }}</td>
             <td class="status">
-              <span [ngClass]="{'pending': e.status == 'Open',
+              <span [ngClass]="{'pending': e.status == 'Pending',
                                 'overdue': e.status == 'Overdue', 
                                 'paid': e.status == 'Paid',
                                 'closed': e.status == 'Closed'}">

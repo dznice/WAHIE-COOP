@@ -95,7 +95,7 @@ class JournalEntryController extends Controller
             $debits->orig_amount = $request->totalcredit;
             $debits->open_balance = $request->totalcredit;
             $debits->payment = 0;
-            $debits->status = "Open";
+            $debits->status = "Pending";
 
             $debits->save();
 

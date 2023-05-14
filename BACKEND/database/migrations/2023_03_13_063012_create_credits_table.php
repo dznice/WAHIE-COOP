@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('credits', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('users_id');
-            $table->unsignedBigInteger('journals_id');
+            $table->unsignedBigInteger('journals_id')->nullable();
             $table->unsignedBigInteger('payables_id');
             $table->datetime('due_date')->nullable();
             $table->double('interest')->nullable();

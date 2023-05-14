@@ -5,7 +5,7 @@ export class Item{
     balance: string;
 
     date: any;
-
+    payment: any;
     No: any;
     Member: any;
     DueDate: any;

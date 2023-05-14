@@ -22,19 +22,14 @@ export class AdminHomeComponent implements OnInit {
   type: string;
   stat: string;
 
-
-
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
   stats: string[]= ["Overdue", "Pending", "Closed", "Paid" ];
 
   startDate: string = '';
   endDate : string = '';
 
-  constructor(private ItemService: itemService,
-              private http: HttpClient,
-              private route: Router) {}
+  constructor(private http: HttpClient, private route: Router) {}
   ngOnInit(): void {
-    this.item = this.ItemService.item;
       // this.showEntries();
       this.showAccounting();
     setTimeout(() => {

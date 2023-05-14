@@ -13,9 +13,12 @@ debit: any;
     email : string;
     balance: string;
 
+    id: number;
+    last_name : string;
+    middle_name : string;
+    payment: any;
     transaction_number: any;
     transaction_date: Date;
-    id: any;
     entry_name: any;
     entry_id: any;
     entries: any;
