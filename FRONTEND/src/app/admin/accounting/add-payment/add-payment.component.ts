@@ -28,6 +28,7 @@ export class AddPaymentComponent implements OnInit {
   public members: any;
   paymentForm: FormGroup;
   paymentRow !: FormArray<any>;
+  amount !: FormGroup<any>;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute, private route:Router, private toast: NgToastService){
 
@@ -84,7 +85,7 @@ export class AddPaymentComponent implements OnInit {
     this.accounts = this.wahieService.getListAccount(this.id).subscribe((account:any[])=>{
         this.accounts = account;
         this.paymentForm=this.builder.group({
-          amountReceived:this.builder.control({value: 69.00, disabled: true}),
+          amountReceived:this.builder.control({value: 0, disabled: true}),
           member:this.builder.control({value: account[0].debit.cred.transac.member.first_name 
             +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
@@ -96,8 +97,8 @@ export class AddPaymentComponent implements OnInit {
           // startDate:this.builder.control(''),
           // endDate:this.builder.control(''),
           payables: this.builder.array(account.map(trial => this.generateFormGroup(trial))),
-          amountApply:this.builder.control({value: 69.00, disabled: true}),
-          amountCredit:this.builder.control({value: 69.00, disabled: true}),
+          amountApply:this.builder.control({value: 0, disabled: true}),
+          amountCredit:this.builder.control({value: 0, disabled: true}),
 
       });
     });
@@ -146,6 +147,27 @@ export class AddPaymentComponent implements OnInit {
     console.log(this.paymentForm.getRawValue());
     //this.route.navigateByUrl('admin/accounting')
   }
+
+  ammountClick(index: any) {
+    this.paymentRow = this.paymentForm.get("payables") as FormArray;
+    this.amount = this.paymentRow.at(index) as FormGroup;
+    this.ammount_summary();
+  }
+
+  ammount_summary(){
+    let array=this.paymentForm.getRawValue().payables;
+    let apply = 0;
+    //let credit = 0;
+    array.forEach((x:any)=>{
+      apply=apply+x.payment;
+    });
+    console.log(apply)
+    this.paymentForm.get("amountApply")?.setValue(apply);
+    this.paymentForm.get("amountReceived")?.setValue(apply);
+    //this.paymentForm.get("totalcredit")?.setValue(total_credit);
+
+  }
+
 
   // memberChange() {
   //   let memberID = this.paymentForm.get("member")?.value;
