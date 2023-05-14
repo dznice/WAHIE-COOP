@@ -16,6 +16,9 @@ import { AuthGuardService } from '../services/auth-guard.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegMembersComponent implements OnInit, OnDestroy {
+  loader = false;
+  loader2 = true;
+
 
   state = 'info1';
   toggle() {
@@ -171,15 +174,23 @@ onSubmit(){
 
     
     regMember(){
+
       console.log(this.form)
+      setTimeout(() => {
+        this.loader = true;
+      }, 2000);
+      setTimeout(() => {
+        this.loader2 = false;
+      }, 2000);
       return this.backend.register(this.form).subscribe(     
         data=>this.handleData(data)
+        
    
         );
+        
     }
 
     handleData(data:any){
-  
       sessionStorage.setItem('email', JSON.stringify(data['email']));
       localStorage.setItem('userData', JSON.stringify(data['id']));
       this.route.navigateByUrl('verify-account');
