@@ -10,14 +10,14 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {  
+    {
         Schema::create('forgotPass', function (Blueprint $table) {
             $table->id();
             $table->integer('userId');
-            $table->string('secret');      
+            $table->string('secret');
             $table->rememberToken();
             $table->timestamps();
-           
+
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('forgotPass');
     }
 };

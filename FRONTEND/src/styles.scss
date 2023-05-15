@@ -33,14 +33,15 @@ body {
 
 /* Dropdown */
 .ng-dropdown-panel{
-  background-color: aliceblue;
+  background-color: var(--grey-alt);
   outline: none;
+  padding: 10px 10px;
   font-size: 14px;
   font-weight: 400;
   color: #333;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
-  border: 1px solid #aaa; 
+  border: 1px solid #aaa;
   margin: 2px 0;
 }
 
@@ -67,8 +68,8 @@ select {
   display: grid;
   grid-template-areas: "select";
 }
-
-select,
-.select:after {
-  grid-area: select;
+ng-select .ng-select-container {
+  padding: 8px 6px;
+  margin-left: 10px;
+  margin-right: 10px;
 }

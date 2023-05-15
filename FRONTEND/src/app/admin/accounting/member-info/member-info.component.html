@@ -35,10 +35,11 @@
             <th>Member</th>
             <th>Due Date</th>
             <th>Balance</th>
+            <th>Payment</th>
             <th>Status</th>
           </thead>
           <tbody *ngFor="
-          let acc of account
+          let acc of account.slice().reverse()
             | filterName : term
         ">
             <tr
@@ -53,6 +54,7 @@
             <td>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
             <td>{{ acc.debit.cred.due_date }}</td>
             <td>{{ acc.open_balance }}</td>
+            <td>{{ acc.payment }}</td>
             <td>{{ acc.status }}</td>
           </tr>
           </tbody>

@@ -49,7 +49,7 @@ export class AddPaymentComponent implements OnInit {
   // });
 
 
-  
+
 
   id:number = 0;
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class AddPaymentComponent implements OnInit {
       console.log(this.members);
     });
   }
-  
+
   // showAccounting(): void{
   //   this.accounts = this.wahieService.getListAccount(this.id).subscribe((account:any)=>{
   //     this.accounts = account;
@@ -86,7 +86,7 @@ export class AddPaymentComponent implements OnInit {
         this.accounts = account;
         this.paymentForm=this.builder.group({
           amountReceived:this.builder.control({value: 0, disabled: true}),
-          member:this.builder.control({value: account[0].debit.cred.transac.member.first_name 
+          member:this.builder.control({value: account[0].debit.cred.transac.member.first_name
             +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
           paymentDate:this.builder.control('',Validators.required),
@@ -103,6 +103,8 @@ export class AddPaymentComponent implements OnInit {
       });
     });
   }
+
+
 
   private generateFormGroup(trial:any) {
     return this.builder.group({
@@ -141,20 +143,32 @@ export class AddPaymentComponent implements OnInit {
         this.route.navigateByUrl('admin/accounting')
       })
     }else{
-      this.toast.error({detail:'Failed',summary:'Fill all inputs',duration:2000, sticky:false,position:'tr'});
+      this.toast.error({detail:'Failed',summary:'Fill all inputs or balance the amount to submit',duration:2000, sticky:false,position:'tr'});
       console.log("Error: Fill all input or need balance the amount to submit");
     }
     console.log(this.paymentForm.getRawValue());
     //this.route.navigateByUrl('admin/accounting')
   }
 
-  ammountClick(index: any) {
+ autoAmount(index: any) {
     this.paymentRow = this.paymentForm.get("payables") as FormArray;
     this.amount = this.paymentRow.at(index) as FormGroup;
-    this.ammount_summary();
-  }
+    let pay = this.amount.get("payment")?.value;
+    let openBal = this.amount.get("openBalance")?.value;
+    if(pay>openBal){
+      this.amount.get("payment")?.setValue(openBal);
+      //this.amount.get("payment")?.setValue(null);
+    }
+    this.amount_summary();
+}
 
-  ammount_summary(){
+clearValue(index: any) {
+  this.paymentRow = this.paymentForm.get("payables") as FormArray;
+  this.amount = this.paymentRow.at(index) as FormGroup;
+  this.amount.get("payment")?.setValue(null);
+}
+
+  amount_summary(){
     let array=this.paymentForm.getRawValue().payables;
     let apply = 0;
     //let credit = 0;
@@ -165,7 +179,13 @@ export class AddPaymentComponent implements OnInit {
     this.paymentForm.get("amountApply")?.setValue(apply);
     this.paymentForm.get("amountReceived")?.setValue(apply);
     //this.paymentForm.get("totalcredit")?.setValue(total_credit);
+  }
 
+  clearMethod(){
+    let array=this.paymentForm.getRawValue().payables;
+    array.forEach((x:any)=>{
+      this.clearValue(x);
+    });
   }
 
 

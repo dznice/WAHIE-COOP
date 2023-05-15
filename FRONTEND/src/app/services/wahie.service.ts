@@ -88,7 +88,7 @@ export class WahieService {
   public getListAccount(mem_id:any){
     const params = new HttpParams()
                    .set('open_balance', '1')
-                   .set('paymentIdentifier', 'Paid');
+                   .set('paymentIdentifier', 'Closed');
 
                    return this.http.get<any[]>(`${this.url}/api/accounts?id=${mem_id}`, { params });
   }

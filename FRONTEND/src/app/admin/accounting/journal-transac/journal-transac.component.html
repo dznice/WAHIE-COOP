@@ -1,0 +1,49 @@
+<main>
+  <div class="head">
+    <h1 class="title">Journal Entry No.</h1>
+  </div>
+
+  <div class="header">
+    <div class="journadate">
+      <label> Journal Date </label>
+    </div>
+
+    <div class="userid">
+      <input class="headinput" type="hidden" formControlName="useid" />
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="table-content">
+      <thead>
+        <th>No.</th>
+        <th>Account</th>
+        <th>Debit</th>
+        <th>Credit</th>
+        <th>Description</th>
+        <th>Name</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of item">
+          <td>{{ e.No }}</td>
+          <td>{{ e.Account }}</td>
+          <td>{{ e.Debit }}</td>
+          <td>{{ e.Credit }}</td>
+          <td>{{ e.Description }}</td>
+          <td>{{ e.Name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="totals">
+    <div class="journdate">
+      <label> Total Debit </label>
+      <input class="headinput" type="number" formControlName="totaldebit" />
+    </div>
+    <div class="journdate">
+      <label> Total Credit </label>
+      <input class="headinput" type="number" formControlName="totalcredit" />
+    </div>
+  </div>
+</main>

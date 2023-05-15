@@ -258,7 +258,7 @@ main {
             border-radius: 0.45rem;
             width: fit-content;
           }
-          
+
           .pending {
             padding: .5rem 1.25rem;
             background: var(--pending-bg);
@@ -267,7 +267,14 @@ main {
           }
 
           .paid {
-            padding: .5rem 2.15rem;
+            padding: .5rem 1.50rem;
+            background: var(--paid-bg);
+            color: var(--paid-font);
+            border-radius: 0.45rem;
+            text-align: center;
+          }
+          .closed {
+            padding: .5rem 1.50rem;
             background: var(--paid-bg);
             color: var(--paid-font);
             border-radius: 0.45rem;
@@ -340,7 +347,7 @@ main {
 
 }
 .circle:nth-child(3){
-	
+
 	left:auto;
 	right: 15%;
 	animation-delay: .3s;
@@ -383,9 +390,9 @@ main {
 
 }
 .shadow:nth-child(5){
-	
+
 	left:auto;
-	right: 15%;	
+	right: 15%;
 	animation-delay: .3s;
 }
 

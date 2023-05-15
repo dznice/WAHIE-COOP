@@ -49,7 +49,7 @@
     <h2 class="section-title">Recent Transactions</h2>
 
     <div class="table-filter">
-      <div class="filter-field1"> 
+      <div class="filter-field1">
         <!-- MEMBER -->
         <label for="search-member" placeholder="Search Member">Member</label>
 
@@ -101,7 +101,7 @@
           <th>Status</th>
         </thead>
         <tbody>
-          <tr *ngFor="let e of account.slice().reverse() | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }"
+          <tr *ngFor="let e of account.slice().reverse() | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 10, currentPage: p }"
           (click)="memberInfo(e.debit.cred.transac.member.id)" >
             <td>{{ e.debit.cred.transac.transaction_date }}</td>
             <td>{{ e.debit.cred.entries.entry_name }}</td>
@@ -112,7 +112,7 @@
             <td>{{ e.payment }}</td>
             <td class="status">
               <span [ngClass]="{'pending': e.status == 'Pending',
-                                'overdue': e.status == 'Overdue', 
+                                'overdue': e.status == 'Overdue',
                                 'paid': e.status == 'Paid',
                                 'closed': e.status == 'Closed'}">
               {{ e.status }}</span></td>

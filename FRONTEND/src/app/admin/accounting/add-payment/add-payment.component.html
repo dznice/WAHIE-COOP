@@ -158,14 +158,14 @@
                 <!-- <td>{{ account.debit.cred.entries.entry_name }}</td>
                 <td>{{ account.debit.cred.due_date }}</td>
                 <td>{{ account.orig_amount }}</td> -->
-        
-                
+
+
                 <!-- <td>{{ account.open_balance }}</td> -->
                 <td class="tablePayment"><input type="text" formControlName="description"/></td>
                 <td class="tablePayment"><input type="text" formControlName="dueDate"/></td>
                 <td class="tablePayment"><input type="text" formControlName="origAmount"/></td>
                 <td class="tablePayment"><input type="text" formControlName="openBalance"/></td>
-                <td class="tablePayment"><input type="number" formControlName="payment" (change)="ammountClick(i)"/></td>
+                <td class="tablePayment"><input type="number" formControlName="payment" (change)=" autoAmount(i)"/></td>
               </tr>
             </tbody>
           </table>
@@ -183,7 +183,7 @@
           <!-- <label> PHP 0.00</label> -->
           <input type="number" formControlName="amountCredit" />
           <br />
-          <a><span>Clear Payment</span></a>
+          <!-- <a (click)="clearMethod()" ><span>Clear Payment</span></a> -->
         </div>
       </div>
 

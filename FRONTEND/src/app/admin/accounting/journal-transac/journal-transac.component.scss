@@ -1,0 +1,84 @@
+main {
+  width: 100%;
+  animation: transitionIn 0.75s;
+}
+
+.head {
+    height: 50px;
+  .title {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+}
+.header,
+.totals {
+  width: 100%;
+  display: flex;
+  .journadate {
+    margin-right: 200px;
+  }
+}
+label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.headinput {
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  padding: 0 14px;
+  height: 34px;
+  margin: 4px 4px;
+}
+
+.table-container {
+  width: 100%;
+  .table-content {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    overflow: hidden;
+    border-collapse: collapse;
+    border-radius: 0.625rem;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px var(--border-color);
+
+    thead {
+      th {
+        position: sticky;
+        background-color: var(--grey);
+        color: var(--primary-color);
+        text-align: center;
+        font-weight: bold;
+        padding: 12px 16px;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--border-color);
+        background-color: var(--panel-color);
+        td {
+          text-align: left;
+          font-weight: 500;
+          padding: 12px 16px;
+          border: 1px solid var(--border-color);
+        }
+      }
+
+      tr:hover {
+        td {
+          color: var(--primary-color);
+          background-color: var(--grey);
+        }
+      }
+    }
+  }
+}
