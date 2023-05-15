@@ -46,25 +46,23 @@ h4 {
   border-bottom: 1px solid var(--border-color);
 }
 
-
-  label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--primary-color);
-    text-align: right;
-
-  }
-  input {
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
-    border-radius: 0.45rem;
-    border: 1px solid #aaa;
-    padding: 0 10px;
-    height: 36px;
-    margin: 8px 0 0;
-    margin-left: 20px;
-  }
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: right;
+}
+input {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  border-radius: 0.45rem;
+  border: 1px solid #aaa;
+  padding: 0 10px;
+  height: 36px;
+  margin: 8px 0 0;
+  margin-left: 20px;
+}
 
 /* Accordion styles */
 .tabs {
@@ -94,7 +92,7 @@ h4 {
       width: 1em;
       height: 1em;
       text-align: center;
-      transition: all .35s;
+      transition: all 0.35s;
     }
   }
 
@@ -102,7 +100,7 @@ h4 {
     max-height: 0;
     padding: 0 1em;
     background-color: var(--grey);
-    transition: all .35s; 
+    transition: all 0.35s;
   }
 
   &-close {
@@ -110,7 +108,7 @@ h4 {
     justify-content: flex-end;
     padding: 1em;
     background-color: var(--grey);
-    
+
     &:hover {
       background-color: var(--grey);
     }
@@ -132,25 +130,29 @@ input:checked {
   }
 }
 
-input#chck1{
-display: none;
+input#chck1 {
+  display: none;
 }
 
-  .input-field {
-    padding-right: 1200px;
-    text-align: right;
-    margin-top: 8px;
-  }
-  h5{
-    margin-top: 14px;
-  }
+.input-field {
+  padding-right: 1200px;
+  text-align: right;
+  margin-top: 8px;
+}
+h5 {
+  margin-top: 14px;
+}
 
-  .btn-add {
-    cursor: pointer;
-    border: none;
-    border-radius: 0.5rem;
-    background-color:var(--primary-color);
-    color:white;
-    padding: 12px 20px 12px 14px;
-    margin-top: 8px;
-  }
+.btn-add {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 20px 12px 14px;
+  margin-top: 8px;
+}
+
+.btn-add:hover {
+  background-color: var(--primary-alt);
+}

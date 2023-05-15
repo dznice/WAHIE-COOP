@@ -39,27 +39,12 @@ main {
     padding: 0 20px 0 50px;
     border-radius: 0.625rem;
     border: 1.6px solid var(--border-color);
-    outline-color: #3f0f88;
+    outline-color: var(--dark-grey-2);
     background-color: transparent;
   }
 
   input::placeholder {
     color: var(--dark-grey-2);
-  }
-
-  input:hover {
-    border: 2px solid var(--primary-color);
-  }
-}
-
-.input-box:hover {
-
-  .ti-search {
-    color: var(--primary-color);
-  }
-
-  input {
-    border: 2px solid var(--primary-color);
   }
 }
 

@@ -1,5 +1,5 @@
 <main>
-  <h1 class="title">Members Profile</h1>
+  <h1 class="title">Profile Settings</h1>
 
   <div class="container">
     <h3>Name and Email</h3>
@@ -108,17 +108,14 @@
                   <input type="password"  formControlName="current_pass"  id="current_pass" name="current_pass" [(ngModel)]="form.current_pass"/>
                 </div>
                 <div class="input-field">
-                  <label for="New">New</label>
+                  <label for="New">New Password</label>
                   <input type="password" id="new_pass" name="new_pass"  formControlName="new_pass"  [(ngModel)]="form.new_pass"/>
                 </div>
                 <div class="input-field">
-                  <label for="Retype New">Retype New</label>
+                  <label for="Retype New">Confirm New Password</label>
                   <input type="password" id="retype_pass" name="retype_pass"  formControlName="retype_pass" [(ngModel)]="form.retype_pass"/>
                 </div>
               </div>
-              <div class="fields"></div>
-              <h5>Forgot Password</h5>
-              <div class="fields"></div>
               <div class="add-account">
                 <button type='submit'class="btn-add">Save Changes</button>
               </div>

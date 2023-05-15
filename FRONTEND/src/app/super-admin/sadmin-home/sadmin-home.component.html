@@ -62,8 +62,8 @@
           <td>{{ user.userrole.user_type }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
-          <td>{{ user.created_at | date : "MM-dd-yyyy" }}</td>
           <td></td>
+          <td>{{ user.created_at | date : "MM-dd-yyyy" }}</td>
 
           <td>
             <div *ngIf="user.status == 0">
@@ -111,7 +111,7 @@
           </div>
           <div class="otp-footer">
             <button class="closebtn" (click)="show(2)">Close</button>
-            <button class="backbtn">Create</button>
+            <button class="savebtn">Create</button>
           </div>
         </div>
       </div>

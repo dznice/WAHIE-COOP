@@ -133,7 +133,7 @@
   <div>
     <div class="otp-modal" *ngIf="showModal === 1">
       <div class="otp-content">
-        <div class="otp-header">Add New Journal Account Entry</div>
+        <div class="otp-header">Add New Account</div>
         <div class="otp-body">
           <label for="journal_number">Journal Number</label>
           <input class="modalinput" type="number" #journal_number />
@@ -145,8 +145,9 @@
           <input class="modalinput" type="text" #journal_type />
         </div>
         <div class="otp-footer">
+          <button class="closebtn" (click)="show(2)">Close</button>
           <button
-            class="backbtn"
+            class="savebtn"
             (click)="
               add(journal_number.value, journal_name.value, journal_type.value);
               journal_number.value = '';
@@ -157,7 +158,6 @@
           >
             Create
           </button>
-          <button class="closebtn" (click)="show(2)">Close</button>
         </div>
       </div>
     </div>

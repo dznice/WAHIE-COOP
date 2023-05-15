@@ -60,7 +60,7 @@ main {
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
     text-align: center;
-    padding: 0 30px 30px;
+    padding: 0 30px 1px;
     transition: transform 0.4s, top 0.4s;
     max-width: 400px;
     width: 100%;
@@ -70,6 +70,7 @@ main {
       font-weight: 600;
       font-size: 20px;
       color: var(--primary-color);
+      text-align: left;
     }
 
     .otp-body {
@@ -78,6 +79,7 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--primary-color);
+        text-align: left;
       }
 
       .modalinput {
@@ -97,15 +99,15 @@ main {
     }
 
     .otp-footer {
-      .backbtn {
-        width: 45%;
-        margin: 10px 10px;
+      .savebtn {
+        width: 44%;
+        margin: 5px 0px 0px 10px;
         height: 43px;
-        background-color: #3f0f88;
+        background-color: var(--primary-color);
         color: #fff;
         border: none;
         cursor: pointer;
-        border-radius: 0.6rem;
+        border-radius: 0.45rem;
         font-size: 0.9rem;
         margin-top: 2rem;
         margin-bottom: 2rem;
@@ -113,20 +115,28 @@ main {
         text-decoration: none;
       }
 
+      .backbtn:hover {
+        background-color: var(--primary-alt);
+      }
+
       .closebtn {
-        width: 45%;
-        margin: 10px 10px;
+        width: 44%;
+        margin: 5px 0px 0px 0px;
         height: 43px;
         border: none;
         cursor: pointer;
-        border-radius: 0.6rem;
+        border-radius: 0.45rem;
         font-size: 0.9rem;
         margin-top: 2rem;
         margin-bottom: 2rem;
         transition: 0.3s;
         text-decoration: none;
-        background-color: #ede9f2;
-        color: #7f7a7a;
+        background-color: var(--grey-alt);
+        color: var(--dark-grey);
+      }
+
+      .closebtn:hover {
+        background-color: var(--dark-grey-2);
       }
     }
   }
@@ -154,39 +164,35 @@ main {
       height: 46px;
       max-width: 300px;
       width: 100%;
-      background: #fff;
       text-align: right;
       margin-top: .5rem;
-      border-radius: 0.625rem;
-      border: 1.6px solid #d1cccc;
   
       i {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
       }
-  
+    
       .ti-search {
         left: 16px;
         font-size: 22px;
-        color: #aeaaaa;
+        color: var(--dark-grey-2);
       }
-  
+    
       input {
         height: 100%;
         width: 100%;
-        outline: none;
         font-size: 15px;
         font-weight: 400;
-        font-family: "Poppins", sans-serif;
-        border: none;
         padding: 0 20px 0 50px;
+        border-radius: 0.625rem;
+        border: 1.6px solid var(--border-color);
+        outline-color: var(--dark-grey-2);
         background-color: transparent;
-        caret-color: var(--dark-grey);
       }
-  
+    
       input::placeholder {
-        color: #aeaaaa;
+        color: var(--dark-grey-2);
       }
     }
   }

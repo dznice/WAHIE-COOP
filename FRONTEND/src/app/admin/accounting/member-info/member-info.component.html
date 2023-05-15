@@ -1,4 +1,8 @@
-<div class="container">
+<main>
+  
+  
+
+  <div class="container">
     <div class="tabs">
       <input
         type="radio"
@@ -55,7 +59,12 @@
             <td>{{ acc.debit.cred.due_date }}</td>
             <td>{{ acc.open_balance }}</td>
             <td>{{ acc.payment }}</td>
-            <td>{{ acc.status }}</td>
+            <td class="status"> 
+              <span [ngClass]="{'pending': acc.status== 'Pending',
+                                'overdue': acc.status == 'Overdue',
+                                'paid': acc.status == 'Paid',
+                                'closed': acc.status == 'Closed'}">
+              {{ acc.status }}</span></td>
           </tr>
           </tbody>
         </table>
@@ -69,22 +78,25 @@
       />
       <label for="Member Details" class="tabs__label">Member Details</label>
       <div class="tabs__content">
-        <div class="member_information"  >
+        <div class="member_information">
           <div class="information_row">
-            <table  *ngFor="let info of item">
-            <div *ngIf="id==info.id">
-              <tr>
-                <th class="fields" width="30%">Member</th>
+            <table *ngFor="let info of item">
+              <div *ngIf="id == info.id">
+                <tr>
+                  <th class="fields" width="30%">Member</th>
 
-                <td class="fieldsdata">{{ info.first_name }} {{ info.middle_name }} {{ info.last_name }} {{ info.suffix }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Email</th>
+                  <td class="fieldsdata">
+                    {{ info.first_name }} {{ info.middle_name }}
+                    {{ info.last_name }} {{ info.suffix }}
+                  </td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Email</th>
 
-                <td class="fieldsdata">{{ info.email }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Mobile Number</th>
+                  <td class="fieldsdata">{{ info.email }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Mobile Number</th>
 
                 <td class="fieldsdata">{{ info.mobile_number }}</td>
               </tr>
@@ -106,72 +118,79 @@
               <tr *ngIf='info.civil_status!="Single"'>
                 <th class="fields" width="30%">Spouse</th>
 
-                <td class="fieldsdata">{{ info.spouse }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Curent Address</th>
+                  <td class="fieldsdata">{{ info.spouse }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Curent Address</th>
 
-                <td class="fieldsdata">{{ info.address }}</td>
-              </tr>
-            </div>
+                  <td class="fieldsdata">{{ info.address }}</td>
+                </tr>
+              </div>
             </table>
           </div>
 
           <div class="information_row">
             <table *ngFor="let info of item">
-              <div *ngIf="id==info.id">
-              <tr>
-                <th class="fields" width="30%">Employement Status</th>
-                <td class="fieldsdata">{{ info.employment_status }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Occupation</th>
+              <div *ngIf="id == info.id">
+                <tr>
+                  <th class="fields" width="30%">Employement Status</th>
+                  <td class="fieldsdata">{{ info.employment_status }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Occupation</th>
 
-                <td class="fieldsdata">{{ info.occupation }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Department</th>
+                  <td class="fieldsdata">{{ info.occupation }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Department</th>
 
-                <td class="fieldsdata">{{ info.department }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Company</th>
+                  <td class="fieldsdata">{{ info.department }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Company</th>
 
-                <td class="fieldsdata">{{ info.company_name }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Company Address</th>
+                  <td class="fieldsdata">{{ info.company_name }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Company Address</th>
 
-                <td class="fieldsdata">{{ info.company_address }}</td>
-              </tr>
-              <!-- <tr>
+                  <td class="fieldsdata">{{ info.company_address }}</td>
+                </tr>
+                <!-- <tr>
                 <th class="fields" width="30%">Beneficiaries</th>
 
                 <td class="fieldsdata"></td>
               </tr> -->
-            </div>
+              </div>
             </table>
           </div>
           <div class="information_row">
-            <th class="fields" >Beneficiaries</th>
+            <th class="fields">Beneficiaries</th>
 
             <thead>
-            <th width="30%">Name</th>
-            <th width="30%">Date of Birth</th>
-            <th width="30%">Relationship</th>
-          </thead>
-          <tbody>
-          <table  *ngFor="let b of ben">
-            <div *ngIf="id==b.benificiary_id">
-                <td class="fieldsdata" width="30%">{{b.benificiary_name}} </td>
-                <td class="fieldsdata" width="30%">{{b.benificiary_birthdate}} </td>
-                <td class="fieldsdata" width="30%">{{b.benificiary_relation}} </td>
-              <br>
-            </div>
-          </table>
-        </tbody>
-        </div>
+              <th width="30%">Name</th>
+              <th width="30%">Date of Birth</th>
+              <th width="30%">Relationship</th>
+            </thead>
+            <tbody>
+              <table *ngFor="let b of ben">
+                <div *ngIf="id == b.benificiary_id">
+                  <td class="fieldsdata" width="30%">
+                    {{ b.benificiary_name }}
+                  </td>
+                  <td class="fieldsdata" width="30%">
+                    {{ b.benificiary_birthdate }}
+                  </td>
+                  <td class="fieldsdata" width="30%">
+                    {{ b.benificiary_relation }}
+                  </td>
+                  <br />
+                </div>
+              </table>
+            </tbody>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</main>
