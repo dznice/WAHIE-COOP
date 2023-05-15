@@ -27,6 +27,9 @@ export class BackendService {
     return this.http.post('http://127.0.0.1:8000/api/adminadd', data);
   }
 
+  changePass(data:any, $email:string): Observable<any>{
+    return this.http.post('http://127.0.0.1:8000/api/users/changePass/'+ $email, data);
+  }
 
 
 }

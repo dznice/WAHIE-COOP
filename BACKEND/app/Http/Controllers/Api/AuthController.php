@@ -181,6 +181,19 @@ class AuthController extends Controller {
 
     }
 
+    public function changePass(Request $request, $email){
+        $user = User::where('email', '=',$email)->first();
+        if(password_verify($request->current_pass, $user->password))
+        {
+            if($request->new_pass==$request->retype_pass){
+            $user->password = Hash::make($request->new_pass);
+            $user->save();
+            return response()->json($user);
+            }
+        }
+        
+    }
+
 
 
 
@@ -254,7 +267,7 @@ class AuthController extends Controller {
 
             }
 
-
+            
 
 
 

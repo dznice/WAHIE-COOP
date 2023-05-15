@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'app-member-profile',
@@ -7,19 +10,27 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrls: ['./member-profile.component.scss']
 })
 export class MemberProfileComponent implements OnInit, OnDestroy{
-constructor(private http:HttpClient){
+
+constructor(private http:HttpClient, private fb:FormBuilder, private backend:BackendService, private route:Router){
   this.myProfile();
   this.myBene();
 }
-
+changePass!:FormGroup
 ngOnDestroy() {
   
 }
 ngOnInit(){
+  this.changePass = this.fb.group({
+    
+    "current_pass": new FormControl(null, [Validators.required]),
 
+    "new_pass": new FormControl(null, [Validators.required]),
+    
+    "retype_pass": new FormControl(null, [Validators.required])
+  })
 }
 
- id = localStorage.getItem('userData');
+ id:any = localStorage.getItem('userData');
  memId:string = '';
  first_name:string = '';
  middle_name:string = '';
@@ -38,7 +49,6 @@ ngOnInit(){
  email:string = '';
  department:string = '';
  employment_status:string = '';
-
 
 
 
@@ -80,4 +90,26 @@ myBene(){
     }
   )
 }
+
+
+public form={
+  current_pass:null,
+  new_pass:null,
+  retype_pass:null,
+  userId: this.id
+}
+
+onSubmit(){
+  console.log(this.email)
+  this.http.post('http://127.0.0.1:8000/api/users/changePass/' + this.email, this.form).subscribe(
+    (res:any)=>
+    {
+  localStorage.clear()
+  sessionStorage.clear()
+  this.route.navigateByUrl('login');  
+    }
+  )}
+
+
+
 }

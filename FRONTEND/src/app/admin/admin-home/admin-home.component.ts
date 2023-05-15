@@ -52,4 +52,12 @@ export class AdminHomeComponent implements OnInit {
       });
     }
 
+    
+    memberInfo(data: any) {
+      this.http
+        .get('http://127.0.0.1:8000/api/memberList/' + data)
+        .subscribe((res: any) => {
+          this.route.navigateByUrl('admin/accounting/member-info/' + data);
+        });
+    }
 }

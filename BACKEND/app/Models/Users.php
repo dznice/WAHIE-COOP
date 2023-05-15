@@ -16,7 +16,7 @@ class Users extends Model
     [
         'name',
         'email',
-        'role_id ',
+        'role_id',
         'status',
         'fillInfo',
         'code',

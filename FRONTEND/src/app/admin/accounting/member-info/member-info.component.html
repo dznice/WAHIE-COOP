@@ -87,11 +87,21 @@
                 <td class="fieldsdata">{{ info.mobile_number }}</td>
               </tr>
               <tr>
+                <th class="fields" width="30%">Birthdate</th>
+
+                <td class="fieldsdata">{{ info.birthdate | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+              <tr>
                 <th class="fields" width="30%">Gender</th>
 
                 <td class="fieldsdata">{{ info.gender }}</td>
               </tr>
               <tr>
+                <th class="fields" width="30%">Civil Status</th>
+
+                <td class="fieldsdata">{{ info.civil_status }}</td>
+              </tr>
+              <tr *ngIf='info.civil_status!="Single"'>
                 <th class="fields" width="30%">Spouse</th>
 
                 <td class="fieldsdata">{{ info.spouse }}</td>

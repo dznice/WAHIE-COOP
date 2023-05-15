@@ -101,7 +101,8 @@
           <th>Status</th>
         </thead>
         <tbody>
-          <tr *ngFor="let e of account.slice().reverse() | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }">
+          <tr *ngFor="let e of account.slice().reverse() | filterHome: term| filter : type | filter : stat | filterHDate: startDate: endDate| paginate : { itemsPerPage: 5, currentPage: p }"
+          (click)="memberInfo(e.debit.cred.transac.member.id)" >
             <td>{{ e.debit.cred.transac.transaction_date }}</td>
             <td>{{ e.debit.cred.entries.entry_name }}</td>
             <td>{{ e.debit.cred.transac.transaction_number }}</td>
