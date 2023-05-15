@@ -49,7 +49,7 @@ export class AddPaymentComponent implements OnInit {
   // });
 
 
-  
+
 
   id:number = 0;
   ngOnInit(): void {
@@ -73,7 +73,7 @@ export class AddPaymentComponent implements OnInit {
       console.log(this.members);
     });
   }
-  
+
   // showAccounting(): void{
   //   this.accounts = this.wahieService.getListAccount(this.id).subscribe((account:any)=>{
   //     this.accounts = account;
@@ -86,7 +86,7 @@ export class AddPaymentComponent implements OnInit {
         this.accounts = account;
         this.paymentForm=this.builder.group({
           amountReceived:this.builder.control({value: 0, disabled: true}),
-          member:this.builder.control({value: account[0].debit.cred.transac.member.first_name 
+          member:this.builder.control({value: account[0].debit.cred.transac.member.first_name
             +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
           paymentDate:this.builder.control('',Validators.required),
@@ -103,6 +103,8 @@ export class AddPaymentComponent implements OnInit {
       });
     });
   }
+
+
 
   private generateFormGroup(trial:any) {
     return this.builder.group({

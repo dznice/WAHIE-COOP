@@ -38,6 +38,7 @@ class PaymentController extends Controller
     {
         if($request->isMethod('post')){
 
+
             $journals = new Transactions;
             $journals->members_id = $request->memberId;
             $journals->users_id = $request->userId;
@@ -90,39 +91,14 @@ class PaymentController extends Controller
 
                 }
 
-                    
-                    
+                return response()->json(['message'=>'Entry added successfully!']);
+
             }
 
 
-                // $payment = new Payment;
-                // $payment->received = $request->amountReceived;
-                // $payment->member = $request->member;
-                // $payment->email = $request->email;
-                // $payment->payment_date = $request->paymentDate;
-                // $payment->payment_method = $request->paymentMethod;
-                // $payment->reference_no = $request->referenceNo;
-                // $payment->deposit_to = $request->depositTo;
-                // $payment->save();
-                // $paymentData = $request->input();
-                // foreach ($paymentData['payables'] as $key => $value)
-                // {
-                //     if ( $value['payment'] == null){
 
-                //     }else{
-                //     $pay = new Payment1;
-                //     $pay->member = $request->member;
-                //     $pay->description = $value['description'];
-                //     $pay->due_date = $value['dueDate'];
-                //     $pay->open_balance = $value['openBalance'] - $value['payment'];
-                //     $pay->original_amount = $value['origAmount'];
-                //     $pay->payment = $value['payment'];
-                //     $pay->save();
-                //     }
-                // }
-                return response()->json(['message'=>'Entry added successfully!']);
         }
-        
+
     }
 
     /**
