@@ -46,27 +46,32 @@
     <div class="table-container">
       <table class="table-content">
         <thead>
-          <th>Date</th>
-          <th>Type</th>
-          <th>No.</th>
-          <th>Due Date</th>
-          <th>Balance</th>
-          <th>Status</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>No.</th>
+            <th>Due Date</th>
+            <th>Balance</th>
+            <th>Payment</th>
+            <th>Status</th>
         </thead>
-        <tbody>
-          <tr
-            *ngFor="let e of memItem | filter : type | filter : stat | filterMhDate : startDate : endDate | paginate : { itemsPerPage: 5, currentPage: p }">
-            <td>{{ e.date }}</td>
-            <td>{{ e.type }}</td>
-            <td>{{ e.No }}</td>
-            <td>{{ e.DueDate }}</td>
-            <td>{{ e.Balance }}</td>
-            <td class="status">
-              <span [ngClass]="{'pending': e.Status == 'Pending',
-                                'overdue': e.Status == 'Overdue',
-                                'paid': e.Status == 'Paid',
-                                'closed': e.Status == 'Closed'}">
-              {{ e.Status }}</span></td>
+        <tbody *ngFor="
+        let acc of account.slice().reverse()
+          | filter : type
+          | filter : stat
+          | filterMhDate : startDate : endDate">
+        <tr  *ngIf="memId==acc.debit.cred.transac.member.id" >
+          <td >{{ acc.debit.cred.transac.transaction_date }}</td>
+          <td >{{ acc.debit.cred.entries.entry_name }}</td>
+          <td >{{ acc.debit.cred.transac.transaction_number }}</td>
+          <td>{{ acc.debit.cred.due_date }}</td>
+          <td>{{ acc.open_balance }}</td>
+          <td>{{ acc.payment }}</td>
+          <td class="status">
+            <span [ngClass]="{'pending': acc.status == 'Pending',
+                              'overdue': acc.status == 'Overdue',
+                              'paid': acc.status == 'Paid',
+                              'closed': acc.status == 'Closed'}">
+            {{ acc.status }}</span></td>
           </tr>
         </tbody>
       </table>

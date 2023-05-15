@@ -5,4 +5,12 @@ export class memItem{
     DueDate: any;
     Balance: any;
     Status: any;
+    debit: any;
+    cred: any;
+    transac: any;
+    member:any;
+    id:any;
+    open_balance: any;
+    payment: any;
+    status:any;
 }
