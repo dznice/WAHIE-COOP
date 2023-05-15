@@ -63,6 +63,7 @@ import { FilterMemHomeDatePipe } from './member/member-home/mfilter-date.pipe';
 import { FilterPaymentDatePipe } from './admin/accounting/add-payment/pfilter-date.pipe';
 import { FilterMemberPipe } from './admin/accounting/filter-member.pipe';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { BnNgIdleService } from 'bn-ng-idle';
     FilterPaymentDatePipe,
     NullPageComponent,
     ManageMembersComponent,
-    FilterMemberPipe
+    FilterMemberPipe,
+    JournalTransacComponent
   ],
   imports: [
     BrowserModule,
