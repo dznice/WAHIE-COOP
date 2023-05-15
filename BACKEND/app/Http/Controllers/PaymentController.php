@@ -39,42 +39,50 @@ class PaymentController extends Controller
         if($request->isMethod('post')){
 
 
-            $journals = new Transactions;
-            $journals->members_id = $request->memberId;
-            $journals->users_id = $request->userId;
-            $journals->transaction_date = $request->paymentDate;
-            $journals->save();
-            $jorn = $journals->id;
 
-            $payables = new Payables;
-            $payables->transaction_id = $jorn;
-            $payables->entry_id = "3";
-            $payables->save();
-            $pays = $payables->id;
 
-            $credits = new Credits;
-            $credits->users_id = $request->userId;
-            $credits-> journals_id = null;
-            $credits-> payables_id = $pays;
-            $credits->save();
-            $creds = $credits->id;
+
 
             $paymentData = $request->input();
             foreach ($paymentData['payables'] as $key => $value)
             {
 
                 if ( $value['payment'] == null){
+                    continue;
+                }
+                else
+                {
+                    $journals = new Transactions;
+                    $journals->members_id = $request->memberId;
+                    $journals->users_id = $request->userId;
+                    $journals->transaction_date = $request->paymentDate;
+                    $journals->save();
+                    $jorn = $journals->id;
 
-                }else{
+                    $payables = new Payables;
+                    $payables->transaction_id = $jorn;
+                    $payables->entry_id = "3";
+                    $payables->save();
+                    $pays = $payables->id;
+
+                    $credits = new Credits;
+                    $credits->users_id = $request->userId;
+                    $credits-> journals_id = null;
+                    $credits-> payables_id = $pays;
+                    $credits->save();
+                    $creds = $credits->id;
 
                     $debits = new Debits;
                     $debits->credits_id = $value['creditId'];
                     $debits->orig_amount = $value['origAmount'];
                     $debits->open_balance = $value['openBalance'] - $value['payment'];
+                    $debits->payment = $value['payment'];
                     $debits->pay_date = $request->paymentDate;
                     $debits->paymentMethod = $request->paymentMethod;
 
-                    if ( $value['openBalance'] - $value['payment'] == 0)
+                    $balanse = $value['openBalance'] - $value['payment'];
+
+                    if ( $balanse == 0)
                     {
                         $debits->status = "Paid";
                     }else{
@@ -86,6 +94,7 @@ class PaymentController extends Controller
                     $debiti->paymentIdentifier = "Closed";
                     $debiti->status = "Closed";
                     $debiti->payment = $value['payment'];
+                    $debiti->open_balance = null;
                     $debiti->credits_id = $creds;
                     $debiti->save();
 

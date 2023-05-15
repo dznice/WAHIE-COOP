@@ -114,7 +114,7 @@ export class AddPaymentComponent implements OnInit {
       dueDate: this.builder.control({ value: null, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
       openBalance: this.builder.control({ value: trial.open_balance , disabled: true }),
-      payment: this.builder.control({value: null, disabled: false} ,Validators.required)
+      payment: this.builder.control({value: 0, disabled: false} ,Validators.required)
     });
   }
 
@@ -143,7 +143,7 @@ export class AddPaymentComponent implements OnInit {
         this.route.navigateByUrl('admin/accounting')
       })
     }else{
-      this.toast.error({detail:'Failed',summary:'Fill all inputs',duration:2000, sticky:false,position:'tr'});
+      this.toast.error({detail:'Failed',summary:'Fill all inputs or balance the amount to submit',duration:2000, sticky:false,position:'tr'});
       console.log("Error: Fill all input or need balance the amount to submit");
     }
     console.log(this.paymentForm.getRawValue());
@@ -166,7 +166,7 @@ clearValue(index: any) {
   this.paymentRow = this.paymentForm.get("payables") as FormArray;
   this.amount = this.paymentRow.at(index) as FormGroup;
   this.amount.get("payment")?.setValue(null);
-} 
+}
 
   amount_summary(){
     let array=this.paymentForm.getRawValue().payables;
