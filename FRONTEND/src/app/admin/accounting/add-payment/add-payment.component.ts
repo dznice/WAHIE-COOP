@@ -112,7 +112,7 @@ export class AddPaymentComponent implements OnInit {
       dueDate: this.builder.control({ value: null, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
       openBalance: this.builder.control({ value: trial.open_balance , disabled: true }),
-      payment: this.builder.control({value: 0, disabled: false} ,Validators.required)
+      payment: this.builder.control({value: null, disabled: false} ,Validators.required)
     });
   }
 
@@ -148,13 +148,25 @@ export class AddPaymentComponent implements OnInit {
     //this.route.navigateByUrl('admin/accounting')
   }
 
-  ammountClick(index: any) {
+ autoAmount(index: any) {
     this.paymentRow = this.paymentForm.get("payables") as FormArray;
     this.amount = this.paymentRow.at(index) as FormGroup;
-    this.ammount_summary();
-  }
+    let pay = this.amount.get("payment")?.value;
+    let openBal = this.amount.get("openBalance")?.value;
+    if(pay>openBal){
+      this.amount.get("payment")?.setValue(openBal);
+      //this.amount.get("payment")?.setValue(null);
+    }
+    this.amount_summary();
+}
 
-  ammount_summary(){
+clearValue(index: any) {
+  this.paymentRow = this.paymentForm.get("payables") as FormArray;
+  this.amount = this.paymentRow.at(index) as FormGroup;
+  this.amount.get("payment")?.setValue(null);
+} 
+
+  amount_summary(){
     let array=this.paymentForm.getRawValue().payables;
     let apply = 0;
     //let credit = 0;
@@ -165,7 +177,13 @@ export class AddPaymentComponent implements OnInit {
     this.paymentForm.get("amountApply")?.setValue(apply);
     this.paymentForm.get("amountReceived")?.setValue(apply);
     //this.paymentForm.get("totalcredit")?.setValue(total_credit);
+  }
 
+  clearMethod(){
+    let array=this.paymentForm.getRawValue().payables;
+    array.forEach((x:any)=>{
+      this.clearValue(x);
+    });
   }
 
 
