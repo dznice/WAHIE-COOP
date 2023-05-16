@@ -6,6 +6,7 @@ import { BackendService } from '../services/backend.service';
 import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
+import { NgToastService } from'ng-angular-popup';
 
 
 @Component({
@@ -77,7 +78,7 @@ export class RegMembersComponent implements OnInit, OnDestroy {
   }
 
   constructor(@Inject(DOCUMENT) private _document: any, private fb:FormBuilder, private backend:BackendService,
-  private token:TokenService, private route:Router, private Auth:AuthGuardService){}
+  private token:TokenService, private route:Router, private Auth:AuthGuardService, private toast: NgToastService){}
 
   passwordMatch(controlName: string, matchControlName: string){
     return (formGroup: FormGroup)=> {
@@ -174,21 +175,33 @@ onSubmit(){
 
     
     regMember(){
-
-      console.log(this.form)
-      setTimeout(() => {
-        this.loader = true;
-      }, 2000);
-      setTimeout(() => {
-        this.loader2 = false;
-      }, 2000);
-      return this.backend.register(this.form).subscribe(     
-        data=>this.handleData(data)
-        
-   
+      
+      if(this.registerForm.invalid){
+        this.toast.error({detail:'Sorry',summary:'Input required  ',duration:2000 , sticky:false,position:'tr'});
+        return this.backend.register(this.form).subscribe( 
+          data=>this.handleError(data),
+          
         );
-        
+      }
+      else {
+  
+        setTimeout(() => {
+          this.loader = true;
+        }, 2000);
+        setTimeout(() => {
+          this.loader2 = false;
+        }, 2000);
+        return this.backend.register(this.form).subscribe(     
+          data=>this.handleData(data)
+          
+     
+          );
+      }
+     
     }
+
+        
+    
 
     handleData(data:any){
       sessionStorage.setItem('email', JSON.stringify(data['email']));
@@ -197,6 +210,7 @@ onSubmit(){
     }
   
     handleError(error:any){
+      this.toast.error({detail:'Sorry',summary:'Input required  ',duration:2000 , sticky:false,position:'tr'});
       this.error = error.error.error;
     }
 
