@@ -89,14 +89,15 @@ export class AddPaymentComponent implements OnInit {
           member:this.builder.control({value: account[0].debit.cred.transac.member.first_name
             +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
-          paymentDate:this.builder.control('',Validators.required),
+          paymentDate:this.builder.control(this.formatDate(new Date())),
           paymentMethod:this.builder.control('',Validators.required),
           referenceNo:this.builder.control(''),
+          depositTo:this.builder.control(''),
           memberId:this.builder.control(this.id),
           userId:this.builder.control(this.useid),
           // startDate:this.builder.control(''),
           // endDate:this.builder.control(''),
-          payables: this.builder.array(account.map(trial => this.generateFormGroup(trial))),
+          payables: this.builder.array(account.map(data => this.generateFormGroup(data))),
           amountApply:this.builder.control({value: 0, disabled: true}),
           amountCredit:this.builder.control({value: 0, disabled: true}),
 
@@ -104,16 +105,14 @@ export class AddPaymentComponent implements OnInit {
     });
   }
 
-
-
-  private generateFormGroup(trial:any) {
+  private generateFormGroup(data:any) {
     return this.builder.group({
-      debitId: this.builder.control({ value: trial.id , disabled: true }),
-      creditId: this.builder.control({ value: trial.credits_id , disabled: true }),
-      description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
+      debitId: this.builder.control({ value: data.id , disabled: true }),
+      creditId: this.builder.control({ value: data.credits_id , disabled: true }),
+      description: this.builder.control({ value: data.debit.cred.entries.entry_name , disabled: true }),
       dueDate: this.builder.control({ value: null, disabled: true }),
-      origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
-      openBalance: this.builder.control({ value: trial.open_balance , disabled: true }),
+      origAmount: this.builder.control({ value: data.orig_amount, disabled: true }),
+      openBalance: this.builder.control({ value: data.open_balance , disabled: true }),
       payment: this.builder.control({value: 0, disabled: false} ,Validators.required)
     });
   }
@@ -165,7 +164,7 @@ export class AddPaymentComponent implements OnInit {
 clearValue(index: any) {
   this.paymentRow = this.paymentForm.get("payables") as FormArray;
   this.amount = this.paymentRow.at(index) as FormGroup;
-  this.amount.get("payment")?.setValue(null);
+  this.amount.get("payment")?.setValue(0);
 }
 
   amount_summary(){
@@ -175,7 +174,6 @@ clearValue(index: any) {
     array.forEach((x:any)=>{
       apply=apply+x.payment;
     });
-    console.log(apply)
     this.paymentForm.get("amountApply")?.setValue(apply);
     this.paymentForm.get("amountReceived")?.setValue(apply);
     //this.paymentForm.get("totalcredit")?.setValue(total_credit);
@@ -183,9 +181,23 @@ clearValue(index: any) {
 
   clearMethod(){
     let array=this.paymentForm.getRawValue().payables;
+    this.paymentRow = this.paymentForm.get("payables") as FormArray;
     array.forEach((x:any)=>{
-      this.clearValue(x);
+      this.amount = this.paymentRow.at(x) as FormGroup;
+      x.payment=0;
+      this.amount.get("payment")?.setValue(x.payment);
     });
+    this.amount_summary();
+  }
+
+  private formatDate(date:any) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
   }
 
 

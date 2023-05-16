@@ -90,11 +90,9 @@ export class JournalEntryComponent implements OnInit {
   }
 
   journalEntryForm=this.builder.group({
-    journal_date:this.builder.control('',Validators.required),
+    journal_date:this.builder.control(this.formatDate(new Date())),
     journal_no:this.builder.control('',Validators.required),
     entries:this.builder.array([
-      this.Generaterow(),
-      this.Generaterow(),
       this.Generaterow(),
       this.Generaterow()]),
     userId:this.builder.control(this.useid),
@@ -187,12 +185,29 @@ export class JournalEntryComponent implements OnInit {
     let total_credit = 0;
 
     array.forEach((x:any)=>{
-      total_debit=total_debit+x.debit;
-      total_credit=total_credit+x.credit;
+      if(x.debit ==''&& x.credit == ''){
+        x.debit = 0;
+        x.credit = 0;
+        total_debit = total_debit + x.debit;
+        total_credit= total_credit + x.credit;
+      }
+      else{
+        total_debit=total_debit+x.debit;
+        total_credit=total_credit+x.credit;
+      }
     });
     this.journalEntryForm.get("totaldebit")?.setValue(total_debit);
     this.journalEntryForm.get("totalcredit")?.setValue(total_credit);
+  }
 
+  private formatDate(date:any) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
   }
 
 

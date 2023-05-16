@@ -67,10 +67,10 @@
             <label> Payment Method </label>
             <select type="text" formControlName="paymentMethod">
             <!-- <select type="text"> -->
-              <option disabled selected hidden>Choose Payment Method</option>
-              <option>Payment 1</option>
-              <option>Payment 2</option>
-              <option>Payment 3</option>
+              <option>Cash</option>
+              <option>Check</option>
+              <option>Credit Card</option>
+              <option>Direct Debit</option>
             </select>
           </div>
 
@@ -84,9 +84,6 @@
             <label> Deposit to </label>
             <!-- <select type="text"> -->
               <select type="text" formControlName="depositTo">
-              <option disabled selected hidden>
-                Cash and cash equivalents
-              </option>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -106,7 +103,6 @@
                 class="field"
                 type="number"
                 placeholder="Find Invoice No."
-                formControlName="depositTo"
               />
               <!-- <input class="field" type="number" placeholder="Find Invoice No." formControlName="depositTo"> -->
             </div>
@@ -165,7 +161,7 @@
                 <td class="tablePayment"><input type="text" formControlName="dueDate"/></td>
                 <td class="tablePayment"><input type="text" formControlName="origAmount"/></td>
                 <td class="tablePayment"><input type="text" formControlName="openBalance"/></td>
-                <td class="tablePayment"><input type="number" formControlName="payment" (change)=" autoAmount(i)"/></td>
+                <td class="tablePayment"><input type="number" formControlName="payment" (change)="autoAmount(i)"/></td>
               </tr>
             </tbody>
           </table>
@@ -183,7 +179,7 @@
           <!-- <label> PHP 0.00</label> -->
           <input type="number" formControlName="amountCredit" />
           <br />
-          <!-- <a (click)="clearMethod()" ><span>Clear Payment</span></a> -->
+          <a (click)="clearMethod()" ><span>Clear Payment</span></a>
         </div>
       </div>
 
