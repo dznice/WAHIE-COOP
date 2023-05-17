@@ -18,19 +18,35 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class AccountingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $Dquery = Debits::query()->with(['debt.cred.entries', 'debt.cred.transac.member']);
+        $Dquery = Debits::query()->with(['debt.journ', 'debt.cred.entries', 'debt.cred.transac.member']);
         $debit = QueryBuilder::for($Dquery);
             return DebitsResource::collection($debit->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function journTransac(Request $request)
+{
+    $Dquery = Debits::query()->with(['debt.journ', 'debt.cred.entries', 'debt.cred.transac.member', 'debt.cred']);
+
+    if ($request->id) {
+        $Dquery->whereHas('debt.cred.transac.member', function ($query) use ($request) {
+            $query->where('id', $request->id);
+        });
+
+        $Dquery->whereHas('debt.cred', function ($query) use ($request) {
+            $query->where('member_id', $request->id);
+        });
+    }
+
+    $debit = $Dquery->get();
+
+    return response()->json($debit);
+}
+
+
+
 
      public function total()
     {
@@ -48,16 +64,13 @@ class AccountingController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function getAccounts(Request $request)
     {
         $Dquery = Debits::with(['debt.cred.entries', 'debt.cred.transac.member']);
         if($request->open_balance){
             $Dquery->where('open_balance', '>=', $request->open_balance)
                     ->where('paymentIdentifier', '!=', $request->paymentIdentifier);
-    }
+        }
         if($request->id){
             $Dquery->whereHAs('debt.cred.transac.member', function($query) use($request){
                 $query->where('id', $request->id);
@@ -70,9 +83,16 @@ class AccountingController extends Controller
         // ,200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function transacList(){
+        $transac = Transactions::all();
+        return response()->json($transac);
+         }
+
+    public function transacInfo($id){
+            $transac = Transactions::find($id);
+            return response()->json($transac);
+             }
+
     public function update(Request $request, string $id)
     {
         //

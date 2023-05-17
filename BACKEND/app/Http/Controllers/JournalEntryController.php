@@ -10,6 +10,7 @@ use App\Models\Transactions;
 use App\Models\Payables;
 use App\Models\Credits;
 use App\Models\Debits;
+use App\Models\JournalLogs;
 use DB;
 
 class JournalEntryController extends Controller
@@ -101,6 +102,22 @@ class JournalEntryController extends Controller
 
 
             return response()->json(['message'=>'Entry added successfully!']);
+
+            foreach ($entryData['entries'] as $key => $value)
+            {
+                $jlogs = new JournalLogs;
+                $jlogs->members_id = $value['name'];
+                $jlogs->journals_id = $value['account'];
+                $jlogs->journal_no = $request->journal_no;
+                $jlogs->journal_date = $request->journal_date;
+                $jlogs->debit_amount = $value['debit'];
+                $jlogs->credit_amount = $value['credit'];
+                $jlogs->description = $request->description;
+                $jlogs->total_credit = $request->totalcredit;
+                $jlogs->total_debit = $request->totalcredit;
+                $jlogs = save();
+
+            }
         }
     }
 
