@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
   get f() { return this.loginForm.controls; } 
 
   handleResponse(user:any){
+    this.toast.error({detail:'Sorry',summary:'Incorrect Credentials',duration:2000 , sticky:false,position:'tr'});  
     console.log(user.access_token);
     localStorage.setItem('userData', JSON.stringify(user.user['id']))
     localStorage.setItem('userRole', JSON.stringify(user.user['role_id']))
@@ -167,9 +168,15 @@ export class LoginComponent implements OnInit, OnDestroy  {
       }
      
     }
- 
+ else {
+  console.log
+  this.toast.error({detail:'Sorry',summary:'Incorrect Credentials',duration:2000 , sticky:false,position:'tr'});
+
+ }
   }
   handleError(error:any){
+    console.log
+    this.toast.error({detail:'Sorry',summary:'Incorrect Credentials',duration:2000 , sticky:false,position:'tr'});
     this.error = error.error.error;
     
   }
