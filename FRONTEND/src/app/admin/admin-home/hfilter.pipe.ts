@@ -14,7 +14,7 @@ export class FilterHomePipe implements PipeTransform{
         } else{
             return name.filter((name) =>
             {
-                return name.debit.cred.transac.member.first_name && name.debit.cred.transac.member.last_name.trim().toLowerCase().includes(term.toLowerCase());
+                return name.debit.cred.transac.member.first_name.trim().toLowerCase().includes(term.toLowerCase()) || name.debit.cred.transac.member.last_name.trim().toLowerCase().includes(term.toLowerCase());
             })
         }
         

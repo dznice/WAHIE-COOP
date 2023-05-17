@@ -55,7 +55,7 @@
           let user of userAccounts
             | search : searchText
             | filter : type
-            | paginate : { itemsPerPage: 10, currentPage: p }
+            | paginate : { itemsPerPage: 4, currentPage: p }
         "
       >
         <tr *ngIf="user.userrole.id != 2 || user.userrole.user_type == type">
