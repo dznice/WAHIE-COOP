@@ -4,6 +4,7 @@ import { formState, formState5, formState6, slider, slideright} from '../animati
 import { Router } from '@angular/router';
 import { BackendService } from '../services/backend.service';
 import { HttpClient } from '@angular/common/http';
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-forgot-pass',
   templateUrl: './forgot-pass.component.html',
@@ -35,7 +36,7 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
   }
 
   constructor(@Inject(DOCUMENT) private _document: any, private route:Router, private backend:BackendService,
-  private http:HttpClient){}
+  private http:HttpClient, private toast:NgToastService){}
 
   ngOnInit() {
     this._document.body.classList.add('body');
@@ -65,9 +66,14 @@ sendLink(){
     'email': this.email,
   }
   this.http.post('http://127.0.0.1:8000/api/users/forgotPass' + '/' + this.email, body).subscribe((res: any) => {
-      console.log(res);
-      this.route.navigateByUrl('check-email');
+ 
+        console.log(res);
+        sessionStorage.setItem('email', this.email)
+        this.route.navigateByUrl('check-email'); 
+      
     });
+
+    
 }
 
 }
