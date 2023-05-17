@@ -13,8 +13,6 @@ import { NgToastService } from 'ng-angular-popup';
   styleUrls: ['./sadmin-home.component.scss'],
 })
 export class SadminHomeComponent {
-  loader = false;
-  loader2 = true;
 
   /* Switch declaration */
   selected: boolean;
@@ -52,12 +50,7 @@ export class SadminHomeComponent {
   AccountType: string;
 
   ngOnInit(): void {    
-    setTimeout(() => {
-      this.loader = true;
-    }, 2000);
-    setTimeout(() => {
-      this.loader2 = false;
-    }, 2000);}
+}
 
 
   showModal = -1;

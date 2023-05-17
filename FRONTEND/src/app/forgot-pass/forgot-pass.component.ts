@@ -13,10 +13,6 @@ import { NgToastService } from 'ng-angular-popup';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ForgotPassComponent  implements OnInit, OnDestroy {
-
-  loader = false;
-  loader2 = true;
-
   // state = 'forgot-pass';
   // toggle() {
   //   this.state = this.state == 'forgot-pass'?'check-email':'new-pass';
