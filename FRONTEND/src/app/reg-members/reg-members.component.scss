@@ -124,7 +124,11 @@ form {
     display: inline;
 }
 
-
+.header{
+  text-align: right;
+  color: #707070;
+  font-weight: 500;
+}
 
 .eye{
     content: '\ea9a';
@@ -163,7 +167,7 @@ form {
 }
 
 .text_field2{
-    margin-top: -1rem;
+    margin-top: -2rem;
 }
 
 input, select{
@@ -185,12 +189,10 @@ input, select{
     margin-bottom: 2.5rem;
 }
 
-select{
+.text-wrap3 select{
+    
     display: flex;
     position: relative;
-}
-
-.text-wrap3 select{
     width: 49%;
     color: #707070;
     height: 3rem;
@@ -206,30 +208,31 @@ input[type="number"]::-webkit-outer-spin-button{
     margin: 0;
 }
 
-input[type="date"]::before{
-    content: attr(placeholder);
-    color: #707070;
-}
+// input[type="date"]::before{
+//     content: attr(placeholder);
+//     color: #707070;
+// }
 
-input[type="date"]{
-    color: #ffffff;
-}
+// input[type="date"]{
+//     color: #ffffff;
+// }
 
-input[type="date"]:focus,
-input[type="date"]:valid{
-    color: #666666;
-}
+// input[type="date"]:focus,
+// input[type="date"]:valid{
+//     color: #666666;
+// }
 
-input[type="date"]:focus::before,
-input[type="date"]:valid::before{
-    content: "" !important;
-}
+// input[type="date"]:focus::before,
+// input[type="date"]:valid::before{
+//     content: "" !important;
+// }
 
 
 .dateOfBirth{
     width: 49%;
     margin-left: 50%;
     height: 3rem;
+    cursor: pointer;
 }
 
 .mName{
@@ -252,37 +255,45 @@ input[type="date"]:valid::before{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1rem;   
-    margin-top: 1.5rem;
+    font-size: .8rem;   
+    margin-top: .8rem;
     width: 100%;
 }
 
-.submit:hover, .back:hover{
-    opacity: 90%;
+.submit:hover {
+    background-color: var(--primary-alt);
 }
 
-.back{
-    padding: 12px 20px ;
+// .back:hover{
+//     background-color: var(--dark-grey-3);
+// }
+
+.back button{
+    background-color: #ffffff;
     transform: translate(0%, -30%);
-    background-color: #707070;
     border: none;
-    border-radius: 10px;
-    color: white;
-    text-align: center;
+    text-align: left ;
     text-decoration: none;
     display: inline-block;
-    font-size: 1rem;   
-    margin-top: .3rem;
-    width: 100%;
+    font-size: .8rem;   
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+    width: 10%;
+}
+
+.back button{
+  content: '\ea60';
+  color: #707070;
+  font-size: 2rem;
+
 }
 
 .login{
-    font-size: .9rem;
+    font-size: 1rem;
     text-decoration: none;
 }
 .login:hover{
-    color: #0f1d88;
-    opacity: 80%;
+    color: var(--primary-alt);
 }
 
 #account{
@@ -318,7 +329,7 @@ input[type="date"]:valid::before{
 // CHECKBOX
 
 .terms{
-    transform: translate(0%, -55%);
+    transform: translate(5%, -30%);
     padding: 15px 10px 15px;
     color: #707070;
     text-decoration: none;
@@ -384,3 +395,4 @@ input[type="date"]:valid::before{
     }
   }
 
+ 

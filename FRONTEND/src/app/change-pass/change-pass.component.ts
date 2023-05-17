@@ -6,6 +6,7 @@ import { BackendService } from '../services/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-change-pass',
@@ -40,7 +41,7 @@ export class ChangePassComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private _document: any,
     private fb: FormBuilder, private backend:BackendService, private http:HttpClient,
-    private aRouter: ActivatedRoute, private route:Router
+    private aRouter: ActivatedRoute, private route:Router, private toast: NgToastService
   ) {
 
   }
@@ -54,6 +55,7 @@ export class ChangePassComponent implements OnInit, OnDestroy {
       }
       if (control.value !== matchControl.value) {
         matchControl.setErrors({ passwordMatch: true });
+        
       } else {
         matchControl.setErrors(null);
       }
@@ -95,9 +97,11 @@ export class ChangePassComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    
     this.changePassForm.get('password')?.markAsTouched();
 
     this.changePassForm.get('confirm_pass')?.markAsTouched();
+    
   }
 
   ngOnDestroy() {
@@ -118,12 +122,22 @@ export class ChangePassComponent implements OnInit, OnDestroy {
 
 
   changePass(){
+    if( this.changePassForm.pristine){
+      this.toast.error({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000 , sticky:false,position:'tr'}); 
+    
+    }
+    else if (this.changePassForm.invalid){
+      this.toast.error({detail:'Error',summary:'Password not match ',duration:2000 , sticky:false,position:'tr'}); 
+     }
+    else{
       this.http.post('http://127.0.0.1:8000/api/users/forgotChange' + '/' + this.id, this.fpform).subscribe(
         (res: any) => {
           console.log(res);
+          this.toast.success({detail:'Success',summary:'Password changed',duration:2000, sticky:false,position:'tr'});  
           this.route.navigateByUrl('login');
+          
         });
     }
-
+  }
   
 }

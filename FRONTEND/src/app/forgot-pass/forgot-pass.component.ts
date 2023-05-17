@@ -45,19 +45,26 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
   email:string ='null'
   
   submitEmail(){
+    
   this.email = (<HTMLInputElement>document.getElementById("email")).value;
   this.sendLink();
+  this.toast.success({detail:'Email sending',summary:'Please wait',duration:2000, sticky:false,position:'tr'});  
+  
 }
 
 
 
 sendLink(){
+  
   let body = {
     'email': this.email,
+    
   }
-  this.http.post('http://127.0.0.1:8000/api/users/forgotPass' + '/' + this.email, body).subscribe((res: any) => {
  
+  this.http.post('http://127.0.0.1:8000/api/users/forgotPass' + '/' + this.email, body).subscribe((res: any) => {
+    this.toast.success({detail:'Email sent',summary:'Please check your email',duration:2000, sticky:false,position:'tr'});
         console.log(res);
+
         sessionStorage.setItem('email', this.email)
         this.route.navigateByUrl('check-email'); 
       
