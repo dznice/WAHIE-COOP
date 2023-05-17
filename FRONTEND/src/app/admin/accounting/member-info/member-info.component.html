@@ -1,6 +1,6 @@
 <main>
-  
-  
+
+
 
   <div class="container">
     <div class="tabs">
@@ -43,18 +43,18 @@
             <th>Status</th>
           </thead>
           <tbody *ngFor="
-          let acc of account.slice().reverse()
+          let acc of account.reverse()
             | filterName : term
         ">
             <tr *ngIf="id==acc.debit.cred.transac.member.id" >
-            <td >{{ acc.debit.cred.transac.transaction_date }}</td>
+            <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
             <td >{{ acc.debit.cred.entries.entry_name }}</td>
             <td >{{ acc.debit.cred.transac.transaction_number }}</td>
             <td>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
             <td>{{ acc.debit.cred.due_date }}</td>
             <td>{{ acc.open_balance }}</td>
             <td>{{ acc.payment }}</td>
-            <td class="status"> 
+            <td class="status">
               <span [ngClass]="{'pending': acc.status== 'Pending',
                                 'overdue': acc.status == 'Overdue',
                                 'paid': acc.status == 'Paid',

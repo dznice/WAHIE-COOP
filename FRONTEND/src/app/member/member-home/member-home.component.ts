@@ -11,17 +11,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MemberHomeComponent {
 
+
+
   memItem: any[] = [];
   p: number = 1;
   type: string;
   stat: string;
 
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
-  stats: string[]= ["Overdue", "Pending", "Closed" ];
+  stats: string[]= ["Overdue", "Pending", "Closed", "Paid" ];
 
   startDate: string = '';
   endDate : string = '';
-  public account: any;
+  public account: any[];
 
   constructor(private ItemService: itemService, private http:HttpClient) {}
   ngOnInit(): void {
@@ -49,7 +51,7 @@ myProfile(){
     (res:any)=>
     {
       console.log(res);
-      this.account = res
+      this.account = res.filter((account: { debit: { cred: { transac: { member: { id: any; }; }; }; }; }) => account.debit.cred.transac.member.id === this.memId);
   });
 }
 

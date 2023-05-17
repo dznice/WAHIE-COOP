@@ -63,7 +63,7 @@ class userController extends Controller
     public function adminChange(Request $request, $id){
 
         $users = User::find($id);
-        $users->name = $request->name; 
+        $users->name = $request->name;
         $users->password = Hash::make($request['password']);
         $users->code = 0;
         $users->save();
@@ -93,7 +93,7 @@ class userController extends Controller
     return response()->json($myProf);
     }
 
-    
+
 
     public function userrole()
     {

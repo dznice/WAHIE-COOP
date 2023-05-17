@@ -41,6 +41,7 @@ import { NullPageComponent } from './null-page/null-page.component';
 import { ManageMembersComponent } from './admin/manage-members/manage-members.component';
 import { AdminPassdoneComponent } from './admin-passdone/admin-passdone.component';
 import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
+import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 
 
 const routes: Routes = [
@@ -127,6 +128,8 @@ const routes: Routes = [
       {path: 'accounting/journal-entry', component: JournalEntryComponent},
       {path: 'accounting/add-invoice', component: AddInvoiceComponent},
       {path: 'accounting/add-payment', component: AddPaymentComponent},
+      {path: 'accounting/journal-transac', component: JournalTransacComponent},
+      {path: 'accounting/journal-transac/:transacId', component: JournalTransacComponent},
       {path: 'accounting/add-payment/:memberId', component: AddPaymentComponent},
       {path: 'accounting/member-info/:memberId', component: MemberInfoComponent},
       {path: 'manage-members', component: ManageMembersComponent},

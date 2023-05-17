@@ -18,7 +18,10 @@ class Credits extends Model
         'users_id',
         'journals_id',
         'payables_id',
-        'amount',
+        'due_date',
+        'interest',
+        'credit_amount',
+        'debit_amount'
     ];
 
     public function cred(): BelongsTo

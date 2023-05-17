@@ -77,6 +77,7 @@ import { JournalTransacComponent } from './admin/accounting/journal-transac/jour
     JournalEntryComponent,
     AddInvoiceComponent,
     AddPaymentComponent,
+    JournalTransacComponent,
     SadminSidenavComponent,
     SadminHomeComponent,
     ActivityLogsComponent,
@@ -131,6 +132,7 @@ import { JournalTransacComponent } from './admin/accounting/journal-transac/jour
     HttpClientModule,
     NgToastModule,
     NgSelectModule
+
   ],
   providers: [AuthGuardService, BnNgIdleService],
   bootstrap: [AppComponent]

@@ -55,12 +55,13 @@
             <th>Status</th>
         </thead>
         <tbody *ngFor="
-        let acc of account.slice().reverse()
+        let acc of (account.reverse()
           | filter : type
           | filter : stat
-          | filterMhDate : startDate : endDate">
-        <tr  *ngIf="memId==acc.debit.cred.transac.member.id" >
-          <td >{{ acc.debit.cred.transac.transaction_date }}</td>
+          | filterMhDate : startDate : endDate)
+          | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+          <tr *ngIf="memId==acc.debit.cred.transac.member.id">
+          <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
           <td >{{ acc.debit.cred.entries.entry_name }}</td>
           <td >{{ acc.debit.cred.transac.transaction_number }}</td>
           <td>{{ acc.debit.cred.due_date }}</td>

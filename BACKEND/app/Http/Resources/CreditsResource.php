@@ -19,6 +19,7 @@ class CreditsResource extends JsonResource
             'users_id' => $this->users_id,
             'journals_id' => $this->journals_id,
             'payables_id' => $this->payables_id,
+            'journ' => $this->whenLoaded('journ'),
             'cred' => $this->whenLoaded('cred'),
             'entries' => $this->whenLoaded('entries'),
             'transac' => $this->whenLoaded('transac'),

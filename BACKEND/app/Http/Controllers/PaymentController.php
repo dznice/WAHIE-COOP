@@ -76,7 +76,6 @@ class PaymentController extends Controller
                     $debits->credits_id = $value['creditId'];
                     $debits->orig_amount = $value['origAmount'];
                     $debits->open_balance = $value['openBalance'] - $value['payment'];
-                    $debits->payment = $value['payment'];
                     $debits->pay_date = $request->paymentDate;
                     $debits->paymentMethod = $request->paymentMethod;
 
