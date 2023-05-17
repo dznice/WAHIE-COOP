@@ -37,6 +37,7 @@ class AuthController extends Controller {
         (!$token=auth()->attempt($credentials));{
 
         }
+
         return $this->respondWithToken($token);
 
        }
@@ -144,54 +145,85 @@ class AuthController extends Controller {
 
 
     public function forgotPass(Request $request,$email){
-        $user = User::where('email', '=', $email)->first();
+          
+        $user = User::where('email', '=', $email)->first();     
+        $secret = forgotPass::where('userId', '=',$user->id)->first();   
+        $count = forgotPass::where('userId', '=',$user->id)->count();
+        $url = Str::random(30);
+        $token = $user->password;
+        $id = $user->id;
+        $link = 'http://localhost:4200/change-pass/'. $id . '/' .  $url;
 
-            $url = Str::random(30);
-            $token = $user->password;
-            $id = $user->id;
-            $link = 'http://localhost:4200/change-pass/'. $id . '/' .  $url;
-    
-            $secret = forgotPass::create([
-                'userId' => $id,
-                'secret' => $token
-            ]);
-    
-    
-            EmailOtp::create([
-            'user_email'=> $email,
-            'code' => 0
-             ]);
-            Mail::to($email)->send(new forgotPassword($link,$email));
-            return response()->json($user);
+        EmailOtp::create([
+        'user_email'=> $email,
+        'code' => 0
+        ]);
+        Mail::to($email)->send(new forgotPassword($link,$email));
+
+        if($count!=0){
+            $secret->delete();    
+        }
+        $secret = forgotPass::create([
+        'userId' => $id,
+        'secret' => $token
+         ]);
+        return response()->json($user);
         
+         
     }
+    
 
 
     public function forgotChange(Request $request,$id){
-        $secret = forgotPass::where('userId', '=',$id)->first();
+        $secret = forgotPass::where('userId', '=',$id)->first();     
         $users = User::where('id', '=',$id)->first();
-        if($secret){
-            if($secret->secret == $users->password){
-            $secret->delete();
-            $users->password = Hash::make($request->password);
-            $users->save();
-            return response()->json($users);
-        }
-        }
 
+        $returnData = array(
+            'status' => 'error',
+            'message' => 'Wrong credentials!'
+        );
+
+        if($secret){   
+            if($secret->secret == $users->password){
+                if($request->password != $request->confirm_pass){
+                    return  response()->json($returnData, 402);
+                }
+                else if($request->password == $request->confirm_pass){   
+                    $secret->delete();                    
+                    $users->password = Hash::make($request->password);
+                    $users->save();
+                    return response()->json($users);
+                }     
+            }
+            return  response()->json($returnData, 401);
+        }
+        return  response()->json($returnData, 404);
     }
+
 
     public function changePass(Request $request, $email){
         $user = User::where('email', '=',$email)->first();
-        if(password_verify($request->current_pass, $user->password))
-        {
-            if($request->new_pass==$request->retype_pass){
-            $user->password = Hash::make($request->new_pass);
-            $user->save();
-            return response()->json($user);
-            }
-        }
-        
+        $secret = forgotPass::where('userId', '=',$user->id)->first();   
+        $count = forgotPass::where('userId', '=',$user->id)->count();
+        $returnData = array(
+            'status' => 'error',
+            'message' => 'Wrong credentials!'
+        );
+            if($user && Hash::check($request->current_pass, $user->password))
+            {
+                    if($request->new_pass==$request->retype_pass){
+                        if($count!=0){
+                            $secret->delete();    
+                        }
+
+                    $user->password = Hash::make($request->new_pass);
+                    $user->save();
+                    return response()->json($user);
+                    }
+                
+                    return  response()->json($returnData, 401);
+                }             
+                    return  response()->json($returnData, 401);
     }
 
 

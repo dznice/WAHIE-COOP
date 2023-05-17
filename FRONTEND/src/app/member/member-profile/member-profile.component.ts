@@ -104,9 +104,9 @@ onSubmit(){
   this.http.post('http://127.0.0.1:8000/api/users/changePass/' + this.email, this.form).subscribe(
     (res:any)=>
     {
-  localStorage.clear()
-  sessionStorage.clear()
-  this.route.navigateByUrl('login');  
+    localStorage.clear()
+    sessionStorage.clear()
+    this.route.navigateByUrl('login');  
     }
   )}
 

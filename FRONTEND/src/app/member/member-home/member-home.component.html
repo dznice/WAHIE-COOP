@@ -55,7 +55,7 @@
             <th>Status</th>
         </thead>
         <tbody *ngFor="
-        let acc of account.slice().reverse()
+        let acc of account.reverse()
           | filter : type
           | filter : stat
           | filterMhDate : startDate : endDate">
