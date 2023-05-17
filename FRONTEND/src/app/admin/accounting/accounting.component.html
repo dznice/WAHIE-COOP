@@ -51,7 +51,7 @@
           <th>ACTION</th>
         </thead>
         <tbody>
-          <tr *ngFor="let member of memberList | filterName: term | paginate : { itemsPerPage: 5, currentPage: p }" >
+          <tr *ngFor="let member of memberList | filter: term | paginate : { itemsPerPage: 5, currentPage: p }" >
            <td (click) = 'memberInfo( member.id )'>#{{member.id}} {{member.first_name}}</td>
            <td (click) = 'memberInfo( member.id )'>{{member.email}}</td>
            <!-- <td (click) = 'memberInfo( member.id )'>{{member.id}}</td> -->
