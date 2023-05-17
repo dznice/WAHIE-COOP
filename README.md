@@ -20,7 +20,7 @@ composer install
 npm update
 npm run build
 npm run dev
-
+npm install --save ngx-ui-loader --legacy-peer-deps
 php artisan migrate
 php artisan serve
 

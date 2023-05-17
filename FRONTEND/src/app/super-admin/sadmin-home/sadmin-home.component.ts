@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from
 import { Router } from '@angular/router';
 import { passwordMatch } from '../../validators/passwordMatch';
 import { BackendService } from '../../services/backend.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-sadmin-home',
@@ -12,8 +13,6 @@ import { BackendService } from '../../services/backend.service';
   styleUrls: ['./sadmin-home.component.scss'],
 })
 export class SadminHomeComponent {
-  loader = false;
-  loader2 = true;
 
   /* Switch declaration */
   selected: boolean;
@@ -23,7 +22,8 @@ export class SadminHomeComponent {
 
   userrole: number[] = [1,3];
 
-  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,) {
+  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,
+    private toast:NgToastService) {
     this.showUsers();
 
   }
@@ -50,12 +50,7 @@ export class SadminHomeComponent {
   AccountType: string;
 
   ngOnInit(): void {    
-    setTimeout(() => {
-      this.loader = true;
-    }, 2000);
-    setTimeout(() => {
-      this.loader2 = false;
-    }, 2000);}
+}
 
 
   showModal = -1;
@@ -75,15 +70,15 @@ export class SadminHomeComponent {
 
   autoAdmin(){
     console.log(this.form)
-    return this.backend.adminadd(this.form).subscribe(
-      data=>this.handleData(data)
-
+    return this.backend.adminadd(this.form).subscribe((res:any)=>{
+      this.show(2)
+      this.toast.success({detail:'added',summary:'account added', sticky:false,position:'false'});  
+    }
+    
     );
   }
 
-  handleData(data:any){
-    sessionStorage.setItem('email', JSON.stringify(data['email']));
-  }
+
 
   showUsers() {
     this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {

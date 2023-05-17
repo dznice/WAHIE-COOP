@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
+import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-member-profile',
@@ -11,7 +12,7 @@ import { BackendService } from 'src/app/services/backend.service';
 })
 export class MemberProfileComponent implements OnInit, OnDestroy{
 
-constructor(private http:HttpClient, private fb:FormBuilder, private backend:BackendService, private route:Router){
+constructor(private http:HttpClient, private fb:FormBuilder, private backend:BackendService, private route:Router,private toast: NgToastService){
   this.myProfile();
   this.myBene();
 }
@@ -106,6 +107,7 @@ onSubmit(){
     {
     localStorage.clear()
     sessionStorage.clear()
+    this.toast.success({detail:'Success',summary:'Password changed successfuly',duration:2000, sticky:false,position:'tr'});  
     this.route.navigateByUrl('login');  
     }
   )}

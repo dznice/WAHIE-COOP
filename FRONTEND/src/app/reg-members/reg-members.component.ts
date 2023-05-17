@@ -17,10 +17,6 @@ import { NgToastService } from'ng-angular-popup';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegMembersComponent implements OnInit, OnDestroy {
-  loader = false;
-  loader2 = true;
-
-
   state = 'info1';
   toggle() {
     this.state = this.state == 'info1'?'info2':'info3';
@@ -185,13 +181,6 @@ onSubmit(){
         );
       }
       else {
-  
-        setTimeout(() => {
-          this.loader = true;
-        }, 2000);
-        setTimeout(() => {
-          this.loader2 = false;
-        }, 2000);
         return this.backend.register(this.form).subscribe(     
           data=>this.handleData(data)
           
@@ -203,7 +192,7 @@ onSubmit(){
 
         
     
-
+      
     handleData(data:any){
       sessionStorage.setItem('email', JSON.stringify(data['email']));
       localStorage.setItem('userData', JSON.stringify(data['id']));
@@ -211,8 +200,7 @@ onSubmit(){
     }
   
     handleError(error:any){
-      console.log
-      this.toast.error({detail:'Sorry',summary:error,duration:2000 , sticky:false,position:'tr'});
+      this.toast.error({detail:'Sorry',summary:'Input required  ',duration:2000 , sticky:false,position:'tr'});
       this.error = error.error.error;
     }
 

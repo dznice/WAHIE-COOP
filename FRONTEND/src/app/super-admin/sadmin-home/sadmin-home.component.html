@@ -1,36 +1,27 @@
-<!--LOADER BOUNCING-->
-<div class="wrapper" *ngIf="loader2">
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="shadow"></div>
-  <div class="shadow"></div>
-  <div class="shadow"></div>
-</div>
 
-<main *ngIf="loader">
+<main>
   <div class="header">
     <div class="left-cont">
       <h1 class="title">Accounts</h1>
     </div>
 
-    <div class="right-cont" *ngIf="loader">
+    <div class="right-cont">
       <button class="btn-add" (click)="show(1)">
         <i class="ti ti-plus"></i>New Account
       </button>
     </div>
   </div>
 
-  <div class="filter-field" *ngIf="loader">
+  <div class="filter-field">
     <div class="filter-search">
       <label>Search User</label>
-      <div class="input-box" *ngIf="loader">
+      <div class="input-box" >
         <i class="ti ti-search"></i>
         <input type="text" placeholder="Search" [(ngModel)]="searchText" />
       </div>
     </div>
 
-    <div class="filter-role" *ngIf="loader">
+    <div class="filter-role">
       <label>User Role</label>
       <select [(ngModel)]="type" name="journal-type">
         <option [ngValue]="undefined" selected>All</option>
@@ -39,7 +30,7 @@
     </div>
   </div>
 
-  <div class="table-container" *ngIf="loader">
+  <div class="table-container">
     <table class="table-content">
       <thead>
         <th>Role</th>
@@ -90,7 +81,7 @@
     </table>
   </div>
 
-  <div class="pagination-controls" *ngIf="loader">
+  <div class="pagination-controls" >
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </main>

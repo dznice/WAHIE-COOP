@@ -11,10 +11,6 @@ import { Router } from '@angular/router';
   providers: [itemService]
 })
 export class AdminHomeComponent implements OnInit {
-
-  loader = false;
-  loader2 = true;
-
   nullcheck: number = 0;
   item: any[] = [];
   term: string = '';
@@ -31,13 +27,6 @@ export class AdminHomeComponent implements OnInit {
   constructor(private http: HttpClient, private route: Router) {}
   ngOnInit(): void {
       // this.showEntries();
-      this.showAccounting();
-    setTimeout(() => {
-      this.loader = true;
-    }, 2000);
-    setTimeout(() => {
-      this.loader2 = false;
-    }, 2000);
   }
 
 

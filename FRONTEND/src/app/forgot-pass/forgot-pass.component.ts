@@ -13,10 +13,6 @@ import { NgToastService } from 'ng-angular-popup';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ForgotPassComponent  implements OnInit, OnDestroy {
-
-  loader = false;
-  loader2 = true;
-
   // state = 'forgot-pass';
   // toggle() {
   //   this.state = this.state == 'forgot-pass'?'check-email':'new-pass';
@@ -49,12 +45,6 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
   email:string ='null'
   
   submitEmail(){
-    setTimeout(() => {
-      this.loader = true;
-    }, 2000);
-    setTimeout(() => {
-      this.loader2 = false;
-    }, 2000);
   this.email = (<HTMLInputElement>document.getElementById("email")).value;
   this.sendLink();
 }
