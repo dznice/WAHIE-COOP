@@ -49,12 +49,6 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
   email:string ='null'
   
   submitEmail(){
-    setTimeout(() => {
-      this.loader = true;
-    }, 2000);
-    setTimeout(() => {
-      this.loader2 = false;
-    }, 2000);
   this.email = (<HTMLInputElement>document.getElementById("email")).value;
   this.sendLink();
 }
