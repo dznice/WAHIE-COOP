@@ -25,12 +25,18 @@ export class SadminHomeComponent {
   constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,
     private toast:NgToastService) {
     this.showUsers();
+    this.Departments();
 
   }
 
   autoAdminForm = new FormGroup({
     username : new FormControl("", [Validators.required]),
-    email : new FormControl("", [Validators.required])
+    email : new FormControl("", [Validators.required]),
+    department : new FormControl("", [Validators.required])
+  })
+
+  addDepartment = new FormGroup({
+    department : new FormControl("", [Validators.required])
   })
 
   userAccounts: any[] = [];
@@ -46,6 +52,7 @@ export class SadminHomeComponent {
   email: string = '';
   coop: string = '';
   status: number = 0;
+  department: string = '';
 
   AccountType: string;
 
@@ -59,13 +66,15 @@ export class SadminHomeComponent {
   }
 
 
+
   back(){
     this.route.navigateByUrl('super-admin/sadmin-home')
   }
 
   public form = {
     username:null,
-    email:null
+    email:null,
+    department:null
   }
 
   autoAdmin(){
@@ -73,12 +82,35 @@ export class SadminHomeComponent {
     return this.backend.adminadd(this.form).subscribe((res:any)=>{
       this.show(2)
       this.toast.success({detail:'added',summary:'account added', sticky:false,position:'false'});  
-    }
-    
-    );
+    });
   }
 
 
+  deptModal = -1;
+  showdept(index: number){
+    this.deptModal = index;
+  }
+
+  public depform = {
+    department:null
+  }
+  addDept(){
+    console.log(this.depform)
+    return this.backend.deptAdd(this.depform).subscribe((res:any)=>{
+      this.showdept(2)
+      this.toast.success({detail:'added',summary:'account added', sticky:false,position:'false'});  
+    });
+  }
+
+  depts: any[]=[];
+  Departments(){
+    this.http.get('http://127.0.0.1:8000/api/showDept').subscribe((res: any) => {
+      console.log(res);
+      this.depts = res;
+    });
+  }
+
+  
 
   showUsers() {
     this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {

@@ -69,6 +69,10 @@ Route::get('/memberAccount/{email}', [App\Http\Controllers\userController::class
 Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::class, 'superChange']);
 Route::post('/users/adminChange/{id}', [App\Http\Controllers\userController::class, 'adminChange']);
 
+Route::post('/deptAdd', [App\Http\Controllers\userController::class, 'deptAdd']);
+Route::get('/showDept', [App\Http\Controllers\userController::class, 'showDept']);
+
+
 // Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
 // Route::post('/users/updateOtp/{id}', [App\Http\Controllers\userController::class, 'submitOtp']);
 // Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);

@@ -31,6 +31,9 @@ export class BackendService {
     return this.http.post('http://127.0.0.1:8000/api/users/changePass/'+ $email, data);
   }
 
+  deptAdd(data:any){
+    return this.http.post('http://127.0.0.1:8000/api/deptAdd', data);
+  }
 
 }
 

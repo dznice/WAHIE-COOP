@@ -27,6 +27,7 @@ export class AdminHomeComponent implements OnInit {
   constructor(private http: HttpClient, private route: Router) {}
   ngOnInit(): void {
       // this.showEntries();
+      this.showAccounting()
   }
 
 
@@ -42,15 +43,15 @@ export class AdminHomeComponent implements OnInit {
     }
 
 
-    memberInfo(data: any) {
+  memberInfo(data: any) {
       this.http
         .get('http://127.0.0.1:8000/api/memberList/' + data)
         .subscribe((res: any) => {
           this.route.navigateByUrl('admin/accounting/member-info/' + data);
         });
-    }
+  }
 
-    memberJournal(data: any) {
+  memberJournal(data: any) {
       this.http
         .get('http://127.0.0.1:8000/api/transacList/' + data)
         .subscribe((res: any) => {
@@ -58,4 +59,4 @@ export class AdminHomeComponent implements OnInit {
           this.route.navigateByUrl('admin/accounting/journal-transac/' + data);
         });
     }
-}
+  }

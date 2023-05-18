@@ -17,6 +17,7 @@ import {
 import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
 
 @Component({
   selector: 'app-additional-info',
@@ -54,7 +55,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
 
   constructor( @Inject(DOCUMENT) private _document: any, private http: HttpClient, 
-  private token: TokenService, private route: Router) {
+  private token: TokenService, private route: Router, private auth:AuthGuardService) {
     this.getmemberId();
    
    
@@ -179,5 +180,11 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
         this.token.handle(sessionStorage.getItem('ftoken'));
         this.route.navigateByUrl('member/member-home');
       });
+  }
+  logout(event:MouseEvent){
+    event.preventDefault();
+    this.auth.changeStatus(false);
+    localStorage.clear();
+    this.route.navigateByUrl('/login');
   }
 }

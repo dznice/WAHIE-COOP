@@ -73,6 +73,7 @@ class AuthController extends Controller {
             'email' => $request['email'],
             'role_id' => '3',
             'fillInfo' => '1',
+            'department' => $request['department'],
             'password' => Hash::make($request['password']),
             'code' => $code,
             'status' => '2',
@@ -133,6 +134,7 @@ class AuthController extends Controller {
             $user = User::create([
                 'name' => $request['username'],
                 'email' => $request['email'],
+                'department' => $request->department,
                 'role_id' => '1',
                 'fillInfo' => '0',
                 'status' => '1',

@@ -77,26 +77,6 @@
             placeholder="company_address"
           />
         </div>
-
-        <!-- <div class="text-wrap">
-          <label for="adress">Address</label>
-          <input
-            [(ngModel)]="updateMemberform.address"
-            type="text"
-            name="address"
-            placeholder="address"
-          />
-        </div>
-        <div class="text-wrap1">
-          <label for="job_title">Job Title</label>
-          <input
-            [(ngModel)]="updateMemberform.job_title"
-            type="text"
-            name="job_title"
-            placeholder="job_title"
-          />
-        </div> -->
-
         <div class="tabs">
           <input
             type="radio"
@@ -229,7 +209,7 @@
         </div>
       </div>
 
-      <button class="logout">
+      <button type='submit' (click)="logout($event)" class="logout">
         <span class="btnTextb">Logout</span>
       </button>
 

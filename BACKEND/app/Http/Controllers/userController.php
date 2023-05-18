@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Users;
 use App\Models\Members;
+use App\Models\departments;
 use App\Http\Resources\UsersResource;
 use App\Models\BenificiaryMembers;
 use Illuminate\Support\Facades\Hash;
@@ -52,22 +53,35 @@ class userController extends Controller
 
 
     public function superChange(Request $request, $id){
-
         $users = User::find($id);
+        $returnData = array(
+            'status' => 'error',
+            'message' => 'Wrong credentials!'
+        );
+        if($request->password== $request->confirm_pass){
         $users->password = Hash::make($request['password']);
         $users->code = 0;
         $users->save();
         return response()->json($users);
     }
+    return response()->json($returnData, 401);
+    }
 
     public function adminChange(Request $request, $id){
 
         $users = User::find($id);
+        $returnData = array(
+            'status' => 'error',
+            'message' => 'Wrong credentials!'
+        );
+        if($request->password== $request->confirm_pass){
         $users->name = $request->name;
         $users->password = Hash::make($request['password']);
         $users->code = 0;
         $users->save();
         return response()->json($users);
+         }
+    return response()->json($returnData, 401);
     }
 
     public function memberList(){
@@ -102,10 +116,27 @@ class userController extends Controller
      return UsersResource::collection($users->get());
     }
 
-    public function memberAccount($email){
+    public function memberAccount($email)
+    {
         $member = Members::where('email', '=', $email)->first();
         $memberId = $member->id;
         return response()->json($memberId);
     }
+
+    public function deptAdd(Request $request){
+        $validated = $request->validate([
+            'department_name' =>'unique:lib_department'
+        ]);
+       $deps = strtoupper($request->department);
+       $department = departments::create([
+            'department_name' => $deps,        
+            ]);
+        return response()->json($department);
+    }
+
+    public function showDept(){
+        $department = departments::all();
+        return response()->json($department);
+     }
 
 }

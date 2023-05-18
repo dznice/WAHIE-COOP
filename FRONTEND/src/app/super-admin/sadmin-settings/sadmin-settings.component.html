@@ -1,6 +1,32 @@
 <main>
   <h1 class="title">Admin Settings</h1>
 
+  <div class="right-cont">
+    <button class="btn-add" (click)="showdept(1)">
+      <i class="ti ti-plus"></i>New Department
+    </button>
+  </div>
+  
+  <section>
+    <div>
+      <form (ngSubmit)="addDept()" #deparmentAdd="ngForm" [formGroup]="addDepartment" class="register-form">
+        <div class="dept-modal" *ngIf="deptModal === 1">
+          <div class="dept-content">
+            <div class="dept-header">Add Department</div>
+            <div class="dept-body">
+              <label for="admin_username">Department</label>
+              <input class="modalinput" type="text" [(ngModel)]="depform.department" formControlName="department"/>
+              <br/>
+            </div>
+            <div class="dept-footer">
+              <button class="closebtn" (click)="showdept(2)">Close</button>
+              <button class="savebtn">Create</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
   <!-- <section class="settings">
     <div class="container">
       <h3 class="logo-label">Company Logo</h3>
