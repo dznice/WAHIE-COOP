@@ -11,7 +11,7 @@
           </div>
         <div class="inner-box">
             <div class="form-wrap">    
-                <form *ngIf="isDisplayed" @slideright>
+                <form [formGroup]="emailForm" (ngSubmit)="submitEmail()"  *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -24,8 +24,8 @@
                 
                     <div class="txt-field">
                         <div class="txt-wrap">
-                            <input type="email"  class="input-field" id="email" placeholder="Enter your email" required><br>
-                            <button (click)="submitEmail()" class="reset">Reset Password</button>         
+                            <input type="email" formControlName="email" class="input-field" id="email" placeholder="Enter your email" required><br>
+                            <button class="reset">Reset Password</button>         
                         </div>
 
                         <a [routerLink]="['/login']" class="back">

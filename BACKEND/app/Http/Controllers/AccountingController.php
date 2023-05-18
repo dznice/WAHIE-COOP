@@ -9,7 +9,9 @@ use App\Models\Transactions;
 use App\Models\Payables;
 use App\Models\Debits;
 use App\Models\LibJournal;
+use App\Models\JournalLogs;
 use App\Http\Resources\TransactionsResource;
+use App\Http\Resources\JournalLogsResource;
 use App\Http\Resources\PayablesResource;
 use App\Http\Resources\CreditsResource;
 use App\Http\Resources\DebitsResource;
@@ -58,6 +60,15 @@ class AccountingController extends Controller
         return response()->json($totals);
     }
 
+    public function totaljour()
+    {
+        $totals = LibJournal::join('credits', 'lib_journals.id', '=', 'credits.journals_id')
+            ->groupBy('lib_journals.id', 'lib_journals.journal_name')
+            ->select('lib_journals.id','lib_journals.journal_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
+            ->get();
+
+        return response()->json($totals);
+    }
 
     public function store(Request $request)
     {
@@ -92,6 +103,28 @@ class AccountingController extends Controller
             $transac = Transactions::find($id);
             return response()->json($transac);
              }
+
+    public function journalLogs(){
+        $LogsQuery = JournalLogs::query()->with(['memberlogs', 'entrylogs']);
+
+        if($request->journal_no){
+            $LogsQuery->whereHAs('', function($query) use($request){
+                $query->where('journal_no', $request->journal_no);
+            });
+        }
+        $logs = QueryBuilder::for($LogsQuery);
+            return JournalLogsResource::collection($logs->get());
+    }
+
+    public function journalLogsId($journal_no)
+{
+    $logs = JournalLogs::whereHas('memberlogs', function ($query) use ($journal_no) {
+        $query->where('journal_no', $journal_no);
+    })->with(['memberlogs', 'entrylogs'])->get();
+
+    return JournalLogsResource::collection($logs);
+}
+
 
     public function update(Request $request, string $id)
     {

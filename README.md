@@ -25,3 +25,8 @@ php artisan migrate
 php artisan serve
 
 composer require spatie/laravel-query-builder
+
+eplace in xammp/mysql
+under msqld
+max_allowed_packet=64M
+wait_timeout = 600
