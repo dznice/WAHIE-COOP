@@ -42,7 +42,7 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
     this.emailForm = this.fb.group(
       {
         email: new FormControl(null, [Validators.required])
-      }
+      },
      
     );
   }
@@ -54,16 +54,15 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
   email:string ='null'
   
   submitEmail(){
-    if(this.emailForm.invalid){
-      
-      this.toast.error({detail:'Input required',summary:'Fill the input to submit',duration:2000 , sticky:false,position:'tr'}); 
-      
-  } 
+    if( this.emailForm.invalid){
+      this.toast.warning({detail:'Input required',summary:'Fill the input to submit',duration:2000 , sticky:false,position:'tr'}); 
+    
+    } 
     else{
   this.email = (<HTMLInputElement>document.getElementById("email")).value;
   this.sendLink();
   this.toast.success({detail:'Email sending',summary:'Please wait',duration:2000, sticky:false,position:'tr'});  
-}
+  }
 }
 
 

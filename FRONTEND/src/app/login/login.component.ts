@@ -124,7 +124,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
       if(user.user['code']!=0){
         this.token.ftoken(user.access_token);
         this.route.navigateByUrl('sadmin-chpass');
-        this.toast.success({detail:'Success',summary:'Change your password',duration:2000, sticky:false,position:'tr'});  
+        this.toast.success({detail:'Welcome',summary:'Please update your password',duration:2000, sticky:false,position:'tr'});  
       }else{
         this.token.handle(user.access_token);
         this.route.navigateByUrl('super-admin/sadmin-home');
