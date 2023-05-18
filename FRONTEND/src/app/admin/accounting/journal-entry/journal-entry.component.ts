@@ -23,6 +23,7 @@ export class JournalEntryComponent implements OnInit {
   public journalEntries: any;
   public journId:any;
   public member:any;
+  maxDate: any;
 
   ngOnInit(): void{
     this.showLibJournal()
@@ -90,7 +91,7 @@ export class JournalEntryComponent implements OnInit {
   }
 
   journalEntryForm=this.builder.group({
-    journal_date:this.builder.control('',Validators.required),
+    journal_date:this.builder.control(this.formatDate(new Date())),
     journal_no:this.builder.control('',Validators.required),
     entries:this.builder.array([
       this.Generaterow(),
@@ -193,6 +194,17 @@ export class JournalEntryComponent implements OnInit {
     this.journalEntryForm.get("totaldebit")?.setValue(total_debit);
     this.journalEntryForm.get("totalcredit")?.setValue(total_credit);
 
+  }
+
+  private formatDate(date:any) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-')
+    return this.maxDate;
   }
 
 

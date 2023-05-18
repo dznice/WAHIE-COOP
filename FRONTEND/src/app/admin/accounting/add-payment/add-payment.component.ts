@@ -29,6 +29,7 @@ export class AddPaymentComponent implements OnInit {
   paymentForm: FormGroup;
   paymentRow !: FormArray<any>;
   amount !: FormGroup<any>;
+  maxDate: any;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute, private route:Router, private toast: NgToastService){
 
@@ -89,7 +90,7 @@ export class AddPaymentComponent implements OnInit {
           member:this.builder.control({value: account[0].debit.cred.transac.member.first_name
             +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
-          paymentDate:this.builder.control('',Validators.required),
+          paymentDate:this.builder.control(this.formatDate(new Date())),
           paymentMethod:this.builder.control('',Validators.required),
           referenceNo:this.builder.control(''),
           memberId:this.builder.control(this.id),
@@ -186,6 +187,17 @@ clearValue(index: any) {
     array.forEach((x:any)=>{
       this.clearValue(x);
     });
+  }
+
+  private formatDate(date:any) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-')
+    return this.maxDate;
   }
 
 
