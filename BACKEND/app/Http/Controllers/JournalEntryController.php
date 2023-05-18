@@ -101,7 +101,7 @@ class JournalEntryController extends Controller
             $debits->save();
 
 
-            return response()->json(['message'=>'Entry added successfully!']);
+
 
             foreach ($entryData['entries'] as $key => $value)
             {
@@ -115,9 +115,10 @@ class JournalEntryController extends Controller
                 $jlogs->description = $request->description;
                 $jlogs->total_credit = $request->totalcredit;
                 $jlogs->total_debit = $request->totalcredit;
-                $jlogs = save();
+                $jlogs->save();
 
             }
+            return response()->json(['message'=>'Entry added successfully!']);
         }
     }
 

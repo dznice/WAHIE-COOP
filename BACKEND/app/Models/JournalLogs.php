@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Members;
+use App\Models\LibJournal;
 
 class JournalLogs extends Model
 {
@@ -20,7 +23,18 @@ class JournalLogs extends Model
         'debit_amount',
         'description',
         'total_credit',
-        'total_debit'
+        'total_debit',
+        'transac_no'
 
     ];
+
+    public function memberlogs(): BelongsTo
+    {
+        return $this->belongsTo(Members::class, 'members_id', 'id');
+    }
+
+    public function entrylogs(): BelongsTo
+    {
+        return $this->belongsTo(LibJournal::class, 'journals_id', 'id');
+    }
 }

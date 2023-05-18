@@ -27,6 +27,7 @@ export class AdminHomeComponent implements OnInit {
   constructor(private http: HttpClient, private route: Router) {}
   ngOnInit(): void {
       // this.showEntries();
+      this.showAccounting();
   }
 
 
