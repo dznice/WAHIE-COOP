@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { BackendService } from '../services/backend.service';
 import { HttpClient } from '@angular/common/http';
 import { NgToastService } from 'ng-angular-popup';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 @Component({
   selector: 'app-forgot-pass',
   templateUrl: './forgot-pass.component.html',
@@ -25,17 +27,24 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
   // get checkemailState() {
   //   return this.state == 'check-email'?'show':'hide';
   // }
+  emailForm!: FormGroup;
 
   isDisplayed: boolean = true;
   toggleDiv(){
     this.isDisplayed = this.isDisplayed? false:true;
   }
 
-  constructor(@Inject(DOCUMENT) private _document: any, private route:Router, private backend:BackendService,
+  constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder,private route:Router, private backend:BackendService,
   private http:HttpClient, private toast:NgToastService){}
 
   ngOnInit() {
     this._document.body.classList.add('body');
+    this.emailForm = this.fb.group(
+      {
+        email: new FormControl(null, [Validators.required])
+      }
+     
+    );
   }
 
   ngOnDestroy() {
@@ -45,11 +54,16 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
   email:string ='null'
   
   submitEmail(){
-    
+    if(this.emailForm.invalid){
+      
+      this.toast.error({detail:'Input required',summary:'Fill the input to submit',duration:2000 , sticky:false,position:'tr'}); 
+      
+  } 
+    else{
   this.email = (<HTMLInputElement>document.getElementById("email")).value;
   this.sendLink();
   this.toast.success({detail:'Email sending',summary:'Please wait',duration:2000, sticky:false,position:'tr'});  
-  
+}
 }
 
 
