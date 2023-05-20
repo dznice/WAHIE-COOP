@@ -93,6 +93,7 @@ export class AdminSidenavComponent implements OnInit {
   logout(event:MouseEvent){
     event.preventDefault();
     this.auth.changeStatus(false);
+    localStorage.clear();
     this.router.navigateByUrl('/login');
   }
   

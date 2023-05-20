@@ -64,7 +64,7 @@ import { FilterPaymentDatePipe } from './admin/accounting/add-payment/pfilter-da
 import { FilterMemberPipe } from './admin/accounting/filter-member.pipe';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
-import { NgxUiLoaderModule,NgxUiLoaderHttpModule   } from 'ngx-ui-loader';
+import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -135,7 +135,6 @@ import { NgxUiLoaderModule,NgxUiLoaderHttpModule   } from 'ngx-ui-loader';
     NgSelectModule,
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule.forRoot({ showForeground: true }) 
-    
   ],
   providers: [AuthGuardService, BnNgIdleService],
   bootstrap: [AppComponent]
