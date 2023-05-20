@@ -34,10 +34,10 @@
 
       <tbody>
         <tr *ngFor="let e of item | filter: term| filterlogDate: startDate: endDate | paginate: {itemsPerPage: 5, currentPage: p} ">
-          <td>{{e.dnt}}</td>
+          <td>{{e.created_at | date: 'MMM d, y, H:mm:ss' : '-0000' }}</td>
           <td>{{e.name}}</td>
-          <td>{{e.coop}}</td>
-          <td>{{e.act}}</td>
+          <td>{{e.department}}</td>
+          <td>{{e.activity}}</td>
         </tr>
       </tbody>
     </table>

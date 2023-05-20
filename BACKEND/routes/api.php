@@ -71,6 +71,8 @@ Route::post('/users/adminChange/{id}', [App\Http\Controllers\userController::cla
 
 Route::post('/deptAdd', [App\Http\Controllers\userController::class, 'deptAdd']);
 Route::get('/showDept', [App\Http\Controllers\userController::class, 'showDept']);
+Route::post('/addActivity', [App\Http\Controllers\userController::class, 'addActivity']);
+Route::get('/actLog', [App\Http\Controllers\userController::class, 'actLog']);
 
 
 // Route::get('/users', [App\Http\Controllers\userController::class, 'users']);

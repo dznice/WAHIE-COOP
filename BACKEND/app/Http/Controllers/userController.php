@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Users;
 use App\Models\Members;
 use App\Models\departments;
+use App\Models\actLog;
 use App\Http\Resources\UsersResource;
 use App\Models\BenificiaryMembers;
 use Illuminate\Support\Facades\Hash;
@@ -140,6 +141,20 @@ class userController extends Controller
     public function showDept(){
         $department = departments::all();
         return response()->json($department);
+     }
+
+     public function addActivity(Request $request){
+        $activity = actLog::create([
+            'name' => $request['name'],
+            'department' => $request['department'],
+            'activity' => $request['activity']
+            ]);
+        return response()->json($activity);
+     }
+
+     public function actLog(){
+        $actLog = actLog::all();
+        return response()->json($actLog);
      }
 
 }
