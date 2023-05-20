@@ -99,7 +99,7 @@ export class AddPaymentComponent implements OnInit {
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
           paymentDate:this.builder.control(this.formatDate(new Date())),
           paymentMethod:this.builder.control('',Validators.required),
-          referenceNo:this.builder.control(''),
+          referenceNo:this.builder.control('',Validators.required),
           memberId:this.builder.control(this.id),
           userId:this.builder.control(this.useid),
           // startDate:this.builder.control(''),
@@ -209,8 +209,13 @@ clearValue(index: any) {
 
   changeMethod(event:any){
     this.selectedMethod=event.target.value;
+    if(event.target.value=='1'){
+      this.paymentForm.get("referenceNo")?.setValue(0);
+    }
+    else{
+      this.paymentForm.get("referenceNo")?.setValue(null);
+    }
   }
-
 
   // memberChange() {
   //   let memberID = this.paymentForm.get("member")?.value;
