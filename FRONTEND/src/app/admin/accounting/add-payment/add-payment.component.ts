@@ -30,6 +30,13 @@ export class AddPaymentComponent implements OnInit {
   paymentRow !: FormArray<any>;
   amount !: FormGroup<any>;
   maxDate: any;
+  paymentMethods: any = [
+    {value: '1', viewValue: 'Cash'},  
+    {value: '2', viewValue: 'Check'},
+    {value: '3', viewValue: 'Credit Card'},  
+    {value: '4', viewValue: 'Direct Debit'}
+  ]
+  selectedMethod: any;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute, private route:Router, private toast: NgToastService){
 
@@ -198,6 +205,10 @@ clearValue(index: any) {
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-')
     return this.maxDate;
+  }
+
+  changeMethod(event:any){
+    this.selectedMethod=event.target.value;
   }
 
 
