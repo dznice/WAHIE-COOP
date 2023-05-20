@@ -19,6 +19,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class userController extends Controller
 {
+
     public function users(){
    $users = User::all();
    return response()->json($users);

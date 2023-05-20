@@ -12,7 +12,7 @@ class actLog extends Model
     protected $fillable = [
      'name',
      'department',
-     'activty',
+     'activity',
      'created_at',
     ];
 }

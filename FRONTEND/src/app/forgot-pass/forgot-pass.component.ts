@@ -1,4 +1,4 @@
-import { Component , OnInit, OnDestroy, ViewEncapsulation, Inject} from '@angular/core';
+import { Component , OnInit, OnDestroy, ViewEncapsulation, Inject, ɵisObservable} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { formState, formState5, formState6, slider, slideright} from '../animation';
 import { Router } from '@angular/router';
@@ -61,8 +61,8 @@ export class ForgotPassComponent  implements OnInit, OnDestroy {
     else{
   this.email = (<HTMLInputElement>document.getElementById("email")).value;
   this.sendLink();
-  this.toast.success({detail:'Email sending',summary:'Please wait',duration:2000, sticky:false,position:'tr'});  
-  }
+
+    }
 }
 
 
@@ -81,7 +81,11 @@ sendLink(){
         sessionStorage.setItem('email', this.email)
         this.route.navigateByUrl('check-email'); 
       
-    });
+    },
+    error => {
+      this.toast.warning({detail:'Invalid email',summary:'Please check your email',duration:2000, sticky:false,position:'tr'});
+    }
+    );
 
     
 }

@@ -4,6 +4,7 @@ import { sAdminNavData } from './sadmin-navdata';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
+import { HttpClient } from '@angular/common/http';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -78,12 +79,27 @@ export class SadminSidenavComponent implements OnInit {
 
   public loggedIn:boolean = false;
 
-  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService) {}
+  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient) {}
+
+  public log ={
+    name: 'SuperAdmin',
+    department:sessionStorage.getItem('department'),
+    activity:'Logout'
+  }
+
+  activityLog(){
+    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
+        console.log(res)   
+    })
+  }
 
   logout(event:MouseEvent){
+    this.activityLog();
     event.preventDefault();
     this.auth.changeStatus(false);
     localStorage.clear();
     this.router.navigateByUrl('/login');
   }
+
+ 
 }
