@@ -123,7 +123,7 @@ export class ChangePassComponent implements OnInit, OnDestroy {
 
   changePass(){
     if( this.changePassForm.pristine){
-      this.toast.error({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000 , sticky:false,position:'tr'}); 
+      this.toast.warning({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000 , sticky:false,position:'tr'}); 
     
     }
     else if (this.changePassForm.invalid){
