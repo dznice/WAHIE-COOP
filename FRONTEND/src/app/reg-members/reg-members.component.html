@@ -50,11 +50,14 @@
                                     <div class="notMatch" *ngIf="registerForm.get('cpass')!.touched && registerForm.get('cpass')!.invalid && registerForm.controls['cpass'].errors!['passwordMatch']"><small> Password not match </small></div>
                                 </div>
                             
-                                <button class="submit" (click)="toggle()"> Next </button>
+                                <button class="submit" (click)="toggle()" (click)="onSubmit2()" [disabled]="!chkEnable.checked"> Next </button>
 
                                 <div class="terms">
-                                    <span class="check" (click)="checkBox()"><i [ngClass]="checkvisible?'ti ti-square':'ti ti-square-check-filled'"></i></span>  
-                                    <p>I agree to the <a href="#" class="condition">Terms & Condition</a></p>
+                                    <!-- <span class="check" (click)="checkBox()"><i [ngClass]="checkvisible?'ti ti-square':'ti ti-square-check-filled'"></i></span>   -->
+                                    <input formControlName="chckbox" name="chckbox" class="check" id="cb1" type="checkbox" 
+                                    [ngClass]="{ 'is-invalid': submitted && frm['chckbox'].errors }" #chkEnable ngModel (change)="submitted">
+                                    <label for="cb1"></label>
+                                    <p for="acceptTerms">I agree to the <a href="#" class="condition">Terms & Condition</a></p>
                                 </div>
                                 
                         </div>
@@ -79,7 +82,7 @@
                                         <div class="text-wrap" class="text-wrap2">
                                             <input class="mName" type="text" name="last_name" formControlName="last_name" id="reg_last_name" placeholder="Last Name" 
                                             [(ngModel)]="form.last_name"> <br>
-                                            <input class="nSuffix" type="text" name="suffix" formControlName="suffix" id="reg-suffix"
+                                            <input class="nSuffix" type="text" name="suffix" id="reg-suffix"
                                             [(ngModel)]="form.suffix" placeholder="Suffix"><br>
                                         </div> 
 
