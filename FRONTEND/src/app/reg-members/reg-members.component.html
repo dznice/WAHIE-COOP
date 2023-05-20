@@ -104,9 +104,13 @@
                                             [(ngModel)]="form.company_name"> <br>
                                         </div>
 
-                                        <div class="text-wrap" class="text-wrap2">
-                                            <input type="text" name="department" formControlName="department" id="department" placeholder="Department"
-                                            [(ngModel)]="form.department"><br>
+                                        <div class="text-wrap">         
+                                            <ng-select  [(ngModel)]="form.department" formControlName="department" id="department"  placeholder="Department">
+                                                <ng-option *ngFor="let item of depts" [value]="item.department_name" >
+                                                   {{ item.department_name }}
+                                                </ng-option>
+                                          </ng-select>
+                                       
                                         </div>
                                     </div>
                                     

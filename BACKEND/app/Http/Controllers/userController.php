@@ -127,11 +127,14 @@ class userController extends Controller
         $validated = $request->validate([
             'department_name' =>'unique:lib_department'
         ]);
-       $deps = strtoupper($request->department);
-       $department = departments::create([
+       $deps = ucfirst($request->department);
+       if($deps!=null){
+        $department = departments::create([
             'department_name' => $deps,        
             ]);
         return response()->json($department);
+       }
+       return response()->json('error', 406);
     }
 
     public function showDept(){

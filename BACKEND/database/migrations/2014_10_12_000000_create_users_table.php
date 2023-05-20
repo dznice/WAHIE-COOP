@@ -28,13 +28,13 @@ return new class extends Migration
             $table->String('department_name')->unique();
             $table->timestamps();
         });
-        DB::table('lib_department')->insert(array('department_name' => 'Superadmin'));
+     
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('department')->nullable();
+            $table->string('department');
             $table->unsignedBigInteger('role_id')->unsigned()->nullable()->default('1');
             $table->integer('status')->default('2');
             $table->integer('fillInfo');

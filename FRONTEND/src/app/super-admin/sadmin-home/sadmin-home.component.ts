@@ -25,14 +25,13 @@ export class SadminHomeComponent {
   constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,
     private toast:NgToastService) {
     this.showUsers();
-    this.Departments();
+    // this.Departments();
 
   }
 
   autoAdminForm = new FormGroup({
     username : new FormControl("", [Validators.required]),
     email : new FormControl("", [Validators.required]),
-    department : new FormControl("", [Validators.required])
   })
 
   addDepartment = new FormGroup({
@@ -102,13 +101,13 @@ export class SadminHomeComponent {
     });
   }
 
-  depts: any[]=[];
-  Departments(){
-    this.http.get('http://127.0.0.1:8000/api/showDept').subscribe((res: any) => {
-      console.log(res);
-      this.depts = res;
-    });
-  }
+  // depts: any[]=[];
+  // Departments(){
+  //   this.http.get('http://127.0.0.1:8000/api/showDept').subscribe((res: any) => {
+  //     console.log(res);
+  //     this.depts = res;
+  //   });
+  // }
 
   
 
