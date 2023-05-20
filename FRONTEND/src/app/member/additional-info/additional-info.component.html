@@ -25,7 +25,7 @@
             [ngModelOptions]="{ standalone: true }"
             name="tin_number"
             type="text"
-            placeholder="TIN Number"
+            placeholder="e.g. 000 – 123 – 456 – 001"
           />
         </div>
 
@@ -36,7 +36,7 @@
             [ngModelOptions]="{ standalone: true }"
             type="text"
             name="spouse"
-            placeholder="spouse"
+            placeholder=""
           />
         </div>
 
@@ -63,7 +63,7 @@
             [ngModelOptions]="{ standalone: true }"
             type="text"
             name="occupation"
-            placeholder="occupation"
+            placeholder=""
           />
         </div>
 
@@ -74,7 +74,7 @@
             [ngModelOptions]="{ standalone: true }"
             type="text"
             name="company_address"
-            placeholder="company_address"
+            placeholder="e.g. 015 Zamora Street, Tarlac City"
           />
         </div>
         <div class="tabs">
@@ -95,7 +95,7 @@
                 [ngModelOptions]="{ standalone: true }"
                 name="current_address"
                 type="text"
-                placeholder="Street/Block/House number"
+                placeholder="House No./Street/Block"
                 required
               />
             </div>
@@ -104,9 +104,9 @@
               <input
                 [(ngModel)]="updateMemberform.city_town"
                 [ngModelOptions]="{ standalone: true }"
-                name="city_town"
+                name="province"
                 type="text"
-                placeholder="City/Town"
+                placeholder="State/Province"
                 required
               />
             </div>
@@ -115,9 +115,9 @@
               <input
                 [(ngModel)]="updateMemberform.province"
                 [ngModelOptions]="{ standalone: true }"
-                name="province"
+                name="city_town"
                 type="text"
-                placeholder="State/Province"
+                placeholder="City/Town"
                 required
               />
             </div>
@@ -125,9 +125,9 @@
               <input
                 [(ngModel)]="updateMemberform.postal_code"
                 [ngModelOptions]="{ standalone: true }"
-                name="postal_code"
+                name="barangay"
                 type="text"
-                placeholder="Postal Code"
+                placeholder="Barangay"
                 required
               />
             </div>
@@ -135,9 +135,9 @@
               <input
                 [(ngModel)]="updateMemberform.barangay"
                 [ngModelOptions]="{ standalone: true }"
-                name="barangay"
+                name="postal_code"
                 type="text"
-                placeholder="Barangay"
+                placeholder="Postal Code"
                 required
               />
             </div>
