@@ -196,7 +196,7 @@ onSubmit2(){
     
     regMember(){
       if (this.registerForm.invalid) {
-        this.toast.error({detail:'Sorry',summary:'checkbox required ',duration:2000 , sticky:false,position:'tr'});
+        this.toast.warning({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000 , sticky:false,position:'tr'});
         return;
         
        
