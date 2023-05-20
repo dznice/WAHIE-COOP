@@ -61,6 +61,7 @@ export class RegMembersComponent implements OnInit, OnDestroy {
   }
 
   registerForm!:FormGroup
+  submitted =false;
 
   
   isDisplayed: boolean = true;
@@ -106,7 +107,7 @@ ngOnInit() {
 
     "middle_name": new FormControl(null, [Validators.required]),
 
-    "suffix": new FormControl(null, [Validators.required]),
+    
 
     "gender": new FormControl(null, [Validators.required]),
 
@@ -122,11 +123,14 @@ ngOnInit() {
 
     "pass": new FormControl(null, [Validators.required]),
     
-    "cpass": new FormControl(null, [Validators.required])
+    "cpass": new FormControl(null, [Validators.required]),
+
+    "chckbox": new FormControl(null, [Validators.requiredTrue])
   }, {
     validator: this.passwordMatch('pass', 'cpass')
   })
 }
+
 
 onSubmit(){
   /**
@@ -139,6 +143,21 @@ onSubmit(){
   
   this.registerForm.get('cpass')?.markAsTouched();
   
+}
+onSubmit2(){
+
+
+        // stop here if form is invalid
+
+       
+         
+          // if(this.registerForm.invalid){
+          //   this.toast.error({detail:'Sorry',summary:'checkbox required ',duration:2000 , sticky:false,position:'tr'});
+          // }
+          // else{
+            this.submitted = true;
+          //  
+        
 }
 
   ngOnDestroy() {
@@ -172,23 +191,22 @@ onSubmit(){
 
     
     regMember(){
-      
-      if(this.registerForm.invalid){
-        this.toast.error({detail:'Sorry',summary:'Input required  ',duration:2000 , sticky:false,position:'tr'}); 
-        return this.backend.register(this.form).subscribe( 
-          data=>this.handleError(data),
-          
-        );
+      if (this.registerForm.invalid) {
+        this.toast.error({detail:'Sorry',summary:'checkbox required ',duration:2000 , sticky:false,position:'tr'});
+        return;
+        
+       
       }
-      else {
+  else{
         return this.backend.register(this.form).subscribe(     
           data=>this.handleData(data)
           
      
           );
+        }
       }
-     
-    }
+    
+    
 
         
     
