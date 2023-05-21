@@ -101,27 +101,40 @@
             </div>
 
             <div class="input-field19">
-              <input
-                [(ngModel)]="updateMemberform.city_town"
-                [ngModelOptions]="{ standalone: true }"
-                name="city_town"
-                type="text"
-                placeholder="City/Town"
-                required
-              />
+              <select class="try" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }">
+                <option *ngFor="let reg of region" [value]="reg.region_code">
+                  {{ reg.region_description }}
+                  {{ reg.journal_name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="input-field19">
+              <select class="try"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }">
+                <option *ngFor="let prov of province" [value]="prov.province_code">
+                  {{ prov.province_description }}
+                  {{ prov.journal_name }}
+                </option>
+              </select>
             </div>
 
             <div class="input-field20">
-              <input
-                [(ngModel)]="updateMemberform.province"
-                [ngModelOptions]="{ standalone: true }"
-                name="province"
-                type="text"
-                placeholder="State/Province"
-                required
-              />
+              <select class="try"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }">
+                <option *ngFor="let city of cities" [value]="city.city_municipality_code">
+                  {{ city.city_municipality_description }}
+                  {{ city.journal_name }}
+                </option>
+              </select>
             </div>
             <div class="input-field21">
+              <select class="try"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }">
+                <option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
+                  {{ brgy.barangay_description }}
+                  {{ brgy.journal_name }}
+                </option>
+              </select>
+            </div>
+            <div class="input-field22">
               <input
                 [(ngModel)]="updateMemberform.postal_code"
                 [ngModelOptions]="{ standalone: true }"
@@ -131,16 +144,7 @@
                 required
               />
             </div>
-            <div class="input-field22">
-              <input
-                [(ngModel)]="updateMemberform.barangay"
-                [ngModelOptions]="{ standalone: true }"
-                name="barangay"
-                type="text"
-                placeholder="Barangay"
-                required
-              />
-            </div>
+            <button (click)="logSelectedValues()"> Check</button>
           </div>
           <input
             type="radio"

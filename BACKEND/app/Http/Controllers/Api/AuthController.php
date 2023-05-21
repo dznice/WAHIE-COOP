@@ -277,8 +277,8 @@ class AuthController extends Controller {
                     $members->occupation = $request->occupation;
                     $members->employment_status = $request->employment_status;
                     $members->company_address = $request->company_address;
-                    $members->address = $request->current_address.' ' . $request->barangay .' ' .
-                    $request->city .' ' . $request->province .' ' . $request->postal_code;
+                    $members->address = $request->current_address.' ' . $request->selectedBarangayDescription .' ' .
+                    $request->selectedCityDescription .' ' . $request->selectedProvinceDescription .' ' . $request->selectedRegionDescription .' ' . $request->postal_code;
                     $members->save();
 
                     $user = User::where('email', '=', $email)->first();

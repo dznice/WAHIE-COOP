@@ -203,7 +203,19 @@ Route::get('/journ', [App\Http\Controllers\JournalEntryController::class, 'journ
 
 Route::post('/payment', [App\Http\Controllers\PaymentController::class, 'store']);
 
+// Address API's
 
+Route::get('/region', [App\Http\Controllers\RegionController::class, 'region']);
+Route::get('/regions/{regions}', [App\Http\Controllers\RegionController::class, 'regions']);
+Route::get('/provinces', [App\Http\Controllers\RegionController::class, 'provinces']);
+Route::get('/province/{regionCode}', [App\Http\Controllers\RegionController::class, 'province']);
+Route::get('/provinceer/{province}', [App\Http\Controllers\RegionController::class, 'provinceer']);
+Route::get('/cities', [App\Http\Controllers\RegionController::class, 'cities']);
+Route::get('/city/{provinceCode}', [App\Http\Controllers\RegionController::class, 'city']);
+Route::get('/memcity/{memcity}', [App\Http\Controllers\RegionController::class, 'memcity']);
+Route::get('/barangays', [App\Http\Controllers\RegionController::class, 'barangays']);
+Route::get('/barangay/{cityCode}', [App\Http\Controllers\RegionController::class, 'barangay']);
+Route::get('/brgys/{brgys}', [App\Http\Controllers\RegionController::class, 'brgys']);
 
 
 

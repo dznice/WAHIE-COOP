@@ -28,6 +28,18 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AdditionalInfoComponent implements OnInit, OnDestroy {
+
+  
+  selectedRegion: any;
+  selectedProvince: any;
+  selectedCity: any;
+  selectedBarangay: any;
+
+  region: any;
+  province: any;
+  cities: any;
+  barangay: any;
+
   isDisplayed: boolean = true;
   toggleDiv() {
     this.isDisplayed = this.isDisplayed ? false : true;
@@ -89,7 +101,13 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._document.body.classList.add('body');
-
+    
+    this.showRegions();
+    this.showProvinces();
+    this.showCities();
+    this.showBarangay();
+    this.showBarangayDesc()
+    this.logSelectedValues()
   }
 
   ngOnDestroy() {
@@ -163,16 +181,23 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
    
     memId: this.memberId,
     row: this.row,
+    selectedRegion: null,
     current_address:null,
-    city_town:null,
-    province:null,
+    selectedCity:null,
+    selectedProvince:null,
     postal_code:null,
-    barangay:null,
+    selectedBarangay:null,
+    selectedRegionDescription: null,
+    selectedProvinceDescription:null,
+    selectedCityDescription:null,
+    selectedBarangayDescription:null,
   }
 
   memberInfo() {
-
+    this.updateMemberform.selectedBarangayDescription = this.barangay.find((brgy: { barangay_code: null; }) => brgy.barangay_code === this.updateMemberform.selectedBarangay)?.barangay_description;
+    
     console.log(this.row);
+    console.log(this.updateMemberform)
     this.http .post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform)
       .subscribe((res: any) => 
       {
@@ -186,5 +211,82 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     this.auth.changeStatus(false);
     localStorage.clear();
     this.route.navigateByUrl('/login');
+  }
+
+  
+  logSelectedValues() {
+    console.log('Selected Region:', this.updateMemberform.selectedRegion);
+    console.log('Selected Province:', this.updateMemberform.selectedProvince);
+    console.log('Selected City:', this.updateMemberform.selectedCity);
+    console.log('Selected Barangay:', this.updateMemberform.selectedBarangay);
+  }
+
+  showRegions() {
+    this.http
+      .get('http://127.0.0.1:8000/api/region')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.region = res;
+      });
+  }
+
+  showProvinces() {
+    if (this.updateMemberform.selectedRegion) {
+      console.log(this.selectedRegion);
+      this.updateMemberform.selectedRegionDescription = this.region.find((reg: { region_code: null; }) => reg.region_code === this.updateMemberform.selectedRegion)?.region_description;
+      this.http
+        .get(`http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.province = res;
+        });
+    } else {
+      this.province = [];
+    }
+  }
+
+  showCities() {
+    if (this.updateMemberform.selectedProvince) {
+      console.log(this.selectedProvince);
+      this.updateMemberform.selectedProvinceDescription = this.province.find((prov: { province_code: null; }) => prov.province_code === this.updateMemberform.selectedProvince)?.province_description;
+      this.http
+        .get(`http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.cities = res;
+        });
+    } else {
+      this.cities = [];
+    }
+  }
+
+  showBarangay() {
+    if (this.updateMemberform.selectedCity) {
+      console.log(this.selectedCity);
+      this.updateMemberform.selectedCityDescription = this.cities.find((city: { city_municipality_code: null; }) => city.city_municipality_code === this.updateMemberform.selectedCity)?.city_municipality_description;
+      this.http
+        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.barangay = res;
+        });
+    } else {
+      this.barangay = [];
+    }
+  }
+
+  showBarangayDesc() {
+    if (this.updateMemberform.selectedBarangay) {
+      console.log(this.selectedBarangay);
+      
+      this.http
+        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
+        .subscribe((res: any) => {
+          console.log(res);
+          this.barangay = res;
+        });
+    } else {
+      this.barangay = [];
+    }
   }
 }

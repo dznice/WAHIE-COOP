@@ -26,7 +26,17 @@ php artisan serve
 
 composer require spatie/laravel-query-builder
 
-eplace in xammp/mysql
+replace in xammp/mysql
 under msqld
 max_allowed_packet=64M
 wait_timeout = 600
+
+after php artisan migrate run this code:
+composer dump-autoload
+
+then this code to seed the data from sql data:
+
+php artisan db:seed --class=PhilippineRegionsTableSeeder
+php artisan db:seed --class=PhilippineProvincesTableSeeder
+php artisan db:seed --class=PhilippineCitiesTableSeeder
+php artisan db:seed --class=PhilippineBarangaysTableSeeder
