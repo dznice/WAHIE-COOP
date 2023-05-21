@@ -12,11 +12,7 @@
     </div>
   </div>
 
-  <div class="right-cont">
-    <button class="btn-add" (click)="showdept(1)">
-      <i class="ti ti-plus"></i>New Department
-    </button>
-  </div>
+
 
   <div class="filter-field">
     <div class="filter-search">
@@ -60,7 +56,7 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.department }}</td>
-          <td>{{ user.created_at | date : "MM-dd-yyyy" }}</td>
+          <td>{{ user.created_at | date:'mediumDate' }}</td>
 
           <td>
             <div *ngIf="user.status == 0">
@@ -105,7 +101,7 @@
             <label for="admin_email">Email Address</label>
             <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
             <br/>
-            <label for="admin_email">Department</label>
+            <!-- <label for="admin_email">Department</label>
             <br/>
             <ng-select class="modalinput" [(ngModel)]="form.department" formControlName="department" >
               <ng-option
@@ -114,8 +110,8 @@
                   >
                     {{ item.department_name }}
                   </ng-option>
-          </ng-select>
-            <br/>
+          </ng-select> -->
+            <!-- <br/> -->
           </div>
           <div class="otp-footer">
             <button class="closebtn" (click)="show(2)">Close</button>
@@ -127,23 +123,3 @@
   </div>
 </section>
 
-<section>
-  <div>
-    <form (ngSubmit)="addDept()" #deparmentAdd="ngForm" [formGroup]="addDepartment" class="register-form">
-      <div class="dept-modal" *ngIf="deptModal === 1">
-        <div class="dept-content">
-          <div class="dept-header">Add Department</div>
-          <div class="dept-body">
-            <label for="admin_username">Department</label>
-            <input class="modalinput" type="text" [(ngModel)]="depform.department" formControlName="department"/>
-            <br/>
-          </div>
-          <div class="dept-footer">
-            <button class="closebtn" (click)="showdept(2)">Close</button>
-            <button class="savebtn">Create</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</section>

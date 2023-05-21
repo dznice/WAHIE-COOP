@@ -112,7 +112,10 @@ export class JournalEntryComponent implements OnInit {
       this.wahieService.saveJournalEntry(this.journalEntryForm.getRawValue()).subscribe(res=>{
         let result:any;
         result=res;
+        console.log('hello'+this.journId);
         console.log(result);
+        this.log.activity = 'Added Journal Entry No.' + this.journId
+        this.activityLog()
         this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
         this.route.navigateByUrl('admin/accounting')
       })
@@ -222,5 +225,16 @@ export class JournalEntryComponent implements OnInit {
 
   back(){
     this.route.navigateByUrl('admin/accounting')
+  }
+
+  public log ={
+    name: sessionStorage.getItem('name'),
+    department:sessionStorage.getItem('department'),
+    activity:'login'
+  }
+  activityLog(){
+    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
+        console.log(res)   
+    })
   }
 }

@@ -7,6 +7,7 @@ import {TokenService} from '../services/token.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { NgToastService } from'ng-angular-popup';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
   
   submitted:boolean = false;
 
-  constructor(@Inject(DOCUMENT) private _document: any , private backend:BackendService,
+  constructor(@Inject(DOCUMENT) private _document: any , private backend:BackendService, private http:HttpClient,
    private token:TokenService, private route:Router , private Auth:AuthGuardService, private toast: NgToastService ){
     localStorage.clear();
     sessionStorage.clear();
@@ -80,6 +81,22 @@ export class LoginComponent implements OnInit, OnDestroy  {
   }
   public error = null;
 
+
+ login:any = 'Login'
+  public log ={
+    name: null,
+    department:null,
+    activity:null
+  }
+
+  activityLog(){
+    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
+        console.log(res)   
+    })
+  }
+
+
+
   submitLogin(){
     return this.backend.login(this.form).subscribe( 
       data=>this.handleResponse(data),
@@ -93,8 +110,14 @@ export class LoginComponent implements OnInit, OnDestroy  {
     localStorage.setItem('userData', JSON.stringify(user.user['id']))
     localStorage.setItem('userRole', JSON.stringify(user.user['role_id']))
     sessionStorage.setItem('name', (user.user['name']))
-
-
+    sessionStorage.setItem('department', (user.user['department']))
+    
+   
+    this.log.name = user.user['name']
+    this.log.department = user.user['department']
+    this.log.activity = this.login
+    this.activityLog();
+  
     //admin
     if(user.user['role_id']==1){
        //otpinput

@@ -5,6 +5,7 @@ import { WahieService } from '../../services/wahie.service';
 import { itemService } from './memItem.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgToastService } from'ng-angular-popup';
 
 @Component({
   selector: 'app-accounting',
@@ -136,7 +137,7 @@ export class AccountingComponent implements OnInit {
   email: string = '';
   status: number = 0;
 
-  constructor(private http: HttpClient, private route: Router) {
+  constructor(private http: HttpClient, private route: Router, private toast: NgToastService) {
     this.showMembers();
   }
 
@@ -164,9 +165,17 @@ export class AccountingComponent implements OnInit {
 
   memberAccounting(data: any) {
     this.http
-      .get('http://127.0.0.1:8000/api/memberList/' + data)
+      .get('http://127.0.0.1:8000/api/account/' + data)
       .subscribe((res: any) => {
-        this.route.navigateByUrl('admin/accounting/add-payment/' + data);
+        res.forEach((x:any)=>{
+          if(data==x.debit.cred.transac.member.id){
+            this.route.navigateByUrl('admin/accounting/add-payment/' + data);
+          }
+          else{
+            this.toast.error({detail:'Failed',summary:'No Transactions Yet',duration:2000, sticky:false,position:'tr'});
+          }
+        });
+        
       });
   }
 }

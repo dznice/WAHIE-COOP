@@ -30,6 +30,7 @@ export class ManageMembersComponent {
   email: string = '';
   coop: string = '';
   status: number = 0;
+  
 
   constructor(private http: HttpClient, private wahieService:WahieService, private route:Router) {
     this.showUsers();
@@ -72,6 +73,8 @@ export class ManageMembersComponent {
     });
   }
 
+
+  //disable user status 1 to 0
   activateUser(data: any) {
     (this.id = data.id),
     (this.status = 1),
@@ -79,13 +82,6 @@ export class ManageMembersComponent {
     (this.email = data.email);
     this.coop = data.coop;
     this.activated();
-  }
-  deactivateTOactivate(data: any) {
-    (this.id = data.id),
-    (this.status = 0),
-    (this.name = data.name),
-    (this.email = data.email);
-    this.deactivated();
   }
 
   activated() {
@@ -96,6 +92,7 @@ export class ManageMembersComponent {
       email: this.email,
       coop: this.coop,
     };
+    this.log.activity ='Disable Account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {
@@ -106,9 +103,19 @@ export class ManageMembersComponent {
         this.name = '';
         this.email = '';
         this.coop = '';
-      });
+        this.activityLog();
+      }); 
   }
 
+
+  //Enable user status 0 to 1
+  deactivateTOactivate(data: any) {
+    (this.id = data.id),
+    (this.status = 0),
+    (this.name = data.name),
+    (this.email = data.email);
+    this.deactivated();
+  }
   deactivated() {
     let updateStatus2 = {
       status: 1,
@@ -116,6 +123,8 @@ export class ManageMembersComponent {
       name: this.name,
       email: this.email,
     };
+
+    this.log.activity ='Enable Account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus2)
       .subscribe((res: any) => {
@@ -125,14 +134,19 @@ export class ManageMembersComponent {
         this.status = 0;
         this.name = '';
         this.email = '';
+        this.activityLog();
       });
   }
+
+
+  //activate member from status 2 to 1
   activateUser2(data: any) {
     (this.id = data.id),
     (this.status = 1),
     (this.name = data.name),
     (this.email = data.email);
     this.coop = data.coop;
+    
     this.activated2();
   }
   activated2() {
@@ -143,6 +157,7 @@ export class ManageMembersComponent {
       email: this.email,
       coop: this.coop,
     };
+    this.log.activity ='Activate Account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {
@@ -154,17 +169,29 @@ export class ManageMembersComponent {
         this.email = '';
         this.coop = '';
         this.isChecked = true;
+        this.activityLog();
       });
   }
+
 
   memberInfo(data: any) {
     this.http.get('http://127.0.0.1:8000/api/memberAccount/' + data)
       .subscribe((res: any) => {
         this.route.navigateByUrl('admin/accounting/member-info/' + res);
       });
-  } 
+  }
 
 
+  public log ={
+    name: sessionStorage.getItem('name'),
+    department:sessionStorage.getItem('department'),
+    activity:'login'
+  }
+  activityLog(){
+    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
+        console.log(res)   
+    })
+  }
 
 }
 

@@ -1,6 +1,6 @@
 export class logItem{
     name: any;
-    dnt: any;
-    coop: any;
-    act: any;
+    created_at: any;
+    department: any;
+    activity: any;
 }

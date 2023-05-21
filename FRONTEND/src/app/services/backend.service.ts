@@ -35,5 +35,9 @@ export class BackendService {
     return this.http.post('http://127.0.0.1:8000/api/deptAdd', data);
   }
 
+  actLog() : Observable<any>{
+    return this.http.get('http://127.0.0.1:8000/api/actLog');
+  }
+
 }
 

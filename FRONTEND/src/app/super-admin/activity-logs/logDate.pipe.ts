@@ -14,7 +14,7 @@ export class FilterLogDatePipe implements PipeTransform {
     {
       let startDate = new Date(sDate);
       let endDate = new Date(eDate);
-      let f = item.filter((item) => new Date(item.dnt) >= startDate && new Date(item.dnt) <= endDate);
+      let f = item.filter((item) => new Date(item.created_at) >= startDate && new Date(item.created_at) <= endDate);
       return f;
     }
     

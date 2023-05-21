@@ -32,7 +32,7 @@ export class SadminSettingsComponent {
     console.log(this.depform)
     return this.backend.deptAdd(this.depform).subscribe((res:any)=>{
       this.showdept(2)
-      this.toast.success({detail:'added',summary:'account added', sticky:false,position:'false'});  
+      this.toast.success({detail:'Successful',summary:'Department added', sticky:false,position:'false'});  
     });
   }
 }

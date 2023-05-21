@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { logItem } from './logItem';
-import { itemService } from './logItem.service';
+import { HttpClient } from '@angular/common/http';
+import { BackendService } from 'src/app/services/backend.service';
+
 
 
 @Component({
   selector: 'app-activity-logs',
   templateUrl: './activity-logs.component.html',
   styleUrls: ['./activity-logs.component.scss'],
-  providers: [itemService]
 })
 export class ActivityLogsComponent implements OnInit{
 
@@ -21,17 +22,21 @@ export class ActivityLogsComponent implements OnInit{
   stringEnd: string = new Date().toDateString();
   endDate : string = '';
   
-  constructor(private ItemService: itemService){
-
-
+  constructor(private http:HttpClient, private backend:BackendService){
     
   }
-  
-
 
 
 ngOnInit():void{
-  this.item = this.ItemService.item;
-
+this.showAct()
 }
+
+showAct(){
+  return this.backend.actLog().subscribe((res:any)=>{
+    console.log(res);
+    this.item = res
+   
+  });     
+}
+
 }

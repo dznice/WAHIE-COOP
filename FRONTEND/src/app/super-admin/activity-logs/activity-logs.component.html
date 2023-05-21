@@ -33,11 +33,11 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let e of item | filter: term| filterlogDate: startDate: endDate | paginate: {itemsPerPage: 5, currentPage: p} ">
-          <td>{{e.dnt}}</td>
+        <tr *ngFor="let e of item.slice().reverse()  | filter: term| filterlogDate: startDate: endDate | paginate: {itemsPerPage: 5, currentPage: p} ">
+          <td>{{e.created_at | date: 'MMM d, y, hh:mm:ss a'  }}</td>
           <td>{{e.name}}</td>
-          <td>{{e.coop}}</td>
-          <td>{{e.act}}</td>
+          <td>{{e.department}}</td>
+          <td>{{e.activity}}</td>
         </tr>
       </tbody>
     </table>

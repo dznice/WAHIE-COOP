@@ -65,19 +65,23 @@
 
           <div class="customerPayment2">
             <label> Payment Method </label>
-            <select type="text" formControlName="paymentMethod">
+            <select type="text" formControlName="paymentMethod" (change)="changeMethod($event)">
             <!-- <select type="text"> -->
-              <option disabled selected hidden>Choose Payment Method</option>
-              <option>Payment 1</option>
-              <option>Payment 2</option>
-              <option>Payment 3</option>
+              <option *ngFor="let item of paymentMethods" [value]="item.value">
+                {{item.viewValue}}
+              </option>
+              <!-- <option>Cash</option>
+              <option>Check</option>
+              <option>Credit Card</option>
+              <option>Direct Debit</option> -->
             </select>
           </div>
 
           <div class="customerPayment2">
+            <div *ngIf="selectedMethod ==='2' || selectedMethod ==='3' || selectedMethod ==='4'">
             <label> Reference No. </label>
-            <!-- <input type="number" /> -->
-            <input type="number" formControlName="referenceNo">
+            <input type="number" formControlName="referenceNo" >
+            </div>
           </div>
 
           <div class="customerPayment2">

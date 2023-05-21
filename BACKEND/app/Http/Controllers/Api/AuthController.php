@@ -69,7 +69,7 @@ class AuthController extends Controller {
             $code = rand(100000,999999);
 
             $user = User::create([
-            'name' => $request['first_name'],
+            'name' => ucfirst($request['first_name']),
             'email' => $request['email'],
             'role_id' => '3',
             'fillInfo' => '1',
@@ -91,9 +91,9 @@ class AuthController extends Controller {
 
 
             $members = Members::create([
-                'first_name' => $request['first_name'],
-                'middle_name' => $request['middle_name'],
-                'last_name' => $request['last_name'],
+                'first_name' => ucfirst($request['first_name']),
+                'middle_name' => ucfirst($request['middle_name']),
+                'last_name' => ucfirst($request['last_name']),
                 'suffix' => $request['suffix'],
                 'email' => $request['email'],
                 'gender' => $request['gender'],
@@ -134,7 +134,7 @@ class AuthController extends Controller {
             $user = User::create([
                 'name' => $request['username'],
                 'email' => $request['email'],
-                'department' => $request->department,
+                'department' => 'Admin',
                 'role_id' => '1',
                 'fillInfo' => '0',
                 'status' => '1',

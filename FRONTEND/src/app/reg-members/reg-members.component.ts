@@ -7,6 +7,7 @@ import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { NgToastService } from'ng-angular-popup';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -75,7 +76,10 @@ export class RegMembersComponent implements OnInit, OnDestroy {
   }
 
   constructor(@Inject(DOCUMENT) private _document: any, private fb:FormBuilder, private backend:BackendService,
-  private token:TokenService, private route:Router, private Auth:AuthGuardService, private toast: NgToastService){}
+  private token:TokenService, private route:Router, private Auth:AuthGuardService, private toast: NgToastService,
+  private http:HttpClient){
+    this.Departments()
+  }
 
   passwordMatch(controlName: string, matchControlName: string){
     return (formGroup: FormGroup)=> {
@@ -104,8 +108,6 @@ ngOnInit() {
     "first_name": new FormControl(null, [Validators.required]),
 
     "last_name": new FormControl(null, [Validators.required]),
-
-    "middle_name": new FormControl(null, [Validators.required]),
 
     
 
@@ -192,7 +194,7 @@ onSubmit2(){
     
     regMember(){
       if (this.registerForm.invalid) {
-        this.toast.error({detail:'Sorry',summary:'checkbox required ',duration:2000 , sticky:false,position:'tr'});
+        this.toast.warning({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000 , sticky:false,position:'tr'});
         return;
         
        
@@ -220,6 +222,14 @@ onSubmit2(){
     handleError(error:any){
       this.toast.error({detail:'Sorry',summary:'Input required  ',duration:2000 , sticky:false,position:'tr'});
       this.error = error.error.error;
+    }
+
+    depts: any[]=[];
+    Departments(){
+      this.http.get('http://127.0.0.1:8000/api/showDept').subscribe((res: any) => {
+        console.log(res);
+        this.depts = res;
+      });
     }
 
     

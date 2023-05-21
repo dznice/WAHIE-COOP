@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Users;
 use App\Models\Members;
 use App\Models\departments;
+use App\Models\actLog;
 use App\Http\Resources\UsersResource;
 use App\Models\BenificiaryMembers;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class userController extends Controller
 {
+
     public function users(){
    $users = User::all();
    return response()->json($users);
@@ -127,16 +129,33 @@ class userController extends Controller
         $validated = $request->validate([
             'department_name' =>'unique:lib_department'
         ]);
-       $deps = strtoupper($request->department);
-       $department = departments::create([
+       $deps = ucfirst($request->department);
+       if($deps!=null){
+        $department = departments::create([
             'department_name' => $deps,        
             ]);
         return response()->json($department);
+       }
+       return response()->json('error', 406);
     }
 
     public function showDept(){
         $department = departments::all();
         return response()->json($department);
+     }
+
+     public function addActivity(Request $request){
+        $activity = actLog::create([
+            'name' => $request['name'],
+            'department' => $request['department'],
+            'activity' => $request['activity']
+            ]);
+        return response()->json($activity);
+     }
+
+     public function actLog(){
+        $actLog = actLog::all();
+        return response()->json($actLog);
      }
 
 }

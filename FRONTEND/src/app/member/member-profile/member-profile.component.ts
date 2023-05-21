@@ -65,7 +65,7 @@ myProfile(){
     this.suffix = res.suffix;
     this.email = res.email;
     this.address = res.address;
-    this.mobile_number = res.mobile_number;
+    this.mobile_number = [res.mobile_number.slice(0, 3), " ", res.mobile_number.slice(3,7), " ", res.mobile_number.slice(7)].join('');
     this.birthdate = res.birthdate;
     this.civil_status = res.civil_status;
     this.company_address = res.company_address;

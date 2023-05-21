@@ -25,7 +25,7 @@
             [ngModelOptions]="{ standalone: true }"
             name="tin_number"
             type="text"
-            placeholder="TIN Number"
+            placeholder="e.g. 000 – 123 – 456 – 001"
           />
         </div>
 
@@ -36,7 +36,7 @@
             [ngModelOptions]="{ standalone: true }"
             type="text"
             name="spouse"
-            placeholder="spouse"
+            placeholder=""
           />
         </div>
 
@@ -63,7 +63,7 @@
             [ngModelOptions]="{ standalone: true }"
             type="text"
             name="occupation"
-            placeholder="occupation"
+            placeholder=""
           />
         </div>
 
@@ -74,7 +74,7 @@
             [ngModelOptions]="{ standalone: true }"
             type="text"
             name="company_address"
-            placeholder="company_address"
+            placeholder="e.g. 015 Zamora Street, Tarlac City"
           />
         </div>
         <div class="tabs">
@@ -95,13 +95,13 @@
                 [ngModelOptions]="{ standalone: true }"
                 name="current_address"
                 type="text"
-                placeholder="Street/Block/House number"
+                placeholder="House No./Street/Block"
                 required
               />
             </div>
 
             <div class="input-field19">
-              <select class="try" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }">
+              <select class="try" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }" required>
                 <option *ngFor="let reg of region" [value]="reg.region_code">
                   {{ reg.region_description }}
                   {{ reg.journal_name }}
@@ -110,7 +110,7 @@
             </div>
 
             <div class="input-field19">
-              <select class="try"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }">
+              <select class="try"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }" required>
                 <option *ngFor="let prov of province" [value]="prov.province_code">
                   {{ prov.province_description }}
                   {{ prov.journal_name }}
@@ -119,15 +119,15 @@
             </div>
 
             <div class="input-field20">
-              <select class="try"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }">
+              <select class="try"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }" required>
                 <option *ngFor="let city of cities" [value]="city.city_municipality_code">
                   {{ city.city_municipality_description }}
                   {{ city.journal_name }}
                 </option>
               </select>
             </div>
-            <div class="input-field21">
-              <select class="try"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }">
+            <div class="input-field21" >
+              <select class="try"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }" required>
                 <option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
                   {{ brgy.barangay_description }}
                   {{ brgy.journal_name }}
@@ -138,7 +138,7 @@
               <input
                 [(ngModel)]="updateMemberform.postal_code"
                 [ngModelOptions]="{ standalone: true }"
-                name="postal_code"
+                name="barangay"
                 type="text"
                 placeholder="Postal Code"
                 required
