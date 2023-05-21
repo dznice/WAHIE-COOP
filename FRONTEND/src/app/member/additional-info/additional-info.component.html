@@ -126,7 +126,7 @@
                 </option>
               </select>
             </div>
-            <div class="input-field21" >
+            <div class="input-field21" placeholder="Postal Code">
               <select class="try"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }" required>
                 <option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
                   {{ brgy.barangay_description }}

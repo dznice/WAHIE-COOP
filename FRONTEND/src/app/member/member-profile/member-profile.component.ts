@@ -11,6 +11,10 @@ import { NgToastService } from'ng-angular-popup';
   styleUrls: ['./member-profile.component.scss']
 })
 export class MemberProfileComponent implements OnInit, OnDestroy{
+  prov: any;
+  city: any;
+  brgy: any;
+  region: any;
 
 constructor(private http:HttpClient, private fb:FormBuilder, private backend:BackendService, private route:Router,private toast: NgToastService){
   this.myProfile();
@@ -111,7 +115,4 @@ onSubmit(){
     this.route.navigateByUrl('login');  
     }
   )}
-
-
-
 }
