@@ -109,8 +109,6 @@ ngOnInit() {
 
     "last_name": new FormControl(null, [Validators.required]),
 
-    "middle_name": new FormControl(null, [Validators.required]),
-
     
 
     "gender": new FormControl(null, [Validators.required]),

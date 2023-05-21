@@ -85,32 +85,6 @@ export class SadminHomeComponent {
   }
 
 
-  deptModal = -1;
-  showdept(index: number){
-    this.deptModal = index;
-  }
-
-  public depform = {
-    department:null
-  }
-  addDept(){
-    console.log(this.depform)
-    return this.backend.deptAdd(this.depform).subscribe((res:any)=>{
-      this.showdept(2)
-      this.toast.success({detail:'added',summary:'account added', sticky:false,position:'false'});  
-    });
-  }
-
-  // depts: any[]=[];
-  // Departments(){
-  //   this.http.get('http://127.0.0.1:8000/api/showDept').subscribe((res: any) => {
-  //     console.log(res);
-  //     this.depts = res;
-  //   });
-  // }
-
-  
-
   showUsers() {
     this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
       this.Loaded = true;
@@ -142,20 +116,14 @@ export class SadminHomeComponent {
     });
   }
 
-  activateUser(data: any) {
+   //disable user status 1 to 0
+   activateUser(data: any) {
     (this.id = data.id),
     (this.status = 1),
     (this.name = data.name),
     (this.email = data.email);
     this.coop = data.coop;
     this.activated();
-  }
-  deactivateTOactivate(data: any) {
-    (this.id = data.id),
-    (this.status = 0),
-    (this.name = data.name),
-    (this.email = data.email);
-    this.deactivated();
   }
 
   activated() {
@@ -166,6 +134,7 @@ export class SadminHomeComponent {
       email: this.email,
       coop: this.coop,
     };
+    this.log.activity ='Disable Account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {
@@ -176,9 +145,19 @@ export class SadminHomeComponent {
         this.name = '';
         this.email = '';
         this.coop = '';
-      });
+        this.activityLog();
+      }); 
   }
 
+
+  //Enable user status 0 to 1
+  deactivateTOactivate(data: any) {
+    (this.id = data.id),
+    (this.status = 0),
+    (this.name = data.name),
+    (this.email = data.email);
+    this.deactivated();
+  }
   deactivated() {
     let updateStatus2 = {
       status: 1,
@@ -186,6 +165,8 @@ export class SadminHomeComponent {
       name: this.name,
       email: this.email,
     };
+
+    this.log.activity ='Enable Account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus2)
       .subscribe((res: any) => {
@@ -195,14 +176,19 @@ export class SadminHomeComponent {
         this.status = 0;
         this.name = '';
         this.email = '';
+        this.activityLog();
       });
   }
+
+
+  //activate member from status 2 to 1
   activateUser2(data: any) {
     (this.id = data.id),
     (this.status = 1),
     (this.name = data.name),
     (this.email = data.email);
     this.coop = data.coop;
+    
     this.activated2();
   }
   activated2() {
@@ -213,6 +199,7 @@ export class SadminHomeComponent {
       email: this.email,
       coop: this.coop,
     };
+    this.log.activity ='Activate Account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {
@@ -224,6 +211,19 @@ export class SadminHomeComponent {
         this.email = '';
         this.coop = '';
         this.isChecked = true;
+        this.activityLog();
       });
   }
+
+  public log ={
+    name: sessionStorage.getItem('name'),
+    department:sessionStorage.getItem('department'),
+    activity:'login'
+  }
+  activityLog(){
+    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
+        console.log(res)   
+    })
+  }
+
 }
