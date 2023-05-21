@@ -26,8 +26,23 @@
           </div>
 
           <div class="filter-field">
-            <label>Date</label>
-            <input type="date" />
+            <label>Start Date</label>
+            <input
+              class="form-control"
+              type="date"
+              [(ngModel)]="startDate"
+              name="sDate"
+            />
+          </div>
+          <!-- DATE End -->
+          <div class="filter-field">
+            <label>End Date</label>
+            <input
+              class="form-control"
+              type="date"
+              [(ngModel)]="endDate"
+              name="eDate"
+            />
           </div>
         </div>
 
@@ -36,21 +51,17 @@
             <th>Date</th>
             <th>Type</th>
             <th>No.</th>
-            <th>Member</th>
+
             <th>Due Date</th>
             <th>Balance</th>
             <th>Payment</th>
             <th>Status</th>
           </thead>
-          <tbody *ngFor="
-          let acc of account.reverse()
-            | filterName : term
-        ">
+          <tbody *ngFor="let acc of account.reverse() | filter: type | filterInfoDate: startDate: endDate | paginate: {itemsPerPage: 10, currentPage: p}">
             <tr *ngIf="id==acc.debit.cred.transac.member.id" >
             <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
             <td >{{ acc.debit.cred.entries.entry_name }}</td>
             <td >{{ acc.debit.cred.transac.transaction_number }}</td>
-            <td>{{ acc.debit.cred.transac.member.first_name +" "+ acc.debit.cred.transac.member.last_name }}</td>
             <td>{{ acc.debit.cred.due_date }}</td>
             <td>{{ acc.open_balance }}</td>
             <td>{{ acc.payment }}</td>
@@ -63,7 +74,14 @@
           </tr>
           </tbody>
         </table>
+
+        <div class="pagination-controls">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+
       </div>
+
+
 
       <input
         type="radio"

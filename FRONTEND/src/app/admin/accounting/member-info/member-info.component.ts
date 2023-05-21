@@ -21,6 +21,11 @@ export class MemberInfoComponent implements OnInit {
   term: string = '';
   p: number = 1;
   type: string;
+  startDate: string = '';
+  endDate : string = '';
+
+
+
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
  private urlId : Subscription;
  public account: any;

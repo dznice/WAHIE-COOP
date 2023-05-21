@@ -28,8 +28,24 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AdditionalInfoComponent implements OnInit, OnDestroy {
+//disabling spouse when single
 
-  
+ isInputDisabled: boolean = false;
+onOptionChange() {
+  if (this.updateMemberform.civil_status === 'single') {
+    this.isInputDisabled = true;
+  } else {
+    this.isInputDisabled = false;
+  }
+}
+
+
+
+
+
+
+
+
   selectedRegion: any;
   selectedProvince: any;
   selectedCity: any;
@@ -66,11 +82,11 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   submitted: boolean = false;
 
-  constructor( @Inject(DOCUMENT) private _document: any, private http: HttpClient, 
+  constructor( @Inject(DOCUMENT) private _document: any, private http: HttpClient,
   private token: TokenService, private route: Router, private auth:AuthGuardService) {
     this.getmemberId();
-   
-   
+
+
   }
 
   // updateMemberInfo = new FormGroup({
@@ -101,7 +117,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._document.body.classList.add('body');
-    
+
     this.showRegions();
     this.showProvinces();
     this.showCities();
@@ -121,15 +137,15 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
     getmemberId(){
     this.http.get('http://127.0.0.1:8000/api/members/' + this.email).subscribe(
-      (res:any)=>{    
+      (res:any)=>{
         console.log('mem' + res);
         this.memberId = res;
-        
-    }); 
+
+    });
   }
- 
+
   id = localStorage.getItem('userData');
-  
+
   //bene
   row = [
     {
@@ -178,7 +194,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     company_address:null,
     address:null,
     job_title:null,
-   
+
     memId: this.memberId,
     row: this.row,
     selectedRegion: null,
@@ -195,11 +211,11 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   memberInfo() {
     this.updateMemberform.selectedBarangayDescription = this.barangay.find((brgy: { barangay_code: null; }) => brgy.barangay_code === this.updateMemberform.selectedBarangay)?.barangay_description;
-    
+
     console.log(this.row);
     console.log(this.updateMemberform)
     this.http .post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform)
-      .subscribe((res: any) => 
+      .subscribe((res: any) =>
       {
         console.log(res);
         this.token.handle(sessionStorage.getItem('ftoken'));
@@ -213,7 +229,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     this.route.navigateByUrl('/login');
   }
 
-  
+
   logSelectedValues() {
     console.log('Selected Region:', this.updateMemberform.selectedRegion);
     console.log('Selected Province:', this.updateMemberform.selectedProvince);
@@ -278,7 +294,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   showBarangayDesc() {
     if (this.updateMemberform.selectedBarangay) {
       console.log(this.selectedBarangay);
-      
+
       this.http
         .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
         .subscribe((res: any) => {

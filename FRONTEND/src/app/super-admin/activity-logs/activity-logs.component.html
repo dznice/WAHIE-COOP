@@ -4,7 +4,7 @@
 
   <div class="table-filter">
     <!-- Search -->
-    <div class="filter-field1"> 
+    <div class="filter-field1">
       <label for="search" placeholder="Search item">Search</label>
 
       <input class="form-control" type="text" placeholder="Search" [(ngModel)]= "term" (ngModelChange)="startDate">
@@ -17,7 +17,7 @@
     <!-- Status -->
     <div class="filter-field3">
       <label>End Date</label>
-      <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">  
+      <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate">
     </div>
   </div>
 
@@ -28,12 +28,12 @@
           <th>Date and Time</th>
           <th>Name</th>
           <th>Department</th>
-          <th>Activity</th>          
+          <th>Activity</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let e of item.slice().reverse()  | filter: term| filterlogDate: startDate: endDate | paginate: {itemsPerPage: 5, currentPage: p} ">
+        <tr *ngFor="let e of item.slice().reverse()  | filter: term| filterlogDate: startDate: endDate | paginate: {itemsPerPage: 10, currentPage: p} ">
           <td>{{e.created_at | date: 'MMM d, y, hh:mm:ss a'  }}</td>
           <td>{{e.name}}</td>
           <td>{{e.department}}</td>

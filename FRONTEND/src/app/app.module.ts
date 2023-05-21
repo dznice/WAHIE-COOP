@@ -55,6 +55,7 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { FilterPipe } from './admin/accounting/filter.pipe';
 import { FilterHomePipe } from './admin/admin-home/hfilter.pipe';
 import { FilterHomeDatePipe } from './admin/admin-home/hfilter-date.pipe';
+import { FilterMemInfoDPipe } from './admin/accounting/member-info/memInfo-date.pipe';
 import { FilterInvPipe } from './admin/inventory/filter-inv.pipe';
 import { SearchPipe } from './super-admin/sadmin-home/accSearch.pipe';
 import { FilterLogDatePipe } from './super-admin/activity-logs/logDate.pipe';
@@ -104,6 +105,7 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader
     FilterLogDatePipe,
     FilterLogsPipe,
     FilterInvPipe,
+    FilterMemInfoDPipe,
     RegMembersComponent,
     AdditionalInfoComponent,
     MemberComponent,
@@ -134,7 +136,7 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader
     NgToastModule,
     NgSelectModule,
     NgxUiLoaderModule,
-    NgxUiLoaderHttpModule.forRoot({ showForeground: true }) 
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true })
   ],
   providers: [AuthGuardService, BnNgIdleService],
   bootstrap: [AppComponent]

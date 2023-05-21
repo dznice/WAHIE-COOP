@@ -11,11 +11,12 @@
             [ngModelOptions]="{ standalone: true }"
             id="civil_status"
             name="civil_status"
+            (change)="onOptionChange()"
             required
           >
             <option disabled selected>Select</option>
-            <option>Single</option>
-            <option>Married</option>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
           </select>
         </div>
         <div class="text-wrap">
@@ -37,6 +38,8 @@
             type="text"
             name="spouse"
             placeholder=""
+
+            [disabled]="isInputDisabled"
           />
         </div>
 
