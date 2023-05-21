@@ -6,7 +6,8 @@ import { logItem } from "./logItem";
 })
 export class FilterLogDatePipe implements PipeTransform {
 
-  transform(item: logItem[], sDate: string, eDate: string) {
+  transform(item: logItem[], sDate: Date, eDate: Date) {
+    console.log('filter call')
     if(!sDate || !eDate){
       return item;
     }
@@ -14,10 +15,13 @@ export class FilterLogDatePipe implements PipeTransform {
     {
       let startDate = new Date(sDate);
       let endDate = new Date(eDate);
-      let f = item.filter((item) => new Date(item.created_at) >= startDate && new Date(item.created_at) <= endDate);
+      let f = item.filter(
+        (item) =>
+          new Date(item.created_at ) >= startDate && new Date(item.created_at ) <= endDate
+      );
       return f;
     }
-    
+
 }
 
 }

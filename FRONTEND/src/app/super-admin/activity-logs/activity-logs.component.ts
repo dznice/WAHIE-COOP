@@ -16,14 +16,13 @@ export class ActivityLogsComponent implements OnInit{
   item: logItem[] = [];
   term: string = '';
   p: number = 1;
-  
-  stringStart: string = new Date().toDateString();
-  startDate: string = '';
-  stringEnd: string = new Date().toDateString();
-  endDate : string = '';
-  
+
+
+  startDate: Date;
+  endDate : Date;
+
   constructor(private http:HttpClient, private backend:BackendService){
-    
+
   }
 
 
@@ -35,8 +34,8 @@ showAct(){
   return this.backend.actLog().subscribe((res:any)=>{
     console.log(res);
     this.item = res
-   
-  });     
+
+  });
 }
 
 }

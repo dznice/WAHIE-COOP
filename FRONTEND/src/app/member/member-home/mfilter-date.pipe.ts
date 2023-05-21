@@ -14,7 +14,7 @@ export class FilterMemHomeDatePipe implements PipeTransform {
       let endDate = new Date(eDate);
       let f = item.filter(
         (item) =>
-          new Date(item.date) >= startDate && new Date(item.date) <= endDate
+          new Date(item.debit.cred.transac.transaction_date) >= startDate && new Date(item.debit.cred.transac.transaction_date) <= endDate
       );
       return f;
     }
