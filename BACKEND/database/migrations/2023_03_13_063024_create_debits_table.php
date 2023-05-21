@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('debits', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('credits_id');
-            $table->double('open_balance');
+            $table->double('open_balance')->nullable();
             $table->double('orig_amount');
             $table->double('payment')->nullable();
             $table->date('pay_date')->nullable();
