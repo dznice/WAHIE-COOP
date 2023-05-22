@@ -108,7 +108,7 @@
                                         </div>
 
                                         <div class="text-wrap">         
-                                            <ng-select  [(ngModel)]="form.department" formControlName="department" id="department"  placeholder="Department">
+                                            <ng-select class="selectDept" [(ngModel)]="form.department" formControlName="department" id="department"  placeholder="Department">
                                                 <ng-option *ngFor="let item of depts" [value]="item.department_name" >
                                                    {{ item.department_name }}
                                                 </ng-option>
