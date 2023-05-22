@@ -22,6 +22,7 @@ class JournalLogsResource extends JsonResource
             'entrylogs' => $this->whenLoaded('entrylogs'),
             'journal_no' => $this->journal_no,
             'journal_date' => $this->journal_date,
+            'due_date' => $this->due_date,
             'credit_amount' => $this->credit_amount,
             'debit_amount' => $this->debit_amount,
             'description' => $this->description,

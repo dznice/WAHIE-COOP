@@ -111,6 +111,7 @@ class JournalEntryController extends Controller
                 $jlogs->journals_id = $value['account'];
                 $jlogs->journal_no = $request->journal_no;
                 $jlogs->journal_date = $request->journal_date;
+                $jlogs-> due_date = $request->due_date;
                 $jlogs->debit_amount = $value['debit'];
                 $jlogs->credit_amount = $value['credit'];
                 $jlogs->description = $value['description'];

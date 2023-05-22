@@ -5,9 +5,13 @@
 
   <div class="header" *ngFor="let e of journalLogs; let i = index">
     <div class="journadate"  *ngIf="i < 1" >
-      <label >Journal Date {{ e.journal_date }} </label>
+      <label >Journal Date {{ e.journal_date | date:'mediumDate' }} </label>
+    </div>
+    <div class="journadate"  *ngIf="i < 1" >
+      <label >Due Date {{ e.due_date | date:'mediumDate' }} </label>
     </div>
   </div>
+
 
   <div class="table-container">
     <table class="table-content">
@@ -20,7 +24,7 @@
         <th>Name</th>
       </thead>
       <tbody >
-        <tr *ngFor="let e of journalLogs; let i = index">
+        <tr *ngFor="let e of journalLogs.reverse(); let i = index">
           <td>{{ i+1 }}</td>
           <td>{{ e.entrylogs.journal_name }}</td>
           <td>{{ e.credit_amount }}</td>
