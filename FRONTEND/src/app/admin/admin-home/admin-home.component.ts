@@ -55,8 +55,11 @@ export class AdminHomeComponent implements OnInit {
       this.http
         .get('http://127.0.0.1:8000/api/transacList/' + data)
         .subscribe((res: any) => {
+          if(data != null){
           console.log(data);
           this.route.navigateByUrl('admin/accounting/journal-transac/' + data);
+          }
         });
     }
+
   }

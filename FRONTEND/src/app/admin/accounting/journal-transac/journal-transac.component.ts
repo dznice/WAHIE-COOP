@@ -28,7 +28,7 @@ export class JournalTransacComponent implements OnInit {
   id:number = 0;
   ngOnInit(): void {
     this.showAccounting();
-    this.showLogs();
+    // this.showLogs();
     this.item = this.ItemService.item;
     this.urlId = this.aRouter.params.subscribe(
       params=>{
@@ -52,13 +52,13 @@ export class JournalTransacComponent implements OnInit {
     });
   }
 
-  showLogs(): void{
-    this.jlogs = this.wahieService.JournalLogs(this.id).subscribe((jlog:any[])=>{
-        this.jlogs = jlog
-        console.log(this.jlogs);
-        console.log(this.id)
-    });
-  }
+  // showLogs(): void{
+  //   this.jlogs = this.wahieService.JournalLogs(this.id).subscribe((jlog:any[])=>{
+  //       this.jlogs = jlog
+  //       console.log(this.jlogs);
+  //       console.log(this.id)
+  //   });
+  // }
 
 
   public fetchJournalLogs(journalNo: number) {

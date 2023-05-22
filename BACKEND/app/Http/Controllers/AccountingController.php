@@ -16,17 +16,35 @@ use App\Http\Resources\PayablesResource;
 use App\Http\Resources\CreditsResource;
 use App\Http\Resources\DebitsResource;
 use Spatie\QueryBuilder\QueryBuilder;
+use Carbon\Carbon;
 
 
 class AccountingController extends Controller
 {
 
-    public function index()
-    {
-        $Dquery = Debits::query()->with(['debt.journ', 'debt.cred.entries', 'debt.cred.transac.member']);
-        $debit = QueryBuilder::for($Dquery);
-            return DebitsResource::collection($debit->get());
+
+public function index()
+{
+    $currentDate = Carbon::now();
+
+    $debitRecords = Debits::with(['debt.journ', 'debt.cred.entries', 'debt.cred.transac.member'])->get();
+
+    foreach ($debitRecords as $debit) {
+        $dueDate = Carbon::parse($debit->debt->due_date);
+
+        if ($dueDate->lt($currentDate)) {
+           if ( $debit->status == 'Paid'){
+
+           }else{
+            $debit->status = 'Overdue';
+            $debit->save();
+           }
+        }
     }
+
+    return DebitsResource::collection($debitRecords);
+}
+
 
     public function journTransac(Request $request)
 {
@@ -74,6 +92,26 @@ class AccountingController extends Controller
     {
         //
     }
+
+    public function DueDate()
+{
+    $records = Credits::all();
+
+    $currentDate = Carbon::now();
+    $results = [];
+
+    foreach ($records as $record) {
+        $databaseDate = Carbon::parse($record->due_date);
+        $isPastCurrentDate = $databaseDate->lt($currentDate);
+
+        $results[] = [
+            'id' => $record->id,
+            'isPastCurrentDate' => $isPastCurrentDate
+        ];
+    }
+
+    return response()->json($results);
+}
 
     public function getAccounts(Request $request)
     {

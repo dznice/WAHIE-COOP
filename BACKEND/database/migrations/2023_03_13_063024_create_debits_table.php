@@ -20,6 +20,8 @@ return new class extends Migration
             $table->double('orig_amount');
             $table->double('payment')->nullable();
             $table->date('pay_date')->nullable();
+            $table->date('due_date')->nullable();
+            $table->float('interest_rate')->nullable();
             $table->string('status');
             $table->string('paymentMethod')->default('');
             $table->string('paymentIdentifier')->default('');

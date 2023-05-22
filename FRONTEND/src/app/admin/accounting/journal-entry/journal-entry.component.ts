@@ -11,8 +11,8 @@ import { NgToastService } from'ng-angular-popup';
   styleUrls: ['./journal-entry.component.scss'],
 })
 export class JournalEntryComponent implements OnInit {
-  
-  useid = localStorage.getItem('userData'); 
+
+  useid = localStorage.getItem('userData');
   journ: any;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,private route:Router, private toast: NgToastService){
@@ -93,6 +93,7 @@ export class JournalEntryComponent implements OnInit {
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control(this.formatDate(new Date())),
     journal_no:this.builder.control('',Validators.required),
+    due_date:this.builder.control(new Date().toISOString().slice(0, -1)),
     entries:this.builder.array([
       this.Generaterow(),
       this.Generaterow(),
@@ -234,7 +235,7 @@ export class JournalEntryComponent implements OnInit {
   }
   activityLog(){
     this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
-        console.log(res)   
+        console.log(res)
     })
   }
 }

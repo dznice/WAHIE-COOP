@@ -15,6 +15,10 @@
         <div class="userid">
           <input class="headinput" type="hidden" formControlName="useid" [value]="this.useid" />
         </div>
+        <div class="duedate">
+          <label> Due Date </label>
+          <input class="headinput" type="date" formControlName="due_date" />
+        </div>
         <div>
           <div>
             <a class="add" (click)="addRow()">

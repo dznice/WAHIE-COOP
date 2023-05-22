@@ -76,6 +76,7 @@ class JournalEntryController extends Controller
 
                 $credits->users_id = $request->userId;
                 $credits-> journals_id = $value['account'];
+                $credits-> due_date = $request->due_date;
                 $credits-> debit_amount = $value['debit'];
                 $credits-> credit_amount = $value['credit'];
                 $credits-> payables_id = $pays;
@@ -112,7 +113,7 @@ class JournalEntryController extends Controller
                 $jlogs->journal_date = $request->journal_date;
                 $jlogs->debit_amount = $value['debit'];
                 $jlogs->credit_amount = $value['credit'];
-                $jlogs->description = $request->description;
+                $jlogs->description = $value['description'];
                 $jlogs->total_credit = $request->totalcredit;
                 $jlogs->total_debit = $request->totalcredit;
                 $jlogs->save();

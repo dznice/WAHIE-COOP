@@ -187,6 +187,7 @@ Route::get('/transaction/{id}', function($id) {
 });
 
 
+
 Route::get('/userrole', [App\Http\Controllers\userController::class, 'userRole']);
 
 Route::get('/account', [App\Http\Controllers\AccountingController::class, 'index']);
@@ -196,6 +197,7 @@ Route::get('/transacList', [App\Http\Controllers\AccountingController::class, 't
 Route::get('/transacList/{id}', [App\Http\Controllers\AccountingController::class, 'transacInfo']);
 Route::get('/journalLogs', [App\Http\Controllers\AccountingController::class, 'journalLogs']);
 Route::get('/journalLog/{id}', [App\Http\Controllers\AccountingController::class, 'journalLogsId']);
+Route::get('/duedate', [App\Http\Controllers\AccountingController::class, 'DueDate']);
 
 Route::get('/total', [App\Http\Controllers\AccountingController::class, 'total']);
 
