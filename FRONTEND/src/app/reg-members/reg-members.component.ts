@@ -18,7 +18,6 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegMembersComponent implements OnInit, OnDestroy {
-
   
   state = 'info1';
   toggle() {
