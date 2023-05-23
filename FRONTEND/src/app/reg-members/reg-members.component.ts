@@ -18,6 +18,8 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegMembersComponent implements OnInit, OnDestroy {
+
+  
   state = 'info1';
   toggle() {
     this.state = this.state == 'info1'?'info2':'info3';
@@ -100,6 +102,18 @@ get frm(){
   return this.registerForm.controls;
 }
 
+maxDate:any;
+
+private formatDate() {
+  const d = new Date();
+  let month = '' + (d.getMonth() + 1);
+  let day = '' + d.getDate();
+  const year = d.getFullYear();
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  this.maxDate = [year, month, day].join('-');
+} 
+
 ngOnInit() {
   this._document.body.classList.add('body');
 
@@ -131,7 +145,9 @@ ngOnInit() {
   }, {
     validator: this.passwordMatch('pass', 'cpass')
   })
-}
+  
+  this.formatDate();
+} 
 
 
 onSubmit(){

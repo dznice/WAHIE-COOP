@@ -97,7 +97,7 @@ export class AddPaymentComponent implements OnInit {
           member:this.builder.control({value: account[0].debit.cred.transac.member.first_name
             +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
           email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
-          paymentDate:this.builder.control(this.formatDate(new Date())),
+          paymentDate:this.builder.control(this.formatDate()),
           paymentMethod:this.builder.control('',Validators.required),
           referenceNo:this.builder.control('',Validators.required),
           memberId:this.builder.control(this.id),
@@ -196,8 +196,15 @@ clearValue(index: any) {
     });
   }
 
-  private formatDate(date:any) {
-    const d = new Date(date);
+  denyDate(){
+    let payment_date = this.paymentForm.get("paymentDate")?.value;
+    if(payment_date>this.maxDate){
+      this.paymentForm.get("paymentDate")?.setValue(this.maxDate);
+    }
+  }
+
+  private formatDate() {
+    const d = new Date();
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
     const year = d.getFullYear();

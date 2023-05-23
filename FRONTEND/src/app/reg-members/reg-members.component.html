@@ -92,8 +92,8 @@
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                                 <option value="pref">Others</option>
-                                            </select>
-                                            <input class="dateOfBirth" type="text" name="birthdate" formControlName="birthdate" id="birthdate"
+                                            </select> 
+                                            <input class="dateOfBirth" type="text"  max="{{maxDate}}" name="birthdate" formControlName="birthdate" id="birthdate"
                                             [(ngModel)]="form.birthdate" placeholder="Date of Birth" onfocus="this.type='date'" onblur="this.type='text'"><br>
                                         </div> 
 

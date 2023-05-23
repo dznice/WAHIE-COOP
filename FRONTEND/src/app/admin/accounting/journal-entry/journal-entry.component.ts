@@ -91,12 +91,10 @@ export class JournalEntryComponent implements OnInit {
   }
 
   journalEntryForm=this.builder.group({
-    journal_date:this.builder.control(this.formatDate(new Date())),
+    journal_date:this.builder.control(this.formatDate()),
     journal_no:this.builder.control('',Validators.required),
     due_date:this.builder.control(new Date().toISOString().slice(0, -1)),
     entries:this.builder.array([
-      this.Generaterow(),
-      this.Generaterow(),
       this.Generaterow(),
       this.Generaterow()]),
     userId:this.builder.control(this.useid),
@@ -109,7 +107,9 @@ export class JournalEntryComponent implements OnInit {
     this.journalEntryForm.controls.journal_no.setValue( this.journId )
     let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     let total_credit = this.journalEntryForm.get("totalcredit")?.value;
-    if(this.journalEntryForm.valid && total_debit == total_credit){
+    let journaldate = this.journalEntryForm.get("journal_date")?.value;
+    console.log(journaldate > this.maxDate);
+    if(this.journalEntryForm.valid && total_debit == total_credit && journaldate <= this.maxDate ){
       this.wahieService.saveJournalEntry(this.journalEntryForm.getRawValue()).subscribe(res=>{
         let result:any;
         result=res;
@@ -186,6 +186,13 @@ export class JournalEntryComponent implements OnInit {
     this.balance_summary();
   }
 
+  denyDate(){
+    let journaldate = this.journalEntryForm.get("journal_date")?.value;
+    if(journaldate>this.maxDate){
+      this.journalEntryForm.get("journal_date")?.setValue(this.maxDate);
+    }
+  }
+
   balance_summary(){
     let array=this.journalEntryForm.getRawValue().entries;
     let total_debit = 0;
@@ -200,8 +207,8 @@ export class JournalEntryComponent implements OnInit {
 
   }
 
-  private formatDate(date:any) {
-    const d = new Date(date);
+  private formatDate() {
+    const d = new Date();
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
     const year = d.getFullYear();
@@ -209,7 +216,7 @@ export class JournalEntryComponent implements OnInit {
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-')
     return this.maxDate;
-  }
+  } 
 
 
   add(journal_number:string,journal_name:string, journal_type:string){

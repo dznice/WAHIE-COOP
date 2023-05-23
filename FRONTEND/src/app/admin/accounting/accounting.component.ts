@@ -170,12 +170,10 @@ export class AccountingComponent implements OnInit {
         res.forEach((x:any)=>{
           if(data==x.debit.cred.transac.member.id){
             this.route.navigateByUrl('admin/accounting/add-payment/' + data);
-          }
-          else{
-            this.toast.error({detail:'Failed',summary:'No Transactions Yet',duration:2000, sticky:false,position:'tr'});
+          }else{
+            //this.toast.error({detail:'Failed',summary:'No Transactions Yet',duration:2000, sticky:false,position:'tr'});
           }
         });
-        
       });
   }
 }
