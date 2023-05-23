@@ -198,6 +198,9 @@ Route::get('/transacList/{id}', [App\Http\Controllers\AccountingController::clas
 Route::get('/journalLogs', [App\Http\Controllers\AccountingController::class, 'journalLogs']);
 Route::get('/journalLog/{id}', [App\Http\Controllers\AccountingController::class, 'journalLogsId']);
 Route::get('/duedate', [App\Http\Controllers\AccountingController::class, 'DueDate']);
+Route::get('/totalPaid', [App\Http\Controllers\AccountingController::class, 'totalPaid']);
+Route::get('/totalOpen', [App\Http\Controllers\AccountingController::class, 'totalOpen']);
+Route::get('/totalOverdue', [App\Http\Controllers\AccountingController::class, 'totalOverdue']);
 
 Route::get('/total', [App\Http\Controllers\AccountingController::class, 'total']);
 

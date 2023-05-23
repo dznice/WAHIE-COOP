@@ -136,12 +136,18 @@ export class AccountingComponent implements OnInit {
   last_name: string = '';
   email: string = '';
   status: number = 0;
+  paidmem: any;
+  opentransac: any;
+  overdue: any;
 
   constructor(private http: HttpClient, private route: Router, private toast: NgToastService) {
     this.showMembers();
   }
 
   ngOnInit(): void {
+    this.PaidMember();
+    this.OpenTransaction();
+    this.OverduePay();
 
 
   }
@@ -174,6 +180,37 @@ export class AccountingComponent implements OnInit {
             //this.toast.error({detail:'Failed',summary:'No Transactions Yet',duration:2000, sticky:false,position:'tr'});
           }
         });
+
+      });
+  }
+
+  PaidMember() {
+    this.http
+      .get('http://127.0.0.1:8000/api/totalPaid')
+      .subscribe((res: any) => {
+        this.Loaded = true;
+        console.log(res);
+        this.paidmem = res;
+      });
+  }
+
+  OpenTransaction() {
+    this.http
+      .get('http://127.0.0.1:8000/api/totalOpen')
+      .subscribe((res: any) => {
+        this.Loaded = true;
+        console.log(res);
+        this.opentransac = res;
+      });
+  }
+
+  OverduePay() {
+    this.http
+      .get('http://127.0.0.1:8000/api/totalOverdue')
+      .subscribe((res: any) => {
+        this.Loaded = true;
+        console.log(res);
+        this.overdue = res;
       });
   }
 }
