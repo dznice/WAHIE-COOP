@@ -18,6 +18,7 @@ import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-additional-info',
@@ -83,7 +84,7 @@ onOptionChange() {
   submitted: boolean = false;
 
   constructor( @Inject(DOCUMENT) private _document: any, private http: HttpClient,
-  private token: TokenService, private route: Router, private auth:AuthGuardService) {
+  private token: TokenService, private route: Router, private auth:AuthGuardService, private toast:NgToastService) {
     this.getmemberId();
 
 
@@ -155,6 +156,7 @@ onOptionChange() {
         this.memberId = res;
 
     });
+    
   }
 
   id = localStorage.getItem('userData');
@@ -165,16 +167,19 @@ onOptionChange() {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
+      
     },
     {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
+      
     },
     {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
+     
     },
   ];
 
@@ -183,6 +188,7 @@ onOptionChange() {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
+      required:true,
     };
     this.row.push(obj);
   }
@@ -223,6 +229,12 @@ onOptionChange() {
   }
 
   memberInfo() {
+    // if(this.row == null){
+    //   this.toast.warning({detail:'Input required please',summary:'Please Check',duration:2000, sticky:false,position:'tr'});
+      
+
+    // }
+    // else{
     this.updateMemberform.selectedBarangayDescription = this.barangay.find((brgy: { barangay_code: null; }) => brgy.barangay_code === this.updateMemberform.selectedBarangay)?.barangay_description;
 
     console.log(this.row);
@@ -233,8 +245,15 @@ onOptionChange() {
         console.log(res);
         this.token.handle(sessionStorage.getItem('ftoken'));
         this.route.navigateByUrl('member/member-home');
-      });
-  }
+      },
+      error => {
+        this.toast.warning({detail:'Input required',summary:'Please Check',duration:2000, sticky:false,position:'tr'});
+      }
+      );
+    }
+      
+      
+  
   logout(event:MouseEvent){
     event.preventDefault();
     this.auth.changeStatus(false);

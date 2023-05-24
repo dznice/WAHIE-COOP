@@ -66,6 +66,7 @@ import { FilterMemberPipe } from './admin/accounting/filter-member.pipe';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader';
+import { ExportAsModule } from 'ngx-export-as';
 
 @NgModule({
   declarations: [
@@ -136,7 +137,8 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader
     NgToastModule,
     NgSelectModule,
     NgxUiLoaderModule,
-    NgxUiLoaderHttpModule.forRoot({ showForeground: true })
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
+    ExportAsModule
   ],
   providers: [AuthGuardService, BnNgIdleService],
   bootstrap: [AppComponent]

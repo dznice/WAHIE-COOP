@@ -281,9 +281,7 @@ class AuthController extends Controller {
                     $request->selectedCityDescription .' ' . $request->selectedProvinceDescription .' ' . $request->selectedRegionDescription .' ' . $request->postal_code;
                     $members->save();
 
-                    $user = User::where('email', '=', $email)->first();
-                    $user->fillInfo = 0;
-                    $user->save();
+                   
                     
 
                     $bene = $request->input();
@@ -296,7 +294,9 @@ class AuthController extends Controller {
                             'benificiary_relation' =>  $value['benificiary_relation'],
                             ]);
                      }
-                     
+                     $user = User::where('email', '=', $email)->first();
+                     $user->fillInfo = 0;
+                     $user->save();
                 return response()->json($members);
 
             }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('members_id');
             $table->integer('journal_no');
             $table->date('journal_date');
+            $table->date('due_date')->nullable();
             $table->double('credit_amount');
             $table->double('debit_amount');
             $table->string('description')->nullable();

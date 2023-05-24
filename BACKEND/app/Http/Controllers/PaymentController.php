@@ -76,9 +76,9 @@ class PaymentController extends Controller
                     $debits->credits_id = $value['creditId'];
                     $debits->orig_amount = $value['origAmount'];
                     $debits->open_balance = $value['openBalance'] - $value['payment'];
-                    $debits->pay_date = $request->paymentDate;
                     $debits->paymentMethod = $request->paymentMethod;
-
+                    $debits->pay_date = $request->paymentDate;
+                    $debits->due_date =  $value['dueDate'];
                     $balanse = $value['openBalance'] - $value['payment'];
 
                     if ( $balanse == 0)
@@ -93,6 +93,7 @@ class PaymentController extends Controller
                     $debiti->paymentIdentifier = "Closed";
                     $debiti->status = "Closed";
                     $debiti->payment = $value['payment'];
+                    $debiti->pay_date = $request->paymentDate;
                     $debiti->open_balance = null;
                     $debiti->credits_id = $creds;
                     $debiti->save();

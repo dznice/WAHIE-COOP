@@ -158,7 +158,7 @@
             *ngFor="let trial of payablesRow.controls; let i = index" [formGroupName]="i"
             >
               <tr>
-                <td><input type="checkbox" value="" /></td>
+                <td>{{ i + 1 }}</td>
                 <!-- <td>{{ account.debit.cred.entries.entry_name }}</td>
                 <td>{{ account.debit.cred.due_date }}</td>
                 <td>{{ account.orig_amount }}</td> -->
@@ -166,7 +166,7 @@
 
                 <!-- <td>{{ account.open_balance }}</td> -->
                 <td class="tablePayment"><input type="text" formControlName="description"/></td>
-                <td class="tablePayment"><input type="text" formControlName="dueDate"/></td>
+                <td class="tablePayment"><input type="text" formControlName="dueDate" /></td>
                 <td class="tablePayment"><input type="text" formControlName="origAmount"/></td>
                 <td class="tablePayment"><input type="text" formControlName="openBalance"/></td>
                 <td class="tablePayment"><input type="number" formControlName="payment" (change)=" autoAmount(i)"/></td>

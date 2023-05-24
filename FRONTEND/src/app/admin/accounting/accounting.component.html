@@ -13,25 +13,25 @@
   </div>
 
   <section class="payables">
-    <div class="unpaid-container">
+    <div class="unpaid-container"  >
       <label>Unpaid Last 365 Days</label>
-      <div class="card-merge">
-        <div class="card overdue">
-          <h3 class="card-amount">PHP0</h3>
-          <span class="card-subtext">0 OVERDUE</span>
+      <div class="card-merge" >
+        <div class="card overdue" >
+          <h3 class="card-amount">PHP {{ overdue.total_overdue }}</h3>
+          <span class="card-subtext" >{{ overdue.overdue_count }} OVERDUE</span>
         </div>
-        <div class="card open-inv">
-          <h3 class="card-amount">PHP0</h3>
-          <span class="card-subtext">5 OPEN INVOICES</span>
+        <div class="card open-inv"  >
+          <h3 class="card-amount">PHP {{ opentransac.total_open_balance }} </h3>
+          <span class="card-subtext" >{{ opentransac.open_balance_count }} OPEN TRANSACTIONS</span>
         </div>
       </div>
     </div>
 
-    <div class="paid-container">
+    <div class="paid-container" >
       <label>Paid</label>
       <div class="card paid">
-        <h3 class="card-amount">PHP0</h3>
-        <span class="card-subtext">7 PAID LAST 30 DAYS</span>
+        <h3 class="card-amount">PHP {{paidmem.total_payment}}</h3>
+        <span class="card-subtext">{{paidmem.paid_count}} PAID LAST 30 DAYS</span>
       </div>
     </div>
   </section>
@@ -47,14 +47,14 @@
         <thead>
           <th>MEMBERS</th>
           <th>EMAIL ADDRESS</th>
-          <!-- <th>OPEN BALANCE</th> -->
+          <th>OPEN BALANCE</th>
           <th>ACTION</th>
         </thead>
         <tbody>
           <tr *ngFor="let member of memberList | filter: term | paginate : { itemsPerPage: 5, currentPage: p }" >
-           <td (click) = 'memberInfo( member.id )'>#{{member.id}} {{member.first_name}}</td>
+           <td (click) = 'memberInfo( member.id )'>{{member.id}} {{member.first_name}}</td>
            <td (click) = 'memberInfo( member.id )'>{{member.email}}</td>
-           <!-- <td (click) = 'memberInfo( member.id )'>{{member.id}}</td> -->
+           <td></td>
            <td class="action-td" (click) = 'memberAccounting( member.id )'><a>Receive payment</a></td>
           </tr>
         </tbody>

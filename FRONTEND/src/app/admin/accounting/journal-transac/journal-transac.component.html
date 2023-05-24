@@ -1,27 +1,33 @@
-<main>
+<main >
+  <button (click)="exportPDF()">clickx</button>
+  <button (click)="exportEXCEL()">clicky</button>
   <div class="head" *ngFor="let e of journalLogs; let i = index">
-    <h1 class="title" *ngIf="i < 1" > Journal Number{{ e.journal_no }}</h1>
+    <h1 class="title" *ngIf="i < 1" >Journal Number No. {{ e.journal_no }}</h1>
   </div>
 
   <div class="header" *ngFor="let e of journalLogs; let i = index">
     <div class="journadate"  *ngIf="i < 1" >
-      <label >Journal Date {{ e.journal_date | date:'mediumDate' }} </label>
+      <label>Journal Date</label>
+      <input class="headinput" type="text" disabled value="{{ e.journal_date | date:'mediumDate' }}"/>
     </div>
     <div class="journadate"  *ngIf="i < 1" >
-      <label >Due Date {{ e.due_date | date:'mediumDate' }} </label>
+      <label>Due Date</label>
+      <input class="headinput" type="text" disabled value="{{ e.due_date | date:'mediumDate' }}"/>
     </div>
   </div>
 
 
   <div class="table-container">
-    <table class="table-content">
+    <table class="table-content" id="trialFile">
       <thead>
+        <tr>
         <th>No.</th>
         <th>Account</th>
         <th>Debit</th>
         <th>Credit</th>
         <th>Description</th>
         <th>Name</th>
+        </tr>
       </thead>
       <tbody >
         <tr *ngFor="let e of journalLogs.reverse(); let i = index">
@@ -32,6 +38,14 @@
           <td>{{ e.description }}</td>
           <td>{{ e.memberlogs.first_name }} {{ e.memberlogs.last_name }}</td>
         </tr>
+        <tr>
+          <td></td>
+          <td style="text-align:right;">TOTAL</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -39,11 +53,11 @@
   <div class="totals" *ngFor="let e of journalLogs; let i = index">
     <div class="journdate" *ngIf="i < 1" >
       <label> Total Debit </label>
-      <input class="headinput" type="disable" disabled value="{{ e.total_debit }}"/>
+      <input class="headinput" type="text" disabled value="{{ e.total_debit }}"/>
     </div>
     <div class="journdate" *ngIf="i < 1">
       <label> Total Credit </label>
-      <input class="headinput" type="number"  value="{{ e.total_credit }}"/>
+      <input class="headinput" type="text" disabled value="{{ e.total_credit }}"/>
     </div>
   </div>
 </main>

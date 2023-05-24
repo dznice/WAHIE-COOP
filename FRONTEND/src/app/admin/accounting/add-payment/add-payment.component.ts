@@ -31,9 +31,9 @@ export class AddPaymentComponent implements OnInit {
   amount !: FormGroup<any>;
   maxDate: any;
   paymentMethods: any = [
-    {value: '1', viewValue: 'Cash'},  
+    {value: '1', viewValue: 'Cash'},
     {value: '2', viewValue: 'Check'},
-    {value: '3', viewValue: 'Credit Card'},  
+    {value: '3', viewValue: 'Credit Card'},
     {value: '4', viewValue: 'Direct Debit'}
   ]
   selectedMethod: any;
@@ -115,11 +115,12 @@ export class AddPaymentComponent implements OnInit {
 
 
   private generateFormGroup(trial:any) {
+
     return this.builder.group({
       debitId: this.builder.control({ value: trial.id , disabled: true }),
       creditId: this.builder.control({ value: trial.credits_id , disabled: true }),
       description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
-      dueDate: this.builder.control({ value: null, disabled: true }),
+      dueDate: this.builder.control({ value:  trial.debit.due_date, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
       openBalance: this.builder.control({ value: trial.open_balance , disabled: true }),
       payment: this.builder.control({value: 0, disabled: false} ,Validators.required)

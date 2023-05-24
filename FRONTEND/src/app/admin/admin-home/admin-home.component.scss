@@ -19,7 +19,7 @@ main {
     background: var(--panel-color);
     border-radius: 0.625rem;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
     align-items: center;
     grid-gap: 24px;
     box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.05);
@@ -32,7 +32,6 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 10px;
       border-radius: 12px;
       padding: 1rem;
       color: var(--secondary-color);
@@ -40,8 +39,8 @@ main {
     }
 
     .text {
-      margin-left: 8px;
-
+      margin-top: .5rem;
+      margin-left: -.5rem;
       h2 {
         font-size: 35px;
         font-weight: 600;
@@ -71,7 +70,6 @@ main {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 0.7rem;
 
     .filter-field1 {
       display: flex;

@@ -78,6 +78,54 @@ public function index()
         return response()->json($totals);
     }
 
+
+    public function totalPaid()
+    {
+    $thirtyDaysAgo = Carbon::now()->subDays(30);
+
+    $totals = DB::table('debits')
+        ->where('status', 'Paid')
+        ->where('pay_date', '>=', $thirtyDaysAgo)
+        ->groupBy('status')
+        ->select('status', DB::raw('SUM(orig_amount) as total_payment'), DB::raw('COUNT(*) as paid_count'))
+        ->first();
+
+    return response()->json($totals);
+    }
+
+    public function totalOverdue()
+{
+    $currentDay = Carbon::now();
+
+    $totals = DB::table('debits')
+        ->where(function ($query) use ($currentDay) {
+            $query->where('status', 'Overdue')
+                  ->orWhere(function ($query) use ($currentDay) {
+                      $query->where('status', 'Pending')
+                            ->where('due_date', '<=', $currentDay);
+                  });
+        })
+        ->select(DB::raw("'Total' as category"), DB::raw('SUM(open_balance) as total_overdue'), DB::raw('COUNT(*) as overdue_count'))
+        ->first();
+
+    return response()->json($totals);
+}
+
+
+
+
+    public function totalOpen()
+    {
+    $totals = DB::table('debits')
+        ->groupBy('status')
+        ->select('status', DB::raw('SUM(open_balance) as total_open_balance'), DB::raw('COUNT(*) as open_balance_count'))
+        ->where('status', 'Pending')
+        ->first();
+
+    return response()->json($totals);
+    }
+
+
     public function totaljour()
     {
         $totals = LibJournal::join('credits', 'lib_journals.id', '=', 'credits.journals_id')
@@ -142,12 +190,22 @@ public function index()
             return response()->json($transac);
              }
 
-    public function journalLogs(){
+    public function journalLogs(Request $request){
         $LogsQuery = JournalLogs::query()->with(['memberlogs', 'entrylogs']);
 
-        if($request->journal_no){
-            $LogsQuery->whereHAs('', function($query) use($request){
-                $query->where('journal_no', $request->journal_no);
+        // if($request->journal_no){
+        //     $LogsQuery->whereHAs('', function($query) use($request){
+        //         $query->where('journal_no', $request->journal_no);
+        //     });
+        // }
+        if($request->account){
+            $LogsQuery->whereHAs('entrylogs', function($query) use($request){
+                $query->where('journals_id', $request->account);
+            });
+        }
+        if($request->member){
+            $LogsQuery->whereHAs('memberlogs', function($query) use($request){
+                $query->where('members_id', $request->member);
             });
         }
         $logs = QueryBuilder::for($LogsQuery);

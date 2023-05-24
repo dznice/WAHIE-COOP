@@ -4,13 +4,11 @@ main {
 }
 
 .head {
-    height: 50px;
   .title {
     color: var(--primary-color);
-    margin-bottom: 10px;
   }
 }
-.header,
+
 .totals {
   width: 100%;
   display: flex;
@@ -18,11 +16,41 @@ main {
     margin-right: 200px;
   }
 }
-label {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--primary-color);
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+
+  .journadate {
+    display: flex;
+    width: calc(38% / 2 - 4px);
+    flex-direction: column;
+    margin: 8px 0 0;
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-grey);
+      margin: 0 4px;
+    }
+
+    input {
+      outline: none;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      border-radius: 0.45rem;
+      border: 1px solid #aaa;
+      padding: 0 10px;
+      height: 36px;
+      margin: 8px 8px 0 0;
+    }
+  }
 }
+
 
 .headinput {
   outline: none;
@@ -40,7 +68,7 @@ label {
   width: 100%;
   .table-content {
     width: 100%;
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: 0.9rem;
     overflow: hidden;
     border-collapse: collapse;
@@ -76,7 +104,6 @@ label {
       tr:hover {
         td {
           color: var(--primary-color);
-          background-color: var(--grey);
         }
       }
     }
