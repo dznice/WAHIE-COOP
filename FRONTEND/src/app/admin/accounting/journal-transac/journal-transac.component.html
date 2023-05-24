@@ -1,5 +1,6 @@
 <main id="trialFile">
-
+  <button (click)="exportPDF()">clickx</button>
+  <button (click)="exportEXCEL()">clicky</button>
   <div class="head" *ngFor="let e of journalLogs; let i = index">
     <h1 class="title" *ngIf="i < 1" >Journal Number No. {{ e.journal_no }}</h1>
   </div>
@@ -26,15 +27,16 @@
   </div>
 
   <div class="table-container">
-
     <table class="table-content">
       <thead>
+        <tr>
         <th>No.</th>
         <th>Account</th>
         <th>Debit</th>
         <th>Credit</th>
         <th>Description</th>
         <th>Name</th>
+        </tr>
       </thead>
 
       <tbody >

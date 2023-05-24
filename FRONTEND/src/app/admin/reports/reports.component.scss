@@ -1,0 +1,47 @@
+.grid-container {
+    display: grid;
+    grid-template-areas: "h1 h1 h1";
+    background-color:#F6F6F6;
+    padding: 10px;
+    border-radius: 15px;
+    
+  }
+
+  
+  .grid-item {
+    background-color:#FFFFFF;
+    border: 1px solid #E9E9E9;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+    border-radius: 15px;
+    margin-left: 50px;
+    width: 550px;
+   
+  }
+
+h1{
+  grid-area: h1;
+ min-height: 20;
+ border-bottom: 1px solid #707070;
+ font-size: 50px;
+ padding: 20px;
+ text-align: center;
+ color: #3f0f88;
+ 
+  
+  }
+
+  h2{
+    
+  border-bottom: 1px solid #707070;
+  padding: 12px;
+  font-size:30px;
+  color: #3f0f88;
+  }
+  .grid-item p {
+    padding: 20px;
+  line-height: 1;
+font-size: 20px;
+  }
