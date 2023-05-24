@@ -151,6 +151,7 @@ width: 310px;
   bottom: -48%;
   cursor: pointer;
   font-size: 1.3rem;
+  color: var(--dark-grey-2);
 }
 
 .eye2 {
@@ -159,6 +160,7 @@ width: 310px;
   bottom: -48%;
   cursor: pointer;
   font-size: 1.3rem;
+  color: var(--dark-grey-2);
 }
 
 .save {
@@ -180,18 +182,14 @@ width: 310px;
   background-color: var(--primary-alt);
 }
 
-.save:hover {
-  background-color: var(--primary-alt);
-}
-
 .logout{
   text-align: center;
   display: inline-block;
   width: 100%;
   height: 43px;
-  background-color: var(--dark-grey-2);
-  color: #fff;
-  border: none;
+  background-color: transparent;
+  border: 2px solid var(--overdue-font);
+  color: var(--overdue-font);
   border-radius: 0.6rem;
   font-size: 1rem;
   margin-bottom: .5rem;
@@ -199,7 +197,8 @@ width: 310px;
 }
 
 .logout:hover{
-  background-color: var(--dark-grey-3);
+  background-color: var(--overdue-font);
+  color: var(--panel-color);
 }
 
 .account {

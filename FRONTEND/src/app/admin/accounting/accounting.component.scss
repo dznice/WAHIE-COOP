@@ -60,17 +60,16 @@ main {
       grid-template-columns: 1fr 1fr;
       grid-gap: .2rem;
       margin-top: .5rem;
-      
   
       .overdue {
         border-radius: 0.645rem;
-        background: #ff8000;
+        background: var(--overdue-font);
         width: 350px;
       }
 
       .open-inv {
         border-radius: 0.645rem;
-        background: #0077c5;
+        background: var(--blue);
         width: 350px;
       }
 
@@ -86,7 +85,7 @@ main {
       margin-top: .5rem;
       border-radius: 0.645rem;
       background: var(--green);
-      width: 670px;
+      width: 400px;
     }
 
     .card-amount {

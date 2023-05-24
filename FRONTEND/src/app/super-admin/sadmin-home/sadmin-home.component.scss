@@ -36,6 +36,10 @@ main {
         margin-right: 5px;
         font-size: 14px;
       }
+
+      .btn-add:hover {
+        background: var(--primary-alt);
+      }
     }
   }
 }

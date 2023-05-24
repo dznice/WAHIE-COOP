@@ -137,6 +137,7 @@ form {
     bottom: -35%;
     cursor: pointer;
     font-size: 1.3rem;
+    color: var(--dark-grey-2);
   }
 
   small{
@@ -157,6 +158,7 @@ form {
     bottom: -35%;
     cursor: pointer;
     font-size: 1.3rem;
+    color: var(--dark-grey-2);
   }
 
 
@@ -266,7 +268,7 @@ input[type="number"]::-webkit-outer-spin-button{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: .8rem;   
+    font-size: 0.9rem;   
     margin-top: .8rem;
     width: 100%;
 }

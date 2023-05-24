@@ -80,7 +80,7 @@ export class SadminHomeComponent {
     console.log(this.form)
     return this.backend.adminadd(this.form).subscribe((res:any)=>{
       this.show(2)
-      this.toast.success({detail:'added',summary:'account added', sticky:false,position:'false'});  
+      this.toast.success({detail:'Successful',summary:'Admin account created', sticky:false,position:'false'});  
     });
   }
 

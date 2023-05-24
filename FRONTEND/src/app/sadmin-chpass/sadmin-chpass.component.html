@@ -19,9 +19,9 @@
                     <div class="txt-field">
                         
                         <div class="txt-wrap">
-                            <label class="enter_pass" for="pass"> Enter Password</label>
+                            <label class="enter_pass" for="pass">Password</label>
                             <input type="hidden" name="id" id="id" value='{{ id }}'>
-                            <input [type]="changetype?'password':'text'" class="input-field" id="sadmin-pass" name="password" placeholder="Input password" formControlName="password"
+                            <input [type]="changetype?'password':'text'" class="input-field" id="sadmin-pass" name="password" placeholder="Enter your new password" formControlName="password"
                             [(ngModel)]="chform.password">
                             <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                         </div>
@@ -30,7 +30,7 @@
                         </div>
                             
                         <div class="txt-wrap">
-                            <label for="pass2"> Confirm Password</label>
+                            <label for="pass2">Confirm Password</label>
                             <input [type]="cchangetype?'password':'text'" class="input-field" id="sadmin-confirm-pass" name="confirm_pass" placeholder="Confirm your new password"  formControlName="confirm_pass"
                             [(ngModel)]="chform.confirm_pass">
                             <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
@@ -39,7 +39,7 @@
                             <small>Password not match</small>
                         </div>
 
-                        <button type="submit" class="save">Save new password</button> 
+                        <button type="submit" class="save">Save password</button> 
                         <button [routerLink]="['/login']" type="submit" class="logout">Logout</button>
                     </div>
                 </form> 

@@ -142,10 +142,11 @@ form {
 .eye {
   content: "\ea9a";
   position: absolute;
-  left: 87%;
+  left: 88%;
   bottom: -30%;
   cursor: pointer;
   font-size: 1.3rem;
+  color: var(--dark-grey-2);
 }
 
 .forgot-pass {
