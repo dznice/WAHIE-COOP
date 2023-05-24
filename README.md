@@ -14,6 +14,9 @@ npm i ng-angular-popup --legacy-peer-deps
 npm i bn-ng-idle --legacy-peer-deps
 npm i ngx-ui-loader --legacy-peer-deps
 
+//npm i exceljs --legacy-peer-deps//
+npm i ngx-export-as --legacy-peer-deps
+
 
 To serve backend run the following commands:
 

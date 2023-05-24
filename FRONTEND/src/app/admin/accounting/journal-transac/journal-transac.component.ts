@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { NgToastService } from'ng-angular-popup';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 @Component({
   selector: 'app-journal-transac',
@@ -23,7 +24,49 @@ export class JournalTransacComponent implements OnInit {
 
   public journalLogs: any;
 
-  constructor(private ItemService: itemService, private wahieService:WahieService, private http:HttpClient, private aRouter: ActivatedRoute, private route:Router, private toast: NgToastService) {}
+  exportAsPdf: ExportAsConfig = {
+    type: 'pdf',
+    elementIdOrContent: 'trialFile',
+    options: {
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 3},
+      margin:  [1, 1, 1, 1],
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+      jsPDF: {
+        orientation: 'landscape',
+        format: 'a4',
+        precision: 16
+      }
+    }
+  }
+
+  exportAsExcel: ExportAsConfig = {
+    type: 'xlsx',
+    elementIdOrContent: 'trialFile'
+  }
+
+  exportPDF() {
+    this.exportAsService.save(this.exportAsPdf, 'Reports').subscribe(() => {
+      // save started
+    });
+  }
+
+  exportEXCEL() {
+    this.exportAsService.save(this.exportAsExcel, 'Reports').subscribe(() => {
+      // save started
+    });
+  }
+
+  constructor(
+    private ItemService: itemService, 
+    private wahieService:WahieService, 
+    private http:HttpClient, 
+    private aRouter: ActivatedRoute, 
+    private route:Router, 
+    private toast: NgToastService,
+    private exportAsService: ExportAsService) {}
+
+  
 
   id:number = 0;
   ngOnInit(): void {
