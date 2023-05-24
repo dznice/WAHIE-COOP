@@ -49,7 +49,36 @@ main {
       margin: 8px 8px 0 0;
     }
   }
+  .export {
+    margin-left: auto;
+margin-right: 0;
+    display: flex;
+    width: calc(38% / 4 - 6px);
+    flex-direction: column;
+    margin: 8px 0 0;
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-grey);
+      margin: 0 4px;
+    }
+  }
+  .export-icon {
+    margin-left: auto;
+    margin-right: 0;
+    margin: 8px 8px 0 0;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--secondary-color);
+    background: var(--secondary-alt);
+  }
 }
+
 
 
 .headinput {

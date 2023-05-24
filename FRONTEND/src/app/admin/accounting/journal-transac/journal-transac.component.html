@@ -1,9 +1,9 @@
 <main id="trialFile">
-  <button (click)="exportPDF()">clickx</button>
-  <button (click)="exportEXCEL()">clicky</button>
+
   <div class="head" *ngFor="let e of journalLogs; let i = index">
     <h1 class="title" *ngIf="i < 1" >Journal Number No. {{ e.journal_no }}</h1>
   </div>
+
 
   <div class="header" *ngFor="let e of journalLogs; let i = index">
     <div class="journadate"  *ngIf="i < 1" >
@@ -14,10 +14,19 @@
       <label>Due Date</label>
       <input class="headinput" type="text" disabled value="{{ e.due_date | date:'mediumDate' }}"/>
     </div>
+
+      <div class="export" *ngIf="i < 1">
+      <label> Export PDF</label>
+      <button (click)="exportPDF()" class="ti ti-file-text export-icon" ></button>
+    </div>
+    <div  class="export" *ngIf="i < 1">
+      <label> Export Excel</label>
+      <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet export-icon"></button>
+    </div>
   </div>
 
-
   <div class="table-container">
+
     <table class="table-content">
       <thead>
         <th>No.</th>
@@ -27,6 +36,7 @@
         <th>Description</th>
         <th>Name</th>
       </thead>
+
       <tbody >
         <tr *ngFor="let e of journalLogs.reverse(); let i = index">
           <td>{{ i+1 }}</td>
@@ -36,26 +46,16 @@
           <td>{{ e.description }}</td>
           <td>{{ e.memberlogs.first_name }} {{ e.memberlogs.last_name }}</td>
         </tr>
-        <tr>
-          <td></td>
-          <td style="text-align:right;">TOTAL</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let e of journalLogs.reverse(); let i = index">
+          <td *ngIf="i < 1 "></td>
+          <td *ngIf="i < 1 " style="text-align:right;">TOTAL</td>
+          <td *ngIf="i < 1 ">{{ e.total_debit }}</td>
+          <td *ngIf="i < 1 ">{{ e.total_credit }}</td>
+          <td *ngIf="i < 1 "></td>
+          <td *ngIf="i < 1 "></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div class="totals" *ngFor="let e of journalLogs; let i = index">
-    <div class="journdate" *ngIf="i < 1" >
-      <label> Total Debit </label>
-      <input class="headinput" type="text" disabled value="{{ e.total_debit }}"/>
-    </div>
-    <div class="journdate" *ngIf="i < 1">
-      <label> Total Credit </label>
-      <input class="headinput" type="text" disabled value="{{ e.total_credit }}"/>
-    </div>
-  </div>
 </main>

@@ -1,11 +1,11 @@
 <main>
 
-  <div class="top-content">
-    <div class="mem-header">
+  <div class="top-content"  *ngFor="let info of item">
+    <div class="mem-header" *ngIf="id == info.id">
       <div class="mem-name">
-        <h1>John Concepcion</h1>
+        <h1> {{ info.first_name }} {{ info.last_name }}</h1>
       </div>
-      <div class="mem-transac">
+      <div class="mem-transac" >
         <button class="btn-add">
           <i class="ti ti-plus"></i>
           New transaction
@@ -13,11 +13,11 @@
       </div>
     </div>
 
-    <div class="info-content">
+    <div class="info-content" *ngIf="id == info.id">
       <div class="mem-contact">
-        <div class="mem-info company">Wireless Access for Health, Inc.</div>
-        <div class="mem-info email">john.cpn@gmail.com</div>
-        <div class="mem-info contact">09941578217</div>
+        <div class="mem-info company">{{ info.company_name }}</div>
+        <div class="mem-info email">{{ info.email }}</div>
+        <div class="mem-info contact">(+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-", info.mobile_number.slice(6)].join('') }}</div>
       </div>
       <div class="mem-payables">
         <div class="open-bal">
@@ -74,6 +74,14 @@
               name="eDate"
             />
           </div>
+          <!-- Status -->
+          <div class="filter-field">
+            <label>Status</label>
+            <select [(ngModel)]="stat" name="status">
+              <option [ngValue]="undefined" selected>All</option>
+              <option *ngFor="let stat of stats" [value]="stat">{{ stat }}</option>
+            </select>
+          </div>
         </div>
 
         <table class="table-content">
@@ -86,7 +94,7 @@
             <th>Payment</th>
             <th>Status</th>
           </thead>
-          <tbody *ngFor="let acc of account.reverse() | filter: type | filterInfoDate: startDate: endDate | paginate: {itemsPerPage: 10, currentPage: p}">
+          <tbody *ngFor="let acc of account.reverse() | filter: type | filterInfoDate: startDate: endDate | filter : stat | paginate: {itemsPerPage: 10, currentPage: p}">
             <tr *ngIf="id==acc.debit.cred.transac.member.id" >
             <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
             <td >{{ acc.debit.cred.entries.entry_name }}</td>

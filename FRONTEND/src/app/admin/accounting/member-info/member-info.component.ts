@@ -23,8 +23,10 @@ export class MemberInfoComponent implements OnInit {
   type: string;
   startDate: string = '';
   endDate : string = '';
+  stat: string;
 
 
+  stats: string[]= ["Overdue", "Pending", "Closed", "Paid" ];
 
   types: string[]= ["Journal Entry", "Invoice", "Payment" ];
  private urlId : Subscription;
