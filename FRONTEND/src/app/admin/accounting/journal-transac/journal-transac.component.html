@@ -1,4 +1,4 @@
-<main id="trialFile">
+<main >
   <button (click)="exportPDF()">clickx</button>
   <button (click)="exportEXCEL()">clicky</button>
   <div class="head" *ngFor="let e of journalLogs; let i = index">
@@ -18,14 +18,16 @@
 
 
   <div class="table-container">
-    <table class="table-content">
+    <table class="table-content" id="trialFile">
       <thead>
+        <tr>
         <th>No.</th>
         <th>Account</th>
         <th>Debit</th>
         <th>Credit</th>
         <th>Description</th>
         <th>Name</th>
+        </tr>
       </thead>
       <tbody >
         <tr *ngFor="let e of journalLogs.reverse(); let i = index">

@@ -190,12 +190,22 @@ public function index()
             return response()->json($transac);
              }
 
-    public function journalLogs(){
+    public function journalLogs(Request $request){
         $LogsQuery = JournalLogs::query()->with(['memberlogs', 'entrylogs']);
 
-        if($request->journal_no){
-            $LogsQuery->whereHAs('', function($query) use($request){
-                $query->where('journal_no', $request->journal_no);
+        // if($request->journal_no){
+        //     $LogsQuery->whereHAs('', function($query) use($request){
+        //         $query->where('journal_no', $request->journal_no);
+        //     });
+        // }
+        if($request->account){
+            $LogsQuery->whereHAs('entrylogs', function($query) use($request){
+                $query->where('journals_id', $request->account);
+            });
+        }
+        if($request->member){
+            $LogsQuery->whereHAs('memberlogs', function($query) use($request){
+                $query->where('members_id', $request->member);
             });
         }
         $logs = QueryBuilder::for($LogsQuery);
