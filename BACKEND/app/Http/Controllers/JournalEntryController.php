@@ -97,6 +97,7 @@ class JournalEntryController extends Controller
             $debits->due_date = $request->due_date;
             $debits->orig_amount = $request->totalcredit;
             $debits->open_balance = $request->totalcredit;
+            $debits-> payables_id = $pays;
             $debits->payment = 0;
             $debits->status = "Pending";
 

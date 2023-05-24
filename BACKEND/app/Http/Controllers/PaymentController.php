@@ -76,6 +76,7 @@ class PaymentController extends Controller
                     $debits->credits_id = $value['creditId'];
                     $debits->orig_amount = $value['origAmount'];
                     $debits->open_balance = $value['openBalance'] - $value['payment'];
+                    $debits->payables_id =  $value['payablesId'];
                     $debits->paymentMethod = $request->paymentMethod;
                     $debits->pay_date = $request->paymentDate;
                     $debits->due_date =  $value['dueDate'];
@@ -96,6 +97,7 @@ class PaymentController extends Controller
                     $debiti->pay_date = $request->paymentDate;
                     $debiti->open_balance = null;
                     $debiti->credits_id = $creds;
+                    $debiti->payables_id =  $value['payablesId'];
                     $debiti->save();
 
                 }

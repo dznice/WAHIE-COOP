@@ -118,6 +118,7 @@ export class AddPaymentComponent implements OnInit {
 
     return this.builder.group({
       debitId: this.builder.control({ value: trial.id , disabled: true }),
+      payablesId: this.builder.control({ value: trial.debit.payables_id , disabled: true }),
       creditId: this.builder.control({ value: trial.credits_id , disabled: true }),
       description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
       dueDate: this.builder.control({ value:  trial.debit.due_date, disabled: true }),
