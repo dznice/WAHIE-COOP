@@ -68,6 +68,7 @@ import { JournalTransacComponent } from './admin/accounting/journal-transac/jour
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader';
 import { ExportAsModule } from 'ngx-export-as';
 import { LedgerComponent } from './admin/reports/ledger/ledger.component';
+import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generate-ledger.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { LedgerComponent } from './admin/reports/ledger/ledger.component';
     FilterMemberPipe,
     JournalTransacComponent,
     LedgerComponent,
+    GenerateLedgerComponent,
   ],
   imports: [
     BrowserModule,

@@ -166,7 +166,7 @@ select {
 }
 
 //ng-select
-.ng-select.try {
+.ng-select.try ::ng-deep .ng-select-container {
   outline: none;
   font-size: 14px;
   font-weight: 400;
@@ -178,7 +178,7 @@ select {
   max-width: 300px;
 }
 
-.ng-select.try .ng-control  {
+.ng-select.try ::ng-deep .ng-control  {
   min-height: 0px;
   border: 1px solid #aaa;
   border-radius: 5px;

@@ -48,15 +48,14 @@
               [formGroupName]="i"
             >
               <td class="journallabel">{{ i + 1 }}</td>
-              <td class="beneinput">
-                <ng-select class="try" formControlName="account">
+              <td>
+                <ng-select class="try" [clearable]="false" formControlName="account">
                   <ng-template ng-header-tmp>
                     <a (click)="show(1)" class="submit"
                       ><i>Click here to Add+</i></a
                     >
                   </ng-template>
                   <ng-option
-                    class="idnk"
                     *ngFor="let libJournal of libJournals"
                     [value]="libJournal.id"
                   >
@@ -85,7 +84,7 @@
               </td>
 
               <td class="beneinput">
-                <ng-select class="try" formControlName="name">
+                <ng-select class="try" [clearable]="false" formControlName="name">
                   <ng-option class="try" *ngFor="let member of members"[value]="member.id">
                     {{ member.id }} {{ member.first_name }}
                     {{ member.middle_name }} {{ member.last_name }}

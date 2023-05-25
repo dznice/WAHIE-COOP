@@ -1,13 +1,13 @@
 <p>ledger works!</p>
 <main>
     <form [formGroup]="ledgerForm">
-        <ng-select formControlName="account">
+        <ng-select [clearable]="false" formControlName="account">
             <ng-option *ngFor="let libJournal of libJournals" [value]="libJournal.id">
                 {{ libJournal.journal_number }}
                 {{ libJournal.journal_name }}
             </ng-option>
         </ng-select>
-        <ng-select formControlName="member">
+        <ng-select [clearable]="false" formControlName="member">
             <ng-option *ngFor="let member of members"[value]="member.id">
                 {{ member.last_name }},{{ member.first_name }}{{ member.middle_name }} 
             </ng-option>
