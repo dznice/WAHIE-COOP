@@ -171,17 +171,169 @@
 
     .btn-logout {
       margin-left: auto;
+      position: relative;
       cursor: pointer;
-      font-size: 25px;
+      font-size: 18px;
       height: 1.7rem;
       border-radius: 50%;
-      background-color: var(--primary-alt);
-      color: var(--panel-color);
       transition: all 0.5s ease;
     }
 
     .btn-logout:hover {
       color: var(--red);
+    }
+    .btn-btn-change {
+      margin-left: auto;
+      position: relative;
+      cursor: pointer;
+      font-size: 20px;
+      height: 1.7rem;
+      border-radius: 50%;
+      transition: all 0.5s ease;
+    }
+
+    .btn-btn-change:hover {
+      color: var(--red);
+    }
+  }
+}
+
+//context menu
+
+.menu-area{
+  height: 600px;
+  width: 600px;
+  
+  
+}
+.customContext{
+  position: fixed;
+  background: #474646;
+  width: 250px;
+  z-index: 100000000;
+  bottom: 20px;
+  transition: all 0.5s ease;
+ 
+}
+
+.customContext ul{
+  padding: 0;
+  margin: 0;
+}
+
+
+.customContext ul li {
+  list-style-type: none;
+  padding: 10px 14px;
+  border: 1px solid rgba(46,46,46);
+  color: #ffffff;
+  width: 100%;
+  cursor: pointer;
+  
+}
+.customContext ul li:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+
+/* Modal */
+.pass-modal {
+  position: fixed;
+  background: #000000bf;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;
+
+  .pass-content {
+    background: #fff;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    text-align: center;
+    padding: 0 30px 1px;
+    transition: transform 0.4s, top 0.4s;
+    max-width: 400px;
+    width: 100%;
+
+    .pass-header {
+      padding: 30px 10px;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--primary-color);
+      text-align: left;
+    }
+
+    .pass-body {
+      
+      label {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--primary-color);
+        text-align: left;
+      }
+
+      .passinput {
+        display: flex;
+        width: calc(90%);
+        flex-direction: column;
+        margin: auto;
+        outline: none;
+        font-size: 14px;
+        font-weight: 400;
+        color: #333;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        padding: 0 14px;
+        height: 36px;
+      }
+    }
+    .pass-footer {
+      .savebtn {
+        width: 44%;
+        margin: 5px 0px 0px 10px;
+        height: 43px;
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.45rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        transition: 0.3s;
+        text-decoration: none;
+      }
+
+      .savebtn:hover {
+        background-color: var(--primary-alt);
+      }
+
+      .closebtn {
+        width: 44%;
+        margin: 5px 0px 0px 0px;
+        height: 43px;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.45rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        transition: 0.3s;
+        text-decoration: none;
+        background-color: var(--grey-alt);
+        color: var(--dark-grey);
+      }
+
+      .closebtn:hover {
+        background-color: var(--dark-grey-2);
+      }
     }
   }
 }

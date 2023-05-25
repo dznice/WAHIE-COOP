@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { HttpClient } from '@angular/common/http';
 
+
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
@@ -15,6 +16,9 @@ interface SideNavToggle {
   selector: 'app-sadmin-sidenav',
   templateUrl: './sadmin-sidenav.component.html',
   styleUrls: ['./sadmin-sidenav.component.scss'],
+  host: {
+    "(window:click)": "disappearContext()"
+  },
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -40,6 +44,8 @@ interface SideNavToggle {
   ],
 })
 export class SadminSidenavComponent implements OnInit {
+
+
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
   screenWidth = 0;
@@ -57,8 +63,29 @@ export class SadminSidenavComponent implements OnInit {
     }
   }
 
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+    
+  }
+  hide:boolean = false;
+ 
+  contextMenu(e:any){
+    e.stopPropagation();
+    this.hide = !this.hide;
+ 
+
+  }
+
+  disappearContext(){
+    this.hide = false;
+  }
+
+
+
+  showModal = -1;
+  show(index: number){
+    this.showModal = index;
   }
 
   toggleCollapse(): void {
@@ -92,6 +119,8 @@ export class SadminSidenavComponent implements OnInit {
         console.log(res)   
     })
   }
+
+
 
   logout(event:MouseEvent){
     this.activityLog();

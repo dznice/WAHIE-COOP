@@ -88,10 +88,14 @@ export class RegMembersComponent implements OnInit, OnDestroy {
         const control = formGroup.controls[controlName];
         const matchControl = formGroup.controls[matchControlName];
             if(matchControl.errors && !matchControl.errors['passwordMatch']){
-                return;
+              
+              return;
             }
             if(control.value !== matchControl.value){
+              this.toast.warning({detail:'Password not match',summary:'Please check again',duration:800 , sticky:false,position:'tr'}); 
                 matchControl.setErrors({passwordMatch:true});
+                
+                
             }else{
                 matchControl.setErrors(null)
             }
@@ -164,7 +168,7 @@ onSubmit(){
 }
 onSubmit2(){
 
-
+        
         // stop here if form is invalid
 
 
@@ -219,16 +223,9 @@ onSubmit2(){
   else{
         return this.backend.register(this.form).subscribe(
           data=>this.handleData(data)
-
-
           );
         }
       }
-
-
-
-
-
 
     handleData(data:any){
       sessionStorage.setItem('email', JSON.stringify(data['email']));

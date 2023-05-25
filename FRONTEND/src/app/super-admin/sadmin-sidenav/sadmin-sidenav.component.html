@@ -12,7 +12,9 @@
     </button>
   </div>
 
-  <ul class="sidenav-nav">
+
+
+  <ul class="sidenav-nav" >
     <li class="nav-item" *ngFor="let data of saNavData">
       <a class="nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="link-icon" [class]="data.icon"></i>
@@ -24,14 +26,48 @@
     </li>
 
     <li class="profile">
-      <div class="profile-details" [routerLink]="['']" @fadeInOut *ngIf="collapsed">
+      <div class="profile-details"   [routerLink]="['']" @fadeInOut *ngIf="collapsed" >
         <img src="assets/image/user-icon.png" alt="profile-img" />
         <div class="admin-name">
           <div class="name"></div>
           <div class="role">Super Admin</div>
+
+        </div>
+
+      </div>
+     
+      <div class = "menu-area" (click)="contextMenu($event)" >
+        <i class="ti ti-caret-down"></i> 
+        <div class="customContext" *ngIf="hide"  (click)="disappearContext()"   >
+          <ul>
+            <li  (click)="show(1)"> 
+            <i class="ti ti-edit btn-change"></i> Forgot password</li>
+            <li  (click)="logout($event)">  
+            <i class="ti ti-logout btn-logout"></i> Logout</li>
+          </ul>
         </div>
       </div>
-      <i class="ti ti-logout btn-logout" (click)="logout($event)"></i>
+      <!-- <i class="ti ti-logout btn-logout" (click)="logout($event)"></i> -->
+   
     </li>
   </ul>
 </div>
+<section>
+  <div class="pass-modal" *ngIf="showModal === 1">
+    <div class="pass-content">
+      <div class="pass-header">Change Your Password</div>
+      <div class="pass-body">
+        <label for="password">Password</label>
+        <input class="passinput" type="number" #password />
+        <br />
+        <label for="confirm_pass">Confirm Password</label>
+        <input class="passinput" type="text" #confirm_pass />
+        <br />
+      </div>
+      <div class="pass-footer">
+        <button class="closebtn" (click)="show(2)">Close</button>
+        <button class="savebtn">Create</button>
+      </div>
+    </div>
+  </div>
+</section>
