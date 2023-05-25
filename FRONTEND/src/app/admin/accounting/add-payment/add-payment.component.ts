@@ -123,7 +123,7 @@ export class AddPaymentComponent implements OnInit {
       description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
       dueDate: this.builder.control({ value:  trial.debit.due_date, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
-      openBalance: this.builder.control({ value: trial.open_balance , disabled: true }),
+      openBalance: this.builder.control({ value:parseFloat(trial.open_balance.toString()) , disabled: true }),
       payment: this.builder.control({value: 0, disabled: false} ,Validators.required)
     });
   }

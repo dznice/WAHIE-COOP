@@ -17,11 +17,11 @@
       <label>Unpaid Last 365 Days</label>
       <div class="card-merge" >
         <div class="card overdue" >
-          <h3 class="card-amount">PHP {{ overdue.total_overdue }}</h3>
+          <h3 class="card-amount">PHP {{ overdue.total_overdue | number:'1.2-2':'en-US'}}</h3>
           <span class="card-subtext" >{{ overdue.overdue_count }} OVERDUE</span>
         </div>
         <div class="card open-inv"  >
-          <h3 class="card-amount">PHP {{ opentransac.total_open_balance }} </h3>
+          <h3 class="card-amount">PHP {{ opentransac.total_open_balance | number:'1.2-2':'en-US'}} </h3>
           <span class="card-subtext" >{{ opentransac.open_balance_count }} OPEN TRANSACTIONS</span>
         </div>
       </div>
@@ -30,8 +30,8 @@
     <div class="paid-container" >
       <label>Paid</label>
       <div class="card paid">
-        <h3 class="card-amount">PHP {{paidmem.total_payment}}</h3>
-        <span class="card-subtext">{{paidmem.paid_count}} PAID LAST 30 DAYS</span>
+        <h3 class="card-amount">PHP {{paidmem.total_payment | number:'1.2-2':'en-US'}}</h3>
+        <span class="card-subtext">{{paidmem.paid_count }} PAID LAST 30 DAYS</span>
       </div>
     </div>
   </section>
@@ -50,14 +50,17 @@
           <th>OPEN BALANCE</th>
           <th>ACTION</th>
         </thead>
-        <tbody>
-          <tr *ngFor="let member of memberList | filter: term | paginate : { itemsPerPage: 5, currentPage: p }" >
-           <td (click) = 'memberInfo( member.id )'>{{member.id}} {{member.first_name}}</td>
-           <td (click) = 'memberInfo( member.id )'>{{member.email}}</td>
-           <td></td>
-           <td class="action-td" (click) = 'memberAccounting( member.id )'><a>Receive payment</a></td>
-          </tr>
+        <tbody *ngFor="let member of memberList | filter: term | paginate : { itemsPerPage: 5, currentPage: p }; let i = index">
+          <ng-container *ngFor="let bal of membalance">
+            <tr *ngIf="member.id == bal.id">
+              <td (click)="memberInfo(member.id)">{{ member.id }} {{ member.first_name }}</td>
+              <td (click)="memberInfo(member.id)">{{ member.email }}</td>
+              <td>{{ bal.total_open_balance | number:'1.2-2':'en-US' }}</td>
+              <td class="action-td" (click)="memberAccounting(member.id)"><a>Receive payment</a></td>
+            </tr>
+          </ng-container>
         </tbody>
+
       </table>
     </div>
   </section>

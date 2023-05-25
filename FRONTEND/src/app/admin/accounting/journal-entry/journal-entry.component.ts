@@ -224,7 +224,7 @@ export class JournalEntryComponent implements OnInit {
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-')
     return this.maxDate;
-  } 
+  }
 
 
   add(journal_number:string,journal_name:string, journal_type:string){

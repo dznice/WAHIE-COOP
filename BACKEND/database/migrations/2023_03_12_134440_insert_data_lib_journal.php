@@ -214,7 +214,7 @@ return new class extends Migration
         DB::table('lib_journals')->insert(array('journal_number' => '40200', 'journal_name' => 'Income from Service Operations', 'journal_type' => 'REVENUE'));
         DB::table('lib_journals')->insert(array('journal_number' => '40210', 'journal_name' => 'Service Income', 'journal_type' => 'REVENUE'));
         DB::table('lib_journals')->insert(array('journal_number' => '40220', 'journal_name' => 'Interest Income from Lease Agreement', 'journal_type' => 'REVENUE'));
-        DB::table('lib_journals')->insert(array('journal_number' => '40300', 'journal_name' => 'Income from Marketing/Consumers/Production Operations'));
+        DB::table('lib_journals')->insert(array('journal_number' => '40300', 'journal_name' => 'Income from Marketing/Consumers/Production Operations', 'journal_type' => 'REVENUE'));
         DB::table('lib_journals')->insert(array('journal_number' => '40310', 'journal_name' => 'Sales', 'journal_type' => 'REVENUE'));
         DB::table('lib_journals')->insert(array('journal_number' => '40320', 'journal_name' => 'Installment Sales', 'journal_type' => 'REVENUE'));
         DB::table('lib_journals')->insert(array('journal_number' => '40330', 'journal_name' => 'Sales Returns & Allowances', 'journal_type' => 'REVENUE'));
@@ -349,7 +349,7 @@ return new class extends Migration
         DB::table('lib_journals')->insert(array('journal_number' => '73360', 'journal_name' => 'School Program Support', 'journal_type' => 'EXPENSES'));
         DB::table('lib_journals')->insert(array('journal_number' => '73370', 'journal_name' => 'Office Supplies', 'journal_type' => 'EXPENSES'));
         DB::table('lib_journals')->insert(array('journal_number' => '73380', 'journal_name' => 'Meetings and Conferences', 'journal_type' => 'EXPENSES'));
-        DB::table('lib_journals')->insert(array('journal_number' => '73390', 'journal_name' => 'Trainings/ Seminars'));
+        DB::table('lib_journals')->insert(array('journal_number' => '73390', 'journal_name' => 'Trainings/ Seminars', 'journal_type' => 'EXPENSES'));
         DB::table('lib_journals')->insert(array('journal_number' => '73400', 'journal_name' => 'Certifications and Recognitions', 'journal_type' => 'EXPENSES'));
         DB::table('lib_journals')->insert(array('journal_number' => '73410', 'journal_name' => 'Power, Light & Water', 'journal_type' => 'EXPENSES'));
         DB::table('lib_journals')->insert(array('journal_number' => '73420', 'journal_name' => 'Travel & Transportation', 'journal_type' => 'EXPENSES'));

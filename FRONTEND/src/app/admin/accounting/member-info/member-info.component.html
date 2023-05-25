@@ -19,13 +19,13 @@
         <div class="mem-info email">{{ info.email }}</div>
         <div class="mem-info contact">(+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-", info.mobile_number.slice(6)].join('') }}</div>
       </div>
-      <div class="mem-payables">
-        <div class="open-bal">
-          <div class="open-money">PHP 20,000.00</div>
+      <div class="mem-payables" *ngFor="let bal of membalance">
+        <div class="open-bal" *ngIf="id == bal.id">
+          <div class="open-money">PHP {{ bal.total_open_balance | number:'1.2-2':'en-US' }}</div>
           <div class="open-label">OPEN</div>
         </div>
-        <div class="overdue-bal">
-          <div class="overdue-money">PHP 0.00</div>
+        <div class="overdue-bal" *ngIf="id == bal.id">
+          <div class="overdue-money">PHP {{ bal.total_payment | number:'1.2-2':'en-US' }}</div>
           <div class="overdue-label">OVERDUE</div>
         </div>
       </div>

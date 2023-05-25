@@ -11,10 +11,12 @@ import { ActivatedRoute } from '@angular/router';
   providers: [itemService],
 })
 export class MemberInfoComponent implements OnInit {
+  membalance: any;
   constructor(private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute) {
     this.personalInfo();
     this.benInfo();
-    this.showAccounting()
+    this.showAccounting();
+    this.memberBalance();
   }
   item: any[] = [];
   ben: any[] = [];
@@ -76,6 +78,15 @@ export class MemberInfoComponent implements OnInit {
       {
         console.log(res);
         this.account = res
+    });
+  }
+
+  memberBalance(): void{
+    this.http.get('http://127.0.0.1:8000/api/totalMemBalance').subscribe(
+      (res:any)=>
+      {
+        console.log(res);
+        this.membalance = res
     });
   }
 }

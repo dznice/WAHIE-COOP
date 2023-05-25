@@ -125,6 +125,22 @@ public function index()
     return response()->json($totals);
     }
 
+    public function totalMemBalance()
+{
+    $totals = DB::table('debits')
+    ->join('payables', 'debits.payables_id', '=', 'payables.id')
+    ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
+    ->join('members', 'transactions.members_id', '=', 'members.id')
+    ->whereNotNull('transactions.id') // Check for existence of related transaction
+    ->groupBy('members.id')
+    ->select('members.id', DB::raw('SUM(debits.open_balance) as total_open_balance'), DB::raw('SUM(debits.payment) as total_payment'))
+    ->get();
+
+return response()->json($totals);
+
+}
+
+
 
     public function totaljour()
     {

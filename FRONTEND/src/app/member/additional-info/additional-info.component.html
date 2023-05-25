@@ -104,38 +104,38 @@
             </div>
 
             <div class="input-field19">
-              <select class="try" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }" required>
-                <option *ngFor="let reg of region" [value]="reg.region_code">
+              <ng-select class="try" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Region">
+                <ng-option *ngFor="let reg of region" [value]="reg.region_code">
                   {{ reg.region_description }}
                   {{ reg.journal_name }}
-                </option>
-              </select>
+                </ng-option>
+              </ng-select>
             </div>
 
             <div class="input-field19">
-              <select class="try"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }" required>
-                <option *ngFor="let prov of province" [value]="prov.province_code">
+              <ng-select class="try"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Province">
+                <ng-option *ngFor="let prov of province" [value]="prov.province_code">
                   {{ prov.province_description }}
                   {{ prov.journal_name }}
-                </option>
-              </select>
+                </ng-option>
+              </ng-select>
             </div>
 
             <div class="input-field20">
-              <select class="try"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }" required>
-                <option *ngFor="let city of cities" [value]="city.city_municipality_code">
+              <ng-select class="try"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose City/Municipality">
+                <ng-option *ngFor="let city of cities" [value]="city.city_municipality_code">
                   {{ city.city_municipality_description }}
                   {{ city.journal_name }}
-                </option>
-              </select>
+                </ng-option>
+              </ng-select>
             </div>
             <div class="input-field21" placeholder="Postal Code">
-              <select class="try"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }" required>
-                <option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
+              <ng-select class="try"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Barangay">
+                <ng-option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
                   {{ brgy.barangay_description }}
                   {{ brgy.journal_name }}
-                </option>
-              </select>
+                </ng-option>
+              </ng-select>
             </div>
             <div class="input-field22">
               <input
@@ -147,7 +147,7 @@
                 required
               />
             </div>
-            
+
           </div>
           <input
             type="radio"

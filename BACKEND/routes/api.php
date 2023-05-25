@@ -201,6 +201,7 @@ Route::get('/duedate', [App\Http\Controllers\AccountingController::class, 'DueDa
 Route::get('/totalPaid', [App\Http\Controllers\AccountingController::class, 'totalPaid']);
 Route::get('/totalOpen', [App\Http\Controllers\AccountingController::class, 'totalOpen']);
 Route::get('/totalOverdue', [App\Http\Controllers\AccountingController::class, 'totalOverdue']);
+Route::get('/totalMemBalance', [App\Http\Controllers\AccountingController::class, 'totalMemBalance']);
 
 Route::get('/total', [App\Http\Controllers\AccountingController::class, 'total']);
 

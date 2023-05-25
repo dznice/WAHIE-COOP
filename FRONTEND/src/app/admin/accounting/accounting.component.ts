@@ -27,6 +27,7 @@ export class AccountingComponent implements OnInit {
   paidmem: any;
   opentransac: any;
   overdue: any;
+  membalance: any;
 
   constructor( private http: HttpClient, private route: Router, private toast: NgToastService) {
     this.showMembers();
@@ -36,6 +37,7 @@ export class AccountingComponent implements OnInit {
     this.PaidMember();
     this.OpenTransaction();
     this.OverduePay();
+    this.memberBalance();
   }
 
   showMembers() {
@@ -47,7 +49,7 @@ export class AccountingComponent implements OnInit {
         this.memberList = res;
       });
   }
-  
+
   memberInfo(data: any) {
     this.http
       .get('http://127.0.0.1:8000/api/memberList/' + data)
@@ -102,5 +104,13 @@ export class AccountingComponent implements OnInit {
         console.log(res);
         this.overdue = res;
       });
+  }
+  memberBalance(): void{
+    this.http.get('http://127.0.0.1:8000/api/totalMemBalance').subscribe(
+      (res:any)=>
+      {
+        console.log(res);
+        this.membalance = res
+    });
   }
 }

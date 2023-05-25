@@ -77,8 +77,8 @@ class JournalEntryController extends Controller
                 $credits->users_id = $request->userId;
                 $credits-> journals_id = $value['account'];
                 $credits-> due_date = $request->due_date;
-                $credits-> debit_amount = $value['debit'];
-                $credits-> credit_amount = $value['credit'];
+                $credits->debit_amount = floatval($value['debit']);
+                $credits->credit_amount = floatval($value['credit']);
                 $credits-> payables_id = $pays;
                 $credits->save();
 
@@ -95,8 +95,8 @@ class JournalEntryController extends Controller
             $debits = new Debits;
             $debits->credits_id = $creds;
             $debits->due_date = $request->due_date;
-            $debits->orig_amount = $request->totalcredit;
-            $debits->open_balance = $request->totalcredit;
+            $debits->orig_amount = floatval($request->totalcredit);
+            $debits->open_balance = floatval($request->totalcredit);
             $debits-> payables_id = $pays;
             $debits->payment = 0;
             $debits->status = "Pending";
