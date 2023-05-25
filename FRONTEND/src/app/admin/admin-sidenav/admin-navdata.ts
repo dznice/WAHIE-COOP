@@ -15,8 +15,13 @@ export const adminNavData = [
         label: 'Members'
     },
     {
+        routeLink: 'reports',
+        icon: 'ti ti-report-analytics',
+        label: 'Reports'
+    },
+    {
         routeLink: 'inventory',
         icon: 'ti ti-archive',
         label: 'Inventory'
     }
-];
+]

@@ -42,6 +42,8 @@ import { ManageMembersComponent } from './admin/manage-members/manage-members.co
 import { AdminPassdoneComponent } from './admin-passdone/admin-passdone.component';
 import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
+import { ReportsComponent } from './admin/reports/reports.component';
+import { LedgerComponent } from './admin/reports/ledger/ledger.component';
 
 
 const routes: Routes = [
@@ -133,6 +135,8 @@ const routes: Routes = [
       {path: 'accounting/add-payment/:memberId', component: AddPaymentComponent},
       {path: 'accounting/member-info/:memberId', component: MemberInfoComponent},
       {path: 'manage-members', component: ManageMembersComponent},
+      {path: 'reports', component: ReportsComponent},
+      {path: 'reports/ledger', component: LedgerComponent},
       {path: 'inventory', component: InventoryComponent},
       {path: 'admin-body', component: AdminBodyComponent}
     ]

@@ -104,6 +104,10 @@ export class WahieService {
     return this.http.get<any[]>(`${this.url}/api/journalLog/${transac_id}`);
   }
 
+  public LedgerLogs(){
+    return this.http.get<any[]>(`${this.url}/api/journalLogs/`);
+  }
+
   public savePayment(payment:any):Observable<any>{
     return this.http.post<any>(this.url+'/api/payment', payment, this.httpOptions)
   }

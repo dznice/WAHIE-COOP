@@ -67,6 +67,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader';
 import { ExportAsModule } from 'ngx-export-as';
+import { LedgerComponent } from './admin/reports/ledger/ledger.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { ExportAsModule } from 'ngx-export-as';
     NullPageComponent,
     ManageMembersComponent,
     FilterMemberPipe,
-    JournalTransacComponent
+    JournalTransacComponent,
+    LedgerComponent,
   ],
   imports: [
     BrowserModule,
