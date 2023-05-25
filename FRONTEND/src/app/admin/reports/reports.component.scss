@@ -1,47 +1,120 @@
-.grid-container {
-    display: grid;
-    grid-template-areas: "h1 h1 h1";
-    background-color:#F6F6F6;
-    padding: 10px;
-    border-radius: 15px;
+// .grid-container {
+//     display: grid;
+//     grid-template-areas: "h1 h1 h1";
+//     background-color:#F6F6F6;
+//     padding: 10px;
+//     border-radius: 15px;
     
-  }
+//   }
 
   
-  .grid-item {
-    background-color:#FFFFFF;
-    border: 1px solid #E9E9E9;
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-    margin-top: 30px;
-    border-radius: 15px;
-    margin-left: 50px;
-    width: 550px;
+//   .grid-item {
+//     background-color:#FFFFFF;
+//     border: 1px solid #E9E9E9;
+//     padding: 20px;
+//     font-size: 30px;
+//     text-align: center;
+//     margin-top: 30px;
+//     border-radius: 15px;
+//     margin-left: 50px;
+//     width: 550px;
    
-  }
+//   }
 
-h1{
-  grid-area: h1;
- min-height: 20;
- border-bottom: 1px solid #707070;
- font-size: 50px;
- padding: 20px;
- text-align: center;
- color: #3f0f88;
+// h1{
+//   grid-area: h1;
+//  min-height: 20;
+//  border-bottom: 1px solid #707070;
+//  font-size: 50px;
+//  padding: 20px;
+//  text-align: center;
+//  color: #3f0f88;
  
   
+//   }
+
+//   h2{
+    
+//   border-bottom: 1px solid #707070;
+//   padding: 12px;
+//   font-size:30px;
+//   color: #3f0f88;
+//   }
+//   .grid-item p {
+//     padding: 20px;
+//   line-height: 1;
+// font-size: 20px;
+//   }
+
+
+.griddy{
+  width: auto;
+  height: auto;
+  place-items: center;
+  padding: 20px;
+  text-align: left;
+  margin: 40px;
+  margin-left: 70px;
+}
+
+
+   .fieldsdata {
+   border-bottom: 1px solid black;
+     font-size: 14px;
   }
 
-  h2{
+  section.info-cards{
+    padding: 100px;
     
-  border-bottom: 1px solid #707070;
-  padding: 12px;
-  font-size:30px;
-  color: #3f0f88;
   }
-  .grid-item p {
-    padding: 20px;
-  line-height: 1;
-font-size: 20px;
+.info-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px));
+  grid-template-columns: auto auto auto;
+  grid-gap: 50px;
+   
+
+
+  .card {
+    padding: 1.5rem;
+    background: var(--panel-color);
+    border-radius: 0.625rem;
+    display: flex;
+    //justify-content: space-between;
+    align-items: center;
+    grid-gap: 24px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    height: 10rem;
+   
+    cursor: pointer;
+
+    .card-icon {
+      font-size: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      padding: 1rem;
+      color: var(--secondary-color);
+      background: var(--secondary-alt);
+    }
+
+    .text {
+      margin-top: .5rem;
+      margin-left: -.5rem;
+      h2 {
+        font-size: 60px;
+        font-weight: 600;
+        margin-top: -1px;
+        color: var(--primary-color);
+      }
+
+      .card-topic {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
+    }
   }
+}
