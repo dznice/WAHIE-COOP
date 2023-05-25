@@ -52,6 +52,7 @@ myProfile(){
     {
       console.log(res);
       this.account = res.filter((account: { debit: { cred: { transac: { member: { id: any; }; }; }; }; }) => account.debit.cred.transac.member.id === this.memId);
+      console.log(this.account);
   });
 }
 

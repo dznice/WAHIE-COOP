@@ -23,11 +23,13 @@ export class AdminHomeComponent implements OnInit {
 
   startDate: string = '';
   endDate : string = '';
+  duedit: any;
 
   constructor(private http: HttpClient, private route: Router) {}
   ngOnInit(): void {
       // this.showEntries();
       this.showAccounting()
+      this.dueDate();
   }
 
 
@@ -39,6 +41,13 @@ export class AdminHomeComponent implements OnInit {
       this.http.get('http://127.0.0.1:8000/api/account').subscribe((res: any) => {
         console.log(res);
         this.account = res;
+      });
+    }
+
+    dueDate(): void {
+      this.http.get('http://127.0.0.1:8000/api/duedate').subscribe((res: any) => {
+        console.log(res);
+        this.duedit = res;
       });
     }
 

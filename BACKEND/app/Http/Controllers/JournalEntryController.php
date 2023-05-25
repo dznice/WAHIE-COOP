@@ -70,6 +70,8 @@ class JournalEntryController extends Controller
 
             $creditss = 0;
 
+            $rate = $request->interest / 100;
+
             foreach ($entryData['entries'] as $key => $value)
             {
                 $credits = new Credits;
@@ -77,6 +79,7 @@ class JournalEntryController extends Controller
                 $credits->users_id = $request->userId;
                 $credits-> journals_id = $value['account'];
                 $credits-> due_date = $request->due_date;
+                $credits-> interest = $rate;
                 $credits->debit_amount = floatval($value['debit']);
                 $credits->credit_amount = floatval($value['credit']);
                 $credits-> payables_id = $pays;
@@ -89,12 +92,13 @@ class JournalEntryController extends Controller
 
             }
 
-
+            $interate = $request->totalcredit * $rate;
             $creds = $credits->id;
 
             $debits = new Debits;
             $debits->credits_id = $creds;
             $debits->due_date = $request->due_date;
+            $debits->interest_rate =  $interate;
             $debits->orig_amount = floatval($request->totalcredit);
             $debits->open_balance = floatval($request->totalcredit);
             $debits-> payables_id = $pays;
@@ -114,6 +118,8 @@ class JournalEntryController extends Controller
                 $jlogs->journal_no = $request->journal_no;
                 $jlogs->journal_date = $request->journal_date;
                 $jlogs->due_date = $request->due_date;
+                $jlogs->interest = $request->interest;
+                $jlogs->interest_amount = $interate;
                 $jlogs->debit_amount = $value['debit'];
                 $jlogs->credit_amount = $value['credit'];
                 $jlogs->description = $value['description'];

@@ -19,6 +19,10 @@
           <label> Due Date </label>
           <input class="headinput" type="date" formControlName="due_date" />
         </div>
+        <div class="duedate">
+          <label> Interest </label>
+          <input class="headinput" type="number" formControlName="interest" /> <label> % </label>
+        </div>
         <div>
           <div>
             <a class="add" (click)="addRow()">
@@ -48,14 +52,15 @@
               [formGroupName]="i"
             >
               <td class="journallabel">{{ i + 1 }}</td>
-              <td>
-                <ng-select class="try" [clearable]="false" formControlName="account">
+              <td class="beneinput">
+                <ng-select class="try" formControlName="account">
                   <ng-template ng-header-tmp>
                     <a (click)="show(1)" class="submit"
                       ><i>Click here to Add+</i></a
                     >
                   </ng-template>
                   <ng-option
+                    class="idnk"
                     *ngFor="let libJournal of libJournals"
                     [value]="libJournal.id"
                   >
@@ -69,14 +74,14 @@
                 <input
                   type="number"
                   formControlName="debit"
-                  (blur)="autoZero(i)"
+                  (change)="autoZero(i)"
                 />
               </td>
               <td class="beneinput">
                 <input
                   type="number"
                   formControlName="credit"
-                  (blur)="autoZero(i)"
+                  (change)="autoZero(i)"
                 />
               </td>
               <td class="beneinput">
@@ -84,7 +89,7 @@
               </td>
 
               <td class="beneinput">
-                <ng-select class="try" [clearable]="false" formControlName="name">
+                <ng-select class="try" formControlName="name">
                   <ng-option class="try" *ngFor="let member of members"[value]="member.id">
                     {{ member.id }} {{ member.first_name }}
                     {{ member.middle_name }} {{ member.last_name }}

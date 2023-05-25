@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('journal_no');
             $table->date('journal_date');
             $table->date('due_date')->nullable();
+            $table->date('interest')->nullable();
+            $table->date('interest_amount')->nullable();
             $table->double('credit_amount');
             $table->double('debit_amount');
             $table->string('description')->nullable();

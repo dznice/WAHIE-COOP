@@ -60,7 +60,7 @@
           | filter : stat
           | filterMhDate : startDate : endDate)
           | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-          <tr *ngIf="memId==acc.debit.cred.transac.member.id">
+          <tr >
           <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
           <td >{{ acc.debit.cred.entries.entry_name }}</td>
           <td >{{ acc.debit.cred.transac.transaction_number }}</td>

@@ -102,8 +102,8 @@
             <td>{{ e.debit.cred.transac.transaction_number }}</td>
             <td>{{ e.debit.cred.transac.member.first_name }} {{ e.debit.cred.transac.member.last_name }}</td>
             <td>{{ e.debit.due_date | date:'mediumDate' }}</td>
-            <td>{{ e.open_balance }}</td>
-            <td>{{ e.payment }}</td>
+            <td>{{ e.open_balance | number:'1.2-2':'en-US' }}</td>
+            <td>{{ e.payment | number:'1.2-2':'en-US' }}</td>
             <td class="status">
               <span [ngClass]="{'pending': e.status == 'Pending',
                                 'overdue': e.status == 'Overdue',

@@ -168,14 +168,38 @@ return response()->json($totals);
         $databaseDate = Carbon::parse($record->due_date);
         $isPastCurrentDate = $databaseDate->lt($currentDate);
 
+        $debit = Debits::where('credits_id', $record->id)->first(); // Assuming there's a one-to-one relationship between Credits and Debits using 'credit_id'
+
+        if ($debit) {
+            $interestRate = $debit->interest_rate; // Retrieve the interest_rate from the debit record
+            $interest = $isPastCurrentDate ? ($record->amount + $interestRate) : 0; // Calculate interest if due date is passed
+            $interestAmount = $record->interest * $debit->orig_amount;
+
+            if ($isPastCurrentDate) {
+                $debit->open_balance += $interestRate; // Add the interest_rate to the open_balance
+                $debit->save(); // Save the updated debit record
+
+                // Delete the interest_rate from the debit record
+                $debit->interest_rate = 0;
+                $debit->save();
+            }
+        } else {
+            $interest = 0; // If no associated debit record, set interest to 0
+            $interestAmount = 0; // If no associated debit record, set interestAmount to 0
+        }
         $results[] = [
             'id' => $record->id,
-            'isPastCurrentDate' => $isPastCurrentDate
+            'isPastCurrentDate' => $isPastCurrentDate,
+            'interest' => $interest,
+            'amount' => $interestAmount
         ];
     }
 
     return response()->json($results);
 }
+
+
+
 
     public function getAccounts(Request $request)
     {

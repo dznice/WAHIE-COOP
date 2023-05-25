@@ -23,6 +23,8 @@ class JournalLogsResource extends JsonResource
             'journal_no' => $this->journal_no,
             'journal_date' => $this->journal_date,
             'due_date' => $this->due_date,
+            'interest' => $this->interest,
+            'interest_amount' => $this->interest_amount,
             'credit_amount' => $this->credit_amount,
             'debit_amount' => $this->debit_amount,
             'description' => $this->description,

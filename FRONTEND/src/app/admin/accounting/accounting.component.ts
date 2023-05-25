@@ -28,6 +28,7 @@ export class AccountingComponent implements OnInit {
   opentransac: any;
   overdue: any;
   membalance: any;
+  duedit: any;
 
   constructor( private http: HttpClient, private route: Router, private toast: NgToastService) {
     this.showMembers();
@@ -38,6 +39,7 @@ export class AccountingComponent implements OnInit {
     this.OpenTransaction();
     this.OverduePay();
     this.memberBalance();
+    this.dueDate();
   }
 
   showMembers() {
@@ -48,6 +50,13 @@ export class AccountingComponent implements OnInit {
         console.log(res);
         this.memberList = res;
       });
+  }
+
+  dueDate(): void {
+    this.http.get('http://127.0.0.1:8000/api/duedate').subscribe((res: any) => {
+      console.log(res);
+      this.duedit = res;
+    });
   }
 
   memberInfo(data: any) {

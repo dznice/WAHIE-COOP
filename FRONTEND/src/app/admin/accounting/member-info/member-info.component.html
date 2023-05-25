@@ -94,14 +94,18 @@
             <th>Payment</th>
             <th>Status</th>
           </thead>
-          <tbody *ngFor="let acc of account.reverse() | filter: type | filterInfoDate: startDate: endDate | filter : stat | paginate: {itemsPerPage: 10, currentPage: p}">
+          <tbody *ngFor="let acc of account.reverse()
+              | filter: type
+              | filterInfoDate: startDate: endDate
+              | filter : stat
+              | paginate: {itemsPerPage: 5, currentPage: p}">
             <tr *ngIf="id==acc.debit.cred.transac.member.id" >
             <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
             <td >{{ acc.debit.cred.entries.entry_name }}</td>
             <td >{{ acc.debit.cred.transac.transaction_number }}</td>
             <td>{{ acc.debit.cred.due_date }}</td>
-            <td>{{ acc.open_balance }}</td>
-            <td>{{ acc.payment }}</td>
+            <td>{{ acc.open_balance | number:'1.2-2':'en-US' }}</td>
+            <td>{{ acc.payment | number:'1.2-2':'en-US' }}</td>
             <td class="status">
               <span [ngClass]="{'pending': acc.status== 'Pending',
                                 'overdue': acc.status == 'Overdue',

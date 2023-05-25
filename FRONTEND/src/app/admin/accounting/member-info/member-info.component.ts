@@ -37,7 +37,8 @@ export class MemberInfoComponent implements OnInit {
 
 
 
-  id:number = 0;
+  id:string = '';
+
   ngOnInit(): void {
     this.item = this.ItemService.item;
     this.urlId = this.aRouter.params.subscribe(
@@ -71,13 +72,24 @@ export class MemberInfoComponent implements OnInit {
       }
     )
   }
+  memId:string = '';
+  myProfile(){
+    this.http.get('http://127.0.0.1:8000/api/users/myProfile/' + this.id).subscribe(
+      (res: any) =>
+      {
+      console.log('myprof' + res);
+      this.memId = res.id;
+      console.log(this.memId)
+      })
+  }
 
   showAccounting(): void{
     this.http.get('http://127.0.0.1:8000/api/account').subscribe(
       (res:any)=>
       {
-        console.log(res);
-        this.account = res
+        console.log(this.id);
+        this.account = res.filter((account: { debit: { cred: { transac: { member: { id: any; }; }; }; }; }) => account.debit.cred.transac.member.id == this.id);
+        console.log(this.account)
     });
   }
 

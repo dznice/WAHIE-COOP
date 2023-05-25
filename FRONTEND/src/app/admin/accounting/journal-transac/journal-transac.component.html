@@ -15,6 +15,14 @@
       <label>Due Date</label>
       <input class="headinput" type="text" disabled value="{{ e.due_date | date:'mediumDate' }}"/>
     </div>
+    <div class="journadate"  *ngIf="i < 1" >
+      <label>Interest</label>
+      <input class="headinput" type="text" disabled value="{{ e.interest}}%"/>
+    </div>
+    <div class="journadate"  *ngIf="i < 1" >
+      <label>Surcharge</label>
+      <input class="headinput" type="text" disabled value="PHP {{ e.interest_amount | number:'1.2-2':'en-US'}}"/>
+    </div>
 
       <div class="export" *ngIf="i < 1">
       <label> Export PDF</label>
@@ -36,30 +44,23 @@
         <th>Credit</th>
         <th>Description</th>
         <th>Name</th>
-        </tr><tr>
-          <th>No.</th>
-          <th>Account</th>
-          <th>Debit</th>
-          <th>Credit</th>
-          <th>Description</th>
-          <th>Name</th>
-          </tr>
+        </tr>
       </thead>
 
       <tbody >
         <tr *ngFor="let e of journalLogs.reverse(); let i = index">
           <td>{{ i+1 }}</td>
           <td>{{ e.entrylogs.journal_name }}</td>
-          <td>{{ e.credit_amount }}</td>
-          <td>{{ e.debit_amount }}</td>
+          <td>{{ e.credit_amount | number:'1.2-2':'en-US' }}</td>
+          <td>{{ e.debit_amount | number:'1.2-2':'en-US' }}</td>
           <td>{{ e.description }}</td>
           <td>{{ e.memberlogs.first_name }} {{ e.memberlogs.last_name }}</td>
         </tr>
         <tr *ngFor="let e of journalLogs.reverse(); let i = index">
           <td *ngIf="i < 1 "></td>
           <td *ngIf="i < 1 " style="text-align:right;">TOTAL</td>
-          <td *ngIf="i < 1 ">{{ e.total_debit }}</td>
-          <td *ngIf="i < 1 ">{{ e.total_credit }}</td>
+          <td *ngIf="i < 1 ">{{ e.total_debit | number:'1.2-2':'en-US' }}</td>
+          <td *ngIf="i < 1 ">{{ e.total_credit | number:'1.2-2':'en-US' }}</td>
           <td *ngIf="i < 1 "></td>
           <td *ngIf="i < 1 "></td>
         </tr>
