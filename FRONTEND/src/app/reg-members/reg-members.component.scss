@@ -211,21 +211,6 @@ input[type="number"]::-webkit-outer-spin-button{
 }
 
 //NG-SELECT
-// .ng-select.selectDept ::ng-deep .ng-select-container {
-//   width: 100%;
-//   font-size: .9rem;
-//   outline-color: #3F0F88;
-//   color: #707070;
-//
-//   padding-left: .2rem;
-//   padding: .22rem;
-// }
-
-// .ng-select.selectDept .ng-control  {
-//
-//   border-radius: 10px;
-// }
-
 .selectDept ::ng-deep .ng-select-container {
     position: absolute;
     font-size: 14px;
@@ -241,19 +226,39 @@ input[type="number"]::-webkit-outer-spin-button{
   color: #707070;
 }
 
-.gender ::ng-deep .ng-select-container {
-
-  display: flex;
-  position: relative;
+.selectDept ::ng-deep .ng-dropdown-panel{
+  margin-top: 3rem;
+  margin-left: .1rem;
 }
 
-.gender ::ng-deep .ng-select-container .ng-placeholder{
+.selectGender ::ng-deep .ng-select-container {
+  position: absolute;
+  font-size: 14px;
+  width: 50%;
+  padding: 22px 9px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin-left: .1rem;
+}
+
+.selectGender ::ng-deep .ng-select-container .ng-placeholder{
 color: #707070;
+}
+
+.selectGender ::ng-deep .ng-select-container .ng-value{
+  color: #707070;
+}
+
+.selectGender ::ng-deep .ng-dropdown-panel{
+  width: 50%;
+  margin-top: 3rem;
+  margin-left: .1rem;
 }
 
 .dateOfBirth{
     width: 49%;
-    margin-left: 50%;
+    margin-left: 51.1%;
     height: 3rem;
     cursor: pointer;
 }
@@ -281,6 +286,7 @@ color: #707070;
     font-size: 0.9rem;
     margin-top: .8rem;
     width: 100%;
+    margin-left: .1rem;
 }
 
 .submit:hover {
