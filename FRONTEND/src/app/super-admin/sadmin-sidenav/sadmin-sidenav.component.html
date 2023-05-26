@@ -12,8 +12,6 @@
     </button>
   </div>
 
-
-
   <ul class="sidenav-nav" >
     <li class="nav-item" *ngFor="let data of saNavData">
       <a class="nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -33,22 +31,26 @@
           <div class="role">Super Admin</div>
 
         </div>
-
       </div>
-     
+
+
       <div class = "menu-area" (click)="contextMenu($event)" >
-        <i class="ti ti-caret-down"></i> 
+        <i class="ti ti-caret-down"></i>
         <div class="customContext" *ngIf="hide"  (click)="disappearContext()"   >
           <ul>
-            <li  (click)="show(1)"> 
+
+            <li  (click)="show(1)">
             <i class="ti ti-edit btn-change"></i> Forgot password</li>
-            <li  (click)="logout($event)">  
+            <li  (click)="logout($event)">
             <i class="ti ti-logout btn-logout"></i> Logout</li>
           </ul>
         </div>
       </div>
       <!-- <i class="ti ti-logout btn-logout" (click)="logout($event)"></i> -->
-   
+
+    </li>
+    <li>
+      <input class="switch" input type="checkbox" (click)="toggleDarkTheme()">
     </li>
   </ul>
 </div>
@@ -70,4 +72,7 @@
       </div>
     </div>
   </div>
+
+
+
 </section>

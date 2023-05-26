@@ -40,6 +40,10 @@ interface SideNavToggle {
   ],
 })
 export class MemberSidenavComponent {
+  toggleDarkTheme() {
+    document.body.classList.toggle('darkmodes');
+  }
+
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
   screenWidth = 0;
@@ -84,7 +88,7 @@ export class MemberSidenavComponent {
   constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient) {}
 
 
-  
+
   public log ={
     name: this.userName(),
     department:sessionStorage.getItem('department'),
@@ -93,7 +97,7 @@ export class MemberSidenavComponent {
 
   activityLog(){
     this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
-        console.log(res)   
+        console.log(res)
     })
   }
 
@@ -104,7 +108,7 @@ export class MemberSidenavComponent {
     localStorage.clear();
     this.router.navigateByUrl('/login');
   }
-  
+
   userName(){
     return sessionStorage.getItem('name');
   }

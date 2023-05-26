@@ -8,6 +8,7 @@
   height: 100vh;
   box-shadow: 0.063rem 0 1.25rem 0 var(--border-color);
 
+
   .logo-container {
     display: flex;
     align-items: center;
@@ -203,8 +204,8 @@
 .menu-area{
   height: 600px;
   width: 600px;
-  
-  
+
+
 }
 .customContext{
   position: fixed;
@@ -213,7 +214,7 @@
   z-index: 100000000;
   bottom: 20px;
   transition: all 0.5s ease;
- 
+
 }
 
 .customContext ul{
@@ -229,7 +230,7 @@
   color: #ffffff;
   width: 100%;
   cursor: pointer;
-  
+
 }
 .customContext ul li:hover {
   background: var(--primary-color);
@@ -271,7 +272,7 @@
     }
 
     .pass-body {
-      
+
       label {
         font-size: 16px;
         font-weight: 500;
@@ -336,4 +337,37 @@
       }
     }
   }
+}
+/* Switch */
+.switch {
+  cursor: pointer;
+  margin: 1px;
+  position: relative;
+  width: 50px;
+  height: 30px;
+  border-radius: 25px;
+  outline: none;
+  background-color: #ccc;
+  -webkit-appearance: none;
+}
+
+input::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  height: 1.25rem;
+  width: 1.25rem;
+  background-color: #ffffff;
+  transition: left 0.3s;
+}
+
+input:checked {
+  background-color: #3f0f88;
+}
+
+input:checked::after {
+  left: 70%;
 }

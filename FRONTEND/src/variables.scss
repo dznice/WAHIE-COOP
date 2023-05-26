@@ -27,7 +27,7 @@
 }
 
 button {
-  font-family: "Poppins", sans-serif; 
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   border: none;
   cursor: pointer;
@@ -36,4 +36,20 @@ button {
 
 input {
   caret-color: var(--primary-color);
+}
+
+.darkmodes {
+  /* ===== Colors ===== */
+  --primary-color: #3f0f88;
+  --primary-alt: #2c0b5f;
+  --secondary-color: #0099ff;
+  --secondary-alt: rgba(0, 153, 255, 0.15);
+  --white:#F2F3F5;
+  --panel-color: #0e1014;
+  --border-color: #15181f;
+  --grey-1: #676b7a;
+  --grey-2: #4e5261;
+  --grey-3: #2b2e38;
+  --grey-4: #15181f;
+
 }
