@@ -88,36 +88,102 @@ select {
   margin: 2px 0;
 }
 
-form .fields .input-field18 {
-  display: flex;
+.cAddress{
+  margin: .5rem 0 .5rem;
+}
+
+.input-field18{
+  position: relative;
   width: 100%;
-  flex-direction: column;
-  margin: auto;
+  margin-bottom: 3rem;
+
+  .postalCode{
+    margin-top: .6rem;
+    margin-left: 50%;
+  }
 }
-form .fields .input-field19 {
-  display: flex;
-  width: calc(50%);
-  flex-direction: column;
-  margin: auto;
+
+.row3{
+  width: 100%;
 }
-form .fields .input-field20 {
-  display: flex;
-  width: calc(49%);
-  flex-direction: column;
-  margin: auto;
+
+.address{
+  position: absolute;
+  width: 49.7%;
 }
-form .fields .input-field21 {
-  display: flex;
-  width: calc(50%);
-  flex-direction: column;
-  margin: auto;
+
+.region ::ng-deep .ng-select-container{
+  position: absolute;
+  font-size: 14px;
+  width: 49.95%;
+  box-sizing: border-box;
+  border: 1px solid #959494;
+  border-radius: 5px;
+  margin-left: 50.1%;
+  margin-top: .15rem;
 }
-form .fields .input-field22 {
-  display: flex;
-  width: calc(49%);
-  flex-direction: column;
-  margin: auto;
+
+.region ::ng-deep .ng-dropdown-panel,
+.municipality ::ng-deep .ng-dropdown-panel{
+  width: 49.95%;
+  margin-top: 2.2rem;
+  margin-left: 50.1%;
 }
+
+.province ::ng-deep .ng-dropdown-panel,
+.barangay ::ng-deep .ng-dropdown-panel{
+  width: 49.7%;
+  margin-top: 2.2rem;
+}
+
+.barangay ::ng-deep .ng-dropdown-panel{
+  width: 49.7%;
+  margin-top: 5rem;
+}
+
+.province ::ng-deep .ng-select-container,
+.barangay ::ng-deep .ng-select-container{
+  position: absolute;
+  font-size: 14px;
+  width: 49.7%;
+  box-sizing: border-box;
+  border: 1px solid #959494;
+  border-radius: 5px;
+  margin-left: 0rem;
+}
+
+.barangay ::ng-deep .ng-select-container{
+  font-size: 14px;
+  width: 49.7%;
+  box-sizing: border-box;
+  border: 1px solid #959494;
+  border-radius: 5px;
+  margin-left: 0rem;
+  margin-top: 2.9rem;
+}
+
+.municipality ::ng-deep .ng-select-container{
+  font-size: 14px;
+  width: 49.9%;
+  box-sizing: border-box;
+  border: 1px solid #959494;
+  border-radius: 5px;
+  float: right;
+  margin-right: 0rem;
+}
+
+.postalCode{
+  width: 49.9%;
+  float: right;
+  margin-top: -3rem;
+}
+
+.region ::ng-deep .ng-select-container .ng-placeholder,
+.province ::ng-deep .ng-select-container .ng-placeholder,
+.municipality ::ng-deep .ng-select-container .ng-placeholder,
+.barangay ::ng-deep .ng-select-container .ng-placeholder{
+  color: #707070;
+  }
 
 .input-field18 input,
 .input-field19 input,
