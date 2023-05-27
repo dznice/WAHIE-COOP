@@ -12,7 +12,7 @@
     </button>
   </div>
 
-  <ul class="sidenav-nav" >
+  <ul class="sidenav-nav">
     <li class="nav-item" *ngFor="let data of saNavData">
       <a class="nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="link-icon" [class]="data.icon"></i>
@@ -23,37 +23,39 @@
       <span class="tooltip">{{ data.label }}</span>
     </li>
 
-    <li class="profile">
-      <div class="profile-details"   [routerLink]="['']" @fadeInOut *ngIf="collapsed" >
+    <li class="profile" >
+      <div class="profile-details">
         <img src="assets/image/user-icon.png" alt="profile-img" />
         <div class="admin-name">
-          <div class="name"></div>
-          <div class="role">Super Admin</div>
-
+          <div class="role">SuperAdmin</div>
         </div>
       </div>
 
+      <div class="dropdown" *ngIf="hide" (click)="disappearContext()">
+        <ul class="menu-nav">
+          <li class="menu-item">
+            <a class="menu-link" (click)="show(1)">
+              <i class="ti ti-edit link-icon"></i>
+              <label class="link-text">Change Password</label>
+            </a>
+          </li>
 
-      <div class = "menu-area" (click)="contextMenu($event)" >
-        <i class="ti ti-caret-down"></i>
-        <div class="customContext" *ngIf="hide"  (click)="disappearContext()"   >
-          <ul>
-
-            <li  (click)="show(1)">
-            <i class="ti ti-edit btn-change"></i> Forgot password</li>
-            <li  (click)="logout($event)">
-            <i class="ti ti-logout btn-logout"></i> Logout</li>
-          </ul>
-        </div>
+          <li class="menu-item">
+            <a class="menu-link" (click)="logout($event)">
+              <i class="ti ti-logout link-icon"></i>
+              <label class="link-text">Logout</label>
+            </a>
+          </li>
+        </ul>
       </div>
-      <!-- <i class="ti ti-logout btn-logout" (click)="logout($event)"></i> -->
-
+      <i class="ti ti-chevron-down btn-down" (click)="contextMenu($event)"></i>
     </li>
     <li>
       <input class="switch" input type="checkbox" (click)="toggleDarkTheme()">
     </li>
   </ul>
 </div>
+
 <section>
   <div class="pass-modal" *ngIf="showModal === 1">
     <div class="pass-content">
@@ -72,7 +74,4 @@
       </div>
     </div>
   </div>
-
-
-
 </section>

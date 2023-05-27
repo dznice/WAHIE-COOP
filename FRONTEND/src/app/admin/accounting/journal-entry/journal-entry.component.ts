@@ -34,13 +34,10 @@ export class JournalEntryComponent implements OnInit {
     this.showJourn()
   }
 
-
   close(event:MouseEvent){
     event.preventDefault();
     this.toast.warning({detail:'Incomplete ',summary:' Fill all input or need balance the amount to submit ', sticky:false,position:'tr', duration:1500});
-   }
-
-
+  }
 
   getJournalNo(){
     console.log(this.useid)
@@ -50,7 +47,6 @@ export class JournalEntryComponent implements OnInit {
     this.http.get('http://127.0.0.1:8000/api/journ').subscribe(
       (res:any)=>
       {
-
         this.journId = res;
         console.log(this.journId);
     });
@@ -59,8 +55,6 @@ export class JournalEntryComponent implements OnInit {
   getJournalNot(){
     console.log(this.journId)
   }
-
-
 
   showLibJournal(): void{
     this.libJournals = this.wahieService.listLibJournals().subscribe(libjournal=>{
@@ -114,20 +108,18 @@ export class JournalEntryComponent implements OnInit {
       this.wahieService.saveJournalEntry(this.journalEntryForm.getRawValue()).subscribe(res=>{
         let result:any;
         result=res;
-        console.log('hello'+this.journId);
+        console.log('Saved'+this.journId);
         console.log(result);
         this.log.activity = 'Added Journal Entry No.' + this.journId
         this.activityLog()
-        this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
+        this.toast.success({detail:'Success',summary:'Transaction saved',duration:2000, sticky:false,position:'tr'});
         this.route.navigateByUrl('admin/accounting')
       })
     }else{
-      this.toast.error({detail:'Failed',summary:'Fill all inputs',duration:2000, sticky:false,position:'tr'});
+      this.toast.error({detail:'Failed',summary:'Fill all inputs or balance the amount',duration:2000, sticky:false,position:'tr'});
       console.log("Error: Fill all input or need balance the amount to submit");
-
     }
     console.log(this.journalEntryForm.value);
-    //this.route.navigateByUrl('admin/accounting')
   }
 
 

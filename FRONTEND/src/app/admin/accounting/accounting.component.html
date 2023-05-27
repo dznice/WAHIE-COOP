@@ -13,26 +13,48 @@
   </div>
 
   <section class="payables">
-    <div class="unpaid-container"  >
+    <div class="unpaid-container">
       <label>Unpaid Last 365 Days</label>
-      <div class="card-merge" >
-        <div class="card overdue" >
-          <h3 class="card-amount">PHP {{ overdue.total_overdue | number:'1.2-2':'en-US'}}</h3>
-          <span class="card-subtext" >{{ overdue.overdue_count }} OVERDUE</span>
+      <div class="card-merge">
+        <div class="card overdue" *ngIf="overdue.total_overdue; else noDue">
+          <h3 class="card-amount">{{ overdue.total_overdue | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
+          <span class="card-subtext">{{ overdue.overdue_count }} OVERDUE</span>
         </div>
-        <div class="card open-inv"  >
-          <h3 class="card-amount">PHP {{ opentransac.total_open_balance | number:'1.2-2':'en-US'}} </h3>
-          <span class="card-subtext" >{{ opentransac.open_balance_count }} OPEN TRANSACTIONS</span>
+
+        <ng-template #noDue>
+          <div class="card overdue">
+            <h3 class="card-amount">{{ 0 | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
+            <span class="card-subtext">{{ overdue.overdue_count }} OVERDUE</span>
+          </div>
+        </ng-template>
+
+        <div class="card open-inv" *ngIf="opentransac.total_open_balance; else noBal">
+          <h3 class="card-amount">{{ opentransac.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2'}} </h3>
+          <span class="card-subtext">{{ opentransac.open_balance_count }} OPEN TRANSACTIONS</span>
         </div>
+
+        <ng-template #noBal>
+          <div class="card open-inv">
+            <h3 class="card-amount">{{ 0 | currency:'PHP':'symbol-narrow':'1.2-2'}} </h3>
+            <span class="card-subtext">0 OPEN TRANSACTIONS</span>
+          </div>
+        </ng-template>
       </div>
     </div>
 
     <div class="paid-container" >
       <label>Paid</label>
-      <div class="card paid">
-        <h3 class="card-amount">PHP {{paidmem.total_payment | number:'1.2-2':'en-US'}}</h3>
+      <div class="card paid" *ngIf="paidmem.total_payment; else noPaid">
+        <h3 class="card-amount">{{paidmem.total_payment | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
         <span class="card-subtext">{{paidmem.paid_count }} PAID LAST 30 DAYS</span>
       </div>
+
+      <ng-template #noPaid>
+        <div class="card paid">
+          <h3 class="card-amount">{{0 | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
+          <span class="card-subtext">0 PAID LAST 30 DAYS</span>
+        </div>
+      </ng-template>
     </div>
   </section>
 
@@ -47,16 +69,16 @@
         <thead>
           <th>MEMBERS</th>
           <th>EMAIL ADDRESS</th>
-          <th>OPEN BALANCE</th>
-          <th>ACTION</th>
+          <th class="th-bal">OPEN BALANCE</th>
+          <th class="th-act">ACTION</th>
         </thead>
         <tbody *ngFor="let member of memberList | filter: term | paginate : { itemsPerPage: 5, currentPage: p }; let i = index">
           <ng-container *ngFor="let bal of membalance">
             <tr *ngIf="member.id == bal.id">
               <td (click)="memberInfo(member.id)">{{ member.id }} {{ member.first_name }}</td>
               <td (click)="memberInfo(member.id)">{{ member.email }}</td>
-              <td>{{ bal.total_open_balance | number:'1.2-2':'en-US' }}</td>
-              <td class="action-td" (click)="memberAccounting(member.id)"><a>Receive payment</a></td>
+              <td class="td-bal">{{ bal.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td class="td-action" (click)="memberAccounting(member.id)"><a>Receive payment</a></td>
             </tr>
           </ng-container>
         </tbody>

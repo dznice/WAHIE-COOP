@@ -15,10 +15,14 @@ export class ReportsComponent implements OnInit{
 
   constructor( private http: HttpClient, private route: Router, private toast: NgToastService) {
 
-
   }
+
   ngOnInit(): void {
   }
+
+  trialBal(){
+    this.route.navigateByUrl('admin/reports/trial-balance');
+}
 
   subLedger(){
       this.route.navigateByUrl('admin/reports/ledger');

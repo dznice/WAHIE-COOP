@@ -231,6 +231,10 @@ main {
         border-right: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
       }
+
+      .th-bal, .th-pay {
+        text-align: right;
+      }
     }
 
     tbody {
@@ -243,6 +247,10 @@ main {
           font-weight: 500;
           padding: 16px 16px;
           border-right: 1px solid var(--border-color);
+        }
+
+        .td-bal, .td-pay {
+          text-align: right;
         }
 
         .status {

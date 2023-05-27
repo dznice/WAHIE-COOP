@@ -21,11 +21,11 @@
       </div>
       <div class="mem-payables" *ngFor="let bal of membalance">
         <div class="open-bal" *ngIf="id == bal.id">
-          <div class="open-money">PHP {{ bal.total_open_balance | number:'1.2-2':'en-US' }}</div>
+          <div class="open-money">{{ bal.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
           <div class="open-label">OPEN</div>
         </div>
         <div class="overdue-bal" *ngIf="id == bal.id">
-          <div class="overdue-money">PHP {{ bal.total_payment | number:'1.2-2':'en-US' }}</div>
+          <div class="overdue-money">{{ bal.total_payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
           <div class="overdue-label">OVERDUE</div>
         </div>
       </div>
@@ -104,8 +104,8 @@
             <td >{{ acc.debit.cred.entries.entry_name }}</td>
             <td >{{ acc.debit.cred.transac.transaction_number }}</td>
             <td>{{ acc.debit.cred.due_date }}</td>
-            <td>{{ acc.open_balance | number:'1.2-2':'en-US' }}</td>
-            <td>{{ acc.payment | number:'1.2-2':'en-US' }}</td>
+            <td>{{ acc.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td>{{ acc.payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             <td class="status">
               <span [ngClass]="{'pending': acc.status== 'Pending',
                                 'overdue': acc.status == 'Overdue',
@@ -157,7 +157,7 @@
               <tr>
                 <th class="fields" width="30%">Birthdate</th>
 
-                <td class="fieldsdata">{{ info.birthdate | date: 'MM/dd/yyyy'}}</td>
+                <td class="fieldsdata">{{ info.birthdate | date: 'mediumDate'}}</td>
               </tr>
               <tr>
                 <th class="fields" width="30%">Gender</th>

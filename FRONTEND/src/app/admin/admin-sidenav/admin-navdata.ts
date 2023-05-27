@@ -19,9 +19,9 @@ export const adminNavData = [
         icon: 'ti ti-report-analytics',
         label: 'Reports'
     },
-    {
-        routeLink: 'inventory',
-        icon: 'ti ti-archive',
-        label: 'Inventory'
-    }
+    // {
+    //     routeLink: 'inventory',
+    //     icon: 'ti ti-archive',
+    //     label: 'Inventory'
+    // }
 ]

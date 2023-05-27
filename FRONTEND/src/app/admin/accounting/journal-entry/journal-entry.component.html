@@ -37,27 +37,22 @@
       <div class="journals">
         <table class="tablejournal" formArrayName="entries">
           <thead>
-            <tr>
-              <th class="journallabel">No.</th>
-              <th class="journallabel">Account</th>
-              <th class="journallabel">Debits</th>
-              <th class="journallabel">Credits</th>
-              <th class="journallabel">Description</th>
-              <th class="journallabel">Name</th>
-            </tr>
+            <th class="journallabel">No.</th>
+            <th class="journallabel">Account</th>
+            <th class="journallabel">Debits</th>
+            <th class="journallabel">Credits</th>
+            <th class="journallabel">Description</th>
+            <th class="journallabel">Name</th>
           </thead>
           <tbody>
-            <tr
-              *ngFor="let item of entryRow.controls; let i = index"
-              [formGroupName]="i"
-            >
+            <tr *ngFor="let item of entryRow.controls; let i = index" [formGroupName]="i">
               <td class="journallabel">{{ i + 1 }}</td>
               <td class="beneinput">
                 <ng-select class="try" formControlName="account">
                   <ng-template ng-header-tmp>
-                    <a (click)="show(1)" class="submit"
-                      ><i>Click here to Add+</i></a
-                    >
+                    <a (click)="show(1)" class="submit">
+                      <i>+ Add new</i>
+                    </a>
                   </ng-template>
                   <ng-option
                     class="idnk"
@@ -85,7 +80,7 @@
                 />
               </td>
               <td class="beneinput">
-                <input type="text" formControlName="description" />
+                <input type="text" formControlName="description"/>
               </td>
 
               <td class="beneinput">
@@ -109,23 +104,16 @@
       <div class="totals">
         <div class="journdate">
           <label> Total Debit </label>
-          <input
-          class="headinput"
-          type="number"
-          formControlName="totaldebit" />
+          <input class="headinput" type="number" formControlName="totaldebit" />
         </div>
         <div class="journdate">
           <label> Total Credit </label>
-          <input
-            class="headinput"
-            type="number"
-            formControlName="totalcredit"
-          />
+          <input class="headinput" type="number"formControlName="totalcredit" />
         </div>
       </div>
       <div class="buttons">
         <a class="back">
-          <span class="btnTextb" (click)="back()" >Back</span>
+          <span class="btnTextb" (click)="back()">Back</span>
         </a>
 
         <button class="save" type="submit">
@@ -136,8 +124,8 @@
   </div>
 </main>
 
+<!-- Modal -->
 <section>
-  <router-outlet></router-outlet>
   <div>
     <div class="otp-modal" *ngIf="showModal === 1">
       <div class="otp-content">

@@ -1,6 +1,3 @@
-
-
-
 <main>
   <h1 class="title">Dashboard</h1>
 
@@ -89,8 +86,8 @@
           <th>No.</th>
           <th>Member</th>
           <th>Due Date</th>
-          <th>Balance</th>
-          <th>Payment</th>
+          <th class="th-bal">Balance</th>
+          <th class="th-pay">Payment</th>
           <th>Status</th>
         </thead>
         <tbody>
@@ -102,8 +99,8 @@
             <td>{{ e.debit.cred.transac.transaction_number }}</td>
             <td>{{ e.debit.cred.transac.member.first_name }} {{ e.debit.cred.transac.member.last_name }}</td>
             <td>{{ e.debit.due_date | date:'mediumDate' }}</td>
-            <td>{{ e.open_balance | number:'1.2-2':'en-US' }}</td>
-            <td>{{ e.payment | number:'1.2-2':'en-US' }}</td>
+            <td class="td-bal">{{ e.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="td-pay">{{ e.payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             <td class="status">
               <span [ngClass]="{'pending': e.status == 'Pending',
                                 'overdue': e.status == 'Overdue',

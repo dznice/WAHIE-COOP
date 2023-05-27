@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup,FormControl,Validators,FormBuilder, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { passwordMatch } from '../../validators/passwordMatch';
 import { BackendService } from '../../services/backend.service';
@@ -13,30 +13,29 @@ import { NgToastService } from 'ng-angular-popup';
   styleUrls: ['./sadmin-home.component.scss'],
 })
 export class SadminHomeComponent {
-
   /* Switch declaration */
   selected: boolean;
   libJournals: any;
-  types: string[] = ["Admin", "Member"];
+  types: string[] = ['Admin', 'Member'];
   type: string;
 
-  userrole: number[] = [1,3];
+  userrole: number[] = [1, 3];
 
-  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,
-    private toast:NgToastService) {
+  constructor(private http: HttpClient, private wahieService: WahieService, private route: Router, private backend: BackendService,
+    private toast: NgToastService
+  ) {
     this.showUsers();
-    // this.Departments();
-
+    //this.Departments();
   }
 
   autoAdminForm = new FormGroup({
-    username : new FormControl("", [Validators.required]),
-    email : new FormControl("", [Validators.required]),
-  })
+    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+  });
 
   addDepartment = new FormGroup({
-    department : new FormControl("", [Validators.required])
-  })
+    department: new FormControl('', [Validators.required]),
+  });
 
   userAccounts: any[] = [];
   Loaded = false;
@@ -55,42 +54,52 @@ export class SadminHomeComponent {
 
   AccountType: string;
 
-  ngOnInit(): void {    
-}
-
+  ngOnInit(): void {}
 
   showModal = -1;
-  show(index: number){
+  show(index: number) {
     this.showModal = index;
   }
 
+  public form = {
+    username: null,
+    email: null,
+    department: null,
+  };
 
-
-  back(){
-    this.route.navigateByUrl('super-admin/sadmin-home')
+  autoAdmin() {
+    console.log(this.form);
+    return this.backend.adminadd(this.form).subscribe((res: any) => {
+      this.show(2);
+      this.toast.success({detail: 'Success', summary: 'Admin account created', sticky: false, position: 'false'});
+    });
   }
 
-  public form = {
-    username:null,
-    email:null,
+  public depform = {
     department:null
   }
 
-  autoAdmin(){
-    console.log(this.form)
-    return this.backend.adminadd(this.form).subscribe((res:any)=>{
-      this.show(2)
-      this.toast.success({detail:'Successful',summary:'Admin account created', sticky:false,position:'false'});  
+  deptModal = -1;
+  showdept(index: number){
+    this.deptModal = index;
+  }
+
+  addDept(){
+    console.log(this.depform)
+    return this.backend.deptAdd(this.depform).subscribe((res:any)=>{
+      this.showdept(2)
+      this.toast.success({detail:'Success',summary:'New department added', sticky:false,position:'false'});  
     });
   }
 
-
   showUsers() {
-    this.http.get('http://127.0.0.1:8000/api/userrole').subscribe((res: any) => {
-      this.Loaded = true;
-      console.log(res);
-      this.userAccounts = res;
-    });
+    this.http
+      .get('http://127.0.0.1:8000/api/userrole')
+      .subscribe((res: any) => {
+        this.Loaded = true;
+        console.log(res);
+        this.userAccounts = res;
+      });
   }
 
   isChecked: boolean = true;
@@ -109,19 +118,21 @@ export class SadminHomeComponent {
     }
   }
 
-  showLibJournal(): void{
-    this.libJournals = this.wahieService.listLibJournals().subscribe(libjournal=>{
-      this.libJournals = libjournal;
-      console.log(this.libJournals);
-    });
+  showLibJournal(): void {
+    this.libJournals = this.wahieService
+      .listLibJournals()
+      .subscribe((libjournal) => {
+        this.libJournals = libjournal;
+        console.log(this.libJournals);
+      });
   }
 
-   //disable user status 1 to 0
-   activateUser(data: any) {
+  //disable user status 1 to 0
+  activateUser(data: any) {
     (this.id = data.id),
-    (this.status = 1),
-    (this.name = data.name),
-    (this.email = data.email);
+      (this.status = 1),
+      (this.name = data.name),
+      (this.email = data.email);
     this.coop = data.coop;
     this.activated();
   }
@@ -134,7 +145,7 @@ export class SadminHomeComponent {
       email: this.email,
       coop: this.coop,
     };
-    this.log.activity ='Disable Account for' + ' ' + this.email
+    this.log.activity = 'Disable Account for' + ' ' + this.email;
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {
@@ -146,16 +157,15 @@ export class SadminHomeComponent {
         this.email = '';
         this.coop = '';
         this.activityLog();
-      }); 
+      });
   }
-
 
   //Enable user status 0 to 1
   deactivateTOactivate(data: any) {
     (this.id = data.id),
-    (this.status = 0),
-    (this.name = data.name),
-    (this.email = data.email);
+      (this.status = 0),
+      (this.name = data.name),
+      (this.email = data.email);
     this.deactivated();
   }
   deactivated() {
@@ -166,7 +176,7 @@ export class SadminHomeComponent {
       email: this.email,
     };
 
-    this.log.activity ='Enable Account for' + ' ' + this.email
+    this.log.activity = 'Enable Account for' + ' ' + this.email;
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus2)
       .subscribe((res: any) => {
@@ -180,15 +190,14 @@ export class SadminHomeComponent {
       });
   }
 
-
   //activate member from status 2 to 1
   activateUser2(data: any) {
     (this.id = data.id),
-    (this.status = 1),
-    (this.name = data.name),
-    (this.email = data.email);
+      (this.status = 1),
+      (this.name = data.name),
+      (this.email = data.email);
     this.coop = data.coop;
-    
+
     this.activated2();
   }
   activated2() {
@@ -199,7 +208,7 @@ export class SadminHomeComponent {
       email: this.email,
       coop: this.coop,
     };
-    this.log.activity ='Activate Account for' + ' ' + this.email
+    this.log.activity = 'Activate Account for' + ' ' + this.email;
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {
@@ -215,15 +224,16 @@ export class SadminHomeComponent {
       });
   }
 
-  public log ={
+  public log = {
     name: sessionStorage.getItem('name'),
-    department:sessionStorage.getItem('department'),
-    activity:'login'
+    department: sessionStorage.getItem('department'),
+    activity: 'login',
+  };
+  activityLog() {
+    this.http
+      .post('http://127.0.0.1:8000/api/addActivity', this.log)
+      .subscribe((res: any) => {
+        console.log(res);
+      });
   }
-  activityLog(){
-    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
-        console.log(res)   
-    })
-  }
-
 }

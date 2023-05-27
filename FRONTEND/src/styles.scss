@@ -32,19 +32,25 @@ body {
 }
 
 
-/* Dropdown */
-.ng-dropdown-panel{
-  background-color: var(--grey-alt);
-  outline: none;
-  padding: 10px 10px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #333;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border: 1px solid #aaa;
-  margin: 2px 0;
-}
+// /* Ng Select */
+// .ng-dropdown-panel{
+//   background-color: var(--grey-alt);
+//   outline: none;
+//   color: #333;
+//   padding: 10px 10px;
+//   font-size: 14px;
+//   font-weight: 400;
+//   border-bottom-right-radius: 5px;
+//   border-bottom-left-radius: 5px;
+//   border: 2px solid #ccc;
+//   margin: 2px 0;
+// }
+
+// ng-select .ng-select-container {
+//   padding: 8px 6px;
+//   margin-left: 10px;
+//   margin-right: 10px;
+// }
 
 /* Select Dropdown */
 select {
@@ -64,10 +70,4 @@ select {
   line-height: 1.1;
   background-color: var(--panel-color);
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
-}
-
-ng-select .ng-select-container {
-  padding: 8px 6px;
-  margin-left: 10px;
-  margin-right: 10px;
 }

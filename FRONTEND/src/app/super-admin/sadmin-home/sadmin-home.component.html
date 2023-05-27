@@ -1,34 +1,36 @@
 
 <main>
+  <h1 class="title">User Accounts</h1>
+
   <div class="header">
     <div class="left-cont">
-      <h1 class="title">Accounts</h1>
-    </div>
-
-    <div class="right-cont">
-      <button class="btn-add" (click)="show(1)">
-        <i class="ti ti-plus"></i>New Account
-      </button>
-    </div>
-  </div>
-
-
-
-  <div class="filter-field">
-    <div class="filter-search">
-      <label>Search User</label>
-      <div class="input-box" >
-        <i class="ti ti-search"></i>
-        <input type="text" placeholder="Search" [(ngModel)]="searchText" />
+      <div class="filter-field">
+        <div class="filter-search">
+          <label>Search User</label>
+          <div class="input-box" >
+            <i class="ti ti-search"></i>
+            <input type="text" placeholder="Search" [(ngModel)]="searchText" />
+          </div>
+        </div>
+    
+        <div class="filter-role">
+          <label>User Role</label>
+          <select [(ngModel)]="type" name="journal-type">
+            <option [ngValue]="undefined" selected>All</option>
+            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <div class="filter-role">
-      <label>User Role</label>
-      <select [(ngModel)]="type" name="journal-type">
-        <option [ngValue]="undefined" selected>All</option>
-        <option *ngFor="let type of types" [value]="type">{{ type }}</option>
-      </select>
+    <div class="right-cont">
+      <button class="btn-add" (click)="showdept(1)">
+        <i class="ti ti-plus"></i>New Department
+      </button>
+
+      <button class="btn-add" (click)="show(1)">
+        <i class="ti ti-plus"></i>New Admin
+      </button>
     </div>
   </div>
 
@@ -48,7 +50,7 @@
           let user of userAccounts
             | search : searchText
             | filter : type
-            | paginate : { itemsPerPage: 4, currentPage: p }
+            | paginate : { itemsPerPage: 10, currentPage: p }
         "
       >
         <tr *ngIf="user.userrole.id != 2 || user.userrole.user_type == type">
@@ -101,17 +103,6 @@
             <label for="admin_email">Email Address</label>
             <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
             <br/>
-            <!-- <label for="admin_email">Department</label>
-            <br/>
-            <ng-select class="modalinput" [(ngModel)]="form.department" formControlName="department" >
-              <ng-option
-                    *ngFor="let item of depts"
-                    [value]="item.department_name"
-                  >
-                    {{ item.department_name }}
-                  </ng-option>
-          </ng-select> -->
-            <!-- <br/> -->
           </div>
           <div class="otp-footer">
             <button class="closebtn" (click)="show(2)">Close</button>
@@ -123,3 +114,23 @@
   </div>
 </section>
 
+<section>
+  <div>
+    <form (ngSubmit)="addDept()" #deparmentAdd="ngForm" [formGroup]="addDepartment" class="register-form">
+      <div class="dept-modal" *ngIf="deptModal === 1">
+        <div class="dept-content">
+          <div class="dept-header">Add Department</div>
+          <div class="dept-body">
+            <label for="admin_username">Department</label>
+            <input class="modalinput" type="text" [(ngModel)]="depform.department" formControlName="department"/>
+            <br/>
+          </div>
+          <div class="dept-footer">
+            <button class="closebtn" (click)="showdept(2)">Close</button>
+            <button class="savebtn">Create</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

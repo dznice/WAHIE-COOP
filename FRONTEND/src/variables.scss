@@ -11,9 +11,11 @@
   --dark-grey: #707070;
   --dark-grey-2: #aeaaaa;
   --dark-grey-3: #918e8e;
+  --black: #0e1014;
   --blue: #0077c5;
   --green: #35CE8D;
   --yellow: #ffc145;
+  --red: #ff3e2f;
   --pending-bg: #fff0c2;
   --pending-font: #a68b00;
   --overdue-bg: #ffcdd2;
@@ -24,18 +26,6 @@
   /* ====== Transitions ====== */
   --tran-05: all 0.5s ease;
   --tran-03: all 0.3s ease;
-}
-
-button {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  border-radius: .435rem;
-}
-
-input {
-  caret-color: var(--primary-color);
 }
 
 .darkmodes {
@@ -51,5 +41,16 @@ input {
   --grey-2: #4e5261;
   --grey-3: #2b2e38;
   --grey-4: #15181f;
+}
 
+button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  border-radius: .435rem;
+}
+
+input {
+  caret-color: var(--primary-color);
 }

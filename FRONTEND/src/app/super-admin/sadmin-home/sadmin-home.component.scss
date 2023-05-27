@@ -6,31 +6,33 @@ main {
   width: 100%;
   animation: transitionIn 0.75s;
 
+  .title {
+    color: var(--primary-color);
+  }
+
   .header {
     display: grid;
+    margin-top: 1rem;
     margin-bottom: 1rem;
 
     .left-cont {
       grid-column: 1;
-
-      .title {
-        color: var(--primary-color);
-      }
     }
     
     /* Add Button */
     .right-cont {
       text-align: right;
-      margin-top: 1px;
+      margin-top: 1.8rem;
       grid-column: 2;
 
       .btn-add {
         cursor: pointer;
         border: none;
-        border-radius: 0.5rem;
+        border-radius: 0.525rem;
         background: var(--primary-color);
         color: var(--panel-color);
         padding: 12px 20px 12px 14px;
+        margin: 0 0.5rem;
       }
       .ti-plus {
         margin-right: 5px;
@@ -40,12 +42,183 @@ main {
       .btn-add:hover {
         background: var(--primary-alt);
       }
-    }
+    } 
   }
 }
 
 
-/* Modal */
+/* Filter Fields */
+.filter-field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  // Search box
+  .filter-search {
+    margin-right: 10px;
+    
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-grey);
+    }
+
+    .input-box {
+      position: relative;
+      height: 40px;
+      max-width: 300px;
+      width: 100%;
+      text-align: right;
+      margin-top: .5rem;
+  
+      i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    
+      .ti-search {
+        left: 16px;
+        font-size: 22px;
+        color: var(--dark-grey-2);
+      }
+    
+      input {
+        height: 100%;
+        width: 100%;
+        font-size: 15px;
+        font-weight: 400;
+        padding: 0 20px 0 50px;
+        border-radius: 0.625rem;
+        border: 1.6px solid var(--border-color);
+        outline-color: var(--dark-grey-2);
+        background-color: transparent;
+      }
+    
+      input::placeholder {
+        color: var(--dark-grey-2);
+      }
+    }
+  }
+  
+  // Filter Role
+  .filter-role {
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-grey);
+    }
+
+    select {
+      outline: none;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      height: 40px;
+      max-width: 300px;
+      width: 100%;
+      color: #333;
+      background: #fff;
+      margin-top: .5rem;
+      border-radius: 0.625rem;
+      border: 1.6px solid #d1cccc;
+      padding: 0 15px 0 15px;
+    }
+  }
+}
+
+/* Table */
+.table-container {
+  margin: auto;
+  width: 100%;
+
+  .table-content {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    overflow: hidden;
+    border-collapse: collapse;
+    border-radius: 0.625rem;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px var(--border-color);
+
+    thead {
+      th {
+        position: sticky;
+        background-color: var(--primary-color);
+        color: var(--panel-color);
+        text-align: left;
+        font-weight: bold;
+        padding: 12px 16px;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--border-color);
+        background-color: var(--panel-color);
+        td {
+          text-align: left;
+          font-weight: 500;
+          padding: 16px 16px;
+          border-right: 1px solid var(--border-color);
+        }
+      }
+
+      tr:hover {
+        td {
+          //cursor: pointer;
+          color: var(--primary-color);
+          background-color: var(--panel-color);
+        }
+      }
+    }
+  }
+}
+
+.pagination-controls {
+  text-align: right;
+  margin-right: 0px;
+}
+
+/* Switch */
+.switch {
+  cursor: pointer;
+  margin: 1px;
+  position: relative;
+  width: 50px;
+  height: 30px;
+  border-radius: 25px;
+  outline: none;
+  background-color: #ccc;
+  -webkit-appearance: none;
+}
+
+input::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  height: 1.25rem;
+  width: 1.25rem;
+  background-color: #ffffff;
+  transition: left 0.3s;
+}
+
+input:checked {
+  background-color: #3f0f88;
+}
+
+input:checked::after {
+  left: 70%;
+}
+
+/* Add Admin Modal */
 .otp-modal {
   position: fixed;
   background: #000000bf;
@@ -146,178 +319,103 @@ main {
   }
 }
 
+/* Add Department Modal */
+.dept-modal {
+  position: fixed;
+  background: #000000bf;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-/* Filter Fields */
-.filter-field {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  // Search box
-  .filter-search {
-    margin-right: 10px;
-    
-    label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--dark-grey);
-    }
-
-    .input-box {
-      position: relative;
-      height: 46px;
-      max-width: 300px;
-      width: 100%;
-      text-align: right;
-      margin-top: .5rem;
-  
-      i {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    
-      .ti-search {
-        left: 16px;
-        font-size: 22px;
-        color: var(--dark-grey-2);
-      }
-    
-      input {
-        height: 100%;
-        width: 100%;
-        font-size: 15px;
-        font-weight: 400;
-        padding: 0 20px 0 50px;
-        border-radius: 0.625rem;
-        border: 1.6px solid var(--border-color);
-        outline-color: var(--dark-grey-2);
-        background-color: transparent;
-      }
-    
-      input::placeholder {
-        color: var(--dark-grey-2);
-      }
-    }
-  }
-  
-  // Filter Role
-  .filter-role {
-
-    label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--dark-grey);
-    }
-
-    select {
-      outline: none;
-      font-family: "Poppins", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      height: 46px;
-      max-width: 300px;
-      width: 100%;
-      color: #333;
-      background: #fff;
-      margin-top: .5rem;
-      border-radius: 0.625rem;
-      border: 1.6px solid #d1cccc;
-      padding: 0 15px 0 15px;
-
-      option:hover {
-        background-color: var(--primary-color);
-      }
-    }
-  }
-}
-
-/* Table */
-.table-container {
-  margin: auto;
-  width: 100%;
-
-  .table-content {
+  .dept-content {
+    background: #fff;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    text-align: center;
+    padding: 0 30px 1px;
+    transition: transform 0.4s, top 0.4s;
+    max-width: 400px;
     width: 100%;
-    margin: 20px 0;
-    font-size: 0.9rem;
-    overflow: hidden;
-    border-collapse: collapse;
-    border-radius: 0.625rem;
-    border-style: hidden;
-    box-shadow: 0 0 0 1px var(--border-color);
 
-    thead {
-      th {
-        position: sticky;
-        background-color: var(--primary-color);
-        color: var(--panel-color);
+    .dept-header {
+      padding: 30px 10px;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--primary-color);
+      text-align: left;
+    }
+
+    .dept-body {
+      
+      label {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--primary-color);
         text-align: left;
-        font-weight: bold;
-        padding: 12px 16px;
-        border-right: 1px solid var(--border-color);
-        border-bottom: 1px solid var(--border-color);
+      }
+
+      .modalinput {
+        display: flex;
+        width: calc(90%);
+        flex-direction: column;
+        margin: auto;
+        outline: none;
+        font-size: 14px;
+        font-weight: 400;
+        color: #333;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        padding: 0 14px;
+        height: 36px;
       }
     }
 
-    tbody {
-      tr {
-        border-bottom: 1px solid var(--border-color);
-        background-color: var(--panel-color);
-        td {
-          text-align: left;
-          font-weight: 500;
-          padding: 16px 16px;
-          border-right: 1px solid var(--border-color);
-        }
+    .dept-footer {
+      .savebtn {
+        width: 44%;
+        margin: 5px 0px 0px 10px;
+        height: 43px;
+        background-color: var(--primary-color);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.45rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        transition: 0.3s;
+        text-decoration: none;
       }
 
-      tr:hover {
-        td {
-          //cursor: pointer;
-          color: var(--primary-color);
-          background-color: var(--panel-color);
-        }
+      .savebtn:hover {
+        background-color: var(--primary-alt);
+      }
+
+      .closebtn {
+        width: 44%;
+        margin: 5px 0px 0px 0px;
+        height: 43px;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.45rem;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        transition: 0.3s;
+        text-decoration: none;
+        background-color: var(--grey-alt);
+        color: var(--dark-grey);
+      }
+
+      .closebtn:hover {
+        background-color: var(--dark-grey-2);
       }
     }
   }
-}
-
-.pagination-controls {
-  text-align: right;
-  margin-right: 0px;
-}
-
-/* Switch */
-.switch {
-  cursor: pointer;
-  margin: 1px;
-  position: relative;
-  width: 50px;
-  height: 30px;
-  border-radius: 25px;
-  outline: none;
-  background-color: #ccc;
-  -webkit-appearance: none;
-}
-
-input::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 30%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  height: 1.25rem;
-  width: 1.25rem;
-  background-color: #ffffff;
-  transition: left 0.3s;
-}
-
-input:checked {
-  background-color: #3f0f88;
-}
-
-input:checked::after {
-  left: 70%;
 }

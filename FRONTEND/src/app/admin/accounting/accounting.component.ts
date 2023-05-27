@@ -78,7 +78,7 @@ export class AccountingComponent implements OnInit {
             // this.toast.error({detail:'Failed',summary:'No Transactions Yet',duration:2000, sticky:false,position:'tr'});
           }
         });
-      }
+      },
       // error => {
       //   this.toast.warning({detail:'Invalid email',summary:'Please check your email',duration:2000, sticky:false,position:'tr'});
       // }
