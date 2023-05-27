@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit, OnDestroy  {
 
   loginForm = new FormGroup({
   
-    email : new FormControl("", [Validators.required]),
+    email : new FormControl("", ),
 
-    password : new FormControl("", [Validators.required]),
+    password : new FormControl("", ),
 
   })
   public form = {
@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
             this.token.handle(user.access_token);
             this.Auth.changeStatus(true);
             this.route.navigateByUrl('admin/admin-home');//verified
-            this.toast.success({detail:'Welcome',summary:'Successfully logged in',duration:2000, sticky:false,position:'tr'});  
+            this.toast.success({detail:'Welcome back',summary:'Successfully logged in',duration:2000, sticky:false,position:'tr'});  
           } 
           else if(user.user['status']==0){
             this.route.navigateByUrl('disable-account');//disabled
@@ -147,11 +147,12 @@ export class LoginComponent implements OnInit, OnDestroy  {
       if(user.user['code']!=0){
         this.token.ftoken(user.access_token);
         this.route.navigateByUrl('sadmin-chpass');
-        this.toast.success({detail:'Welcome',summary:'Please update your password',duration:2000, sticky:false,position:'tr'});  
+        this.toast.success({detail:'Suceess',summary:'Please update your password',duration:2000, sticky:false,position:'tr'});  
       }else{
         this.token.handle(user.access_token);
-        this.route.navigateByUrl('super-admin/sadmin-home');
         this.toast.success({detail:'Welcome back',summary:'Successfully logged in',duration:2000, sticky:false,position:'tr'}); 
+        this.route.navigateByUrl('super-admin/sadmin-home');
+        
       }
      
     }
@@ -165,6 +166,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
         this.toast.success({detail:'Welcome',summary:'Please input first the otp',duration:2000, sticky:false,position:'tr'}); 
       }
       else if(user.user['code']==0){
+        
         //verified
           if(user.user['status']==2){
             this.route.navigateByUrl('not-verified');//not verified

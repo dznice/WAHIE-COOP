@@ -6,6 +6,8 @@ import { BackendService } from '../services/backend.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../services/token.service';
+import { NgToastService } from 'ng-angular-popup';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-admin-chpass',
@@ -38,7 +40,7 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
   chpassForm!: FormGroup;
 
   constructor(@Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private http:HttpClient, 
-  private backend:BackendService, private route:Router, private token:TokenService ){}
+  private backend:BackendService, private route:Router, private token:TokenService,private toast:NgToastService ){}
 
   passwordMatch(controlName: string, matchControlName: string) {
     return (formGroup: FormGroup) => {
@@ -64,10 +66,10 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
 
     this.chpassForm = this.fb.group(
       {
-        name: new FormControl(null, [Validators.required]),
-        password: new FormControl(null, [Validators.required]),
+        name: new FormControl(null),
+        password: new FormControl(null),
 
-        confirm_pass: new FormControl(null, [Validators.required]),
+        confirm_pass: new FormControl(null),
       },
       {
         validator: this.passwordMatch('password', 'confirm_pass'),
@@ -104,14 +106,31 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
 
 
   submitPass(){
+    
+    // if( this.chpassForm.valid){
+    //   this.toast.warning({detail:'Input required',summary:'Fill all the inputs to submit',duration:500 , sticky:false,position:'tr'}); 
+    
+    // }
+    if (this.chpassForm.invalid){
+      this.toast.error({detail:'Error',summary:'Password not match ',duration:2000 , sticky:false,position:'tr'}); 
+     }
+
+ else{
+      
     this.http.post('http://127.0.0.1:8000/api/users/adminChange' + '/' + this.id, this.chform).subscribe(
       (res:any)=>{
         console.log(res.id);
-
         this.token.handle(sessionStorage.getItem('ftoken'));
         sessionStorage.clear();
         sessionStorage.setItem('name', res.name);
         this.route.navigateByUrl('admin/admin-home');
-    }); 
+        this.toast.success({detail:'Welcome',summary:'Successfully logged in',duration:2000, sticky:false,position:'tr'});  
+      
+    },
+    error => {
+      this.toast.warning({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000, sticky:false,position:'tr'});
+    }
+    ); 
+  }
   }
 }

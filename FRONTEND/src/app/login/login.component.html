@@ -3,7 +3,7 @@
     <div class="box">
         <div class="inner-box">
             <div class="form-wrap" >    
-                <form #loginForms="ngForm" (ngSubmit)="submitLogin()" [formGroup]="loginForm" class="login-form"  *ngIf="isDisplayed" @slideright>
+                <form #loginForms="ngForm" ngNativeValidate (ngSubmit)="submitLogin()" [formGroup]="loginForm" class="login-form"  *ngIf="isDisplayed" @slideright>
                     <div class="wah-logo">
                         <img src="assets/image/coop-logo.png" alt="WAH Logo">
                         <p>WAHIE <br> Cooperative</p>
@@ -16,12 +16,12 @@
                 
                     <div class="txt-field">
                             <div class="txt-wrap">
-                                <input type="email" name="email" formControlName="email" class="input-field" id="log-email" placeholder="Email" 
+                                <input type="email" name="email" formControlName="email" class="input-field" id="log-email" placeholder="Email" required
                                 [ngClass]="{error : getControl('email')?.errors && getControl('email')}"  [(ngModel)]="form.email"><br>
                             </div>
 
                             <div class="txt-wrap">
-                                <input [type]="changetype?'password':'text'" name="password" formControlName="password"  [(ngModel)]="form.password" class="input-field" id="log-pass" placeholder="Password" 
+                                <input [type]="changetype?'password':'text'" name="password" formControlName="password"  [(ngModel)]="form.password" class="input-field" id="log-pass" placeholder="Password"  required
                                 [ngClass]="{error : getControl('password')?.errors && getControl('password')}">
                                 <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span>
                             

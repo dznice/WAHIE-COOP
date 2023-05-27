@@ -15,6 +15,9 @@ interface SideNavToggle {
   selector: 'app-admin-sidenav',
   templateUrl: './admin-sidenav.component.html',
   styleUrls: ['./admin-sidenav.component.scss'],
+  host: {
+    "(window:click)": "disappearContext()"
+  },
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -76,6 +79,26 @@ export class AdminSidenavComponent implements OnInit {
     //     this.loggedIn = value;
     //   }
     // )
+  }
+
+  hide:boolean = false;
+
+  contextMenu(e:any){
+    e.stopPropagation();
+    this.hide = !this.hide;
+
+
+  }
+
+  disappearContext(){
+    this.hide = false;
+  }
+
+
+
+  showModal = -1;
+  show(index: number){
+    this.showModal = index;
   }
 
   toggleCollapse(): void {
