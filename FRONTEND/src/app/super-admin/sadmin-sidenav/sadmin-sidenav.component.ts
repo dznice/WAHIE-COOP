@@ -43,7 +43,11 @@ interface SideNavToggle {
     ]),
   ],
 })
+
 export class SadminSidenavComponent implements OnInit {
+toggleDarkTheme() {
+  document.body.classList.toggle('darkmodes');
+}
 
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
@@ -66,14 +70,14 @@ export class SadminSidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    
+
   }
   hide:boolean = false;
- 
+
   contextMenu(e:any){
     e.stopPropagation();
     this.hide = !this.hide;
- 
+
 
   }
 
@@ -116,7 +120,7 @@ export class SadminSidenavComponent implements OnInit {
 
   activityLog(){
     this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
-        console.log(res)   
+        console.log(res)
     })
   }
 
@@ -130,5 +134,5 @@ export class SadminSidenavComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
- 
+
 }

@@ -40,6 +40,13 @@ interface SideNavToggle {
   ],
 })
 export class AdminSidenavComponent implements OnInit {
+  //dark
+  toggleDarkTheme() {
+    document.body.classList.toggle('darkmodes');
+  }
+
+
+
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
   screenWidth = 0;
@@ -62,7 +69,7 @@ export class AdminSidenavComponent implements OnInit {
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
     // var data = this.creds.get();
-    // console.log('email', data) 
+    // console.log('email', data)
     // this.email=sessionStorage.getItem('email')
     // this.auth.authStatus.subscribe(
     //   value=>{
@@ -90,7 +97,7 @@ export class AdminSidenavComponent implements OnInit {
   public loggedIn:boolean = false;
 
   constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient) {}
-  
+
   public log ={
     name: this.userName(),
     department:sessionStorage.getItem('department'),
@@ -99,7 +106,7 @@ export class AdminSidenavComponent implements OnInit {
 
   activityLog(){
     this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
-        console.log(res)   
+        console.log(res)
     })
   }
 
@@ -110,7 +117,7 @@ export class AdminSidenavComponent implements OnInit {
     localStorage.clear();
     this.router.navigateByUrl('/login');
   }
-  
+
   userName(){
     return sessionStorage.getItem('name');
   }

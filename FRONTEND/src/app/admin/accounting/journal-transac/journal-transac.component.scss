@@ -51,7 +51,7 @@ main {
   }
   .export {
     margin-left: auto;
-margin-right: 0;
+    margin-right: 0;
     display: flex;
     width: calc(38% / 4 - 6px);
     flex-direction: column;
@@ -79,8 +79,6 @@ margin-right: 0;
   }
 }
 
-
-
 .headinput {
   outline: none;
   font-size: 14px;
@@ -93,11 +91,14 @@ margin-right: 0;
   margin: 4px 4px;
 }
 
+/* Table */
 .table-container {
+  margin: auto;
   width: 100%;
+
   .table-content {
     width: 100%;
-    margin: 10px 0;
+    margin: 20px 0;
     font-size: 0.9rem;
     overflow: hidden;
     border-collapse: collapse;
@@ -108,13 +109,17 @@ margin-right: 0;
     thead {
       th {
         position: sticky;
-        background-color: var(--grey);
+        background-color: var(--grey-alt);
         color: var(--primary-color);
-        text-align: center;
+        text-align: left;
         font-weight: bold;
         padding: 12px 16px;
         border-right: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
+      }
+
+      .th-debit , .th-credit {
+        text-align: right;
       }
     }
 
@@ -122,17 +127,35 @@ margin-right: 0;
       tr {
         border-bottom: 1px solid var(--border-color);
         background-color: var(--panel-color);
+
         td {
           text-align: left;
           font-weight: 500;
           padding: 12px 16px;
-          border: 1px solid var(--border-color);
+          border-right: 1px solid var(--border-color);
+        }
+
+        .td-debit, 
+        .td-credit,
+        .td-total {
+          text-align: right;
         }
       }
 
-      tr:hover {
+      .tr-total {
+        background-color: var(--grey-alt);
+
         td {
+          padding: 6px 16px;
+        }
+        
+      }
+
+      tr:not(.tr-total):hover {
+        td {
+          cursor: pointer;
           color: var(--primary-color);
+          //background-color: var(--grey);
         }
       }
     }

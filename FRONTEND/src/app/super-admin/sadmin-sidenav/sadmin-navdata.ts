@@ -9,9 +9,9 @@ export const sAdminNavData = [
         icon: 'ti ti-history',
         label: 'Logs'
     },
-    {
-        routeLink: 'sadmin-settings',
-        icon: 'ti ti-settings',
-        label: 'Settings'
-    }
+    // {
+    //     routeLink: 'sadmin-settings',
+    //     icon: 'ti ti-settings',
+    //     label: 'Settings'
+    // }
 ];

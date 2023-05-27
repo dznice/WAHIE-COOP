@@ -50,8 +50,8 @@
             <th>Type</th>
             <th>No.</th>
             <th>Due Date</th>
-            <th>Balance</th>
-            <th>Payment</th>
+            <th class="th-bal">Balance</th>
+            <th class="th-pay">Payment</th>
             <th>Status</th>
         </thead>
         <tbody *ngFor="
@@ -64,9 +64,9 @@
           <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
           <td >{{ acc.debit.cred.entries.entry_name }}</td>
           <td >{{ acc.debit.cred.transac.transaction_number }}</td>
-          <td>{{ acc.debit.cred.due_date }}</td>
-          <td>{{ acc.open_balance }}</td>
-          <td>{{ acc.payment }}</td>
+          <td >{{ acc.debit.cred.due_date }}</td>
+          <td class="td-bal">{{ acc.open_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+          <td class="td-pay">{{ acc.payment | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           <td class="status">
             <span [ngClass]="{'pending': acc.status == 'Pending',
                               'overdue': acc.status == 'Overdue',

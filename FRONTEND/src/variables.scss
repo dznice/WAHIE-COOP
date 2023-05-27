@@ -11,9 +11,11 @@
   --dark-grey: #707070;
   --dark-grey-2: #aeaaaa;
   --dark-grey-3: #918e8e;
+  --black: #0e1014;
   --blue: #0077c5;
   --green: #35CE8D;
   --yellow: #ffc145;
+  --red: #ff3e2f;
   --pending-bg: #fff0c2;
   --pending-font: #a68b00;
   --overdue-bg: #ffcdd2;
@@ -26,8 +28,23 @@
   --tran-03: all 0.3s ease;
 }
 
+.darkmodes {
+  /* ===== Colors ===== */
+  --primary-color: #3f0f88;
+  --primary-alt: #2c0b5f;
+  --secondary-color: #0099ff;
+  --secondary-alt: rgba(0, 153, 255, 0.15);
+  --white:#F2F3F5;
+  --panel-color: #0e1014;
+  --border-color: #15181f;
+  --grey-1: #676b7a;
+  --grey-2: #4e5261;
+  --grey-3: #2b2e38;
+  --grey-4: #15181f;
+}
+
 button {
-  font-family: "Poppins", sans-serif; 
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   border: none;
   cursor: pointer;

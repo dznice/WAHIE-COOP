@@ -69,6 +69,13 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader
 import { ExportAsModule } from 'ngx-export-as';
 import { LedgerComponent } from './admin/reports/ledger/ledger.component';
 import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generate-ledger.component';
+import { TrialBalanceComponent } from './admin/reports/trial-balance/trial-balance.component';
+import { SlAccountsComponent } from './admin/reports/sl-accounts/sl-accounts.component';
+import { SlMembersComponent } from './admin/reports/sl-members/sl-members.component';
+import { FsFinconComponent } from './admin/reports/fs-fincon/fs-fincon.component';
+import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
+import { PrintCrjComponent } from './admin/reports/print-crj/print-crj.component';
+import { PrintCdjComponent } from './admin/reports/print-cdj/print-cdj.component';
 
 @NgModule({
   declarations: [
@@ -126,6 +133,13 @@ import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generat
     JournalTransacComponent,
     LedgerComponent,
     GenerateLedgerComponent,
+    TrialBalanceComponent,
+    SlAccountsComponent,
+    SlMembersComponent,
+    FsFinconComponent,
+    FsOpComponent,
+    PrintCrjComponent,
+    PrintCdjComponent,
   ],
   imports: [
     BrowserModule,

@@ -44,6 +44,13 @@ import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 import { ReportsComponent } from './admin/reports/reports.component';
 import { LedgerComponent } from './admin/reports/ledger/ledger.component';
+import { FsFinconComponent } from './admin/reports/fs-fincon/fs-fincon.component';
+import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
+import { PrintCrjComponent } from './admin/reports/print-crj/print-crj.component';
+import { PrintCdjComponent } from './admin/reports/print-cdj/print-cdj.component';
+import { SlAccountsComponent } from './admin/reports/sl-accounts/sl-accounts.component';
+import { SlMembersComponent } from './admin/reports/sl-members/sl-members.component';
+import { TrialBalanceComponent } from './admin/reports/trial-balance/trial-balance.component';
 
 
 const routes: Routes = [
@@ -137,6 +144,13 @@ const routes: Routes = [
       {path: 'manage-members', component: ManageMembersComponent},
       {path: 'reports', component: ReportsComponent},
       {path: 'reports/ledger', component: LedgerComponent},
+      {path: 'reports/fs-fincon', component: FsFinconComponent},
+      {path: 'reports/fs-op', component: FsOpComponent},
+      {path: 'reports/print-crj', component: PrintCrjComponent},
+      {path: 'reports/print-cdj', component: PrintCdjComponent},
+      {path: 'reports/sl-accounts', component: SlAccountsComponent},
+      {path: 'reports/sl-members', component: SlMembersComponent},
+      {path: 'reports/trial-balance', component: TrialBalanceComponent},
       {path: 'inventory', component: InventoryComponent},
       {path: 'admin-body', component: AdminBodyComponent}
     ]

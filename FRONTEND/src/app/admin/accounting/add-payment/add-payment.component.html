@@ -65,15 +65,11 @@
 
           <div class="customerPayment2">
             <label> Payment Method </label>
-            <select type="text" formControlName="paymentMethod" (change)="changeMethod($event)">
-            <!-- <select type="text"> -->
+            <select formControlName="paymentMethod" (change)="changeMethod($event)">
+              <option value="" selected disabled>Choose payment method</option>
               <option *ngFor="let item of paymentMethods" [value]="item.value">
                 {{item.viewValue}}
               </option>
-              <!-- <option>Cash</option>
-              <option>Check</option>
-              <option>Credit Card</option>
-              <option>Direct Debit</option> -->
             </select>
           </div>
 
@@ -86,7 +82,6 @@
 
           <div class="customerPayment2">
             <label> Deposit to </label>
-            <!-- <select type="text"> -->
               <select type="text" formControlName="depositTo">
               <option disabled selected hidden>
                 Cash and cash equivalents

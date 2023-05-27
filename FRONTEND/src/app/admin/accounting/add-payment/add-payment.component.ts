@@ -149,7 +149,7 @@ export class AddPaymentComponent implements OnInit {
         let result:any;
         result=res;
         console.log(result);
-        this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
+        this.toast.success({detail:'Success',summary:'Transaction saved',duration:2000, sticky:false,position:'tr'});
         this.route.navigateByUrl('admin/accounting')
       })
     }else{

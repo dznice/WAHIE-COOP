@@ -134,34 +134,11 @@ main {
           font-weight: 500;
           padding: 16px 16px;
           border-right: 1px solid var(--border-color);
+          width: 20%;
         }
 
-        .status {
-          width: 1rem;
-          font-weight: 600;
-
-          .overdue {
-            padding: 0.5rem 1.25rem;
-            background: var(--overdue-bg);
-            color: var(--overdue-font);
-            border-radius: 0.45rem;
-            width: fit-content;
-          }
-
-          .pending {
-            padding: 0.5rem 1.25rem;
-            background: var(--pending-bg);
-            color: var(--pending-font);
-            border-radius: 0.45rem;
-          }
-
-          .paid {
-            padding: 0.5rem 2.15rem;
-            background: var(--paid-bg);
-            color: var(--paid-font);
-            border-radius: 0.45rem;
-            text-align: center;
-          }
+        td:last-child {
+          width: 40%;
         }
       }
 

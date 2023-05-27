@@ -13,26 +13,26 @@ import { WahieService } from 'src/app/services/wahie.service';
 })
 export class SadminSettingsComponent {
 
-  constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,
-    private toast:NgToastService) {
+  // constructor(private http: HttpClient, private wahieService:WahieService, private route:Router, private backend:BackendService,
+  //   private toast:NgToastService) {
 
-  }
+  // }
 
-  addDepartment = new FormGroup({
-    department : new FormControl("", [Validators.required])
-  })
-  public depform = {
-    department:null
-  }
-  deptModal = -1;
-  showdept(index: number){
-    this.deptModal = index;
-  }
-  addDept(){
-    console.log(this.depform)
-    return this.backend.deptAdd(this.depform).subscribe((res:any)=>{
-      this.showdept(2)
-      this.toast.success({detail:'Successful',summary:'New department added', sticky:false,position:'false'});  
-    });
-  }
+  // addDepartment = new FormGroup({
+  //   department : new FormControl("", [Validators.required])
+  // })
+  // public depform = {
+  //   department:null
+  // }
+  // deptModal = -1;
+  // showdept(index: number){
+  //   this.deptModal = index;
+  // }
+  // addDept(){
+  //   console.log(this.depform)
+  //   return this.backend.deptAdd(this.depform).subscribe((res:any)=>{
+  //     this.showdept(2)
+  //     this.toast.success({detail:'Success',summary:'New department added', sticky:false,position:'false'});  
+  //   });
+  // }
 }
