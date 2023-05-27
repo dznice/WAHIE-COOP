@@ -142,15 +142,135 @@ return response()->json($totals);
 
 
 
-    public function totaljour()
-    {
-        $totals = LibJournal::join('credits', 'lib_journals.id', '=', 'credits.journals_id')
-            ->groupBy('lib_journals.id', 'lib_journals.journal_name')
-            ->select('lib_journals.id','lib_journals.journal_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
-            ->get();
+public function totaljour()
+{
+    $totals = LibJournal::join('credits', 'lib_journals.id', '=', 'credits.journals_id')
+        ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type')
+        ->select('lib_journals.id', 'lib_journals.journal_name','lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
+        ->get();
 
-        return response()->json($totals);
+    $result = [];
+
+    foreach ($totals as $total) {
+        $journalType = $total->journal_type; // Assuming "journal_type" column exists in the "LibJournal" table
+
+        if (strpos(strtolower($journalType), 'cash and cash equivalents') !== false) {
+            $totald = $total->total_debit_amount - $total->total_credit_amount;
+            $totalc = 0;
+        } elseif (strpos(strtolower($journalType), 'current liabilities') !== false) {
+            $totalc = $total->total_credit_amount - $total->total_debit_amount;
+            $totald = 0;
+        } else {
+            $totalc = $total->total_credit_amount;
+            $totald = $total->total_debit_amount;
+        }
+
+        $result[] = [
+            'id' => $total->id,
+            'journal_name' => $total->journal_name,
+            'totalc' => $totalc,
+            'totald' => $totald,
+        ];
     }
+
+    return response()->json($result);
+}
+
+
+public function totalmemjour(Request $request)
+{
+    $totals = DB::table('credits')
+        ->join('lib_journals', 'credits.journals_id' , '=' , 'lib_journals.id')
+        ->join('payables', 'credits.payables_id', '=', 'payables.id')
+        ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
+        ->join('members', 'transactions.members_id', '=', 'members.id')
+        ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name')
+        ->where('members.id', $request->id)
+        ->select('lib_journals.id as  journal_id', 'lib_journals.journal_name','lib_journals.journal_type', 'members.id as member_id', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
+        ->get();
+
+    $result = [];
+
+    foreach ($totals as $total) {
+        $journalType = strtolower($total->journal_type); // Assuming "journal_type" column exists in the "LibJournal" table
+
+        switch ($journalType) {
+            case 'cash and cash equivalents':
+            case 'loans and receivables':
+                $totald = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = 0;
+                break;
+            case 'current liabilities':
+                $totalc = $total->total_credit_amount - $total->total_debit_amount;
+                $totald = 0;
+                break;
+            default:
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
+                break;
+        }
+
+        $result[] = [
+            'journal_id' => $total->journal_id,
+            'member_id' => $total->member_id,
+            'members_first_name' => $total->first_name,
+            'journal_name' => $total->journal_name,
+            'totalc' => $totalc,
+            'totald' => $totald,
+        ];
+    }
+
+
+    return response()->json($result);
+}
+
+
+public function totaljourmem(Request $request)
+{
+    $totals = DB::table('credits')
+        ->join('lib_journals', 'credits.journals_id' , '=' , 'lib_journals.id')
+        ->join('payables', 'credits.payables_id', '=', 'payables.id')
+        ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
+        ->join('members', 'transactions.members_id', '=', 'members.id')
+        ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name')
+        ->where('lib_journals.id', $request->id)
+        ->select('lib_journals.id as  journal_id', 'lib_journals.journal_name','lib_journals.journal_type', 'members.id as member_id', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
+        ->get();
+
+    $result = [];
+
+    foreach ($totals as $total) {
+        $journalType = strtolower($total->journal_type); // Assuming "journal_type" column exists in the "LibJournal" table
+
+        switch ($journalType) {
+            case 'cash and cash equivalents':
+            case 'loans and receivables':
+                $totald = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = 0;
+                break;
+            case 'current liabilities':
+                $totalc = $total->total_credit_amount - $total->total_debit_amount;
+                $totald = 0;
+                break;
+            default:
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
+                break;
+        }
+
+        $result[] = [
+            'journal_id' => $total->journal_id,
+            'member_id' => $total->member_id,
+            'members_first_name' => $total->first_name,
+            'journal_name' => $total->journal_name,
+            'totalc' => $totalc,
+            'totald' => $totald,
+        ];
+    }
+
+
+    return response()->json($result);
+}
 
     public function store(Request $request)
     {
