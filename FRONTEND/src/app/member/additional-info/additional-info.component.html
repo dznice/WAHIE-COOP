@@ -88,12 +88,16 @@
             id="Address"
             checked
           />
+
+          <!-- ADDRESS -->
+          
           <label for="Address" class="tabs__label">Address</label>
+          
           <div class="tabs__content">
+            <label class="cAddress">Current Address</label><br />
+            <div class="row3">
             <div class="input-field18">
-              <br />
-              <label>Current Address</label>
-              <input
+              <input class="address"
                 [(ngModel)]="updateMemberform.current_address"
                 [ngModelOptions]="{ standalone: true }"
                 name="current_address"
@@ -101,10 +105,7 @@
                 placeholder="House No./Street/Block"
                 required
               />
-            </div>
-
-            <div class="input-field19">
-              <ng-select class="try" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Region">
+              <ng-select class="region" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Region">
                 <ng-option *ngFor="let reg of region" [value]="reg.region_code">
                   {{ reg.region_description }}
                   {{ reg.journal_name }}
@@ -112,33 +113,29 @@
               </ng-select>
             </div>
 
-            <div class="input-field19">
-              <ng-select class="try"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Province">
+            <div class="input-field18">
+              <ng-select class="province"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Province">
                 <ng-option *ngFor="let prov of province" [value]="prov.province_code">
                   {{ prov.province_description }}
                   {{ prov.journal_name }}
                 </ng-option>
               </ng-select>
-            </div>
-
-            <div class="input-field20">
-              <ng-select class="try"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose City/Municipality">
+              <ng-select class="municipality"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose City/Municipality">
                 <ng-option *ngFor="let city of cities" [value]="city.city_municipality_code">
                   {{ city.city_municipality_description }}
                   {{ city.journal_name }}
                 </ng-option>
               </ng-select>
             </div>
-            <div class="input-field21" placeholder="Postal Code">
-              <ng-select class="try"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Barangay">
+
+            <div class="input-field18">
+              <ng-select class="barangay"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Barangay">
                 <ng-option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
                   {{ brgy.barangay_description }}
                   {{ brgy.journal_name }}
                 </ng-option>
               </ng-select>
-            </div>
-            <div class="input-field22">
-              <input
+              <input class="postalCode"
                 [(ngModel)]="updateMemberform.postal_code"
                 [ngModelOptions]="{ standalone: true }"
                 name="barangay"
@@ -148,7 +145,16 @@
               />
             </div>
 
+            <!-- 
+            <div class="input-field18">
+              
+              
+              
+            </div> -->
+</div>
           </div>
+        
+
           <input
             type="radio"
             class="tabs__radio"
@@ -219,6 +225,7 @@
         </div>
       </div>
 
+      
       <button type='submit' (click)="logout($event)" class="logout">
         <span class="btnTextb">Logout</span>
       </button>

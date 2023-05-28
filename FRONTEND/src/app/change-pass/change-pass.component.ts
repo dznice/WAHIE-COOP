@@ -86,9 +86,9 @@ export class ChangePassComponent implements OnInit, OnDestroy {
 
     this.changePassForm = this.fb.group(
       {
-        password: new FormControl(null, [Validators.required]),
+        password: new FormControl(null),
 
-        confirm_pass: new FormControl(null, [Validators.required]),
+        confirm_pass: new FormControl(null),
       },
       {
         validator: this.passwordMatch('password', 'confirm_pass'),
@@ -122,11 +122,8 @@ export class ChangePassComponent implements OnInit, OnDestroy {
 
 
   changePass(){
-    if( this.changePassForm.pristine){
-      this.toast.warning({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000 , sticky:false,position:'tr'}); 
-    
-    }
-    else if (this.changePassForm.invalid){
+
+  if (this.changePassForm.invalid){
       this.toast.error({detail:'Error',summary:'Password not match ',duration:2000 , sticky:false,position:'tr'}); 
      }
     else{
