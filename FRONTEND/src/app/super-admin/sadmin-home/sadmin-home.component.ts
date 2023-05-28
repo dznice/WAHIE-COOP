@@ -73,7 +73,12 @@ export class SadminHomeComponent {
       location.reload();
       this.show(2);
       this.toast.success({detail: 'Success', summary: 'Admin account created', sticky: false, position: 'false'});
-    });
+    },
+    error => {
+      this.toast.error({detail:'Invalid email',summary:'Please try again',duration:2000, sticky:false,position:'tr'}); 
+    }
+    );
+
   }
 
   public depform = {

@@ -92,13 +92,15 @@ export class RegMembersComponent implements OnInit, OnDestroy {
               return;
             }
             if(control.value !== matchControl.value){
-              this.toast.warning({detail:'Password not match',summary:'Please check again',duration:800 , sticky:false,position:'tr'}); 
+             
                 matchControl.setErrors({passwordMatch:true});
                 
                 
             }else{
+              
                 matchControl.setErrors(null)
             }
+            
     }
 }
 
@@ -123,29 +125,29 @@ ngOnInit() {
 
   this.registerForm = this.fb.group({
 
-    "first_name": new FormControl(null, [Validators.required]),
+    "first_name": new FormControl(null),
 
-    "last_name": new FormControl(null, [Validators.required]),
+    "last_name": new FormControl(null),
 
 
 
-    "gender": new FormControl(null, [Validators.required]),
+    "gender": new FormControl(null),
 
-    "birthdate": new FormControl(null, [Validators.required]),
+    "birthdate": new FormControl(null),
 
-    "mobile_number": new FormControl(null, [Validators.required]),
+    "mobile_number": new FormControl(null),
 
-    "company_name": new FormControl(null, [Validators.required]),
+    "company_name": new FormControl(null),
 
-    "department": new FormControl(null, [Validators.required]),
+    "department": new FormControl(null),
 
-    "email": new FormControl(null, [Validators.required]),
+    "email": new FormControl( null),
 
-    "pass": new FormControl(null, [Validators.required]),
+    "pass": new FormControl(null),
 
-    "cpass": new FormControl(null, [Validators.required]),
+    "cpass": new FormControl(null),
 
-    "chckbox": new FormControl(null, [Validators.requiredTrue])
+    "chckbox": new FormControl(null)
   }, {
     validator: this.passwordMatch('pass', 'cpass')
   })
@@ -213,14 +215,11 @@ onSubmit2(){
 
 
     regMember(){
-      if (this.registerForm.invalid) {
-        this.toast.warning({detail:'Input required',summary:'Fill all the inputs to submit',duration:2000 , sticky:false,position:'tr'});
-        console.log(this.form);
-        return;
-
-
+      if (this.registerForm.invalid){
+        this.toast.error({detail:'Error',summary:'Password not match ',duration:2000 , sticky:false,position:'tr'}); 
+      return;
       }
-  else{
+      else{
         return this.backend.register(this.form).subscribe(
           data=>this.handleData(data)
           );
