@@ -83,7 +83,7 @@ sendLink(){
       
     },
     error => {
-      this.toast.warning({detail:'Invalid email',summary:'Please check your email',duration:2000, sticky:false,position:'tr'});
+      this.toast.error({detail:'Invalid email',summary:'Please check your email',duration:2000, sticky:false,position:'tr'});
     }
     );
 

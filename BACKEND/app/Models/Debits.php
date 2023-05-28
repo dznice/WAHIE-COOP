@@ -15,11 +15,13 @@ class Debits extends Model
     protected $fillable =
     [
         'credits_id',
+        'payables_id',
         'open_balance',
         'orig_amount',
         'payment',
         'pay_date',
-        'status'
+        'status',
+        'due_date'
     ];
 
     public function debt(): BelongsTo

@@ -128,7 +128,7 @@ class JournalEntryController extends Controller
                 $jlogs->save();
 
             }
-            return response()->json(['message'=>'Entry added successfully!']);
+            return response()->json($jlogs);
         }
     }
 

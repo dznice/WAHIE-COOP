@@ -70,6 +70,7 @@ export class SadminHomeComponent {
   autoAdmin() {
     console.log(this.form);
     return this.backend.adminadd(this.form).subscribe((res: any) => {
+      location.reload();
       this.show(2);
       this.toast.success({detail: 'Success', summary: 'Admin account created', sticky: false, position: 'false'});
     });
@@ -208,7 +209,7 @@ export class SadminHomeComponent {
       email: this.email,
       coop: this.coop,
     };
-    this.log.activity = 'Activate Account for' + ' ' + this.email;
+    this.log.activity ='Activate account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {

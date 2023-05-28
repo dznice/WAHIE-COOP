@@ -76,10 +76,11 @@ export class JournalEntryComponent implements OnInit {
   }
 
   public members: any ;
-
+  public mobile: any ;
   showMembers(): void{
     this.members = this.wahieService.listMembers().subscribe(member=>{
       this.members = member;
+
       console.log(this.members);
     });
   }
@@ -87,18 +88,19 @@ export class JournalEntryComponent implements OnInit {
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control(this.formatDate()),
     journal_no:this.builder.control('',Validators.required),
-    due_date:this.builder.control(''),
-    interest:this.builder.control(''),
+    due_date:this.builder.control(this.formatDate()),
     entries:this.builder.array([
       this.Generaterow(),
       this.Generaterow()]),
     userId:this.builder.control(this.useid),
+    memberNo:this.builder.control(null),
     totaldebit:this.builder.control({ value: 0, disabled: true }),
     totalcredit:this.builder.control({ value: 0, disabled: true })
   });
 
-
+   due = new Date()
   saveEntry(){
+   
     this.journalEntryForm.controls.journal_no.setValue( this.journId )
     let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     let total_credit = this.journalEntryForm.get("totalcredit")?.value;
@@ -112,7 +114,11 @@ export class JournalEntryComponent implements OnInit {
         console.log(result);
         this.log.activity = 'Added Journal Entry No.' + this.journId
         this.activityLog()
-        this.toast.success({detail:'Success',summary:'Transaction saved',duration:2000, sticky:false,position:'tr'});
+        this.sms.sendDate = this.journalEntryForm.getRawValue().due_date
+        this.sms.journal_id = this.journId
+        console.log(this.journId)
+        this.smsDue()
+        this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
         this.route.navigateByUrl('admin/accounting')
       })
     }else{
@@ -245,5 +251,27 @@ export class JournalEntryComponent implements OnInit {
     this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
         console.log(res)
     })
+  }
+
+
+
+  public sms = {
+    account:null,
+    sendDate:this.formatDate(),
+    journal_id:null
+  }
+  smsDue(){
+    console.log(this.sms)
+    this.http.post('http://127.0.0.1:8000/api/sendDate', this.sms).subscribe((res: any) => {
+        console.log(res)
+    })
+  }
+
+  getNameID(index:any){
+    this.journalEntryRow = this.journalEntryForm.get("entries") as FormArray;
+    this.amount = this.journalEntryRow.at(index) as FormGroup;
+    let name_id = this.amount.get("name")?.value;
+    this.sms.account = name_id
+
   }
 }

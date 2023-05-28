@@ -6,7 +6,7 @@ import { BackendService } from '../services/backend.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from '../services/token.service';
-import { NgToastService } from'ng-angular-popup';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-sadmin-chpass',
@@ -118,6 +118,7 @@ export class SadminChpassComponent implements OnInit, OnDestroy {
       .subscribe((res: any) => {
         console.log(res.id);
         this.token.handle(sessionStorage.getItem('ftoken'));
+        this.toast.success({detail:'Success',summary:'Password Changed', sticky:false,position:'false'});  
         this.route.navigateByUrl('super-admin/sadmin-home');
         this.toast.success({detail:'Welcome',summary:'Successfully logged in',duration:2000, sticky:false,position:'tr'});  
       });

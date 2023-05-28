@@ -29,18 +29,21 @@ export class AdminHomeComponent implements OnInit {
   ngOnInit(): void {
       // this.showEntries();
       this.showAccounting()
-      this.dueDate();
+      this.checkDue()
   }
 
 
   public entries: any;
   public account: any;
 
+last_day:any;
+today=new Date()
 
   showAccounting(): void {
       this.http.get('http://127.0.0.1:8000/api/account').subscribe((res: any) => {
-        console.log(res);
+        console.log(res.length);
         this.account = res;
+          
       });
     }
 
@@ -69,6 +72,14 @@ export class AdminHomeComponent implements OnInit {
           this.route.navigateByUrl('admin/accounting/journal-transac/' + data);
           }
         });
+    }
+
+    hello:string = 'hello'
+    checkDue(){
+      console.log('checkdueee')
+      this.http.post('http://127.0.0.1:8000/api/dueDateSMS', this.hello) .subscribe((res: any) => {
+        console.log(res)
+    })
     }
 
   }

@@ -84,7 +84,7 @@
               </td>
 
               <td class="beneinput">
-                <ng-select class="try" formControlName="name">
+                <ng-select class="try" formControlName="name" (change)="getNameID(i)">
                   <ng-option class="try" *ngFor="let member of members"[value]="member.id">
                     {{ member.id }} {{ member.first_name }}
                     {{ member.middle_name }} {{ member.last_name }}

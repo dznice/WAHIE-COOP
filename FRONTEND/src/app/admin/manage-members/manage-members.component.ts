@@ -157,7 +157,7 @@ export class ManageMembersComponent {
       email: this.email,
       coop: this.coop,
     };
-    this.log.activity ='Activate Account for' + ' ' + this.email
+    this.log.activity ='Activate account for' + ' ' + this.email
     this.http
       .put('http://127.0.0.1:8000/api/users' + '/' + this.id, updateStatus)
       .subscribe((res: any) => {

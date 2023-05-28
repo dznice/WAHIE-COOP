@@ -121,7 +121,8 @@ export class AdminChpassComponent implements OnInit, OnDestroy {
       (res:any)=>{
         console.log(res.id);
         this.token.handle(sessionStorage.getItem('ftoken'));
-        sessionStorage.clear();
+        sessionStorage.removeItem('ftoken');
+        sessionStorage.removeItem('name');
         sessionStorage.setItem('name', res.name);
         this.route.navigateByUrl('admin/admin-home');
         this.toast.success({detail:'Welcome',summary:'Successfully logged in',duration:2000, sticky:false,position:'tr'});  

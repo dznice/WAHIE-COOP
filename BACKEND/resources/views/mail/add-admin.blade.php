@@ -2,7 +2,7 @@
 # NEW ADMIN ACCOUNT
 
 The password for you account, <br>
-{{ $password }}
+# {{ $password }}
 
 
 Thanks,<br>
