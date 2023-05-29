@@ -32,6 +32,7 @@ export class JournalEntryComponent implements OnInit {
     this.getJournalNo()
     this.getJournalNot()
     this.showJourn()
+    this.journalEntryForm.controls.journal_no.setValue( this.journId )
   }
 
   close(event:MouseEvent){
@@ -99,9 +100,9 @@ export class JournalEntryComponent implements OnInit {
   });
 
    due = new Date()
+
+
   saveEntry(){
-   
-    this.journalEntryForm.controls.journal_no.setValue( this.journId )
     let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     let total_credit = this.journalEntryForm.get("totalcredit")?.value;
     let journaldate = this.journalEntryForm.get("journal_date")?.value;
@@ -120,6 +121,22 @@ export class JournalEntryComponent implements OnInit {
         this.smsDue()
         this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
         this.route.navigateByUrl('admin/accounting')
+      },
+     error => {
+        if (error.status === 422) {
+          // Validation failed, retrieve the error messages
+          const errors = error.error.errors;
+
+          // Loop through the error messages and display them or handle them as needed
+          Object.keys(errors).forEach(field => {
+            const fieldErrors = errors[field];
+            fieldErrors.forEach((errorMessage: any) => {
+              this.displayToast(errorMessage, 'Validation Error');
+              console.log(`${field}: ${errorMessage}`);
+            });
+          });
+        }
+
       })
     }else{
       this.toast.error({detail:'Failed',summary:'Fill all inputs or balance the amount',duration:2000, sticky:false,position:'tr'});
@@ -128,6 +145,10 @@ export class JournalEntryComponent implements OnInit {
     console.log(this.journalEntryForm.value);
   }
 
+  displayToast(message: string, title: string) {
+    this.toast.error({detail:'Failed',summary:'This Journal Number is Taken',duration:2000, sticky:false,position:'tr'});
+    console.log(`Toast - Title: ${title}, Message: ${message}`);
+  }
 
   addRow(){
     this.journalEntryRow=this.journalEntryForm.get("entries") as FormArray;

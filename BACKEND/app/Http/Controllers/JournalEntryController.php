@@ -39,6 +39,10 @@ class JournalEntryController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'journal_no' => 'required|unique:transactions,transaction_number'
+        ]);
+
 
 
         if($request->isMethod('post')){
