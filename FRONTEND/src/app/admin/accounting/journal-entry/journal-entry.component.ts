@@ -89,7 +89,8 @@ export class JournalEntryComponent implements OnInit {
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control(this.formatDate()),
     journal_no:this.builder.control('',Validators.required),
-    due_date:this.builder.control(this.formatDate()),
+    due_date:this.builder.control(''),
+    interest:this.builder.control(''),
     entries:this.builder.array([
       this.Generaterow(),
       this.Generaterow()]),

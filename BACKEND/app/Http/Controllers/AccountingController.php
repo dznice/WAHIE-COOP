@@ -142,27 +142,65 @@ return response()->json($totals);
 
 
 
-public function totaljour()
+public function totaljour(Request $request)
 {
-    $totals = LibJournal::join('credits', 'lib_journals.id', '=', 'credits.journals_id')
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
+    $yearDate = $request->input('year');
+    $memberIds = $request->input('member_id');
+    $journalIds = $request->input('journal_ids');
+
+    $totalsQuery = DB::table('credits')
+        ->join('lib_journals', 'credits.journals_id', '=', 'lib_journals.id')
+        ->join('payables', 'credits.payables_id', '=', 'payables.id')
+        ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
+        ->join('members', 'transactions.members_id', '=', 'members.id')
         ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type')
-        ->select('lib_journals.id', 'lib_journals.journal_name','lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
-        ->get();
+        ->select('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+
+    if ($startDate && $endDate) {
+        $totalsQuery->whereBetween('transactions.transaction_date', [$startDate, $endDate]);
+    } else if ($yearDate) {
+        $startOfYear = $yearDate . '-01-01';
+        $endOfYear = $yearDate . '-12-31';
+        $totalsQuery->whereBetween('transactions.transaction_date', [$startOfYear, $endOfYear]);
+    } else {
+        // Retrieve all data for the current year if no date is specified
+        $currentYear = date('Y');
+        $startOfYear = $currentYear . '-01-01';
+        $endOfYear = $currentYear . '-12-31';
+        $totalsQuery->whereBetween('transactions.transaction_date', [$startOfYear, $endOfYear]);
+    }
+
+    if ($memberIds) {
+        $totalsQuery->where('members.id', $memberIds);
+    }
+
+    if ($journalIds) {
+        $totalsQuery->where('lib_journals.id', $journalIds);
+    }
+
+    $totals = $totalsQuery->get();
 
     $result = [];
 
     foreach ($totals as $total) {
-        $journalType = $total->journal_type; // Assuming "journal_type" column exists in the "LibJournal" table
+        $journalType = strtolower($total->journal_type); // Assuming "journal_type" column exists in the "LibJournal" table
 
-        if (strpos(strtolower($journalType), 'cash and cash equivalents') !== false) {
-            $totald = $total->total_debit_amount - $total->total_credit_amount;
-            $totalc = 0;
-        } elseif (strpos(strtolower($journalType), 'current liabilities') !== false) {
-            $totalc = $total->total_credit_amount - $total->total_debit_amount;
-            $totald = 0;
-        } else {
-            $totalc = $total->total_credit_amount;
-            $totald = $total->total_debit_amount;
+        switch ($journalType) {
+            case 'cash and cash equivalents':
+            case 'loans and receivables':
+                $totald = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = 0;
+                break;
+            case 'current liabilities':
+                $totalc = $total->total_credit_amount - $total->total_debit_amount;
+                $totald = 0;
+                break;
+            default:
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
+                break;
         }
 
         $result[] = [
@@ -175,6 +213,11 @@ public function totaljour()
 
     return response()->json($result);
 }
+
+
+
+
+
 
 
 public function totalmemjour(Request $request)
