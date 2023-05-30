@@ -58,20 +58,25 @@
 
 <section>
   <div class="pass-modal" *ngIf="showModal === 1">
-    <div class="pass-content">
-      <div class="pass-header">Change Your Password</div>
-      <div class="pass-body">
-        <label for="password">Password</label>
-        <input class="passinput" type="password" #password />
-        <br />
-        <label for="confirm_pass">Confirm Password</label>
-        <input class="passinput" type="password" #confirm_pass />
-        <br />
+    <form [formGroup]="navChange" #navbarChange="ngForm">
+      <div class="pass-content">
+        <div class="pass-header">Change Your Password</div>
+        <div class="pass-body">
+          <label for="password">Current Password</label>
+          <input class="passinput" type="password" formControlName="current_pass"  [(ngModel)]="passForm.current_pass" #currentpassword />
+          <br />
+          <label for="password">New Password</label>
+          <input class="passinput" type="password"  formControlName="new_pass" name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password />
+          <br />
+          <label for="confirm_pass">Confirm Password</label>
+          <input class="passinput" type="password" formControlName="confirm_pass" name="confirm_pass" id= "confirm_pass" [(ngModel)]="passForm.confirm_pass" #confirm_pass />
+          <br />
+        </div>
+        <div class="pass-footer">
+          <button class="closebtn" (click)="show(2)">Close</button>
+          <button class="savebtn" (click)="navChangePass()">Change</button>
+        </div>
       </div>
-      <div class="pass-footer">
-        <button class="closebtn" (click)="show(2)">Close</button>
-        <button class="savebtn">Create</button>
-      </div>
-    </div>
+    </form>
   </div>
 </section>

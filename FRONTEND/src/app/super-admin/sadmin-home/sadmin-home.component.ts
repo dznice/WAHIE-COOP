@@ -70,9 +70,12 @@ export class SadminHomeComponent {
   autoAdmin() {
     console.log(this.form);
     return this.backend.adminadd(this.form).subscribe((res: any) => {
-      location.reload();
+    
       this.show(2);
       this.toast.success({detail: 'Success', summary: 'Admin account created', sticky: false, position: 'false'});
+      this.log.activity = 'Account created: ' + ' ' + this.form.email;
+      this.activityLog();
+     
     },
     error => {
       this.toast.error({detail:'Invalid email',summary:'Please try again',duration:2000, sticky:false,position:'tr'}); 
@@ -80,6 +83,7 @@ export class SadminHomeComponent {
     );
 
   }
+
 
   public depform = {
     department:null

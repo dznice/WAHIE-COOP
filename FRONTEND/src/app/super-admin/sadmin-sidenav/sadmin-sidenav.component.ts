@@ -5,6 +5,7 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 interface SideNavToggle {
@@ -67,10 +68,18 @@ toggleDarkTheme() {
     }
   }
 
-
+  navChange!:FormGroup
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
 
+    this.navChange = this.fb.group({
+    
+      "current_pass": new FormControl(null, [Validators.required]),
+  
+      "new_pass": new FormControl(null, [Validators.required]),
+      
+      "confirm_pass": new FormControl(null, [Validators.required])
+    })
   }
   hide:boolean = false;
 
@@ -110,7 +119,7 @@ toggleDarkTheme() {
 
   public loggedIn:boolean = false;
 
-  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient) {}
+  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient, private fb:FormBuilder) {}
 
   public log ={
     name: 'SuperAdmin',
@@ -134,5 +143,20 @@ toggleDarkTheme() {
     this.router.navigateByUrl('/login');
   }
 
-
+  public passForm={
+    current_pass:null,
+    new_pass:null,
+    confirm_pass:null,
+    userId: localStorage.getItem('userData')
+  }  
+  
+    navChangePass(){
+      console.log(this.passForm.userId)
+      this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
+        localStorage.clear()
+        sessionStorage.clear()
+        console.log(res)
+        this.router.navigateByUrl('login');
+    })
+    }
 }
