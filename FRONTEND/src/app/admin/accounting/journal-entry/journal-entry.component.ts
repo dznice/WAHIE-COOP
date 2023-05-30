@@ -32,8 +32,16 @@ export class JournalEntryComponent implements OnInit {
     this.getJournalNo()
     this.getJournalNot()
     this.showJourn()
-    this.journalEntryForm.controls.journal_no.setValue( this.journId )
+    const currentJournalNo = this.journalEntryForm.controls.journal_no.value;
+const newJournalNo = this.journId;
+
+if (newJournalNo !== currentJournalNo) {
+  this.journalEntryForm.patchValue({ journal_no: newJournalNo });
+}
+
   }
+
+
 
   close(event:MouseEvent){
     event.preventDefault();
@@ -104,6 +112,10 @@ export class JournalEntryComponent implements OnInit {
 
 
   saveEntry(){
+
+
+
+
     let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     let total_credit = this.journalEntryForm.get("totalcredit")?.value;
     let journaldate = this.journalEntryForm.get("journal_date")?.value;
