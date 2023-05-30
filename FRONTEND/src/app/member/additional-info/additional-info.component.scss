@@ -88,6 +88,19 @@ select {
   margin: 2px 0;
 }
 
+.civStatus ::ng-deep .ng-select-container,
+.empStatus ::ng-deep .ng-select-container{
+  border: 1px solid #959494;
+}
+
+.civStatus,
+.empStatus,
+.province,
+.municipality,
+.barangay{
+  font-size: 14px;
+}
+
 .cAddress{
   margin: .5rem 0 .5rem;
 }
@@ -197,7 +210,7 @@ select {
   font-weight: 400;
   color: #333;
   border-radius: 5px;
-  padding: 0 15px;
+  padding: 0 11px;
   height: 36px;
   margin: 2px 0;
 }
@@ -225,6 +238,34 @@ form .fields .tabs__content {
   font-size: 0.9em;
   display: none;
 }
+
+.scroll{
+    overflow-y: scroll;
+    border-radius: 50;
+    height:171px;
+    width: 100%;
+}
+
+
+.header{
+  padding-left: 3rem;
+  margin-bottom: -4rem;
+  position: sticky;
+  background-color: #fff;
+  width: 100%;
+  height: 14%;
+
+  .dob{
+    margin-left: 21rem;
+    }
+
+    .rel{
+      margin-left: 11rem;
+      }
+}
+
+
+
 
 form .fields .tabs__radio:checked + .tabs__label {
   font-weight: bold;

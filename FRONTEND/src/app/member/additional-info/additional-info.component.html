@@ -6,7 +6,7 @@
       <div class="fields">
         <div class="text-wrap">
           <label for="civil_status">Civil Status</label>
-          <select
+          <!-- <select
             [(ngModel)]="updateMemberform.civil_status"
             [ngModelOptions]="{ standalone: true }"
             id="civil_status"
@@ -15,9 +15,14 @@
             required
           >
             <option disabled selected>Select</option>
-            <option value="Single">Single</option>
-            <option value="Married">Married</option>
-          </select>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+          </select> -->
+          <ng-select class="civStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.civil_status" [ngModelOptions]="{ standalone: true }" id="civil_status" name="civil_status" (change)="onSpouseChange()" required>
+            <ng-option *ngFor="let civil_status of civilStatus" [value]="civil_status">
+                {{ civil_status }}
+            </ng-option>
+          </ng-select>
         </div>
         <div class="text-wrap">
           <label for="tin_number">TIN Number </label>
@@ -38,14 +43,13 @@
             type="text"
             name="spouse"
             placeholder=""
-
-            [disabled]="isInputDisabled"
+            [disabled]="isSpouseDisabled"
           />
         </div>
 
         <div class="text-wrap">
-          <label>Employement Status</label>
-          <select
+          <label>Employment Status</label>
+          <!-- <select
             [(ngModel)]="updateMemberform.employment_status"
             [ngModelOptions]="{ standalone: true }"
             id="employement_status"
@@ -56,7 +60,13 @@
             <option>Employed</option>
             <option>Unemployed</option>
             <option>Self-Employed</option>
-          </select>
+          </select> -->
+
+          <ng-select class="empStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.employment_status" [ngModelOptions]="{ standalone: true }" id="employment_status" name="employment_status" (change)="onEmploymentChange()" required>
+            <ng-option *ngFor="let employment_status of employmentStatus" [value]="employment_status">
+              {{ employment_status }}
+            </ng-option>
+          </ng-select>
         </div>
 
         <div class="text-wrap">
@@ -67,6 +77,7 @@
             type="text"
             name="occupation"
             placeholder=""
+            [disabled]="isOccupationDisabled"
           />
         </div>
 
@@ -164,15 +175,23 @@
 
           <label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
           <div class="tabs__content">
+            <div class="header">
+              <label for="benificiary_name">Name</label>
+              <label for="benificiary_birthdate" class="dob">Date Of Birth</label>
+              <label for="benificiary_relation" class="rel">Relationship</label>
+            </div>
+            
+            <div class="scroll">
             <table class="tablebene">
               <br />
-              <tr>
+              <!-- <tr>
                 <th></th>
                 <th class="benelabel">Name</th>
                 <th class="benelabel">Date of Birth</th>
                 <th class="benelabel">Relationship</th>
-              </tr>
-
+              </tr> -->
+              
+              
               <tr *ngFor="let item of row; let x = index">
                 <td class="delbut">
                   <button class="addbut" (click)="addTable()">
@@ -220,7 +239,9 @@
                   </button>
                 </td>
               </tr>
+            
             </table>
+          </div>
           </div>
         </div>
       </div>

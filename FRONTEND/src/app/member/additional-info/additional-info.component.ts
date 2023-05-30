@@ -29,17 +29,31 @@ import { NgToastService } from 'ng-angular-popup';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AdditionalInfoComponent implements OnInit, OnDestroy {
-//disabling spouse when single
 
- isInputDisabled: boolean = false;
-onOptionChange() {
-  if (this.updateMemberform.civil_status === 'single') {
-    this.isInputDisabled = true;
+civilStatus: string[]= ["Single", "Married"];
+employmentStatus: string[]= ["Employed", "Unemployed", "Self-employed"];
+
+  //disabling spouse when single
+
+ isSpouseDisabled: boolean = false;
+onSpouseChange() {
+  if (this.updateMemberform.civil_status === this.civilStatus[0]) {
+    this.isSpouseDisabled = true;
   } else {
-    this.isInputDisabled = false;
+    this.isSpouseDisabled = false;
   }
 }
 
+// disabling employment when unemployed
+
+isOccupationDisabled: boolean = false;
+onEmploymentChange() {
+  if (this.updateMemberform.employment_status === this.employmentStatus[1]) {
+    this.isOccupationDisabled = true;
+  } else {
+    this.isOccupationDisabled = false;
+  }
+}
 
 
 
