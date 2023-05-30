@@ -32,6 +32,24 @@ class userController extends Controller
    return response()->json($users);
     }
 
+    public function navChangePass(Request $request){
+        $user = User::find($request->userId);
+        $returnData = array(
+            'status' => 'error',
+            'message' => 'Wrong credentials!'
+        );
+
+        if( Hash::check($request->current_pass, $user->password))
+        {
+                if($request->new_pass==$request->confirm_pass && $request->new_pass!=NULL){      
+                    $user->password = Hash::make($request->new_pass);
+                    $user->save();
+                    return response()->json($user);
+                }
+                return  response()->json($returnData, 401);
+            }
+            return  response()->json($returnData, 401);
+    }
     public function activateUser(Request $request, $id){
         $users = User::find($id);
         $users->update($request->all());

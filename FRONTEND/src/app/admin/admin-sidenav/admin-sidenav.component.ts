@@ -5,6 +5,8 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { HttpClient } from '@angular/common/http';
+import { BackendService } from 'src/app/services/backend.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -68,6 +70,7 @@ export class AdminSidenavComponent implements OnInit {
   }
 
   email:any
+  navChange!:FormGroup
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
@@ -79,7 +82,17 @@ export class AdminSidenavComponent implements OnInit {
     //     this.loggedIn = value;
     //   }
     // )
+    this.navChange = this.fb.group({
+    
+      "current_pass": new FormControl(null, [Validators.required]),
+  
+      "new_pass": new FormControl(null, [Validators.required]),
+      
+      "confirm_pass": new FormControl(null, [Validators.required])
+    })
   }
+  
+  
 
   hide:boolean = false;
 
@@ -119,7 +132,10 @@ export class AdminSidenavComponent implements OnInit {
 
   public loggedIn:boolean = false;
 
-  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient) {}
+  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService,
+    private backend:BackendService, private http:HttpClient,  private fb:FormBuilder) {
+ 
+    }
 
   public log ={
     name: this.userName(),
@@ -141,7 +157,25 @@ export class AdminSidenavComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+ 
   userName(){
     return sessionStorage.getItem('name');
+  }
+
+public passForm={
+  current_pass:null,
+  new_pass:null,
+  confirm_pass:null,
+  userId: localStorage.getItem('userData')
+}  
+
+  navChangePass(){
+    console.log(this.passForm.userId)
+    this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
+      localStorage.clear()
+      sessionStorage.clear()
+      console.log(res)
+      this.router.navigateByUrl('login');
+  })
   }
 }

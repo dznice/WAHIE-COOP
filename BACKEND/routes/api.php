@@ -52,6 +52,7 @@ Route::post('/users/resendOtp/{id}', [App\Http\Controllers\Api\AuthController::c
 Route::post('/users/forgotPass/{email}', [App\Http\Controllers\Api\AuthController::class, 'forgotPass']);
 Route::post('/users/forgotChange/{id}', [App\Http\Controllers\Api\AuthController::class, 'forgotChange']);
 Route::post('/users/changePass/{email}', [App\Http\Controllers\Api\AuthController::class, 'changePass']);
+Route::post('/users/navChangePass', [App\Http\Controllers\userController::class, 'navChangePass']);
 Route::get('/users/myProfile/{id}', [App\Http\Controllers\userController::class, 'myProfile']);
 
 
