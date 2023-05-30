@@ -154,9 +154,7 @@ public function totaljour(Request $request)
         ->join('lib_journals', 'credits.journals_id', '=', 'lib_journals.id')
         ->join('payables', 'credits.payables_id', '=', 'payables.id')
         ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
-        ->join('members', 'transactions.members_id', '=', 'members.id')
-        ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type')
-        ->select('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        ->join('members', 'transactions.members_id', '=', 'members.id');
 
     if ($startDate && $endDate) {
         $totalsQuery->whereBetween('transactions.transaction_date', [$startDate, $endDate]);
@@ -174,10 +172,24 @@ public function totaljour(Request $request)
 
     if ($memberIds) {
         $totalsQuery->where('members.id', $memberIds);
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+
+    }else{
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+
     }
 
     if ($journalIds) {
         $totalsQuery->where('lib_journals.id', $journalIds);
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+
+    }else{
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+
     }
 
     $totals = $totalsQuery->get();
@@ -203,12 +215,31 @@ public function totaljour(Request $request)
                 break;
         }
 
-        $result[] = [
-            'id' => $total->id,
+        $entry = [
             'journal_name' => $total->journal_name,
             'totalc' => $totalc,
             'totald' => $totald,
         ];
+
+        if ($memberIds && isset($total->memberId)) {
+            $entry['journId'] = $total->journId;
+            $entry['memberId'] = $total->memberId;
+            $entry['name'] = $total->first_name;
+        }
+        if ($journalIds && isset($total->journId)) {
+            $entry['journId'] = $total->journId;
+            $entry['memberId'] = $total->memberId;
+            $entry['name'] = $total->first_name;
+        }
+        if (!$memberIds && !$journalIds) {
+            $entry['journId'] = null;
+            $entry['memberId'] = null;
+            $entry['name'] = null;
+        }
+
+
+        $result[] = $entry;
+
     }
 
     return response()->json($result);
