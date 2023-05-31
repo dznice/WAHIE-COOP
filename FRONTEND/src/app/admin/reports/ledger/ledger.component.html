@@ -1,18 +1,19 @@
 <main>
-    <form [formGroup]="ledgerForm">
-        <ng-select [clearable]="false" formControlName="account">
+    <form [formGroup]="ledgerForm" (ngSubmit)="onSubmit(ledgerForm.value)">
+        <ng-select formControlName="account">
             <ng-option *ngFor="let libJournal of libJournals" [value]="libJournal.id">
                 {{ libJournal.journal_number }}
                 {{ libJournal.journal_name }}
             </ng-option>
         </ng-select>
-        <ng-select [clearable]="false" formControlName="member">
+        <ng-select formControlName="member">
             <ng-option *ngFor="let member of members"[value]="member.id">
-                {{ member.last_name }},{{ member.first_name }}{{ member.middle_name }} 
+                {{ member.last_name }}, {{ member.first_name }}{{ member.middle_name }} 
             </ng-option>
         </ng-select>
-        <input type="date">
-        <input type="date">
-        <button type="submit">Generate</button>
+        <input type="date" formControlName="startDate">
+        <input type="date" formControlName="endDate">
+        <button type="submit" >Generate</button>
     </form>
+    <app-sl-accounts *ngIf="showReport" [formData]="submittedFormData"></app-sl-accounts>
 </main>

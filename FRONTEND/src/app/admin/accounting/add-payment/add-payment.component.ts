@@ -112,14 +112,13 @@ export class AddPaymentComponent implements OnInit {
     });
   }
 
-
-
   private generateFormGroup(trial:any) {
 
     return this.builder.group({
       debitId: this.builder.control({ value: trial.id , disabled: true }),
       payablesId: this.builder.control({ value: trial.debit.payables_id , disabled: true }),
       creditId: this.builder.control({ value: trial.credits_id , disabled: true }),
+      journal_no: this.builder.control({ value: trial.debit.cred.transaction_number , disabled: true }),
       description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
       dueDate: this.builder.control({ value:  trial.debit.due_date, disabled: true }),
       origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),

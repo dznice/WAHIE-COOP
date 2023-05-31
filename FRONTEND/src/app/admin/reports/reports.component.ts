@@ -25,6 +25,6 @@ export class ReportsComponent implements OnInit{
 }
 
   subLedger(){
-      this.route.navigateByUrl('admin/reports/ledger');
+      this.route.navigateByUrl('admin/reports/generate-ledger');
   }
 }

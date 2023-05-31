@@ -23,6 +23,8 @@ export class JournalEntryComponent implements OnInit {
   public journalEntries: any;
   public journId:any;
   public member:any;
+  total_debit:any;
+  total_credit:any;
   maxDate: any;
 
   ngOnInit(): void{
@@ -228,24 +230,23 @@ if (newJournalNo !== currentJournalNo) {
 
   balance_summary(){
     let array=this.journalEntryForm.getRawValue().entries;
-    let total_debit = 0;
-    let total_credit = 0;
+    this.total_debit = 0;
+    this.total_credit = 0;
 
     array.forEach((x:any)=>{
       if(x.debit ==''&& x.credit == ''){
         x.debit = 0;
         x.credit = 0;
-        total_debit = total_debit + x.debit;
-        total_credit= total_credit + x.credit;
+        this.total_debit = this.total_debit + x.debit;
+        this.total_credit= this.total_credit + x.credit;
       }
       else{
-        total_debit=total_debit+x.debit;
-        total_credit=total_credit+x.credit;
+        this.total_debit=this.total_debit+x.debit;
+        this.total_credit=this.total_credit+x.credit;
       }
     });
-      this.journalEntryForm.get("totaldebit")?.setValue(total_debit);
-      this.journalEntryForm.get("totalcredit")?.setValue(total_credit);
-
+      this.journalEntryForm.get("totaldebit")?.setValue(this.total_debit);
+      this.journalEntryForm.get("totalcredit")?.setValue(this.total_credit);
   }
 
   private formatDate() {

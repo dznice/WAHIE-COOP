@@ -105,6 +105,30 @@ export class WahieService {
     return this.http.get<any[]>(`${this.url}/api/journalLog/${transac_id}`);
   }
 
+  // public accLegder(journId:any){
+  //   return this.http.get<any[]>(`${this.url}/api/totaljour?journal_ids=${journId}`);
+  // }
+
+  // public memLegder(memId:any){
+  //   return this.http.get<any[]>(`${this.url}/api/totaljour?member_id=${memId}`);
+  // }
+
+  // public sLegder3(memId:any, journId:any){
+  //   return this.http.get<any[]>(`${this.url}/api/totaljour?member_id=${memId}&journal_ids=${journId}`);
+  // }
+
+  public sLegder(memId:any, journId:any, startD:any, endD:any){
+    return this.http.get<any[]>(`${this.url}/api/totaljour?member_id=${memId}&journal_ids=${journId}&start_date=${startD}&end_date=${endD}`);
+  }
+
+  // public sLegder5(memId:any, startD:any, endD:any){
+  //   return this.http.get<any[]>(`${this.url}/api/totaljour?member_id=${memId}&start_date=${startD}&end_date=${endD}`);
+  // }
+
+  // public sLegder6( journId:any, startD:any, endD:any){
+  //   return this.http.get<any[]>(`${this.url}/api/totaljour?journal_ids=${journId}&start_date=${startD}&end_date=${endD}`);
+  // }
+
   public savePayment(payment:any):Observable<any>{
     return this.http.post<any>(this.url+'/api/payment', payment, this.httpOptions)
   }

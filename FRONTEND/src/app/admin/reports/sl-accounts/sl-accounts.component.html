@@ -1,7 +1,7 @@
 <main>
   <header>
     <span class="coop-name">WAH-Cooperative</span>
-    <h4 class="report-name">Subsidiary Ledger for "Accounts"</h4>
+    <h4 class="report-name">Subsidiary Ledger for {{formData.account}}</h4>
     <span class="date-today">As of "DateToday"</span>
   </header>
 
@@ -19,21 +19,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Jericko Cabalu</td>
-            <td class="td-bal">3,593.39</td>
+          <tr *ngFor="let item of ledgers">
+            <td>{{item.name}}</td>
+            <td class="td-bal"> {{formData.account}}</td>
+            <td class="td-bal"></td>
+            <td class="td-bal" *ngIf="item.totald!=0">{{item.totald}}</td>
+            <td class="td-bal" *ngIf="item.totalc!=0">{{item.totalc}}</td>
             <td class="td-bal"></td>
             <td class="td-bal"></td>
-            <td class="td-bal">1,611.19</td>
-            <td class="td-bal">1,982.20</td>
-          </tr>
-          <tr>
-            <td>Mary Gabriel</td>
-            <td class="td-bal">5,200.00</td>
-            <td class="td-bal"></td>
-            <td class="td-bal"></td>
-            <td class="td-bal">650.00</td>
-            <td class="td-bal">4,550.00</td>
           </tr>
           <tr class="tr-total">
             <td class="td-total">Total</td>

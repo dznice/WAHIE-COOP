@@ -204,6 +204,11 @@ select {
   border-radius: 5px;
 }
 
+.ng-select.try ::ng-deep .ng-dropdown-panel  {
+  max-width: 300px;
+  margin-left: 10px;
+}
+
 /* Modal */
 .otp-modal {
   position: fixed;

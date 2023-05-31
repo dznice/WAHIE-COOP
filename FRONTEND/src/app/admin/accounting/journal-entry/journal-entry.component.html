@@ -129,12 +129,11 @@
               <td></td>
               <td><label class="totaltext"> TOTAL</label></td>
               <td>
-
                 <!-- TOTAL DEBIT HERE -->
-                
+                {{total_debit}}
               </td>
               <td>
-                
+                {{total_credit}}
                <!-- TOTAL CREDIT HERE -->
               </td>
               <td></td>
@@ -143,7 +142,7 @@
         </table>
       </div>
       
-      <div class="totals">
+      <!-- <div class="totals">
         <div class="journdate">
           <label> Total Debit </label>
           <input class="headinput" type="number" formControlName="totaldebit" />
@@ -156,7 +155,7 @@
             formControlName="totalcredit"
           />
         </div>
-      </div>
+      </div> -->
       <div class="buttons">
         <a class="back">
           <span class="btnTextb" (click)="back()">Back</span>

@@ -44,6 +44,7 @@ import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 import { ReportsComponent } from './admin/reports/reports.component';
 import { LedgerComponent } from './admin/reports/ledger/ledger.component';
+import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generate-ledger.component';
 import { FsFinconComponent } from './admin/reports/fs-fincon/fs-fincon.component';
 import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
 import { PrintCrjComponent } from './admin/reports/print-crj/print-crj.component';
@@ -144,6 +145,7 @@ const routes: Routes = [
       {path: 'manage-members', component: ManageMembersComponent},
       {path: 'reports', component: ReportsComponent},
       {path: 'reports/ledger', component: LedgerComponent},
+      {path: 'reports/generate-ledger', component: GenerateLedgerComponent},
       {path: 'reports/fs-fincon', component: FsFinconComponent},
       {path: 'reports/fs-op', component: FsOpComponent},
       {path: 'reports/print-crj', component: PrintCrjComponent},
