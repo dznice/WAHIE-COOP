@@ -173,9 +173,28 @@ table td{
     padding: 0.5rem;
 }
 
-table th{
+.head1{
+    text-align: left;
     padding: 0.5rem;
     color: #3F0F88;
+}
+
+.head2{
+    text-align: right;
+    padding: 0.5rem;
+    color: #3F0F88;
+}
+
+.tablePayment1 input{
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    height: 36px;
+    margin: 2px 0;
+    display: flex;
+    width: 100%;
+    padding: 10px 10px;
+    
 }
 
 .tablePayment input{
@@ -186,17 +205,29 @@ table th{
     margin: 2px 0;
     display: flex;
     width: 100%;
+    padding: 10px 10px;
+    text-align: right;
+}
+
+
+//pagination
+.pagination-controls{
+  text-align: right;
 }
 
 .total{
+   
     float: right;
     margin-top: 2rem;
 }
 
 .totals{
+    color: var(--primary-color);
     margin-right: 5rem;
     font-weight: 1000;
 }
+
+
 
 .totals2{
     margin-left: .17rem;
@@ -216,7 +247,7 @@ table th{
 }
 
     .footer{
-    margin-top: 10rem;
+    margin-top: 12rem;
     float: inline-end;
     
     }
@@ -254,3 +285,15 @@ table th{
     .save:hover{
     opacity: 80%;
     }
+
+.conbox{
+    height: 30px;
+    width:100%;
+    outline: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 10px;
+}

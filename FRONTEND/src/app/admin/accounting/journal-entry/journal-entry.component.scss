@@ -6,7 +6,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-
 main {
   width: 100%;
   animation: transitionIn 0.75s;
@@ -15,7 +14,6 @@ main {
     color: var(--primary-color);
     margin-bottom: 10px;
   }
-
 }
 
 .header {
@@ -33,8 +31,8 @@ label {
   width: 100%;
 }
 
-.journals{
-  height: 450px;
+.journals {
+  height: 500px;
   overflow-y: scroll;
   border-radius: 50;
 }
@@ -47,7 +45,6 @@ select {
   color: #333;
   border-radius: 5px;
   border: 1px solid #aaa;
-
   padding: 0 15px;
   height: 36px;
   margin: 2px 0;
@@ -70,7 +67,7 @@ select {
   border: 1px solid #aaa;
   padding: 0 14px;
   height: 34px;
-  margin: 4px 4px;
+  margin: 0px 4px;
 }
 
 /* buttons */
@@ -86,12 +83,12 @@ select {
   border-radius: 5px;
   cursor: pointer;
   padding: 6px 13px;
-    span{
+  span {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
     margin-top: 10px;
-    }
+  }
 }
 
 .delbut {
@@ -110,11 +107,14 @@ select {
 }
 
 .buttons {
+  background-color: var(--panel-color);
   display: flex;
   justify-content: flex-end;
-  position: relative;
+  position: fixed;
   bottom: 0;
+  right: 0;
   margin: 14px 0;
+  margin-right: 40px;
   float: right;
 }
 
@@ -129,21 +129,42 @@ select {
   outline: none;
   cursor: pointer;
   padding: 6px 21px;
-  span{
+  span {
     font-size: 14px;
     font-weight: 600;
     text-align: center;
     margin-top: 10px;
-    }
+  }
 }
 
 .totals {
+  background-color: var(--panel-color);
   display: flex;
   justify-content: flex-end;
-  position: relative;
+  position: fixed;
   bottom: 0;
   margin: 14px 0;
   float: left;
+}
+.totaltext {
+  margin-right: 20px;
+}
+
+.totalsbot {
+  text-align: right;
+ 
+  .totalinput {
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 14px;
+    height: 34px;
+    margin: 0px 0px;
+    width: 100%;
+  }
 }
 
 .save {
@@ -175,10 +196,9 @@ select {
   border: 1px solid #aaa;
   height: 36px;
   min-width: 300px;
-  max-width: 300px;
 }
 
-.ng-select.try ::ng-deep .ng-control  {
+.ng-select.try ::ng-deep .ng-control {
   min-height: 0px;
   border: 1px solid #aaa;
   border-radius: 5px;
@@ -217,7 +237,6 @@ select {
     }
 
     .otp-body {
-      
       label {
         font-size: 16px;
         font-weight: 500;
@@ -284,7 +303,6 @@ select {
     }
   }
 }
-
 
 @media (max-height: 1200px) {
   .container {

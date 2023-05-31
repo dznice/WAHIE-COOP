@@ -96,51 +96,16 @@
       <!--</div> -->
 
         <div class="journals">
-          <label class="outsTransac"> Outstanding Transactions</label>
-
-          <div class="sub_header3">
-            <div class="customerPayment3">
-              <label>Invoice No.</label>
-              <input
-                class="field"
-                type="number"
-                placeholder="Find Invoice No."
-                formControlName="depositTo"
-              />
-              <!-- <input class="field" type="number" placeholder="Find Invoice No." formControlName="depositTo"> -->
-            </div>
-
-            <div class="customerPayment3">
-              <label>Date</label>
-              <input
-                class="form-control"
-                type="date"
-                [(ngModel)]="startDate"
-                name="sDate"
-              />
-              <!-- <input class="form-control" type="date" [(ngModel)]="startDate" formControlName="depositTo"> -->
-            </div>
-
-            <div class="customerPayment3">
-              <label>Date</label>
-              <input
-                class="form-control"
-                type="date"
-                [(ngModel)]="endDate"
-                name="eDate"
-              />
-              <!-- <input class="form-control" type="date" [(ngModel)]="endDate" formControlName="depositTo"> -->
-            </div>
-          </div>
+         
 
           <table rules="all"  formArrayName="payables">
             <tr>
               <th>.</th>
-              <th>Description</th>
-              <th>Due Date</th>
-              <th>Original Amount</th>
-              <th>Open Balance</th>
-              <th>Payment</th>
+              <th class="head1">Description</th>
+              <th class="head1">Due Date</th>
+              <th class="head2">Original Amount</th>
+              <th class="head2">Open Balance</th>
+              <th class="head2">Payment</th>
             </tr>
 
             <!-- <tbody
@@ -160,8 +125,8 @@
 
 
                 <!-- <td>{{ account.open_balance }}</td> -->
-                <td class="tablePayment"><input type="text" formControlName="description"/></td>
-                <td class="tablePayment"><input type="text" formControlName="dueDate" /></td>
+                <td class="tablePayment1"><input type="text" formControlName="description"/></td>
+                <td class="tablePayment1"><input type="text" formControlName="dueDate" /></td>
                 <td class="tablePayment"><input type="text" formControlName="origAmount"/></td>
                 <td class="tablePayment"><input type="text" formControlName="openBalance"/></td>
                 <td class="tablePayment"><input type="number" formControlName="payment" (change)=" autoAmount(i)"/></td>
@@ -176,11 +141,11 @@
         <div class="total">
           <label class="totals"> Amount to Apply </label>
           <!-- <label class="totals2"> PHP 0.00</label> -->
-          <input type="number" formControlName="amountApply" />
+          <input class="conbox" type="number" formControlName="amountApply" />
           <br />
           <label class="totals"> Amount to Credit </label>
           <!-- <label> PHP 0.00</label> -->
-          <input type="number" formControlName="amountCredit" />
+          <input class="conbox" type="number" formControlName="amountCredit" />
           <br />
           <!-- <a (click)="clearMethod()" ><span>Clear Payment</span></a> -->
         </div>
