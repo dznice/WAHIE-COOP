@@ -17,11 +17,12 @@ main {
 }
 
 .header {
-  width: 100%;
   display: flex;
+  flex-wrap: wrap;
 }
 
 label {
+  margin-left: 4px;
   font-size: 16px;
   font-weight: 500;
   color: var(--primary-color);
@@ -29,6 +30,13 @@ label {
 
 .tablejournal {
   width: 100%;
+}
+ .journdate, .journnumber, .userid, .duedate, .interest{
+  display: flex;
+  flex-direction: column;
+
+
+ 
 }
 
 .journals {
@@ -146,13 +154,14 @@ select {
   margin: 14px 0;
   float: left;
 }
-.totaltext {
+.totaltext{
   margin-right: 20px;
 }
 
+
 .totalsbot {
   text-align: right;
- 
+
   .totalinput {
     outline: none;
     font-size: 14px;
@@ -166,6 +175,8 @@ select {
     width: 100%;
   }
 }
+
+
 
 .save {
   height: 40px;

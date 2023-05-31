@@ -35,10 +35,10 @@
           <label> Due Date </label>
           <input class="headinput" type="date" formControlName="due_date" />
         </div>
-        <div class="duedate">
+        <div class="interest">
           <label> Interest </label>
-          <input class="headinput" type="number" formControlName="interest" />
-          <label> % </label>
+          <input class="headinput" type="number" formControlName="interest"  />
+         
         </div>
         <div>
           <div>
@@ -125,14 +125,16 @@
                 </a>
               </td>
             </tr>
+           <br>
+    
             <tr class="totalsbot">
               <td></td>
               <td><label class="totaltext"> TOTAL</label></td>
-              <td>
+              <td class="total">
                 <!-- TOTAL DEBIT HERE -->
                 {{total_debit}}
               </td>
-              <td>
+              <td class="total">
                 {{total_credit}}
                <!-- TOTAL CREDIT HERE -->
               </td>
