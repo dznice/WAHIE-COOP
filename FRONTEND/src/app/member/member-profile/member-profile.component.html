@@ -1,128 +1,131 @@
 <main>
-  <h1 class="title">Profile Settings</h1>
+  <!-- <div class="container"> -->
+    <div class="heading">Vertical Tabs</div>
+    <main class="content">
+      <input type="radio" checked id="home" name="slider" />
+      <input type="radio" id="blog" name="slider" />
+      <input type="radio" id="help" name="slider" />
+      <div class="list">
+        <label for="home" class="home">
+          <i class="ti ti-user-check"></i>
+          <span class="title">Member Profile</span>
+        </label>
+        <label for="blog" class="blog">
+         <i class="ti ti-users-group"></i>
+          <span class="title">Beneficiaries</span>
+        </label>
+        <label for="help" class="help">
+          <i class="ti ti-shield-lock"></i>
+          <span class="title">Password</span>
+        </label>
+        <div class="slider"></div>
+      </div>
+      
+    <div class="text-content">
+      <div class="home text">
+        <div class="fields">
+          <h1>Additional Information</h1>
+          <table>
+            <tr>
+              <label>Mobile Number</label>
+              <td class="fieldsdata">(+63) {{ mobile_number }}</td>
+            </tr>
+            <tr>
+              <label>Gender</label>
+              <td class="fieldsdata">{{ gender }}</td>
+            </tr>
+            <tr>
+              <label>Birthdate</label>
+              <td class="fieldsdata">{{ birthdate | date : "MM/dd/yyyy" }}</td>
+            </tr>
+            <tr>
+              <label>Civil Status</label>
+              <td class="fieldsdata">{{ civil_status }}</td>
+            </tr>
+            <tr *ngIf="civil_status != 'Single'">
+              <label>Spouse</label>
+              <td class="fieldsdata">{{ spouse }}</td>
+            </tr>
+            <tr>
+              <label>Current Address</label>
+              <td class="fieldsdata">{{ address }}</td>
+            </tr>
+            <tr>
+              <label>Employee Status</label>
+              <td class="fieldsdata">{{ employment_status }}</td>
+            </tr>
+            <tr>
+              <label>TIN Number</label>
+              <td class="fieldsdata">{{ tin_number }}</td>
+            </tr>
+            <tr>
+              <label>Occupation</label>
+              <td class="fieldsdata">{{ occupation }}</td>
+            </tr>
+            <tr>
+              <label>Department</label>
+              <td class="fieldsdata">{{ department }}</td>
+            </tr>
+            <tr>
+              <label>Company</label>
+              <td class="fieldsdata">{{ company_name }}</td>
+            </tr>
+            <tr>
+              <label>Company Address</label>
+              <td class="fieldsdata">{{ company_address }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
-  <div class="container">
-    <h3>Name and Email</h3>
-    <div class="fields">
-      <table>
-        <tr>
-          <th class="fields">Name</th>
-          <td class="fieldsdata">
-            {{ first_name }} {{ middle_name }} {{ last_name }} {{ suffix }}
-          </td>
-        </tr>
-        <tr>
-          <th class="fields">Email</th>
-          <td class="fieldsdata">{{ email }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="container">
-    <h3>Additional Information</h3>
-    <div class="fields">
-      <table>
-        <tr>
-          <th class="fields">Mobile Number</th>
-          <td class="fieldsdata">(+63) {{ mobile_number }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Gender</th>
-          <td class="fieldsdata">{{ gender }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Birthdate</th>
-          <td class="fieldsdata">{{ birthdate | date : "MM/dd/yyyy" }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Civil Status</th>
-          <td class="fieldsdata">{{ civil_status }}</td>
-        </tr>
-        <tr *ngIf="civil_status != 'Single'">
-          <th class="fields">Spouse</th>
-          <td class="fieldsdata">{{ spouse }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Current Address</th>
-          <td class="fieldsdata">{{ address }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Employement Status</th>
-          <td class="fieldsdata">{{ employment_status }}</td>
-        </tr>
-        <tr>
-          <th class="fields">TIN Number</th>
-          <td class="fieldsdata">{{ tin_number }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Occupation</th>
-          <td class="fieldsdata">{{ occupation }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Department</th>
-          <td class="fieldsdata">{{ department }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Company</th>
-          <td class="fieldsdata">{{ company_name }}</td>
-        </tr>
-        <tr>
-          <th class="fields">Company Address</th>
-          <td class="fieldsdata">{{ company_address }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="container">
-    <h3>Beneficiary</h3>
-    <div class="fields">
-      <table *ngFor="let b of ben">
-        <tr *ngIf="memId == b.benificiary_id">
-          <td class="fieldsdata" width="30%">{{ b.benificiary_name }}</td>
-          <td class="fieldsdata" width="30%">
-            {{ b.benificiary_birthdate | date : "MM/dd/yyyy" }}
-          </td>
-          <td class="fieldsdata" width="30%">{{ b.benificiary_relation }}</td>
-          <br />
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="tabs">
-      <div class="tab">
-        <input type="checkbox" id="chck1" />
-        <label class="tab-label" for="chck1">Password</label>
-        <div class="tab-content">
-          <div class="fields">
-            <form [formGroup]="changePass" (ngSubmit)="onSubmit()"  #memberChange="ngForm">
-              <div class="passhead">
-                <h4>Change Password</h4>
-              </div>
-              <div class="change">
-                <div class="input-field">
-                  <label for="Current">Current</label>
-                  <input type="password"  formControlName="current_pass"  id="current_pass" name="current_pass" [(ngModel)]="form.current_pass"/>
+      <div class="blog text">
+        <h1>Beneficiary</h1>
+        <div class="fields">
+          <table *ngFor="let b of ben">
+            <tr *ngIf="memId == b.benificiary_id">
+              <td class="fieldsdata" width="30%">{{ b.benificiary_name }}</td>
+              <td class="fieldsdata" width="30%">
+                {{ b.benificiary_birthdate | date : "MM/dd/yyyy" }}
+              </td>
+              <td class="fieldsdata" width="30%">{{ b.benificiary_relation }}</td>
+              <br />
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="help text">
+        <h1>Password</h1>
+        <div class="tabs">
+          <div class="tab-content">
+            <div class="fields">
+              <form [formGroup]="changePass" (ngSubmit)="onSubmit()" #memberChange="ngForm">
+                <div class="passhead">
+                  <h4>Change Password</h4>
                 </div>
-                <div class="input-field">
-                  <label for="New">New Password</label>
-                  <input type="password" id="new_pass" name="new_pass"  formControlName="new_pass"  [(ngModel)]="form.new_pass"/>
+                <div class="change">
+                  <div class="input-field">
+                    <label for="Current">Current</label>
+                    <input type="password" formControlName="current_pass" id="current_pass" name="current_pass"
+                      [(ngModel)]="form.current_pass" />
+                  </div>
+                  <div class="input-field">
+                    <label for="New">New Password</label>
+                    <input type="password" id="new_pass" name="new_pass" formControlName="new_pass"
+                      [(ngModel)]="form.new_pass" />
+                  </div>
+                  <div class="input-field">
+                    <label for="Retype New">Confirm New Password</label>
+                    <input type="password" id="retype_pass" name="retype_pass" formControlName="retype_pass"
+                      [(ngModel)]="form.retype_pass" />
+                  </div>
                 </div>
-                <div class="input-field">
-                  <label for="Retype New">Confirm New Password</label>
-                  <input type="password" id="retype_pass" name="retype_pass"  formControlName="retype_pass" [(ngModel)]="form.retype_pass"/>
+                <div class="add-account">
+                  <button type='submit' class="btn-add">Save Changes</button>
                 </div>
-              </div>
-              <div class="add-account">
-                <button type='submit'class="btn-add">Save Changes</button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
