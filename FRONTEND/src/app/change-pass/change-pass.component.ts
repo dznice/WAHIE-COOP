@@ -124,7 +124,7 @@ export class ChangePassComponent implements OnInit, OnDestroy {
   changePass(){
 
   if (this.changePassForm.invalid){
-      this.toast.error({detail:'Error',summary:'Password not match ',duration:2000 , sticky:false,position:'tr'}); 
+    this.toast.warning({detail:'Password not match',summary:'Please check the password',duration:2000 , sticky:false,position:'tr'}); 
      }
     else{
       this.http.post('http://127.0.0.1:8000/api/users/forgotChange' + '/' + this.id, this.fpform).subscribe(

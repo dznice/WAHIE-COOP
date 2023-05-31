@@ -16,23 +16,44 @@ export class MemberProfileComponent implements OnInit, OnDestroy{
   brgy: any;
   region: any;
 
+changePass!:FormGroup
+
 constructor(private http:HttpClient, private fb:FormBuilder, private backend:BackendService, private route:Router,private toast: NgToastService){
   this.myProfile();
   this.myBene();
 }
-changePass!:FormGroup
+
+passwordMatch(controlName: string, matchControlName: string) {
+  return (formGroup: FormGroup) => {
+    const control = formGroup.controls[controlName];
+    const matchControl = formGroup.controls[matchControlName];
+    if (matchControl.errors && !matchControl.errors['passwordMatch']) {
+      return;
+    }
+    if (control.value !== matchControl.value) {
+      matchControl.setErrors({ passwordMatch: true });
+      
+    } else {
+      matchControl.setErrors(null);
+    }
+  };
+}
+
 ngOnDestroy() {
   
 }
 ngOnInit(){
   this.changePass = this.fb.group({
     
-    "current_pass": new FormControl(null, [Validators.required]),
+    current_pass: new FormControl(null),
 
-    "new_pass": new FormControl(null, [Validators.required]),
+    new_pass: new FormControl(null),
     
-    "retype_pass": new FormControl(null, [Validators.required])
-  })
+    retype_pass: new FormControl(null)
+  },
+  {
+    validator: this.passwordMatch('new_pass', 'retype_pass'),
+  });
 }
 
  id:any = localStorage.getItem('userData');
@@ -105,6 +126,13 @@ public form={
 }
 
 onSubmit(){
+
+  if( this.changePass.invalid){
+    this.toast.warning({detail:'Password not match',summary:'Please check the password',duration:2000 , sticky:false,position:'tr'}); 
+  
+  } 
+
+else{
   console.log(this.email)
   this.http.post('http://127.0.0.1:8000/api/users/changePass/' + this.email, this.form).subscribe(
     (res:any)=>
@@ -113,6 +141,14 @@ onSubmit(){
     sessionStorage.clear()
     this.toast.success({detail:'Success',summary:'Password changed successfuly',duration:2000, sticky:false,position:'tr'});  
     this.route.navigateByUrl('login');  
+    },
+    
+    error => {
+      this.toast.error({detail:'Invalid current password',summary:'Please check the password you input',duration:2000, sticky:false,position:'tr'});
     }
-  )}
+    
+  
+    )
+  }
+}
 }

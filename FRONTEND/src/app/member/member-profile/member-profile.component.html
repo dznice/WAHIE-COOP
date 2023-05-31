@@ -98,27 +98,30 @@
         <div class="tabs">
           <div class="tab-content">
             <div class="fields">
-              <form [formGroup]="changePass" (ngSubmit)="onSubmit()" #memberChange="ngForm">
+              <form ngNativeValidate [formGroup]="changePass" (ngSubmit)="onSubmit()" #memberChange="ngForm">
                 <div class="passhead">
                   <h4>Change Password</h4>
                 </div>
                 <div class="change">
                   <div class="input-field">
                     <label for="Current">Current</label>
-                    <input type="password" formControlName="current_pass" id="current_pass" name="current_pass"
+                    <input type="password" formControlName="current_pass" id="current_pass" name="current_pass" required
                       [(ngModel)]="form.current_pass" />
                   </div>
                   <div class="input-field">
                     <label for="New">New Password</label>
-                    <input type="password" id="new_pass" name="new_pass" formControlName="new_pass"
+                    <input type="password" id="new_pass" name="new_pass" formControlName="new_pass" required
                       [(ngModel)]="form.new_pass" />
                   </div>
                   <div class="input-field">
                     <label for="Retype New">Confirm New Password</label>
-                    <input type="password" id="retype_pass" name="retype_pass" formControlName="retype_pass"
+                    <input type="password" id="retype_pass" name="retype_pass" formControlName="retype_pass" required
                       [(ngModel)]="form.retype_pass" />
                   </div>
                 </div>
+                <div class="text-danger1" *ngIf="changePass.get('retype_pass')!.touched && changePass.get('retype_pass')!.invalid && changePass.controls['retype_pass'].errors!['passwordMatch']">
+                  <small>Password not match</small>
+              </div>
                 <div class="add-account">
                   <button type='submit' class="btn-add">Save Changes</button>
                 </div>

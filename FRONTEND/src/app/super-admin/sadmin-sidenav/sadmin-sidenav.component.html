@@ -58,23 +58,36 @@
 
 <section>
   <div class="pass-modal" *ngIf="showModal === 1">
-    <form [formGroup]="navChange" #navbarChange="ngForm">
+    <form ngNativeValidate [formGroup]="navChange" name="form" (ngSubmit)="navChangePass()" #navbarChange="ngForm">
       <div class="pass-content">
         <div class="pass-header">Change Your Password</div>
         <div class="pass-body">
+
           <label for="password">Current Password</label>
-          <input class="passinput" type="password" formControlName="current_pass"  [(ngModel)]="passForm.current_pass" #currentpassword />
-          <br />
+          <input class="passinput" [type]="chcurrent ?'password':'text'" type="password" formControlName="current_pass"  [(ngModel)]="passForm.current_pass" #currentpassword required/>
+          <span class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+          
           <label for="password">New Password</label>
-          <input class="passinput" type="password"  formControlName="new_pass" name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password />
-          <br />
+          <input class="passinput" [type]="changetype?'password':'text'" type="password"  formControlName="new_pass" name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password required minlength="8" />
+          <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+
+          <div class="meter">
+            <strength-meter [value]="navChange.value.new_pass" (measure)="onStrengthChange($event)"></strength-meter>
+          </div>
+
           <label for="confirm_pass">Confirm Password</label>
-          <input class="passinput" type="password" formControlName="confirm_pass" name="confirm_pass" id= "confirm_pass" [(ngModel)]="passForm.confirm_pass" #confirm_pass />
-          <br />
+          <input class="passinput" [type]="cchangetype?'password':'text'" type="password" formControlName="confirm_pass" name="confirm_pass" id= "confirm_pass" [(ngModel)]="passForm.confirm_pass" #confirm_pass required   minlength="8"/>
+          <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
         </div>
+        
+        <div class="text-danger1" *ngIf="navChange.get('confirm_pass')!.touched && navChange.get('confirm_pass')!.invalid && navChange.controls['confirm_pass'].errors!['passwordMatch']">
+          <small>Password not match</small>
+      </div>
+
         <div class="pass-footer">
+
           <button class="closebtn" (click)="show(2)">Close</button>
-          <button class="savebtn" (click)="navChangePass()">Change</button>
+          <button class="savebtn">Change</button>
         </div>
       </div>
     </form>

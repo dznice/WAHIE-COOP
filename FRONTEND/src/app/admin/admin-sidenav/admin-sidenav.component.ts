@@ -7,6 +7,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from 'src/app/services/backend.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgToastService } from'ng-angular-popup';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -50,6 +51,25 @@ export class AdminSidenavComponent implements OnInit {
     document.body.classList.toggle('darkmodes');
   }
 
+  current:boolean = true;
+  chcurrent:boolean = true;
+  ccurrent(){
+    this.current = !this.current
+    this.chcurrent = !this.chcurrent
+  }
+  
+  visible:boolean = true;
+  changetype:boolean = true;
+  viewpass(){
+    this.visible = !this.visible
+    this.changetype = !this.changetype
+  }
+  cvisible:boolean = true;
+  cchangetype:boolean = true;
+  cviewpass(){
+    this.cvisible = !this.cvisible
+    this.cchangetype = !this.cchangetype
+  }
 
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
@@ -69,6 +89,22 @@ export class AdminSidenavComponent implements OnInit {
     }
   }
 
+  passwordMatch(controlName: string, matchControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchControl = formGroup.controls[matchControlName];
+      if (matchControl.errors && !matchControl.errors['passwordMatch']) {
+        return;
+      }
+      if (control.value !== matchControl.value) {
+        matchControl.setErrors({ passwordMatch: true });
+        
+      } else {
+        matchControl.setErrors(null);
+      }
+    };
+  }
+
   email:any
   navChange!:FormGroup
 
@@ -84,12 +120,16 @@ export class AdminSidenavComponent implements OnInit {
     // )
     this.navChange = this.fb.group({
     
-      "current_pass": new FormControl(null, [Validators.required]),
+      "current_pass": new FormControl(null),
   
-      "new_pass": new FormControl(null, [Validators.required]),
+      "new_pass": new FormControl(null),
       
-      "confirm_pass": new FormControl(null, [Validators.required])
-    })
+      "confirm_pass": new FormControl(null)
+    },
+    {
+      validator: this.passwordMatch('new_pass', 'confirm_pass'),
+    }
+    );
   }
   
   
@@ -107,7 +147,11 @@ export class AdminSidenavComponent implements OnInit {
     this.hide = false;
   }
 
+  onStrengthChange(score: any){
+    
+    console.log('new score', score);
 
+  }
 
   showModal = -1;
   show(index: number){
@@ -133,7 +177,7 @@ export class AdminSidenavComponent implements OnInit {
   public loggedIn:boolean = false;
 
   constructor(private auth:AuthGuardService,private router:Router,private token:TokenService,
-    private backend:BackendService, private http:HttpClient,  private fb:FormBuilder) {
+    private backend:BackendService, private http:HttpClient,  private fb:FormBuilder, private toast: NgToastService) {
  
     }
 
@@ -170,12 +214,24 @@ public passForm={
 }  
 
   navChangePass(){
+    if( this.navChange.invalid){
+      this.toast.warning({detail:'Password not match',summary:'Please check the password',duration:3000 , sticky:false,position:'tr'}); 
+    
+    } 
+  
+  else{
+
     console.log(this.passForm.userId)
     this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
       localStorage.clear()
       sessionStorage.clear()
       console.log(res)
       this.router.navigateByUrl('login');
-  })
+  },
+  error => {
+    this.toast.error({detail:'Invalid current password',summary:'Please check the password you input',duration:3000, sticky:false,position:'tr'});
+  }
+  )
+}
   }
 }

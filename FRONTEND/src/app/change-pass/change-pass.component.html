@@ -17,7 +17,8 @@
                     <div  class="txt-field">
                         <div class="txt-wrap">
                             <label class="enter_pass" for="pass"> Enter Password</label>
-                            <input formControlName="password" [type]="changetype?'password':'text'" name="password" [(ngModel)]="fpform.password" required
+                            <input formControlName="password" [type]="changetype?'password':'text'" name="password" [(ngModel)]="fpform.password" required minlength="8" 
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters, one letter, one number and one special character:"
                             id="password" placeholder="Input password">
                             <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                         </div>
@@ -28,7 +29,7 @@
 
                         <div class="txt-wrap">
                             <label for="pass2"> Confirm Password</label>
-                            <input formControlName="confirm_pass" [type]="cchangetype?'password':'text'" name="confirm_pass" id="confirm_pass" required
+                            <input formControlName="confirm_pass" [type]="cchangetype?'password':'text'" name="confirm_pass" id="confirm_pass" required minlength="8"
                             [(ngModel)]="fpform.confirm_pass" placeholder="Confirm your new password">
                             <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                         </div>

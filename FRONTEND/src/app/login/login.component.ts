@@ -117,6 +117,7 @@ export class LoginComponent implements OnInit, OnDestroy  {
     this.log.department = user.user['department']
     this.log.activity = this.login
     this.activityLog();
+    
   
     //admin
     if(user.user['role_id']==1){
