@@ -26,7 +26,7 @@
               | paginate : { itemsPerPage: 10, currentPage: p }
           "
         >
-          <tr *ngIf="user.role_id == 3">
+          <tr>
             <td (click)='memberInfo(user.email)'>{{ user.name }}</td>
             <td (click)='memberInfo(user.email)'>{{ user.email }}</td>
             <td>{{ user.created_at | date:'mediumDate' }}</td>

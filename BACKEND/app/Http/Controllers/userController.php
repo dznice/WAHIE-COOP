@@ -32,6 +32,11 @@ class userController extends Controller
    $users = User::all();
    return response()->json($users);
     }
+    
+    public function userMembers(){
+        $members = User::where('role_id', '=', 3)->get();
+        return response()->json($members);
+    }
 
     public function navChangePass(Request $request){
         $user = User::find($request->userId);

@@ -44,7 +44,7 @@ export class ManageMembersComponent {
   memAccounts: any[] = [];
 
   showUsers() {
-    this.http.get('http://127.0.0.1:8000/api/users').subscribe((res: any) => {
+    this.http.get('http://127.0.0.1:8000/api/userMembers').subscribe((res: any) => {
       this.Loaded = true;
       console.log(res);
       this.memAccounts = res;

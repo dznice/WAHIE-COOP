@@ -46,6 +46,7 @@ Route::post('adminadd', [App\Http\Controllers\Api\AuthController::class, 'admina
 
 Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
 Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);
+Route::get('/userMembers', [App\Http\Controllers\userController::class, 'userMembers']);
 
 Route::post('/users/updateOtp/{id}', [App\Http\Controllers\Api\AuthController::class, 'submitOtp']);
 Route::post('/users/resendOtp/{id}', [App\Http\Controllers\Api\AuthController::class, 'resendOtp']);
