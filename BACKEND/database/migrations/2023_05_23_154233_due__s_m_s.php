@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id');
             $table->string('mobile_number');
             $table->string('journal_id');
-            $table->date('sendDate');
+            $table->date('sendDate')->nullable();
             $table->timestamps();
 
         });

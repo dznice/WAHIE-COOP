@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Mail;
 use Spatie\QueryBuilder\QueryBuilder;
 use  Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use PDO;
 
 class userController extends Controller
 {
@@ -253,4 +254,6 @@ class userController extends Controller
      
          return response()->json($totals);
      }
+
+    
     }

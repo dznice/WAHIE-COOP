@@ -89,7 +89,6 @@ cviewpass(){
       });
     }
   }
-
   passwordMatch(controlName: string, matchControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -166,7 +165,8 @@ cviewpass(){
 
   public loggedIn:boolean = false;
 
-  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient, private fb:FormBuilder, private toast: NgToastService) {}
+  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient,
+    private toast:NgToastService, private fb:FormBuilder) {}
 
 
   public log ={
@@ -207,17 +207,8 @@ cviewpass(){
 
       console.log(this.passForm.userId)
       this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
-        localStorage.clear()
-        sessionStorage.clear()
         console.log(res)
-        this.router.navigateByUrl('login');
-        this.toast.success({detail:'Password successfully changed',summary:'Please log in again',duration:2000, sticky:false,position:'tr'});
-    },
-
-    error => {
-      this.toast.error({detail:'Invalid current password',summary:'Please check the password you input',duration:3000, sticky:false,position:'tr'});
+    })
     }
-    )
-  }
-    }
+}
 }

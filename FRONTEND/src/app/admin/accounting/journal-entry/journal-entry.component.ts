@@ -98,13 +98,13 @@ if (newJournalNo !== currentJournalNo) {
 
   journalEntryForm=this.builder.group({
     journal_date:this.builder.control(this.formatDate()),
-    journal_no:this.builder.control('',Validators.required),
+    journal_no:this.builder.control("",Validators.required),
     due_date:this.builder.control(''),
     interest:this.builder.control(''),
     entries:this.builder.array([
       this.Generaterow(),
       this.Generaterow()]),
-    userId:this.builder.control(this.useid),
+    userId:this.builder.control(this.useid),  
     memberNo:this.builder.control(null),
     totaldebit:this.builder.control({ value: 0, disabled: true }),
     totalcredit:this.builder.control({ value: 0, disabled: true })
@@ -115,12 +115,12 @@ if (newJournalNo !== currentJournalNo) {
 
   saveEntry(){
 
-
-
+this.journalEntryForm.get("journal_no")?.setValue((<HTMLInputElement>document.getElementById("journnumber")).value)
 
     let total_debit = this.journalEntryForm.get("totaldebit")?.value;
     let total_credit = this.journalEntryForm.get("totalcredit")?.value;
     let journaldate = this.journalEntryForm.get("journal_date")?.value;
+   
     console.log(journaldate > this.maxDate);
     if(this.journalEntryForm.valid && total_debit == total_credit && journaldate <= this.maxDate ){
       this.wahieService.saveJournalEntry(this.journalEntryForm.getRawValue()).subscribe(res=>{
@@ -130,10 +130,12 @@ if (newJournalNo !== currentJournalNo) {
         console.log(result);
         this.log.activity = 'Added Journal Entry No.' + this.journId
         this.activityLog()
-        this.sms.sendDate = this.journalEntryForm.getRawValue().due_date
-        this.sms.journal_id = this.journId
-        console.log(this.journId)
-        this.smsDue()
+        if(this.journalEntryForm.getRawValue().due_date!=''){
+          this.sms.sendDate = this.journalEntryForm.getRawValue().due_date
+          this.sms.journal_id = this.journId
+          console.log(this.journId)
+          this.smsDue()
+        }
         this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
         this.route.navigateByUrl('admin/accounting')
       },

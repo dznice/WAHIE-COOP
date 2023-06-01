@@ -78,6 +78,7 @@ Route::post('/dueDateSMS', [App\Http\Controllers\userController::class, 'dueDate
 Route::post('/sendDate', [App\Http\Controllers\userController::class, 'sendDate']);
 
 
+
 // Route::get('/users', [App\Http\Controllers\userController::class, 'users']);
 // Route::post('/users/updateOtp/{id}', [App\Http\Controllers\userController::class, 'submitOtp']);
 // Route::put('/users/{id}', [App\Http\Controllers\userController::class, 'activateUser']);

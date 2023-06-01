@@ -7,7 +7,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from 'src/app/services/backend.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgToastService } from'ng-angular-popup';
+import { NgToastService } from 'ng-angular-popup';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -177,7 +177,7 @@ export class AdminSidenavComponent implements OnInit {
   public loggedIn:boolean = false;
 
   constructor(private auth:AuthGuardService,private router:Router,private token:TokenService,
-    private backend:BackendService, private http:HttpClient,  private fb:FormBuilder, private toast: NgToastService) {
+    private backend:BackendService, private http:HttpClient,  private fb:FormBuilder, private toast:NgToastService) {
  
     }
 
@@ -223,15 +223,8 @@ public passForm={
 
     console.log(this.passForm.userId)
     this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
-      localStorage.clear()
-      sessionStorage.clear()
       console.log(res)
-      this.router.navigateByUrl('login');
-  },
-  error => {
-    this.toast.error({detail:'Invalid current password',summary:'Please check the password you input',duration:3000, sticky:false,position:'tr'});
+  })
   }
-  )
-}
   }
 }
