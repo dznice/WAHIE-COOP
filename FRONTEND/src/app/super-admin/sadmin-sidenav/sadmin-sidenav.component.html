@@ -56,7 +56,7 @@
   </ul>
 </div>
 
-<section>
+<section> 
   <div class="pass-modal" *ngIf="showModal === 1">
     <form ngNativeValidate [formGroup]="navChange" name="form" (ngSubmit)="navChangePass()" #navbarChange="ngForm">
       <div class="pass-content">
@@ -68,7 +68,8 @@
           <span class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
           
           <label for="password">New Password</label>
-          <input class="passinput" [type]="changetype?'password':'text'" type="password"  formControlName="new_pass" name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password required minlength="8" />
+          <input class="passinput" [type]="changetype?'password':'text'" type="password"  formControlName="new_pass" name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password required minlength="8" 
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters, one letter, one number and one special character:"/>
           <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
 
           <div class="meter">

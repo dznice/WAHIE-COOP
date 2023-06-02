@@ -67,6 +67,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     this.otp = (<HTMLInputElement>document.getElementById("otp")).value;
     this.updateData();
   }
+
   }
 
   updateData() {

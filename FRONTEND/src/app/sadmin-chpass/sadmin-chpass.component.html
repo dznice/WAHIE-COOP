@@ -22,6 +22,7 @@
                             <label class="enter_pass" for="pass">Password</label>
                             <input type="hidden" name="id" id="id" value='{{ id }}'>
                             <input [type]="changetype?'password':'text'" class="input-field" id="sadmin-pass" name="password" placeholder="Enter your new password" formControlName="password" required
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters, one letter, one number and one special character:"
                             [(ngModel)]="chform.password">
                             <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div> 
                         </div>

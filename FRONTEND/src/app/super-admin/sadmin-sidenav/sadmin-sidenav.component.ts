@@ -208,7 +208,11 @@ cviewpass(){
       console.log(this.passForm.userId)
       this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
         console.log(res)
-    })
+    },
+    error => {
+      this.toast.error({detail:'Invalid current password',summary:'Please check the password you input',duration:3000, sticky:false,position:'tr'});
+    }
+    )
     }
 }
 }
