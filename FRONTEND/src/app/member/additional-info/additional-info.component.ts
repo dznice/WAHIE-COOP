@@ -44,7 +44,7 @@ onSpouseChange() {
   }
 }
 
-// disabling employment when unemployed
+// disabling occupation when unemployed
 
 isOccupationDisabled: boolean = false;
 onEmploymentChange() {

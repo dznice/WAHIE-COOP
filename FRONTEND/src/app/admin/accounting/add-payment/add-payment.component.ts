@@ -24,18 +24,27 @@ export class AddPaymentComponent implements OnInit {
 
   startDate: string = '';
   endDate: string = '';
+  paymentMethod: string = '';
+  deposit: string = '';
+  transaction_Num: string = '';
+  reference_Num: string = '';
+
   public accounts: any;
   public members: any;
   paymentForm: FormGroup;
   paymentRow !: FormArray<any>;
   amount !: FormGroup<any>;
   maxDate: any;
-  paymentMethods: any = [
-    {value: '1', viewValue: 'Cash'},
-    {value: '2', viewValue: 'Check'},
-    {value: '3', viewValue: 'Credit Card'},
-    {value: '4', viewValue: 'Direct Debit'}
-  ]
+  // paymentMethods: any = [
+  //   {value: '1', viewValue: 'Cash'},
+  //   {value: '2', viewValue: 'Check'},
+  //   {value: '3', viewValue: 'Credit Card'},
+  //   {value: '4', viewValue: 'Direct Debit'}
+  // ]
+  paymentMethods: string[] = ["Cash", "Check", "Credit Card", "Direct Debit"];
+  deposits: string[] = ["1", "2", "3"];
+  transaction_Number: string[] = ["Transaction 1", "Transaction 2", "Transaction 3"];
+  reference_Number: string[] = ["Reference 1", "Reference 2", "Reference 3"]
   selectedMethod: any;
 
   constructor(private builder:FormBuilder, private wahieService:WahieService, private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute, private route:Router, private toast: NgToastService){
