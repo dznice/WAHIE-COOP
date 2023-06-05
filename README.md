@@ -13,9 +13,10 @@ npm i @ng-select/ng-select --legacy-peer-deps
 npm i ng-angular-popup --legacy-peer-deps
 npm i bn-ng-idle --legacy-peer-deps
 npm i ngx-ui-loader --legacy-peer-deps
+npm i ngx-export-as --legacy-peer-deps
 
 //npm i exceljs --legacy-peer-deps//
-npm i ngx-export-as --legacy-peer-deps
+
 
 
 To serve backend run the following commands:
@@ -28,6 +29,7 @@ php artisan migrate
 php artisan serve
 
 composer require spatie/laravel-query-builder
+composer require vonage/client
 
 replace in xammp/mysql
 under msqld
@@ -44,4 +46,3 @@ php artisan db:seed --class=PhilippineProvincesTableSeeder
 php artisan db:seed --class=PhilippineCitiesTableSeeder
 php artisan db:seed --class=PhilippineBarangaysTableSeeder
 
-composer require vonage/client

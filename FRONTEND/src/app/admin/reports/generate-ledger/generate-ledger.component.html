@@ -15,6 +15,6 @@
         <input type="date" formControlName="endDate">
         <button type="submit" >Generate</button>
     </form>
-    <app-sl-accounts *ngIf="showReport" [formData]="submittedFormData" [trial]="trialData" [slData]="tableData"></app-sl-accounts>
+    <app-sl-accounts *ngIf="showReport" [formData]="submittedFormData" [trial]="trialData" [slData]="tableData" [PastslData]="tableData"></app-sl-accounts>
     <!-- <app-sl-members *ngIf="showReport" [formData]="submittedFormData"></app-sl-members> -->
 </main>

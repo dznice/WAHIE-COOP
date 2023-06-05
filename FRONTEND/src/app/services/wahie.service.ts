@@ -121,6 +121,10 @@ export class WahieService {
     return this.http.get<any[]>(`${this.url}/api/totaljour?member_id=${memId}&journal_ids=${journId}&start_date=${startD}&end_date=${endD}`);
   }
 
+  public pastLegder(memId:any, journId:any, startD:any, endD:any){
+    return this.http.get<any[]>(`${this.url}/api/totaljourlastyear?member_id=${memId}&journal_ids=${journId}&start_date=${startD}&end_date=${endD}`);
+  }
+
   // public sLegder5(memId:any, startD:any, endD:any){
   //   return this.http.get<any[]>(`${this.url}/api/totaljour?member_id=${memId}&start_date=${startD}&end_date=${endD}`);
   // }

@@ -1,1 +1,109 @@
-<p>fs-op works!</p>
+<main>
+    <header>
+      <span class="coop-name">WAH-Cooperative</span>
+      <h4 class="report-name">Trial Balance</h4>
+      <span class="date-today">As of DateToday</span>
+    </header>
+  
+    <section class="tabler-section">
+      <div class="table-container">
+        <table class="table-content">
+          <thead>
+            <tr>
+              <th>Accounts</th>
+              <th class="th-cred">Credit</th>
+              <th class="th-deb">Debit</th>
+            </tr>
+          </thead>
+          <tbody>
+
+             <!-- Current Assets -->
+             <ng-container *ngIf="assets && assets.length > 0">
+              <tr class="tr-total">
+                <td>Current Assets</td>
+              </tr>
+            <ng-container *ngFor="let item of assets">
+              <tr>
+                <td>{{ item.result.journal_name }}</td>
+                <td class="td-cred">
+                  <ng-container *ngFor="let items of passets">
+                    <ng-container *ngIf="item.result.journId === items.result.journId">
+                      {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                    </ng-container>
+                  </ng-container>
+                </td>
+                <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              </tr>
+            </ng-container>
+            <!-- Total of all Current Assets -->
+            <tr>
+                <td>Total Assets</td>
+                <td class="td-cred"></td>
+                <td class="td-deb" *ngIf="assets.length > 0">{{ assets[assets.length - 1].total_asset }}</td>
+              </tr>
+            </ng-container>
+
+              <!-- Other Current Assets -->
+              <ng-container *ngIf="otherAssets && otherAssets.length > 0">
+                <tr class="tr-total">
+                  <td>Other-Current Assets</td>
+                </tr>
+
+            <ng-container *ngFor="let item of otherAssets">
+              <tr>
+                <td>{{item.result.journal_name }}</td>
+                <td class="td-cred">
+                  <ng-container *ngFor="let items of potherAssets">
+                    <ng-container *ngIf="item.result.journId === items.result.journId">
+                      {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                    </ng-container>
+                  </ng-container>
+                </td>
+                <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              </tr>
+            </ng-container>
+            <!-- Total of Other Current Assets -->
+            <tr>
+              <td>Total of Other Current Assets</td>
+              <td class="td-cred"></td>
+              <td class="td-deb" *ngIf="otherAssets.length > 0">{{ otherAssets.length > 0 ? otherAssets[otherAssets.length - 1].total_other_asset : '' }}</td>
+            </tr>
+          </ng-container>
+
+            <ng-container *ngIf="nonAssets && nonAssets.length > 0">
+              <tr class="tr-total">
+                <td>Non-Assets</td>
+              </tr>
+              <ng-container *ngFor="let item of nonAssets">
+                <tr>
+                  <td>{{item.result.journal_name }}</td>
+                  <td class="td-cred">
+                    <ng-container *ngFor="let items of pnonAssets">
+                      <ng-container *ngIf="item.result.journId === items.result.journId">
+                        {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                      </ng-container>
+                    </ng-container>
+                  </td>
+                  <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                </tr>
+              </ng-container>
+              <!-- Total of Other Current Assets -->
+            <tr>
+              <td>Total of Non-Current Assets</td>
+              <td class="td-cred"></td>
+              <td class="td-deb" *ngIf="nonAssets.length > 0">{{ nonAssets.length > 0 ? nonAssets[nonAssets.length - 1].total_non_asset : '' }}</td>
+            </tr>
+            </ng-container>
+            
+            <tr class="tr-total">
+              <td class="td-total" colspan="2">Total</td>
+              <td class="td-deb">{{ calculateTotalBalance() }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+  
+  
+  </main>

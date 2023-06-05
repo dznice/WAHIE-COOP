@@ -24,6 +24,14 @@ export class ReportsComponent implements OnInit{
     this.route.navigateByUrl('admin/reports/trial-balance');
 }
 
+  fsOp(){
+    this.route.navigateByUrl('admin/reports/fs-op');
+}
+
+  fsFincon(){
+    this.route.navigateByUrl('admin/reports/fs-fincon');
+}
+
   subLedger(){
       this.route.navigateByUrl('admin/reports/generate-ledger');
   }

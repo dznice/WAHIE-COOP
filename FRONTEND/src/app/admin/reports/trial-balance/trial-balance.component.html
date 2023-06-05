@@ -16,23 +16,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Cash and cash equivalents</td>
-            <td class="td-cred">10,032,000.00</td>
-            <td class="td-deb"></td>
-          </tr>
-          <tr>
-            <td>Accounts Receivable (A/R)</td>
+          <tr *ngFor="let item of assets">
+            <td>{{ item.result.journal_name }}</td>
             <td class="td-cred"></td>
-            <td class="td-deb">9,992,500.00</td>
+            <td class="td-deb">{{ item.result.total_balance }}</td>
+          </tr>
+          <tr *ngFor="let item of otherAssets">
+            <td>{{ item.result.journal_name }}</td>
+            <td class="td-cred"></td>
+            <td class="td-deb">{{ item.result.total_balance }}</td>
+          </tr>
+          <tr *ngFor="let item of nonAssets">
+            <td>{{ item.result.journal_name }}</td>
+            <td class="td-cred"></td>
+            <td class="td-deb">{{ item.result.total_balance }}</td>
           </tr>
           <tr class="tr-total">
-            <td class="td-total">Total</td>
-            <td class="td-credtot">10,032,000.00</td>
-            <td class="td-debtot">10,037,000.00</td>
+            <td class="td-total" colspan="2">Total</td>
+            <td class="td-deb">{{ calculateTotalBalance() }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
+  
+
+
 </main>

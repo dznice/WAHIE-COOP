@@ -67,8 +67,8 @@ return new class extends Migration
         DB::table('lib_journals')->insert(array('journal_number' => '11570', 'journal_name' => 'Inventory Agricultural Produce', 'journal_type' => 'Inventories'));
         DB::table('lib_journals')->insert(array('journal_number' => '11580', 'journal_name' => 'Equipment for Lease Inventory', 'journal_type' => 'Inventories'));
         DB::table('lib_journals')->insert(array('journal_number' => '11590', 'journal_name' => 'Allowance for impairment - Inventory', 'journal_type' => 'Inventories'));
-        // Biological Assets 11600
-        DB::table('lib_journals')->insert(array('journal_number' => '11600', 'journal_name' => 'Biological Assets', 'journal_type' => 'Biological Assets'));
+        // Biologicals Assets 11600
+        DB::table('lib_journals')->insert(array('journal_number' => '11600', 'journal_name' => 'Biological Assets', 'journal_type' => 'Biologicals Assets'));
         // Other Current Assets - 12000
         // DB::table('lib_journals')->insert(array('journal_number' => '12000', 'journal_name' => 'Other Current Assets'));
         DB::table('lib_journals')->insert(array('journal_number' => '12110', 'journal_name' => 'Input Tax', 'journal_type' => 'Other Current Assets'));

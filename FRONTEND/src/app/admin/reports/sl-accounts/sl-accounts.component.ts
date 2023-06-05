@@ -10,9 +10,11 @@ export class SlAccountsComponent {
   @Input() formData: any;
   @Input() trial: any;
   @Input() slData: any[];
+  @Input() PastslData: any[];
 
   showReport: boolean;
   public ledgers: any 
+  public pledgers: any 
   public libJournals: any 
   constructor( private wahieService:WahieService){
 
@@ -20,7 +22,9 @@ export class SlAccountsComponent {
 
   ngOnInit():void{
     this.showSLedger(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
+    this.showPastSLedger(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
     console.log(this.slData);
+    console.log(this.PastslData);
   }
 
   showLibJournal(): void{
@@ -40,6 +44,13 @@ export class SlAccountsComponent {
       //     console.log('hello');
       //   }
       // });
+    });
+  }
+
+  showPastSLedger(mem:any, acc:any, sd:any, ed:any): void{
+    this.pledgers = this.wahieService.pastLegder(mem, acc, sd, ed).subscribe(pledger=>{
+      this.pledgers = pledger;
+        
     });
   }
 

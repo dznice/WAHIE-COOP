@@ -13,6 +13,7 @@ export class GenerateLedgerComponent {
   selectedOption: string;
   showReport: boolean;
   tableData: any[];
+  pastTableData: any[];
   constructor(private builder:FormBuilder, private wahieService:WahieService, private exportAsService: ExportAsService){
     //this.tableData = [];
   }
@@ -67,6 +68,7 @@ export class GenerateLedgerComponent {
   public members: any ;
   public libJournals: any ;
   public ledgers: any ;
+  public pledgers: any ;
 
   showMembers(): void{
     this.members = this.wahieService.listMembers().subscribe(member=>{
@@ -89,16 +91,28 @@ export class GenerateLedgerComponent {
     });
   }
 
+  showPastSLedger(mem:any, acc:any, sd:any, ed:any){
+    return this.wahieService.pastLegder(mem, acc, sd, ed).subscribe(pledger=>{
+      this.pledgers = pledger;
+      this.PastslData = this.pledgers;
+      console.log(this.pledgers);
+    });
+  }
+
   submittedFormData: any;
   trialData: any;
   slData:any[];
+  PastslData:any[];
   onSubmit(formData: any) {
     let acc = this.ledgerForm.get('account')?.value;
     let mem = this.ledgerForm.get('member')?.value;
     let sd = this.ledgerForm.get('startDate')?.value;
     let ed = this.ledgerForm.get('endDate')?.value;
     this.showSLedger(mem, acc, sd, ed );
+    this.showPastSLedger(mem, acc, sd, ed );
+    this.PastslData = this.PastslData;
     this.slData = this.tableData;
+    console.log(this.PastslData);
     console.log(this.slData);
     this.submittedFormData = formData;
     this.showReport = true;
