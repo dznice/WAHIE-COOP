@@ -1,7 +1,7 @@
 <main>
   <h1 class="title">Journal Entry</h1>
   <div>
-    <form [formGroup]="journalEntryForm" (ngSubmit)="saveEntry()">
+    <form ngNativeValidate [formGroup]="journalEntryForm" (ngSubmit)="saveEntry()">
       <div class="header">
         <div class="journdate">
           <label> Journal Date </label>
@@ -24,6 +24,7 @@
             name="journnumber"
             formControlName="journal_no"
             [value]="this.journId"
+            required
           >
         </div>
         <div class="userid">
@@ -32,11 +33,12 @@
             type="hidden"
             formControlName="useid"
             [value]="this.useid"
+            required
           />
         </div>
         <div class="duedate">
           <label> Due Date </label>
-          <input class="headinput" type="date" formControlName="due_date" />
+          <input class="headinput" type="date" formControlName="due_date" required/>
         </div>
         <div class="interest">
           <label> Interest % </label>
@@ -55,13 +57,13 @@
 <br>
       <div class="journals">
         <table class="tablejournal" formArrayName="entries">
-          <thead>
-            <th class="journallabel">No.</th>
-            <th class="journallabel">Account</th>
-            <th class="journallabel">Debits</th>
-            <th class="journallabel">Credits</th>
-            <th class="journallabel">Description</th>
-            <th class="journallabel">Name</th>
+          <thead >
+            <th class="journallabel2">No.</th>
+            <th class="journallabel2">Account</th>
+            <th class="journallabel2">Debits</th>
+            <th class="journallabel2">Credits</th>
+            <th class="journallabel2">Description</th>
+            <th class="journallabel2">Name</th>
           </thead>
           <tbody>
             <tr
@@ -92,6 +94,7 @@
                   type="number"
                   formControlName="debit"
                   (change)="autoZero(i)"
+                  required
                 />
               </td>
               <td class="beneinput">
@@ -99,6 +102,7 @@
                   type="number"
                   formControlName="credit"
                   (change)="autoZero(i)"
+                  required
                 />
               </td>
               <td class="beneinput">
@@ -110,6 +114,7 @@
                   class="try"
                   formControlName="name"
                   (change)="getNameID(i)"
+                  
                 >
                   <ng-option
                     class="try"
