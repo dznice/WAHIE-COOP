@@ -12,8 +12,16 @@ export class TrialBalanceComponent implements OnInit {
   assets: any[];
   otherAssets: any[];
   nonAssets: any[];
+  passets: any[];
+  potherAssets: any[];
+  pnonAssets: any[];
+  pliabilities : any[];
+  pnonLiabilities : any[];
+  pequity : any[];
   item: any[];
-  lastTotalAsset: any;
+  liabilities : any[];
+  nonLiabilities : any[];
+  equity : any[];
 
   constructor(private http:HttpClient) {}
     
@@ -39,6 +47,9 @@ export class TrialBalanceComponent implements OnInit {
     this.assets = [];
     this.otherAssets = [];
     this.nonAssets = [];
+    this.liabilities = [];
+    this.nonLiabilities = [];
+    this.equity = [];
   
     for (const item of this.ledgers) {
       const journalName = item.result.journType.toLowerCase(); // Convert to lowercase for case-insensitive comparison
@@ -50,16 +61,58 @@ export class TrialBalanceComponent implements OnInit {
         this.otherAssets.push(item);
       } else if (['non current assets', 'biological assets', 'intangible assets'].includes(journalName)) {
         this.nonAssets.push(item);
-      }
+      } else if (['liabilities', 'other current liabilities'].includes(journalName)) {
+        this.liabilities.push(item);
+      } else if (['current liabilities', 'other non-current liabilities'].includes(journalName)) {
+        this.nonLiabilities.push(item);
+      } else if (journalName === 'equity') {
+        this.equity.push(item);
+      } 
     }
-    
-    console.log('Ledgers:', this.ledgers);
-    console.log('Assets:', this.assets);
-    console.log('Other Assets:', this.otherAssets);
-    console.log('Non-Assets:', this.nonAssets);
   }
   
-  calculateTotalBalance(): number {
+  
+  showPastSLedger(): void {
+    this.http.get('http://127.0.0.1:8000/api/totaljourlastyear').subscribe(
+      (res: any) => {
+        console.log(res);
+        this.pledgers = res;
+        this.pastProcessLedgerData();
+        console.log(this.processLedgerData())
+      }
+    );
+  }
+
+  pastProcessLedgerData(): void {
+    this.passets = [];
+    this.potherAssets = [];
+    this.pnonAssets = [];
+    this.pliabilities = [];
+    this.pnonLiabilities = [];
+    this.pequity = [];
+  
+    for (const items of this.pledgers) {
+      const journalName = items.result.journType.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+      console.log('Journal Name:', journalName);
+
+      if (['cash and cash equivalents', 'loans and receivables', 'financial assets', 'biologicals assets'].includes(journalName)) {
+        this.passets.push(items);
+      } else if (journalName === 'other current assets') {
+        this.potherAssets.push(items);
+      } else if (['non current assets', 'biological assets', 'intangible assets'].includes(journalName)) {
+        this.pnonAssets.push(items);
+      } else if (['liabilities', 'other current liabilities'].includes(journalName)) {
+        this.pliabilities.push(items);
+      } else if (['current liabilities', 'other non-current liabilities'].includes(journalName)) {
+        this.pnonLiabilities.push(items);
+      } else if (journalName === 'equity') {
+        this.pequity.push(items);
+      } 
+    }
+    
+  }
+  
+  calculateAssetTotalBalance(): number {
     let totalBalance = 0;
   
     for (const item of this.assets) {
@@ -76,16 +129,24 @@ export class TrialBalanceComponent implements OnInit {
   
     return totalBalance;
   }
-  
 
-  showPastSLedger(): void {
-    this.http.get('http://127.0.0.1:8000/api/totaljourlastyear').subscribe(
-      (res: any) => {
-        console.log(res);
-        this.pledgers = res;
-        this.processLedgerData();
-      }
-    );
+  calculateLiabilityandEquityTotalBalance(): number {
+    let totalBalance = 0;
+  
+    for (const item of this.liabilities) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.nonLiabilities) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.equity) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    return totalBalance;
   }
   
+
 }

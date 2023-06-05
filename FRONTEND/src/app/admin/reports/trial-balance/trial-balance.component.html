@@ -19,21 +19,37 @@
           <tr *ngFor="let item of assets">
             <td>{{ item.result.journal_name }}</td>
             <td class="td-cred"></td>
-            <td class="td-deb">{{ item.result.total_balance }}</td>
+            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           </tr>
           <tr *ngFor="let item of otherAssets">
             <td>{{ item.result.journal_name }}</td>
             <td class="td-cred"></td>
-            <td class="td-deb">{{ item.result.total_balance }}</td>
+            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           </tr>
           <tr *ngFor="let item of nonAssets">
             <td>{{ item.result.journal_name }}</td>
             <td class="td-cred"></td>
-            <td class="td-deb">{{ item.result.total_balance }}</td>
+            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+          </tr>
+          <tr *ngFor="let item of liabilities">
+            <td>{{ item.result.journal_name }}</td>
+            <td class="td-cred">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-deb"></td>
+          </tr>
+          <tr *ngFor="let item of nonLiabilities">
+            <td>{{ item.result.journal_name }}</td>
+            <td class="td-cred">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-deb"></td>
+          </tr>
+          <tr *ngFor="let item of equity">
+            <td>{{ item.result.journal_name }}</td>
+            <td class="td-cred">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-deb"></td>
           </tr>
           <tr class="tr-total">
-            <td class="td-total" colspan="2">Total</td>
-            <td class="td-deb">{{ calculateTotalBalance() }}</td>
+            <td>Total</td>
+            <td class="td-deb">{{ calculateLiabilityandEquityTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="td-cred">{{ calculateAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
           </tr>
         </tbody>
       </table>

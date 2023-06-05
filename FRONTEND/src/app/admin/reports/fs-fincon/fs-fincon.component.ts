@@ -112,7 +112,7 @@ export class FsFinconComponent implements OnInit {
     
   }
 
-  calculateTotalBalance(): number {
+  calculateAssetTotalBalance(): number {
     let totalBalance = 0;
   
     for (const item of this.assets) {
@@ -124,6 +124,24 @@ export class FsFinconComponent implements OnInit {
     }
   
     for (const item of this.nonAssets) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    return totalBalance;
+  }
+
+  calculateLiabilityandEquityTotalBalance(): number {
+    let totalBalance = 0;
+  
+    for (const item of this.liabilities) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.nonLiabilities) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.equity) {
       totalBalance += item.result.total_balance;
     }
   
