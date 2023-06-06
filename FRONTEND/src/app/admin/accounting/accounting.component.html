@@ -13,37 +13,38 @@
   </div>
 
   <section class="payables">
-    <div class="unpaid-container">
-      <label>Unpaid Last 365 Days</label>
-      <div class="card-merge">
-        <div class="card overdue" *ngIf="overdue.total_overdue; else noDue">
-          <h3 class="card-amount">{{ overdue.total_overdue | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
+  
+    <div class="card-cont">
+      <div class="card overdue" *ngIf="overdue.total_overdue; else noDue">
+        <h3 class="card-amount">{{ overdue.total_overdue | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
+        <span class="card-subtext">{{ overdue.overdue_count }} OVERDUE</span>
+      </div>
+
+      <ng-template #noDue>
+        <div class="card overdue">
+          <h3 class="card-amount">{{ 0 | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
           <span class="card-subtext">{{ overdue.overdue_count }} OVERDUE</span>
         </div>
-
-        <ng-template #noDue>
-          <div class="card overdue">
-            <h3 class="card-amount">{{ 0 | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
-            <span class="card-subtext">{{ overdue.overdue_count }} OVERDUE</span>
-          </div>
-        </ng-template>
-
-        <div class="card open-inv" *ngIf="opentransac.total_open_balance; else noBal">
-          <h3 class="card-amount">{{ opentransac.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2'}} </h3>
-          <span class="card-subtext">{{ opentransac.open_balance_count }} OPEN TRANSACTIONS</span>
-        </div>
-
-        <ng-template #noBal>
-          <div class="card open-inv">
-            <h3 class="card-amount">{{ 0 | currency:'PHP':'symbol-narrow':'1.2-2'}} </h3>
-            <span class="card-subtext">0 OPEN TRANSACTIONS</span>
-          </div>
-        </ng-template>
-      </div>
+      </ng-template>
     </div>
+    
 
-    <div class="paid-container" >
-      <label>Paid</label>
+    
+    <div class="card-cont">
+      <div class="card open-inv" *ngIf="opentransac.total_open_balance; else noBal">
+        <h3 class="card-amount">{{ opentransac.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2'}} </h3>
+        <span class="card-subtext">{{ opentransac.open_balance_count }} OPEN TRANSACTIONS</span>
+      </div>
+
+      <ng-template #noBal>
+        <div class="card open-inv">
+          <h3 class="card-amount">{{ 0 | currency:'PHP':'symbol-narrow':'1.2-2'}} </h3>
+          <span class="card-subtext">0 OPEN TRANSACTIONS</span>
+        </div>
+      </ng-template>
+    </div>
+    
+    <div class="card-cont">
       <div class="card paid" *ngIf="paidmem.total_payment; else noPaid">
         <h3 class="card-amount">{{paidmem.total_payment | currency:'PHP':'symbol-narrow':'1.2-2'}}</h3>
         <span class="card-subtext">{{paidmem.paid_count }} PAID LAST 30 DAYS</span>
@@ -56,6 +57,7 @@
         </div>
       </ng-template>
     </div>
+    
   </section>
 
   <section class="members-table">

@@ -1,11 +1,36 @@
 <ngx-ui-loader
- fgsColor="#0099ff"
- pbColor="#0099ff"
- [hasProgressBar]="false"
- [fgsSize]="50"
- fgsType="square-loader"
- blur="12"
- fastFadeOut="true"
- ></ngx-ui-loader>
+  fgsColor="#0099ff"
+  pbColor="#0099ff"
+  [hasProgressBar]="false"
+  [fgsSize]="50"
+  fgsType="folding-cube"
+  blur="12"
+  fastFadeOut="true"
+></ngx-ui-loader>
 <router-outlet></router-outlet>
 <lib-ng-toast></lib-ng-toast>
+
+<!-- Session Timeout Modal -->
+<section>
+  <div>
+    <div class="modal-bg" *ngIf="timeModal === 1">
+      <div class="modal-wrapper">
+
+        <div class="modal-header">
+          <span class="check-icon"><i class="ti ti-history"></i></span>
+        </div>
+
+        <div class="modal-body">
+          <h1>Session Timeout</h1>
+          <p>We have logged you out, due to inactivity.</p>
+          <p> To get back in, login again.</p>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-close" (click)="showMod(2)">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

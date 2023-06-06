@@ -18,7 +18,7 @@ main {
     .left-cont {
       grid-column: 1;
     }
-    
+
     /* Add Button */
     .right-cont {
       text-align: right;
@@ -42,10 +42,9 @@ main {
       .btn-add:hover {
         background: var(--primary-alt);
       }
-    } 
+    }
   }
 }
-
 
 /* Filter Fields */
 .filter-field {
@@ -56,7 +55,7 @@ main {
   // Search box
   .filter-search {
     margin-right: 10px;
-    
+
     label {
       font-size: 14px;
       font-weight: 500;
@@ -69,20 +68,20 @@ main {
       max-width: 300px;
       width: 100%;
       text-align: right;
-      margin-top: .5rem;
-  
+      margin-top: 0.5rem;
+
       i {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
       }
-    
+
       .ti-search {
         left: 16px;
         font-size: 22px;
-        color: var(--dark-grey-2);
+        color: var(--border-color);
       }
-    
+
       input {
         height: 100%;
         width: 100%;
@@ -91,19 +90,28 @@ main {
         padding: 0 20px 0 50px;
         border-radius: 0.625rem;
         border: 1.6px solid var(--border-color);
-        outline-color: var(--dark-grey-2);
+        outline-color: var(--primary-color);
         background-color: transparent;
       }
-    
+
       input::placeholder {
         color: var(--dark-grey-2);
       }
     }
+
+    .input-box:hover {
+      input {
+        border: 1.6px solid var(--dark-grey-2);
+      }
+
+      .ti-search {
+        color: var(--dark-grey-2);
+      }
+    }
   }
-  
+
   // Filter Role
   .filter-role {
-
     label {
       font-size: 14px;
       font-weight: 500;
@@ -120,10 +128,18 @@ main {
       width: 100%;
       color: #333;
       background: #fff;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       border-radius: 0.625rem;
-      border: 1.6px solid #d1cccc;
+      border: 1.6px solid var(--border-color);
       padding: 0 15px 0 15px;
+    }
+
+    select:hover {
+      border: 1.6px solid var(--dark-grey-2);
+    }
+
+    select:focus {
+      border: 1.6px solid var(--primary-color);
     }
   }
 }
@@ -160,11 +176,25 @@ main {
       tr {
         border-bottom: 1px solid var(--border-color);
         background-color: var(--panel-color);
+
         td {
           text-align: left;
           font-weight: 500;
           padding: 16px 16px;
           border-right: 1px solid var(--border-color);
+          width: 22%;
+        }
+
+        td:first-child {
+          width: 8%;
+        }
+
+        td:last-child {
+          width: 8%;
+        }
+
+        .td-date {
+          width: 12%;
         }
       }
 
@@ -218,8 +248,8 @@ input:checked::after {
   left: 70%;
 }
 
-/* Add Admin Modal */
-.otp-modal {
+/* Modal */
+.modal-bg {
   position: fixed;
   background: #000000bf;
   top: 0;
@@ -227,194 +257,120 @@ input:checked::after {
   right: 0;
   bottom: 0;
 
-  .otp-content {
-    background: #fff;
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 1rem;
-    position: absolute;
+  .modal-wrapper {
     top: 50%;
     left: 50%;
+    position: absolute;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
     transform: translate(-50%, -50%) scale(1);
-    text-align: center;
-    padding: 0 30px 1px;
     transition: transform 0.4s, top 0.4s;
+    background: var(--panel-color);
+    border-radius: 1rem;
     max-width: 400px;
     width: 100%;
 
-    .otp-header {
-      padding: 30px 10px;
-      font-weight: 600;
-      font-size: 20px;
-      color: var(--primary-color);
-      text-align: left;
-    }
+    .modal-header {
+      padding: 30px 25px;
+      height: 60px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .otp-body {
-      
-      label {
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--primary-color);
-        text-align: left;
+      .header-title {
+        font-weight: 600;
+        font-size: 18px;
+        //color: var(--primary-color);
+        margin-top: 0.15rem;
       }
 
-      .modalinput {
-        display: flex;
-        width: calc(90%);
-        flex-direction: column;
-        margin: auto;
-        outline: none;
-        font-size: 14px;
-        font-weight: 400;
-        color: #333;
-        border-radius: 5px;
-        border: 1px solid #aaa;
-        padding: 0 14px;
-        height: 36px;
-      }
-    }
-
-    .otp-footer {
-      .savebtn {
-        width: 44%;
-        margin: 5px 0px 0px 10px;
-        height: 43px;
-        background-color: var(--primary-color);
-        color: #fff;
-        border: none;
+      .ti-x {
+        font-size: 20px;
+        color: var(--dark-grey);
         cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 4px;
+        margin-top: -3px;
+        margin-right: -6px;
+      }
+
+      .ti-x:hover {
+        background-color: var(--grey-alt);
+        border-radius: 100%;
+      }
+    }
+
+    .modal-body {
+      padding: 20px 25px 15px;
+
+      .input-box {
+        margin-bottom: 15px;
+
+        .input-label {
+          display: block;
+          font-size: 16px;
+          font-weight: 500;
+          margin-bottom: 0.35rem;
+          color: var(--dark-grey);
+          text-align: left;
+        }
+
+        .input-field {
+          height: 45px;
+          width: 100%;
+          outline: none;
+          border: 1.6px solid var(--border-color);
+          color: var(--text-color);
+          font-size: 14px;
+          border-radius: 0.625rem;
+          padding-left: 12px;
+        }
+
+        .input-field:hover {
+          border: 1.6px solid var(--dark-grey-2);
+        }
+
+        .input-field:focus {
+          border: 1.6px solid var(--primary-color);
+        }
+      }
+    }
+
+    .modal-footer {
+      padding: 18px 25px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .btn {
+        width: 100px;
+        height: 42px;
         border-radius: 0.45rem;
         font-size: 0.9rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        transition: 0.3s;
-        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
       }
 
-      .savebtn:hover {
+      .btn-save {
+        background-color: var(--primary-color);
+        color: var(--panel-color);
+        margin-left: 1rem;
+      }
+
+      .btn-save:hover {
         background-color: var(--primary-alt);
       }
 
-      .closebtn {
-        width: 44%;
-        margin: 5px 0px 0px 0px;
-        height: 43px;
-        border: none;
-        cursor: pointer;
-        border-radius: 0.45rem;
-        font-size: 0.9rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        transition: 0.3s;
-        text-decoration: none;
+      .btn-close {
         background-color: var(--grey-alt);
         color: var(--dark-grey);
       }
 
-      .closebtn:hover {
-        background-color: var(--dark-grey-2);
-      }
-    }
-  }
-}
-
-/* Add Department Modal */
-.dept-modal {
-  position: fixed;
-  background: #000000bf;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  .dept-content {
-    background: #fff;
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 1rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    text-align: center;
-    padding: 0 30px 1px;
-    transition: transform 0.4s, top 0.4s;
-    max-width: 400px;
-    width: 100%;
-
-    .dept-header {
-      padding: 30px 10px;
-      font-weight: 600;
-      font-size: 20px;
-      color: var(--primary-color);
-      text-align: left;
-    }
-
-    .dept-body {
-      
-      label {
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--primary-color);
-        text-align: left;
-      }
-
-      .modalinput {
-        display: flex;
-        width: calc(90%);
-        flex-direction: column;
-        margin: auto;
-        outline: none;
-        font-size: 14px;
-        font-weight: 400;
-        color: #333;
-        border-radius: 5px;
-        border: 1px solid #aaa;
-        padding: 0 14px;
-        height: 36px;
-      }
-    }
-
-    .dept-footer {
-      .savebtn {
-        width: 44%;
-        margin: 5px 0px 0px 10px;
-        height: 43px;
-        background-color: var(--primary-color);
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        border-radius: 0.45rem;
-        font-size: 0.9rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        transition: 0.3s;
-        text-decoration: none;
-      }
-
-      .savebtn:hover {
-        background-color: var(--primary-alt);
-      }
-
-      .closebtn {
-        width: 44%;
-        margin: 5px 0px 0px 0px;
-        height: 43px;
-        border: none;
-        cursor: pointer;
-        border-radius: 0.45rem;
-        font-size: 0.9rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        transition: 0.3s;
-        text-decoration: none;
-        background-color: var(--grey-alt);
-        color: var(--dark-grey);
-      }
-
-      .closebtn:hover {
-        background-color: var(--dark-grey-2);
+      .btn-close:hover {
+        background-color: var(--border-color);
       }
     }
   }

@@ -80,11 +80,17 @@ main {
       tr {
         border-bottom: 1px solid var(--border-color);
         background-color: var(--panel-color);
+
         td {
           text-align: left;
           font-weight: 500;
           padding: 16px 16px;
           border-right: 1px solid var(--border-color);
+          width: 40%;
+        }
+
+        td:last-child {
+          width: 8%;
         }
       }
 

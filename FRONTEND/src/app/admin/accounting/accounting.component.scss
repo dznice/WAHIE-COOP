@@ -32,6 +32,7 @@ main {
         color: var(--panel-color);
         padding: 12px 20px 12px 14px;
       }
+
       .ti-plus {
         margin-right: 5px;
         font-size: 14px;
@@ -48,66 +49,49 @@ main {
 .payables {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-gap: 0.2rem;
-  margin: 10px 0px;
 
-  .unpaid-container {
-    width: 100%;
+  .card-cont {
+    display: flex;
+    flex-direction: column;
+      
+    label {
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--dark-grey);
+    }
 
-    .card-merge {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 0.2rem;
-      margin-top: 0.5rem;
+    .label-null {
+      color: var(--panel-color);
+    }
 
-      .overdue {
-        border-radius: 0.645rem;
-        background: var(--overdue-font);
-        width: 350px;
-      }
-
-      .open-inv {
-        border-radius: 0.645rem;
-        background: var(--blue);
-        width: 350px;
-      }
+    .card {
+      margin-top: .5rem;
+      padding: 2rem 1rem;
+      color: var(--panel-color);
+      border-radius: 0.645rem;
 
       .card-amount {
         font-weight: 500;
         font-size: 36px;
       }
-    }
-  }
 
-  .paid-container {
+      .card-subtext {
+        font-size: 18px;
+      }
+    }
+
+    .overdue {
+      background: var(--overdue-font);
+    }
+  
+    .open-inv {
+      background: var(--blue);
+    }
+  
     .paid {
-      margin-top: 0.5rem;
-      border-radius: 0.645rem;
       background: var(--paid-font);
-      width: 400px;
     }
-
-    .card-amount {
-      font-weight: 500;
-      font-size: 36px;
-    }
-  }
-
-  label {
-    font-weight: 500;
-    font-size: 16px;
-    color: var(--dark-grey);
-  }
-
-  .card {
-    padding: 2rem 1rem;
-    background: var(--grey);
-    color: var(--panel-color);
-  }
-
-  .card-subtext {
-    font-size: 18px;
-  }
+  }  
 }
 
 .payables > * {
@@ -201,10 +185,10 @@ main {
           font-weight: 500;
           padding: 12px 16px;
           border-right: 1px solid var(--border-color);
+          width: 28%;
         }
 
         .td-action {
-
           a {
             color: var(--primary-color);
             font-weight: 600;
@@ -213,6 +197,10 @@ main {
 
         .td-bal {
           text-align: right;
+        }
+
+        td:last-child {
+          width: 16%;
         }
       }
 

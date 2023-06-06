@@ -5,12 +5,12 @@
       <div class="mem-name">
         <h1> {{ info.first_name }} {{ info.last_name }}</h1>
       </div>
-      <div class="mem-transac" >
+      <!-- <div class="mem-transac" >
         <button class="btn-add">
           <i class="ti ti-plus"></i>
           New transaction
         </button>
-      </div>
+      </div> -->
     </div>
 
     <div class="info-content" *ngIf="id == info.id">
@@ -21,12 +21,18 @@
       </div>
       <div class="mem-payables" *ngFor="let bal of membalance">
         <div class="open-bal" *ngIf="id == bal.id">
-          <div class="open-money">{{ bal.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
-          <div class="open-label">OPEN</div>
+          <div class="open-bar"></div>
+          <div class="open-val">
+            <div class="open-money">{{ bal.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
+            <div class="open-label">OPEN</div>
+          </div>
         </div>
         <div class="overdue-bal" *ngIf="id == bal.id">
-          <div class="overdue-money">{{ bal.total_payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
-          <div class="overdue-label">OVERDUE</div>
+          <div class="overdue-bar"></div>
+          <div class="overdue-val">
+            <div class="overdue-money">{{ bal.total_payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
+            <div class="overdue-label">OVERDUE</div>
+          </div>
         </div>
       </div>
     </div>

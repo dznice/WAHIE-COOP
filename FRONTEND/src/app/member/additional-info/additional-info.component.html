@@ -6,21 +6,22 @@
       <div class="fields">
         <div class="text-wrap">
           <label for="civil_status">Civil Status</label>
-          <!-- <select
+          <ng-select
+            class="civStatus"
+            [searchable]="false"
+            [clearable]="false"
             [(ngModel)]="updateMemberform.civil_status"
             [ngModelOptions]="{ standalone: true }"
             id="civil_status"
             name="civil_status"
-            (change)="onOptionChange()"
+            (change)="onSpouseChange()"
             required
           >
-            <option disabled selected>Select</option>
-            <option value="single">Single</option>
-            <option value="married">Married</option>
-          </select> -->
-          <ng-select class="civStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.civil_status" [ngModelOptions]="{ standalone: true }" id="civil_status" name="civil_status" (change)="onSpouseChange()" required>
-            <ng-option *ngFor="let civil_status of civilStatus" [value]="civil_status">
-                {{ civil_status }}
+            <ng-option
+              *ngFor="let civil_status of civilStatus"
+              [value]="civil_status"
+            >
+              {{ civil_status }}
             </ng-option>
           </ng-select>
         </div>
@@ -49,21 +50,21 @@
 
         <div class="text-wrap">
           <label>Employment Status</label>
-          <!-- <select
+          <ng-select
+            class="empStatus"
+            [searchable]="false"
+            [clearable]="false"
             [(ngModel)]="updateMemberform.employment_status"
             [ngModelOptions]="{ standalone: true }"
-            id="employement_status"
-            name="employement_status"
+            id="employment_status"
+            name="employment_status"
+            (change)="onEmploymentChange()"
             required
           >
-            <option disabled selected>Select</option>
-            <option>Employed</option>
-            <option>Unemployed</option>
-            <option>Self-Employed</option>
-          </select> -->
-
-          <ng-select class="empStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.employment_status" [ngModelOptions]="{ standalone: true }" id="employment_status" name="employment_status" (change)="onEmploymentChange()" required>
-            <ng-option *ngFor="let employment_status of employmentStatus" [value]="employment_status">
+            <ng-option
+              *ngFor="let employment_status of employmentStatus"
+              [value]="employment_status"
+            >
               {{ employment_status }}
             </ng-option>
           </ng-select>
@@ -89,6 +90,7 @@
             type="text"
             name="company_address"
             placeholder="e.g. 015 Zamora Street, Tarlac City"
+            [disabled]="isCompAddDisabled"
           />
         </div>
         <div class="tabs">
@@ -101,70 +103,102 @@
           />
 
           <!-- ADDRESS -->
-          
           <label for="Address" class="tabs__label">Address</label>
-          
+
           <div class="tabs__content">
             <label class="cAddress">Current Address</label><br />
             <div class="row3">
-            <div class="input-field18">
-              <input class="address"
-                [(ngModel)]="updateMemberform.current_address"
-                [ngModelOptions]="{ standalone: true }"
-                name="current_address"
-                type="text"
-                placeholder="House No./Street/Block"
-                required
-              />
-              <ng-select class="region" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Region">
-                <ng-option *ngFor="let reg of region" [value]="reg.region_code">
-                  {{ reg.region_description }}
-                  {{ reg.journal_name }}
-                </ng-option>
-              </ng-select>
-            </div>
+              <div class="input-field18">
+                <input
+                  class="address"
+                  [(ngModel)]="updateMemberform.current_address"
+                  [ngModelOptions]="{ standalone: true }"
+                  name="current_address"
+                  type="text"
+                  placeholder="House No./Street/Block"
+                  required
+                />
+                <ng-select
+                  class="region"
+                  [(ngModel)]="updateMemberform.selectedRegion"
+                  (click)="showProvinces()"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                  placeholder="Choose Region"
+                >
+                  <ng-option
+                    *ngFor="let reg of region"
+                    [value]="reg.region_code"
+                  >
+                    {{ reg.region_description }}
+                    {{ reg.journal_name }}
+                  </ng-option>
+                </ng-select>
+              </div>
 
-            <div class="input-field18">
-              <ng-select class="province"  [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Province">
-                <ng-option *ngFor="let prov of province" [value]="prov.province_code">
-                  {{ prov.province_description }}
-                  {{ prov.journal_name }}
-                </ng-option>
-              </ng-select>
-              <ng-select class="municipality"  [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }" required placeholder="Choose City/Municipality">
-                <ng-option *ngFor="let city of cities" [value]="city.city_municipality_code">
-                  {{ city.city_municipality_description }}
-                  {{ city.journal_name }}
-                </ng-option>
-              </ng-select>
-            </div>
+              <div class="input-field18">
+                <ng-select
+                  class="province"
+                  [(ngModel)]="updateMemberform.selectedProvince"
+                  (click)="showCities()"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                  placeholder="Choose Province"
+                >
+                  <ng-option
+                    *ngFor="let prov of province"
+                    [value]="prov.province_code"
+                  >
+                    {{ prov.province_description }}
+                    {{ prov.journal_name }}
+                  </ng-option>
+                </ng-select>
+                <ng-select
+                  class="municipality"
+                  [(ngModel)]="updateMemberform.selectedCity"
+                  (click)="showBarangay()"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                  placeholder="Choose City/Municipality"
+                >
+                  <ng-option
+                    *ngFor="let city of cities"
+                    [value]="city.city_municipality_code"
+                  >
+                    {{ city.city_municipality_description }}
+                    {{ city.journal_name }}
+                  </ng-option>
+                </ng-select>
+              </div>
 
-            <div class="input-field18">
-              <ng-select class="barangay"  [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }" required placeholder="Choose Barangay">
-                <ng-option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
-                  {{ brgy.barangay_description }}
-                  {{ brgy.journal_name }}
-                </ng-option>
-              </ng-select>
-              <input class="postalCode"
-                [(ngModel)]="updateMemberform.postal_code"
-                [ngModelOptions]="{ standalone: true }"
-                name="barangay"
-                type="text"
-                placeholder="Postal Code"
-                required
-              />
+              <div class="input-field18">
+                <ng-select
+                  class="barangay"
+                  [(ngModel)]="updateMemberform.selectedBarangay"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                  placeholder="Choose Barangay"
+                >
+                  <ng-option
+                    *ngFor="let brgy of barangay"
+                    [value]="brgy.barangay_code"
+                  >
+                    {{ brgy.barangay_description }}
+                    {{ brgy.journal_name }}
+                  </ng-option>
+                </ng-select>
+                <input
+                  class="postalCode"
+                  [(ngModel)]="updateMemberform.postal_code"
+                  [ngModelOptions]="{ standalone: true }"
+                  name="barangay"
+                  type="text"
+                  placeholder="Postal Code"
+                  required
+                />
+              </div>
             </div>
-
-            <!-- 
-            <div class="input-field18">
-              
-              
-              
-            </div> -->
-</div>
           </div>
-        
 
           <input
             type="radio"
@@ -180,80 +214,101 @@
               <label for="benificiary_birthdate" class="dob">Date Of Birth</label>
               <label for="benificiary_relation" class="rel">Relationship</label>
             </div>
-            
-            <div class="scroll">
-            <table class="tablebene">
-              <br />
-              <!-- <tr>
-                <th></th>
-                <th class="benelabel">Name</th>
-                <th class="benelabel">Date of Birth</th>
-                <th class="benelabel">Relationship</th>
-              </tr> -->
-              
-              
-              <tr *ngFor="let item of row; let x = index">
-                <td class="delbut">
-                  <button class="addbut" (click)="addTable()">
-                    <i class="ti ti-square-rounded-plus"></i>
-                  </button>
-                </td>
 
+            <div class="scroll">
+              <table class="tablebene">
+                <br />
+
+                <tr *ngFor="let item of row; let x = index">
+                  <td class="delbut">
+                    <button class="addbut" (click)="addTable()">
+                      <i class="ti ti-square-rounded-plus"></i>
+                    </button>
+                  </td>
 
                   <td class="beneinput">
-                  <input
-                    type="text"
-                    [(ngModel)]="item.benificiary_name"
-                    name = 'benificiary_name'
-                    id = ' benificiary_name'
-                    [ngModelOptions]="{ standalone: true }"
-                    required
-                  />
-                </td>
+                    <input
+                      type="text"
+                      [(ngModel)]="item.benificiary_name"
+                      name="benificiary_name"
+                      id=" benificiary_name"
+                      [ngModelOptions]="{ standalone: true }"
+                      required
+                    />
+                  </td>
 
-                <td class="beneinput">
-                  <input
-                    type="date"
-                    [(ngModel)]="item.benificiary_birthdate"
-                    name = 'benificiary_birthdate'
-                    id = ' benificiary_birthdate'
-                    [ngModelOptions]="{ standalone: true }"
-                    max="{{maxDate}}"
-                    required
-                  />
-                </td>
+                  <td class="beneinput">
+                    <input
+                      type="date"
+                      [(ngModel)]="item.benificiary_birthdate"
+                      name="benificiary_birthdate"
+                      id=" benificiary_birthdate"
+                      [ngModelOptions]="{ standalone: true }"
+                      max="{{ maxDate }}"
+                      required
+                    />
+                  </td>
 
-                <td class="beneinput">
-                  <input
-                    type="text"
-                    name = 'benificiary_relation'
-                    id = ' benificiary_relation'
-                    [(ngModel)]="item.benificiary_relation"
-                    [ngModelOptions]="{ standalone: true }"
-                    required/>
-                </td>
+                  <td class="beneinput">
+                    <input
+                      type="text"
+                      name="benificiary_relation"
+                      id=" benificiary_relation"
+                      [(ngModel)]="item.benificiary_relation"
+                      [ngModelOptions]="{ standalone: true }"
+                      required
+                    />
+                  </td>
 
-                <td class="delbut">
-                  <button class="delbut" (click)="deleteRow(x)">
-                    <i class="ti ti-square-rounded-x"></i>
-                  </button>
-                </td>
-              </tr>
-            
-            </table>
-          </div>
+                  <td class="delbut">
+                    <button class="delbut" type="button">
+                      <i class="ti ti-square-rounded-x" (click)="showDel(1)"></i>
+                    </button>
+                  </td>
+
+                  <!-- Delete Modal -->
+                  <section>
+                    <div>
+                      <div class="modal-bg dept-modal" *ngIf="delModal === 1">
+                        <div class="modal-wrapper">
+                          <div class="modal-header">
+                            <span class="header-title">Confirm delete</span>
+                            <i class="ti ti-x" (click)="showDel(2)"></i>
+                          </div>
+
+                          <div class="modal-body">
+                            <span class="text-bold">Are you sure you want to delete this?</span>
+                            <br>
+                            <span class="text-muted">This cannot be undone.</span>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button class="btn btn-close" type="button" (click)="showDel(2)">
+                              Close
+                            </button>
+                            <button class="btn btn-save" (click)="deleteRow(x)">Delete</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
 
-      
-      <button type='submit' (click)="logout($event)" class="logout">
-        <span class="btnTextb">Logout</span>
-      </button>
-
-      <button type="submit" (click)="memberInfo()" class="submit">
-        Update
-      </button>
+      <div class="footer">
+        <button type="submit" (click)="logout($event)" class="btn-logout">
+          <span class="btnTextb">Logout</span>
+        </button>
+    
+        <button type="submit" (click)="memberInfo()" class="btn-submit">
+          Update
+        </button>
+      </div>
     </form>
   </div>
 </main>

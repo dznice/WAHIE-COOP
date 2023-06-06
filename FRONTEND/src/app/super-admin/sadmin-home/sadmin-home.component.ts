@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { WahieService } from '../../services/wahie.service';
 import { FormGroup,FormControl,Validators,FormBuilder, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -56,6 +56,13 @@ export class SadminHomeComponent {
 
   ngOnInit(): void {}
 
+  @HostListener('window:keydown.esc', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    console.log(event);
+    this.show(2);
+    this.showdept(2);
+  }
+
   showModal = -1;
   show(index: number) {
     this.showModal = index;
@@ -88,7 +95,7 @@ export class SadminHomeComponent {
   public depform = {
     department:null
   }
-
+  
   deptModal = -1;
   showdept(index: number){
     this.deptModal = index;

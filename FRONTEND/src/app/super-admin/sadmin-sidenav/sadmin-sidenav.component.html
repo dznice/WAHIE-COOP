@@ -23,7 +23,7 @@
       <span class="tooltip">{{ data.label }}</span>
     </li>
 
-    <li class="profile" >
+    <li class="nav-profile" >
       <div class="profile-details">
         <img src="assets/image/user-icon.png" alt="profile-img" />
         <div class="admin-name">
@@ -48,49 +48,69 @@
           </li>
         </ul>
       </div>
-      <i class="ti ti-chevron-down btn-down" (click)="contextMenu($event)"></i>
+      <i class="btn-down" [ngClass]="chevron?'ti ti-chevron-down':'ti ti-chevron-up'" (click)="contextMenu($event)"></i>
     </li>
-    <li>
-      <input class="switch" input type="checkbox" (click)="toggleDarkTheme()">
+    
+    <li class="nav-mode">
+      <div class="mode-details" @fadeInOut *ngIf="collapsed">
+        <i class="mode-icon" [ngClass]="mode?'ti ti-moon':'ti ti-sun'"></i>
+        <span class="mode-text" *ngIf="modeState">Light mode</span>
+        <span class="mode-text" *ngIf="!modeState">Dark mode</span>
+      </div>
+      <div class="mode-switch">
+        <input class="switch" type="checkbox" [(ngModel)]="modeState" (click)="toggleDarkTheme()">
+      </div>
     </li>
+    
   </ul>
 </div>
 
-<section> 
-  <div class="pass-modal" *ngIf="showModal === 1">
-    <form ngNativeValidate [formGroup]="navChange" name="form" (ngSubmit)="navChangePass()" #navbarChange="ngForm">
-      <div class="pass-content">
-        <div class="pass-header">Change Your Password</div>
-        <div class="pass-body">
+<section>
+  <form ngNativeValidate [formGroup]="navChange" name="form" (ngSubmit)="navChangePass()" #navbarChange="ngForm">
+    <div class="pass-modal" *ngIf="showModal === 1">
+      <div class="modal-wrapper">
+        <div class="modal-header">
+          <span class="header-title">Change Password</span>
+          <i class="ti ti-x" (click)="show(2)"></i>
+        </div>
 
-          <label for="password">Current Password</label>
-          <input class="passinput" [type]="chcurrent ?'password':'text'" type="password" formControlName="current_pass"  [(ngModel)]="passForm.current_pass" #currentpassword required/>
-          <span class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+        <div class="modal-body">
+          <div class="input-box">
+            <label class="input-label" for="password">Current Password</label>
+            <input class="input-field" [type]="chcurrent ?'password':'text'" type="password" formControlName="current_pass"  [(ngModel)]="passForm.current_pass" #currentpassword required/>
+            <span class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+          </div>
           
-          <label for="password">New Password</label>
-          <input class="passinput" [type]="changetype?'password':'text'" type="password"  formControlName="new_pass" name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password required minlength="8" 
-          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters, one letter, one number and one special character:"/>
-          <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+          <div class="input-box">
+            <label class="input-label" for="password">New Password</label>
+            <input class="input-field" [type]="changetype?'password':'text'" type="password"  formControlName="new_pass"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must be at least 8 characters, one letter, one number and one special character:" 
+            name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password required minlength="8" />
+            <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+          </div>
 
           <div class="meter">
             <strength-meter [value]="navChange.value.new_pass" (measure)="onStrengthChange($event)"></strength-meter>
           </div>
 
-          <label for="confirm_pass">Confirm Password</label>
-          <input class="passinput" [type]="cchangetype?'password':'text'" type="password" formControlName="confirm_pass" name="confirm_pass" id= "confirm_pass" [(ngModel)]="passForm.confirm_pass" #confirm_pass required   minlength="8"/>
-          <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+          <div class="input-box">
+            <label class="input-label" for="confirm_pass">Confirm Password</label>
+            <input class="input-field" [type]="cchangetype?'password':'text'" type="password" formControlName="confirm_pass"
+            name="confirm_pass" id= "confirm_pass" [(ngModel)]="passForm.confirm_pass" #confirm_pass required   minlength="8"/>
+            <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+          </div>
+
+          <div class="text-danger1" *ngIf="navChange.get('confirm_pass')!.touched && navChange.get('confirm_pass')!.invalid && navChange.controls['confirm_pass'].errors!['passwordMatch']">
+            <small>Password not match</small>
+          </div>
         </div>
         
-        <div class="text-danger1" *ngIf="navChange.get('confirm_pass')!.touched && navChange.get('confirm_pass')!.invalid && navChange.controls['confirm_pass'].errors!['passwordMatch']">
-          <small>Password not match</small>
-      </div>
-
-        <div class="pass-footer">
-
-          <button class="closebtn" (click)="show(2)">Close</button>
-          <button class="savebtn">Change</button>
+        <div class="modal-footer">
+          <button class="btn btn-close" (click)="show(2)">Close</button>
+          <button class="btn btn-save" >Change</button>
         </div>
+
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </section>

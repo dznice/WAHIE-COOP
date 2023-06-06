@@ -10,20 +10,24 @@ import { NgxUiLoaderHttpModule } from 'ngx-ui-loader';
 })
 export class AppComponent implements OnInit {
   title = 'WAHffle';
-  constructor(
-    private bnIdle: BnNgIdleService,
-    private route: Router,
-    private ngxService: NgxUiLoaderHttpModule
-  ) {
 
+  index: number;
+  
+  timeModal = -1;
+  showMod(index: number){
+    this.timeModal = index;
+  }
+
+  constructor(private bnIdle: BnNgIdleService, private route: Router, private ngxService: NgxUiLoaderHttpModule) {
     // initiate it in your component constructor
     this.bnIdle.startWatching(1800).subscribe((res) => {
+      
       if (res) {
+        this.showMod(1);
         console.log('session expired');
         localStorage.clear();
         sessionStorage.clear();
         this.route.navigateByUrl('login');
-        // Add modal
       }
     });
   }

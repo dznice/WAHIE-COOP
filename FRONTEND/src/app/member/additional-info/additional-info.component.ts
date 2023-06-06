@@ -4,6 +4,7 @@ import {
   OnDestroy,
   ViewEncapsulation,
   Inject,
+  HostListener,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { slideleft2, slideright2 } from '../../animation';
@@ -29,37 +30,31 @@ import { NgToastService } from 'ng-angular-popup';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AdditionalInfoComponent implements OnInit, OnDestroy {
+  civilStatus: string[] = ['Single', 'Married'];
+  employmentStatus: string[] = ['Employed', 'Unemployed', 'Self-employed'];
 
-civilStatus: string[]= ["Single", "Married"];
-employmentStatus: string[]= ["Employed", "Unemployed", "Self-employed"];
-
-  //disabling spouse when single
-
- isSpouseDisabled: boolean = false;
-onSpouseChange() {
-  if (this.updateMemberform.civil_status === this.civilStatus[0]) {
-    this.isSpouseDisabled = true;
-  } else {
-    this.isSpouseDisabled = false;
+  // disabling spouse when single
+  isSpouseDisabled: boolean = false;
+  onSpouseChange() {
+    if (this.updateMemberform.civil_status === this.civilStatus[0]) {
+      this.isSpouseDisabled = true;
+    } else {
+      this.isSpouseDisabled = false;
+    }
   }
-}
 
-// disabling occupation when unemployed
-
-isOccupationDisabled: boolean = false;
-onEmploymentChange() {
-  if (this.updateMemberform.employment_status === this.employmentStatus[1]) {
-    this.isOccupationDisabled = true;
-  } else {
-    this.isOccupationDisabled = false;
+  // disabling occupation when unemployed
+  isOccupationDisabled: boolean = false;
+  isCompAddDisabled: boolean = false;
+  onEmploymentChange() {
+    if (this.updateMemberform.employment_status === this.employmentStatus[1]) {
+      this.isOccupationDisabled = true;
+      this.isCompAddDisabled = true;
+    } else {
+      this.isOccupationDisabled = false;
+      this.isCompAddDisabled = false;
+    }
   }
-}
-
-
-
-
-
-
 
   selectedRegion: any;
   selectedProvince: any;
@@ -97,11 +92,15 @@ onEmploymentChange() {
 
   submitted: boolean = false;
 
-  constructor( @Inject(DOCUMENT) private _document: any, private http: HttpClient,
-  private token: TokenService, private route: Router, private auth:AuthGuardService, private toast:NgToastService) {
+  constructor(
+    @Inject(DOCUMENT) private _document: any,
+    private http: HttpClient,
+    private token: TokenService,
+    private route: Router,
+    private auth: AuthGuardService,
+    private toast: NgToastService
+  ) {
     this.getmemberId();
-
-
   }
 
   // updateMemberInfo = new FormGroup({
@@ -142,7 +141,7 @@ onEmploymentChange() {
     this.formatDate();
   }
 
-  maxDate:any;
+  maxDate: any;
 
   private formatDate() {
     const d = new Date();
@@ -152,7 +151,7 @@ onEmploymentChange() {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-');
-  } 
+  }
 
   ngOnDestroy() {
     this._document.body.classList.add('body');
@@ -161,16 +160,15 @@ onEmploymentChange() {
   public error: any = [];
 
   email = sessionStorage.getItem('email');
-  memberId:string = '';
+  memberId: string = '';
 
-    getmemberId(){
-    this.http.get('http://127.0.0.1:8000/api/members/' + this.email).subscribe(
-      (res:any)=>{
+  getmemberId() {
+    this.http
+      .get('http://127.0.0.1:8000/api/members/' + this.email)
+      .subscribe((res: any) => {
         console.log('mem' + res);
         this.memberId = res;
-
-    });
-    
+      });
   }
 
   id = localStorage.getItem('userData');
@@ -181,19 +179,16 @@ onEmploymentChange() {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
-      
     },
     {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
-      
     },
     {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
-     
     },
   ];
 
@@ -202,79 +197,98 @@ onEmploymentChange() {
       benificiary_name: '',
       benificiary_birthdate: '',
       benificiary_relation: '',
-      required:true,
+      required: true,
     };
     this.row.push(obj);
   }
 
-  deleteRow(x: number) {
-    var delBtn = confirm(' Do you want to delete ?');
-    if (delBtn == true) {
-      this.row.splice(x, 1);
-    }
+  @HostListener('window:keydown.esc', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    console.log(event);
+    this.showDel(2);
   }
 
+  delModal = -1;
+  showDel(index: number) {
+    this.delModal = index;
+  }
 
-
+  deleteRow(x: number) {
+    //var delBtn = confirm(' Do you want to delete ?');
+    // if (delBtn == true) {
+    //   s
+    // }
+    this.row.splice(x, 1);
+    this.showDel(2);
+  }
 
   public updateMemberform = {
-    email:this.email,
-    tin_number:null,
-    civil_status:null,
-    spouse:null,
-    employment_status:null,
-    occupation:null,
-    company_address:null,
-    address:null,
-    job_title:null,
+    email: this.email,
+    tin_number: null,
+    civil_status: null,
+    spouse: null,
+    employment_status: null,
+    occupation: null,
+    company_address: null,
+    address: null,
+    job_title: null,
 
     memId: this.memberId,
     row: this.row,
     selectedRegion: null,
-    current_address:null,
-    selectedCity:null,
-    selectedProvince:null,
-    postal_code:null,
-    selectedBarangay:null,
+    current_address: null,
+    selectedCity: null,
+    selectedProvince: null,
+    postal_code: null,
+    selectedBarangay: null,
     selectedRegionDescription: null,
-    selectedProvinceDescription:null,
-    selectedCityDescription:null,
-    selectedBarangayDescription:null,
-  }
+    selectedProvinceDescription: null,
+    selectedCityDescription: null,
+    selectedBarangayDescription: null,
+  };
 
   memberInfo() {
     // if(this.row == null){
     //   this.toast.warning({detail:'Input required please',summary:'Please Check',duration:2000, sticky:false,position:'tr'});
-      
 
     // }
     // else{
-    this.updateMemberform.selectedBarangayDescription = this.barangay.find((brgy: { barangay_code: null; }) => brgy.barangay_code === this.updateMemberform.selectedBarangay)?.barangay_description;
+    this.updateMemberform.selectedBarangayDescription = this.barangay.find(
+      (brgy: { barangay_code: null }) =>
+        brgy.barangay_code === this.updateMemberform.selectedBarangay
+    )?.barangay_description;
 
     console.log(this.row);
-    console.log(this.updateMemberform)
-    this.http .post('http://127.0.0.1:8000/api/memberInfo' + '/' + this.email, this.updateMemberform)
-      .subscribe((res: any) =>
-      {
-        console.log(res);
-        this.token.handle(sessionStorage.getItem('ftoken'));
-        this.route.navigateByUrl('member/member-home');
-      },
-      error => {
-        this.toast.warning({detail:'Input required',summary:'Please Check',duration:2000, sticky:false,position:'tr'});
-      }
+    console.log(this.updateMemberform);
+    this.http
+      .post(
+        'http://127.0.0.1:8000/api/memberInfo' + '/' + this.email,
+        this.updateMemberform
+      )
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          this.token.handle(sessionStorage.getItem('ftoken'));
+          this.route.navigateByUrl('member/member-home');
+        },
+        (error) => {
+          this.toast.warning({
+            detail: 'Input required',
+            summary: 'Please Check',
+            duration: 2000,
+            sticky: false,
+            position: 'tr',
+          });
+        }
       );
-    }
-      
-      
-  
-  logout(event:MouseEvent){
+  }
+
+  logout(event: MouseEvent) {
     event.preventDefault();
     this.auth.changeStatus(false);
     localStorage.clear();
     this.route.navigateByUrl('/login');
   }
-
 
   logSelectedValues() {
     console.log('Selected Region:', this.updateMemberform.selectedRegion);
@@ -284,20 +298,23 @@ onEmploymentChange() {
   }
 
   showRegions() {
-    this.http
-      .get('http://127.0.0.1:8000/api/region')
-      .subscribe((res: any) => {
-        console.log(res);
-        this.region = res;
-      });
+    this.http.get('http://127.0.0.1:8000/api/region').subscribe((res: any) => {
+      console.log(res);
+      this.region = res;
+    });
   }
 
   showProvinces() {
     if (this.updateMemberform.selectedRegion) {
       console.log(this.selectedRegion);
-      this.updateMemberform.selectedRegionDescription = this.region.find((reg: { region_code: null; }) => reg.region_code === this.updateMemberform.selectedRegion)?.region_description;
+      this.updateMemberform.selectedRegionDescription = this.region.find(
+        (reg: { region_code: null }) =>
+          reg.region_code === this.updateMemberform.selectedRegion
+      )?.region_description;
       this.http
-        .get(`http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`)
+        .get(
+          `http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`
+        )
         .subscribe((res: any) => {
           console.log(res);
           this.province = res;
@@ -310,9 +327,14 @@ onEmploymentChange() {
   showCities() {
     if (this.updateMemberform.selectedProvince) {
       console.log(this.selectedProvince);
-      this.updateMemberform.selectedProvinceDescription = this.province.find((prov: { province_code: null; }) => prov.province_code === this.updateMemberform.selectedProvince)?.province_description;
+      this.updateMemberform.selectedProvinceDescription = this.province.find(
+        (prov: { province_code: null }) =>
+          prov.province_code === this.updateMemberform.selectedProvince
+      )?.province_description;
       this.http
-        .get(`http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`)
+        .get(
+          `http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`
+        )
         .subscribe((res: any) => {
           console.log(res);
           this.cities = res;
@@ -325,9 +347,14 @@ onEmploymentChange() {
   showBarangay() {
     if (this.updateMemberform.selectedCity) {
       console.log(this.selectedCity);
-      this.updateMemberform.selectedCityDescription = this.cities.find((city: { city_municipality_code: null; }) => city.city_municipality_code === this.updateMemberform.selectedCity)?.city_municipality_description;
+      this.updateMemberform.selectedCityDescription = this.cities.find(
+        (city: { city_municipality_code: null }) =>
+          city.city_municipality_code === this.updateMemberform.selectedCity
+      )?.city_municipality_description;
       this.http
-        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
+        .get(
+          `http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`
+        )
         .subscribe((res: any) => {
           console.log(res);
           this.barangay = res;
@@ -342,7 +369,9 @@ onEmploymentChange() {
       console.log(this.selectedBarangay);
 
       this.http
-        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
+        .get(
+          `http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`
+        )
         .subscribe((res: any) => {
           console.log(res);
           this.barangay = res;

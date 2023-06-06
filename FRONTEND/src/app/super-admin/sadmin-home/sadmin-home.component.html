@@ -1,4 +1,3 @@
-
 <main>
   <h1 class="title">User Accounts</h1>
 
@@ -58,7 +57,7 @@
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.department }}</td>
-          <td>{{ user.created_at | date:'mediumDate' }}</td>
+          <td class="td-date">{{ user.created_at | date:'mediumDate' }}</td>
 
           <td>
             <div *ngIf="user.status == 0">
@@ -90,46 +89,65 @@
   </div>
 </main>
 
-<section>
+<!-- Add Admin Modal -->
+<section >
   <div>
     <form (ngSubmit)="autoAdmin()" #memberRegistration="ngForm" [formGroup]="autoAdminForm" class="register-form">
-      <div class="otp-modal" *ngIf="showModal === 1">
-        <div class="otp-content">
-          <div class="otp-header">Add Admin Account</div>
-          <div class="otp-body">
-            <label for="admin_username">Username</label>
-            <input class="modalinput" type="text" [(ngModel)]="form.username" formControlName="username"/>
-            <br/>
-            <label for="admin_email">Email Address</label>
-            <input class="modalinput" type="text" [(ngModel)]="form.email" formControlName="email"/>
-            <br/>
+      <div class="modal-bg admin-modal" *ngIf="showModal === 1">
+        <div class="modal-wrapper">
+
+          <div class="modal-header">
+            <span class="header-title">Add Admin Account</span>
+            <i class="ti ti-x" (click)="show(2)"></i>
           </div>
-          <div class="otp-footer">
-           
-            <button class="closebtn" (click)="show(2)">Close</button>
-            <button class="savebtn">Create</button>
+
+          <div class="modal-body">
+            <div class="input-box">
+              <span class="input-label">Username</span>
+              <input class="input-field" type="text" [(ngModel)]="form.username" formControlName="username"/>
+            </div>
+
+            <div class="input-box">
+              <span class="input-label">Email Address</span>
+              <input class="input-field" type="text" [(ngModel)]="form.email" formControlName="email"/>
+            </div>
           </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-close" type="button" (click)="show(2)">Close</button>
+            <button class="btn btn-save" >Create</button>
+          </div>
+
         </div>
       </div>
     </form>
   </div>
 </section>
 
+<!-- Add Department Modal -->
 <section>
   <div>
     <form (ngSubmit)="addDept()" #deparmentAdd="ngForm" [formGroup]="addDepartment" class="register-form">
-      <div class="dept-modal" *ngIf="deptModal === 1">
-        <div class="dept-content">
-          <div class="dept-header">Add Department</div>
-          <div class="dept-body">
-            <label for="admin_username">Department</label>
-            <input class="modalinput" type="text" [(ngModel)]="depform.department" formControlName="department"/>
-            <br/>
+      <div class="modal-bg dept-modal"  *ngIf="deptModal === 1">
+        <div class="modal-wrapper">
+
+          <div class="modal-header">
+            <span class="header-title">Add Department</span>
+            <i class="ti ti-x" (click)="showdept(2)"></i>
           </div>
-          <div class="dept-footer">
-            <button class="closebtn" (click)="showdept(2)">Close</button>
-            <button class="savebtn">Create</button>
+
+          <div class="modal-body">
+            <div class="input-box">
+              <label class="input-label">Department</label>
+              <input class="input-field" type="text" [(ngModel)]="depform.department" formControlName="department"/>
+            </div>
           </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-close" type="button" (click)="showdept(2)">Close</button>
+            <button class="btn btn-save">Add</button>
+          </div>
+
         </div>
       </div>
     </form>

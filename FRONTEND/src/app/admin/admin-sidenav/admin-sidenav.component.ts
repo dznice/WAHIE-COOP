@@ -19,7 +19,7 @@ interface SideNavToggle {
   templateUrl: './admin-sidenav.component.html',
   styleUrls: ['./admin-sidenav.component.scss'],
   host: {
-    "(window:click)": "disappearContext()"
+    '(window:click)': 'disappearContext()',
   },
   animations: [
     trigger('fadeInOut', [
@@ -46,31 +46,35 @@ interface SideNavToggle {
   ],
 })
 export class AdminSidenavComponent implements OnInit {
-  //dark
+  // Dark Mode
+  mode: boolean = true;
+  modeState: boolean = false;
+
   toggleDarkTheme() {
+    this.mode = !this.mode;
     document.body.classList.toggle('darkmodes');
   }
 
-  current:boolean = true;
-  chcurrent:boolean = true;
-  ccurrent(){
-    this.current = !this.current
-    this.chcurrent = !this.chcurrent
-  }
-  
-  visible:boolean = true;
-  changetype:boolean = true;
-  viewpass(){
-    this.visible = !this.visible
-    this.changetype = !this.changetype
-  }
-  cvisible:boolean = true;
-  cchangetype:boolean = true;
-  cviewpass(){
-    this.cvisible = !this.cvisible
-    this.cchangetype = !this.cchangetype
+  current: boolean = true;
+  chcurrent: boolean = true;
+  ccurrent() {
+    this.current = !this.current;
+    this.chcurrent = !this.chcurrent;
   }
 
+  visible: boolean = true;
+  changetype: boolean = true;
+  viewpass() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
+
+  cvisible: boolean = true;
+  cchangetype: boolean = true;
+  cviewpass() {
+    this.cvisible = !this.cvisible;
+    this.cchangetype = !this.cchangetype;
+  }
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
@@ -98,63 +102,57 @@ export class AdminSidenavComponent implements OnInit {
       }
       if (control.value !== matchControl.value) {
         matchControl.setErrors({ passwordMatch: true });
-        
       } else {
         matchControl.setErrors(null);
       }
     };
   }
 
-  email:any
-  navChange!:FormGroup
+  email: any;
+  navChange!: FormGroup;
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    // var data = this.creds.get();
-    // console.log('email', data)
-    // this.email=sessionStorage.getItem('email')
-    // this.auth.authStatus.subscribe(
-    //   value=>{
-    //     this.loggedIn = value;
-    //   }
-    // )
-    this.navChange = this.fb.group({
-    
-      "current_pass": new FormControl(null),
-  
-      "new_pass": new FormControl(null),
-      
-      "confirm_pass": new FormControl(null)
-    },
-    {
-      validator: this.passwordMatch('new_pass', 'confirm_pass'),
-    }
+ 
+    this.navChange = this.fb.group(
+      {
+        current_pass: new FormControl(null),
+
+        new_pass: new FormControl(null),
+
+        confirm_pass: new FormControl(null),
+      },
+      {
+        validator: this.passwordMatch('new_pass', 'confirm_pass'),
+      }
     );
   }
-  
-  
 
-  hide:boolean = false;
+  hide: boolean = false;
+  chevron: boolean = true;
 
-  contextMenu(e:any){
+  contextMenu(e: any) {
     e.stopPropagation();
     this.hide = !this.hide;
-
-
+    this.chevron = !this.chevron;
   }
 
-  disappearContext(){
+  disappearContext() {
     this.hide = false;
   }
 
-  onStrengthChange(score: any){
-    
+  onStrengthChange(score: any) {
     console.log('new score', score);
+  }
 
+  @HostListener('window:keydown.esc', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    console.log(event);
+    this.show(2);
   }
 
   showModal = -1;
-  show(index: number){
+  show(index: number) {
     this.showModal = index;
   }
 
@@ -174,57 +172,68 @@ export class AdminSidenavComponent implements OnInit {
     });
   }
 
-  public loggedIn:boolean = false;
+  public loggedIn: boolean = false;
 
-  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService,
-    private backend:BackendService, private http:HttpClient,  private fb:FormBuilder, private toast:NgToastService) {
- 
-    }
+  constructor(
+    private auth: AuthGuardService,
+    private router: Router,
+    private token: TokenService,
+    private backend: BackendService,
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private toast: NgToastService
+  ) {}
 
-  public log ={
+  public log = {
     name: this.userName(),
-    department:sessionStorage.getItem('department'),
-    activity:'Logout'
+    department: sessionStorage.getItem('department'),
+    activity: 'Logout',
+  };
+
+  activityLog() {
+    this.http
+      .post('http://127.0.0.1:8000/api/addActivity', this.log)
+      .subscribe((res: any) => {
+        console.log(res);
+      });
   }
 
-  activityLog(){
-    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
-        console.log(res)
-    })
-  }
-
-  logout(event:MouseEvent){
-    this.activityLog()
+  logout(event: MouseEvent) {
+    this.activityLog();
     event.preventDefault();
     this.auth.changeStatus(false);
     localStorage.clear();
     this.router.navigateByUrl('/login');
   }
 
- 
-  userName(){
+  userName() {
     return sessionStorage.getItem('name');
   }
 
-public passForm={
-  current_pass:null,
-  new_pass:null,
-  confirm_pass:null,
-  userId: localStorage.getItem('userData')
-}  
+  public passForm = {
+    current_pass: null,
+    new_pass: null,
+    confirm_pass: null,
+    userId: localStorage.getItem('userData'),
+  };
 
-  navChangePass(){
-    if( this.navChange.invalid){
-      this.toast.warning({detail:'Password not match',summary:'Please check the password',duration:3000 , sticky:false,position:'tr'}); 
-    
-    } 
-  
-  else{
-
-    console.log(this.passForm.userId)
-    this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
-      console.log(res)
-  })
-  }
+  navChangePass() {
+    if (this.navChange.invalid) {
+      this.toast.warning({
+        detail: 'Password not match',
+        summary: 'Please check the password',
+        duration: 3000,
+        sticky: false,
+        position: 'tr',
+      });
+    } else {
+      console.log(this.passForm.userId);
+      this.http
+        .post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm)
+        .subscribe((res: any) => {
+          console.log(res);
+        }
+      );
+    }
   }
 }

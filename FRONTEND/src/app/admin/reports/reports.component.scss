@@ -23,7 +23,7 @@ section.info-cards {
 .info-data {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px));
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   grid-gap: 50px;
 
   .card {

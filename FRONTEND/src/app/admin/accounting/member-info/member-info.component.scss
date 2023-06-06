@@ -61,28 +61,58 @@ main {
 
         .open-bal {
           margin-bottom: .5rem;
+          display: flex;
+          justify-content: flex-start;
 
-          .open-money {
-            font-size:22px;
+          .open-bar {
+            background: var(--red);
+            width: 6px;
+            height: 60px;
+            border-radius: 10px;
           }
 
-          .open-label {
-            font-size: 18px;
-            font-weight: 400;
-            color: var(--dark-grey);
+          .open-val {
+            text-align: left;
+            margin-top: -.75px;
+            margin-left: 0.5rem;
+
+            .open-money {
+              font-size:22px;
+            }
+  
+            .open-label {
+              font-size: 18px;
+              font-weight: 400;
+              color: var(--dark-grey);
+            }
           }
         }
 
         .overdue-bal {
+          display: flex;
+          justify-content: flex-start;
 
-          .overdue-money {
-            font-size: 22px;
+          .overdue-bar {
+            background: var(--yellow);
+            width: 6px;
+            height: 60px;
+            border-radius: 10px;
           }
 
-          .overdue-label {
-            font-size: 18px;
-            font-weight: 400;
-            color: var(--dark-grey);
+          .overdue-val {
+            text-align: left;
+            margin-top: -.75px;
+            margin-left: 0.5rem;
+
+            .overdue-money {
+              font-size: 22px;
+            }
+  
+            .overdue-label {
+              font-size: 18px;
+              font-weight: 400;
+              color: var(--dark-grey);
+            }
           }
         }
       }
@@ -216,7 +246,7 @@ main {
         }
 
         .paid {
-          padding: 0.5rem 1.5rem;
+          padding: .5rem 2.05rem;
           background: var(--paid-bg);
           color: var(--paid-font);
           border-radius: 0.45rem;

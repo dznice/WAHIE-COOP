@@ -30,44 +30,25 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-alt);
 }
-
-
-// /* Ng Select */
-// .ng-dropdown-panel{
-//   background-color: var(--grey-alt);
-//   outline: none;
-//   color: #333;
-//   padding: 10px 10px;
-//   font-size: 14px;
-//   font-weight: 400;
-//   border-bottom-right-radius: 5px;
-//   border-bottom-left-radius: 5px;
-//   border: 2px solid #ccc;
-//   margin: 2px 0;
-// }
-
-// ng-select .ng-select-container {
-//   padding: 8px 6px;
-//   margin-left: 10px;
-//   margin-right: 10px;
-// }
+::-webkit-scrollbar-track:hover {
+  background: var(--border-color);
+}
 
 /* Select Dropdown */
 select {
   -moz-appearance:none;
   -webkit-appearance:none;
   appearance: none;
-  border: 1px solid var(--border-color);
-  border-radius: 0.45rem;
+  background-color: var(--panel-color);
+  border: 1.6px solid var(--border-color);
+  border-radius: 0.645rem;
   padding: 0 10px;
   margin: 8px 4px 0;
-  height: 36px;
+  height: 40px;
   min-width: 15ch;
   font-family: inherit;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   line-height: 1.1;
-  background-color: var(--panel-color);
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }

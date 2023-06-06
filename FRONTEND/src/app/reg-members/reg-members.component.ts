@@ -1,14 +1,25 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, Inject} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewEncapsulation,
+  Inject,
+  HostListener,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { formState2, slideright2, slideleft2 } from '../animation';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { BackendService } from '../services/backend.service';
 import { TokenService } from '../services/token.service';
 import { Router } from '@angular/router';
 import { AuthGuardService } from '../services/auth-guard.service';
-import { NgToastService } from'ng-angular-popup';
+import { NgToastService } from 'ng-angular-popup';
 import { HttpClient } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-reg-members',
@@ -18,329 +29,238 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegMembersComponent implements OnInit, OnDestroy {
-
   state = 'info1';
   toggle() {
-    this.state = this.state == 'info1'?'info2':'info3';
+    this.state = this.state == 'info1' ? 'info2' : 'info3';
   }
 
-  toggle3(){
-    this.state = this.state == 'info1'?'info2':'info2';
+  toggle3() {
+    this.state = this.state == 'info1' ? 'info2' : 'info2';
   }
 
   toggle2() {
-    this.state = this.state == 'info3'?'info2':'info1';
+    this.state = this.state == 'info3' ? 'info2' : 'info1';
   }
 
   get info1State() {
-    return this.state == 'info1'?'show':'hide';
+    return this.state == 'info1' ? 'show' : 'hide';
   }
 
   get info2State() {
-    return this.state == 'info2'?'show':'hide';
+    return this.state == 'info2' ? 'show' : 'hide';
   }
   get info3State() {
-    return this.state == 'info3'?'show':'hide';
+    return this.state == 'info3' ? 'show' : 'hide';
   }
 
-  genders: string[]= ["Male", "Female", "Others"];
+  genders: string[] = ['Male', 'Female', 'Others'];
 
-  visible:boolean = true;
-  changetype:boolean = true;
-  viewpass(){
-    this.visible = !this.visible
-    this.changetype = !this.changetype
+  visible: boolean = true;
+  changetype: boolean = true;
+  viewpass() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
   }
-  cvisible:boolean = true;
-  cchangetype:boolean = true;
-  cviewpass(){
-    this.cvisible = !this.cvisible
-    this.cchangetype = !this.cchangetype
-  }
-
-  checkvisible:boolean = true;
-  checkBox(){
-    this.checkvisible = !this.checkvisible
+  cvisible: boolean = true;
+  cchangetype: boolean = true;
+  cviewpass() {
+    this.cvisible = !this.cvisible;
+    this.cchangetype = !this.cchangetype;
   }
 
-  registerForm!:FormGroup
-  submitted =false;
+  checkvisible: boolean = true;
+  checkBox() {
+    this.checkvisible = !this.checkvisible;
+  }
 
+  registerForm!: FormGroup;
+  submitted = false;
 
   isDisplayed: boolean = true;
-  toggleDiv(){
-    this.isDisplayed = this.isDisplayed? false:true;
+  toggleDiv() {
+    this.isDisplayed = this.isDisplayed ? false : true;
   }
 
   isDisplayed2: boolean = false;
-  toggleDiv2(){
+  toggleDiv2() {
     this.isDisplayed2 = !this.isDisplayed2;
   }
 
-  constructor(@Inject(DOCUMENT) private _document: any, private fb:FormBuilder, private backend:BackendService,
-  private token:TokenService, private route:Router, private Auth:AuthGuardService, private toast: NgToastService,
-  private http:HttpClient){
-    this.Departments()
+  @HostListener('window:keydown.esc', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    console.log(event);
+    this.showTerms(2);
   }
 
-  passwordMatch(controlName: string, matchControlName: string){
-    return (formGroup: FormGroup)=> {
-        const control = formGroup.controls[controlName];
-        const matchControl = formGroup.controls[matchControlName];
-            if(matchControl.errors && !matchControl.errors['passwordMatch']){
-              
-              return;
-            }
-            if(control.value !== matchControl.value){
-             
-                matchControl.setErrors({passwordMatch:true});
-                
-                
-            }else{
-              
-                matchControl.setErrors(null)
-            }
-            
+  termsModal = -1;
+  showTerms(index: number) {
+    this.termsModal = index;
+  }
+
+  isChecked: boolean = false;
+  acceptTerms() {
+    if (this.isChecked == false) {
+      this.isChecked = true;
+      this.showTerms(2);
+    } 
+    else if (this.isChecked == true) {
+      this.isChecked = true;
+      this.showTerms(2);
     }
-}
+    else {
+      this.isChecked = true;
+      this.showTerms(2);
+    }
+  }
 
-get frm(){
-  return this.registerForm.controls;
-}
+  constructor(
+    @Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private backend: BackendService, private token: TokenService,
+    private route: Router, private Auth: AuthGuardService, private toast: NgToastService, private http: HttpClient) {
+    this.Departments();
+  }
 
-maxDate:any;
+  passwordMatch(controlName: string, matchControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchControl = formGroup.controls[matchControlName];
+      if (matchControl.errors && !matchControl.errors['passwordMatch']) {
+        return;
+      }
+      if (control.value !== matchControl.value) {
+        matchControl.setErrors({ passwordMatch: true });
+      } else {
+        matchControl.setErrors(null);
+      }
+    };
+  }
 
-private formatDate() {
-  const d = new Date();
-  let month = '' + (d.getMonth() + 1);
-  let day = '' + d.getDate();
-  const year = d.getFullYear();
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
-  this.maxDate = [year, month, day].join('-');
-}
+  get frm() {
+    return this.registerForm.controls;
+  }
 
-ngOnInit() {
-  this._document.body.classList.add('body');
+  maxDate: any;
 
-  this.registerForm = this.fb.group({
+  private formatDate() {
+    const d = new Date();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-');
+  }
 
-    "first_name": new FormControl(null),
+  ngOnInit() {
+    this._document.body.classList.add('body');
 
-    "last_name": new FormControl(null),
+    this.registerForm = this.fb.group(
+      {
+        first_name: new FormControl(null),
 
+        last_name: new FormControl(null),
 
+        gender: new FormControl(null),
 
-    "gender": new FormControl(null),
+        birthdate: new FormControl(null),
 
-    "birthdate": new FormControl(null),
+        mobile_number: new FormControl(null),
 
-    "mobile_number": new FormControl(null),
+        company_name: new FormControl(null),
 
-    "company_name": new FormControl(null),
+        department: new FormControl(null),
 
-    "department": new FormControl(null),
+        email: new FormControl(null),
 
-    "email": new FormControl( null),
+        pass: new FormControl(null),
 
-    "pass": new FormControl(null),
+        cpass: new FormControl(null),
 
-    "cpass": new FormControl(null),
+        chckbox: new FormControl(null),
+      },
+      {
+        validator: this.passwordMatch('pass', 'cpass'),
+      }
+    );
 
-    "chckbox": new FormControl(null)
-  }, {
-    validator: this.passwordMatch('pass', 'cpass')
-  })
+    this.formatDate();
+  }
 
-  this.formatDate();
-}
+  onSubmit() {
+    this.registerForm.get('pass')?.markAsTouched();
 
+    this.registerForm.get('cpass')?.markAsTouched();
+  }
+  onSubmit2() {
+    // stop here if form is invalid
 
-onSubmit(){
-  /**
-  this.registerForm.get('name')?.markAsTouched();
-
-  this.registerForm.get('email')?.markAsTouched();
-   */
-
-  this.registerForm.get('pass')?.markAsTouched();
-
-  this.registerForm.get('cpass')?.markAsTouched();
-
-}
-onSubmit2(){
-
-        
-        // stop here if form is invalid
-
-
-
-          // if(this.registerForm.invalid){
-          //   this.toast.error({detail:'Sorry',summary:'checkbox required ',duration:2000 , sticky:false,position:'tr'});
-          // }
-          // else{
-            this.submitted = true;
-          //
-
-}
+    // if(this.registerForm.invalid){
+    //   this.toast.error({detail:'Sorry',summary:'checkbox required ',duration:2000 , sticky:false,position:'tr'});
+    // }
+    // else{
+    this.submitted = true;
+    //
+  }
 
   ngOnDestroy() {
     this._document.body.classList.add('body');
   }
 
-  onStrengthChange(score: any){
+  onStrengthChange(score: any) {
     console.log('new score', score);
-
   }
 
+  public error: any = [];
 
-    public error:any= [];
+  public form = {
+    first_name: null,
+    middle_name: null,
+    last_name: null,
+    suffix: null,
+    email: null,
+    password: null,
+    confirm_pass: null,
+    mobile_number: null,
+    gender: null,
+    birthdate: null,
+    company_name: null,
+    department: null,
+  };
 
-    public form = {
-      first_name:null,
-      middle_name:null,
-      last_name:null,
-      suffix:null,
-      email:null,
-      password:null,
-      confirm_pass:null,
-      mobile_number:null,
-      gender:null,
-      birthdate:null,
-      company_name:null,
-      department:null,
-
-
-    }
-
-
-    regMember(){
-      if (this.registerForm.invalid){
-        this.toast.error({detail:'Error',summary:'Password not match ',duration:2000 , sticky:false,position:'tr'}); 
+  regMember() {
+    if (this.registerForm.invalid) {
+      this.toast.error({ detail: 'Error', summary: 'Password not match ', duration: 2000, sticky: false, position: 'tr',});
       return;
-      }
-      else{
-        return this.backend.register(this.form).subscribe(
-          data=>this.handleData(data)
-          );
-        }
-      }
-
-    handleData(data:any){
-      sessionStorage.setItem('email', JSON.stringify(data['email']));
-      localStorage.setItem('userData', JSON.stringify(data['id']));
-      this.route.navigateByUrl('verify-account');
+    } else {
+      return this.backend
+        .register(this.form)
+        .subscribe((data) => this.handleData(data));
     }
+  }
 
-    handleError(error:any){
-      this.toast.error({detail:'Sorry',summary:'Input required  ',duration:2000 , sticky:false,position:'tr'});
-      this.error = error.error.error;
-    }
+  handleData(data: any) {
+    sessionStorage.setItem('email', JSON.stringify(data['email']));
+    localStorage.setItem('userData', JSON.stringify(data['id']));
+    this.route.navigateByUrl('verify-account');
+  }
 
-    depts: any[]=[];
-    Departments(){
-      this.http.get('http://127.0.0.1:8000/api/showDept').subscribe((res: any) => {
+  handleError(error: any) {
+    this.toast.error({
+      detail: 'Sorry',
+      summary: 'Input required  ',
+      duration: 2000,
+      sticky: false,
+      position: 'tr',
+    });
+    this.error = error.error.error;
+  }
+
+  depts: any[] = [];
+  Departments() {
+    this.http
+      .get('http://127.0.0.1:8000/api/showDept')
+      .subscribe((res: any) => {
         console.log(res);
         this.depts = res;
       });
-    }
-
-
-    // isDisplayed: boolean = true;
-    // toggleDiv(){
-    //   this.isDisplayed = this.isDisplayed? false:true;
-    // }
-
-    // visible:boolean = true;
-    // changetype:boolean = true;
-    // viewpass(){
-    //   this.visible = !this.visible
-    //   this.changetype = !this.changetype
-    // }
-
-    // cvisible:boolean = true;
-    // cchangetype:boolean = true;
-    // cviewpass(){
-    //   this.cvisible = !this.cvisible
-    //   this.cchangetype = !this.cchangetype
-    // }
-
-    // checkvisible:boolean = true;
-    // checkBox(){
-    //   this.checkvisible = !this.checkvisible
-    // }
-
-    // submitted:boolean = false;
-
-    // constructor(@Inject(DOCUMENT) private _document: any, private backend:BackendService,
-    // private token:TokenService, private route:Router, private Auth:AuthGuardService ){}
-
-    // memberForm = new FormGroup({
-    //   first_name : new FormControl("", [Validators.required]),
-    //   middle_name : new FormControl(""),
-    //   last_name : new FormControl("", [Validators.required]),
-    //   suffix : new FormControl(""),
-    //   mobile_number : new FormControl("",[Validators.required]),
-    //   gender : new FormControl(""),
-    //   birthdate : new FormControl(""),
-    //   company_name : new FormControl("", [Validators.required]),
-    //   department : new FormControl("", [Validators.required]),
-    //   email : new FormControl("", [Validators.required]),
-    //   password : new FormControl("", [Validators.required]),
-    //   confirm_pass : new FormControl("", [Validators.required]),
-    // }, [ passwordMatch("password", "confirm_pass") ])
-
-    // getControl(name: any): AbstractControl | null{
-    //   return this.memberForm.get(name)
-    // }
-
-    // onSubmit(){
-    //   this.submitted = true;
-    //   if(this.memberForm.invalid){
-    //     return;
-    //   }
-    // }
-
-    // ngOnInit() {
-    //   this._document.body.classList.add('body');
-    // }
-
-    // ngOnDestroy() {
-    //   this._document.body.classList.add('body');
-    // }
-
-    // public error:any= [];
-
-    // public form = {
-    //   first_name:null,
-    //   middle_name:null,
-    //   last_name:null,
-    //   suffix:null,
-    //   email:null,
-    //   password:null,
-    //  confirm_pass:null,
-    //  mobile_number:null,
-    //  gender:null,
-    //  birthdate:null,
-    //  company_name:null,
-    //  department:null,
-
-    // }
-
-
-
-    // regMember(){
-    //   console.log(this.form)
-    //   return this.backend.register(this.form).subscribe(
-    //     data=>this.handleData(data)
-
-    //     );
-    // }
-
-
-    // handleError(error:any){
-    //   this.error = error.error.error;
-    // }
   }
-
-
+}

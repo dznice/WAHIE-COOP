@@ -1,0 +1,69 @@
+/* Modal */
+.modal-bg {
+  position: fixed;
+  background: #000000bf;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .modal-wrapper {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.4s, top 0.4s;
+    background: var(--panel-color);
+    border-radius: 1rem;
+    max-width: 400px;
+    width: 100%;
+
+    .modal-header {
+      padding: 5px 30px 0px;
+      text-align: center;
+
+      .check-icon {
+        content: "\f704";
+        font-size: 6rem;
+        color: var(--primary-color);
+      }
+    }
+
+    .modal-body {
+      padding: 0px 30px 15px;
+      text-align: center;
+
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: .5rem;
+      }
+
+      p {
+        color: #707070;
+      }
+    }
+
+    .modal-footer {
+      padding: 20px 30px 30px;
+      align-items: center;
+
+      .btn-close {
+        width: 100%;
+        height: 45px;
+        border-radius: 0.645rem;
+        font-size: 0.9rem;
+        text-align: center;
+        cursor: pointer;
+        background-color: var(--primary-color);
+        color: var(--panel-color);
+      }
+
+      .btn-close:hover {
+        background-color: var(--primary-alt);
+      }
+    }
+  }
+}

@@ -6,12 +6,11 @@ import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgToastService } from'ng-angular-popup';
-
+import { NgToastService } from 'ng-angular-popup';
 
 interface SideNavToggle {
   screenWidth: number;
-  collapsed: boolean; 
+  collapsed: boolean;
 }
 
 @Component({
@@ -19,7 +18,7 @@ interface SideNavToggle {
   templateUrl: './sadmin-sidenav.component.html',
   styleUrls: ['./sadmin-sidenav.component.scss'],
   host: {
-    "(window:click)": "disappearContext()"
+    '(window:click)': 'disappearContext()',
   },
   animations: [
     trigger('fadeInOut', [
@@ -44,34 +43,37 @@ interface SideNavToggle {
       ]),
     ]),
   ],
-  
 })
-
 export class SadminSidenavComponent implements OnInit {
-toggleDarkTheme() {
-  document.body.classList.toggle('darkmodes');
-}
+  // Dark Mode
+  mode: boolean = true;
+  modeState: boolean = false;
 
+  toggleDarkTheme() {
+    this.mode = !this.mode;
+    document.body.classList.toggle('darkmodes');
+  }
 
-current:boolean = true;
-chcurrent:boolean = true;
-ccurrent(){
-  this.current = !this.current
-  this.chcurrent = !this.chcurrent
-}
+  current: boolean = true;
+  chcurrent: boolean = true;
+  ccurrent() {
+    this.current = !this.current;
+    this.chcurrent = !this.chcurrent;
+  }
 
-visible:boolean = true;
-changetype:boolean = true;
-viewpass(){
-  this.visible = !this.visible
-  this.changetype = !this.changetype
-}
-cvisible:boolean = true;
-cchangetype:boolean = true;
-cviewpass(){
-  this.cvisible = !this.cvisible
-  this.cchangetype = !this.cchangetype
-}
+  visible: boolean = true;
+  changetype: boolean = true;
+  viewpass() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
+
+  cvisible: boolean = true;
+  cchangetype: boolean = true;
+  cviewpass() {
+    this.cvisible = !this.cvisible;
+    this.cchangetype = !this.cchangetype;
+  }
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
@@ -89,6 +91,7 @@ cviewpass(){
       });
     }
   }
+
   passwordMatch(controlName: string, matchControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -98,52 +101,56 @@ cviewpass(){
       }
       if (control.value !== matchControl.value) {
         matchControl.setErrors({ passwordMatch: true });
-        
       } else {
         matchControl.setErrors(null);
       }
     };
   }
-  
-  navChange!:FormGroup
+
+  navChange!: FormGroup;
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    
-    this.navChange = this.fb.group({
-    
-      "current_pass": new FormControl(null),
-  
-      "new_pass": new FormControl(null),
-      
-      "confirm_pass": new FormControl(null)
-    },
-    {
-      validator: this.passwordMatch('new_pass', 'confirm_pass'),
-    }
+
+    this.navChange = this.fb.group(
+      {
+        current_pass: new FormControl(null),
+
+        new_pass: new FormControl(null),
+
+        confirm_pass: new FormControl(null),
+      },
+      {
+        validator: this.passwordMatch('new_pass', 'confirm_pass'),
+      }
     );
   }
-  hide:boolean = false;
 
-  contextMenu(e:any){
+  hide: boolean = false;
+  chevron: boolean = true;
+
+  contextMenu(e: any) {
     e.stopPropagation();
     this.hide = !this.hide;
-
-
+    this.chevron = !this.chevron;
   }
 
-  disappearContext(){
+  disappearContext() {
     this.hide = false;
   }
 
-
-  onStrengthChange(score: any){
-    
+  onStrengthChange(score: any) {
     console.log('new score', score);
+  }
 
+  @HostListener('window:keydown.esc', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    console.log(event);
+    this.show(2);
   }
 
   showModal = -1;
-  show(index: number){
+  show(index: number) {
     this.showModal = index;
   }
 
@@ -163,26 +170,32 @@ cviewpass(){
     });
   }
 
-  public loggedIn:boolean = false;
+  public loggedIn: boolean = false;
 
-  constructor(private auth:AuthGuardService,private router:Router,private token:TokenService, private http:HttpClient,
-    private toast:NgToastService, private fb:FormBuilder) {}
+  constructor(
+    private auth: AuthGuardService,
+    private router: Router,
+    private token: TokenService,
+    private http: HttpClient,
+    private toast: NgToastService,
+    private fb: FormBuilder
+  ) {}
 
-
-  public log ={
+  public log = {
     name: 'SuperAdmin',
-    department:sessionStorage.getItem('department'),
-    activity:'Logout'
+    department: sessionStorage.getItem('department'),
+    activity: 'Logout',
+  };
+
+  activityLog() {
+    this.http
+      .post('http://127.0.0.1:8000/api/addActivity', this.log)
+      .subscribe((res: any) => {
+        console.log(res);
+      });
   }
 
-  activityLog(){
-    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
-        console.log(res)
-    })
-  }
-
-
-  logout(event:MouseEvent){
+  logout(event: MouseEvent) {
     this.activityLog();
     event.preventDefault();
     this.auth.changeStatus(false);
@@ -190,29 +203,40 @@ cviewpass(){
     this.router.navigateByUrl('/login');
   }
 
-  public passForm={
-    current_pass:null,
-    new_pass:null,
-    confirm_pass:null,
-    userId: localStorage.getItem('userData')
-  }  
-  
-    navChangePass(){
-      if( this.navChange.invalid){
-        this.toast.warning({detail:'Password not match',summary:'Please check the password',duration:3000 , sticky:false,position:'tr'}); 
-      
-      } 
-    
-    else{
+  public passForm = {
+    current_pass: null,
+    new_pass: null,
+    confirm_pass: null,
+    userId: localStorage.getItem('userData'),
+  };
 
-      console.log(this.passForm.userId)
-      this.http.post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm).subscribe((res: any) => {
-        console.log(res)
-    },
-    error => {
-      this.toast.error({detail:'Invalid current password',summary:'Please check the password you input',duration:3000, sticky:false,position:'tr'});
+  navChangePass() {
+    if (this.navChange.invalid) {
+      this.toast.warning({
+        detail: 'Password not match',
+        summary: 'Please check the password',
+        duration: 3000,
+        sticky: false,
+        position: 'tr',
+      });
+    } else {
+      console.log(this.passForm.userId);
+      this.http
+        .post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm)
+        .subscribe(
+          (res: any) => {
+            console.log(res);
+          },
+          (error) => {
+            this.toast.error({
+              detail: 'Invalid current password',
+              summary: 'Please check the password you input',
+              duration: 3000,
+              sticky: false,
+              position: 'tr',
+            });
+          }
+        );
     }
-    )
-    }
-}
+  }
 }

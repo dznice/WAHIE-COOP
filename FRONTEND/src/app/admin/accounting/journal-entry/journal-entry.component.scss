@@ -17,6 +17,11 @@ main {
 }
 
 .header {
+  display: grid;
+}
+
+.left-field {
+  grid-column: 1;
   display: flex;
   flex-wrap: wrap;
 }
@@ -31,18 +36,19 @@ label {
 .tablejournal {
   width: 100%;
 }
- .journdate, .journnumber, .userid, .duedate, .interest{
+
+.journdate,
+.journnumber,
+.userid,
+.duedate,
+.interest {
   display: flex;
   flex-direction: column;
-
-
- 
 }
 
 .journals {
-  height: 500px;
+  height: 70vh;
   overflow-y: scroll;
-  border-radius: 50;
 }
 
 .beneinput input,
@@ -79,23 +85,21 @@ select {
 }
 
 /* buttons */
+.right-field {
+  grid-column: 2;
+  text-align: end;
 
-.add {
-  position: absolute;
-  right: 0;
-  margin-right: 40px;
-  height: 40px;
-  width: 80px;
-  background-color: var(--primary-color);
-  color: #ffffff;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 6px 13px;
-  span {
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 10px;
+  .add {
+    height: 40px;
+    background-color: var(--primary-color);
+    color: var(--panel-color);
+    cursor: pointer;
+    padding: 0px 20px;
+    margin-top: 18px;
+
+    .ti-plus {
+      margin-left: -5px;
+    }
   }
 }
 
@@ -117,31 +121,29 @@ select {
 .buttons {
   background-color: var(--panel-color);
   display: flex;
-  justify-content: flex-end;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 14px 0;
-  margin-right: 40px;
-  float: right;
-}
+  justify-content: space-between;
 
-.back {
-  right: 0;
-  height: 40px;
-  width: 80px;
-  border: none;
-  background-color: #ede9f2;
-  color: #7f7a7a;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-  padding: 6px 21px;
-  span {
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 10px;
+  .save {
+    height: 40px;
+    width: 90px;
+    margin-left: 10px;
+    background-color: var(--primary-color);
+    color: var(--panel-color);
+  }
+
+  .save:hover {
+    background-color: var(--primary-alt);
+  }
+
+  .back {
+    height: 40px;
+    width: 90px;
+    background-color: var(--grey-alt);
+    color: var(--dark-grey);
+  }
+
+  .back:hover {
+    background-color: var(--dark-grey-2);
   }
 }
 
@@ -154,10 +156,9 @@ select {
   margin: 14px 0;
   float: left;
 }
-.totaltext{
+.totaltext {
   margin-right: 20px;
 }
-
 
 .totalsbot {
   text-align: right;
@@ -176,27 +177,6 @@ select {
   }
 }
 
-
-
-.save {
-  height: 40px;
-  width: 80px;
-  border: none;
-  margin-left: 10px;
-  align-items: end;
-  background-color: var(--primary-color);
-  color: #ffffff;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-}
-
-.btnTextb {
-  font-size: 14px;
-  font-weight: 600;
-  justify-content: center;
-}
-
 //ng-select
 .ng-select.try ::ng-deep .ng-select-container {
   outline: none;
@@ -206,6 +186,7 @@ select {
   border-radius: 5px;
   border: 1px solid #aaa;
   height: 36px;
+  width: 100%;
   min-width: 300px;
 }
 
@@ -215,13 +196,20 @@ select {
   border-radius: 5px;
 }
 
-.ng-select.try ::ng-deep .ng-dropdown-panel  {
-  max-width: 300px;
-  margin-left: 10px;
+.ng-select.try ::ng-deep .ng-dropdown-panel {
+  width: 100%;
+  //max-width: 300px;
+  //margin-left: 10px;
 }
 
-/* Modal */
-.otp-modal {
+.ng-select.try {
+  .submit {
+    cursor: pointer;
+  }
+}
+
+/* Add Modal */
+.modal-bg {
   position: fixed;
   background: #000000bf;
   top: 0;
@@ -229,96 +217,230 @@ select {
   right: 0;
   bottom: 0;
 
-  .otp-content {
-    background: #fff;
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 1rem;
-    position: absolute;
+  .modal-wrapper {
     top: 50%;
     left: 50%;
+    position: absolute;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
     transform: translate(-50%, -50%) scale(1);
-    text-align: center;
-    padding: 0 30px 1px;
     transition: transform 0.4s, top 0.4s;
+    background: var(--panel-color);
+    border-radius: 1rem;
     max-width: 400px;
     width: 100%;
 
-    .otp-header {
-      padding: 30px 10px;
-      font-weight: 600;
-      font-size: 20px;
-      color: var(--primary-color);
-      text-align: left;
-    }
+    .modal-header {
+      padding: 30px 25px;
+      height: 60px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .otp-body {
-      label {
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--primary-color);
-        text-align: left;
+      .header-title {
+        font-weight: 600;
+        font-size: 18px;
+        //color: var(--primary-color);
+        margin-top: 0.15rem;
       }
 
-      .modalinput {
-        display: flex;
-        width: calc(90%);
-        flex-direction: column;
-        margin: auto;
-        outline: none;
-        font-size: 14px;
-        font-weight: 400;
-        color: #333;
-        border-radius: 5px;
-        border: 1px solid #aaa;
-        padding: 0 14px;
-        height: 36px;
-      }
-    }
-
-    .otp-footer {
-      .savebtn {
-        width: 44%;
-        margin: 5px 0px 0px 10px;
-        height: 43px;
-        background-color: var(--primary-color);
-        color: #fff;
-        border: none;
+      .ti-x {
+        font-size: 20px;
+        color: var(--dark-grey);
         cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 4px;
+        margin-top: -3px;
+        margin-right: -6px;
+      }
+
+      .ti-x:hover {
+        background-color: var(--grey-alt);
+        border-radius: 100%;
+      }
+    }
+
+    .modal-body {
+      padding: 20px 25px 15px;
+
+      .input-box {
+        margin-bottom: 15px;
+
+        .input-label {
+          display: block;
+          font-size: 16px;
+          font-weight: 500;
+          margin-bottom: 0.35rem;
+          color: var(--dark-grey);
+          text-align: left;
+        }
+
+        .input-field {
+          height: 45px;
+          width: 100%;
+          outline: none;
+          border: 1.6px solid var(--border-color);
+          color: var(--text-color);
+          font-size: 14px;
+          border-radius: 0.625rem;
+          padding-left: 12px;
+        }
+
+        .input-field:hover {
+          border: 1.6px solid var(--dark-grey-2);
+        }
+
+        .input-field:focus {
+          border: 1.6px solid var(--primary-color);
+        }
+      }
+    }
+
+    .modal-footer {
+      padding: 18px 25px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .btn {
+        width: 100px;
+        height: 42px;
         border-radius: 0.45rem;
         font-size: 0.9rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        transition: 0.3s;
-        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
       }
 
-      .savebtn:hover {
+      .btn-save {
+        background-color: var(--primary-color);
+        color: var(--panel-color);
+        margin-left: 1rem;
+      }
+
+      .btn-save:hover {
         background-color: var(--primary-alt);
       }
 
-      .closebtn {
-        width: 44%;
-        margin: 5px 0px 0px 0px;
-        height: 43px;
-        border: none;
-        cursor: pointer;
-        border-radius: 0.45rem;
-        font-size: 0.9rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        transition: 0.3s;
-        text-decoration: none;
+      .btn-close {
         background-color: var(--grey-alt);
         color: var(--dark-grey);
       }
 
-      .closebtn:hover {
-        background-color: var(--dark-grey-2);
+      .btn-close:hover {
+        background-color: var(--border-color);
       }
     }
   }
 }
+
+/* Delete Modal */
+.del-modal {
+  position: fixed;
+  background: #000000bf;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .modal-wrapper {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.4s, top 0.4s;
+    background: var(--panel-color);
+    border-radius: 1rem;
+    max-width: 400px;
+    width: 100%;
+
+    .modal-header {
+      padding: 30px 25px;
+      height: 60px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .header-title {
+        font-weight: 600;
+        font-size: 20px;
+        //color: var(--primary-color);
+        margin-top: 0.15rem;
+      }
+
+      .ti-x {
+        font-size: 20px;
+        color: var(--dark-grey);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 4px;
+        margin-top: -3px;
+        margin-right: -6px;
+      }
+
+      .ti-x:hover {
+        background-color: var(--grey-alt);
+        border-radius: 100%;
+      }
+    }
+
+    .modal-body {
+      padding: 20px 25px 20px;
+
+      .text-bold {
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .text-muted {
+        opacity: 55%;
+      }
+    }
+
+    .modal-footer {
+      padding: 15px 25px 15px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .btn {
+        width: 100px;
+        height: 42px;
+        border-radius: 0.45rem;
+        font-size: 0.9rem;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .btn-save {
+        background-color: var(--primary-color);
+        color: var(--panel-color);
+        margin-left: .75rem;
+      }
+
+      .btn-save:hover {
+        background-color: var(--primary-alt);
+      }
+
+      .btn-close {
+        background-color: transparent;
+        color: var(--dark-grey);
+      }
+
+      .btn-close:hover {
+        background-color: var(--grey-alt);
+      }
+    }
+  }
+}
+
 
 @media (max-height: 1200px) {
   .container {
