@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('lib_journals', function (Blueprint $table) {
-            $table->integer('journal_number');
+            $table->integer('journal_number')->unique();
             $table->string('journal_name');
             $table->string('journal_type')->default('');
         });

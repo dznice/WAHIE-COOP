@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from'ng-angular-popup';
 
 @Component({
@@ -10,12 +10,14 @@ import { NgToastService } from'ng-angular-popup';
   templateUrl: './journal-entry.component.html',
   styleUrls: ['./journal-entry.component.scss'],
 })
-export class JournalEntryComponent implements OnInit {
+export class JournalEntryComponent implements OnInit{
 
   useid = localStorage.getItem('userData');
   journ: any;
 
-  constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,private route:Router, private toast: NgToastService){
+  constructor(private builder:FormBuilder, private wahieService:WahieService, private http: HttpClient,
+    private route:Router, private toast: NgToastService, private router: ActivatedRoute){
+      this.route.routeReuseStrategy.shouldReuseRoute = () => false;
   }
   journalEntryRow !: FormArray<any>;
   amount !: FormGroup<any>;
@@ -26,6 +28,7 @@ export class JournalEntryComponent implements OnInit {
   total_debit:any;
   total_credit:any;
   maxDate: any;
+
 
   ngOnInit(): void{
     this.showLibJournal()
@@ -269,8 +272,10 @@ this.journalEntryForm.get("journal_no")?.setValue((<HTMLInputElement>document.ge
       'journal_name': journal_name,
       'journal_type': journal_type,
     };
-    this.wahieService.addLibJournal(this.libJournals as any).subscribe(libjournal=>{
+    this.wahieService.addLibJournal(this.libJournals as any).subscribe((libjournal:any)=>{
       this.libJournals = libjournal
+      this.ngOnInit();
+      this.toast.success({detail:'Success',summary:'Account added', sticky:false,position:'false'});  
     });
     console.log(this.libJournals)
   }
@@ -311,4 +316,6 @@ this.journalEntryForm.get("journal_no")?.setValue((<HTMLInputElement>document.ge
     this.sms.account = name_id
 
   }
+
+
 }

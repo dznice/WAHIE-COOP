@@ -80,7 +80,8 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
     
     this.http.post('http://127.0.0.1:8000/api/users/updateOtp' + '/' + this.id, body).subscribe(
       (res:any)=>{
-        // this.show()
+      
+    console.log(res)
       if(res.status==2) {
         this.toast.success({detail:'success',summary:'Please wait for a moment.',duration:2000, sticky:false,position:'tr'}); 
        this.route.navigateByUrl('not-verified');
@@ -88,9 +89,7 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
       } else if(res.status==0) {
         this.route.navigateByUrl('disable-account');
       } else if(res.status==1) {
-        this.token.verifyHandle(sessionStorage.getItem('ftoken'));  
-        this.Auth.changeStatus(true);
-        this.route.navigateByUrl('members-home');
+        this.route.navigateByUrl('login');
         this.toast.success({detail:'Success',summary:'Email has been verified',duration:2000, sticky:false,position:'tr'}); 
       }
       
