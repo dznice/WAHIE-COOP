@@ -2,8 +2,6 @@
   font-family: inherit;
 }
 
-
-
 .heading {
   font-size: 30px;
   font-weight: 600;
@@ -21,9 +19,11 @@
   background-color: var(--grey-alt);
   border-radius: 8px;
   padding:20px;
-  margin:20px;
-}
+  margin-bottom: -1rem;
 
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); 
+}
 
 .content .list {
   display: flex;
@@ -157,26 +157,41 @@ input#help{
 //   }
 // }
 
+.list span{
+  margin-left: .5rem;
+}
+
+.fields{
+  margin-top: -.4rem;
+}
+
+.fields table{
+    margin-top: .5rem;
+}
+
+span{
+  font-size: 20px;
+  font-weight: 600;
+}
 
 .input-field {
-  width: 50%;
-
- margin: 8px 0;
- 
- 
+  width: 40%;
 
  label {
-  font-size: 14px;
+   font-size: 14px;
    font-weight: 600;
-   color: var(--primary-color);
-   
+   color: var(--primary-color); 
  }
+
  input {
    width: 100%;
-   padding: 12px 20px;
+   padding: 7px 15px;
    margin: 8px 0;
-   
-   border-radius: 8px;
+
+   height: 1%;
+   outline-color: #3f0f88;
+   border: 2px solid #ccc;
+   border-radius: 0.6rem;
  }
 }
 
@@ -200,6 +215,48 @@ input#help{
   }
 }
 
+.row{
+  display:inline-flex;
+
+  #fieldsdataRow{
+    width: 30rem;
+  }
+}
+
+.row2{
+  margin-top: 1rem;
+  margin-right: 1rem;
+  display:inline-flex;
+
+  #fieldsdataRow2{
+    width: 19rem;
+  }
+}
+
+.fields .fieldsdata2 {
+  border: 1px solid #959494;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  height: 36px;
+  padding: 7px 15px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.fields .fieldsdata1 {
+  border: 1px solid #959494;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  height: 36px;
+  padding: 7px 15px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: left;
+}
+
 
 .fields .fieldsdata {
   outline-color: #3f0f88;
@@ -213,7 +270,7 @@ input#help{
   margin: 2px 0;
   display: flex;
   width: 100%;
-  padding: 12px 20px;
+  padding: 7px 15px;
   box-sizing: border-box;
   border-radius: 8px;
   position: relative;
@@ -230,4 +287,21 @@ label {
 .text-danger1 {
   color: red;
   font-size: 14px;
+}
+
+.change{
+  margin-top: 1rem;
+}
+
+.btn-add{
+  height: 40px;
+  width: 120px;
+  border: none;
+  color: #fff;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  outline: none;
+  margin-top: 7px;
+  margin-right: 8px;
+  cursor: pointer;
 }

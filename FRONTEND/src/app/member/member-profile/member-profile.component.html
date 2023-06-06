@@ -24,77 +24,95 @@
     <div class="text-content">
       <div class="home text">
         <div class="fields">
-          <h1>Additional Information</h1>
+          <span>Additional Information</span>
           <table>
+            <div class="row">
             <tr>
               <label>Mobile Number</label>
-              <td class="fieldsdata">(+63) {{ mobile_number }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">(+63) {{ mobile_number }}</td>
             </tr>
             <tr>
               <label>Gender</label>
-              <td class="fieldsdata">{{ gender }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ gender }}</td>
             </tr>
+          </div>
+
+          <div class="row">
             <tr>
               <label>Birthdate</label>
-              <td class="fieldsdata">{{ birthdate | date : "MM/dd/yyyy" }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ birthdate | date : "MM/dd/yyyy" }}</td>
             </tr>
             <tr>
               <label>Civil Status</label>
-              <td class="fieldsdata">{{ civil_status }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ civil_status }}</td>
             </tr>
+          </div>
+          
             <tr *ngIf="civil_status != 'Single'">
               <label>Spouse</label>
               <td class="fieldsdata">{{ spouse }}</td>
             </tr>
+
             <tr>
               <label>Current Address</label>
               <td class="fieldsdata">{{ address }}</td>
             </tr>
+
+          <div class="row">
             <tr>
               <label>Employee Status</label>
-              <td class="fieldsdata">{{ employment_status }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ employment_status }}</td>
             </tr>
             <tr>
               <label>TIN Number</label>
-              <td class="fieldsdata">{{ tin_number }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ tin_number }}</td>
             </tr>
+          </div>
+
+          <div class="row">
             <tr>
               <label>Occupation</label>
-              <td class="fieldsdata">{{ occupation }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ occupation }}</td>
             </tr>
             <tr>
               <label>Department</label>
-              <td class="fieldsdata">{{ department }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ department }}</td>
             </tr>
+          </div>
+
+          <div class="row">
             <tr>
               <label>Company</label>
-              <td class="fieldsdata">{{ company_name }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ company_name }}</td>
             </tr>
             <tr>
               <label>Company Address</label>
-              <td class="fieldsdata">{{ company_address }}</td>
+              <td class="fieldsdata1" id="fieldsdataRow">{{ company_address }}</td>
             </tr>
+          </div>
           </table>
         </div>
       </div>
 
       <div class="blog text">
-        <h1>Beneficiary</h1>
+        <span>Beneficiary</span>
         <div class="fields">
           <table *ngFor="let b of ben">
             <tr *ngIf="memId == b.benificiary_id">
-              <td class="fieldsdata" width="30%">{{ b.benificiary_name }}</td>
-              <td class="fieldsdata" width="30%">
-                {{ b.benificiary_birthdate | date : "MM/dd/yyyy" }}
-              </td>
-              <td class="fieldsdata" width="30%">{{ b.benificiary_relation }}</td>
+              <div class="row2">
+                <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_name }}</td>
+                <td class="fieldsdata2" id="fieldsdataRow2">
+                  {{ b.benificiary_birthdate | date : "MM/dd/yyyy" }}
+                </td>
+                <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_relation }}</td>
+              </div>
               <br />
             </tr>
           </table>
         </div>
       </div>
       <div class="help text">
-        <h1>Change Password</h1>
+        <span>Change Password</span>
         <div class="tabs">
           <div class="tab-content">
             <div class="fields">
