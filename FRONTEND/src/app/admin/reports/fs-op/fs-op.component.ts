@@ -10,12 +10,10 @@ import { HttpClient } from '@angular/common/http';
 export class FsOpComponent implements OnInit {
   ledgers: any;
   pledgers: any;
-  assets: any[];
-  otherAssets: any[];
-  nonAssets: any[];
-  passets: any[];
-  potherAssets: any[];
-  pnonAssets: any[];
+  revenue: any[];
+  expense: any[];
+  prevenue: any[];
+  pexpense: any[];
   item: any[];
 
   constructor(private http:HttpClient) {}
@@ -39,27 +37,20 @@ export class FsOpComponent implements OnInit {
   }
   
   processLedgerData(): void {
-    this.assets = [];
-    this.otherAssets = [];
-    this.nonAssets = [];
+    this.revenue = [];
+    this.expense = [];
   
     for (const item of this.ledgers) {
       const journalName = item.result.journType.toLowerCase(); // Convert to lowercase for case-insensitive comparison
       console.log('Journal Name:', journalName);
 
-      if (['cash and cash equivalents', 'loans and receivables', 'financial assets', 'biologicals assets'].includes(journalName)) {
-        this.assets.push(item);
-      } else if (journalName === 'other current assets') {
-        this.otherAssets.push(item);
-      } else if (['non current assets', 'biological assets', 'intangible assets'].includes(journalName)) {
-        this.nonAssets.push(item);
-      }
+      if (['revenue', 'cost of goods sold', 'cost of services'].includes(journalName)) {
+        this.revenue.push(item);
+      } else if (['expenses', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
+        this.expense.push(item);
+      } 
     }
     
-    console.log('Ledgers:', this.ledgers);
-    console.log('Assets:', this.assets);
-    console.log('Other Assets:', this.otherAssets);
-    console.log('Non-Assets:', this.nonAssets);
   }
   
   
@@ -75,45 +66,52 @@ export class FsOpComponent implements OnInit {
   }
 
   pastProcessLedgerData(): void {
-    this.passets = [];
-    this.potherAssets = [];
-    this.pnonAssets = [];
+    this.prevenue = [];
+    this.pexpense = [];
   
     for (const items of this.pledgers) {
       const journalName = items.result.journType.toLowerCase(); // Convert to lowercase for case-insensitive comparison
       console.log('Journal Name:', journalName);
 
-      if (['cash and cash equivalents', 'loans and receivables', 'financial assets', 'biologicals assets'].includes(journalName)) {
-        this.passets.push(items);
-      } else if (journalName === 'other current assets') {
-        this.potherAssets.push(items);
-      } else if (['non current assets', 'biological assets', 'intangible assets'].includes(journalName)) {
-        this.pnonAssets.push(items);
-      }
+      if (['revenue', 'cost of goods sold', 'cost of services'].includes(journalName)) {
+        this.prevenue.push(items);
+      } else if (['expenses', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
+        this.pexpense.push(items);
+      } 
     }
     
-    console.log('Ledgers:', this.ledgers);
-    console.log('Assets:', this.assets);
-    console.log('Other Assets:', this.otherAssets);
-    console.log('Non-Assets:', this.nonAssets);
   }
 
+
+  reserveFund : any;
+  cetFund : any;
+  cdFund : any;
+  optionalFund : any;
+  dueToUnion : any;
   calculateTotalBalance(): number {
     let totalBalance = 0;
+    let totalExpenses = 0;
+    let totalRevenue = 0;
   
-    for (const item of this.assets) {
-      totalBalance += item.result.total_balance;
+    for (const item of this.revenue) {
+      totalRevenue += item.result.total_balance;
     }
   
-    for (const item of this.otherAssets) {
-      totalBalance += item.result.total_balance;
+    for (const item of this.expense) {
+      totalExpenses += item.result.total_balance;
     }
-  
-    for (const item of this.nonAssets) {
-      totalBalance += item.result.total_balance;
-    }
+
+    totalBalance = totalRevenue - totalExpenses;
+
+    this.reserveFund = totalBalance * 0.1;
+    this.cetFund = totalBalance * 0.05;
+    this.cdFund = totalBalance * 0.03;
+    this.optionalFund = totalBalance * 0.07;
+    this.dueToUnion = totalBalance * 0.05
   
     return totalBalance;
+
+    
   }
 
 }

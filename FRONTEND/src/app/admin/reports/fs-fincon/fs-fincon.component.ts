@@ -22,6 +22,15 @@ export class FsFinconComponent implements OnInit {
   liabilities : any[];
   nonLiabilities : any[];
   equity : any[];
+  sscc : any[];
+  src : any[];
+  srp : any[];
+  pscp : any[];
+  tscp : any[];
+  dscp : any[];
+  uns : any[];
+  nl : any[];
+  dg : any[];
 
   constructor(private http:HttpClient) {}
     
@@ -50,7 +59,16 @@ export class FsFinconComponent implements OnInit {
     this.liabilities = [];
     this.nonLiabilities = [];
     this.equity = [];
-  
+    this.sscc = [];
+    this.src = [];
+    this.srp = [];
+    this.pscp = [];
+    this.tscp = [];
+    this.dscp = [];
+    this.uns = [];
+    this.nl = [];
+    this.dg = [];
+
     for (const item of this.ledgers) {
       const journalName = item.result.journType.toLowerCase(); // Convert to lowercase for case-insensitive comparison
       console.log('Journal Name:', journalName);
@@ -66,10 +84,69 @@ export class FsFinconComponent implements OnInit {
       } else if (['current liabilities', 'other non-current liabilities'].includes(journalName)) {
         this.nonLiabilities.push(item);
       } else if (journalName === 'equity') {
-        this.equity.push(item);
+        // this.equity.push(item);
+        if (item.result.journal_name === 'Subscribed Share Capital - Common') {
+          this.sscc.push(item);
+        } else if (item.result.journal_name === 'Subscription Receivable - Common') {
+          this.src.push(item);
+        } else if (item.result.journal_name === 'Subscriptions Receivable Preferred') {
+          this.srp.push(item);
+        } else if (item.result.journal_name === 'Paid-up Share Capital-Preferred') {
+          this.pscp.push(item);
+        } else if (item.result.journal_name === 'Treasury Shares Capital -Preferred') {
+          this.tscp.push(item);
+        } else if (item.result.journal_name === 'Deposit for Share Capital Subscription') {
+          this.dscp.push(item);
+        } else if (item.result.journal_name === 'Undivided Net Surplus') {
+          this.uns.push(item);
+        } else if (item.result.journal_name === 'Net Loss') {
+          this.nl.push(item);
+        } else if (item.result.journal_name === 'Donations/Grants') {
+          this.dg.push(item);
       } 
     }
   }
+}
+
+calculateMemberEquity(): number {
+  let totalBalance = 0;
+
+  for (const item of this.sscc) {
+    totalBalance += item.result.total_balance;
+  }
+
+  for (const item of this.src) {
+    totalBalance += item.result.total_balance;
+  }
+
+  for (const item of this.srp) {
+    totalBalance += item.result.total_balance;
+  }
+  for (const item of this.pscp) {
+    totalBalance += item.result.total_balance;
+  }
+
+  for (const item of this.tscp) {
+    totalBalance += item.result.total_balance;
+  }
+
+  for (const item of this.dscp) {
+    totalBalance += item.result.total_balance;
+  }
+  for (const item of this.uns) {
+    totalBalance += item.result.total_balance;
+  }
+
+  for (const item of this.nl) {
+    totalBalance += item.result.total_balance;
+  }
+
+  for (const item of this.dg) {
+    totalBalance += item.result.total_balance;
+  }
+
+  return totalBalance;
+}
   
   
   showPastSLedger(): void {
@@ -78,7 +155,7 @@ export class FsFinconComponent implements OnInit {
         console.log(res);
         this.pledgers = res;
         this.pastProcessLedgerData();
-        console.log(this.processLedgerData())
+        console.log(this.pastProcessLedgerData())
       }
     );
   }
@@ -147,5 +224,58 @@ export class FsFinconComponent implements OnInit {
   
     return totalBalance;
   }
+
+  calculateFSCEquityTotalBalance(): number {
+    let totalBalance = 0;
+  
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Subscribed Share Capital - Common' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+  
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Subscription Receivable - Common' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+  
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Subscriptions Receivable Preferred' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+    
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Paid-up Share Capital-Preferred' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Treasury Shares Capital -Preferred' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Deposit for Share Capital Subscription' ? item.value : 0;
+      totalBalance += value;
+    }
+    
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Undivided Net Surplus' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+    
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Net Loss' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+
+    for (const item of this.ledgers) {
+      const value = item.journal_name === 'Donations/Grants' ? item.result.total_balance : 0;
+      totalBalance += value;
+    }
+  
+    return totalBalance;
+    console.log(totalBalance)
+  }
+  
 
 }

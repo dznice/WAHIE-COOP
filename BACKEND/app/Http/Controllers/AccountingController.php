@@ -192,12 +192,12 @@ public function totaljour(Request $request)
     $totalc = 0;
     $totald = 0;
     $total_balance =0;
-    $resultVariable =0;
-    $reserveVariable =0;
-    $cetVariable = 0;
-    $cdfVariable = 0;
-    $ofVariable = 0;
-    $cetfVariable = 0;
+    // $resultVariable =0;
+    // $reserveVariable =0;
+    // $cetVariable = 0;
+    // $cdfVariable = 0;
+    // $ofVariable = 0;
+    // $cetfVariable = 0;
 
     $result = [];
     $final = [];
@@ -249,37 +249,37 @@ public function totaljour(Request $request)
             $total_balance = $total->total_credit_amount - $total->total_debit_amount;
             $total_equity += $total_balance;
         
-            if ($total->journal_name == 'Subscribed Share Capital - Common') {
-                // Multiply by 10% and assign to "Reserve Fund"
-                $reserve_fund_balance = $total_balance * 0.1;
-                $total->journal_name = 'Reserve Fund';
-                $total->total_balance = $reserve_fund_balance;
-                $reserveVariable = $reserve_fund_balance;
+            // if ($total->journal_name == 'Subscribed Share Capital - Common') {
+            //     // Multiply by 10% and assign to "Reserve Fund"
+            //     $reserve_fund_balance = $total_balance * 0.1;
+            //     $total->journal_name = 'Reserve Fund';
+            //     $total->total_balance = $reserve_fund_balance;
+            //     $reserveVariable = $reserve_fund_balance;
         
-                // Multiply by 05% and assign to "CET Fund"
-                $cet_fund_balance = $total_balance * 0.05;
-                $total->journal_name = 'Coop. Education & Training Fund';
-                $total->total_balance = $cet_fund_balance;
-                $cetVariable = $cet_fund_balance;
+            //     // Multiply by 05% and assign to "CET Fund"
+            //     $cet_fund_balance = $total_balance * 0.05;
+            //     $total->journal_name = 'Coop. Education & Training Fund';
+            //     $total->total_balance = $cet_fund_balance;
+            //     $cetVariable = $cet_fund_balance;
 
-                // Multiply by 03% and assign to "Community Development Fund"
-                $cdf_fund_balance = $total_balance * 0.03;
-                $total->journal_name = 'Community Development Fund';
-                $total->total_balance = $cdf_fund_balance;
-                $cdfVariable = $cdf_fund_balance;
+            //     // Multiply by 03% and assign to "Community Development Fund"
+            //     $cdf_fund_balance = $total_balance * 0.03;
+            //     $total->journal_name = 'Community Development Fund';
+            //     $total->total_balance = $cdf_fund_balance;
+            //     $cdfVariable = $cdf_fund_balance;
 
-                // Multiply by 07% and assign to "Optional Fund"
-                $of_fund_balance = $total_balance * 0.07;
-                $total->journal_name = 'Optional Fund';
-                $total->total_balance = $of_fund_balance;
-                $ofVariable = $of_fund_balance;
+            //     // Multiply by 07% and assign to "Optional Fund"
+            //     $of_fund_balance = $total_balance * 0.07;
+            //     $total->journal_name = 'Optional Fund';
+            //     $total->total_balance = $of_fund_balance;
+            //     $ofVariable = $of_fund_balance;
 
-                // Multiply by 05% and assign to "Due to Union/Federation (CETF)"
-                $cetf_fund_balance = $total_balance * 0.05;
-                $total->journal_name = 'Due to Union/Federation (CETF)';
-                $total->total_balance = $cetf_fund_balance;
-                $cetfVariable = $cetf_fund_balance;
-            }
+            //     // Multiply by 05% and assign to "Due to Union/Federation (CETF)"
+            //     $cetf_fund_balance = $total_balance * 0.05;
+            //     $total->journal_name = 'Due to Union/Federation (CETF)';
+            //     $total->total_balance = $cetf_fund_balance;
+            //     $cetfVariable = $cetf_fund_balance;
+            // }
             break;
         
         
@@ -291,8 +291,8 @@ public function totaljour(Request $request)
                 $total_revenue += $total_balance;
                 break;
         //Expenses
-            case 'expense':
-            case 'subsidy/ gain (losses)':
+            case 'expenses':
+            case 'other items – subsidy/ gain (losses)':
                 $total_balance = $total->total_credit_amount - $total->total_debit_amount;
                 $total_expenses += $total_balance;
                 break;
@@ -303,11 +303,11 @@ public function totaljour(Request $request)
             'journType' => $total->journal_type,
             'journal_name' => $total->journal_name,
             'total_balance' => $total_balance,
-            'reserveVariable' => $reserveVariable,
-            'cetVariable' =>$cetVariable,
-            'cdfVariable' => $cdfVariable,
-            'ofVariable' => $ofVariable,
-            'cetfVariable' => $cetfVariable,
+            // 'reserveVariable' => $reserveVariable,
+            // 'cetVariable' =>$cetVariable,
+            // 'cdfVariable' => $cdfVariable,
+            // 'ofVariable' => $ofVariable,
+            // 'cetfVariable' => $cetfVariable,
             'totalc' => $totalc,
             'totald' => $totald,
         ];

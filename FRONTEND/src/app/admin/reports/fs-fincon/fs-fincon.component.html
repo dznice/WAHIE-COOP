@@ -155,34 +155,40 @@
               </ng-container>
 
               <!-- Equity -->
-            <ng-container *ngIf="equity && equity.length > 0">
-                <tr class="tr-total">
-                  <td>Equity</td>
-                </tr>
-                <ng-container *ngFor="let item of equity">
-                  <tr>
-                    <td>{{item.result.journal_name }}</td>
-                    <td class="td-cred">
-                      <ng-container *ngFor="let items of pequity">
-                        <ng-container *ngIf="item.result.journId === items.result.journId">
-                          {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
-                        </ng-container>
-                      </ng-container>
-                    </td>
-                    <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-                  </tr>
-                </ng-container>
-                <!-- Total of Equity -->
-              <tr>
-                <td>Total of Equity</td>
-                <td class="td-cred"></td>
-                <td class="td-deb" *ngIf="equity.length > 0">{{ equity.length > 0 ? (equity[equity.length - 1].total_equity | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
-              </tr>
-              </ng-container>
+<ng-container *ngIf="equity && equity.length > 0">
+    <tr class="tr-total">
+      <td>Equity</td>
+    </tr>
+    <ng-container *ngFor="let item of equity">
+      <tr>
+        <td>{{ item.result.journal_name }}</td>
+        <td class="td-cred">
+          <ng-container *ngFor="let items of pequity">
+            <ng-container *ngIf="item.result.journId === items.result.journId">
+              {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+            </ng-container>
+          </ng-container>
+        </td>
+        <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+      </tr>
+    </ng-container>
+    <!-- Total of Equity -->
+    <tr>
+      <td>Total of Equity</td>
+      <td class="td-cred"></td>
+      <td class="td-deb" *ngIf="equity.length > 0">{{ equity[equity.length - 1].total_equity | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+    </tr>
+  </ng-container>
+  
             
               <tr class="tr-total">
                 <td class="td-total" colspan="2">Total of Liability and Equity</td>
                 <td class="td-deb">{{ calculateLiabilityandEquityTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              </tr>
+
+              <tr class="tr-total">
+                <td class="td-total" colspan="2">Total of Equity</td>
+                <td class="td-deb">{{ calculateMemberEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
               </tr>
             
           </tbody>
