@@ -571,9 +571,9 @@ public function totaljourmem(Request $request)
         ->join('payables', 'credits.payables_id', '=', 'payables.id')
         ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
         ->join('members', 'transactions.members_id', '=', 'members.id')
-        ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name')
+        ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.last_name', 'members.first_name')
         ->where('lib_journals.id', $request->id)
-        ->select('lib_journals.id as  journal_id', 'lib_journals.journal_name','lib_journals.journal_type', 'members.id as member_id', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
+        ->select('lib_journals.id as  journal_id', 'lib_journals.journal_name','lib_journals.journal_type', 'members.id as member_id', 'members.last_name', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
         ->get();
 
     $result = [];
@@ -600,6 +600,7 @@ public function totaljourmem(Request $request)
         $result[] = [
             'journal_id' => $total->journal_id,
             'member_id' => $total->member_id,
+            'members_last_name' => $total->last_name,
             'members_first_name' => $total->first_name,
             'journal_name' => $total->journal_name,
             'totalc' => $totalc,
@@ -732,5 +733,88 @@ public function totaljourmem(Request $request)
     public function destroy(string $id)
     {
         //
+    }
+
+    public function ledgerList(Request $request)
+{
+    $totals = DB::table('credits')
+        ->join('lib_journals', 'credits.journals_id' , '=' , 'lib_journals.id')
+        ->join('payables', 'credits.payables_id', '=', 'payables.id')
+        ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
+        ->join('members', 'transactions.members_id', '=', 'members.id')
+        ->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name')
+        ->where('lib_journals.id', $request->id)
+        ->select('lib_journals.id as  journal_id', 'lib_journals.journal_name','lib_journals.journal_type', 'members.id as member_id', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'))
+        ->get();
+
+    $result = [];
+
+    foreach ($totals as $total) {
+        $journalType = strtolower($total->journal_type); // Assuming "journal_type" column exists in the "LibJournal" table
+
+        switch ($journalType) {
+            case 'cash and cash equivalents':
+            case 'loans and receivables':
+                $totald = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = 0;
+                break;
+            case 'current liabilities':
+                $totalc = $total->total_credit_amount - $total->total_debit_amount;
+                $totald = 0;
+                break;
+            default:
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
+                break;
+        }
+
+        $result[] = [
+            'journal_id' => $total->journal_id,
+            'member_id' => $total->member_id,
+            'members_first_name' => $total->first_name,
+            'journal_name' => $total->journal_name,
+            'totalc' => $totalc,
+            'totald' => $totald,
+        ];
+    }
+
+
+    return response()->json($result);
+}
+
+    public function getTransactionNo(Request $request){
+
+        $memberIds = $request->input('member_id');
+
+        $totalsQuery = DB::table('transactions');
+
+        if($memberIds) {
+            $totalsQuery->where('members_id', $memberIds);
+        }
+
+        $totals = $totalsQuery->get();
+        return response()->json($totals);
+    }
+
+    public function getTransactionList(Request $request){
+
+        $transactionNo = $request->input('transactionNum');
+        $memberId = $request->input('memberID');
+
+            $transacQuery = DB::table('credits')
+            ->join('lib_journals', 'credits.journals_id', '=', 'lib_journals.id')
+            ->join('payables', 'credits.payables_id', '=', 'payables.id')
+            ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
+            ->join('members', 'transactions.members_id', '=', 'members.id')
+            ->where('members.id', $memberId)
+            ->groupBy('transactions.id', 'transactions.transaction_number' , 'transactions.transaction_number','journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount')
+            ->select('transactions.id','transactions.transaction_number', 'journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount');
+
+        if($transactionNo){
+            $transacQuery->where('transactions.transaction_number', $transactionNo);
+        }
+
+        $totals = $transacQuery->get();
+        return response()->json($totals);
     }
 }

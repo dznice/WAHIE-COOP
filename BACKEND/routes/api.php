@@ -206,6 +206,8 @@ Route::get('/duedate', [App\Http\Controllers\AccountingController::class, 'DueDa
 Route::get('/totalmemjour/{id}', [App\Http\Controllers\AccountingController::class, 'totalmemjour']);
 Route::get('/totaljourmem/{id}', [App\Http\Controllers\AccountingController::class, 'totaljourmem']);
 Route::get('/totaljour', [App\Http\Controllers\AccountingController::class, 'totaljour']);
+Route::get('/transactionNo', [App\Http\Controllers\AccountingController::class, 'getTransactionNo']);
+Route::get('/transactions', [App\Http\Controllers\AccountingController::class, 'getTransactionList']);
 Route::get('/totaljourlastyear', [App\Http\Controllers\AccountingController::class, 'totaljourlastyear']);
 Route::get('/totalPaid', [App\Http\Controllers\AccountingController::class, 'totalPaid']);
 Route::get('/totalOpen', [App\Http\Controllers\AccountingController::class, 'totalOpen']);

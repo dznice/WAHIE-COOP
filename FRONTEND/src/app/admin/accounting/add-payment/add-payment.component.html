@@ -2,24 +2,9 @@
   <h1 class="title"><i class="ti ti-history-toggle"></i>Payment</h1>
   <form *ngIf="paymentForm" [formGroup]="paymentForm" (ngSubmit)="savePayment()">
     <div class="container">
-    <div class="left-cont">
-      
-        <!-- <div *ngFor="let account of accounts"> -->
-        <!-- <div *ngIf="id == member.id"> -->
-        <!-- <div class="amount">
-          <label class="amounts"> AMOUNT RECEIVED </label> <br /> -->
-          <!-- <label class="amounts2" id="balance"> PHP 69.00</label> -->
-          <!-- <div class="received">
-            <input type="text" formControlName="amountReceived"/>
-          </div>
-        </div> -->
-
+      <div class="left-cont">
         <div class="sub_header">
           <div class="customerPayment">
-            <!-- <label>
-                {{ member.first_name }} {{ member.middle_name }}
-                {{ member.last_name }} {{ member.suffix }}
-              </label> -->
             <label> Customer </label> <br />
             <input type="text" formControlName="member"/>
           </div>
@@ -32,41 +17,27 @@
 
           <div class="customerPayment">
             <label> Payment Method </label>
-            <!-- <select formControlName="paymentMethod" (change)="changeMethod($event)">
-              <option value="" selected disabled>Choose payment method</option>
-              <option *ngFor="let item of paymentMethods" [value]="item.value">
-                {{item.viewValue}}
-              </option>
-            </select> -->
-
-            <ng-select class="payMethod" [(ngModel)]="paymentMethod" [searchable]="false" [clearable]="false" placeholder="Choose payment method">
-              <ng-option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod">
-                {{ paymentMethod }}
-              </ng-option>
-            </ng-select>
+              <ng-select formControlName="paymentMethod" class="payMethod" [searchable]="false" [clearable]="false" placeholder="Choose payment method" (change)="changeMethod()">
+                <ng-option *ngFor="let item of paymentMethods" [value]="item.value">
+                  {{ item.viewValue }}
+                </ng-option>
+              </ng-select>
           </div>
 
           <div class="customerPayment">
-            <label> Reference No. </label>
-
-            <ng-select class="referenceNum" [(ngModel)]="reference_Num">
-              <ng-option *ngFor="let reference_Num of reference_Number" [value]="reference_Num">
-                {{ reference_Num }}
-              </ng-option>
-            </ng-select>
+            <div *ngIf="selectedMethod =='2' || selectedMethod =='3' || selectedMethod =='4'">
+              <label> Reference No. </label>
+              <!-- <ng-select class="referenceNum" [(ngModel)]="reference_Num">
+                <ng-option *ngFor="let reference_Num of reference_Number" [value]="reference_Num">
+                  {{ reference_Num }}
+                </ng-option>
+              </ng-select> -->
+              <input type="text" formControlName="referenceNo">
+            </div>
           </div>
 
           <div class="customerPayment">
             <label> Deposit to </label>
-              <!-- <select type="text" formControlName="depositTo">
-              <option disabled selected hidden>
-                Cash and cash equivalents
-              </option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-            </select> -->
-
             <ng-select class="depositCash" [(ngModel)]="deposit" [searchable]="false" [clearable]="false" placeholder="Cash and cash equivalents">
               <ng-option *ngFor="let deposit of deposits" [value]="deposit">
                 {{ deposit }}
@@ -77,9 +48,9 @@
           <div class="customerPayment">
             <label> Transaction No. </label>
 
-            <ng-select class="transactionNum" [(ngModel)]="transaction_Num">
-              <ng-option *ngFor="let transaction_Num of transaction_Number" [value]="transaction_Num">
-                {{ transaction_Num }}
+            <ng-select class="transactionNum" formControlName="transactionNo" (change)="changeTNo()">
+              <ng-option *ngFor="let item of transactionNOs" [value]="item.transaction_number">
+                {{ item.transaction_number }}
               </ng-option>
             </ng-select>
           </div>
@@ -140,14 +111,14 @@
             </div>
           </div> -->
 
-          <table formArrayName="payables">
+          <table *ngIf="selectedTNo > 0" formArrayName="payables">
             <thead>
               <th>No.</th>
               <th>Account</th>
               <th class="th-right">Debits</th>
               <th class="th-right">Credits</th>
-              <th>Description</th>
-              <th>Due Date</th>
+              <!-- <th>Description</th>
+              <th>Due Date</th> -->
               <th></th>
             </thead>
 
@@ -157,31 +128,58 @@
             <!-- <tbody
               *ngFor="let account of accounts; let i = index" [formGroupName]="i"
             > -->
-            <tbody
-            *ngFor="let trial of payablesRow.controls; let i = index" [formGroupName]="i"
-            >
+            <!-- <tbody *ngFor="let trial of payablesRow.controls; let i = index" [formGroupName]="i">
               <tr>
-                <td class="td-center">{{ i + 1 }}</td>
+                <td class="td-center">{{ i + 1 }}</td> -->
                 <!-- <td>{{ account.debit.cred.entries.entry_name }}</td>
                 <td>{{ account.debit.cred.due_date }}</td>
                 <td>{{ account.orig_amount }}</td> -->
 
 
                 <!-- <td>{{ account.open_balance }}</td> -->
-                <td class="tablePayment"><input type="text" formControlName="description"/></td>
+                <!-- <td class="tablePayment"><input type="text" formControlName="description"/></td>
                 <td class="td-right"><input type="number"  formControlName="openBalance" /></td>
                 <td class="td-right"><input type="number"  formControlName="origAmount"/></td>
                 <td class="tablePayment"><input type="text" formControlName="dueDate"/></td>
                 <td class="tablePayment"><input type="date" formControlName="payment" (change)=" autoAmount(i)"/></td>
                 <td><a class="delbut"><i class="ti ti-square-rounded-x"></i></a></td>
               </tr>
+            </tbody> -->
+            <tbody>
+              <tr *ngFor="let item of payRow.controls; let i = index" [formGroupName]="i">
+                <td class="td-center">{{ i + 1 }}</td>
+                <td class="td-right">
+                  <ng-select class="trial" formControlName="account">
+                    <ng-option *ngFor="let item of recents" [value]="item.id">
+                      {{item.journal_number}} {{item.journal_name}}
+                    </ng-option>
+                  </ng-select>
+                </td>
+                <td class="tablePayment">
+                  <input type="number" formControlName="debit"/>
+                </td>
+                <td class="tablePayment">
+                  <input type="number" formControlName="credit"/>
+                </td>
+                <!-- <td class="td-center">
+                  <span>Sample</span>
+                </td>
+                <td class="td-center">
+                  <span>Sample</span>
+                </td> -->
+                <td>
+                  <a (click)="removeRow(i)" class="delbut">
+                    <i class="ti ti-square-rounded-x"></i>
+                  </a>
+                </td>
+              </tr>
             </tbody>
           </table>
-          <div class="add-row">
-            <a class="add">
+          <div class="add-row" *ngIf="selectedTNo > 0">
+            <button class="add" (click)="addRow()" type="button">
               <i class="ti ti-plus"></i>
-              <span class="btnText">Add Row</span>
-            </a>
+              <span class="btnText" >Add Row</span>
+            </button>
           </div>
         </div>
         <!-- <div class="pagination-controls">
@@ -205,6 +203,39 @@
     </div>
     <div class="right-cont">
       <h2 class="recent">Recent Loans</h2>
+      <table>
+        <thead>
+          <th>Transaction No.</th>
+          <th>Account</th>
+          <th class="th-right">Debits</th>
+          <th class="th-right">Credits</th>
+          <th>Description</th>
+          <th>Due Date</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of recents">
+            <td class="td-center">
+              <span>{{item.transaction_number}}</span>
+            </td>
+            <td class="td-center">
+              <span>{{item.journal_number}} {{item.journal_name}}</span>
+            </td>
+            <td class="td-center">
+              <span>{{item.debit_amount}}</span>
+            </td>
+            <td class="td-center">
+              <span>{{item.credit_amount}}</span>
+            </td>
+            <td class="td-center">
+              <span>{{item.description}}</span>
+            </td>
+            <td class="td-center">
+              <span>{{item.due_date}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
     
   </div>

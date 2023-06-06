@@ -116,6 +116,9 @@ padding: auto;
     color: #3F0F88;
 }
 
+.trial ::ng-deep .ng-select-container{
+    width: 200px;
+}
 .payMethod ::ng-deep .ng-select-container,
 .depositCash ::ng-deep .ng-select-container,
 .transactionNum ::ng-deep .ng-select-container,
@@ -140,6 +143,10 @@ padding: auto;
   .referenceNum ::ng-deep .ng-select-container .ng-placeholder{
   color: #333;
   }
+
+  .trial ::ng-deep .ng-select-container .ng-value{
+    text-align: left;
+  }
   
   .payMethod ::ng-deep .ng-dropdown-panel,
   .depositCash ::ng-deep .ng-dropdown-panel,
@@ -160,7 +167,7 @@ padding: auto;
         margin: 0 15px 20px 1px;
         width: calc(70% / 2.3 - 20px);
 
-        select, select, input[type=date], input[type=email],input[type=text]{
+        select, select, input[type=date], input[type=email], input[type=text]{
             height: 36px;
             width: 100%;
             outline: none;

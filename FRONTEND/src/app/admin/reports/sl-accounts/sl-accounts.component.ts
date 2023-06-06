@@ -36,6 +36,8 @@ export class SlAccountsComponent {
   showSLedger(mem:any, acc:any, sd:any, ed:any): void{
     this.ledgers = this.wahieService.sLegder(mem, acc, sd, ed).subscribe(ledger=>{
       this.ledgers = ledger;
+       console.log(this.ledgers);
+       console.log(this.ledgers.result[1].name);
         //let num=0;
       //   ledger.forEach((x:any)=>{
       //   if(x.totald=0){
