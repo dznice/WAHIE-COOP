@@ -807,8 +807,8 @@ public function totaljourmem(Request $request)
             ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
             ->join('members', 'transactions.members_id', '=', 'members.id')
             ->where('members.id', $memberId)
-            ->groupBy('transactions.id', 'transactions.transaction_number' , 'transactions.transaction_number','journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount')
-            ->select('transactions.id','transactions.transaction_number', 'journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount');
+            ->groupBy('transactions.id', 'transactions.transaction_number' , 'transactions.transaction_number','journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','credits.payables_id')
+            ->select('transactions.id','transactions.transaction_number', 'journals_id as journId', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','payables_id as paysId');
 
         if($transactionNo){
             $transacQuery->where('transactions.transaction_number', $transactionNo);

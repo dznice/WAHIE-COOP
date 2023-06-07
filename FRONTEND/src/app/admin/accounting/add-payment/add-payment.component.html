@@ -55,96 +55,19 @@
             </ng-select>
           </div>
 
-          <!-- <div class="customerPayment">
-            <label> {{ member.email }} </label>
-            <label> Email</label> <br />
-            <input type="email" formControlName="email" />
-          </div> -->
         </div>
 
-        <!-- <div class="sub_header2"> -->
-          <!-- <div class="customerPayment2">
-            <div *ngIf="selectedMethod ==='2' || selectedMethod ==='3' || selectedMethod ==='4'">
-            <label> Reference No. </label>
-            <input type="number" formControlName="referenceNo" >
-            </div>
-          </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-      <!--</div> -->
 
         <div class="journals">
-          <!-- <label class="outsTransac"> Outstanding Transactions</label>
-
-          <div class="sub_header3">
-            <div class="customerPayment3">
-              <label>Invoice No.</label>
-              <input
-                class="field"
-                type="number"
-                placeholder="Find Invoice No."
-                formControlName="depositTo"
-              />
-               <input class="field" type="number" placeholder="Find Invoice No." formControlName="depositTo">
-            </div>
-
-            <div class="customerPayment3">
-              <label>Date</label>
-              <input
-                class="form-control"
-                type="date"
-                [(ngModel)]="startDate"
-                name="sDate"
-              />
-              <input class="form-control" type="date" [(ngModel)]="startDate" formControlName="depositTo"> 
-            </div>
-
-            <div class="customerPayment3">
-              <label>Date</label>
-              <input
-                class="form-control"
-                type="date"
-                [(ngModel)]="endDate"
-                name="eDate"
-              />
-               <input class="form-control" type="date" [(ngModel)]="endDate" formControlName="depositTo"> 
-            </div>
-          </div> -->
-
           <table *ngIf="selectedTNo > 0" formArrayName="payables">
             <thead>
               <th>No.</th>
               <th>Account</th>
               <th class="th-right">Debits</th>
               <th class="th-right">Credits</th>
-              <!-- <th>Description</th>
-              <th>Due Date</th> -->
               <th></th>
             </thead>
 
-            <!-- <tbody
-              *ngFor="let trial of tryForm.controls['testing'].controls; let i = index" [formGroupName]="i"
-            > -->
-            <!-- <tbody
-              *ngFor="let account of accounts; let i = index" [formGroupName]="i"
-            > -->
-            <!-- <tbody *ngFor="let trial of payablesRow.controls; let i = index" [formGroupName]="i">
-              <tr>
-                <td class="td-center">{{ i + 1 }}</td> -->
-                <!-- <td>{{ account.debit.cred.entries.entry_name }}</td>
-                <td>{{ account.debit.cred.due_date }}</td>
-                <td>{{ account.orig_amount }}</td> -->
-
-
-                <!-- <td>{{ account.open_balance }}</td> -->
-                <!-- <td class="tablePayment"><input type="text" formControlName="description"/></td>
-                <td class="td-right"><input type="number"  formControlName="openBalance" /></td>
-                <td class="td-right"><input type="number"  formControlName="origAmount"/></td>
-                <td class="tablePayment"><input type="text" formControlName="dueDate"/></td>
-                <td class="tablePayment"><input type="date" formControlName="payment" (change)=" autoAmount(i)"/></td>
-                <td><a class="delbut"><i class="ti ti-square-rounded-x"></i></a></td>
-              </tr>
-            </tbody> -->
             <tbody>
               <tr *ngFor="let item of payRow.controls; let i = index" [formGroupName]="i">
                 <td class="td-center">{{ i + 1 }}</td>
@@ -161,12 +84,7 @@
                 <td class="tablePayment">
                   <input type="number" formControlName="credit" (change)="autoZero(i)" />
                 </td>
-                <!-- <td class="td-center">
-                  <span>Sample</span>
-                </td>
-                <td class="td-center">
-                  <span>Sample</span>
-                </td> -->
+                
                 <td>
                   <a (click)="removeRow(i)" class="delbut">
                     <i class="ti ti-square-rounded-x"></i>

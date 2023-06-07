@@ -81,6 +81,8 @@ export class AddPaymentComponent implements OnInit {
 
   paymentForm=this.builder.group({
     member:this.builder.control({value:'', disabled: true}),
+    memberId:this.builder.control({value:'', disabled: true}),
+    userId:this.builder.control(this.useid),
     paymentDate:this.builder.control(this.formatDate()),
     paymentMethod:this.builder.control('',Validators.required),
     referenceNo:this.builder.control('',Validators.required),
@@ -101,6 +103,7 @@ export class AddPaymentComponent implements OnInit {
     this.members = this.wahieService.getMemberInfo(index).subscribe((member:any)=>{
       this.members = member;
       this.paymentForm.get("member")?.setValue(this.members.first_name +' '+ this.members.last_name);
+      this.paymentForm.get("memberId")?.setValue(this.members.id);
       console.log(this.members);
     });
   }

@@ -65,7 +65,7 @@ class PaymentController extends Controller
                     $payables->save();
                     $pays = $payables->id;
 
-                    $credits = new Credits;
+                    $credits = Credits::find($value['transactionNo']);
                     $credits->users_id = $request->userId;
                     $credits-> journals_id = null;
                     $credits-> payables_id = $pays;

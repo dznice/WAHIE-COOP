@@ -76,6 +76,7 @@
               <td class="td-deb">{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             </tr>
 
+            <ng-container *ngIf="this.reserveFund && this.cetFund && this.dueToUnion && this.cdFund && this.optionalFund !== 0">
             <thead>
               <tr>
                 <th>Statutory Fund</th>
@@ -104,6 +105,7 @@
               <td>Optional Fund</td>
               <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             </tr>
+          </ng-container>
           </tbody>
         </table>
       </div>
