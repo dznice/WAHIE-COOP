@@ -83,9 +83,10 @@ export class AddPaymentComponent implements OnInit {
     member:this.builder.control({value:'', disabled: true}),
     memberId:this.builder.control({value:'', disabled: true}),
     userId:this.builder.control(this.useid),
+    paysId:this.builder.control({value:'', disabled: true}),
     paymentDate:this.builder.control(this.formatDate()),
     paymentMethod:this.builder.control('',Validators.required),
-    referenceNo:this.builder.control('',Validators.required),
+    referenceNo:this.builder.control(''),
     depositTo:this.builder.control('',Validators.required),
     transactionNo:this.builder.control('',Validators.required),
     // invoiceNo:this.builder.control(''),
@@ -111,6 +112,7 @@ export class AddPaymentComponent implements OnInit {
   optionTransactionNo(index:any){
     this.transactionNOs = this.wahieService.listTransactionNo(index).subscribe((optionTransac:any)=>{
       this.transactionNOs = optionTransac;
+      
       console.log(this.transactionNOs);
     });
   }
@@ -118,6 +120,9 @@ export class AddPaymentComponent implements OnInit {
   showRecentTransactions(mem:any, tran:any){
     this.recents = this.wahieService.listTransaction(mem, tran).subscribe((recent:any)=>{
       this.recents = recent;
+      const lastData = this.recents[this.recents.length - 1]; // Get the last data
+      const paysId = lastData ? lastData.paysId : null; // Retrieve the paysId from the last data or set to null if there is no data
+      this.paymentForm.get("paysId")?.setValue(paysId);
       console.log(this.recents);
     });
   }
