@@ -330,6 +330,30 @@ clearValue(index: any) {
     // }
   }
 
+  autoZero(index: any) {
+    this.paymentRow = this.paymentForm.get('payables') as FormArray;
+    this.amount = this.paymentRow.at(index) as FormGroup;
+    let debit = this.amount.get('debit')?.value;
+    let credit = this.amount.get('credit')?.value;
+    if (debit == null || credit == null) {
+      if (debit == null) {
+        this.amount.get('credit')?.setValue(null);
+        this.amount.get('credit')?.setValue('');
+        this.amount.get('debit')?.setValue('');
+      } else if (credit == null) {
+        this.amount.get('debit')?.setValue(null);
+        this.amount.get('debit')?.setValue('');
+        this.amount.get('credit')?.setValue('');
+      }
+    } else if (debit > 0) {
+      this.amount.get('credit')?.setValue(0);
+    } else if (credit > 0) {
+      this.amount.get('debit')?.setValue(0);
+    }
+
+    //this.balance_summary();
+  }
+
   public log ={
     name: sessionStorage.getItem('name'),
     department:sessionStorage.getItem('department'),

@@ -156,10 +156,10 @@
                   </ng-select>
                 </td>
                 <td class="tablePayment">
-                  <input type="number" formControlName="debit"/>
+                  <input type="number" formControlName="debit" (change)="autoZero(i)"/>
                 </td>
                 <td class="tablePayment">
-                  <input type="number" formControlName="credit"/>
+                  <input type="number" formControlName="credit" (change)="autoZero(i)" />
                 </td>
                 <!-- <td class="td-center">
                   <span>Sample</span>
