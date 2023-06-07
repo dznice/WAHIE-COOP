@@ -82,10 +82,10 @@ export class AddPaymentComponent implements OnInit {
   paymentForm=this.builder.group({
     member:this.builder.control({value:'', disabled: true}),
     paymentDate:this.builder.control(this.formatDate()),
-    paymentMethod:this.builder.control(''),
+    paymentMethod:this.builder.control('',Validators.required),
     referenceNo:this.builder.control('',Validators.required),
-    depositTo:this.builder.control(''),
-    transactionNo:this.builder.control(''),
+    depositTo:this.builder.control('',Validators.required),
+    transactionNo:this.builder.control('',Validators.required),
     // invoiceNo:this.builder.control(''),
     // startDate:this.builder.control(''),
     // endDate:this.builder.control(''),
@@ -183,11 +183,29 @@ export class AddPaymentComponent implements OnInit {
 
 
 
+  // savePayment1(){
+  //   //this.paymentForm.get("entries") as FormArray;
+  //   // this.paymentForm.controls.journal_no.setValue( this.journId )
+  //   // let total_debit = this.journalEntryForm.get("totaldebit")?.value;
+  //   // let total_credit = this.journalEntryForm.get("totalcredit")?.value;
+  //   if(this.paymentForm.valid){
+  //     this.wahieService.savePayment(this.paymentForm.getRawValue()).subscribe(res=>{
+  //       let result:any;
+  //       result=res;
+  //       this.log.activity = 'Receive payment from' + ' ' + this.paymentForm.getRawValue().member
+  //       this.activityLog()
+  //       this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
+  //       this.route.navigateByUrl('admin/accounting')
+  //     })
+  //   }else{
+  //     this.toast.error({detail:'Failed',summary:'Fill all inputs or balance the amount to submit',duration:2000, sticky:false,position:'tr'});
+  //     console.log("Error: Fill all input or need balance the amount to submit");
+  //   }
+  //   console.log(this.paymentForm.getRawValue());
+  //   //this.route.navigateByUrl('admin/accounting')
+  // }
+
   savePayment(){
-    //this.paymentForm.get("entries") as FormArray;
-    // this.paymentForm.controls.journal_no.setValue( this.journId )
-    // let total_debit = this.journalEntryForm.get("totaldebit")?.value;
-    // let total_credit = this.journalEntryForm.get("totalcredit")?.value;
     if(this.paymentForm.valid){
       this.wahieService.savePayment(this.paymentForm.getRawValue()).subscribe(res=>{
         let result:any;
@@ -205,6 +223,8 @@ export class AddPaymentComponent implements OnInit {
     //this.route.navigateByUrl('admin/accounting')
   }
 
+  
+
   addRow(){
     this.paymentRow=this.paymentForm.get("payables") as FormArray;
     this.paymentRow.push(this.Generaterow());
@@ -219,8 +239,8 @@ export class AddPaymentComponent implements OnInit {
       account:this.builder.control('', Validators.required),
       debit:this.builder.control('', Validators.required),
       credit:this.builder.control('', Validators.required),
-      description:this.builder.control(''),
-      dueDate:this.builder.control('',Validators.required),
+      //description:this.builder.control(''),
+      //dueDate:this.builder.control('',Validators.required),
     });
   }
 
