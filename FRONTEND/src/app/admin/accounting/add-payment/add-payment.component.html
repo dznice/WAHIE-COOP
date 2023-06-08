@@ -1,5 +1,6 @@
 <main>
-  <h1 class="title"><i class="ti ti-history-toggle"></i>Payment</h1>
+  <div class="dotted"></div>
+  <h1 class="title">Payment</h1>
   <form *ngIf="paymentForm" [formGroup]="paymentForm" (ngSubmit)="savePayment()">
     <div class="container">
       <div class="left-cont">
@@ -65,7 +66,9 @@
               <th>Account</th>
               <th class="th-right">Debits</th>
               <th class="th-right">Credits</th>
-              <th></th>
+              <!-- <th>Description</th>
+              <th>Due Date</th> -->
+              <th><a class="addbut" (click)="addRow()"><i class="ti ti-square-rounded-plus"></i></a></th>
             </thead>
 
             <tbody>
@@ -102,12 +105,12 @@
               </tr>
             </tfoot>
           </table>
-          <div class="add-row" *ngIf="selectedTNo > 0">
+          <!-- <div class="add-row" *ngIf="selectedTNo > 0">
             <button class="add" (click)="addRow()" type="button">
               <i class="ti ti-plus"></i>
               <span class="btnText" >Add Row</span>
             </button>
-          </div>
+          </div> -->
         </div>
         <!-- <div class="pagination-controls">
           <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -126,18 +129,23 @@
         </div> -->
       
 
-      
+        <div class="footer">
+          <button class="cancel">Cancel</button>
+          <button class="save" type="submit">Save</button>
+        </div> 
     </div>
+
     <div class="right-cont">
       <h2 class="recent">Recent Loans</h2>
+      <div class="right-table">
       <table>
         <thead>
-          <th>Transaction No.</th>
+          <th>No.</th>
           <th>Account</th>
           <th class="th-right">Debits</th>
           <th class="th-right">Credits</th>
-          <th>Description</th>
-          <th>Due Date</th>
+          <!-- <th>Description</th> -->
+          <!-- <th>Due Date</th> -->
         </thead>
         <tbody>
           <tr *ngFor="let item of recents">
@@ -153,22 +161,18 @@
             <td class="td-center">
               <span>{{item.credit_amount}}</span>
             </td>
-            <td class="td-center">
+            <!-- <td class="td-center">
               <span>{{item.description}}</span>
-            </td>
-            <td class="td-center">
+            </td> -->
+            <!-- <td class="td-center">
               <span>{{item.due_date}}</span>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>
-
+    </div>
     </div>
     
-  </div>
-  <div class="footer">
-    <button class="cancel">Cancel</button>
-    <button class="save" type="submit">Save</button>
   </div>
   </form>
 </main>
