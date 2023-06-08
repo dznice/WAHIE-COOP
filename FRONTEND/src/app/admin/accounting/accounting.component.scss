@@ -49,6 +49,7 @@ main {
 .payables {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-right: -1.5rem;
 
   .card-cont {
     display: flex;
@@ -56,7 +57,7 @@ main {
       
     label {
       font-weight: 500;
-      font-size: 16px;
+      font-size: 16px;  
       color: var(--dark-grey);
     }
 
@@ -91,7 +92,15 @@ main {
     .paid {
       background: var(--paid-font);
     }
-  }  
+  } 
+
+  .open-cont {
+    margin-left: -1.25rem;
+  }
+
+  .paid-cont {
+    margin-left: -1.25rem;
+  }
 }
 
 .payables > * {

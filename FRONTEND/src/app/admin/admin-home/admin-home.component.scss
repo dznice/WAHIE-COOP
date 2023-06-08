@@ -3,7 +3,7 @@ main {
   animation: transitionIn 0.75s;
 
   .title {
-    color: var(--primary-color);
+    color: var(--title-color);
   }
 }
 
@@ -19,13 +19,13 @@ main {
     background: var(--panel-color);
     border-radius: 0.625rem;
     display: flex;
-    //justify-content: space-between;
     align-items: center;
     grid-gap: 24px;
     box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.05);
-    border: 1px solid var(--border-color);
+    //border: 1px solid var(--border-color);
     height: 9rem;
-    cursor: pointer;
+    //justify-content: space-between;
+    //cursor: pointer;
 
     .card-icon {
       font-size: 50px;
@@ -45,13 +45,13 @@ main {
         font-size: 35px;
         font-weight: 600;
         margin-top: -1px;
-        color: var(--primary-color);
+        color: var(--title-color);
       }
 
       .card-topic {
         font-size: 18px;
         font-weight: 500;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
       }
     }
   }
@@ -60,7 +60,7 @@ main {
 /* Filtering */
 .recent-transaction {
   .section-title {
-    color: var(--primary-color);
+    color: var(--title-color);
     margin-top: 2.5rem;
     font-size: 28px;
   }
@@ -80,7 +80,7 @@ main {
       label {
         font-size: 14px;
         font-weight: 500;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
       }
 
       input,
@@ -89,9 +89,10 @@ main {
         font-family: "Poppins", sans-serif;
         font-size: 16px;
         font-weight: 500;
-        color: #333;
+        color: var(--text-color-3);
         border-radius: 0.45rem;
-        border: 1px solid #aaa;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
@@ -107,7 +108,7 @@ main {
       label {
         font-size: 14px;
         font-weight: 500;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
       }
 
       input,
@@ -116,9 +117,10 @@ main {
         font-family: "Poppins", sans-serif;
         font-size: 16px;
         font-weight: 500;
-        color: #333;
+        color: var(--text-color-3);
         border-radius: 0.45rem;
-        border: 1px solid #aaa;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
@@ -133,7 +135,7 @@ main {
       label {
         font-size: 14px;
         font-weight: 500;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
       }
 
       input,
@@ -142,9 +144,10 @@ main {
         font-family: "Poppins", sans-serif;
         font-size: 16px;
         font-weight: 500;
-        color: #333;
+        color: var(--text-color-3);
         border-radius: 0.45rem;
-        border: 1px solid #aaa;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
@@ -159,7 +162,7 @@ main {
       label {
         font-size: 14px;
         font-weight: 500;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
       }
 
       input,
@@ -168,9 +171,10 @@ main {
         font-family: "Poppins", sans-serif;
         font-size: 16px;
         font-weight: 500;
-        color: #333;
+        color: var(--text-color-3);
         border-radius: 0.45rem;
-        border: 1px solid #aaa;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
@@ -185,7 +189,7 @@ main {
       label {
         font-size: 14px;
         font-weight: 500;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
       }
 
       input,
@@ -194,9 +198,10 @@ main {
         font-family: "Poppins", sans-serif;
         font-size: 16px;
         font-weight: 500;
-        color: #333;
+        color: var(--text-color-3);
         border-radius: 0.45rem;
-        border: 1px solid #aaa;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
@@ -224,7 +229,7 @@ main {
       th {
         position: sticky;
         background-color: var(--primary-color);
-        color: var(--panel-color);
+        color: var(--white);
         text-align: left;
         font-weight: bold;
         padding: 12px 16px;
@@ -241,6 +246,7 @@ main {
       tr {
         border-bottom: 1px solid var(--border-color);
         background-color: var(--panel-color);
+        color: var(--text-color-2);
 
         td {
           text-align: left;

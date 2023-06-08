@@ -23,9 +23,20 @@
       <span class="tooltip">{{ data.label }}</span>
     </li>
 
+    <li class="nav-mode">
+      <div class="mode-details" @fadeInOut *ngIf="collapsed">
+        <i class="mode-icon" [ngClass]="mode?'ti ti-moon':'ti ti-sun'"></i>
+        <span class="mode-text" *ngIf="modeState">Light mode</span>
+        <span class="mode-text" *ngIf="!modeState">Dark mode</span>
+      </div>
+      <div class="mode-switch">
+        <input class="switch" type="checkbox" [(ngModel)]="modeState" (click)="toggleDarkTheme()">
+      </div>
+    </li>
+
     <li class="nav-profile" >
-      <div class="profile-details">
-        <img src="assets/image/user-icon.png" alt="profile-img" />
+      <div class="profile-details" (click)="contextMenu($event)">
+        <img src="assets/image/user-icon.png" alt="profile-img"/>
         <div class="admin-name">
           <div class="role">SuperAdmin</div>
         </div>
@@ -49,17 +60,6 @@
         </ul>
       </div>
       <i class="btn-down" [ngClass]="chevron?'ti ti-chevron-down':'ti ti-chevron-up'" (click)="contextMenu($event)"></i>
-    </li>
-    
-    <li class="nav-mode">
-      <div class="mode-details" @fadeInOut *ngIf="collapsed">
-        <i class="mode-icon" [ngClass]="mode?'ti ti-moon':'ti ti-sun'"></i>
-        <span class="mode-text" *ngIf="modeState">Light mode</span>
-        <span class="mode-text" *ngIf="!modeState">Dark mode</span>
-      </div>
-      <div class="mode-switch">
-        <input class="switch" type="checkbox" [(ngModel)]="modeState" (click)="toggleDarkTheme()">
-      </div>
     </li>
     
   </ul>
@@ -89,9 +89,9 @@
             <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
           </div>
 
-          <div class="meter">
+          <!-- <div class="meter">
             <strength-meter [value]="navChange.value.new_pass" (measure)="onStrengthChange($event)"></strength-meter>
-          </div>
+          </div> -->
 
           <div class="input-box">
             <label class="input-label" for="confirm_pass">Confirm Password</label>

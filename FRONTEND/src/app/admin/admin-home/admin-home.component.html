@@ -112,7 +112,12 @@
       </table>
     </div>
     <div class="pagination-controls">
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls 
+        [responsive]=true
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="p = $event">
+      </pagination-controls>
     </div>
   </section>
 </main>

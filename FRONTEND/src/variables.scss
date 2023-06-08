@@ -1,27 +1,54 @@
 :root {
-  /* ===== Colors ===== */
+  /* ===== Element Colors ===== */
+  --panel-color: var(--white);
+  --bg-color: var(--grey-1);
+  --title-color: var(--primary-color);
+  --text-color-1: var(--white);
+  --text-color-2: var(--black);
+  --text-color-3: var(--grey-4);
+  --subtext-color: var(--grey-3);
+  --cancel-text: var(--grey-4);
+  --border-color: var(--grey-3);
+  --nav-border: var(--grey-2);
+  --dropdown-bg: var(--white);
+  --modal-bg: var(--white);
+  --modal-overlay: #121314bf;
+
+
+  /* ===== Base ===== */
+  --white: #ffffff;
+  --black: #121314;
   --primary-color: #3f0f88;
-  --primary-alt: #2c0b5f;
+  --primary-color-light: #522794;
+  --primary-color-dark: #2c0b5f;
   --secondary-color: #0099ff;
   --secondary-alt: rgba(0, 153, 255, 0.15);
-  --panel-color: #FFFFFF;
-  --border-color: #d1cccc;
-  --grey: #f6f6f6;
-  --grey-alt: #e9e9e9;
-  --dark-grey: #707070;
-  --dark-grey-2: #aeaaaa;
-  --dark-grey-3: #918e8e;
-  --black: #0e1014;
+
+  /* ===== Graybase ===== */ 
+  --grey-1: #f4f6fb; 
+  --grey-2: #e4e5eb; 
+  --grey-3: #bdc0c7;
+  --grey-4: #858994;
+
+  /* ===== Accents ===== */
   --blue: #0077c5;
-  --green: #35CE8D;
-  --yellow: #ffc145;
-  --red: #ff3e2f;
-  --pending-bg: #fff0c2;
+  --green: #0eb25b;
+  --yellow: #ffc400;
+  --dark-yellow: #ff941a;
+  --orange: #ff5429;
+
+  /* ===== Destructive ===== */
+  --red: #ff2e51;
+  --red-hover: #ff4767;
+  --red-focus: #f10e35;
+
+  /* ===== Status ===== */
   --pending-font: #a68b00;
-  --overdue-bg: #ffcdd2;
+  --pending-bg: rgb(255,240,194,0.7);
   --overdue-font: #c62828;
-  --paid-bg: #c8e6c9;
+  --overdue-bg: rgb(255,205,210,0.7);
   --paid-font: #388e3c;
+  --paid-bg: rgb(200,230,201,0.7);
 
   /* ====== Transitions ====== */
   --tran-05: all 0.5s ease;
@@ -29,18 +56,59 @@
 }
 
 .darkmodes {
-  /* ===== Colors ===== */
-  --primary-color: #3f0f88;
-  --primary-alt: #2c0b5f;
+  /* ===== Element Colors ===== */
+  --panel-color: var(--grey-4);
+  --bg-color: var(--black);
+  --title-color: var(--white);
+  --text-color-1: var(--black);
+  --text-color-2: var(--white);
+  --text-color-3: var(--white);
+  --subtext-color: var(--grey-3);
+  --border-color: var(--grey-3);
+  --nav-border: var(--grey-3);
+  --dropdown-bg: var(--grey-3);
+  --modal-bg: var(--black);
+  --modal-overlay: #15181fbf;
+  --cancel-text: var(--white);
+
+  /* ===== Base ===== */
+  --white: #f2f3f5;
+  --black: #121212;
+  --primary-color: #522794;
+  --primary-color-light: #522794;
+  --primary-color-dark: #2c0b5f;
   --secondary-color: #0099ff;
   --secondary-alt: rgba(0, 153, 255, 0.15);
-  --white:#F2F3F5;
-  --panel-color: #0e1014;
-  --border-color: #15181f;
+
+  /* ===== Graybase ===== */ 
   --grey-1: #676b7a;
   --grey-2: #4e5261;
   --grey-3: #2b2e38;
   --grey-4: #15181f;
+
+  /* ===== Accents ===== */
+  --blue: #0077c5;
+  --green: #35CE8D;
+  --yellow: #ffc145;
+  --dark-yellow: #ff9d2e;
+  --orange: #ff5c33;
+
+  /* ===== Destructive ===== */
+  --red: #ff4262;
+  --red-hover: #ff5c77;
+  --red-focus: #f52c4e;
+
+  /* ===== Status ===== */
+  --pending-font: #a68b00;
+  --pending-bg: rgb(255,240,194,0.7);
+  --overdue-font: #c62828;
+  --overdue-bg: rgb(255,205,210,0.7);
+  --paid-font: #388e3c;
+  --paid-bg: rgb(200,230,201,0.7);
+
+  /* ====== Transitions ====== */
+  --tran-05: all 0.5s ease;
+  --tran-03: all 0.3s ease;
 }
 
 button {
