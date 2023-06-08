@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double('interest')->nullable();
             $table->double('credit_amount')->nullable();
             $table->double('debit_amount')->nullable();
+            $table->string('paymentIdentifier')->default('')->nullable();
             $table->timestamps();
 
             $table->foreign('users_id')-> references('id')->on('users');

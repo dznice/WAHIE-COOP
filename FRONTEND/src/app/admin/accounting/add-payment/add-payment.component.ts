@@ -34,6 +34,7 @@ export class AddPaymentComponent implements OnInit {
   public members: any;
   public transactionNOs: any;
   public recents: any;
+  public recentdebs: any;
   // paymentForm: FormGroup;
 
   total_debit: any;
@@ -74,10 +75,12 @@ export class AddPaymentComponent implements OnInit {
     this.showLibJournal();
     if(this.selectedTNo>0){
     this.showRecentTransactions(this.id, this.selectedTNo);
+    this.showRecentDebitTransactions(this.id, this.selectedTNo);
     }
     else{
       this.selectedTNo='';
       this.showRecentTransactions(this.id, this.selectedTNo);
+      this.showRecentDebitTransactions(this.id, this.selectedTNo);
     }
   }
 
@@ -86,6 +89,11 @@ export class AddPaymentComponent implements OnInit {
     memberId:this.builder.control({value:'', disabled: true}),
     userId:this.builder.control(this.useid),
     paysId:this.builder.control({value:'', disabled: true}),
+    debsId:this.builder.control({value:'', disabled: true}),
+    credsId:this.builder.control({value:'', disabled: true}),
+    open_balance:this.builder.control({value:'', disabled: true}),
+    orig_amount:this.builder.control({value:'', disabled: true}),
+    due_date:this.builder.control({value:'', disabled: true}),
     paymentDate:this.builder.control(this.formatDate()),
     paymentMethod:this.builder.control('',Validators.required),
     referenceNo:this.builder.control(''),
@@ -116,18 +124,35 @@ export class AddPaymentComponent implements OnInit {
   optionTransactionNo(index:any){
     this.transactionNOs = this.wahieService.listTransactionNo(index).subscribe((optionTransac:any)=>{
       this.transactionNOs = optionTransac;
-      
       console.log(this.transactionNOs);
     });
   }
 
   showRecentTransactions(mem:any, tran:any){
-    this.recents = this.wahieService.listTransaction(mem, tran).subscribe((recent:any)=>{
-      this.recents = recent;
+    this.recentdebs = this.wahieService.listTransaction(mem, tran).subscribe((recent:any)=>{
+      this.recents = recent.filter((item: any) => item.credit_amount !== item.debit_amount && item.status !== "Closed");
       const lastData = this.recents[this.recents.length - 1]; // Get the last data
       const paysId = lastData ? lastData.paysId : null; // Retrieve the paysId from the last data or set to null if there is no data
       this.paymentForm.get("paysId")?.setValue(paysId);
       console.log(this.recents);
+    });
+  }
+
+  showRecentDebitTransactions(mem:any, tran:any){
+    this.recentdebs = this.wahieService.listDebitTransaction(mem, tran).subscribe((recentdeb:any)=>{
+      this.recentdebs = recentdeb.filter((item: any) => item.credit_amount !== item.debit_amount && item.status !== "Closed");
+      const lastData = this.recentdebs[this.recentdebs.length - 1]; // Get the last data
+      const open_balance = lastData ? lastData.open_balance : null; // Retrieve the paysId from the last data or set to null if there is no data
+      this.paymentForm.get("open_balance")?.setValue(open_balance);
+      const orig_amount = lastData ? lastData.orig_amount : null; // Retrieve the paysId from the last data or set to null if there is no data
+      this.paymentForm.get("orig_amount")?.setValue(orig_amount);
+      const due_date = lastData ? lastData.due_date : null; // Retrieve the paysId from the last data or set to null if there is no data
+      this.paymentForm.get("due_date")?.setValue(due_date);
+      const debsId = lastData ? lastData.debsId : null; // Retrieve the paysId from the last data or set to null if there is no data
+      this.paymentForm.get("debsId")?.setValue(debsId);
+      const credsId = lastData ? lastData.credsId : null; // Retrieve the paysId from the last data or set to null if there is no data
+      this.paymentForm.get("credsId")?.setValue(credsId);
+      console.log(this.recentdebs);
     });
   }
 
@@ -138,49 +163,11 @@ export class AddPaymentComponent implements OnInit {
     });
   }
 
-  // showAccounting(): void{
-  //   this.accounts = this.wahieService.getListAccount(this.id).subscribe((account:any)=>{
-  //     this.accounts = account;
-  //     console.log('result');
-  //   });
-  // }
-
   showAccounting(): void{
     this.accounts = this.wahieService.getListAccount(this.id).subscribe((account:any[])=>{
         this.accounts = account;
-      //   this.paymentForm=this.builder.group({
-      //     amountReceived:this.builder.control({value: 0, disabled: true}),
-      //     member:this.builder.control({value: account[0].debit.cred.transac.member.first_name
-      //       +' '+ account[0].debit.cred.transac.member.last_name, disabled: true}),
-      //     email:this.builder.control({value: account[0].debit.cred.transac.member.email, disabled: true}),
-      //     paymentDate:this.builder.control(this.formatDate()),
-      //     paymentMethod:this.builder.control('',Validators.required),
-      //     referenceNo:this.builder.control('',Validators.required),
-      //     memberId:this.builder.control(this.id),
-      //     userId:this.builder.control(this.useid),
-      //     // startDate:this.builder.control(''),
-      //     // endDate:this.builder.control(''),
-      //     payables: this.builder.array(account.map(trial => this.generateFormGroup(trial))),
-      //     amountApply:this.builder.control({value: 0, disabled: true}),
-      //     amountCredit:this.builder.control({value: 0, disabled: true}),
-      // });
     });
   }
-
-  // private generateFormGroup(trial:any) {
-
-  //   return this.builder.group({
-  //     debitId: this.builder.control({ value: trial.id , disabled: true }),
-  //     payablesId: this.builder.control({ value: trial.debit.payables_id , disabled: true }),
-  //     creditId: this.builder.control({ value: trial.credits_id , disabled: true }),
-  //     journal_no: this.builder.control({ value: trial.debit.cred.transaction_number , disabled: true }),
-  //     description: this.builder.control({ value: trial.debit.cred.entries.entry_name , disabled: true }),
-  //     dueDate: this.builder.control({ value:  trial.debit.due_date, disabled: true }),
-  //     origAmount: this.builder.control({ value: trial.orig_amount, disabled: true }),
-  //     openBalance: this.builder.control({ value:parseFloat(trial.open_balance.toString()) , disabled: true }),
-  //     payment: this.builder.control({value: 0, disabled: false} ,Validators.required)
-  //   });
-  // }
 
   get payablesRow(){
     return this.paymentForm.get("payables") as FormArray;
@@ -192,30 +179,6 @@ export class AddPaymentComponent implements OnInit {
       console.log(this.accounts);
     });
   }
-
-
-
-  // savePayment1(){
-  //   //this.paymentForm.get("entries") as FormArray;
-  //   // this.paymentForm.controls.journal_no.setValue( this.journId )
-  //   // let total_debit = this.journalEntryForm.get("totaldebit")?.value;
-  //   // let total_credit = this.journalEntryForm.get("totalcredit")?.value;
-  //   if(this.paymentForm.valid){
-  //     this.wahieService.savePayment(this.paymentForm.getRawValue()).subscribe(res=>{
-  //       let result:any;
-  //       result=res;
-  //       this.log.activity = 'Receive payment from' + ' ' + this.paymentForm.getRawValue().member
-  //       this.activityLog()
-  //       this.toast.success({detail:'Success',summary:'Information saved',duration:2000, sticky:false,position:'tr'});
-  //       this.route.navigateByUrl('admin/accounting')
-  //     })
-  //   }else{
-  //     this.toast.error({detail:'Failed',summary:'Fill all inputs or balance the amount to submit',duration:2000, sticky:false,position:'tr'});
-  //     console.log("Error: Fill all input or need balance the amount to submit");
-  //   }
-  //   console.log(this.paymentForm.getRawValue());
-  //   //this.route.navigateByUrl('admin/accounting')
-  // }
 
   savePayment(){
     let total_debit = this.paymentForm.get('totaldebit')?.value;

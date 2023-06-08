@@ -144,4 +144,8 @@ export class WahieService {
   public listTransaction(memID:any, tranID:any):Observable<any>{
     return this.http.get<any[]>(`${this.url}/api/transactions?memberID=${memID}&transactionNum=${tranID}`);
   }
+
+  public listDebitTransaction(memID:any, tranID:any):Observable<any>{
+    return this.http.get<any[]>(`${this.url}/api/transactionDeb?memberID=${memID}&transactionNum=${tranID}`);
+  }
 }

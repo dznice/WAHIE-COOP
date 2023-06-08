@@ -782,19 +782,27 @@ public function totaljourmem(Request $request)
     return response()->json($result);
 }
 
-    public function getTransactionNo(Request $request){
+    public function getTransactionNo(Request $request)
+{
+    $memberIds = $request->input('member_id');
 
-        $memberIds = $request->input('member_id');
+    $totalsQuery = DB::table('transactions')
+        ->whereExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('payables')
+                ->join('credits', 'payables.id', '=', 'credits.payables_id')
+                ->whereColumn('payables.transaction_id', 'transactions.id')
+                ->whereRaw('credits.debit_amount <> credits.credit_amount');
+        });
 
-        $totalsQuery = DB::table('transactions');
-
-        if($memberIds) {
-            $totalsQuery->where('members_id', $memberIds);
-        }
-
-        $totals = $totalsQuery->get();
-        return response()->json($totals);
+    if ($memberIds) {
+        $totalsQuery->where('members_id', $memberIds);
     }
+
+    $totals = $totalsQuery->get();
+    return response()->json($totals);
+}
+
 
     public function getTransactionList(Request $request){
 
@@ -807,8 +815,61 @@ public function totaljourmem(Request $request)
             ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
             ->join('members', 'transactions.members_id', '=', 'members.id')
             ->where('members.id', $memberId)
-            ->groupBy('transactions.id', 'transactions.transaction_number' , 'transactions.transaction_number','journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','credits.payables_id')
-            ->select('transactions.id','transactions.transaction_number', 'journals_id as journId', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','payables_id as paysId');
+            ->groupBy('transactions.id', 'transactions.transaction_number' , 'transactions.transaction_number','journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','credits.payables_id','credits.status')
+            ->select('transactions.id','transactions.transaction_number', 'journals_id as journId', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','payables_id as paysId','credits.status');
+
+        if($transactionNo){
+            $transacQuery->where('transactions.transaction_number', $transactionNo);
+        }
+
+        $totals = $transacQuery->get();
+        return response()->json($totals);
+    }
+
+    public function getTransactionDebits(Request $request){
+
+        $transactionNo = $request->input('transactionNum');
+        $memberId = $request->input('memberID');
+
+        $transacQuery = DB::table('debits')
+        ->join('credits', 'debits.credits_id', '=', 'credits.id')
+        ->join('lib_journals', 'credits.journals_id', '=', 'lib_journals.id')
+        ->join('payables', 'credits.payables_id', '=', 'payables.id')
+        ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
+        ->join('members', 'transactions.members_id', '=', 'members.id')
+        ->where('members.id', $memberId)
+        ->groupBy('transactions.id', 
+                'transactions.transaction_number', 
+                'journals_id', 
+                'journal_name', 
+                'journal_number', 
+                'description', 
+                'debit_amount', 
+                'credit_amount', 
+                'credits.payables_id', 
+                'debits.open_balance',  
+                'debits.orig_amount',  
+                'debits.due_date',
+                'debits.interest_rate',
+                'debits.id', 
+                'credits.id', 
+                'credits.status')
+        ->select('transactions.id', 
+                'transactions.transaction_number', 
+                'journals_id as journId', 
+                'journal_name', 
+                'journal_number', 
+                'description', 
+                'debit_amount', 
+                'credit_amount', 
+                'credits.payables_id as paysId', 
+                'debits.open_balance',  
+                'debits.orig_amount',
+                'debits.due_date',
+                'debits.interest_rate',
+                'debits.id as debsId', 
+                'credits.id as credsId', 
+                'credits.status');
 
         if($transactionNo){
             $transacQuery->where('transactions.transaction_number', $transactionNo);

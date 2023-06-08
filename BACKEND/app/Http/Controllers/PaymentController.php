@@ -37,15 +37,7 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('post')){
-
-
-
-
-
-
             $paymentData = $request->input();
-            
-
                 
                     $journals = new Transactions;
                     $journals->members_id = $request->memberId;
@@ -62,34 +54,41 @@ class PaymentController extends Controller
 
                     $payment = 0;
 
-                    $credits = Credits::where('payables_id', $request->paysId)->get();
+                    $creditss = Credits::where('payables_id', $request->paysId)->get();
 
                     foreach ($paymentData['payables'] as $key => $value) {
-                        $matchingCredits = $credits->where('journals_id', $value['account']);
+                        $matchingCredits = $creditss->where('journals_id', $value['account']);
 
                         if ($matchingCredits->isNotEmpty()) {
-                            // Update the existing matching records
+                            // Retrieve the debit amount for the matching journal_id
+                            $debit = $value['debit'];
+                        }
+                    }
+                    foreach ($paymentData['payables'] as $key => $value) {
+                                $matchingCredits = $creditss->where('journals_id', $value['account']);
+        
+                                if ($matchingCredits->isNotEmpty()) {
                             foreach ($matchingCredits as $matchingCredit) {
-                                    $matchingCredit->users_id = $request->userId;
-                                    if ($value['credit'] !== null && $value['debit'] !== null) {
-                                        // Both credit and debit amounts are provided
-                                        $matchingCredit->credit_amount += $value['credit'];
-                                        $matchingCredit->debit_amount += $value['debit']; // Add the new debit amount to the existing debit
-                                    } elseif ($value['credit'] !== null) {
-                                        // Only credit amount is provided
-                                        $matchingCredit->credit_amount += $value['credit'];
-                                        $matchingCredit->debit_amount += $value['debit']; // Add the new debit amount to the existing debit
-                                    } elseif ($value['debit'] !== null) {
-                                        // Only debit amount is provided
-                                        $matchingCredit->credit_amount += $value['credit']; // Add the new credit amount to the existing credit
-                                        $matchingCredit->debit_amount += $value['debit']; // Add the new debit amount to the existing debit
-                                    }
-                                    
-                                    $matchingCredit->journals_id = $value['account'];
-                                    $matchingCredit->save();
-                                    
-                                    $payment += $value['debit'];
+                                $matchingCredit->users_id = $request->userId;
+                            
+                                if ($value['credit'] == 0) {
+                                    // Only credit amount is provided
+                                    $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
+                                    $matchingCredit->debit_amount += $value['debit'];
+                                } else {
+                                    // Only debit amount is provided
+                                    $matchingCredit->credit_amount += $value['credit'];
+                                    $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->debit_amount;
+                                }
+                            
+                                $matchingCredit->journals_id = $value['account'];
+                                $matchingCredit->save();
+                            
+                                $payment += $debit;
                             }
+                        
+                    
+                    
                         } else {
                             // Create a new record
                             $newCredits = new Credits();
@@ -98,48 +97,49 @@ class PaymentController extends Controller
                             $newCredits->credit_amount = $value['credit'];
                             $newCredits->debit_amount = $value['debit'];
                             $newCredits->journals_id = $value['account'];
+                            $newCredits->status = "Closed";
                             $newCredits->save();
                         }
                     }
 
-                    
-                    // $creds = $credits->id;
+                    $credits = Credits::find($request->transactionNo);
+                    $credits->users_id = $request->userId;
+                    $credits-> journals_id = null;
+                    $credits-> payables_id = $pays;
+                    $credits->save();
+                    $creds = $credits->id;
 
-                    // $debits = new Debits;
-                    // $debits->credits_id = $value['creditId'];
-                    // $debits->orig_amount = $value['origAmount'];
-                    // $debits->open_balance = $value['openBalance'] - $value['payment'];
-                    // $debits->payables_id =  $value['payablesId'];
-                    // $debits->paymentMethod = $request->paymentMethod;
-                    // $debits->pay_date = $request->paymentDate;
-                    // $debits->due_date =  $value['dueDate'];
-                    // $balanse = $value['openBalance'] - $value['payment'];
+                    $debits = new Debits;
+                    $debits->credits_id = $request->credsId;
+                    $debits->orig_amount = $request->orig_amount;
+                    $debits->open_balance = $request->open_balance - $payment;
+                    $debits->payables_id =  $request->paysId;
+                    $debits->paymentMethod = $request->paymentMethod;
+                    $debits->pay_date = $request->paymentDate;
+                    $debits->due_date =  $request->due_date;
+                    $balanse = $request->open_balance - $payment;
 
-                    // if ( $balanse == 0)
-                    // {
-                    //     $debits->status = "Paid";
-                    // }else{
-                    //     $debits->status = "Pending";
-                    // }
-                    // $debits->save();
+                    if ( $balanse == 0)
+                    {
+                        $debits->status = "Paid";
+                    }else{
+                        $debits->status = "Pending";
+                    }
+                    $debits->save();
 
-                    // $debiti = Debits::find($value['debitId']);
-                    // $debiti->paymentIdentifier = "Closed";
-                    // $debiti->status = "Closed";
-                    // $debiti->payment = $value['payment'];
-                    // $debiti->pay_date = $request->paymentDate;
-                    // $debiti->open_balance = null;
-                    // $debiti->credits_id = $creds;
-                    // $debiti->payables_id =  $value['payablesId'];
-                    // $debiti->save();
+                    $debiti = Debits::find($request->debsId);
+                    $debiti->paymentIdentifier = "Closed";
+                    $debiti->status = "Closed";
+                    $debiti->payment =  $payment;
+                    $debiti->pay_date = $request->paymentDate;
+                    $debiti->open_balance = null;
+                    $debiti->credits_id = $creds;
+                    $debiti->payables_id =  $request->paysId;
+                    $debiti->save();
 
                 
 
                 return response()->json(['message'=>'Entry added successfully!']);
-
-            
-
-
 
         }
 
