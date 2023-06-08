@@ -259,7 +259,7 @@ return new class extends Migration
         DB::table('lib_journals')->insert(array('journal_number' => '62210', 'journal_name' => 'Salaries & Wages', 'journal_type' => 'Cost of Services'));
         DB::table('lib_journals')->insert(array('journal_number' => '62230', 'journal_name' => 'Employees’ Benefits', 'journal_type' => 'Cost of Services'));
         DB::table('lib_journals')->insert(array('journal_number' => '62240', 'journal_name' => 'SSS,Philhealth/ECC/Pag-Ibig Contribution', 'journal_type' => 'Cost of Services'));
-        DB::table('lib_journals')->insert(array('journal_number' => '62250', 'journal_name' => 'Retirement Benefit Expenses', 'journal_type' => 'Cost of Services'));
+       // DB::table('lib_journals')->insert(array('journal_number' => '62250', 'journal_name' => 'Retirement Benefit Expenses', 'journal_type' => 'Cost of Services'));
         DB::table('lib_journals')->insert(array('journal_number' => '62250', 'journal_name' => 'Miscellaneous', 'journal_type' => 'Cost of Services'));
         DB::table('lib_journals')->insert(array('journal_number' => '62280', 'journal_name' => 'Professional and Consultancy Fees', 'journal_type' => 'Cost of Services'));
         DB::table('lib_journals')->insert(array('journal_number' => '62370', 'journal_name' => 'Supplies', 'journal_type' => 'Cost of Services'));

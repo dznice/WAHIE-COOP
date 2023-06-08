@@ -24,7 +24,7 @@ export class SadminHomeComponent {
   constructor(private http: HttpClient, private wahieService: WahieService, private route: Router, private backend: BackendService,
     private toast: NgToastService
   ) {
-    this.showUsers();
+ 
     //this.Departments();
   }
 
@@ -54,7 +54,9 @@ export class SadminHomeComponent {
 
   AccountType: string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showUsers();
+  }
 
   @HostListener('window:keydown.esc', ['$event'])
   onEsc(event: KeyboardEvent) {
@@ -82,6 +84,7 @@ export class SadminHomeComponent {
       this.toast.success({detail: 'Success', summary: 'Admin account created', sticky: false, position: 'false'});
       this.log.activity = 'Account created: ' + ' ' + this.form.email;
       this.activityLog();
+      this.ngOnInit();
      
     },
     error => {
@@ -105,7 +108,9 @@ export class SadminHomeComponent {
     console.log(this.depform)
     return this.backend.deptAdd(this.depform).subscribe((res:any)=>{
       this.showdept(2)
-      this.toast.success({detail:'Success',summary:'New department added', sticky:false,position:'false'});  
+      this.toast.success({detail:'Success',summary:'New department added', sticky:false,position:'false'}); 
+      this.log.activity = 'Add Department: ' + ' ' + res.department_name;
+      this.activityLog(); 
     });
   }
 

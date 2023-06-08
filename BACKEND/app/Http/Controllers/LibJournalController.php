@@ -21,6 +21,14 @@ class LibJournalController extends Controller
      */
     public function store(Request $request)
     {
+        $exist = LibJournal::where('journal_number', $request->journal_number)->exists();
+        $returnData = array(
+            'status' => 'error',
+            'message' => 'Account number already taken!'
+        );
+        if($exist){
+            return  response()->json($returnData, 401);
+        }
         return LibJournal::create($request->all());
     }
 
