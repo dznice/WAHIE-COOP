@@ -8,20 +8,101 @@
     size: letter;
   }
   
+  .report-name{
+    font-size: 30px;
+    font-weight: 600;
+   
+  }
+  
+  .report-name{
+    color: var(--primary-color);
+  }
+
+
+  .sticky-div{
+
+    padding: 10px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color:rgb(243, 241, 241);
+    height: 80px;
+    width: auto;
+    flex-wrap: wrap;
+    color:#fff9f9;
+    padding-left: 2rem;
+    margin:-20px -35px 0px -35px ;
+   
+}
+
+.head{
+  text-align: left;
+} 
+  .print{
+    margin: auto;
+    width: 70%;
+    border: 1px solid var(--black);
+    display: flex;
+    flex-direction: row;
+
+    .save{
+      width: 70%;
+      height: 5vh;
+      padding-left: 1rem;
+      padding-top: .5rem
+    }
+      
+    .PDF{
+      display: flex;
+      padding-left: 55%;
+      margin-top: .1rem;
+      width: 70%;
+    }
+
+    .PDF-icon{
+      padding-top: .2rem;
+      font-size: 28px;
+      background: none;
+      padding-right: .4rem;
+    }
+    .excel-icon{
+      padding-top: .2rem;
+      font-size: 28px;
+      background: none; 
+    }
+  }
+
+  .main-section{
+    padding-top: 2rem;
+    margin: auto;
+    width: 70%;
+    border: 1px solid var(--black);
+    border-top: none;
+    border-bottom:  2px solid var(--black) ;
+    margin-bottom: 10rem ;
+    
+  }
   header {
     text-align: center;
+    
   
     .coop-name {
       font-size: 26px;
       font-weight: 200;
       margin-bottom: 1rem;
+     
     }
   }
-  
+  .stat{
+    text-align: left;
+      font-weight: 400;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--black);
+  }
   /* Table */
   .table-container {
     margin: auto;
-    width: 100%;
+    width: 95%;
   
     .table-content {
       width: 100%;
@@ -29,36 +110,40 @@
       font-size: 0.9rem;
       overflow: hidden;
       border-collapse: collapse;
-  
+      
+
       thead {
         th {
-          position: sticky;
           text-align: left;
           font-weight: 400;
           padding: 12px 16px;
           border-top: 1px solid var(--black);
           border-bottom: 1px solid var(--black);
         }
-  
+        
         .th-cred, .th-deb {
           border-left: 1px dotted var(--border-color);
-          text-align: right;
+          text-align: center;
+          padding-left: 5rem;
         }
       }
   
+
+      
       tbody {
         tr {
           //border-bottom: 1px solid var(--border-color);
           background-color: var(--panel-color);
   
           td {
-            text-align: left;
-            font-weight: 500;
-            padding: 16px 16px;
+            padding: 16px 46px;
+            
           }
   
           .td-deb, .td-cred {
             text-align: right;
+            
+            
           }
         }
   

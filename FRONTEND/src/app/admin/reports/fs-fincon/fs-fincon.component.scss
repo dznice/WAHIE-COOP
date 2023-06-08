@@ -164,9 +164,12 @@
   .main-section{
     padding-top: 2rem;
     margin: auto;
+    margin-bottom: 3rem;
     width: 70%;
     border: 1px solid var(--black);
     border-top: none;
+    border-bottom:  2px solid var(--black) ;
+    
     
   }
 

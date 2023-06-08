@@ -1,4 +1,35 @@
 <main>
+
+  <div class="sticky-div">
+    <span class="report-name">Trial Balance</span>
+    <br/>
+    <div class="dates"> 
+        <!-- DATE Start -->
+          <div class="filter-field2">
+           
+              <input class="form-control" type="date"  name="sDate">
+          </div>
+          <label class="to"> to </label>
+          <!-- DATE End -->
+          <div class="filter-field3">
+              
+              <input class="form-control" type="date"  name="eDate">
+          </div>
+    </div>
+</div>
+  <br/>
+  <br/>
+
+  <div class="print">
+    <div class="save"> Save report as:
+    </div>
+    <div class="PDF"> 
+        <button  class="ti ti-file-text PDF-icon" ></button>
+        <button class="ti ti-file-spreadsheet excel-icon"></button>
+    </div>
+    </div>
+    
+  <section class="main-section"> 
   <header>
     <span class="coop-name">WAH-Cooperative</span>
     <h4 class="report-name">Trial Balance</h4>
@@ -18,42 +49,43 @@
         <tbody>
           <tr *ngFor="let item of assets">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred"></td>
+            <td class="td-cred2"></td>
             <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           </tr>
           <tr *ngFor="let item of otherAssets">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred"></td>
+            <td class="td-cred2"></td>
             <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           </tr>
           <tr *ngFor="let item of nonAssets">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred"></td>
+            <td class="td-cred2"></td>
             <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           </tr>
           <tr *ngFor="let item of liabilities">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             <td class="td-deb"></td>
           </tr>
           <tr *ngFor="let item of nonLiabilities">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             <td class="td-deb"></td>
           </tr>
           <tr *ngFor="let item of equity">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             <td class="td-deb"></td>
           </tr>
           <tr class="tr-total">
-            <td>Total</td>
-            <td class="td-deb">{{ calculateLiabilityandEquityTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-            <td class="td-cred">{{ calculateAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="total">Total</td>
+            <td class="td-deb2">{{ calculateLiabilityandEquityTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="td-cred3">{{ calculateAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
           </tr>
         </tbody>
       </table>
     </div>
+  </section>
   </section>
   
 

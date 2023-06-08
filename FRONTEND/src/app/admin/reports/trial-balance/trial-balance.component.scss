@@ -8,6 +8,145 @@
   size: letter;
 }
 
+.report-name{
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.report-name{
+  color: var(--primary-color);
+}
+
+
+.sticky-div{
+
+  padding: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color:rgb(243, 241, 241);
+  height: 120px;
+  width: auto;
+  flex-wrap: wrap;
+  color:#fff9f9;
+  padding-left: 2rem;
+  margin:-20px -35px 0px -35px ;
+ 
+.dates{
+display: flex;
+
+  .to{
+    color: #000000;
+    padding: 1rem 1rem;
+    
+  }
+
+    
+  .filter-field2 {
+    display: flex;
+    width: calc(18% - 10px);
+    flex-direction: column;
+    margin: 8px 0;
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-grey);
+    }
+
+    input,
+    select {
+      outline: none;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      border-radius: 0.45rem;
+      border: 1px solid #aaa;
+      padding: 0 10px;
+      height: 30px;
+      margin: 8px 0 0;
+    }
+  }
+  .filter-field3 {
+    display: flex;
+    width: calc(18% - 10px);
+    flex-direction: column;
+    margin: 8px 0;
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dark-grey);
+    }
+
+    input,
+    select {
+      padding-right: 2rem;
+      outline: none;
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      border-radius: 0.45rem;
+      border: 1px solid #aaa;
+      padding: 0 10px;
+      height: 30px;
+      margin: 8px 0 0;
+    }
+  }
+}
+}
+
+.head{
+  text-align: left;
+} 
+  .print{
+    margin: auto;
+    width: 70%;
+    border: 1px solid var(--black);
+    display: flex;
+    flex-direction: row;
+
+    .save{
+      width: 70%;
+      height: 5vh;
+      padding-left: 1rem;
+      padding-top: .5rem
+    }
+      
+    .PDF{
+      display: flex;
+      padding-left: 55%;
+      margin-top: .1rem;
+      width: 70%;
+    }
+
+    .PDF-icon{
+      padding-top: .2rem;
+      font-size: 28px;
+      background: none;
+      padding-right: .4rem;
+    }
+    .excel-icon{
+      padding-top: .2rem;
+      font-size: 28px;
+      background: none; 
+    }
+  }
+
+
+.main-section{
+  padding-top: 2rem;
+  margin: auto;
+  width: 70%;
+  border: 1px solid var(--black);
+  border-top: none;
+  border-bottom:  2px solid var(--black) ;
+  
+  
+}
+
 header {
   text-align: center;
 
@@ -17,11 +156,15 @@ header {
     margin-bottom: 1rem;
   }
 }
-
+.td-cred2{
+  border-left: 1px dotted var(--border-color);
+ text-align: right;
+  
+}
 /* Table */
 .table-container {
   margin: auto;
-  width: 100%;
+  width: 97%;
 
   .table-content {
     width: 100%;
@@ -32,7 +175,6 @@ header {
 
     thead {
       th {
-        position: sticky;
         text-align: left;
         font-weight: 400;
         padding: 12px 16px;
@@ -42,23 +184,37 @@ header {
 
       .th-cred, .th-deb {
         border-left: 1px dotted var(--border-color);
-        text-align: right;
+        padding-left: 13rem;
       }
+
+
+    }
+    .total {
+      text-align: left;
+      font-weight: 900;
+      font-size: larger;
+      padding: 16px 16px;
     }
 
+    .td-deb2, .td-cred3, .td-deb {
+      text-align: right;
+      
+      
+    }
     tbody {
       tr {
         //border-bottom: 1px solid var(--border-color);
         background-color: var(--panel-color);
 
+
+
         td {
-          text-align: left;
-          font-weight: 500;
-          padding: 16px 16px;
+          padding: 16px 36px;
         }
 
         .td-deb, .td-cred {
           text-align: right;
+
         }
       }
 
@@ -68,7 +224,6 @@ header {
         border-right: none;
         border-top: none;
         border-color: var(--black);
-
         border-top: 1px double var(--border-color);
         //border-bottom: 2px double var(--black);
 
