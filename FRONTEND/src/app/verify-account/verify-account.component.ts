@@ -54,23 +54,24 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
 
   email = sessionStorage.getItem('email');
 
-  getOtp(data: any) {
-    if(this.otpForm.invalid){
-      this.toast.error({detail:'Error',summary:'Invalid code, no code input',duration:2000, sticky:false,position:'tr'}); 
+  // getOtp(data: any) {
+  //   if(this.otpForm.invalid){
+  //     this.toast.error({detail:'Error',summary:'Invalid code, no code input',duration:2000, sticky:false,position:'tr'}); 
 
     
     
-  }
-  else{
-    console.log(data);
+  // }
+  // else{
+  //   console.log(data);
+    
+  //   this.updateData();
+  // }
+
+  // }
+
+  updateData(data: any) {
     this.id = localStorage.getItem('userData'),
     this.otp = (<HTMLInputElement>document.getElementById("otp")).value;
-    this.updateData();
-  }
-
-  }
-
-  updateData() {
     let body = {
       'code': this.otp,
       'id' : this.id
@@ -92,12 +93,12 @@ export class VerifyAccountComponent implements OnInit, OnDestroy {
         this.route.navigateByUrl('login');
         this.toast.success({detail:'Success',summary:'Email has been verified',duration:2000, sticky:false,position:'tr'}); 
       }
-      
+
       },
       error => {
         this.toast.error({detail:'Error',summary:'Invalid code, no code input',duration:2000, sticky:false,position:'tr'}); 
       }
-    )
+    );
   }
 
   resendOtp() {
