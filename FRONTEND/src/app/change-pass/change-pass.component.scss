@@ -17,7 +17,7 @@ main {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #3f0f88;
+  background-color: var(--primary-color);
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -29,7 +29,7 @@ main {
   width: 100%;
   max-width: 1000px;
   height: 600px;
-  background: white;
+  background: var(--white);
   border-radius: 30px;
   box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.5);
 }
@@ -57,7 +57,7 @@ main {
   width: 55%;
   left: 45%;
   top: 0;
-  background-color: #0099ff;
+  background-color: var(--secondary-color);
   border-radius: 25px;
 }
 
@@ -84,7 +84,7 @@ form {
 }
 
 .wah-logo p {
-  color: #3f0f88;
+  color: var(--primary-color);
   font-size: 0.9rem;
   line-height: 100%;
   letter-spacing: 0.2px;
@@ -99,12 +99,12 @@ form {
 .heading h1 {
   font-size: 2rem;
   font-weight: 1000;
-  color: #151111;
+  color: var(--black);
   letter-spacing: -0.5px;
 }
 
 .heading p {
-  color: #707070;
+  color: var(--grey-4);
   font-size: 0.96rem;
 }
 
@@ -118,7 +118,7 @@ label {
   display: flex;
   flex-direction: column;
   font-size: 0.7rem;
-  color: #3f0f88;
+  color: var(--grey-4);
   font-weight: 600;
   margin-bottom: 5px;
 }
@@ -126,8 +126,8 @@ input {
   position: absolute;
   width: 100%;
   height: 100%;
-  outline-color: #3f0f88;
-  border: 2px solid #ccc;
+  outline-color: var(--primary-color);
+  border: 2px solid var(--grey-3);
   border-radius: 0.6rem;
   padding: 20px;
   display: flex;
@@ -145,7 +145,7 @@ input {
   bottom: -50%;
   cursor: pointer;
   font-size: 1.3rem;
-  color: var(--dark-grey-2);
+  color: var(--grey-3);
 }
 
 .eye2 {
@@ -154,15 +154,15 @@ input {
   bottom: -55%;
   cursor: pointer;
   font-size: 1.3rem;
-  color: var(--dark-grey-2);
+  color: var(--grey-3);
 }
 
 .save {
   display: inline-block;
   width: 100%;
   height: 43px;
-  background-color: #3F0F88;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--white);
   border: none;
   cursor: pointer;
   border-radius: 0.6rem;
@@ -173,19 +173,18 @@ input {
 }
 
 .save:hover {
-  background-color: var(--primary-alt);
+  background-color: var(--primary-color-dark);
 }
 
 .account {
-  color: #707070;
+  color: var(--grey-4);
   font-size: 0.9rem;
   text-align: center;
 }
 
 .back {
   display: flex;
-
-  color: #707070;
+  color: var(--grey-4);
   font-size: 0.9rem;
   align-items: center;
   font-weight: 500;
@@ -201,18 +200,18 @@ input {
 }
 
 .back:hover{
-  color: var(--dark-grey-2);
+  color: var(--grey-3);
 }
 
 span {
   height: 20px;
   width: 20px;
-  background-color: #bbb;
+  background-color: var(--grey-3);
   border-radius: 50%;
   display: inline-block;
-  color: #fff;
+  color: var(--white);
   font-size: 10px;
-  padding-top: 0.2rem;
+  padding-top: 0.1rem;
 }
 
 .dot1 {
@@ -223,9 +222,8 @@ span {
 }
 .dot3 {
   margin-right: 5%;
-  background-color: #3f0f88;
-  color: #fff;
-  border: #3f0f88;
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 .dot4 {
   margin-right: 5%;

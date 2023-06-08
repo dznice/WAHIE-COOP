@@ -6,14 +6,14 @@
   --text-color-1: var(--white);
   --text-color-2: var(--black);
   --text-color-3: var(--grey-4);
-  --subtext-color: var(--grey-3);
+  --subtext-color: var(--grey-4);
   --cancel-text: var(--grey-4);
   --border-color: var(--grey-3);
   --nav-border: var(--grey-2);
   --dropdown-bg: var(--white);
   --modal-bg: var(--white);
   --modal-overlay: #121314bf;
-
+  --table-header: var(--grey-2);
 
   /* ===== Base ===== */
   --white: #ffffff;
@@ -63,13 +63,14 @@
   --text-color-1: var(--black);
   --text-color-2: var(--white);
   --text-color-3: var(--white);
-  --subtext-color: var(--grey-3);
+  --subtext-color: var(--grey-1);
   --border-color: var(--grey-3);
   --nav-border: var(--grey-3);
   --dropdown-bg: var(--grey-3);
   --modal-bg: var(--black);
   --modal-overlay: #15181fbf;
   --cancel-text: var(--white);
+  --table-header: var(--grey-3);
 
   /* ===== Base ===== */
   --white: #f2f3f5;
@@ -84,7 +85,7 @@
   --grey-1: #676b7a;
   --grey-2: #4e5261;
   --grey-3: #2b2e38;
-  --grey-4: #15181f;
+  --grey-4: #212121;
 
   /* ===== Accents ===== */
   --blue: #0077c5;
