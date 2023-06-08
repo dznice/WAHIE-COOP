@@ -45,4 +45,3 @@ php artisan db:seed --class=PhilippineRegionsTableSeeder
 php artisan db:seed --class=PhilippineProvincesTableSeeder
 php artisan db:seed --class=PhilippineCitiesTableSeeder
 php artisan db:seed --class=PhilippineBarangaysTableSeeder
-

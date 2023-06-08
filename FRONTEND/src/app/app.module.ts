@@ -24,7 +24,6 @@ import { CheckEmailComponent } from './check-email/check-email.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
 import { PassDoneComponent } from './pass-done/pass-done.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
-import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
 import { FormsModule, NgSelectOption, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StrengthMeterModule } from "ngx-strength-meter";
@@ -41,7 +40,6 @@ import { MemberHomeComponent } from './member/member-home/member-home.component'
 import { MemberBodyComponent } from './member/member-body/member-body.component';
 import { MemberSidenavComponent } from './member/member-sidenav/member-sidenav.component';
 import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
-import { AdminPassdoneComponent } from './admin-passdone/admin-passdone.component';
 import { NullPageComponent } from './null-page/null-page.component';
 import { ManageMembersComponent } from './admin/manage-members/manage-members.component';
 
@@ -67,15 +65,12 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader';
 import { ExportAsModule } from 'ngx-export-as';
-import { LedgerComponent } from './admin/reports/ledger/ledger.component';
 import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generate-ledger.component';
 import { TrialBalanceComponent } from './admin/reports/trial-balance/trial-balance.component';
 import { SlAccountsComponent } from './admin/reports/sl-accounts/sl-accounts.component';
 import { SlMembersComponent } from './admin/reports/sl-members/sl-members.component';
 import { FsFinconComponent } from './admin/reports/fs-fincon/fs-fincon.component';
 import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
-import { PrintCrjComponent } from './admin/reports/print-crj/print-crj.component';
-import { PrintCdjComponent } from './admin/reports/print-cdj/print-cdj.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +97,6 @@ import { PrintCdjComponent } from './admin/reports/print-cdj/print-cdj.component
     ChangePassComponent,
     PassDoneComponent,
     SadminChpassComponent,
-    SadminPassdoneComponent,
     AdminBodyComponent,
     SadminBodyComponent,
     NotVerifiedComponent,
@@ -124,22 +118,18 @@ import { PrintCdjComponent } from './admin/reports/print-cdj/print-cdj.component
     MemberBodyComponent,
     MemberSidenavComponent,
     AdminChpassComponent,
-    AdminPassdoneComponent,
     FilterMemHomeDatePipe,
     FilterPaymentDatePipe,
     NullPageComponent,
     ManageMembersComponent,
     FilterMemberPipe,
     JournalTransacComponent,
-    LedgerComponent,
     GenerateLedgerComponent,
     TrialBalanceComponent,
     SlAccountsComponent,
     SlMembersComponent,
     FsFinconComponent,
     FsOpComponent,
-    PrintCrjComponent,
-    PrintCdjComponent,
   ],
   imports: [
     BrowserModule,

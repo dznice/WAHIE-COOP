@@ -12,7 +12,6 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AccountingComponent } from './admin/accounting/accounting.component';
 import { InventoryComponent } from './admin/inventory/inventory.component';
 import { SadminChpassComponent } from './sadmin-chpass/sadmin-chpass.component';
-import { SadminPassdoneComponent } from './sadmin-passdone/sadmin-passdone.component';
 import { SadminHomeComponent } from './super-admin/sadmin-home/sadmin-home.component';
 import { ActivityLogsComponent } from './super-admin/activity-logs/activity-logs.component';
 import { SadminSettingsComponent } from './super-admin/sadmin-settings/sadmin-settings.component';
@@ -39,16 +38,12 @@ import { MemberBodyComponent } from './member/member-body/member-body.component'
 import { MemberOnlyService } from './services/member-only.service';
 import { NullPageComponent } from './null-page/null-page.component';
 import { ManageMembersComponent } from './admin/manage-members/manage-members.component';
-import { AdminPassdoneComponent } from './admin-passdone/admin-passdone.component';
 import { AdminChpassComponent } from './admin-chpass/admin-chpass.component';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 import { ReportsComponent } from './admin/reports/reports.component';
-import { LedgerComponent } from './admin/reports/ledger/ledger.component';
 import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generate-ledger.component';
 import { FsFinconComponent } from './admin/reports/fs-fincon/fs-fincon.component';
 import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
-import { PrintCrjComponent } from './admin/reports/print-crj/print-crj.component';
-import { PrintCdjComponent } from './admin/reports/print-cdj/print-cdj.component';
 import { SlAccountsComponent } from './admin/reports/sl-accounts/sl-accounts.component';
 import { SlMembersComponent } from './admin/reports/sl-members/sl-members.component';
 import { TrialBalanceComponent } from './admin/reports/trial-balance/trial-balance.component';
@@ -100,10 +95,6 @@ const routes: Routes = [
     component: SadminChpassComponent,
   },
   {
-    path: 'sadmin-passdone',
-    component: SadminPassdoneComponent,
-  },
-  {
     path: 'not-verified',
     component: NotVerifiedComponent,
   },
@@ -124,10 +115,6 @@ const routes: Routes = [
     component: AdminChpassComponent,
   },
   {
-    path: 'admin-passdone',
-    component: AdminPassdoneComponent,
-  },
-  {
     path: 'admin',
     component: AdminComponent,
     canActivate : [LoggedInService , AdminOnlyService],
@@ -144,12 +131,9 @@ const routes: Routes = [
       {path: 'accounting/member-info/:memberId', component: MemberInfoComponent},
       {path: 'manage-members', component: ManageMembersComponent},
       {path: 'reports', component: ReportsComponent},
-      {path: 'reports/ledger', component: LedgerComponent},
       {path: 'reports/generate-ledger', component: GenerateLedgerComponent},
       {path: 'reports/fs-fincon', component: FsFinconComponent},
       {path: 'reports/fs-op', component: FsOpComponent},
-      {path: 'reports/print-crj', component: PrintCrjComponent},
-      {path: 'reports/print-cdj', component: PrintCdjComponent},
       {path: 'reports/sl-accounts', component: SlAccountsComponent},
       {path: 'reports/sl-members', component: SlMembersComponent},
       {path: 'reports/trial-balance', component: TrialBalanceComponent},
