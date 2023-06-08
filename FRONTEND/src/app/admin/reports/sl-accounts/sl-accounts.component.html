@@ -1,8 +1,13 @@
 <main>
   <header>
     <span class="coop-name">WAH-Cooperative</span>
-    <h4 class="report-name">Subsidiary Ledger for accId:{{formData.account}} memID: {{formData.member}} </h4>
-    <span class="date-today">As of "DateToday"</span>
+    <h4 class="report-name" *ngIf="formData.account!=''">Subsidiary Ledger for {{accInfos.journal_name}}</h4>
+    <h4 class="report-name" *ngIf="formData.member!='' && formData.account==''">Subsidiary Ledger for {{memInfos.first_name}} {{memInfos.middle_name}} {{memInfos.last_name}}</h4>
+    <h4 class="report-name" *ngIf="formData.member=='' && formData.account==''">Subsidiary Ledger for All Accounts</h4>
+    <span class="date-today">As of {{ maxDate | date:'mediumDate' }}</span>
+    <h5 class="date-today" *ngIf="formData.startDate!='' && formData.endDate!=''">This report based from {{formData.startDate | date:'mediumDate'}} to {{formData.endDate | date:'mediumDate'}}</h5>
+    <h5 class="date-today" *ngIf="formData.startDate!='' && formData.endDate==''">This report based from {{formData.startDate | date:'mediumDate'}} to {{formData.endDate | date:'mediumDate'}}</h5>
+    <!-- <h5 class="date-today">This report based from {{formData.startDate | date:'mediumDate'}} to {{formData.endDate | date:'mediumDate'}}</h5> -->
   </header>
 
   <section class="tabler-section">

@@ -1,5 +1,5 @@
 <main>
-  <div class="dotted"></div>
+  <!-- <div class="dotted"></div><div class="dotted"></div> -->
   <h1 class="title">Payment</h1>
   <form *ngIf="paymentForm" [formGroup]="paymentForm" (ngSubmit)="savePayment()">
     <div class="container">
@@ -88,8 +88,8 @@
                   <input type="number" formControlName="credit" (change)="autoZero(i)" />
                 </td>
                 
-                <td>
-                  <a (click)="removeRow(i)" class="delbut">
+                <td (click)="removeRow(i)" >
+                  <a class="delbut">
                     <i class="ti ti-square-rounded-x"></i>
                   </a>
                 </td>
@@ -168,10 +168,10 @@
             </td>
             <!-- <td class="td-center">
               <span>{{item.description}}</span>
-            </td> -->
-            <!-- <td class="td-center">
-              <span>{{item.due_date}}</span>
-            </td> -->
+            </td>
+            <td class="td-center">
+              <span>{{item.due_date | date:'mediumDate'}}</span>
+            </td>-->
           </tr>
         </tbody>
       </table>

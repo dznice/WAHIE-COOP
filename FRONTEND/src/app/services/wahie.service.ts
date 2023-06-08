@@ -18,6 +18,10 @@ export class WahieService {
     return this.http.get<any[]>(this.url+'/api/journals');
   }
 
+  public getLibJournalInfo(accId:any): Observable<any[]>{
+    return this.http.get<any[]>(`${this.url}/api/journal/${accId}`);
+  }
+
   httpOptions={
     headers : new HttpHeaders({
       'Content-Type' : 'application/json'

@@ -11,8 +11,8 @@
                 {{ member.last_name }}, {{ member.first_name }}{{ member.middle_name }} 
             </ng-option>
         </ng-select>
-        <input type="date" formControlName="startDate">
-        <input type="date" formControlName="endDate">
+        <input type="date" formControlName="startDate" max="{{ maxDate }}" (change)="denyDate()">
+        <input type="date" formControlName="endDate" max="{{ maxDate }}" (change)="denyDate()">
         <button type="submit" >Generate</button>
     </form>
     <app-sl-accounts *ngIf="showReport" [formData]="submittedFormData"></app-sl-accounts>
