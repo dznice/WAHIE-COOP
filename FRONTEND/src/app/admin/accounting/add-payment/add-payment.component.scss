@@ -156,6 +156,7 @@ padding: auto;
   
   .ng-select.trial ::ng-deep .ng-dropdown-panel {
     width: 100%;
+    position: absolute;
     //max-width: 300px;
     //margin-left: 10px;
   }
@@ -307,7 +308,6 @@ table{
     // border-color: #aaa;
     width: 100%;
     font-size: 0.9rem;
-    overflow: hidden;
     border-collapse: collapse;
     border-radius: 0.625rem;
     border-style: hidden;
