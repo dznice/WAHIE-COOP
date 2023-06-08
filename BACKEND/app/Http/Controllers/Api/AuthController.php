@@ -233,13 +233,17 @@ class AuthController extends Controller {
 
     public function submitOtp(Request $request, $id){
                 $users = User::find($id);
+                $returnData = array(
+                    'status' => 'error',
+                    'message' => 'Wrong credentials!'
+                );
                if($users->code==$request->code){
                 $users->code = 0;
                 $users->save();
                 return response()->json($users);
                 // return $this->respondWithToken(true);
                }
-
+               return  response()->json($returnData, 401);
             }
 
     public function resendOtp($id){

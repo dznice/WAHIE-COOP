@@ -72,6 +72,14 @@ select {
   color: var(--primary-color);
 }
 
+thead th { position: sticky; top: 0; }
+
+.journallabel2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--primary-color);
+    
+}
 .headinput {
   outline: none;
   font-size: 14px;
