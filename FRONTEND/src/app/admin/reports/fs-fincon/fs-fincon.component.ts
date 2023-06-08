@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 @Component({
   selector: 'app-fs-fincon',
@@ -32,13 +33,48 @@ export class FsFinconComponent implements OnInit {
   nl : any[];
   dg : any[];
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient, private exportAsService: ExportAsService ) {}
     
   ngOnInit(): void {
 
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
+  }
+
+  exportAsPdf: ExportAsConfig = {
+    type: 'pdf',
+    elementIdOrContent: 'fsFincon',
+    options: {
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 3},
+      margin:  [5, 2, 5, 2],
+      fontSize: 12,
+      // pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+      jsPDF: {
+        orientation: 'portrait',
+        format: 'letter',
+        defaultFontSize: 12,
+        //precision: 16
+      }
+    }
+  }
+
+  exportAsExcel: ExportAsConfig = {
+    type: 'xlsx',
+    elementIdOrContent: 'fsFincon'
+  }
+
+  exportPDF() {
+    this.exportAsService.save(this.exportAsPdf, 'FS-Financial-Condition').subscribe(() => {
+      // save started
+    });
+  }
+
+  exportEXCEL() {
+    this.exportAsService.save(this.exportAsExcel, 'FS-Financial-Condition').subscribe(() => {
+      // save started
+    });
   }
 
   showSLedger(): void {

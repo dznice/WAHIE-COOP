@@ -12,12 +12,12 @@
     <div class="save"> Save report as:
     </div>
     <div class="PDF"> 
-        <button  class="ti ti-file-text PDF-icon" ></button>
-        <button class="ti ti-file-spreadsheet excel-icon"></button>
+        <button (click)="exportPDF()" class="ti ti-file-text PDF-icon" ></button>
+        <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet excel-icon"></button>
     </div>
 </div>
 
-<section class="main-section">
+<section class="main-section" id="fsOp">
     <header>
       <span class="coop-name">WAH-Cooperative</span>
       <h4 class="report-name">Statement of Operations</h4>

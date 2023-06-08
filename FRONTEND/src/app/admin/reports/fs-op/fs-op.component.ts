@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 
 @Component({
   selector: 'app-fs-op',
@@ -16,13 +16,48 @@ export class FsOpComponent implements OnInit {
   pexpense: any[];
   item: any[];
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient, private exportAsService: ExportAsService) {}
     
   ngOnInit(): void {
 
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
+  }
+
+  exportAsPdf: ExportAsConfig = {
+    type: 'pdf',
+    elementIdOrContent: 'fsOp',
+    options: {
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas:  { scale: 3},
+      margin:  [5, 2, 5, 2],
+      fontSize: 12,
+      // pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+      jsPDF: {
+        orientation: 'portrait',
+        format: 'letter',
+        defaultFontSize: 12,
+        //precision: 16
+      }
+    }
+  }
+
+  exportAsExcel: ExportAsConfig = {
+    type: 'xlsx',
+    elementIdOrContent: 'fsOp'
+  }
+
+  exportPDF() {
+    this.exportAsService.save(this.exportAsPdf, 'FS-Operations').subscribe(() => {
+      // save started
+    });
+  }
+
+  exportEXCEL() {
+    this.exportAsService.save(this.exportAsExcel, 'FS-Operations').subscribe(() => {
+      // save started
+    });
   }
 
   showSLedger(): void {
