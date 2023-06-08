@@ -3,7 +3,7 @@ main {
   animation: transitionIn 0.75s;
 
   .title {
-    color: var(--primary-color);
+    color: var(--title-color);
   }
 }
 
@@ -57,13 +57,13 @@ section.info-cards {
         font-size: 60px;
         font-weight: 600;
         margin-top: -1px;
-        color: var(--primary-color);
+        color: var(--title-color);
       }
 
       .card-topic {
         font-size: 20px;
         font-weight: 500;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
       }
     }
   }
