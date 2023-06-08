@@ -29,6 +29,11 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegMembersComponent implements OnInit, OnDestroy {
+
+  emails="";
+  passwords="";
+  cpasswords="";
+
   state = 'info1';
   toggle() {
     this.state = this.state == 'info1' ? 'info2' : 'info3';
