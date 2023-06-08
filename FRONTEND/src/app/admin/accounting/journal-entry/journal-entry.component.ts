@@ -128,8 +128,8 @@ export class JournalEntryComponent implements OnInit {
     entries: this.builder.array([this.Generaterow(), this.Generaterow()]),
     userId: this.builder.control(this.useid),
     memberNo: this.builder.control(null),
-    totaldebit: this.builder.control({ value: 0, disabled: true }),
-    totalcredit: this.builder.control({ value: 0, disabled: true }),
+    totaldebit: this.builder.control(0),
+    totalcredit: this.builder.control(0),
   });
 
   due = new Date();

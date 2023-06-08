@@ -83,38 +83,45 @@ export class GenerateLedgerComponent {
   }
 
 
-  showSLedger(mem:any, acc:any, sd:any, ed:any){
-    return this.wahieService.sLegder(mem, acc, sd, ed).subscribe(ledger=>{
-      this.ledgers = ledger;
-      this.tableData = this.ledgers;
-      console.log(this.tableData);
-    });
-  }
+  // showSLedger(mem:any, acc:any, sd:any, ed:any){
+  //   return this.wahieService.sLegder(mem, acc, sd, ed).subscribe(ledger=>{
+  //     this.ledgers = ledger;
+  //     this.tableData = this.ledgers;
+  //     console.log(this.tableData);
+  //   });
+  // }
 
-  showPastSLedger(mem:any, acc:any, sd:any, ed:any){
-    return this.wahieService.pastLegder(mem, acc, sd, ed).subscribe(pledger=>{
-      this.pledgers = pledger;
-      this.PastslData = this.pledgers;
-      console.log(this.pledgers);
-    });
-  }
+  // showPastSLedger(mem:any, acc:any, sd:any, ed:any){
+  //   return this.wahieService.pastLegder(mem, acc, sd, ed).subscribe(pledger=>{
+  //     this.pledgers = pledger;
+  //     this.PastslData = this.pledgers;
+  //     console.log(this.pledgers);
+  //   });
+  // }
 
   submittedFormData: any;
   trialData: any;
   slData:any[];
   PastslData:any[];
-  onSubmit(formData: any) {
-    let acc = this.ledgerForm.get('account')?.value;
-    let mem = this.ledgerForm.get('member')?.value;
-    let sd = this.ledgerForm.get('startDate')?.value;
-    let ed = this.ledgerForm.get('endDate')?.value;
-    this.showSLedger(mem, acc, sd, ed );
-    this.showPastSLedger(mem, acc, sd, ed );
-    this.PastslData = this.PastslData;
-    this.slData = this.tableData;
-    console.log(this.PastslData);
-    console.log(this.slData);
-    this.submittedFormData = formData;
+  onSubmit(){
+    //let acc = this.ledgerForm.get('account')?.value;
+    //let mem = this.ledgerForm.get('member')?.value;
+    //let sd = this.ledgerForm.get('startDate')?.value;
+    //let ed = this.ledgerForm.get('endDate')?.value;
+    //this.showSLedger(mem, acc, sd, ed );
+    //this.showPastSLedger(mem, acc, sd, ed );
+    //this.PastslData = this.PastslData;
+    //this.slData = this.tableData;
+    //console.log(this.PastslData);
+    //console.log(this.slData);
+    if(this.ledgerForm.get('account')?.value==null){
+      this.ledgerForm.get("account")?.setValue('');
+    }
+    if(this.ledgerForm.get('member')?.value==null){
+      this.ledgerForm.get("member")?.setValue('');
+    }
+    console.log(this.ledgerForm.getRawValue());
+    this.submittedFormData = this.ledgerForm.getRawValue();
     this.showReport = true;
     this.trialData = this.showReport;
   }

@@ -92,6 +92,15 @@
                 </td>
               </tr>
             </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>TOTAL</td>
+                <td>{{ total_debit }}</td>
+                <td>{{ total_credit }}</td>
+                <td></td>
+              </tr>
+            </tfoot>
           </table>
           <div class="add-row" *ngIf="selectedTNo > 0">
             <button class="add" (click)="addRow()" type="button">

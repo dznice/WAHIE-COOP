@@ -1,5 +1,5 @@
 <main>
-    <form [formGroup]="ledgerForm" (ngSubmit)="onSubmit(ledgerForm.value)">
+    <form [formGroup]="ledgerForm" (ngSubmit)="onSubmit()">
         <ng-select formControlName="account">
             <ng-option *ngFor="let libJournal of libJournals" [value]="libJournal.id">
                 {{ libJournal.journal_number }}
@@ -15,6 +15,6 @@
         <input type="date" formControlName="endDate">
         <button type="submit" >Generate</button>
     </form>
-    <app-sl-accounts *ngIf="showReport" [formData]="submittedFormData" [trial]="trialData" [slData]="tableData" [PastslData]="tableData"></app-sl-accounts>
+    <app-sl-accounts *ngIf="showReport" [formData]="submittedFormData"></app-sl-accounts>
     <!-- <app-sl-members *ngIf="showReport" [formData]="submittedFormData"></app-sl-members> -->
 </main>

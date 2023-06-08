@@ -36,6 +36,8 @@ export class AddPaymentComponent implements OnInit {
   public recents: any;
   // paymentForm: FormGroup;
 
+  total_debit: any;
+  total_credit: any;
   selectedTNo: any;
   selectedMethod: any;
   paymentRow !: FormArray<any>;
@@ -89,6 +91,7 @@ export class AddPaymentComponent implements OnInit {
     referenceNo:this.builder.control(''),
     depositTo:this.builder.control('',Validators.required),
     transactionNo:this.builder.control('',Validators.required),
+    paysID:this.builder.control(''),
     // invoiceNo:this.builder.control(''),
     // startDate:this.builder.control(''),
     // endDate:this.builder.control(''),
@@ -97,7 +100,8 @@ export class AddPaymentComponent implements OnInit {
       this.Generaterow(),
       this.Generaterow(),
       this.Generaterow()]),
-
+    totaldebit:this.builder.control(0),
+    totalcredit:this.builder.control(0),
   });
 
   personalInfo(index:any){
@@ -214,7 +218,10 @@ export class AddPaymentComponent implements OnInit {
   // }
 
   savePayment(){
-    if(this.paymentForm.valid){
+    let total_debit = this.paymentForm.get('totaldebit')?.value;
+    let total_credit = this.paymentForm.get('totalcredit')?.value;
+    console.log(total_debit == total_credit);
+    if(this.paymentForm.valid && total_debit == total_credit){
       this.wahieService.savePayment(this.paymentForm.getRawValue()).subscribe(res=>{
         let result:any;
         result=res;
@@ -272,12 +279,6 @@ export class AddPaymentComponent implements OnInit {
     this.amount_summary();
 }
 
-clearValue(index: any) {
-  this.paymentRow = this.paymentForm.get("payables") as FormArray;
-  this.amount = this.paymentRow.at(index) as FormGroup;
-  this.amount.get("payment")?.setValue(null);
-}
-
   amount_summary(){
     let array=this.paymentForm.getRawValue().payables;
     let apply = 0;
@@ -289,13 +290,6 @@ clearValue(index: any) {
     //this.paymentForm.get("amountApply")?.setValue(apply);
     //this.paymentForm.get("amountReceived")?.setValue(apply);
     //this.paymentForm.get("totalcredit")?.setValue(total_credit);
-  }
-
-  clearMethod(){
-    let array=this.paymentForm.getRawValue().payables;
-    array.forEach((x:any)=>{
-      this.clearValue(x);
-    });
   }
 
   denyDate(){
@@ -359,7 +353,27 @@ clearValue(index: any) {
       this.amount.get('debit')?.setValue(0);
     }
 
-    //this.balance_summary();
+    this.balance_summary();
+  }
+
+  balance_summary() {
+    let array = this.paymentForm.getRawValue().payables;
+    this.total_debit = 0;
+    this.total_credit = 0;
+
+    array.forEach((x: any) => {
+      if (x.debit == '' && x.credit == '') {
+        x.debit = 0;
+        x.credit = 0;
+        this.total_debit = this.total_debit + x.debit;
+        this.total_credit = this.total_credit + x.credit;
+      } else {
+        this.total_debit = this.total_debit + x.debit;
+        this.total_credit = this.total_credit + x.credit;
+      }
+    });
+    this.paymentForm.get('totaldebit')?.setValue(this.total_debit);
+    this.paymentForm.get('totalcredit')?.setValue(this.total_credit);
   }
 
   public log ={
