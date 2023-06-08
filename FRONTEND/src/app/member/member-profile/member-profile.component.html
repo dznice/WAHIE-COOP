@@ -20,9 +20,26 @@
         </label>
         <div class="slider"></div>
       </div>
-      
+    
     <div class="text-content">
       <div class="home text">
+
+        <div class="top-content">
+          <table>
+            <div class="row">
+              <tr>
+                <label>Full Name</label>
+                <td class="fieldsdata1" id="fieldsdataRow"></td>
+              </tr>
+              <tr>
+                <label>Email Address</label>
+                <td class="fieldsdata1" id="fieldsdataRow"></td>
+              </tr>
+            </div>
+          </table>
+        </div>
+
+        <div class="first-tab">
         <div class="fields">
           <span>Additional Information</span>
           <table>
@@ -93,8 +110,10 @@
           </table>
         </div>
       </div>
+      </div>
 
       <div class="blog text">
+        <div class="second-tab">
         <span>Beneficiary</span>
         <div class="fields">
           <table *ngFor="let b of ben">
@@ -111,7 +130,10 @@
           </table>
         </div>
       </div>
+      </div>
+
       <div class="help text">
+        <div class="third-tab">
         <span>Change Password</span>
         <div class="tabs">
           <div class="tab-content">
@@ -146,6 +168,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </main>

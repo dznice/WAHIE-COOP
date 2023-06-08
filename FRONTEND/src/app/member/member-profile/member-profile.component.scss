@@ -16,6 +16,18 @@
 }
 
 .text-content{
+  // background-color: var(--grey-alt);
+  // border-radius: 8px;
+  // padding:20px;
+  // margin-bottom: -1rem;
+
+  // border-radius: 5px;
+  // box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); 
+  // margin-top: 8.5rem;
+}
+
+
+.first-tab{
   background-color: var(--grey-alt);
   border-radius: 8px;
   padding:20px;
@@ -23,6 +35,33 @@
 
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); 
+  margin-top: 8.5rem;
+  margin-left: -1rem;
+}
+
+.second-tab, .third-tab{
+  background-color: var(--grey-alt);
+  border-radius: 8px;
+  padding:20px;
+  margin-bottom: -1rem;
+
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); 
+  // margin-top: 8.5rem;
+  margin-left: -1rem;
+}
+
+.top-content{
+  background-color: var(--grey-alt);
+  border-radius: 8px;
+  padding:20px;
+
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  margin-left: -1rem;
+  margin-top: -8.5rem;
+  width: 147.1vh;
+  position: absolute;
 }
 
 .content .list {
@@ -246,6 +285,18 @@ span{
 }
 
 .fields .fieldsdata1 {
+  border: 1px solid #959494;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  height: 36px;
+  padding: 7px 15px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.top-content .fieldsdata1 {
   border: 1px solid #959494;
   font-size: 14px;
   font-weight: 400;
