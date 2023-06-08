@@ -325,8 +325,21 @@ export class JournalEntryComponent implements OnInit {
           sticky: false,
           position: 'false',
         });
-      });
-    console.log(this.libJournals);
+        this.log.activity = 'Add Journal Account: ' +  this.libJournals.journal_number +" "+ this.libJournals.journal_name;
+        this.activityLog();
+        this.show(2);
+      console.log(this.libJournals);
+      },error =>{
+        this.ngOnInit();
+        this.toast.error({
+          detail: 'Error',
+          summary: 'Account number already taken',
+          sticky: false,
+          position: 'false',
+        }); 
+      }
+      );
+   
   }
 
   back() {
