@@ -32,8 +32,8 @@
           <thead>
             <tr>
               <th>Accounts</th>
-              <th class="th-cred">Last Year Balance</th>
-              <th class="th-deb">This Year Balance</th>
+              <th class="th-cred">Balance last  {{ oneYearAgo | date:'y' }}</th>
+              <th class="th-deb">Balance this {{ maxDate | date:'y' }}</th>
             </tr>
           </thead>
           <tbody>

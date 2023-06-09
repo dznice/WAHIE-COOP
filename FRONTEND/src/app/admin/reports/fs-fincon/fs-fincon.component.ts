@@ -32,13 +32,17 @@ export class FsFinconComponent implements OnInit {
   uns : any[];
   nl : any[];
   dg : any[];
+  maxDate: any;
+  oneYearAgo: any;
 
-  maxDate:any;
 
   constructor(private http:HttpClient, private exportAsService: ExportAsService ) {}
     
   ngOnInit(): void {
+
     this.formatDate();
+    this.oneYearAgo = new Date(this.maxDate);
+    this.oneYearAgo.setFullYear(this.oneYearAgo.getFullYear() - 1);
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
@@ -91,17 +95,6 @@ export class FsFinconComponent implements OnInit {
     );
   }
 
-  private formatDate() {
-    const d = new Date();
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    this.maxDate = [year, month, day].join('-');
-    return this.maxDate;
-  }
-  
   processLedgerData(): void {
     this.assets = [];
     this.otherAssets = [];
@@ -325,6 +318,17 @@ calculateMemberEquity(): number {
   
     return totalBalance;
     console.log(totalBalance)
+  }
+
+  formatDate() {
+    const d = new Date();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-');
+    return this.maxDate;
   }
   
 
