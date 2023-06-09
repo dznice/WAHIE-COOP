@@ -40,11 +40,14 @@ main {
     border-radius: 0.625rem;
     border: 1.6px solid var(--border-color);
     outline-color: var(--dark-grey-2);
-    background-color: transparent;
+    background-color: var(--panel-color);
   }
 
   input::placeholder {
-    color: var(--dark-grey-2);
+    color: var(--text-color-3);
+  }
+  .ti-search{
+    color: var(--text-color-3);
   }
 }
 
@@ -67,7 +70,7 @@ main {
       th {
         position: sticky;
         background-color: var(--primary-color);
-        color: var(--panel-color);
+        color: var(--white);
         text-align: left;
         font-weight: bold;
         padding: 12px 16px;
@@ -80,6 +83,7 @@ main {
       tr {
         border-bottom: 1px solid var(--border-color);
         background-color: var(--panel-color);
+        color: var(--text-color-2);
 
         td {
           text-align: left;

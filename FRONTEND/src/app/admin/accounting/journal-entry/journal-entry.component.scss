@@ -11,7 +11,7 @@ main {
   animation: transitionIn 0.75s;
 
   .title {
-    color: var(--primary-color);
+    color: var(--title-color);
     margin-bottom: 10px;
   }
 }
@@ -30,7 +30,7 @@ label {
   margin-left: 4px;
   font-size: 16px;
   font-weight: 500;
-  color: var(--primary-color);
+  color: var(--text-color-3);
 }
 
 .tablejournal {
@@ -58,27 +58,39 @@ select {
   font-weight: 400;
   color: #333;
   border-radius: 5px;
-  border: 1px solid #aaa;
   padding: 0 15px;
   height: 36px;
   margin: 2px 0;
   display: flex;
   width: 100%;
+  border: 1.6px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
+
 }
 
 .journallabel {
   font-size: 16px;
   font-weight: 500;
-  color: var(--primary-color);
+  color: var(--title-color);
 }
 
-thead th { position: sticky; top: 0; }
+thead th {
+  position: sticky;
+  top: 0;
+}
+
 
 .journallabel2 {
   font-size: 16px;
   font-weight: 500;
-  color: var(--primary-color);
-    
+  color: var(--title-color);
+}
+.journallabel22 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--title-color);
+  text-align: left;
 }
 .headinput {
   outline: none;
@@ -89,7 +101,10 @@ thead th { position: sticky; top: 0; }
   border: 1px solid #aaa;
   padding: 0 14px;
   height: 34px;
-  margin: 0px 4px;
+  margin: 2px 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-3);
 }
 
 /* buttons */
@@ -127,7 +142,7 @@ thead th { position: sticky; top: 0; }
 }
 
 .buttons {
-  background-color: var(--panel-color);
+  background-color: var(--bg-color);
   display: flex;
   justify-content: space-between;
 
@@ -153,6 +168,10 @@ thead th { position: sticky; top: 0; }
   .back:hover {
     background-color: var(--dark-grey-2);
   }
+}
+
+.total{
+  color: var(--text-color-2);
 }
 
 .totals {
@@ -196,18 +215,27 @@ thead th { position: sticky; top: 0; }
   height: 36px;
   width: 100%;
   min-width: 300px;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
 }
 
 .ng-select.try ::ng-deep .ng-control {
   min-height: 0px;
   border: 1px solid #aaa;
   border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
 }
 
 .ng-select.try ::ng-deep .ng-dropdown-panel {
   width: 100%;
   //max-width: 300px;
   //margin-left: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
 }
 
 .ng-select.try {
@@ -430,7 +458,7 @@ thead th { position: sticky; top: 0; }
       .btn-save {
         background-color: var(--primary-color);
         color: var(--panel-color);
-        margin-left: .75rem;
+        margin-left: 0.75rem;
       }
 
       .btn-save:hover {
@@ -448,7 +476,6 @@ thead th { position: sticky; top: 0; }
     }
   }
 }
-
 
 @media (max-height: 1200px) {
   .container {
