@@ -13,7 +13,7 @@
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
-    background-color: #3F0F88;
+    background-color: var(--primary-color);
     padding: 2rem;
     display: flex;
     align-items: center;
@@ -25,7 +25,7 @@
     width: 100%;
     max-width: 1000px;
     height: 600px;
-    background: white;
+    background: var(--white);
     border-radius: 30px;
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.50);
   }
@@ -57,7 +57,7 @@
     width: 55%;
     left: 45%;
     top: 0;
-    background-color: #0099FF;
+    background-color: var(--secondary-color);
     border-radius: 2rem;
   }
   
@@ -84,7 +84,7 @@
   }
   
   .wah-logo p{
-    color: #3F0F88;
+    color: var(--primary-color);
     font-size: .9rem;
     line-height: 100%;
     letter-spacing: 0.2px;
@@ -99,12 +99,12 @@
   .heading h1{
     font-size: 2.5rem;
     font-weight: 1000;
-    color: #151111;
+    color: var(--black);
     letter-spacing: -0.5px;
   }
   
   .heading p{
-    color: #707070;
+    color: var(--grey-4);
     font-size: .96rem;
     display: inline;
   }
@@ -116,15 +116,15 @@
   }
   
   .txt-wrap h5{
-    color: #3F0F88;
+    color: var(--primary-color);
   }
   
   .input-field{
     position: absolute;
     width: 100%;
     height: 100%;
-    outline-color: #3F0F88;
-    border: 2px solid #ccc;
+    outline-color: var(--primary-color);
+    border: 2px solid var(--grey-3);
     border-radius: 0.6rem;
     padding: 20px;
   }
@@ -132,7 +132,7 @@
   .resend-code{
     cursor: pointer;
     font-size: 0.8rem;
-    color: #3F0F88;
+    color: var(--primary-color);
     text-decoration: none;
     padding-left: 14.1rem;
     transform: translate(10%, -850%);
@@ -146,8 +146,8 @@
     display: inline-block;
     width: 100%;
     height: 43px;
-    background-color: #3F0F88;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--white);
     border: none;
     cursor: pointer;
     border-radius: 0.6rem;
@@ -163,7 +163,7 @@
   
   .back{
     display:flex;
-    color: #707070;
+    color: var(--grey-4);
     font-size: 0.9rem;
     align-items: center;
     font-weight: 500;
@@ -187,12 +187,12 @@
   .check-icon{
     content: '\f704';
     font-size: 6rem;
-    color: #3F0F88;
+    color: var(--primary-color);
   }
   
   .otp-modal{
     position: fixed;
-    background: #000000bf;
+    background: var(--black);
     top: 0;
     left: 0;
     right: 0;
@@ -200,7 +200,7 @@
   }
   
   .otp-content{
-    background: #fff;
+    background: var(--white);
     width: 50%;
     margin: 0 auto;
     border-radius: 1rem;
@@ -216,7 +216,7 @@
   
   .otp-header{
     padding: 20px;
-    color: #fff;
+    color: var(--white);
   }
   
   .otp-body h1{
@@ -224,14 +224,14 @@
   }
   
   .otp-body p{
-    color: #707070
+    color: var(--grey-4);
   }
   
   .otp-footer .backbtn{
     width: 80%;
     height: 43px;
-    background-color: #3F0F88;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--white);
     border: none;
     cursor: pointer;
     border-radius: 0.6rem;
