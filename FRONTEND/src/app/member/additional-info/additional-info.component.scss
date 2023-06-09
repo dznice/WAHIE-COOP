@@ -352,23 +352,23 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
     height: 45px;
     width: 100px;
     background-color: var(--primary-color);
-    color: var(--panel-color);
+    color: var(--white);
   }
 
   .btn-submit:hover {
-    background-color: var(--primary-alt);
-    color: var(--panel-color);
+    background-color: var(--primary-color-light);
+    color: var(--white);
   }
   
   .btn-logout {
     height: 45px;
     width: 100px;
     background-color: var(--grey-alt);
-    color: var(--dark-grey);
+        color: var(--dark-grey);
   }
 
   .btn-logout:hover {
-    background-color: var(--dark-grey-2);
+    background-color: var(--border-color);
     color: var(--dark-grey);
   }
 }
