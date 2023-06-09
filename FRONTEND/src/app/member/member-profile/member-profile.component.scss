@@ -6,7 +6,7 @@
   font-size: 30px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--text-color-2);
 }
 
 .content {
@@ -37,6 +37,10 @@
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); 
   margin-top: 8.5rem;
   margin-left: -1rem;
+
+  span{
+    color: var(--text-color-2);
+  }
 }
 
 .second-tab, .third-tab{
@@ -49,6 +53,10 @@
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); 
   // margin-top: 8.5rem;
   margin-left: -1rem;
+
+  span{
+    color: var(--text-color-2);
+  }
 }
 
 .top-content{
@@ -80,7 +88,7 @@
   cursor: pointer;
   padding-left: 25px;
   transition: all 0.5s ease;
-  color: #333;
+  color: var(--text-color-2);
   z-index: 12;
   white-space: nowrap;
 }
@@ -226,10 +234,12 @@ span{
    width: 100%;
    padding: 7px 15px;
    margin: 8px 0;
+   background-color: var(--panel-color);
 
    height: 1%;
    outline-color: #3f0f88;
-   border: 2px solid #ccc;
+   border: 2px solid var(--border-color);
+   color: var(--text-color-2);
    border-radius: 0.6rem;
  }
 }
@@ -273,10 +283,11 @@ span{
 }
 
 .fields .fieldsdata2 {
-  border: 1px solid #959494;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
   font-size: 14px;
   font-weight: 400;
-  color: #333333;
   height: 36px;
   padding: 7px 15px;
   box-sizing: border-box;
@@ -285,10 +296,11 @@ span{
 }
 
 .fields .fieldsdata1 {
-  border: 1px solid #959494;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
   font-size: 14px;
   font-weight: 400;
-  color: #333333;
   height: 36px;
   padding: 7px 15px;
   box-sizing: border-box;
@@ -297,10 +309,11 @@ span{
 }
 
 .top-content .fieldsdata1 {
-  border: 1px solid #959494;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
   font-size: 14px;
   font-weight: 400;
-  color: #333333;
   height: 36px;
   padding: 7px 15px;
   box-sizing: border-box;
@@ -310,13 +323,11 @@ span{
 
 
 .fields .fieldsdata {
-  outline-color: #3f0f88;
-  border: 1px solid #959494;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
   font-size: 14px;
   font-weight: 400;
-  color: #333;
-  border-radius: 5px;
-  padding: 0 15px;
   height: 36px;
   margin: 2px 0;
   display: flex;
@@ -331,7 +342,7 @@ span{
 label {
   font-size: 16px;
   font-weight: 500;
-  color: var(--primary-color);
+  color: var(--title-color);
 }
 
 
@@ -342,6 +353,10 @@ label {
 
 .change{
   margin-top: 1rem;
+
+  label{
+    color: var(--title-color);
+  }
 }
 
 .btn-add{
