@@ -16,6 +16,7 @@ export class FsOpComponent implements OnInit {
   pexpense: any[];
   item: any[];
   maxDate: any;
+  oneYearAgo: any;
 
   constructor(private http:HttpClient, private exportAsService: ExportAsService) {}
     
@@ -24,6 +25,8 @@ export class FsOpComponent implements OnInit {
   ngOnInit(): void {
 
     this.formatDate();
+    this.oneYearAgo = new Date(this.maxDate);
+    this.oneYearAgo.setFullYear(this.oneYearAgo.getFullYear() - 1);
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();

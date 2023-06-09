@@ -30,9 +30,7 @@
           <thead>
             <tr>
               <th>Accounts</th>
-            <ng-container *ngFor="let items of pledgers; let i = index">
-              <th class="th-cred" *ngIf="i === pledgers.length - 1">Balance last {{ items.previousYear }}</th>
-            </ng-container>
+              <th class="th-cred">Balance last  {{ oneYearAgo | date:'y' }}</th>
               <th class="th-deb">Balance this {{ maxDate | date:'y' }}</th>
             </tr>
           </thead>
