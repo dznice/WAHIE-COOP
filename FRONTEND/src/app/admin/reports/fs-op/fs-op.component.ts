@@ -15,11 +15,15 @@ export class FsOpComponent implements OnInit {
   prevenue: any[];
   pexpense: any[];
   item: any[];
+  maxDate: any;
 
   constructor(private http:HttpClient, private exportAsService: ExportAsService) {}
     
+
+  
   ngOnInit(): void {
 
+    this.formatDate();
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
@@ -123,6 +127,9 @@ export class FsOpComponent implements OnInit {
   cdFund : any;
   optionalFund : any;
   dueToUnion : any;
+  statutoryFund : any;
+  netFundAfterSF : any;
+  
   calculateTotalBalance(): number {
     let totalBalance = 0;
     let totalExpenses = 0;
@@ -144,9 +151,26 @@ export class FsOpComponent implements OnInit {
     this.optionalFund = totalBalance * 0.07;
     this.dueToUnion = totalBalance * 0.05
   
-    return totalBalance;
+    this.statutoryFund = this.reserveFund+this.cetFund+this.cdFund+this.optionalFund+this.dueToUnion;
 
-    
+    this.netFundAfterSF = totalBalance - this.statutoryFund;
+
+    return totalBalance;
+  }
+
+
+
+
+
+  formatDate() {
+    const d = new Date();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-');
+    return this.maxDate;
   }
 
 }

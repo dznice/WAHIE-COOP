@@ -21,7 +21,7 @@
     <header>
       <span class="coop-name">WAH-Cooperative</span>
       <h4 class="report-name">Statement of Operations</h4>
-      <span class="date-today">As of DateToday</span>
+      <span class="date-today">As of {{ maxDate | date:'mediumDate' }}</span>
     </header>
   
     <section class="tabler-section">
@@ -30,8 +30,10 @@
           <thead>
             <tr>
               <th>Accounts</th>
-              <th class="th-cred">Credit</th>
-              <th class="th-deb">Debit</th>
+            <ng-container *ngFor="let items of pledgers; let i = index">
+              <th class="th-cred" *ngIf="i === pledgers.length - 1">Balance last {{ items.previousYear }}</th>
+            </ng-container>
+              <th class="th-deb">Balance this {{ maxDate | date:'y' }}</th>
             </tr>
           </thead>
           <tbody>
@@ -39,7 +41,7 @@
              <!-- Current revenue -->
              <ng-container *ngIf="revenue && revenue.length > 0">
               <tr class="tr-total">
-                <td>Current revenue</td>
+                <td class="titles">Current revenue</td>
                 <td></td>
                 <td></td>
               </tr>
@@ -57,18 +59,18 @@
               </tr>
             </ng-container>
             <!-- Total of all Current revenue -->
-            <tr>
-                <td>Total revenue</td>
-                <td class="td-cred"></td>
-                <td class="td-deb" *ngIf="revenue.length > 0">{{( revenue.length > 0 ? revenue[revenue.length - 1].total_revenue : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <tr class="totals">
+                <td class="totass">Total revenue:</td>
+                <td class="total-cred"></td>
+                <td class="total-deb" *ngIf="revenue.length > 0">{{( revenue.length > 0 ? revenue[revenue.length - 1].total_revenue : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
 
               </tr>
             </ng-container>
-
+<br>
               <!-- Current Assets -->
               <ng-container *ngIf="expense && expense.length > 0">
                 <tr class="tr-total">
-                  <td>Current expense</td>
+                  <td class="titles">Current expense</td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -87,48 +89,64 @@
               </tr>
             </ng-container>
             <!-- Total of Other Current Assets -->
-            <tr>
-              <td>Total of Other Current Assets</td>
-              <td class="td-cred"></td>
-              <td class="td-deb" *ngIf="expense.length > 0">{{ (expense.length > 0 ? expense[expense.length - 1].total_expenses : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <tr class="totals">
+              <td class="totass">Total Expenses:</td>
+              <td class="total-cred"></td>
+              <td class="total-deb" *ngIf="expense.length > 0">{{ (expense.length > 0 ? expense[expense.length - 1].total_expenses : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             </tr>
           </ng-container>
-
-            <tr class="tr-total">
-              <td>Net Surplus Before Other Item</td>
-              <td class="td-deb">{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td></td>
+<br>
+            <tr class="totals">
+              <td class="totass">Net Surplus Before Other Item:</td>
+              <td class="total-cred"></td>
+              <td class="total-deb">{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             </tr>
-
+<br>
             <ng-container *ngIf="this.reserveFund && this.cetFund && this.dueToUnion && this.cdFund && this.optionalFund !== 0">
             
                 <tr class="tr-total">
-                  <th class="stat">Statutory Fund</th>
+                  <td class="titles">Distributed as Follows:</td>
                 </tr>
-             
-
             <tr>
               <td>Reserve Fund</td>
-              <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
               <td></td>
+              <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              
               
             </tr>
             <tr>
               <td>Coop. Education & Training Fund</td>
+              <td></td>
               <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             </tr>
             <tr>
               <td>Due to Union/Federation (CETF)</td>
+              <td></td>
               <td class="td-deb">{{ this.dueToUnion | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             </tr>
             <tr>
               <td>Community Development Fund</td>
+              <td></td>
               <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             </tr>
             <tr>
               <td>Optional Fund</td>
+              <td></td>
               <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             </tr>
+
+            <tr class="totals">
+              <td class="totass">Total Statutory Fund:</td>
+              <td class="total-cred"></td>
+              <td class="total-deb">{{ this.statutoryFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            </tr>
+
+            <tr class="totals">
+              <td class="totass">Net Surplus after SF:</td>
+              <td class="total-cred"></td>
+              <td class="total-deb">{{ this.netFundAfterSF | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            </tr>
+
           </ng-container>
           </tbody>
         </table>

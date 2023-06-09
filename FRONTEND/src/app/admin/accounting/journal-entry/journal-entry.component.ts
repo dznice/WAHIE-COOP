@@ -223,10 +223,10 @@ export class JournalEntryComponent implements OnInit {
 
   removeRow(index: any) {
     this.journalEntryRow = this.journalEntryForm.get('entries') as FormArray;
-    // if (confirm('Do you want to remove?')) {
-    //   this.journalEntryRow.removeAt(index);
-    //   this.balance_summary();
-    // }
+    if (confirm('Do you want to remove?')) {
+      this.journalEntryRow.removeAt(index);
+      this.balance_summary();
+    }
     this.journalEntryRow.removeAt(index);
     this.showDel(2);
     this.balance_summary();

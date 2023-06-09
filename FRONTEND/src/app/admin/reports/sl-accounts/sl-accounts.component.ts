@@ -57,14 +57,31 @@ export class SlAccountsComponent implements OnChanges {
     this.ledgers = this.wahieService.sLegder(mem, acc, sd, ed).subscribe(ledger=>{
       this.ledgers = ledger;
        console.log(this.ledgers); 
+
+       this.calculateExample();
     });
   }
 
   showPastSLedger(mem:any, acc:any, sd:any, ed:any): void{
     this.pledgers = this.wahieService.pastLegder(mem, acc, sd, ed).subscribe(pledger=>{
       this.pledgers = pledger;
-        
+       
+      this.calculateExample();
     });
+  }
+
+  calculateExample(): void {
+    if (this.ledgers && this.pledgers) {
+      for (let item of this.ledgers) {
+        
+        for (let items of this.pledgers) {
+          if (item.result.journId === items.result.journId) {
+            item.example = item.result.total_balance - items.result.total_balance;
+            break;
+          }
+        }
+      }
+    }
   }
 
   private formatDate() {

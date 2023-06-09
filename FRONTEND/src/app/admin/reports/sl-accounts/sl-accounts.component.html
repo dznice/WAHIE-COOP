@@ -16,9 +16,11 @@
         <thead>
           <tr>
             <th>Particulars</th>
-            <th class="th-bal">Last Year Balance</th>
-            <th class="th-bal">Remarks</th>
-            <th class="th-bal">Current Balance</th>
+            <ng-container *ngFor="let items of pledgers; let i = index">
+              <th class="th-bal" *ngIf="i === pledgers.length - 1">Starting Balance of {{ items.startingBalanceYear | date:'mediumDate'}}</th>
+            </ng-container>
+            <th class="th-bal">Payment this {{ maxDate | date:'y' }}</th>
+            <th class="th-bal">Current Balance of {{ maxDate | date:'mediumDate' }}</th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +34,7 @@
                   </ng-container>
                 </ng-container>
               </td>
-              <td class="td-bal"></td>
+              <td class="td-bal">{{ item.example | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
               <td class="td-bal">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             </tr>
           </ng-container>

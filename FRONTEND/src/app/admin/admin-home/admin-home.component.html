@@ -8,30 +8,35 @@
           <i class="ti ti-report-money card-icon"></i>
         </div>
         <div class="text">
-          <div class="card-topic">Profit</div>
-          <h2>PHP0</h2>
+          <div class="card-topic">Net Surplus</div>
+          <h2>{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</h2>
         </div>
       </li>
 
+      <ng-container *ngIf="expense && expense.length > 0">
       <li class="card">
         <div>
           <i class="ti ti-receipt-tax card-icon"></i>
         </div>
         <div class="text">
           <span class="card-topic">Expenses</span>
-          <h2>PHP0</h2>
+          <h2 *ngIf="expense.length > 0">{{ (expense.length > 0 ? expense[expense.length - 1].total_expenses : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</h2>
         </div>
       </li>
-
+    </ng-container>
+      
+    <ng-container *ngIf="revenue && revenue.length > 0">
       <li class="card">
         <div>
           <i class="ti ti-chart-pie card-icon"></i>
         </div>
         <div class="text">
           <span class="card-topic">Revenue</span>
-          <h2>PHP0</h2>
+          <h2 *ngIf="revenue.length > 0">{{( revenue.length > 0 ? revenue[revenue.length - 1].total_revenue : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</h2>
         </div>
       </li>
+    </ng-container>
+    
     </ul>
   </section>
 

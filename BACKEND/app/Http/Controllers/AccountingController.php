@@ -358,6 +358,7 @@ public function totaljourlastyear(Request $request)
     $currentYear = date('Y');
     $previousYear = $currentYear - 1;
 
+    $startingBalanceYear = $currentYear . '-01-01';
     $startOfYear = $previousYear . '-01-01';
     $endOfYear = $previousYear . '-12-31';
 
@@ -504,7 +505,9 @@ public function totaljourlastyear(Request $request)
             'total_equity' => $total_equity,
             'total_liability_equity' => $total_all_liability + $total_equity,
             'total_revenue' => $total_revenue,
-            'total_expenses' => $total_expenses
+            'total_expenses' => $total_expenses,
+            'startingBalanceYear' => $startingBalanceYear,
+            'previousYear' => $previousYear
         ];
 
     }

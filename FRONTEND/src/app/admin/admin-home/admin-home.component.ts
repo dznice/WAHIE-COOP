@@ -25,11 +25,17 @@ export class AdminHomeComponent implements OnInit {
   endDate: string = '';
   duedit: any;
 
+  ledgers: any;
+  revenue: any[];
+  expense: any[];
+
   constructor(private http: HttpClient, private route: Router) {}
+  
   ngOnInit(): void {
-    // this.showEntries();
     this.showAccounting();
     this.checkDue();
+    this.showSLedger();
+    this.processLedgerData();
   }
 
   public entries: any;
@@ -79,5 +85,69 @@ export class AdminHomeComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
       });
+  }
+
+  showSLedger(): void {
+    this.http.get('http://127.0.0.1:8000/api/totaljour').subscribe(
+      (res: any) => {
+        console.log(res);
+        this.ledgers = res;
+        this.processLedgerData();
+        console.log(this.processLedgerData())
+      }
+    );
+  }
+  
+  processLedgerData(): void {
+    this.revenue = [];
+    this.expense = [];
+  
+    for (const item of this.ledgers) {
+      const journalName = item.result.journType.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+      console.log('Journal Name:', journalName);
+
+      if (['revenue', 'cost of goods sold', 'cost of services'].includes(journalName)) {
+        this.revenue.push(item);
+      } else if (['expenses', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
+        this.expense.push(item);
+      } 
+    }
+    
+  }
+
+  reserveFund : any;
+  cetFund : any;
+  cdFund : any;
+  optionalFund : any;
+  dueToUnion : any;
+  statutoryFund : any;
+  netFundAfterSF : any;
+  
+  calculateTotalBalance(): number {
+    let totalBalance = 0;
+    let totalExpenses = 0;
+    let totalRevenue = 0;
+  
+    for (const item of this.revenue) {
+      totalRevenue += item.result.total_balance;
+    }
+  
+    for (const item of this.expense) {
+      totalExpenses += item.result.total_balance;
+    }
+
+    totalBalance = totalRevenue - totalExpenses;
+
+    this.reserveFund = totalBalance * 0.1;
+    this.cetFund = totalBalance * 0.05;
+    this.cdFund = totalBalance * 0.03;
+    this.optionalFund = totalBalance * 0.07;
+    this.dueToUnion = totalBalance * 0.05
+  
+    this.statutoryFund = this.reserveFund+this.cetFund+this.cdFund+this.optionalFund+this.dueToUnion;
+
+    this.netFundAfterSF = totalBalance - this.statutoryFund;
+
+    return totalBalance;
   }
 }
