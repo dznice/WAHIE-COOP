@@ -215,9 +215,7 @@ thead th {
   outline: none;
   font-size: 14px;
   font-weight: 400;
-  color: #333;
   border-radius: 5px;
-  border: 1px solid #aaa;
   height: 36px;
   width: 100%;
   min-width: 300px;
@@ -228,21 +226,32 @@ thead th {
 
 .ng-select.try ::ng-deep .ng-control {
   min-height: 0px;
-  border: 1px solid #aaa;
   border-radius: 5px;
   border: 1px solid var(--border-color);
-  background-color: var(--panel-color);
-  color: var(--text-color-2);
+  // background-color: var(--panel-color);
+  // color: var(--text-color-2);
 }
 
 .ng-select.try ::ng-deep .ng-dropdown-panel {
   width: 100%;
   //max-width: 300px;
   //margin-left: 10px;
-  border: 1px solid var(--border-color);
-  background-color: var(--panel-color);
-  color: var(--text-color-2);
+  // border: 1px solid var(--border-color);
+  // background-color: var(--panel-color);
+  // color: var(--text-color-2);
 }
+
+.ng-select.try ::ng-deep .ng-dropdown-panel .ng-option{
+    background-color: var(--panel-color);
+  }
+
+.ng-select.try ::ng-deep .ng-dropdown-panel .ng-option:hover{
+    background-color: var(--secondary-color);
+  }
+
+.ng-select.try ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    color: var(--text-color-2);
+  }
 
 .ng-select.try {
   .submit {
