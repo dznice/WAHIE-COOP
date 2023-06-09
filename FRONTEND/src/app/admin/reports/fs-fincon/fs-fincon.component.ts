@@ -33,13 +33,16 @@ export class FsFinconComponent implements OnInit {
   nl : any[];
   dg : any[];
 
+  maxDate:any;
+
   constructor(private http:HttpClient, private exportAsService: ExportAsService ) {}
     
   ngOnInit(): void {
-
+    this.formatDate();
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
+    console.log(this.maxDate)
   }
 
   exportAsPdf: ExportAsConfig = {
@@ -47,15 +50,15 @@ export class FsFinconComponent implements OnInit {
     elementIdOrContent: 'fsFincon',
     options: {
       image: { type: 'jpeg', quality: 1 },
-      html2canvas:  { scale: 3},
-      margin:  [5, 2, 5, 2],
-      fontSize: 12,
-      // pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+      html2canvas:  { scale: 1},
+      margin:  [2, 2, 2, 2],
+      fontSize: 1,
+      //pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
       jsPDF: {
         orientation: 'portrait',
         format: 'letter',
-        defaultFontSize: 12,
-        //precision: 16
+        defaultFontSize: 1,
+        precision: 16
       }
     }
   }
@@ -86,6 +89,17 @@ export class FsFinconComponent implements OnInit {
         console.log(this.processLedgerData())
       }
     );
+  }
+
+  private formatDate() {
+    const d = new Date();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-');
+    return this.maxDate;
   }
   
   processLedgerData(): void {

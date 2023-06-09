@@ -40,8 +40,8 @@
     background-color: var(--panel-color);
     color: var(--text-color-3);
     margin: auto;
-    width: 70%;
-    border: 1px solid var(--text-color-2);
+    width: 800px;
+    border: 1px solid var(--black);
     border-bottom: none;
     display: flex;
     flex-direction: row;
@@ -104,12 +104,11 @@
     padding-top: 2rem;
     margin: auto;
     margin-bottom: 3rem;
-    width: 70%;
+    width: 800px;
     border: 1px solid var(--text-color-2);
     border-top:1px solid var(--text-color-2) ;
     border-bottom:  2px solid var(--text-color-2) ;
     background-color: var(--panel-color);
-    
     
   }
 

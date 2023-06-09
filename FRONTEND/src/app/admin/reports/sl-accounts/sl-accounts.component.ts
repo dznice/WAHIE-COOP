@@ -27,12 +27,12 @@ export class SlAccountsComponent implements OnChanges {
     if(changes['formData']) {
       // Perform necessary actions based on the submitted value
       this.ngOnInit();
-      this.formatDate();
       
     }
   }
 
   ngOnInit(): void{
+    this.formatDate();
     this.showLibJournalInfo(this.formData.account);
     this.showMemberInfo(this.formData.member);
     this.showSLedger(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);

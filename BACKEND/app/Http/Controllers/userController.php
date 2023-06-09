@@ -117,10 +117,14 @@ class userController extends Controller
     return response()->json($returnData, 401);
     }
 
-    public function memberList(){
+    public function memberList(Request $request){
         $member = Members::all();
+        if($request->id){
+            $member->where('id', '=', $request->id);
+        }
+        //$member = QueryBuilder::for($memberQ);
         return response()->json($member);
-         }
+    }
 
 
     public function beneficiaries(){
@@ -131,7 +135,7 @@ class userController extends Controller
     public function memberInfo($id){
         $member = Members::find($id);
         return response()->json($member);
-         }
+        }
 
     public function myProfile($id){
     $user = Users::find($id);

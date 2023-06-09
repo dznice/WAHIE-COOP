@@ -8,7 +8,6 @@
   size: letter;
   height: 110%;
   
-  
 }
 
 .report-name{
@@ -107,7 +106,7 @@ display: flex;
     background-color: var(--panel-color);
     color: var(--text-color-3);
     margin: auto;
-    width: 70%;
+    width: 800px;
     border: 1px solid var(--text-color-2);
     border-bottom: none;
     display: flex;
@@ -149,7 +148,7 @@ display: flex;
 .main-section{
   padding-top: 2rem;
   margin: auto;
-  width: 70%;
+  width: 800px;
   border: 1px solid var(--text-color-2);
   border-top: none;
   border-bottom:  2px solid var(--text-color-2) ;

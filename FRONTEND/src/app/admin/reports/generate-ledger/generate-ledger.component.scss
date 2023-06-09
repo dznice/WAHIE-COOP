@@ -1,36 +1,109 @@
-th, td{
-    border: 1px blue solid;
+.report-name{
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--title-color);
 }
 
-tfoot tr{
-    background-color: yellow;
-}
-
-.export {
-    margin-left: auto;
-    margin-right: 0;
+.sticky-div{
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      background-color:rgb(243, 241, 241);
+      height: 150px;
+      background-color:var(--table-header);
+      width: auto;
+      flex-wrap: wrap;
+      color:#fff9f9;
+      padding-left: 2rem;
+      margin:-20px -35px 0px -35px ;
+     
+    .table-filter {
     display: flex;
-    width: calc(38% / 4 - 6px);
-    flex-direction: column;
-    margin: 8px 0 0;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
-    label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--dark-grey);
-      margin: 0 4px;
+    .filter-field1 {
+      display: flex;
+      width: calc(20% - 10px);
+      flex-direction: column;
+      margin: 4px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-color-3);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-color-3);
+        border-radius: 0.45rem;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
+        padding: 0 10px;
+        height: 36px;
+        margin: 8px 0 0;
+      }
+    }
+
+    .filter-field2 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 4px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-color-3);
+      }
+
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-color-3);
+        border-radius: 0.45rem;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
+        padding: 0 10px;
+        height: 36px;
+        //margin: 8px 0 0;
+      }
+    }
+    .filter-field3 {
+      display: flex;
+      width: calc(15% - 10px);
+      flex-direction: column;
+      margin: 4px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-color-3);
+      }
+
+      input,
+      select, button {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--panel-color);
+        border-radius: 0.45rem;
+        border: 1px solid var(--border-color);
+        background-color: var(--title-color);
+        //background-color: var(--panel-color);
+        padding: 0 10px;
+        margin: 8px 0 0;
+      }
     }
   }
-  .export-icon {
-    margin-left: auto;
-    margin-right: 0;
-    margin: 8px 8px 0 0;
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    padding: 1rem;
-    color: var(--secondary-color);
-    background: var(--secondary-alt);
   }
