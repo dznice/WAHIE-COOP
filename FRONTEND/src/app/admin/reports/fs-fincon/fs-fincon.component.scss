@@ -37,6 +37,7 @@
   }
 
   .print{
+    background-color: var(--panel-color);
     color: var(--text-color-3);
     margin: auto;
     width: 70%;
@@ -49,7 +50,8 @@
       width: 70%;
       height: 5vh;
       padding-left: 1rem;
-      padding-top: .5rem
+      padding-top: .5rem;
+      color: var(--text-color-2);
     }
       
     .PDF{
@@ -106,6 +108,7 @@
     border: 1px solid var(--text-color-2);
     border-top:1px solid var(--text-color-2) ;
     border-bottom:  2px solid var(--text-color-2) ;
+    background-color: var(--panel-color);
     
     
   }
@@ -157,6 +160,7 @@
           //border-bottom: 1px solid var(--border-color);
           border-bottom: 1px solid var(--text-color-2);
           color: var(--text-color-2);
+          background-color: var(--panel-color);
 
           .titles{
             padding: 16px 16px;
@@ -182,7 +186,8 @@
             border-top: 2px double var(--text-color-2);
             border-bottom: 2px double var(--text-color-2);
             border-color: var(--text-color-2);
-            background-color:var(--panel-color);
+            background-color:var(--grey-2);
+            
           
           }
         }

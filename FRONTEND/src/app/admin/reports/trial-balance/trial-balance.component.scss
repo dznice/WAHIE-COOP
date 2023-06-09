@@ -104,6 +104,7 @@ display: flex;
   text-align: left;
 } 
   .print{
+    background-color: var(--panel-color);
     color: var(--text-color-3);
     margin: auto;
     width: 70%;
@@ -116,7 +117,8 @@ display: flex;
       width: 70%;
       height: 5vh;
       padding-left: 1rem;
-      padding-top: .5rem
+      padding-top: .5rem;
+      color: var(--text-color-2);
     }
       
     .PDF{
@@ -152,6 +154,7 @@ display: flex;
   border-top: none;
   border-bottom:  2px solid var(--text-color-2) ;
   border-top:1px solid var(--text-color-2) ;
+  background-color: var(--panel-color);
   
 }
 
@@ -219,6 +222,7 @@ header {
         //border-bottom: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
         color: var(--text-color-2);
+        background-color: var(--panel-color);
 
         td {
           padding: 16px 36px;
