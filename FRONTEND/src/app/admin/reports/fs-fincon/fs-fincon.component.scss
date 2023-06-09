@@ -11,10 +11,7 @@
   .report-name{
     font-size: 30px;
     font-weight: 600;
-  }
-  
-  .report-name{
-    color: var(--primary-color);
+    color: var(--title-color);
   }
 
   .sticky-div{
@@ -23,78 +20,14 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    background-color:rgb(243, 241, 241);
-    height: 120px;
+    background-color:var(--table-header);
+    height: 70px;
     width: auto;
     flex-wrap: wrap;
     color:#fff9f9;
     padding-left: 2rem;
     margin:-20px -35px 0px -35px ;
    
-.dates{
-  display: flex;
-
-    .to{
-      color: #000000;
-      padding: 1rem 1rem;
-      
-    }
-
-      
-    .filter-field2 {
-      display: flex;
-      width: calc(18% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
-
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--dark-grey);
-      }
-
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-        border-radius: 0.45rem;
-        border: 1px solid #aaa;
-        padding: 0 10px;
-        height: 30px;
-        margin: 8px 0 0;
-      }
-    }
-    .filter-field3 {
-      display: flex;
-      width: calc(18% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
-
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--dark-grey);
-      }
-
-      input,
-      select {
-        padding-right: 2rem;
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: #333;
-        border-radius: 0.45rem;
-        border: 1px solid #aaa;
-        padding: 0 10px;
-        height: 30px;
-        margin: 8px 0 0;
-      }
-    }
-  }
 }
 
 
@@ -104,9 +37,11 @@
   }
 
   .print{
+    color: var(--text-color-3);
     margin: auto;
     width: 70%;
-    border: 1px solid var(--black);
+    border: 1px solid var(--text-color-2);
+    border-bottom: none;
     display: flex;
     flex-direction: row;
 
@@ -129,11 +64,13 @@
       font-size: 28px;
       background: none;
       padding-right: .4rem;
+      color: var(--secondary-color);
     }
     .excel-icon{
       padding-top: .2rem;
       font-size: 28px;
       background: none; 
+      color: var(--secondary-color);
     }
   }
 
@@ -166,21 +103,22 @@
     margin: auto;
     margin-bottom: 3rem;
     width: 70%;
-    border: 1px solid var(--black);
-    border-top: none;
-    border-bottom:  2px solid var(--black) ;
+    border: 1px solid var(--text-color-2);
+    border-top:1px solid var(--text-color-2) ;
+    border-bottom:  2px solid var(--text-color-2) ;
     
     
   }
 
   header {
     text-align: center;
-    
+    color: var(--title-color);
   
     .coop-name {
       font-size: 26px;
       font-weight: 200;
       margin-bottom: 1rem;
+      color: var(--title-color);
     }
   }
   
@@ -203,12 +141,13 @@
           text-align: left;
           font-weight: 400;
           padding: 12px 16px;
-          border-top: 1px solid var(--black);
-          border-bottom: 1px solid var(--black);
+          border-top: 1px solid var(--text-color-2);
+          border-bottom: 1px solid var(--text-color-2);
+          color: var(--text-color-2);
         }
   
         .th-cred, .th-deb {
-          border-left: 1px dotted var(--border-color);
+          border-left: 1px dotted var(--text-color-2);
           text-align: right;
         }
       }
@@ -216,7 +155,9 @@
       tbody {
         tr {
           //border-bottom: 1px solid var(--border-color);
-        
+          border-bottom: 1px solid var(--text-color-2);
+          color: var(--text-color-2);
+
           .titles{
             padding: 16px 16px;
           }
@@ -228,20 +169,20 @@
   
           .td-deb, .td-cred {
             text-align: right;
-            
 
           }
           .total-cred, .total-deb{
             text-align: right;
+            border-top: 2px double var(--text-color-2);
           }
           .total-cred, .total-deb, .totass{
             border-style: double;
             border-left: none;
             border-right: none;
-            border-top: 2px double var(--grey);
-            border-bottom: 2px double var(--grey);
-            border-color: var(--grey);
-            background-color:rgb(243, 241, 241);
+            border-top: 2px double var(--text-color-2);
+            border-bottom: 2px double var(--text-color-2);
+            border-color: var(--text-color-2);
+            background-color:var(--panel-color);
           
           }
         }
@@ -250,9 +191,9 @@
           border-style: double;
           border-left: none;
           border-right: none;
-          border-color: var(--black);
+          border-color: var(--text-color-2);
           
-          border-bottom: 2px double var(--black);
+          border-bottom: 2px double var(--text-color-2);
           
   
           .td-debtot, .td-credtot {
@@ -288,12 +229,12 @@
           text-align: left;
           font-weight: 400;
           padding: 12px 16px;
-          border-top: 1px solid var(--black);
-          border-bottom: 1px solid var(--black);
+          border-top: 1px solid var(--text-color-2);
+          border-bottom: 1px solid var(--text-color-2);
         }
   
         .th-cred, .th-deb {
-          border-left: 1px dotted var(--border-color);
+          border-left: 1px dotted var(--text-color-2);
           text-align: right;
         }
       }
@@ -310,8 +251,8 @@
             border-left: none;
             border-right: none;
             border-bottom: none;
-            border-color: var(--black);
-            border-top: 1px solid var(--black);
+            border-color: var(--text-color-2);
+            border-top: 1px solid var(--text-color-2 );
             padding: 16px 16px;
             font-size: medium;
 
@@ -322,9 +263,9 @@
             border-left: none;
             border-right: none;
             border-bottom: none;
-            border-color: var(--black);
-            border-top: 1px solid var(--black);
-            border-top: 1px double var(--black);
+            border-color: var(--subtext-color);
+            border-top: 1px solid var(--subtext-color);
+            border-top: 1px double var(--subtext-color);
             text-align: right;
             font-weight: 500;
             font-size: medium;
@@ -347,9 +288,8 @@
           border-style: double;
           border-left: none;
           border-right: none;
-          border-color: var(--black);
-        
-          border-bottom: 2px double var(--black);
+          border-color: var(--subtext-color);
+          border-bottom: 2px double var(--subtext-color);
          
           
   
@@ -384,8 +324,8 @@
           text-align: left;
           font-weight: 400;
           padding: 12px 16px;
-          border-top: 1px solid var(--black);
-          border-bottom: 1px solid var(--black);
+          border-top: 1px solid var(--text-color-2);
+          border-bottom: 1px solid var(--text-color-2);
         }
   
         .th-cred, .th-deb {
@@ -416,9 +356,9 @@
           border-style: double;
           border-left: none;
           border-right: none;
-          border-color: var(--black);
+          border-color: var(--subtext-color);
          
-          border-bottom: 2px double var(--black);
+          border-bottom: 2px double var(--subtext-color);
           
          
           
@@ -434,10 +374,10 @@
           border-left: none;
           border-right: none;
           border-top: none;
-          border-color: var(--black);
+          border-color: var(--subtext-color);
           padding: 16px 16px;
 
-          border-bottom: 2px double var(--black);
+          border-bottom: 2px double var(--subtext-color);
         }
         tr:hover {
           td {
