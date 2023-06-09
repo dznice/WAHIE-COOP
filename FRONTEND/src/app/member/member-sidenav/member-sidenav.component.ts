@@ -40,7 +40,12 @@ interface SideNavToggle {
   ],
 })
 export class MemberSidenavComponent {
+  // Dark Mode
+  mode: boolean = true;
+  modeState: boolean = false;
+
   toggleDarkTheme() {
+    this.mode = !this.mode;
     document.body.classList.toggle('darkmodes');
   }
 

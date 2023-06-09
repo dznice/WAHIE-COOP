@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Item } from './paymentItem';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
 import { WahieService } from '../../../services/wahie.service';
@@ -201,7 +201,16 @@ export class AddPaymentComponent implements OnInit {
     //this.route.navigateByUrl('admin/accounting')
   }
 
-  
+  @HostListener('window:keydown.esc', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    console.log(event);
+    this.showDel(2);
+  }
+
+  delModal = -1;
+  showDel(index: number) {
+    this.delModal = index;
+  } 
 
   addRow(){
     this.paymentRow=this.paymentForm.get("payables") as FormArray;
@@ -224,10 +233,14 @@ export class AddPaymentComponent implements OnInit {
 
   removeRow(index:any){
     this.paymentRow = this.paymentForm.get("payables") as FormArray;
-    if(confirm('Do you want to remove?')){
-      this.paymentRow.removeAt(index);
-      //this.balance_summary();
-    }
+    // if(confirm('Do you want to remove?')){
+    //   this.paymentRow.removeAt(index);
+    //   this.balance_summary();
+    // }
+
+    this.paymentRow.removeAt(index);
+    this.showDel(2);
+    this.balance_summary();
   }
 
  autoAmount(index: any) {

@@ -34,7 +34,7 @@ main {
         border: none;
         border-radius: 0.525rem;
         background: var(--primary-color);
-        color: var(--panel-color);
+        color: var(--white);
         padding: 12px 20px 12px 14px;
         margin: 0 0.5rem;
       }
@@ -44,7 +44,7 @@ main {
       }
 
       .btn-add:hover {
-        background: var(--primary-alt);
+        background: var(--primary-color-dark);
       }
     }
   }

@@ -33,7 +33,18 @@
       <span class="tooltip">{{ data.label }}</span>
     </li>
 
-    <li class="profile">
+    <li class="nav-mode">
+      <div class="mode-details" @fadeInOut *ngIf="collapsed">
+        <i class="mode-icon" [ngClass]="mode?'ti ti-moon':'ti ti-sun'"></i>
+        <span class="mode-text" *ngIf="modeState">Lightmode</span>
+        <span class="mode-text" *ngIf="!modeState">Darkmode</span>
+      </div>
+      <div class="mode-switch">
+        <input class="switch" type="checkbox" [(ngModel)]="modeState" (click)="toggleDarkTheme()">
+      </div>
+    </li>
+
+    <li class="nav-profile">
       <div class="profile-details" @fadeInOut *ngIf="collapsed">
         <img src="assets/image/user-icon.png" alt="profile-img" />
         <div class="admin-name">
@@ -43,8 +54,6 @@
       </div>
       <i class="ti ti-logout btn-logout" (click)="logout($event)"></i>
     </li>
-     <li>
-      <input class="switch" input type="checkbox" (click)="toggleDarkTheme()">
-    </li>
+    
   </ul>
 </div>
