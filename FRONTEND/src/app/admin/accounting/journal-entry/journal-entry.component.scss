@@ -63,7 +63,7 @@ select {
   margin: 2px 0;
   display: flex;
   width: 100%;
-  border: 1.6px solid var(--border-color);
+  border: 1px solid var(--border-color);
   background-color: var(--panel-color);
   color: var(--text-color-2);
 
@@ -114,15 +114,17 @@ thead th {
 
   .add {
     height: 40px;
-    background-color: var(--primary-color);
-    color: var(--panel-color);
+    background: var(--primary-color);
+    color: var(--white);
     cursor: pointer;
     padding: 0px 20px;
     margin-top: 18px;
-
     .ti-plus {
       margin-left: -5px;
     }
+  }
+  .add:hover{
+    background-color: var(--primary-color-light);
   }
 }
 
@@ -134,15 +136,19 @@ thead th {
   font-size: 24px;
   background: none;
   background-color: none;
-  color: #ff0000;
+  color: #fd7f7f;
   border-radius: 5px;
   outline: none;
   font-weight: 600;
   cursor: pointer;
 }
+.delbut:hover{
+  color: #ff0000;
+}
+
 
 .buttons {
-  background-color: var(--bg-color);
+  background-color: transparent;
   display: flex;
   justify-content: space-between;
 
@@ -151,22 +157,22 @@ thead th {
     width: 90px;
     margin-left: 10px;
     background-color: var(--primary-color);
-    color: var(--panel-color);
+    color: var(--white);
   }
 
   .save:hover {
-    background-color: var(--primary-alt);
+    background-color: var(--primary-color-light);
   }
 
   .back {
     height: 40px;
     width: 90px;
-    background-color: var(--grey-alt);
-    color: var(--dark-grey);
+    background-color: var(--grey-3);
+    color: var(--white);
   }
 
   .back:hover {
-    background-color: var(--dark-grey-2);
+    background-color: var(--grey-4);
   }
 }
 
