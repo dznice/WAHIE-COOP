@@ -151,3 +151,17 @@ input:checked::after {
 }
 
 
+.btn-success {
+  width: 100px;
+  height: 42px;
+  border-radius: 0.45rem;
+  font-size: 0.9rem;
+  text-align: center;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-success:hover {
+  background-color: var(--primary-color-dark);
+}
