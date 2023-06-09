@@ -284,7 +284,7 @@ thead th {
       .header-title {
         font-weight: 600;
         font-size: 18px;
-        //color: var(--primary-color);
+        color: var(--text-color-2);
         margin-top: 0.15rem;
       }
 
@@ -315,7 +315,7 @@ thead th {
           font-size: 16px;
           font-weight: 500;
           margin-bottom: 0.35rem;
-          color: var(--dark-grey);
+          color: var(--text-color-2);
           text-align: left;
         }
 
@@ -323,8 +323,9 @@ thead th {
           height: 45px;
           width: 100%;
           outline: none;
-          border: 1.6px solid var(--border-color);
-          color: var(--text-color);
+          border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+  color: var(--text-color-2);
           font-size: 14px;
           border-radius: 0.625rem;
           padding-left: 12px;
