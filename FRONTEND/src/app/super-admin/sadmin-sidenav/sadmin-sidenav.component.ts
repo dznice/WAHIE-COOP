@@ -201,6 +201,7 @@ export class SadminSidenavComponent implements OnInit {
     this.auth.changeStatus(false);
     localStorage.clear();
     this.router.navigateByUrl('/login');
+    document.body.classList.remove('darkmodes');
   }
 
   public passForm = {

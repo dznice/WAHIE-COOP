@@ -113,7 +113,7 @@ export class AdminSidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
- 
+
     this.navChange = this.fb.group(
       {
         current_pass: new FormControl(null),
@@ -204,6 +204,7 @@ export class AdminSidenavComponent implements OnInit {
     this.auth.changeStatus(false);
     localStorage.clear();
     this.router.navigateByUrl('/login');
+    document.body.classList.remove('darkmodes');
   }
 
   userName() {

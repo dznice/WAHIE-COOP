@@ -112,6 +112,8 @@ export class MemberSidenavComponent {
     this.auth.changeStatus(false);
     localStorage.clear();
     this.router.navigateByUrl('/login');
+    document.body.classList.remove('darkmodes');
+
   }
 
   userName(){
