@@ -45,3 +45,9 @@ php artisan db:seed --class=PhilippineRegionsTableSeeder
 php artisan db:seed --class=PhilippineProvincesTableSeeder
 php artisan db:seed --class=PhilippineCitiesTableSeeder
 php artisan db:seed --class=PhilippineBarangaysTableSeeder
+
+if wala kayong storage sa backend:
+
+--php artisan storage:link--
+--create image folder sa loob ng storage--
+--pokat niyo si coop-logo.png--

@@ -332,10 +332,10 @@ calculateMemberEquity(): number {
     return this.maxDate;
   }
   
+
+
   preLogo:any;
   id:any;
-
-
   getLogo(){
     this.id = localStorage.getItem('userData')
     this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
@@ -344,8 +344,8 @@ calculateMemberEquity(): number {
   }
   
   chLogo(event:any){
-    let fileName =  event.target.files[0].name;
     let fileType = event.target.files[0].type;
+    let file =  event.target.files[0];
     if(fileType.match(/image\/*/)){
       let upload = new FileReader();
       upload.readAsDataURL(event.target.files[0]);
@@ -354,13 +354,14 @@ calculateMemberEquity(): number {
 
       
       );   
-    //   this.id = localStorage.getItem('userData')
-    // let upLogo = {
-    //   fileName : fileName
-    //   }
-    //   this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,upLogo).subscribe((res: any) => {
-    //     this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
-    //   }); 
+      var myFormData = new FormData();
+      this.id = localStorage.getItem('userData')
+      myFormData.append('image', file);
+
+      this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
+        this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
+        this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }

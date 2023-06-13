@@ -267,15 +267,19 @@ class userController extends Controller
 
      public function chLogo($id,Request $request){
 
-        $fileName = time().$request->file('logo')->getClientOriginalName();
-        $path = $request->file('logo')->storeAs('image',$fileName,'public');
-        $requestData['photo'] = 'storage/image/' .$path;
+        if ($request->hasFile('image'))
+        {
+              $file      = $request->file('image');
+              $filename  = $file->getClientOriginalName();
+              $extension = $file->getClientOriginalExtension();
+              $picture   = date('His').'-'.$filename;
+              $file->move(public_path('/storage/image'), $picture);
 
         $logo =  forLogo::where('adminId', '=', $id)->first();
-        $logo->logo = $request->fileName;
+        $logo->logo = $picture;
         $logo->save();
-        return response()->json($logo);
-
+        return response()->json($picture);
+        }
 
     }
 

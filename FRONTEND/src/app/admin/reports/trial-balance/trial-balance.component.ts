@@ -28,7 +28,7 @@ export class TrialBalanceComponent implements OnInit {
   constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService) {}
     
   ngOnInit(): void {
-
+    this.getLogo();
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
@@ -185,17 +185,34 @@ export class TrialBalanceComponent implements OnInit {
     return totalBalance;
   }
   
-  preLogo ="assets/image/coop-logo.png"
-
+  preLogo:any;
+  id:any;
+  getLogo(){
+    this.id = localStorage.getItem('userData')
+    this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
+      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+    });
+  }
+  
   chLogo(event:any){
     let fileType = event.target.files[0].type;
+    let file =  event.target.files[0];
     if(fileType.match(/image\/*/)){
       let upload = new FileReader();
       upload.readAsDataURL(event.target.files[0]);
       upload.onload = (event:any)=>(
         this.preLogo = event.target.result
+
       
-      );  this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
+      );   
+      var myFormData = new FormData();
+      this.id = localStorage.getItem('userData')
+      myFormData.append('image', file);
+
+      this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
+        this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
+        this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }
