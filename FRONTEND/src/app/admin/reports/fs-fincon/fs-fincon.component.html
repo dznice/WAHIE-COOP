@@ -62,7 +62,7 @@
             <tr class="totals">
                 <td class="totass">Total Assets:</td>
                 
-                <td class="total-cred"></td>
+                <td class="total-cred"*ngIf="assets.length > 0">{{ passets.length > 0 ? (passets[passets.length - 1].total_asset | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
                 <td class="total-deb" *ngIf="assets.length > 0">{{ assets.length > 0 ? (assets[assets.length - 1].total_asset | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
             </tr>
             <br/>
@@ -92,7 +92,7 @@
             <!-- Total of Other Current Assets -->
             <tr class="totals">
               <td class="totass">Total of Other Current Assets:</td>
-              <td class="total-cred"></td>
+              <td class="total-cred" *ngIf="otherAssets.length > 0">{{ potherAssets.length > 0 ? (potherAssets[potherAssets.length - 1].total_other_asset | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
               <td class="total-deb" *ngIf="otherAssets.length > 0">{{ otherAssets.length > 0 ? (otherAssets[otherAssets.length - 1].total_other_asset | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
             </tr>
             <br/>
@@ -119,25 +119,20 @@
                 </tr>
               </ng-container>
               <!-- Total of Non-Current Assets -->
-
-
-              
             <tr class="totals">
               <td class="totass">Total of Non-Current Assets:</td>
-              <td class="total-cred"></td>
+              <td class="total-cred" *ngIf="nonAssets.length > 0">{{ pnonAssets.length > 0 ? (pnonAssets[pnonAssets.length - 1].total_non_asset | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
               <td class="total-deb" *ngIf="nonAssets.length > 0">{{ nonAssets.length > 0 ? (nonAssets[nonAssets.length - 1].total_non_asset | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
             </tr>
             
             </ng-container>
-            
             <!-- Total of all assets -->
-            <br/>
             <tr class="totals">
-                <td class="titles2"  colspan="2">Total All Assets:</td>
+                <td class="titles2">Total All Assets:</td>
+                <td class="total-cred2">{{ calculateLastYearAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
                 <td class="total-deb2">{{ calculateAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
               
               </tr>
-              <br/>
               <br/>
 
             <!-- Current Liabilities -->
@@ -163,7 +158,7 @@
                 <!-- Total of Liabilities -->
               <tr class="totals">
                 <td class="totass">Total of Current Liabilities:</td>
-                <td class="total-cred"></td>
+                <td class="total-cred" *ngIf="liabilities.length > 0">{{ pliabilities.length > 0 ? (pliabilities[pliabilities.length - 1].total_liability | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
                 <td class="total-deb" *ngIf="liabilities.length > 0">{{ liabilities.length > 0 ? (liabilities[liabilities.length - 1].total_liability | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
               </tr>
               </ng-container>
@@ -189,7 +184,7 @@
                 <!-- Total of Non-Current Liabilities -->
               <tr class="totals">
                 <td class="totass">Total of Non-Current Liabilities:</td>
-                <td class="total-cred"></td>
+                <td class="total-cred" *ngIf="nonLiabilities.length > 0">{{ pnonLiabilities.length > 0 ? (pnonLiabilities[pnonLiabilities.length - 1].total_non_liability | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
                 <td class="total-deb" *ngIf="nonLiabilities.length > 0">{{ nonLiabilities.length > 0 ? (nonLiabilities[nonLiabilities.length - 1].total_non_liability | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
               </tr>
               </ng-container>
@@ -221,19 +216,65 @@
                 <td class="total-deb" *ngIf="equity.length > 0">{{ equity.length > 0 ? (equity[equity.length - 1].total_equity | currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
               </tr>
               </ng-container>
-            
 
-              <tr class="totals">
-                <td class="totass" colspan="2">Total of Equity:</td>
-                <td class="total-deb">{{ calculateMemberEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-              </tr>
-              <br/>
-              <tr class="totals">
-                <td class="titles2" colspan="2">Total of Liability and Equity:</td>
-                <td class="total-deb2">{{ calculateLiabilityandEquityTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-              </tr>
-
+              <ng-container *ngIf="this.reserveFund && this.cetFund && this.cdFund && this.optionalFund !== 0">
             
+                <tr class="tr-total">
+                  <td class="titles">Statutory Funds</td>
+                </tr>
+                <tr>
+                  <td>Reserve Fund</td>
+                  <td class="td-cred">{{ this.preserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+                  <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+                </tr>
+                <tr>
+                  <td>Coop. Education & Training Fund</td>
+                  <td class="td-cred">{{ this.pcetFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+                  <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+                </tr>
+                <tr>
+                  <td>Community Development Fund</td>
+                  <td class="td-cred">{{ this.pcdFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                  <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                </tr>
+                <tr>
+                  <td>Optional Fund</td>
+                  <td class="td-cred">{{ this.poptionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                  <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                </tr>
+                <tr class="totals">
+                  <td class="totass">Total Statutory Fund:</td>
+                  <td class="total-cred">{{  calculateLastYearTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+                  <td class="total-deb">{{   calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+                </tr>
+            <br>
+          <tr class="totals">
+            <td class="totass">Total of Member Equity:</td>
+            <td class="total-cred"></td>
+            <td class="total-deb">{{ calculateCombinedMemberEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+          </tr>
+          <br/>
+          <tr class="totals">
+            <td class="titles2">Total of Liability and Equity:</td>
+            <td class="total-cred2"></td>
+            <td class="total-deb2">{{ calculateCombinedTotalLiabilityandEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+          </tr>
+          </ng-container>
+ <br>
+          
+          <br>
+          <tr class="totals">
+            <td class="totass">Total of Member Equity:</td>
+            <td class="total-cred"></td>
+            <td class="total-deb">{{ calculateCombinedMemberEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+          </tr>
+          <br/>
+          <tr class="totals">
+            <td class="titles2">Total of Liability and Equity:</td>
+            <td class="total-cred2"></td>
+            <td class="total-deb2">{{ calculateCombinedTotalLiabilityandEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+          </tr>
+
           </tbody>
         </table>
       </div>

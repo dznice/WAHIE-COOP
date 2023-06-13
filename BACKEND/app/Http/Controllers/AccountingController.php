@@ -156,6 +156,15 @@ public function totaljour(Request $request)
         ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
         ->join('members', 'transactions.members_id', '=', 'members.id');
     
+    if ($startDate && $endDate) {
+        $totalsQuery->whereBetween('transactions.transaction_date', [$startDate, $endDate]);
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+    }else{
+        
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+    }
 
     if ($memberIds) {
         $totalsQuery->where('members.id', $memberIds);
@@ -166,7 +175,6 @@ public function totaljour(Request $request)
         $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type');
         $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }
-
     if ($journalIds) {
         $totalsQuery->where('lib_journals.id', $journalIds);
         $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name');
@@ -192,12 +200,6 @@ public function totaljour(Request $request)
     $totalc = 0;
     $totald = 0;
     $total_balance =0;
-    // $resultVariable =0;
-    // $reserveVariable =0;
-    // $cetVariable = 0;
-    // $cdfVariable = 0;
-    // $ofVariable = 0;
-    // $cetfVariable = 0;
 
     $result = [];
     $final = [];
@@ -248,40 +250,7 @@ public function totaljour(Request $request)
         case 'equity':
             $total_balance = $total->total_credit_amount - $total->total_debit_amount;
             $total_equity += $total_balance;
-        
-            // if ($total->journal_name == 'Subscribed Share Capital - Common') {
-            //     // Multiply by 10% and assign to "Reserve Fund"
-            //     $reserve_fund_balance = $total_balance * 0.1;
-            //     $total->journal_name = 'Reserve Fund';
-            //     $total->total_balance = $reserve_fund_balance;
-            //     $reserveVariable = $reserve_fund_balance;
-        
-            //     // Multiply by 05% and assign to "CET Fund"
-            //     $cet_fund_balance = $total_balance * 0.05;
-            //     $total->journal_name = 'Coop. Education & Training Fund';
-            //     $total->total_balance = $cet_fund_balance;
-            //     $cetVariable = $cet_fund_balance;
-
-            //     // Multiply by 03% and assign to "Community Development Fund"
-            //     $cdf_fund_balance = $total_balance * 0.03;
-            //     $total->journal_name = 'Community Development Fund';
-            //     $total->total_balance = $cdf_fund_balance;
-            //     $cdfVariable = $cdf_fund_balance;
-
-            //     // Multiply by 07% and assign to "Optional Fund"
-            //     $of_fund_balance = $total_balance * 0.07;
-            //     $total->journal_name = 'Optional Fund';
-            //     $total->total_balance = $of_fund_balance;
-            //     $ofVariable = $of_fund_balance;
-
-            //     // Multiply by 05% and assign to "Due to Union/Federation (CETF)"
-            //     $cetf_fund_balance = $total_balance * 0.05;
-            //     $total->journal_name = 'Due to Union/Federation (CETF)';
-            //     $total->total_balance = $cetf_fund_balance;
-            //     $cetfVariable = $cetf_fund_balance;
-            // }
             break;
-        
         
         //Revenue
             case 'revenue':
@@ -303,11 +272,6 @@ public function totaljour(Request $request)
             'journType' => $total->journal_type,
             'journal_name' => $total->journal_name,
             'total_balance' => $total_balance,
-            // 'reserveVariable' => $reserveVariable,
-            // 'cetVariable' =>$cetVariable,
-            // 'cdfVariable' => $cdfVariable,
-            // 'ofVariable' => $ofVariable,
-            // 'cetfVariable' => $cetfVariable,
             'totalc' => $totalc,
             'totald' => $totald,
         ];
@@ -396,8 +360,8 @@ public function totaljourlastyear(Request $request)
     $totals = $totalsQuery->get();
     $total_all_asset = 0;
     $total_asset = 0;
-    $total_non_asset = 0;
     $total_other_asset = 0;
+    $total_non_asset = 0;
     $total_all_liability = 0;
     $total_liability = 0;
     $total_non_liability = 0;
@@ -407,9 +371,10 @@ public function totaljourlastyear(Request $request)
     $total_expenses = 0;
     $totalc = 0;
     $totald = 0;
+    $total_balance =0;
 
     $result = [];
-    $finallastyear = [];
+    $final = [];
 
     foreach ($totals as $total) {
         $journalType = strtolower($total->journal_type); // Assuming "journal_type" column exists in the "LibJournal" table
@@ -422,7 +387,7 @@ public function totaljourlastyear(Request $request)
             case 'financial assets':
             case 'biologicals assets':
                 $total_balance = $total->total_debit_amount - $total->total_credit_amount;
-                $total_asset += $total_balance ;
+                $total_asset += $total_balance;
                 break;
             //Other Current Assets
             case 'other current assets':
@@ -435,6 +400,10 @@ public function totaljourlastyear(Request $request)
             case 'intangible assets':
                 $total_balance = $total->total_debit_amount - $total->total_credit_amount;
                 $total_non_asset += $total_balance ;
+                break;
+
+            case 'inventories':
+                $total_balance = $total->total_debit_amount - $total->total_credit_amount;
                 break;
         //Liabilities
             //CURRENT Liability
@@ -450,10 +419,11 @@ public function totaljourlastyear(Request $request)
                 $total_non_liability += $total_balance;
                 break;
         //Equity
-            case 'equity':
-                $total_balance = $total->total_credit_amount - $total->total_debit_amount;
-                $total_equity += $total_balance;
-                break;
+        case 'equity':
+            $total_balance = $total->total_credit_amount - $total->total_debit_amount;
+            $total_equity += $total_balance;
+            break;
+        
         //Revenue
             case 'revenue':
             case 'cost of goods sold':
@@ -462,8 +432,8 @@ public function totaljourlastyear(Request $request)
                 $total_revenue += $total_balance;
                 break;
         //Expenses
-            case 'expense':
-            case 'subsidy/ gain (losses)':
+            case 'expenses':
+            case 'other items – subsidy/ gain (losses)':
                 $total_balance = $total->total_credit_amount - $total->total_debit_amount;
                 $total_expenses += $total_balance;
                 break;
@@ -493,7 +463,7 @@ public function totaljourlastyear(Request $request)
 
         $result = $entry;
 
-        $finallastyear[] = [
+        $final[] = [
             'result' => $result,
             'total_asset' => $total_asset,
             'total_other_asset' => $total_other_asset,
@@ -505,14 +475,12 @@ public function totaljourlastyear(Request $request)
             'total_equity' => $total_equity,
             'total_liability_equity' => $total_all_liability + $total_equity,
             'total_revenue' => $total_revenue,
-            'total_expenses' => $total_expenses,
-            'startingBalanceYear' => $startingBalanceYear,
-            'previousYear' => $previousYear
+            'total_expenses' => $total_expenses
         ];
 
     }
 
-    return response()->json($finallastyear);
+    return response()->json($final);
 }
 
 
@@ -818,8 +786,29 @@ public function totaljourmem(Request $request)
             ->join('transactions', 'payables.transaction_id', '=', 'transactions.id')
             ->join('members', 'transactions.members_id', '=', 'members.id')
             ->where('members.id', $memberId)
-            ->groupBy('transactions.id', 'transactions.transaction_number' , 'transactions.transaction_number','journals_id', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','credits.payables_id','credits.status')
-            ->select('transactions.id','transactions.transaction_number', 'journals_id as journId', 'journal_name', 'journal_number', 'description', 'due_date', 'debit_amount', 'credit_amount','payables_id as paysId','credits.status');
+            ->groupBy('transactions.id', 
+            'transactions.transaction_number' , 
+            'transactions.transaction_number',
+            'journals_id', 
+            'journal_name', 
+            'journal_number', 
+            'description', 
+            'due_date', 
+            'debit_amount', 
+            'credit_amount',
+            'credits.payables_id',
+            'credits.status')
+            ->select('transactions.id',
+            'transactions.transaction_number', 
+            'journals_id as journId', 
+            'journal_name', 
+            'journal_number', 
+            'description', 
+            'due_date', 
+            'debit_amount', 
+            'credit_amount',
+            'payables_id as paysId',
+            'credits.status');
 
         if($transactionNo){
             $transacQuery->where('transactions.transaction_number', $transactionNo);
@@ -881,4 +870,5 @@ public function totaljourmem(Request $request)
         $totals = $transacQuery->get();
         return response()->json($totals);
     }
+    
 }

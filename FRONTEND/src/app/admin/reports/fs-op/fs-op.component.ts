@@ -102,7 +102,7 @@ export class FsOpComponent implements OnInit {
         console.log(res);
         this.pledgers = res;
         this.pastProcessLedgerData();
-        console.log(this.processLedgerData())
+        console.log(this.pastProcessLedgerData())
       }
     );
   }
@@ -117,7 +117,7 @@ export class FsOpComponent implements OnInit {
 
       if (['revenue', 'cost of goods sold', 'cost of services'].includes(journalName)) {
         this.prevenue.push(items);
-      } else if (['expenses', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
+      }  else if (['expenses', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
         this.pexpense.push(items);
       } 
     }
@@ -132,6 +132,8 @@ export class FsOpComponent implements OnInit {
   dueToUnion : any;
   statutoryFund : any;
   netFundAfterSF : any;
+  ioc : any;
+  patRef : any;
   
   calculateTotalBalance(): number {
     let totalBalance = 0;
@@ -158,10 +160,52 @@ export class FsOpComponent implements OnInit {
 
     this.netFundAfterSF = totalBalance - this.statutoryFund;
 
+    this.ioc = this.netFundAfterSF * 0.7;
+    this.patRef = this.netFundAfterSF *0.3;
+
     return totalBalance;
   }
 
+  preserveFund : any;
+  pcetFund : any;
+  pcdFund : any;
+  poptionalFund : any;
+  pdueToUnion : any;
+  pstatutoryFund : any;
+  pnetFundAfterSF : any;
+  pioc : any;
+  ppatRef : any;
+  
+  calculateLastYearTotalBalance(): number {
+    let totalBalance = 0;
+    let totalExpenses = 0;
+    let totalRevenue = 0;
+  
+    for (const item of this.prevenue) {
+      totalRevenue += item.result.total_balance;
+    }
+  
+    for (const item of this.pexpense) {
+      totalExpenses += item.result.total_balance;
+    }
 
+    totalBalance = totalRevenue - totalExpenses;
+
+    this.preserveFund = totalBalance * 0.1;
+    this.pcetFund = totalBalance * 0.05;
+    this.pcdFund = totalBalance * 0.03;
+    this.poptionalFund = totalBalance * 0.07;
+    this.pdueToUnion = totalBalance * 0.05
+  
+    this.pstatutoryFund = this.preserveFund+this.pcetFund+this.pcdFund+this.poptionalFund+this.pdueToUnion;
+
+    this.pnetFundAfterSF = totalBalance - this.pstatutoryFund;
+
+    this.pioc = this.pnetFundAfterSF * 0.7;
+    this.ppatRef = this.pnetFundAfterSF *0.3;
+
+    return totalBalance;
+  }
 
 
 

@@ -267,9 +267,24 @@
             border-left: none;
             border-right: none;
             border-bottom: none;
-            border-color: var(--subtext-color);
-            border-top: 1px solid var(--subtext-color);
-            border-top: 1px double var(--subtext-color);
+            border-color: var(--text-color-2);
+            border-top: 2px solid var(--text-color-2);
+            border-top: 2px double var(--text-color-2);
+            text-align: right;
+            font-weight: 500;
+            font-size: medium;
+            
+
+          }
+
+          .total-cred2 {
+            border-style: double;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            border-color: var(--text-color-2);
+            border-top: 2px solid var(--text-color-2);
+            border-top: 2px double var(--text-color-2);
             text-align: right;
             font-weight: 500;
             font-size: medium;
