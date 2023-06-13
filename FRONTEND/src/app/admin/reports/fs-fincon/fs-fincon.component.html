@@ -14,7 +14,8 @@
     </div>
     <div class="PDF"> 
         <button (click)="exportPDF()"  class="ti ti-file-text PDF-icon" ></button>
-        <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet excel-icon"></button>
+        <button (click)="generateExcel()" class="ti ti-file-spreadsheet excel-icon"></button>
+       <input hidden accept="image/*" type="file" id="logo" name="logo" (change)="chLogo($event)">
       </div>
     </div>
 
