@@ -240,6 +240,8 @@ calculateMemberEquity(): number {
     this.pliabilities = [];
     this.pnonLiabilities = [];
     this.pequity = [];
+    this.prevenue = [];
+    this.pexpense = [];
     this.psscc = [];
     this.psrc = [];
     this.psrp = [];
@@ -429,11 +431,7 @@ calculateMemberEquity(): number {
   cetFund : any;
   cdFund : any;
   optionalFund : any;
-  dueToUnion : any;
   statutoryFund : any;
-  netFundAfterSF : any;
-  combinedEquityTotalBalance : any;
-  combinedLiabilityandEquityBalance : any;
   
   calculateTotalBalance(): number {
     let totalBalance = 0;
@@ -456,9 +454,10 @@ calculateMemberEquity(): number {
     this.cdFund = totalBalance * 0.03;
     this.optionalFund = totalBalance * 0.07;
   
-    statutoryFund = this.reserveFund+this.cetFund+this.cdFund+this.optionalFund;
+    this.statutoryFund = this.reserveFund+this.cetFund+this.cdFund+this.optionalFund;
+    totalBalance = this.reserveFund+this.cetFund+this.cdFund+this.optionalFund;
 
-    return statutoryFund;
+    return totalBalance;
   }
 
   calculateCombinedMemberEquity(): number {
@@ -479,24 +478,19 @@ calculateMemberEquity(): number {
   pcetFund : any;
   pcdFund : any;
   poptionalFund : any;
-  pdueToUnion : any;
   pstatutoryFund : any;
-  pnetFundAfterSF : any;
-  pioc : any;
-  ppatRef : any;
   
   calculateLastYearTotalBalance(): number {
     let totalBalance = 0;
     let totalExpenses = 0;
     let totalRevenue = 0;
-    let pstatutoryFund = 0
   
-    for (const items of this.prevenue) {
-      totalRevenue += items.result.total_balance;
+    for (const item of this.prevenue) {
+      totalRevenue += item.result.total_balance;
     }
   
-    for (const items of this.pexpense) {
-      totalExpenses += items.result.total_balance;
+    for (const item of this.pexpense) {
+      totalExpenses += item.result.total_balance;
     }
 
     totalBalance = totalRevenue - totalExpenses;
@@ -506,9 +500,10 @@ calculateMemberEquity(): number {
     this.pcdFund = totalBalance * 0.03;
     this.poptionalFund = totalBalance * 0.07;
   
-    pstatutoryFund = this.preserveFund+this.pcetFund+this.pcdFund+this.poptionalFund;
+    this.pstatutoryFund = this.preserveFund+this.pcetFund+this.pcdFund+this.poptionalFund;
+    totalBalance = this.preserveFund+this.pcetFund+this.pcdFund+this.poptionalFund;
 
-    return pstatutoryFund;
+    return totalBalance;
   }
 
   calculateLastYearCombinedMemberEquity(): number {
