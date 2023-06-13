@@ -131,7 +131,7 @@ select {
 .region ::ng-deep .ng-select-container {
   position: absolute;
   font-size: 14px;
-  width: 49.90%;
+  width: 49.9%;
   box-sizing: border-box;
   border: 1.6px solid var(--border-color);
   border-radius: 0.45rem;
@@ -141,7 +141,7 @@ select {
 
 .region ::ng-deep .ng-dropdown-panel,
 .municipality ::ng-deep .ng-dropdown-panel {
-  width: 49.90%;
+  width: 49.9%;
   margin-top: 2.2rem;
   margin-left: 50.1%;
 }
@@ -224,7 +224,7 @@ select {
 .region:focus ::ng-deep .ng-select-container,
 .province:focus ::ng-deep .ng-select-container,
 .municipality:focus ::ng-deep .ng-select-container,
-.barangay:focus  ::ng-deep .ng-select-container {
+.barangay:focus ::ng-deep .ng-select-container {
   //border: 1.6px solid var(--primary-color);
   outline: var(--primary-color);
 }
@@ -264,7 +264,7 @@ form .fields .tabs__content {
 
 .header {
   padding-left: 3rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   //margin-bottom: 0rem;
   position: sticky;
   background-color: #fff;
@@ -305,7 +305,7 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
   height: 36px;
   display: flex;
   width: 100%;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .benelabel {
@@ -323,7 +323,7 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
   color: var(--primary-color);
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .delbut {
@@ -339,9 +339,9 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
   outline: none;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
-.delbut:hover{
+.delbut:hover {
   color: #ff0000;
 }
 
@@ -356,26 +356,29 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
     width: 100px;
     background-color: var(--primary-color);
     color: var(--white);
+    margin-bottom: 2px;
+    margin-left: 2px;
   }
 
   .btn-submit:hover {
     background-color: var(--primary-color-light);
     color: var(--white);
   }
-  
+
   .btn-logout {
     height: 45px;
     width: 100px;
-    background-color: var(--grey-alt);
-        color: var(--dark-grey);
+    background-color: transparent;
+    box-shadow: 0 0 0 1px var(--border-color);
+    color: var(--text-color-2);
+    margin-bottom: 2px;
+    margin-left: 2px;
   }
 
   .btn-logout:hover {
-    background-color: var(--border-color);
-    color: var(--dark-grey);
+    background-color: var(--grey-2);
   }
 }
-
 
 /* Modal */
 .modal-bg {
@@ -411,13 +414,13 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
       .header-title {
         font-weight: 600;
         font-size: 20px;
-        //color: var(--primary-color);
+        color: var(--text-color-2);
         margin-top: 0.15rem;
       }
 
       .ti-x {
         font-size: 20px;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
         cursor: pointer;
         transition: all 0.2s ease;
         padding: 4px;
@@ -426,7 +429,7 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
       }
 
       .ti-x:hover {
-        background-color: var(--grey-alt);
+        background-color: var(--grey-2);
         border-radius: 100%;
       }
     }
@@ -437,15 +440,17 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
       .text-bold {
         font-size: 15px;
         font-weight: 500;
+        color: var(--text-color-2);
       }
 
       .text-muted {
         opacity: 55%;
+        color: var(--text-color-2);
       }
     }
 
     .modal-footer {
-      padding: 15px 25px 15px;
+      padding: 18px 25px;
       border-top: 1px solid var(--border-color);
       display: flex;
       justify-content: flex-end;
@@ -454,7 +459,7 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
       .btn {
         width: 100px;
         height: 42px;
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         font-size: 0.9rem;
         text-align: center;
         cursor: pointer;
@@ -462,21 +467,22 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
 
       .btn-save {
         background-color: var(--primary-color);
-        color: var(--panel-color);
-        margin-left: .75rem;
+        color: var(--white);
+        margin-left: 1rem;
       }
 
       .btn-save:hover {
-        background-color: var(--primary-alt);
+        background-color: var(--primary-color-light);
       }
 
       .btn-close {
         background-color: transparent;
-        color: var(--dark-grey);
+        box-shadow: 0 0 0 1px var(--border-color);
+        color: var(--text-color-2);
       }
 
       .btn-close:hover {
-        background-color: var(--grey-alt);
+        background-color: var(--grey-2);
       }
     }
   }

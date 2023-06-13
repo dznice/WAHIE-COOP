@@ -72,7 +72,7 @@ main {
       font-size: 16px;
       font-weight: 500;
       color: var(--text-color-3);
-      border-radius: 0.45rem;
+      border-radius: 0.5rem;
       border: 1px solid var(--border-color);
       background-color: var(--panel-color);
       padding: 0 10px;
@@ -100,7 +100,7 @@ main {
       font-size: 16px;
       font-weight: 500;
       color: var(--text-color-3);
-      border-radius: 0.45rem;
+      border-radius: 0.5rem;
       border: 1px solid var(--border-color);
       background-color: var(--panel-color);
       padding: 0 10px;
@@ -127,7 +127,7 @@ main {
       font-size: 16px;
       font-weight: 500;
       color: var(--text-color-3);
-      border-radius: 0.45rem;
+      border-radius: 0.5rem;
       border: 1px solid var(--border-color);
       background-color: var(--panel-color);
       padding: 0 10px;
@@ -187,7 +187,7 @@ main {
             padding: .5rem 1.25rem;
             background: var(--overdue-bg);
             color: var(--overdue-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
             width: fit-content;
           }
 
@@ -195,14 +195,14 @@ main {
             padding: .5rem 1.25rem;
             background: var(--pending-bg);
             color: var(--pending-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
           }
 
           .paid {
             padding: .5rem 2.15rem;
             background: var(--paid-bg);
             color: var(--paid-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
             text-align: center;
           }
         }
@@ -211,8 +211,8 @@ main {
       tr:hover {
         td {
           cursor: pointer;
-          color: var(--primary-color);
-          background-color: var(--panel-color);
+          color: var(--text-color-2);
+          background-color: var(--grey-2);
         }
       }
     }

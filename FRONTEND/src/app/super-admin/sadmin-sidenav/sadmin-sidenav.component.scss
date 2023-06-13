@@ -175,10 +175,9 @@
     .btn-down {
       text-align: right;
       margin-right: 0.5rem;
-      margin-top: 0.25rem;
       margin-left: auto;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 24px;
       height: 1.5rem;
       border-radius: 50%;
       color: var(--text-color-2);
@@ -359,7 +358,7 @@
 
       .ti-x {
         font-size: 20px;
-        color: var(--grey-3);
+        color: var(--text-color-3);
         cursor: pointer;
         transition: all 0.2s ease;
         padding: 4px;
@@ -398,7 +397,7 @@
           font-size: 14px;
           border-radius: 0.625rem;
           padding-left: 1rem;
-          font-family: inherit;
+          font-family: "Poppins", sans-serif;
         }
 
         .input-field:focus {
@@ -413,7 +412,7 @@
         bottom: 66%;
         cursor: pointer;
         font-size: 1.3rem;
-        color: var(--grey-3);
+        color: var(--eye-color);
       }
   
       .eye {
@@ -423,7 +422,7 @@
         bottom: 46%;
         cursor: pointer;
         font-size: 1.3rem;
-        color: var(--grey-3);
+        color: var(--eye-color);
       }
   
       .eye2 {
@@ -433,14 +432,8 @@
         bottom: 26%;
         cursor: pointer;
         font-size: 1.3rem;
-        color: var(--grey-3);
+        color: var(--eye-color);
       }
-  
-      // .meter {
-      //   max-width: 70px;
-      //   transform: translate(2%, 10%);
-      //   width: 300%;
-      // }
 
       .text-danger1 {
         color: var(--red);
@@ -455,13 +448,13 @@
       padding: 18px 25px;
       border-top: 1px solid var(--border-color);
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
 
       .btn {
         width: 100px;
         height: 42px;
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         font-size: 0.9rem;
         text-align: center;
         cursor: pointer;
@@ -474,12 +467,13 @@
       }
 
       .btn-save:hover {
-        background-color: var(--primary-color-dark);
+        background-color: var(--primary-color-light);
       }
 
       .btn-close {
         background-color: transparent;
-        color: var(--cancel-text);
+        box-shadow: 0 0 0 1px var(--border-color);
+        color: var(--text-color-2);
       }
 
       .btn-close:hover {

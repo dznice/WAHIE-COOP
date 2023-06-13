@@ -31,7 +31,7 @@ main {
         }
 
         .btn-add:hover {
-          background-color: var(--primary-alt);
+          background-color: var(--primary-color-light);
         }
 
         .ti-plus {
@@ -184,12 +184,24 @@ main {
       font-size: 16px;
       font-weight: 500;
       color: var(--text-color-3);
-      border-radius: 0.45rem;
+      border-radius: 0.5rem;
       border: 1px solid var(--border-color);
       background-color: var(--panel-color);
       padding: 0 10px;
       height: 36px;
       margin: 8px 8px 0 0;
+    }
+
+    input:focus {
+      border: 1px solid var(--text-color-3);
+    }
+
+    input::placeholder {
+      color: var(--text-color-3);
+    }
+
+    select:focus {
+      border: 1px solid var(--text-color-3);
     }
   }
 }
@@ -240,7 +252,7 @@ main {
           padding: 0.5rem 1.25rem;
           background: var(--overdue-bg);
           color: var(--overdue-font);
-          border-radius: 0.45rem;
+          border-radius: 0.5rem;
           width: fit-content;
         }
 
@@ -248,33 +260,33 @@ main {
           padding: 0.5rem 1.25rem;
           background: var(--pending-bg);
           color: var(--pending-font);
-          border-radius: 0.45rem;
+          border-radius: 0.5rem;
         }
 
         .paid {
           padding: .5rem 2.05rem;
           background: var(--paid-bg);
           color: var(--paid-font);
-          border-radius: 0.45rem;
+          border-radius: 0.5rem;
           text-align: center;
         }
         .closed {
           padding: 0.5rem 1.5rem;
           background: var(--paid-bg);
           color: var(--paid-font);
-          border-radius: 0.45rem;
+          border-radius: 0.5rem;
           text-align: center;
         }
       }
     }
 
     tr:hover {
-      td {
-        cursor: pointer;
-        color: var(--primary-color);
-        background-color: var(--panel-color);
+        td {
+          cursor: pointer;
+          color: var(--text-color-2);
+          background-color: var(--grey-2);
+        }
       }
-    }
   }
 }
 
@@ -284,31 +296,6 @@ main {
   font-size: 14px;
   margin: 10px 20px;
   color: var(--text-color-3);
-}
-
-.buttonedit {
-  width: 100%;
-
-  .Edit {
-    position: absolute;
-    right: 0;
-    margin-top: 1rem;
-    margin-right: 20px;
-    margin-left: 20px;
-    height: 40px;
-    width: 80px;
-    outline: 2px solid var(--primary-color);
-    font-family: "Poppins", sans-serif;
-    background-color: var(--panel-color);
-    color: var(--primary-color);
-    border-radius: 5px;
-    outline: 4px var(--primary-color);
-    font-weight: 600;
-
-    :hover {
-      cursor: pointer;
-    }
-  }
 }
 
 .member_information {

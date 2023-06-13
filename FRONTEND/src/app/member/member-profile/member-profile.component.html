@@ -1,26 +1,26 @@
 <main>
-  <!-- <div class="container"> -->
-    <div class="heading">Profile Settings</div>
-    <main class="content">
-      <input type="radio" checked id="home" name="slider" />
-      <input type="radio" id="blog" name="slider" />
-      <input type="radio" id="help" name="slider" />
-      <div class="list">
-        <label for="home" class="home">
-          <i class="ti ti-user-check"></i>
-          <span class="title">Member Profile</span>
-        </label>
-        <label for="blog" class="blog">
-         <i class="ti ti-users-group"></i>
-          <span class="title">Beneficiaries</span>
-        </label>
-        <label for="help" class="help">
-          <i class="ti ti-shield-lock"></i>
-          <span class="title">Password</span>
-        </label>
-        <div class="slider"></div>
-      </div>
-    
+  <h1 class="heading">Profile Settings</h1>
+
+  <section class="content">
+    <input type="radio" checked id="home" name="slider" />
+    <input type="radio" id="blog" name="slider" />
+    <input type="radio" id="help" name="slider" />
+    <div class="list">
+      <label for="home" class="home">
+        <i class="ti ti-user-cog"></i>
+        <span class="title">Member Profile</span>
+      </label>
+      <label for="blog" class="blog">
+        <i class="ti ti-users-group"></i>
+        <span class="title">Beneficiaries</span>
+      </label>
+      <label for="help" class="help">
+        <i class="ti ti-shield-lock"></i>
+        <span class="title">Password</span>
+      </label>
+      <div class="slider"></div>
+    </div>
+
     <div class="text-content">
       <div class="home text">
 
@@ -40,135 +40,135 @@
         </div>
 
         <div class="first-tab">
-        <div class="fields">
-          <span>Additional Information</span>
-          <table>
-            <div class="row">
-            <tr>
-              <label>Mobile Number</label>
-              <td class="fieldsdata1" id="fieldsdataRow">(+63) {{ mobile_number }}</td>
-            </tr>
-            <tr>
-              <label>Gender</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ gender }}</td>
-            </tr>
-          </div>
+          <div class="fields">
+            <span>Additional Information</span>
+            <table>
+              <div class="row">
+                <tr>
+                  <label>Mobile Number</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">(+63) {{ mobile_number }}</td>
+                </tr>
+                <tr>
+                  <label>Gender</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ gender }}</td>
+                </tr>
+              </div>
 
-          <div class="row">
-            <tr>
-              <label>Birthdate</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ birthdate | date : "MM/dd/yyyy" }}</td>
-            </tr>
-            <tr>
-              <label>Civil Status</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ civil_status }}</td>
-            </tr>
-          </div>
-          
-            <tr *ngIf="civil_status != 'Single'">
-              <label>Spouse</label>
-              <td class="fieldsdata">{{ spouse }}</td>
-            </tr>
+              <div class="row">
+                <tr>
+                  <label>Birthdate</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ birthdate | date : "MM/dd/yyyy" }}</td>
+                </tr>
+                <tr>
+                  <label>Civil Status</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ civil_status }}</td>
+                </tr>
+              </div>
 
-            <tr>
-              <label>Current Address</label>
-              <td class="fieldsdata">{{ address }}</td>
-            </tr>
+              <tr *ngIf="civil_status != 'Single'">
+                <label>Spouse</label>
+                <td class="fieldsdata">{{ spouse }}</td>
+              </tr>
 
-          <div class="row">
-            <tr>
-              <label>Employee Status</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ employment_status }}</td>
-            </tr>
-            <tr>
-              <label>TIN Number</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ tin_number }}</td>
-            </tr>
-          </div>
+              <tr>
+                <label>Current Address</label>
+                <td class="fieldsdata">{{ address }}</td>
+              </tr>
 
-          <div class="row">
-            <tr>
-              <label>Occupation</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ occupation }}</td>
-            </tr>
-            <tr>
-              <label>Department</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ department }}</td>
-            </tr>
-          </div>
+              <div class="row">
+                <tr>
+                  <label>Employee Status</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ employment_status }}</td>
+                </tr>
+                <tr>
+                  <label>TIN Number</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ tin_number }}</td>
+                </tr>
+              </div>
 
-          <div class="row">
-            <tr>
-              <label>Company</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ company_name }}</td>
-            </tr>
-            <tr>
-              <label>Company Address</label>
-              <td class="fieldsdata1" id="fieldsdataRow">{{ company_address }}</td>
-            </tr>
+              <div class="row">
+                <tr>
+                  <label>Occupation</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ occupation }}</td>
+                </tr>
+                <tr>
+                  <label>Department</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ department }}</td>
+                </tr>
+              </div>
+
+              <div class="row">
+                <tr>
+                  <label>Company</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ company_name }}</td>
+                </tr>
+                <tr>
+                  <label>Company Address</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ company_address }}</td>
+                </tr>
+              </div>
+            </table>
           </div>
-          </table>
         </div>
-      </div>
       </div>
 
       <div class="blog text">
         <div class="second-tab">
-        <span>Beneficiary</span>
-        <div class="fields">
-          <table *ngFor="let b of ben">
-            <tr *ngIf="memId == b.benificiary_id">
-              <div class="row2">
-                <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_name }}</td>
-                <td class="fieldsdata2" id="fieldsdataRow2">
-                  {{ b.benificiary_birthdate | date : "MM/dd/yyyy" }}
-                </td>
-                <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_relation }}</td>
-              </div>
-              <br />
-            </tr>
-          </table>
+          <span>Beneficiary</span>
+          <div class="fields">
+            <table *ngFor="let b of ben">
+              <tr *ngIf="memId == b.benificiary_id">
+                <div class="row2">
+                  <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_name }}</td>
+                  <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_birthdate | date : "MM/dd/yyyy" }}</td>
+                  <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_relation }}</td>
+                </div>
+                <br />
+              </tr>
+            </table>
+          </div>
         </div>
-      </div>
       </div>
 
       <div class="help text">
         <div class="third-tab">
-        <span>Change Password</span>
-        <div class="tabs">
-          <div class="tab-content">
-            <div class="fields">
-              <form ngNativeValidate [formGroup]="changePass" (ngSubmit)="onSubmit()" #memberChange="ngForm">
-                <div class="passhead">
-                </div>
-                <div class="change">
-                  <div class="input-field">
-                    <label for="Current">Current</label>
-                    <input type="password" formControlName="current_pass" id="current_pass" name="current_pass" required
-                      [(ngModel)]="form.current_pass" />
+          <span>Change Password</span>
+          <div class="tabs">
+            <div class="tab-content">
+              <div class="fields">
+                <form ngNativeValidate [formGroup]="changePass" (ngSubmit)="onSubmit()" #memberChange="ngForm">
+                  <div class="passhead">
                   </div>
-                  <div class="input-field">
-                    <label for="New">New Password</label>
-                    <input type="password" id="new_pass" name="new_pass" formControlName="new_pass" required
-                      [(ngModel)]="form.new_pass" />
+                  <div class="change">
+                    <div class="input-field">
+                      <label for="Current">Current</label>
+                      <input [type]="chcurrent ?'password':'text'" formControlName="current_pass" id="current_pass" name="current_pass" required [(ngModel)]="form.current_pass" />
+                      <span class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+                    </div>
+                    <div class="input-field">
+                      <label for="New">New Password</label>
+                      <input [type]="changetype?'password':'text'" id="new_pass" name="new_pass" formControlName="new_pass" required [(ngModel)]="form.new_pass" />
+                      <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+                    </div>
+                    <div class="input-field">
+                      <label for="Retype New">Confirm New Password</label>
+                      <input [type]="cchangetype?'password':'text'" id="retype_pass" name="retype_pass" formControlName="retype_pass" required [(ngModel)]="form.retype_pass" />
+                      <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+                    </div>
                   </div>
-                  <div class="input-field">
-                    <label for="Retype New">Confirm New Password</label>
-                    <input type="password" id="retype_pass" name="retype_pass" formControlName="retype_pass" required
-                      [(ngModel)]="form.retype_pass" />
+                  <div class="text-danger1"
+                    *ngIf="changePass.get('retype_pass')!.touched && changePass.get('retype_pass')!.invalid && changePass.controls['retype_pass'].errors!['passwordMatch']">
+                    <small>Password not match</small>
                   </div>
-                </div>
-                <div class="text-danger1" *ngIf="changePass.get('retype_pass')!.touched && changePass.get('retype_pass')!.invalid && changePass.controls['retype_pass'].errors!['passwordMatch']">
-                  <small>Password not match</small>
+                  <div class="add-account">
+                    <button type='submit' class="btn-add">Save Changes</button>
+                  </div>
+                </form>
               </div>
-                <div class="add-account">
-                  <button type='submit' class="btn-add">Save Changes</button>
-                </div>
-              </form>
             </div>
           </div>
         </div>
       </div>
-      </div>
     </div>
-  </main>
+  </section>
+</main>

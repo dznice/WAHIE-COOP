@@ -1,173 +1,178 @@
 <main>
-  <!-- <div class="dotted"></div> -->
-  <h1 class="title">Payment</h1>
-  <form *ngIf="paymentForm" [formGroup]="paymentForm" (ngSubmit)="savePayment()">
-    <div class="container">
-      <div class="left-cont">
-        <div class="sub_header">
-          <div class="customerPayment">
-            <label> Customer </label> <br />
-            <input type="text" formControlName="member"/>
-          </div>
+  <div class="main-cont">
+    <!-- <div class="dotted"></div> -->
+    <h1 class="title">Payment</h1>
+    <form *ngIf="paymentForm" [formGroup]="paymentForm" (ngSubmit)="savePayment()">
+      <div class="container">
+        <div class="left-cont">
+          <div class="sub_header">
+            <div class="customerPayment">
+              <label> Customer </label> <br />
+              <input type="text" formControlName="member" />
+            </div>
 
-          <div class="customerPayment">
-            <label> Payment Date </label>
-            <input type="date" formControlName="paymentDate" max="{{maxDate}}" (change)="denyDate()">
-            <!-- <input type="date" /> -->
-          </div>
+            <div class="customerPayment">
+              <label> Payment Date </label>
+              <input type="date" formControlName="paymentDate" max="{{maxDate}}" (change)="denyDate()">
+              <!-- <input type="date" /> -->
+            </div>
 
-          <div class="customerPayment">
-            <label> Payment Method </label>
-              <ng-select formControlName="paymentMethod" class="payMethod" [searchable]="false" [clearable]="false" placeholder="Choose payment method" (change)="changeMethod()">
+            <div class="customerPayment">
+              <label> Payment Method </label>
+              <ng-select formControlName="paymentMethod" class="payMethod" [searchable]="false" [clearable]="false" placeholder="Choose payment method"
+                (change)="changeMethod()">
                 <ng-option *ngFor="let item of paymentMethods" [value]="item.value">
                   {{ item.viewValue }}
                 </ng-option>
               </ng-select>
-          </div>
+            </div>
 
-          <div class="customerPayment">
-            <div *ngIf="selectedMethod =='2' || selectedMethod =='3' || selectedMethod =='4'">
-              <label> Reference No. </label>
-              <!-- <ng-select class="referenceNum" [(ngModel)]="reference_Num">
+            <div class="customerPayment">
+              <div *ngIf="selectedMethod =='2' || selectedMethod =='3' || selectedMethod =='4'">
+                <label> Reference No. </label>
+                <!-- <ng-select class="referenceNum" [(ngModel)]="reference_Num">
                 <ng-option *ngFor="let reference_Num of reference_Number" [value]="reference_Num">
                   {{ reference_Num }}
                 </ng-option>
               </ng-select> -->
-              <input type="text" formControlName="referenceNo">
+                <input type="text" formControlName="referenceNo">
+              </div>
             </div>
+
+            <div class="customerPayment">
+              <label> Deposit to </label>
+              <ng-select class="depositCash" [(ngModel)]="deposit" [searchable]="false" [clearable]="false" placeholder="Cash and cash equivalents"
+                formControlName="depositTo">
+                <ng-option *ngFor="let deposit of deposits" [value]="deposit">
+                  {{ deposit }}
+                </ng-option>
+              </ng-select>
+            </div>
+
+            <div class="customerPayment">
+              <label> Transaction No. </label>
+
+              <ng-select class="transactionNum" formControlName="transactionNo" (change)="changeTNo()">
+                <ng-option *ngFor="let item of transactionNOs" [value]="item.transaction_number">
+                  {{ item.transaction_number }}
+                </ng-option>
+              </ng-select>
+            </div>
+
           </div>
 
-          <div class="customerPayment">
-            <label> Deposit to </label>
-            <ng-select class="depositCash" [(ngModel)]="deposit" [searchable]="false" [clearable]="false" placeholder="Cash and cash equivalents" formControlName="depositTo">
-              <ng-option *ngFor="let deposit of deposits" [value]="deposit">
-                {{ deposit }}
-              </ng-option>
-            </ng-select>
-          </div>
 
-          <div class="customerPayment">
-            <label> Transaction No. </label>
+          <div class="journals">
+            <table *ngIf="selectedTNo > 0" formArrayName="payables">
+              <thead>
+                <th>No.</th>
+                <th>Account</th>
+                <th class="th-right">Debits</th>
+                <th class="th-right">Credits</th>
+                <th><a class="addbut" (click)="addRow()"><i class="ti ti-square-rounded-plus"></i></a></th>
+              </thead>
 
-            <ng-select class="transactionNum" formControlName="transactionNo" (change)="changeTNo()">
-              <ng-option *ngFor="let item of transactionNOs" [value]="item.transaction_number">
-                {{ item.transaction_number }}
-              </ng-option>
-            </ng-select>
-          </div>
+              <tbody>
+                <tr *ngFor="let item of payRow.controls; let i = index" [formGroupName]="i">
+                  <td class="td-center">{{ i + 1 }}</td>
+                  <td class="td-right">
+                    <ng-select class="trial" formControlName="account">
+                      <ng-option *ngFor="let item of libJournals" [value]="item.id">
+                        {{item.journal_number}} {{item.journal_name}}
+                      </ng-option>
+                    </ng-select>
+                  </td>
+                  <td class="tablePayment">
+                    <input type="number" formControlName="debit" (change)="autoZero(i)" />
+                  </td>
+                  <td class="tablePayment">
+                    <input type="number" formControlName="credit" (change)="autoZero(i)" />
+                  </td>
 
-        </div>
+                  <td (click)="showDel(1)">
+                    <a class="delbut">
+                      <i class="ti ti-square-rounded-x"></i>
+                    </a>
+                  </td>
 
+                  <!-- Delete Modal -->
+                  <section>
+                    <div>
+                      <div class="del-modal" *ngIf="delModal === 1">
+                        <div class="modal-wrapper">
+                          <div class="modal-header">
+                            <span class="header-title">Confirm delete</span>
+                            <i class="ti ti-x" (click)="showDel(2)"></i>
+                          </div>
 
-        <div class="journals">
-          <table *ngIf="selectedTNo > 0" formArrayName="payables">
-            <thead>
-              <th>No.</th>
-              <th>Account</th>
-              <th class="th-right">Debits</th>
-              <th class="th-right">Credits</th>
-              <th><a class="addbut" (click)="addRow()"><i class="ti ti-square-rounded-plus"></i></a></th>
-            </thead>
+                          <div class="modal-body">
+                            <span class="text-bold">Are you sure you want to delete this?</span>
+                            <br>
+                            <span class="text-muted">This cannot be undone.</span>
+                          </div>
 
-            <tbody>
-              <tr *ngFor="let item of payRow.controls; let i = index" [formGroupName]="i">
-                <td class="td-center">{{ i + 1 }}</td>
-                <td class="td-right">
-                  <ng-select class="trial" formControlName="account">
-                    <ng-option *ngFor="let item of libJournals" [value]="item.id">
-                      {{item.journal_number}} {{item.journal_name}}
-                    </ng-option>
-                  </ng-select>
-                </td>
-                <td class="tablePayment">
-                  <input type="number" formControlName="debit" (change)="autoZero(i)"/>
-                </td>
-                <td class="tablePayment">
-                  <input type="number" formControlName="credit" (change)="autoZero(i)" />
-                </td>
-                
-                <td (click)="showDel(1)">
-                  <a class="delbut">
-                    <i class="ti ti-square-rounded-x"></i>
-                  </a>
-                </td>
-
-                <!-- Delete Modal -->
-                <section>
-                  <div>
-                    <div class="del-modal" *ngIf="delModal === 1">
-                      <div class="modal-wrapper">
-                        <div class="modal-header">
-                          <span class="header-title">Confirm delete</span>
-                          <i class="ti ti-x" (click)="showDel(2)"></i>
-                        </div>
-
-                        <div class="modal-body">
-                          <span class="text-bold">Are you sure you want to delete this?</span>
-                          <br>
-                          <span class="text-muted">This cannot be undone.</span>
-                        </div>
-
-                        <div class="modal-footer">
-                          <button class="btn btn-close" type="button" (click)="showDel(2)">
-                            Close
-                          </button>
-                          <button class="btn btn-save" (click)="removeRow(i)">Delete</button>
+                          <div class="modal-footer">
+                            <button class="btn btn-close" type="button" (click)="showDel(2)">
+                              Close
+                            </button>
+                            <button class="btn btn-save" (click)="removeRow(i)">Delete</button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </section>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr class="total">
-                <td></td>
-                <td>TOTAL</td>
-                <td>{{ total_debit }}</td>
-                <td>{{ total_credit }}</td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      
-        <div class="footer">
-          <button class="cancel">Cancel</button>
-          <button class="save" type="submit">Save</button>
-        </div> 
-    </div>
+                  </section>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="total">
+                  <td></td>
+                  <td>TOTAL</td>
+                  <td>{{ total_debit }}</td>
+                  <td>{{ total_credit }}</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
 
-    <div class="right-cont">
-      <h2 class="recent">Recent Loans</h2>
-      <div class="right-table">
-      <table>
-        <thead>
-          <th>No.</th>
-          <th>Account</th>
-          <th class="th-right">Debits</th>
-          <th class="th-right">Credits</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of recents">
-            <td class="td-center">
-              <span>{{item.transaction_number}}</span>
-            </td>
-            <td class="td-center">
-              <span>{{item.journal_number}} {{item.journal_name}}</span>
-            </td>
-            <td class="td-center">
-              <span>{{item.debit_amount}}</span>
-            </td>
-            <td class="td-center">
-              <span>{{item.credit_amount}}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    </div>
-    
+
+        </div>
+
+        <div class="right-cont">
+          <h2 class="recent">Recent Loans</h2>
+          <div class="right-table">
+            <table>
+              <thead>
+                <th>No.</th>
+                <th>Account</th>
+                <th class="th-right">Debits</th>
+                <th class="th-right">Credits</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of recents">
+                  <td class="td-center">
+                    <span>{{item.transaction_number}}</span>
+                  </td>
+                  <td class="td-center">
+                    <span>{{item.journal_number}} {{item.journal_name}}</span>
+                  </td>
+                  <td class="td-center">
+                    <span>{{item.debit_amount}}</span>
+                  </td>
+                  <td class="td-center">
+                    <span>{{item.credit_amount}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <div class="footer">
+        <button class="cancel" type="button">Cancel</button>
+        <button class="save" type="submit">Save</button>
+      </div>
+    </form>
   </div>
-  </form>
 </main>

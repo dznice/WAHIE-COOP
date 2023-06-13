@@ -1,23 +1,18 @@
 <main>
 
-  <div class="top-content"  *ngFor="let info of item">
+  <div class="top-content" *ngFor="let info of item">
     <div class="mem-header" *ngIf="id == info.id">
       <div class="mem-name">
         <h1> {{ info.first_name }} {{ info.last_name }}</h1>
       </div>
-      <!-- <div class="mem-transac" >
-        <button class="btn-add">
-          <i class="ti ti-plus"></i>
-          New transaction
-        </button>
-      </div> -->
     </div>
 
     <div class="info-content" *ngIf="id == info.id">
       <div class="mem-contact">
         <div class="mem-info company">{{ info.company_name }}</div>
         <div class="mem-info email">{{ info.email }}</div>
-        <div class="mem-info contact">(+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-", info.mobile_number.slice(6)].join('') }}</div>
+        <div class="mem-info contact">(+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-", info.mobile_number.slice(6)].join('')
+          }}</div>
       </div>
       <div class="mem-payables" *ngFor="let bal of membalance">
         <div class="open-bal" *ngIf="id == bal.id">
@@ -40,13 +35,7 @@
 
   <div class="bot-content">
     <div class="tabs">
-      <input
-        type="radio"
-        class="tabs__radio"
-        name="tabs-coop"
-        id="Transactions"
-        checked
-      />
+      <input type="radio" class="tabs__radio" name="tabs-coop" id="Transactions" checked />
       <label for="Transactions" class="tabs__label">Transactions</label>
 
       <div class="tabs__content">
@@ -63,22 +52,12 @@
           <!-- DATE Start -->
           <div class="filter-field">
             <label>Start Date</label>
-            <input
-              class="form-control"
-              type="date"
-              [(ngModel)]="startDate"
-              name="sDate"
-            />
+            <input class="form-control" type="date" [(ngModel)]="startDate" name="sDate" />
           </div>
           <!-- DATE End -->
           <div class="filter-field">
             <label>End Date</label>
-            <input
-              class="form-control"
-              type="date"
-              [(ngModel)]="endDate"
-              name="eDate"
-            />
+            <input class="form-control" type="date" [(ngModel)]="endDate" name="eDate" />
           </div>
           <!-- Status -->
           <div class="filter-field">
@@ -100,47 +79,36 @@
             <th>Payment</th>
             <th>Status</th>
           </thead>
-          <tbody *ngFor="let acc of account.reverse()
-              | filter: type
-              | filterInfoDate: startDate: endDate
-              | filter : stat
-              | paginate: {itemsPerPage: 5, currentPage: p}">
-            <tr *ngIf="id==acc.debit.cred.transac.member.id" >
-            <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
-            <td >{{ acc.debit.cred.entries.entry_name }}</td>
-            <td >{{ acc.debit.cred.transac.transaction_number }}</td>
-            <td>{{ acc.debit.cred.due_date }}</td>
-            <td>{{ acc.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-            <td>{{ acc.payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-            <td class="status">
-              <span [ngClass]="{'pending': acc.status== 'Pending',
+          <tbody *ngFor="let acc of account.reverse() | filter: type | filterInfoDate: startDate: endDate
+              | filter : stat | paginate: {itemsPerPage: 5, currentPage: p}">
+            <tr *ngIf="id==acc.debit.cred.transac.member.id">
+              <td>{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
+              <td>{{ acc.debit.cred.entries.entry_name }}</td>
+              <td>{{ acc.debit.cred.transac.transaction_number }}</td>
+              <td>{{ acc.debit.cred.due_date }}</td>
+              <td>{{ acc.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td>{{ acc.payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td class="status">
+                <span [ngClass]="{'pending': acc.status== 'Pending',
                                 'overdue': acc.status == 'Overdue',
                                 'paid': acc.status == 'Paid',
                                 'closed': acc.status == 'Closed'}">
-              {{ acc.status }}</span></td>
-          </tr>
+                  {{ acc.status }}</span>
+              </td>
+            </tr>
           </tbody>
         </table>
 
         <div class="pagination-controls">
-          <pagination-controls 
-        [responsive]=true
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="p = $event">
-      </pagination-controls>
+          <pagination-controls [responsive]=true previousLabel="Prev" nextLabel="Next" (pageChange)="p = $event">
+          </pagination-controls>
         </div>
 
       </div>
 
 
 
-      <input
-        type="radio"
-        class="tabs__radio"
-        name="tabs-coop"
-        id="Member Details"
-      />
+      <input type="radio" class="tabs__radio" name="tabs-coop" id="Member Details" />
       <label for="Member Details" class="tabs__label">Member Details</label>
       <div class="tabs__content">
         <div class="member_information">
@@ -163,25 +131,26 @@
                 <tr>
                   <th class="fields" width="30%">Mobile Number</th>
 
-                <td class="fieldsdata">(+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-", info.mobile_number.slice(6)].join('') }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Birthdate</th>
+                  <td class="fieldsdata">(+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-",
+                    info.mobile_number.slice(6)].join('') }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Birthdate</th>
 
-                <td class="fieldsdata">{{ info.birthdate | date: 'mediumDate'}}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Gender</th>
+                  <td class="fieldsdata">{{ info.birthdate | date: 'mediumDate'}}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Gender</th>
 
-                <td class="fieldsdata">{{ info.gender }}</td>
-              </tr>
-              <tr>
-                <th class="fields" width="30%">Civil Status</th>
+                  <td class="fieldsdata">{{ info.gender }}</td>
+                </tr>
+                <tr>
+                  <th class="fields" width="30%">Civil Status</th>
 
-                <td class="fieldsdata">{{ info.civil_status }}</td>
-              </tr>
-              <tr *ngIf='info.civil_status!="Single"'>
-                <th class="fields" width="30%">Spouse</th>
+                  <td class="fieldsdata">{{ info.civil_status }}</td>
+                </tr>
+                <tr *ngIf='info.civil_status!="Single"'>
+                  <th class="fields" width="30%">Spouse</th>
 
                   <td class="fieldsdata">{{ info.spouse }}</td>
                 </tr>
@@ -198,26 +167,26 @@
             <table *ngFor="let info of item">
               <div *ngIf="id == info.id">
                 <tr>
-                  <th class="fields" width="30%">Employement Status</th>
+                  <th class="fields" width="35%">Employement Status</th>
                   <td class="fieldsdata">{{ info.employment_status }}</td>
                 </tr>
                 <tr>
-                  <th class="fields" width="30%">Occupation</th>
+                  <th class="fields" width="35%">Occupation</th>
 
                   <td class="fieldsdata">{{ info.occupation }}</td>
                 </tr>
                 <tr>
-                  <th class="fields" width="30%">Department</th>
+                  <th class="fields" width="35%">Department</th>
 
                   <td class="fieldsdata">{{ info.department }}</td>
                 </tr>
                 <tr>
-                  <th class="fields" width="30%">Company</th>
+                  <th class="fields" width="35%">Company</th>
 
                   <td class="fieldsdata">{{ info.company_name }}</td>
                 </tr>
                 <tr>
-                  <th class="fields" width="30%">Company Address</th>
+                  <th class="fields" width="35%">Company Address</th>
 
                   <td class="fieldsdata">{{ info.company_address }}</td>
                 </tr>

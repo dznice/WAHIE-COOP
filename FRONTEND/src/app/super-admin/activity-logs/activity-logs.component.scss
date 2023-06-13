@@ -14,23 +14,22 @@ main {
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 0.7rem;
+  border-radius: 0.625rem;
+  background-color: var(--panel-color);
+  padding: 0.5rem 1rem; 
+  margin-top: .75rem;
+  border: 1px solid var(--border-color);
   
-  ::placeholder{
-    color: var(--text-color-2);
-  }
-
   .filter-field1 {
     display: flex;
     width: calc(40% - 10px);
     flex-direction: column;
     margin: 8px 0;
     
-    
-
     label {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text-color-2);
+      color: var(--text-color-3);
     }
 
     input,
@@ -39,13 +38,21 @@ main {
       font-family: "Poppins", sans-serif;
       font-size: 16px;
       font-weight: 500;
-      color: var(--text-color-2);
-      border-radius: 0.45rem;
+      color: var(--text-color-3);
+      border-radius: 0.5rem;
       border: 1.6px solid var(--border-color);
+      background-color: var(--panel-color);
       padding: 0 10px;
       height: 40px;
       margin: 8px 0 0;
-      background-color: var(--panel-color);
+    }
+
+    input:focus {
+      border: 1.6px solid var(--text-color-3);
+    }
+
+    input::placeholder {
+      color: var(--text-color-3);
     }
   }
 
@@ -58,7 +65,7 @@ main {
     label {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text-color-2);
+      color: var(--text-color-3);
     }
 
     input,
@@ -67,13 +74,17 @@ main {
       font-family: "Poppins", sans-serif;
       font-size: 16px;
       font-weight: 500;
-      color: var(--text-color-2);
-      border-radius: 0.45rem;
+      color: var(--text-color-3);
+      border-radius: 0.5rem;
       border: 1.6px solid var(--border-color);
+      background-color: var(--panel-color);
       padding: 0 10px;
       height: 40px;
       margin: 8px 0 0;
-      background-color: var(--panel-color);
+    }
+
+    input:focus {
+      border: 1.6px solid var(--text-color-3);
     }
   }
   .filter-field3 {
@@ -85,7 +96,7 @@ main {
     label {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text-color-2);
+      color: var(--text-color-3);
     }
 
     input,
@@ -94,13 +105,17 @@ main {
       font-family: "Poppins", sans-serif;
       font-size: 16px;
       font-weight: 500;
-      color: var(--text-color-2);
-      border-radius: 0.45rem;
+      color: var(--text-color-3);
+      border-radius: 0.5rem;
       border: 1.6px solid var(--border-color);
-      padding: 0 10px;
+      background-color: var(--panel-color);
+      padding: 0 10px;  
       height: 40px;
       margin: 8px 0 0;
-      background-color: var(--panel-color);
+    }
+
+    input:focus {
+      border: 1.6px solid var(--text-color-3);
     }
   }
 }
@@ -129,7 +144,7 @@ main {
         text-align: left;
         font-weight: bold;
         padding: 12px 16px;
-        border-right: 1px solid var(--border-color);
+        //border-right: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
       }
     }
@@ -156,8 +171,8 @@ main {
       tr:hover {
         td {
           cursor: pointer;
-          color: var(--primary-color);
-          background-color: var(--panel-color);
+          color: var(--text-color-2);
+          background-color: var(--table-hover);
         }
       }
     }

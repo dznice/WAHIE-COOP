@@ -12,7 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MemberInfoComponent implements OnInit {
   membalance: any;
-  constructor(private ItemService: itemService, private http:HttpClient, private aRouter: ActivatedRoute) {
+  constructor(
+    private ItemService: itemService,
+    private http: HttpClient,
+    private aRouter: ActivatedRoute
+  ) {
     this.personalInfo();
     this.benInfo();
     this.showAccounting();
@@ -24,81 +28,63 @@ export class MemberInfoComponent implements OnInit {
   p: number = 1;
   type: string;
   startDate: string = '';
-  endDate : string = '';
+  endDate: string = '';
   stat: string;
 
+  stats: string[] = ['Overdue', 'Pending', 'Closed', 'Paid'];
 
-  stats: string[]= ["Overdue", "Pending", "Closed", "Paid" ];
+  types: string[] = ['Journal Entry', 'Invoice', 'Payment'];
+  private urlId: Subscription;
+  public account: any;
 
-  types: string[]= ["Journal Entry", "Invoice", "Payment" ];
- private urlId : Subscription;
- public account: any;
-
-
-
-
-  id:string = '';
+  id: string = '';
 
   ngOnInit(): void {
     this.item = this.ItemService.item;
-    this.urlId = this.aRouter.params.subscribe(
-      params=>{
-
+    this.urlId = this.aRouter.params.subscribe((params) => {
       console.log(params);
-      console.log(params['memberId'])
-      this.id = params['memberId']
-    })
-  }
-
-
-  personalInfo(){
-    this.http.get('http://127.0.0.1:8000/api/memberList').subscribe(
-      (res:any)=>
-      {
-
-        console.log(res)
-        this.item = res;
-
-      }
-    )
-  }
-
-  benInfo(){
-    this.http.get('http://127.0.0.1:8000/api/beneficiaries').subscribe(
-      (res:any)=>
-      {
-        console.log(res)
-        this.ben = res;
-      }
-    )
-  }
-  memId:string = '';
-  myProfile(){
-    this.http.get('http://127.0.0.1:8000/api/users/myProfile/' + this.id).subscribe(
-      (res: any) =>
-      {
-      console.log('myprof' + res);
-      this.memId = res.id;
-      console.log(this.memId)
-      })
-  }
-
-  showAccounting(): void{
-    this.http.get('http://127.0.0.1:8000/api/account').subscribe(
-      (res:any)=>
-      {
-        console.log(this.id);
-        this.account = res.filter((account: { debit: { cred: { transac: { member: { id: any; }; }; }; }; }) => account.debit.cred.transac.member.id == this.id);
-        console.log(this.account)
+      console.log(params['memberId']);
+      this.id = params['memberId'];
     });
   }
 
-  memberBalance(): void{
-    this.http.get('http://127.0.0.1:8000/api/totalMemBalance').subscribe(
-      (res:any)=>
-      {
-        console.log(res);
-        this.membalance = res
+  personalInfo() {
+    this.http.get('http://127.0.0.1:8000/api/memberList').subscribe((res: any) => {
+      console.log(res);
+      this.item = res;
+    });
+  }
+
+  benInfo() {
+    this.http.get('http://127.0.0.1:8000/api/beneficiaries').subscribe((res: any) => {
+      console.log(res);
+      this.ben = res;
+    });
+  }
+  memId: string = '';
+  myProfile() {
+    this.http.get('http://127.0.0.1:8000/api/users/myProfile/' + this.id).subscribe((res: any) => {
+      console.log('myprof' + res);
+      this.memId = res.id;
+      console.log(this.memId);
+    });
+  }
+
+  showAccounting(): void {
+    this.http.get('http://127.0.0.1:8000/api/account').subscribe((res: any) => {
+      console.log(this.id);
+      this.account = res.filter(
+        (account: { debit: { cred: { transac: { member: { id: any } } } } }) =>
+          account.debit.cred.transac.member.id == this.id
+      );
+      console.log(this.account);
+    });
+  }
+
+  memberBalance(): void {
+    this.http.get('http://127.0.0.1:8000/api/totalMemBalance').subscribe((res: any) => {
+      console.log(res);
+      this.membalance = res;
     });
   }
 }

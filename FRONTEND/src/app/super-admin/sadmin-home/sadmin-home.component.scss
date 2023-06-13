@@ -3,11 +3,9 @@
   
 }
 
-
 main {
   width: 100%;
   animation: transitionIn 0.75s;
-
 
   .title {
     color: var(--title-color);
@@ -18,7 +16,6 @@ main {
     margin-top: 1rem;
     margin-bottom: 1rem;
 
-    
     .left-cont {
       grid-column: 1;
     }
@@ -44,7 +41,7 @@ main {
       }
 
       .btn-add:hover {
-        background: var(--primary-color-dark);
+        background: var(--primary-color-light);
       }
     }
   }
@@ -60,12 +57,10 @@ main {
   .filter-search {
     margin-right: 10px;
 
-    
-
     label {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text-color-2);
+      color: var(--text-color-3);
     }
 
     .input-box {
@@ -76,8 +71,6 @@ main {
       text-align: right;
       margin-top: 0.5rem;
 
-      
-
       i {
         position: absolute;
         top: 50%;
@@ -87,7 +80,7 @@ main {
       .ti-search {
         left: 16px;
         font-size: 22px;
-        color: var(--border-color);
+        color: var(--text-color-3);
       }
 
       input {
@@ -98,23 +91,13 @@ main {
         padding: 0 20px 0 50px;
         border-radius: 0.625rem;
         border: 1.6px solid var(--border-color);
-        outline-color: var(--primary-color);
+        outline-color: var(--grey-4);
         background-color: var(--panel-color);
-        color: var(--text-color-2);
+        color: var(--text-color-3);
       }
 
       input::placeholder {
-        color: var(--text-color-2);
-      }
-    }
-
-    .input-box:hover {
-      input {
-        border: 1.6px solid var(--text-color-2);
-      }
-
-      .ti-search {
-        color: var(--text-color-2);
+        color: var(--text-color-3);
       }
     }
   }
@@ -124,18 +107,18 @@ main {
     label {
       font-size: 14px;
       font-weight: 500;
-      color: var(--text-color-2);
+      color: var(--text-color-3);
     }
 
     select {
       outline: none;
-      font-family: inherit;
+      font-family: "Poppins", sans-serif;
       font-size: 16px;
       font-weight: 500;
       height: 40px;
       max-width: 300px;
       width: 100%;
-      color: var(--text-color-2);
+      color: var(--text-color-3);
       background: var(--panel-color);
       margin-top: 0.5rem;
       border-radius: 0.625rem;
@@ -143,12 +126,8 @@ main {
       padding: 0 15px 0 15px;
     }
 
-    select:hover {
-      border: 1.6px solid var(--dark-grey-2);
-    }
-
     select:focus {
-      border: 1.6px solid var(--primary-color);
+      border: 1.6px solid var(--text-color-3);
     }
   }
 }
@@ -176,7 +155,7 @@ main {
         text-align: left;
         font-weight: bold;
         padding: 12px 16px;
-        border-right: 1px solid var(--border-color);
+        //border-right: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
       }
     }
@@ -210,9 +189,8 @@ main {
 
       tr:hover {
         td {
-          //cursor: pointer;
-          color: var(--primary-color);
-          background-color: var(--panel-color);
+          color: var(--text-color-2);
+          background-color: var(--table-hover);
         }
       }
     }
@@ -261,7 +239,7 @@ input:checked::after {
 .btn-success {
   width: 100px;
   height: 42px;
-  border-radius: 0.45rem;
+  border-radius: 0.5rem;
   font-size: 0.9rem;
   text-align: center;
   cursor: pointer;
@@ -270,17 +248,18 @@ input:checked::after {
 }
 
 .btn-success:hover {
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-light);
 }
 
 /* Modal */
 .modal-bg {
   position: fixed;
-  background: #000000bf;
+  background: var(--modal-overlay);
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1000000;
 
   .modal-wrapper {
     top: 50%;
@@ -291,7 +270,7 @@ input:checked::after {
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translate(-50%, -50%) scale(1);
     transition: transform 0.4s, top 0.4s;
-    background: var(--panel-color);
+    background: var(--modal-bg);
     border-radius: 1rem;
     max-width: 400px;
     width: 100%;
@@ -306,23 +285,21 @@ input:checked::after {
 
       .header-title {
         font-weight: 600;
-        font-size: 18px;
-        //color: var(--primary-color);
+        font-size: 20px;
+        color: var(--text-color-2);
         margin-top: 0.15rem;
       }
 
       .ti-x {
         font-size: 20px;
-        color: var(--dark-grey);
+        color: var(--text-color-3);
         cursor: pointer;
         transition: all 0.2s ease;
         padding: 4px;
-        margin-top: -3px;
-        margin-right: -6px;
       }
 
       .ti-x:hover {
-        background-color: var(--grey-alt);
+        background-color: var(--grey-2);
         border-radius: 100%;
       }
     }
@@ -338,7 +315,7 @@ input:checked::after {
           font-size: 16px;
           font-weight: 500;
           margin-bottom: 0.35rem;
-          color: var(--dark-grey);
+          color: var(--text-color-3);
           text-align: left;
         }
 
@@ -346,19 +323,17 @@ input:checked::after {
           height: 45px;
           width: 100%;
           outline: none;
-          border: 1.6px solid var(--border-color);
-          color: var(--text-color);
+          border: 1.8px solid var(--border-color);
+          background-color: var(--panel-color);
+          color: var(--text-color-2);
           font-size: 14px;
           border-radius: 0.625rem;
-          padding-left: 12px;
-        }
-
-        .input-field:hover {
-          border: 1.6px solid var(--dark-grey-2);
+          padding-left: 1rem;
+          font-family: "Poppins", sans-serif;
         }
 
         .input-field:focus {
-          border: 1.6px solid var(--primary-color);
+          border: 1.8px solid var(--primary-color);
         }
       }
     }
@@ -367,13 +342,13 @@ input:checked::after {
       padding: 18px 25px;
       border-top: 1px solid var(--border-color);
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
 
       .btn {
         width: 100px;
         height: 42px;
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         font-size: 0.9rem;
         text-align: center;
         cursor: pointer;
@@ -381,21 +356,22 @@ input:checked::after {
 
       .btn-save {
         background-color: var(--primary-color);
-        color: var(--panel-color);
+        color: var(--white);
         margin-left: 1rem;
       }
 
       .btn-save:hover {
-        background-color: var(--primary-alt);
+        background-color: var(--primary-color-light);
       }
 
       .btn-close {
-        background-color: var(--grey-alt);
-        color: var(--dark-grey);
+        background-color: transparent;
+        box-shadow: 0 0 0 1px var(--border-color);
+        color: var(--text-color-2);
       }
 
       .btn-close:hover {
-        background-color: var(--border-color);
+        background-color: var(--grey-2);
       }
     }
   }

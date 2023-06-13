@@ -130,13 +130,38 @@ form {
 }
 
 .reset:hover {
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-light);
 }
 
 .account {
   color: var(--grey-4);
   font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
   text-align: center;
+
+  .back {
+    display: flex;
+    color: var(--grey-4);
+    font-size: 0.9rem;
+    align-items: center;
+    font-weight: 500;
+    transition: 0.3s;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .ti-arrow-left {
+    display: flex;
+    font-size: 18px;
+    text-align: center;
+    margin-right: .3rem;
+  }
+  
+  .back:hover {
+    color: var(--grey-3);
+  }
 }
 
 .did {
@@ -160,31 +185,8 @@ form {
   cursor: pointer;
 }
 
-.back {
-  display: flex;
-  color: var(--grey-4);
-  font-size: 0.9rem;
-  align-items: center;
-  font-weight: 500;
-  transition: 0.3s;
-  cursor: pointer;
-  opacity: 80%;
-  margin-left: 30%;
-  text-align: center;
-  text-decoration: none;
-}
-
-.ti-chevron-left {
-  font-size: 18px;
-  margin-right: .3rem;
-}
-
-.back:hover {
-  color: var(--grey-3);
-}
-
 .signup:hover {
-  color: var(--primary-color-dark);
+  color: var(--primary-color-light);
 }
 
 span {
@@ -209,14 +211,6 @@ span {
 }
 .dot3 {
   margin-right: 5%;
-}
-.dot4 {
-  margin-right: 5%;
-}
-
-span:hover {
-  text-decoration: none;
-  cursor: context-menu;
 }
 
 @media (max-width: 850px) {

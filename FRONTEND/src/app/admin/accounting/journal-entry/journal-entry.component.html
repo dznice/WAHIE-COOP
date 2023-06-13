@@ -1,60 +1,35 @@
 <main>
   <h1 class="title">Journal Entry</h1>
+
   <div>
-    <form
-      ngNativeValidate
-      [formGroup]="journalEntryForm"
-      (ngSubmit)="saveEntry()"
-    >
+    <form ngNativeValidate [formGroup]="journalEntryForm" (ngSubmit)="saveEntry()">
       <div class="header">
+
         <div class="left-field">
           <div class="journdate">
-            <label> Journal Date </label>
-            <input
-              class="headinput"
-              type="date"
-              max="{{ maxDate }}"
-              (change)="denyDate()"
-              formControlName="journal_date"
-            />
+            <label>Journal Date</label>
+            <input class="headinput" type="date" max="{{ maxDate }}" (change)="denyDate()" formControlName="journal_date" />
           </div>
-  
+
           <div class="journnumber">
-            <label> Journal Number </label>
-            <input
-              class="headinput"
-              type="number"
-              id="journnumber"
-              name="journnumber"
-              formControlName="journal_no"
-              [value]="this.journId"
-              required
-            />
+            <label>Journal Number</label>
+            <input class="headinput" type="number" id="journnumber" name="journnumber" formControlName="journal_no" [value]="this.journId" required />
           </div>
+
           <div class="userid">
-            <input
-              class="headinput"
-              type="hidden"
-              formControlName="useid"
-              [value]="this.useid"
-              required
-            />
+            <input class="headinput" type="hidden" formControlName="useid" [value]="this.useid" required />
           </div>
+
           <div class="duedate">
             <label> Due Date </label>
-            <input
-              class="headinput"
-              type="date"
-              formControlName="due_date"
-              
-            />
+            <input class="headinput" type="date" formControlName="due_date" />
           </div>
           <!-- <div class="interest">
             <label> Interest % </label>
             <input class="headinput" type="number" formControlName="interest" />
           </div> -->
         </div>
-        
+
         <div class="right-field">
           <button class="add" (click)="addRow()" type="button">
             <i class="ti ti-plus"></i>
@@ -62,9 +37,11 @@
           </button>
         </div>
       </div>
+
       <br />
       <div class="journals">
         <table class="tablejournal" formArrayName="entries">
+
           <thead>
             <th class="journallabel22">No.</th>
             <th class="journallabel2">Account</th>
@@ -73,24 +50,20 @@
             <th class="journallabel2">Description</th>
             <th class="journallabel2">Name</th>
           </thead>
+
           <tbody>
-            <tr
-              *ngFor="let item of entryRow.controls; let i = index"
-              [formGroupName]="i"
-            >
+            <tr *ngFor="let item of entryRow.controls; let i = index" [formGroupName]="i">
               <td class="journallabel">{{ i + 1 }}</td>
               <td class="beneinput">
-                <ng-select class="try" formControlName="account">
+                <ng-select class="try" formControlName="account" [clearable]="false" #select>
                   <ng-template ng-header-tmp>
-                    <a (click)="show(1)" class="submit">
-                      <i><i class="ti ti-plus"></i> Add new</i>
-                    </a>
+                    <div (click)="show(1)" (click)="closeSelect(select)" class="ng-header">
+                      <a class="submit">
+                        <i><i class="ti ti-plus"></i> Add new</i>
+                      </a>
+                    </div>
                   </ng-template>
-                  <ng-option
-                    class="idnk"
-                    *ngFor="let libJournal of libJournals"
-                    [value]="libJournal.id"
-                  >
+                  <ng-option class="idnk" *ngFor="let libJournal of libJournals" [value]="libJournal.id">
                     {{ libJournal.journal_number }}
                     {{ libJournal.journal_name }}
                   </ng-option>
@@ -98,36 +71,18 @@
               </td>
 
               <td class="beneinput">
-                <input
-                  type="number"
-                  formControlName="debit"
-                  (change)="autoZero(i)"
-                  required
-                />
+                <input type="number" formControlName="debit" (change)="autoZero(i)" required />
               </td>
               <td class="beneinput">
-                <input
-                  type="number"
-                  formControlName="credit"
-                  (change)="autoZero(i)"
-                  required
-                />
+                <input type="number" formControlName="credit" (change)="autoZero(i)" required />
               </td>
               <td class="beneinput">
                 <input type="text" formControlName="description" />
               </td>
 
               <td class="beneinput">
-                <ng-select
-                  class="try"
-                  formControlName="name"
-                  (change)="getNameID(i)"
-                >
-                  <ng-option
-                    class="try"
-                    *ngFor="let member of members"
-                    [value]="member.id"
-                  >
+                <ng-select class="try" formControlName="name" (change)="getNameID(i)" [clearable]="false">
+                  <ng-option class="try" *ngFor="let member of members" [value]="member.id">
                     {{ member.id }} {{ member.first_name }}
                     {{ member.middle_name }} {{ member.last_name }}
                   </ng-option>
@@ -174,12 +129,10 @@
               <td></td>
               <td><label class="totaltext"> TOTAL</label></td>
               <td class="total">
-                <!-- TOTAL DEBIT HERE -->
                 {{ total_debit }}
               </td>
               <td class="total">
                 {{ total_credit }}
-                <!-- TOTAL CREDIT HERE -->
               </td>
               <td></td>
             </tr>
@@ -200,7 +153,7 @@
   </div>
 </main>
 
-<!-- Modal -->
+<!-- Add Modal -->
 <section>
   <div>
     <div class="modal-bg" *ngIf="showModal === 1">
@@ -212,9 +165,7 @@
 
         <div class="modal-body">
           <div class="input-box">
-            <label for="journal_number" class="input-label"
-              >Journal Number</label
-            >
+            <label for="journal_number" class="input-label">Journal Number</label>
             <input class="input-field" type="number" #journal_number />
           </div>
           <div class="input-box">
@@ -229,15 +180,12 @@
 
         <div class="modal-footer">
           <button class="btn btn-close" (click)="show(2)">Close</button>
-          <button
-            class="btn btn-save"
-            (click)="
+          <button class="btn btn-save" (click)="
               add(journal_number.value, journal_name.value, journal_type.value);
               journal_number.value = '';
               journal_name.value = '';
               journal_type.value = ''
-            "
-          >
+            ">
             Create
           </button>
         </div>

@@ -1,12 +1,12 @@
 <main>
-  <h1 class="title">Home</h1>
+  <h1 class="title">Recent Transactions</h1>
 
   <section class="recent-transaction">
-    <h2 class="section-title">Recent Transactions</h2>
+    <!-- <h2 class="section-title">Recent Transactions</h2> -->
 
     <div class="table-filter">
       <!-- DATE Start -->
-      <div class="filter-field2">
+      <div class="filter-field1">
         <label>Start Date</label>
         <input
           class="form-control"
@@ -16,7 +16,7 @@
         />
       </div>
       <!-- DATE End -->
-      <div class="filter-field3">
+      <div class="filter-field2">
         <label>End Date</label>
         <input
           class="form-control"
@@ -26,7 +26,7 @@
         />
       </div>
       <!-- Type -->
-      <div class="filter-field4">
+      <div class="filter-field3">
         <label>Type</label>
         <select [(ngModel)]="type" name="journal-type">
           <option [ngValue]="undefined" selected>All</option>
@@ -34,7 +34,7 @@
         </select>
       </div>
       <!-- Status -->
-      <div class="filter-field5">
+      <div class="filter-field4">
         <label>Status</label>
         <select [(ngModel)]="stat" name="status">
           <option [ngValue]="undefined" selected>All</option>
@@ -59,7 +59,7 @@
           | filter : type
           | filter : stat
           | filterMhDate : startDate : endDate)
-          | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+          | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
           <tr >
           <td >{{ acc.debit.cred.transac.transaction_date | date:'mediumDate' }}</td>
           <td >{{ acc.debit.cred.entries.entry_name }}</td>

@@ -129,12 +129,10 @@ export class AdminSidenavComponent implements OnInit {
   }
 
   hide: boolean = false;
-  chevron: boolean = true;
 
   contextMenu(e: any) {
     e.stopPropagation();
     this.hide = !this.hide;
-    this.chevron = !this.chevron;
   }
 
   disappearContext() {

@@ -6,14 +6,24 @@
 }
 
 main {
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 0.625rem;
+  background-color: var(--panel-color);
   width: 100%;
   height: 100%;
-  margin-left: -1rem;
+  overflow: hidden;
+  // margin-left: -1rem;
 
   .title {
     color: var(--title-color);
     margin-bottom: 10px;
   }
+}
+
+.main-cont {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 45px;
 }
 
 .container {
@@ -28,7 +38,7 @@ main {
   }
   .right-cont {
     margin-right: -2.7rem;
-    margin-top: -4rem;
+    margin-top: -3rem;
     width: 40%;
     padding: 0;
     height: 97vh;
@@ -95,37 +105,35 @@ input {
   //margin-left: 10px;
 }
 
-  
+.ng-select.payMethod ::ng-deep .ng-control,
+.ng-select.depositCash ::ng-deep .ng-control,
+.ng-select.transactionNum ::ng-deep .ng-control {
+  min-height: 0px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
 
-  .ng-select.payMethod ::ng-deep .ng-control,
-  .ng-select.depositCash ::ng-deep .ng-control,
-  .ng-select.transactionNum ::ng-deep .ng-control {
-    min-height: 0px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-  }
-  
-  .ng-select.payMethod ::ng-deep .ng-dropdown-panel,
-  .ng-select.depositCash ::ng-deep .ng-dropdown-panel,
-  .ng-select.transactionNum ::ng-deep .ng-dropdown-panel {
-    width: 100%;
-    position: absolute;
-    //max-width: 300px;
-    //margin-left: 10px;
-  }
+.ng-select.payMethod ::ng-deep .ng-dropdown-panel,
+.ng-select.depositCash ::ng-deep .ng-dropdown-panel,
+.ng-select.transactionNum ::ng-deep .ng-dropdown-panel {
+  width: 100%;
+  position: absolute;
+  //max-width: 300px;
+  //margin-left: 10px;
+}
 
-  .ng-select.payMethod ::ng-deep .ng-select-container,
-  .ng-select.depositCash ::ng-deep .ng-select-container,
-  .ng-select.transactionNum ::ng-deep .ng-select-container {
-    height: 36px;
-    outline: none;
-    font-size: 12.3px;
-    font-weight: 400;
-    color: var(--text-color-2);
-    border-radius: 5px;
-    border: 1px solid var(--border-color);
-    background-color: var(--panel-color);
-  }
+.ng-select.payMethod ::ng-deep .ng-select-container,
+.ng-select.depositCash ::ng-deep .ng-select-container,
+.ng-select.transactionNum ::ng-deep .ng-select-container {
+  height: 36px;
+  outline: none;
+  font-size: 12.3px;
+  font-weight: 400;
+  color: var(--text-color-2);
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-color);
+}
 
 // .payMethod ::ng-deep .ng-select-container,
 // .depositCash ::ng-deep .ng-select-container,
@@ -141,7 +149,7 @@ input {
 //     padding: 0 0px;
 //     background-color: var(--panel-color);
 //   }
-  
+
 //   .payMethod ::ng-deep .ng-select-container .ng-placeholder,
 //   .depositCash ::ng-deep .ng-select-container .ng-placeholder,
 // //   .payMethod ::ng-deep .ng-select-container .ng-value,
@@ -152,7 +160,7 @@ input {
 //   .referenceNum ::ng-deep .ng-select-container .ng-placeholder{
 //     color: var(--text-color-2);
 //   }
-  
+
 // //   .payMethod ::ng-deep .ng-dropdown-panel,
 //   .depositCash ::ng-deep .ng-dropdown-panel,
 //   .transactionNum ::ng-deep .ng-dropdown-panel,
@@ -160,26 +168,26 @@ input {
 //     width: 100%;
 //   }
 
-  .ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-option,
-  .ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-option,
-  .ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-option,
-  .ng-select.trial ::ng-deep .ng-dropdown-panel .ng-option{
-    background-color: var(--panel-color);
-  }
+.ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-option,
+.ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-option,
+.ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-option,
+.ng-select.trial ::ng-deep .ng-dropdown-panel .ng-option {
+  background-color: var(--panel-color);
+}
 
-  .ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-option:hover,
-  .ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-option:hover,
-  .ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-option:hover,
-  .ng-select.trial ::ng-deep .ng-dropdown-panel .ng-option:hover{
-    background-color: var(--secondary-color);
-  }
+.ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-option:hover,
+.ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-option:hover,
+.ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-option:hover,
+.ng-select.trial ::ng-deep .ng-dropdown-panel .ng-option:hover {
+  background-color: var(--secondary-color);
+}
 
-  .ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
-  .ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
-  .ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
-  .ng-select.trial ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
-    color: var(--text-color-2);
-  }
+.ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
+.ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
+.ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
+.ng-select.trial ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  color: var(--text-color-2);
+}
 
 //   .payMethod ::ng-deep  .ng-select-container .ng-value-container .ng-value{
 //     caret-color: initial !important;
@@ -225,15 +233,15 @@ input {
   width: 98.4%;
   // height: 70%;
   // position: sticky;
-
-  height: 52vh;
+  min-height: 60%;
+  max-height: 60%;
   overflow-y: scroll;
   margin-bottom: 0.7rem;
 }
 
 .right-table {
   width: 98.4%;
-  height: 90vh;
+  height: 10vh;
   overflow-y: scroll;
 }
 
@@ -385,12 +393,6 @@ table .th-right {
   color: var(--text-color-2);
 }
 
-// .totals{
-//     color: var(--primary-color);
-//     margin-right: 5rem;
-//     font-weight: 1000;
-// }
-
 .totals2 {
   margin-left: 0.17rem;
 }
@@ -409,44 +411,44 @@ table .th-right {
 }
 
 .footer {
-  float: inline-end;
   height: 7%;
-  width: 100%;
-  margin-top: 0;
+  width: 65%;
+  margin-top: -5.5rem;
+  margin-bottom: -5rem;
   position: sticky;
-}
-.cancel {
-  margin-left: -75%;
-  height: 40px;
-  width: 80px;
-  border: none;
-  background-color: var(--grey-3);
-  color: var(--white);
-  border-radius: 5px;
-  outline: none;
-  font-weight: 600;
-  font-size: 15px;
-}
-.cancel:hover {
-  background-color: var(--grey-4);
-}
 
-.save {
-  margin-right: 2%;
-  height: 40px;
-  width: 80px;
-  border: none;
-  background-color: var(--primary-color);
-  color: var(--white);
-  border-radius: 5px;
-  outline: none;
-  font-weight: 600;
-  float: right;
-  font-size: 15px;
-}
+  .cancel {
+    margin-left: 1%;
+    height: 40px;
+    width: 80px;
+    background-color: transparent;
+    box-shadow: 0 0 0 1px var(--border-color);
+    color: var(--text-color-2);
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .cancel:hover {
+    background-color: var(--grey-2);
+  }
 
-.save:hover {
-  background-color: var(--primary-color-light);
+  .save {
+    margin-right: 2%;
+    height: 40px;
+    width: 80px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 5px;
+    outline: none;
+    font-weight: 600;
+    float: right;
+    font-size: 15px;
+  }
+
+  .save:hover {
+    background-color: var(--primary-color-light);
+  }
 }
 
 .conbox {
@@ -539,7 +541,7 @@ table .th-right {
       .btn {
         width: 100px;
         height: 42px;
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         font-size: 0.9rem;
         text-align: center;
         cursor: pointer;
@@ -552,12 +554,13 @@ table .th-right {
       }
 
       .btn-save:hover {
-        background-color: var(--primary-color-dark);
+        background-color: var(--primary-color-light);
       }
 
       .btn-close {
         background-color: transparent;
-        color: var(--cancel-text);
+        box-shadow: 0 0 0 1px var(--border-color);
+        color: var(--text-color-2);
       }
 
       .btn-close:hover {
