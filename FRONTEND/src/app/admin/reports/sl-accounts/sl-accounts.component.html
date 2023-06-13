@@ -1,4 +1,18 @@
 <main>
+  <br/>
+  <br/>
+  <div class="print">
+    <div class="save"> Save report as:
+    </div>
+    <div class="PDF"> 
+        <button  class="ti ti-file-text PDF-icon" ></button>
+        <button  class="ti ti-file-spreadsheet excel-icon"></button>
+        <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)">
+    </div>
+</div>
+
+
+<section class="main-section">
   <header>
     <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)">
     <span class="coop-name"><label for="logo"><img [src]="preLogo" alt="Logo" height="50px" width="50px"></label>WAH-Cooperative</span>
@@ -11,6 +25,7 @@
     <!-- <h5 class="date-today">This report based from {{formData.startDate | date:'mediumDate'}} to {{formData.endDate | date:'mediumDate'}}</h5> -->
   </header>
 
+
   <section class="tabler-section">
     <div class="table-container">
       <table class="table-content">
@@ -22,11 +37,13 @@
             </ng-container>
             <th class="th-bal">Payment this {{ maxDate | date:'y' }}</th>
             <th class="th-bal">Current Balance of {{ maxDate | date:'mediumDate' }}</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let item of ledgers">
             <tr>
+              <tr>
               <td>{{ item.result.name ? item.result.name : item.result.journal_name }}</td>
               <td class="td-bal">
                 <ng-container *ngFor="let items of pledgers">
@@ -49,4 +66,5 @@
       </table>
     </div>
   </section>
+</section>
 </main>

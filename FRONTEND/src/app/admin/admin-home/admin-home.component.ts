@@ -54,6 +54,7 @@ export class AdminHomeComponent implements OnInit {
   dueDate(): void {
     this.http.get('http://127.0.0.1:8000/api/duedate').subscribe((res: any) => {
       console.log(res);
+      console.log('hello due');
       this.duedit = res;
     });
   }

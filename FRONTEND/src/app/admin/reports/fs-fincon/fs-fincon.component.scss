@@ -20,7 +20,7 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    background-color:var(--table-header);
+    background-color:var(--panel-color);;
     height: 70px;
     width: auto;
     flex-wrap: wrap;
@@ -134,7 +134,7 @@
     .table-content {
       width: 50%;
       margin: 20px 0;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       overflow: hidden;
       border-collapse: collapse;
   
@@ -223,7 +223,7 @@
     .table-content {
       width: 100%;
       margin: 20px 0;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       overflow: hidden;
       border-collapse: collapse;
   
@@ -258,7 +258,7 @@
             border-color: var(--text-color-2);
             border-top: 1px solid var(--text-color-2 );
             padding: 16px 16px;
-            font-size: medium;
+            font-size: 0.9rem;
 
           }
 
@@ -272,7 +272,7 @@
             border-top: 2px double var(--text-color-2);
             text-align: right;
             font-weight: 500;
-            font-size: medium;
+            font-size: 0.8rem;;
             
 
           }
@@ -287,7 +287,7 @@
             border-top: 2px double var(--text-color-2);
             text-align: right;
             font-weight: 500;
-            font-size: medium;
+            font-size:0.8rem;;
             
 
           }
@@ -333,7 +333,7 @@
     .table-content {
       width: 100%;
       margin: 20px 0;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       overflow: hidden;
       border-collapse: collapse;
   

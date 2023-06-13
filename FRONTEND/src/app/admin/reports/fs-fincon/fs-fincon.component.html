@@ -250,18 +250,6 @@
                   <td class="total-cred">{{  calculateLastYearTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
                   <td class="total-deb">{{   calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
                 </tr>
-            <br>
-          <tr class="totals">
-            <td class="totass">Total of Member Equity:</td>
-            <td class="total-cred"></td>
-            <td class="total-deb">{{ calculateCombinedMemberEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-          </tr>
-          <br/>
-          <tr class="totals">
-            <td class="titles2">Total of Liability and Equity:</td>
-            <td class="total-cred2"></td>
-            <td class="total-deb2">{{ calculateCombinedTotalLiabilityandEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-          </tr>
           </ng-container>
  <br>
           

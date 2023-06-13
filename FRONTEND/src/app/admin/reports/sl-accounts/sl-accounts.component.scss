@@ -8,20 +8,76 @@
   size: letter;
 }
 
+
+.print{
+  background-color: var(--panel-color);
+  color: var(--text-color-3);
+  margin: auto;
+  width: 800px;
+  border: 1px solid var(--text-color-2);
+  border-bottom: none;
+  display: flex;
+  flex-direction: row;
+
+  .save{
+    width: 70%;
+    height: 5vh;
+    padding-left: 1rem;
+    padding-top: .5rem;
+    color: var(--text-color-2);
+  }
+    
+  .PDF{
+    display: flex;
+    padding-left: 55%;
+    margin-top: .1rem;
+    width: 70%;
+  }
+
+  .PDF-icon{
+    padding-top: .2rem;
+    font-size: 28px;
+    background: none;
+    padding-right: .4rem;
+    color: var(--secondary-color);
+  }
+  .excel-icon{
+    padding-top: .2rem;
+    font-size: 28px;
+    background: none; 
+    color: var(--secondary-color);
+  }
+}
+
+.main-section{
+  padding-top: 2rem;
+  margin: auto;
+  margin-bottom: 3rem;
+  width: 800px;
+  border: 1px solid var(--text-color-2);
+  border-top:1px solid var(--text-color-2) ;
+  border-bottom:  2px solid var(--text-color-2) ;
+  background-color: var(--panel-color);
+  
+  
+}
+
 header {
   text-align: center;
+  color: var(--title-color);
 
   .coop-name {
     font-size: 26px;
     font-weight: 200;
     margin-bottom: 1rem;
+    color: var(--title-color);
   }
 }
 
 /* Table */
 .table-container {
   margin: auto;
-  width: 100%;
+  width: 95%;
 
   .table-content {
     width: 100%;
@@ -32,16 +88,16 @@ header {
 
     thead {
       th {
-        position: sticky;
         text-align: left;
         font-weight: 400;
         padding: 12px 16px;
-        border-top: 1px solid var(--black);
-        border-bottom: 1px solid var(--black);
+        border-top: 1px solid var(--text-color-2);
+        border-bottom: 1px solid var(--text-color-2);
+        color: var(--text-color-2);
       }
 
       .th-bal {
-        border-left: 1px dotted var(--border-color);
+        border-left: 1px dotted var(--text-color-2);
         text-align: right;
       }
     }
@@ -49,12 +105,14 @@ header {
     tbody {
       tr {
         //border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--text-color-2);
+        color: var(--text-color-2);
         background-color: var(--panel-color);
 
         td {
           text-align: left;
           font-weight: 500;
-          padding: 16px 16px;
+          padding: 16px 26px;
         }
 
         .td-bal {
@@ -66,10 +124,11 @@ header {
         border-style: double;
         border-left: none;
         border-right: none;
-        border-top: none;
-        border-color: var(--black);
-
-        border-top: 1px double var(--border-color);
+        border-color: var(--text-color-2);
+        border-bottom: 2px double var(--text-color-2);
+        font-size: 1.1rem;
+         
+        
         //border-bottom: 2px double var(--black);
 
         .td-total {
@@ -81,6 +140,7 @@ header {
         td {
           cursor: pointer;
           // color: var(--primary-color);
+          border-top: 1px double var(--border-color);
           background-color: var(--grey);
         }
       }
