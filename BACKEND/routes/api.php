@@ -77,6 +77,8 @@ Route::post('/addActivity', [App\Http\Controllers\userController::class, 'addAct
 Route::get('/actLog', [App\Http\Controllers\userController::class, 'actLog']);
 Route::post('/dueDateSMS', [App\Http\Controllers\userController::class, 'dueDateSMS']);
 Route::post('/sendDate', [App\Http\Controllers\userController::class, 'sendDate']);
+Route::get('/getLogo/{id}', [App\Http\Controllers\userController::class, 'getLogo']);
+Route::post('/chLogo/{id}', [App\Http\Controllers\userController::class, 'chLogo']);
 
 
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Members;
 use App\Models\forgotPass;
+use App\Models\forLogo;
 use App\Models\BenificiaryMembers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -142,7 +143,15 @@ class AuthController extends Controller {
                 'code' => '1',
                 ]);
 
-            return response()->json($password);
+            $preLogo = 'coop-logo.png';
+            $logo = forLogo::create([
+                    'adminId' =>$user->id,
+                    'logo' => $preLogo,
+                    ]);
+    
+            
+
+            return response()->json($logo);
         }
 
 

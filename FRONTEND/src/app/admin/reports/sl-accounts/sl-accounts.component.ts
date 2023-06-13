@@ -1,5 +1,7 @@
 import { Component, Input , OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
+import { NgToastService } from 'ng-angular-popup';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-sl-accounts',
@@ -19,7 +21,7 @@ export class SlAccountsComponent implements OnChanges {
   public memInfos: any;
 
   maxDate: any;
-  constructor( private wahieService:WahieService){
+  constructor( private wahieService:WahieService, private toast:NgToastService, private http:HttpClient){
 
   }
 
@@ -32,6 +34,7 @@ export class SlAccountsComponent implements OnChanges {
   }
 
   ngOnInit(): void{
+    this.getLogo();
     this.formatDate();
     this.showLibJournalInfo(this.formData.account);
     this.showMemberInfo(this.formData.member);
@@ -93,5 +96,37 @@ export class SlAccountsComponent implements OnChanges {
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-');
     return this.maxDate;
+  }
+  preLogo:any;
+  id:any;
+  getLogo(){
+    this.id = localStorage.getItem('userData')
+    this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
+      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+    });
+  }
+  
+  chLogo(event:any){
+    let fileType = event.target.files[0].type;
+    let file =  event.target.files[0];
+    if(fileType.match(/image\/*/)){
+      let upload = new FileReader();
+      upload.readAsDataURL(event.target.files[0]);
+      upload.onload = (event:any)=>(
+        this.preLogo = event.target.result
+
+      
+      );   
+      var myFormData = new FormData();
+      this.id = localStorage.getItem('userData')
+      myFormData.append('image', file);
+
+      this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
+        this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
+        this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      }); 
+    }else{
+      this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
+    }
   }
 }
