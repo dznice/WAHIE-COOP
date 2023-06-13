@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-fs-op',
@@ -18,7 +19,7 @@ export class FsOpComponent implements OnInit {
   maxDate: any;
   oneYearAgo: any;
 
-  constructor(private http:HttpClient, private exportAsService: ExportAsService) {}
+  constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService) {}
     
 
   
@@ -175,5 +176,19 @@ export class FsOpComponent implements OnInit {
     this.maxDate = [year, month, day].join('-');
     return this.maxDate;
   }
+  preLogo ="assets/image/coop-logo.png"
 
+  chLogo(event:any){
+    let fileType = event.target.files[0].type;
+    if(fileType.match(/image\/*/)){
+      let upload = new FileReader();
+      upload.readAsDataURL(event.target.files[0]);
+      upload.onload = (event:any)=>(
+        this.preLogo = event.target.result
+      
+      );  this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
+    }else{
+      this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
+    }
+  }
 }

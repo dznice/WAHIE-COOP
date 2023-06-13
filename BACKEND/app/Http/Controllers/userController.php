@@ -9,6 +9,7 @@ use App\Models\Members;
 use App\Models\departments;
 use App\Models\actLog;
 use App\Models\smsDue;
+use App\Models\forLogo;
 use App\Http\Resources\UsersResource;
 use App\Models\BenificiaryMembers;
 use Illuminate\Support\Facades\Hash;
@@ -264,5 +265,23 @@ class userController extends Controller
          return response()->json($totals);
      }
 
-    
+     public function chLogo($id,Request $request){
+
+        $fileName = time().$request->file('logo')->getClientOriginalName();
+        $path = $request->file('logo')->storeAs('image',$fileName,'public');
+        $requestData['photo'] = 'storage/image/' .$path;
+
+        $logo =  forLogo::where('adminId', '=', $id)->first();
+        $logo->logo = $request->fileName;
+        $logo->save();
+        return response()->json($logo);
+
+
+    }
+
+    public function getLogo($id){
+        $logo =  forLogo::where('adminId', '=', $id)->first();
+        $get = $logo->logo;
+        return response()->json($get);
+    }
     }

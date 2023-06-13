@@ -14,12 +14,13 @@
     <div class="PDF"> 
         <button (click)="exportPDF()" class="ti ti-file-text PDF-icon" ></button>
         <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet excel-icon"></button>
+        <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)">
     </div>
 </div>
 
 <section class="main-section" id="fsOp">
     <header>
-      <span class="coop-name">WAH-Cooperative</span>
+      <span class="coop-name"><label for="logo"><img [src]="preLogo" alt="Logo" height="50px" width="50px"></label>WAH-Cooperative</span>
       <h4 class="report-name">Statement of Operations</h4>
       <span class="date-today">As of {{ maxDate | date:'mediumDate' }}</span>
     </header>

@@ -1,5 +1,6 @@
 import { Component, Input , OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { WahieService } from '../../../services/wahie.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-sl-accounts',
@@ -19,7 +20,7 @@ export class SlAccountsComponent implements OnChanges {
   public memInfos: any;
 
   maxDate: any;
-  constructor( private wahieService:WahieService){
+  constructor( private wahieService:WahieService, private toast:NgToastService){
 
   }
 
@@ -93,5 +94,20 @@ export class SlAccountsComponent implements OnChanges {
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-');
     return this.maxDate;
+  }
+  preLogo ="assets/image/coop-logo.png"
+
+  chLogo(event:any){
+    let fileType = event.target.files[0].type;
+    if(fileType.match(/image\/*/)){
+      let upload = new FileReader();
+      upload.readAsDataURL(event.target.files[0]);
+      upload.onload = (event:any)=>(
+        this.preLogo = event.target.result
+      
+      );  this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
+    }else{
+      this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
+    }
   }
 }
