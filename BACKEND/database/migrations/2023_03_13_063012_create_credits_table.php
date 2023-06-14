@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('journals_id')->nullable();
             $table->unsignedBigInteger('payables_id');
             $table->datetime('due_date')->nullable();
+            $table->string('status')->default('')->nullable();
             $table->double('interest')->nullable();
             $table->double('credit_amount')->nullable();
             $table->double('debit_amount')->nullable();
