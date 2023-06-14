@@ -162,6 +162,14 @@ export class FsFinconComponent implements OnInit {
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
             const cAssetsTotal = ['','Total Assets:' ,this.passets[this.passets.length - 1].total_asset, this.assets[this.assets.length - 1].total_asset];
+            if(this.otherAssets.length > 0 ? this.otherAssets[this.otherAssets.length - 1].total_other_asset : ''){
+              cAssetsTotal[3] = this.assets[this.assets.length - 1].total_asset;
+              
+            }
+            if(this.potherAssets.length > 0 ? this.potherAssets[this.potherAssets.length - 1].total_other_asset : ''){
+              cAssetsTotal[2] = this.passets[this.passets.length - 1].total_asset;
+            
+            }
             const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
             cAssetsTotalRow.font = { bold: true };
           }
@@ -187,6 +195,12 @@ export class FsFinconComponent implements OnInit {
             const empty1 = [''];
             const empty1Row = excelSheet.addRow(empty1);
             const ncAssetsTotal = ['','Total of Other Current Assets:' ,'', ''];
+            if(this.otherAssets.length > 0 ? this.otherAssets[this.otherAssets.length - 1].total_other_asset : ''){
+              ncAssetsTotal[3] = this.otherAssets[this.otherAssets.length - 1].total_other_asset;
+            }
+            if(this.potherAssets.length > 0 ? this.potherAssets[this.potherAssets.length - 1].total_other_asset : ''){
+              ncAssetsTotal[2] = this.potherAssets[this.potherAssets.length - 1].total_other_asset;
+            }
             const ncAssetsTotalRow = excelSheet.addRow(ncAssetsTotal);
             ncAssetsTotalRow.font = { bold: true };
           }
@@ -213,6 +227,12 @@ export class FsFinconComponent implements OnInit {
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
             const cAssetsTotal = ['','Total of Non-Current Assets' ,'', ''];
+            if(this.nonAssets.length > 0 ? this.nonAssets[this.nonAssets.length - 1].total_non_asset : ''){
+              cAssetsTotal[3] = this.nonAssets[this.nonAssets.length - 1].total_non_asset;
+            }
+            if(this.pnonAssets.length > 0 ? this.pnonAssets[this.pnonAssets.length - 1].total_non_asset : ''){
+              cAssetsTotal[2] = this.potherAssets[this.potherAssets.length - 1].total_non_asset;
+            }
             const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
             cAssetsTotalRow.font = { bold: true };
           }
@@ -245,6 +265,12 @@ export class FsFinconComponent implements OnInit {
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
             const cAssetsTotal = ['','Total of Current Liabilities:' ,'',''];
+            if(this.pliabilities.length > 0 ? (this.pliabilities[this.pliabilities.length - 1].total_liability) : ''){
+              cAssetsTotal[3] = this.pliabilities[this.pliabilities.length - 1].total_liability;
+            }
+            if(this.pliabilities.length > 0 ? this.pliabilities[this.pliabilities.length - 1].total_liability : ''){
+              cAssetsTotal[2] = this.pliabilities[this.potherAssets.length - 1].total_liability;
+            }
             const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
             cAssetsTotalRow.font = { bold: true };
           }
