@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-journal-entry',
@@ -14,14 +15,7 @@ export class JournalEntryComponent implements OnInit {
   useid = localStorage.getItem('userData');
   journ: any;
 
-  constructor(
-    private builder: FormBuilder,
-    private wahieService: WahieService,
-    private http: HttpClient,
-    private route: Router,
-    private toast: NgToastService,
-    private router: ActivatedRoute
-  ) {
+  constructor(private builder: FormBuilder, private wahieService: WahieService, private http: HttpClient, private route: Router, private toast: NgToastService, private router: ActivatedRoute) {
     this.route.routeReuseStrategy.shouldReuseRoute = () => false;
   }
   journalEntryRow!: FormArray<any>;
@@ -76,21 +70,17 @@ export class JournalEntryComponent implements OnInit {
   }
 
   showLibJournal(): void {
-    this.libJournals = this.wahieService
-      .listLibJournals()
-      .subscribe((libjournal) => {
-        this.libJournals = libjournal;
-        console.log(this.libJournals);
-      });
+    this.libJournals = this.wahieService.listLibJournals().subscribe((libjournal) => {
+      this.libJournals = libjournal;
+      console.log(this.libJournals);
+    });
   }
 
   showJournalEntry(): void {
-    this.journalEntries = this.wahieService
-      .listJournalEntry()
-      .subscribe((journalEntry) => {
-        this.journalEntries = journalEntry;
-        console.log(this.journalEntries);
-      });
+    this.journalEntries = this.wahieService.listJournalEntry().subscribe((journalEntry) => {
+      this.journalEntries = journalEntry;
+      console.log(this.journalEntries);
+    });
   }
 
   @HostListener('window:keydown.esc', ['$event'])
@@ -108,6 +98,10 @@ export class JournalEntryComponent implements OnInit {
   delModal = -1;
   showDel(index: number) {
     this.delModal = index;
+  }
+
+  closeSelect(select: NgSelectComponent) {
+    select.close();
   }
 
   public members: any;
@@ -135,63 +129,53 @@ export class JournalEntryComponent implements OnInit {
   due = new Date();
 
   saveEntry() {
-    this.journalEntryForm
-      .get('journal_no')
-      ?.setValue(
-        (<HTMLInputElement>document.getElementById('journnumber')).value
-      );
+    this.journalEntryForm.get('journal_no')?.setValue((<HTMLInputElement>document.getElementById('journnumber')).value);
 
     let total_debit = this.journalEntryForm.get('totaldebit')?.value;
     let total_credit = this.journalEntryForm.get('totalcredit')?.value;
     let journaldate = this.journalEntryForm.get('journal_date')?.value;
 
     console.log(journaldate > this.maxDate);
-    if (
-      this.journalEntryForm.valid &&
-      total_debit == total_credit &&
-      journaldate <= this.maxDate
-    ) {
-      this.wahieService
-        .saveJournalEntry(this.journalEntryForm.getRawValue())
-        .subscribe(
-          (res) => {
-            let result: any;
-            result = res;
-            console.log('Saved' + this.journId);
-            console.log(result);
-            this.log.activity = 'Added Journal Entry No.' + this.journId;
-            this.activityLog();
-            if (this.journalEntryForm.getRawValue().due_date != '') {
-              this.sms.sendDate = this.journalEntryForm.getRawValue().due_date;
-              this.sms.journal_id = this.journId;
-              console.log(this.journId);
-              this.smsDue();
-            }
-            this.toast.success({
-              detail: 'Success',
-              summary: 'Information saved',
-              duration: 2000,
-              sticky: false,
-              position: 'tr',
-            });
-            this.route.navigateByUrl('admin/accounting');
-          },
-          (error) => {
-            if (error.status === 422) {
-              // Validation failed, retrieve the error messages
-              const errors = error.error.errors;
-
-              // Loop through the error messages and display them or handle them as needed
-              Object.keys(errors).forEach((field) => {
-                const fieldErrors = errors[field];
-                fieldErrors.forEach((errorMessage: any) => {
-                  this.displayToast(errorMessage, 'Validation Error');
-                  console.log(`${field}: ${errorMessage}`);
-                });
-              });
-            }
+    if (this.journalEntryForm.valid && total_debit == total_credit && journaldate <= this.maxDate) {
+      this.wahieService.saveJournalEntry(this.journalEntryForm.getRawValue()).subscribe(
+        (res) => {
+          let result: any;
+          result = res;
+          console.log('Saved' + this.journId);
+          console.log(result);
+          this.log.activity = 'Added Journal Entry No.' + this.journId;
+          this.activityLog();
+          if (this.journalEntryForm.getRawValue().due_date != '') {
+            this.sms.sendDate = this.journalEntryForm.getRawValue().due_date;
+            this.sms.journal_id = this.journId;
+            console.log(this.journId);
+            this.smsDue();
           }
-        );
+          this.toast.success({
+            detail: 'Success',
+            summary: 'Information saved',
+            duration: 2000,
+            sticky: false,
+            position: 'tr',
+          });
+          this.route.navigateByUrl('admin/accounting');
+        },
+        (error) => {
+          if (error.status === 422) {
+            // Validation failed, retrieve the error messages
+            const errors = error.error.errors;
+
+            // Loop through the error messages and display them or handle them as needed
+            Object.keys(errors).forEach((field) => {
+              const fieldErrors = errors[field];
+              fieldErrors.forEach((errorMessage: any) => {
+                this.displayToast(errorMessage, 'Validation Error');
+                console.log(`${field}: ${errorMessage}`);
+              });
+            });
+          }
+        }
+      );
     } else {
       this.toast.error({
         detail: 'Failed',
@@ -223,10 +207,6 @@ export class JournalEntryComponent implements OnInit {
 
   removeRow(index: any) {
     this.journalEntryRow = this.journalEntryForm.get('entries') as FormArray;
-    // if (confirm('Do you want to remove?')) {
-    //   this.journalEntryRow.removeAt(index);
-    //   this.balance_summary();
-    // }
     this.journalEntryRow.removeAt(index);
     this.showDel(2);
     this.balance_summary();
@@ -314,9 +294,8 @@ export class JournalEntryComponent implements OnInit {
       journal_name: journal_name,
       journal_type: journal_type,
     };
-    this.wahieService
-      .addLibJournal(this.libJournals as any)
-      .subscribe((libjournal: any) => {
+    this.wahieService.addLibJournal(this.libJournals as any).subscribe(
+      (libjournal: any) => {
         this.libJournals = libjournal;
         this.ngOnInit();
         this.toast.success({
@@ -325,21 +304,21 @@ export class JournalEntryComponent implements OnInit {
           sticky: false,
           position: 'false',
         });
-        this.log.activity = 'Add Journal Account: ' +  this.libJournals.journal_number +" "+ this.libJournals.journal_name;
+        this.log.activity = 'Add Journal Account: ' + this.libJournals.journal_number + ' ' + this.libJournals.journal_name;
         this.activityLog();
         this.show(2);
-      console.log(this.libJournals);
-      },error =>{
+        console.log(this.libJournals);
+      },
+      (error) => {
         this.ngOnInit();
         this.toast.error({
           detail: 'Error',
           summary: 'Account number already taken',
           sticky: false,
           position: 'false',
-        }); 
+        });
       }
-      );
-   
+    );
   }
 
   back() {
@@ -352,11 +331,9 @@ export class JournalEntryComponent implements OnInit {
     activity: 'login',
   };
   activityLog() {
-    this.http
-      .post('http://127.0.0.1:8000/api/addActivity', this.log)
-      .subscribe((res: any) => {
-        console.log(res);
-      });
+    this.http.post('http://127.0.0.1:8000/api/addActivity', this.log).subscribe((res: any) => {
+      console.log(res);
+    });
   }
 
   public sms = {
@@ -366,11 +343,9 @@ export class JournalEntryComponent implements OnInit {
   };
   smsDue() {
     console.log(this.sms);
-    this.http
-      .post('http://127.0.0.1:8000/api/sendDate', this.sms)
-      .subscribe((res: any) => {
-        console.log(res);
-      });
+    this.http.post('http://127.0.0.1:8000/api/sendDate', this.sms).subscribe((res: any) => {
+      console.log(res);
+    });
   }
 
   getNameID(index: any) {

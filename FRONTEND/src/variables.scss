@@ -12,9 +12,12 @@
   --nav-border: var(--grey-2);
   --dropdown-bg: var(--white);
   --modal-bg: var(--white);
-  --modal-overlay: #121314bf;
+  --modal-overlay: #2b2e38bf;
   --table-header: var(--grey-2);
   --sign-cont: #fff;
+  --select-hover: var(--secondary-alt);
+  --table-hover: var(--grey-1);
+  --eye-color: var(--grey-3);
 
   /* ===== Base ===== */
   --white: #ffffff;
@@ -73,6 +76,9 @@
   --cancel-text: var(--white);
   --table-header: var(--grey-3);
   --sign-cont: #fff;
+  --select-hover: var(--secondary-color);
+  --table-hover: var(--grey-1);
+  --eye-color: var(--grey-1);
 
   /* ===== Base ===== */
   --white: #f2f3f5;
@@ -112,16 +118,4 @@
   /* ====== Transitions ====== */
   --tran-05: all 0.5s ease;
   --tran-03: all 0.3s ease;
-}
-
-button {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  border-radius: .435rem;
-}
-
-input {
-  caret-color: var(--primary-color);
 }

@@ -220,17 +220,27 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 22px 9px;
   box-sizing: border-box;
   border: 2px solid var(--border-color);
+  color: var(--grey-4);
   border-radius: 10px;
   margin-left: 0.1rem;
 }
 
 .selectDept ::ng-deep .ng-select-container .ng-placeholder {
-  color: var(--border-color);
+  color: var(--grey-4);
 }
 
 .selectDept ::ng-deep .ng-dropdown-panel {
   margin-top: 3rem;
   margin-left: 0.1rem;
+  border: 2px solid var(--border-color);
+  border-top: none;
+}
+
+.selectDept ::ng-deep .ng-dropdown-panel .ng-option {
+  background-color: transparent;
+}
+.selectDept ::ng-deep .ng-dropdown-panel .ng-option:hover {
+  background-color: var(--select-hover);
 }
 
 .selectGender ::ng-deep .ng-select-container {
@@ -240,22 +250,28 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 22px 9px;
   box-sizing: border-box;
   border: 2px solid var(--border-color);
+  color: var(--grey-4);
   border-radius: 10px;
   margin-left: 0.1rem;
 }
 
 .selectGender ::ng-deep .ng-select-container .ng-placeholder {
-  color: var(--border-color);
-}
-
-.selectGender ::ng-deep .ng-select-container .ng-value {
-  color: var(--border-color);
+  color: var(--grey-4);
 }
 
 .selectGender ::ng-deep .ng-dropdown-panel {
   width: 50%;
   margin-top: 3rem;
   margin-left: 0.1rem;
+  border: 2px solid var(--border-color);
+  border-top: none;
+}
+
+.selectGender ::ng-deep .ng-dropdown-panel .ng-option {
+  background-color: transparent;
+}
+.selectGender ::ng-deep .ng-dropdown-panel .ng-option:hover {
+  background-color: var(--select-hover);
 }
 
 .dateOfBirth {
@@ -292,7 +308,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .submit:hover {
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-light);
 }
 
 .back button {
@@ -319,7 +335,7 @@ input[type="number"]::-webkit-outer-spin-button {
   text-decoration: none;
 }
 .login:hover {
-  color: var(--primary-color-dark);
+  color: var(--primary-color-light);
 }
 
 #account {
@@ -366,15 +382,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-left: 0.3rem;
 }
 
-// .check input{
-//   position: absolute;
-//   cursor: pointer;
-//   font-size: 20px;
-//   transition: 0.3s;
-//   color: #3F0F88;
-//   margin-top: 0.1rem;
-// }
-
 input[id="cb1"] + label {
   display: flex;
   width: 17px;
@@ -396,7 +403,7 @@ input[id="cb1"] {
 }
 
 .condition:hover {
-  color: var(--primary-color-dark);
+  color: var(--primary-color-light);
 }
 
 .condition {
@@ -490,7 +497,7 @@ input[id="cb1"] {
       .btn {
         width: 100px;
         height: 45px;
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         font-size: 0.9rem;
         text-align: center;
         cursor: pointer;
@@ -503,12 +510,13 @@ input[id="cb1"] {
       }
 
       .btn-save:hover {
-        background-color: var(--primary-color-dark);
+        background-color: var(--primary-color-light);
       }
 
       .btn-close {
         background-color: transparent;
-        color: var(--cancel-text);
+        box-shadow: 0 0 0 1px var(--border-color);
+        color: var(--text-color-2);
       }
 
       .btn-close:hover {

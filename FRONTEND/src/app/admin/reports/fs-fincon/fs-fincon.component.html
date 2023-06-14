@@ -14,7 +14,7 @@
     </div>
     <div class="PDF"> 
         <button (click)="exportPDF()"  class="ti ti-file-text PDF-icon" ></button>
-        <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet excel-icon"></button>
+        <button (click)="generateExcel()" class="ti ti-file-spreadsheet excel-icon"></button>
        <input hidden accept="image/*" type="file" id="logo" name="logo" (change)="chLogo($event)">
       </div>
     </div>
@@ -22,10 +22,21 @@
 
   <section class="main-section" id="fsFincon">
     <header>
-     
+      <div class="container">
+        <div class="logo">
+        <label class="-label" for="file">
+        <span class="coop-name"><label for="logo">
+          <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)" class="addimg"/>
+        <img [src]="preLogo"  height="10px" width="10px" i class="ti ti-camera" ></label></span>
+      </label>
+  
       
-      <span class="coop-name"><label for="logo"><img [src]="preLogo" alt="Logo" height="50px" width="50px"></label>WAH-Cooperative</span>
-      <h4 class="report-name">Statement of Financial Condition</h4>
+       </div>
+       </div>
+      </header>
+      <header class="second">
+      <h3> WAH-Cooperative</h3>
+      <h4 class="report_name">Statement of Financial Condition</h4>
       <span class="date-today">As of {{ maxDate | date:'mediumDate' }}</span>
     </header>
   

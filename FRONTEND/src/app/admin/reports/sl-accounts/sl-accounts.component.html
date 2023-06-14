@@ -1,21 +1,34 @@
 <main>
   <br/>
-  <br/>
+
   <div class="print">
     <div class="save"> Save report as:
     </div>
     <div class="PDF"> 
         <button  class="ti ti-file-text PDF-icon" ></button>
         <button  class="ti ti-file-spreadsheet excel-icon"></button>
-        <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)">
+        
     </div>
 </div>
 
 
 <section class="main-section">
   <header>
-    <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)">
-    <span class="coop-name"><label for="logo"><img [src]="preLogo" alt="Logo" height="50px" width="50px"></label>WAH-Cooperative</span>
+    <div class="container">
+      <div class="logo">
+      <label class="-label" for="file">
+      <span class="coop-name"><label for="logo">
+        <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)" class="addimg"/>
+      <img [src]="preLogo"  height="10px" width="10px" i class="ti ti-camera" ></label></span>
+    </label>
+
+    
+     </div>
+     </div>
+    </header>
+
+  <header class="second">
+    <h3> WAH-Cooperative</h3>
     <h4 class="report-name" *ngIf="formData.account!=''">Subsidiary Ledger for {{accInfos.journal_name}}</h4>
     <h4 class="report-name" *ngIf="formData.member!='' && formData.account==''">Subsidiary Ledger for {{memInfos.first_name}} {{memInfos.middle_name}} {{memInfos.last_name}}</h4>
     <h4 class="report-name" *ngIf="formData.member=='' && formData.account==''">Subsidiary Ledger for All Accounts</h4>
@@ -36,8 +49,10 @@
               <th class="th-bal" *ngIf="i === pledgers.length - 1">Starting Balance of {{ items.startingBalanceYear | date:'mediumDate'}}</th>
             </ng-container>
             <th class="th-bal">Payment this {{ maxDate | date:'y' }}</th>
-            <th class="th-bal">Current Balance of {{ maxDate | date:'mediumDate' }}</th>
             <th></th>
+
+            <th class="th-bal2">Current Balance of {{ maxDate | date:'mediumDate' }}</th>
+          
           </tr>
         </thead>
         <tbody>

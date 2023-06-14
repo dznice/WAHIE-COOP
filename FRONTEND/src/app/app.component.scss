@@ -1,7 +1,7 @@
 /* Modal */
 .modal-bg {
   position: fixed;
-  background: #000000bf;
+  background: var(--modal-overlay);
   top: 0;
   left: 0;
   right: 0;
@@ -62,7 +62,7 @@
       }
 
       .btn-close:hover {
-        background-color: var(--primary-alt);
+        background-color: var(--primary-color-light);
       }
     }
   }

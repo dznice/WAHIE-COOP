@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
+import { WahieService } from '../../../services/wahie.service';
+import * as ExcelJS from 'exceljs';
 
 @Component({
   selector: 'app-fs-fincon',
@@ -34,6 +36,8 @@ export class FsFinconComponent implements OnInit {
   nl : any[];
   dg : any[];
   maxDate: any;
+  maxYear: any;
+  lastYear: any;
   oneYearAgo: any;
   revenue: any[];
   expense: any[];
@@ -50,7 +54,10 @@ export class FsFinconComponent implements OnInit {
   pdg : any[];
 
 
-  constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService ) {}
+  constructor(private http:HttpClient, 
+    private exportAsService: ExportAsService, 
+    private wahieService:WahieService,
+    private toast:NgToastService) {}
     
   ngOnInit(): void {
     this.getLogo();
@@ -60,6 +67,199 @@ export class FsFinconComponent implements OnInit {
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
+    console.log(this.maxDate)
+  }
+
+  generateExcel(): void{
+    // Create a new spreadsheet:
+      const spreadSheet = new ExcelJS.Workbook();
+      spreadSheet.creator = 'WAH-COOP';
+      spreadSheet.lastModifiedBy = 'Pogi';
+      spreadSheet.created = new Date();
+      spreadSheet.modified = new Date();
+
+    // Add a sheet
+    const excelSheet = spreadSheet.addWorksheet('Statement of Financial Condition');
+
+        excelSheet.mergeCells(`A1:A4`);
+        excelSheet.getCell('A1').value = 'Logo Here'
+        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
+        excelSheet.getCell('A1').font = { size: 15, bold: true };
+        excelSheet.getCell('A1').border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
+
+        excelSheet.getColumn('A').width = 15;
+        excelSheet.getColumn('B').width = 35;
+        excelSheet.getColumn('C').width = 20;
+        excelSheet.getColumn('D').width = 20;
+
+        excelSheet.mergeCells(`B1:D1`);
+        excelSheet.getCell('B1').value = 'Provincial Employees Credit Cooperative';
+        excelSheet.getCell('B1').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B1').font = { size: 12 };
+        excelSheet.getCell('B1').border = {
+          top: { style: 'thin' },
+          right: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B2:D2`);
+        excelSheet.getCell('B2').value = 'PCEDO Office, Old IBP Bldg., Rotary Lane, San Vicente, Tarlac City';
+        excelSheet.getCell('B2').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B2').font = { size: 12 };
+        excelSheet.getCell('B2').border = {
+          right: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B3:D3`);
+        excelSheet.getCell('B3').value = 'Statement of Financial Condition';
+        excelSheet.getCell('B3').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B3').font = { size: 12, bold: true};
+        excelSheet.getCell('B3').border = {
+          right: { style: 'thin' }
+        };
+        
+        excelSheet.mergeCells(`B4:D4`);
+        excelSheet.getCell('B4').value = 'As of ' + this.maxDate;
+        excelSheet.getCell('B4').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B4').font = { size: 12 };
+        excelSheet.getCell('B4').border = {
+          right: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B5:D5`);
+        excelSheet.getCell('B5').value = '';
+      
+        // Create the headers
+        const reportHeaders = ['','Accounts', 'Balance last ' + this.lastYear , 'Balance this ' + this.maxYear];
+        
+        // Add headers for employees with styling
+        const reportHeaderRow = excelSheet.addRow(reportHeaders);
+        reportHeaderRow.font = { bold: true };
+        reportHeaderRow.eachCell((cell) => {
+          cell.alignment = { horizontal: 'center' };
+        });
+
+        if(this.assets && this.assets.length > 0){
+          const cAssets = ['','Current Assets:','', ''];
+          const cAssetsRow = excelSheet.addRow(cAssets);
+          cAssetsRow.font = { bold: true };
+
+          this.assets.forEach(data =>{
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.passets.forEach(data =>{
+              res[2] = data.result.total_balance;
+              console.log(res[2]);
+            });
+            excelSheet.addRow(res);
+          });
+
+          if(this.assets.length > 0){
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const cAssetsTotal = ['','Total Assets:' ,this.passets[this.passets.length - 1].total_asset, this.assets[this.assets.length - 1].total_asset];
+            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
+            cAssetsTotalRow.font = { bold: true };
+          }
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        };
+
+        if(this.otherAssets && this.otherAssets.length > 0){
+          const ncAssets = ['','Other-Current Assets:','', ''];
+          const ncAssetsRow = excelSheet.addRow(ncAssets);
+          ncAssetsRow.font = { bold: true };
+
+          this.otherAssets.forEach(data =>{
+            const res1 = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.potherAssets.forEach(data =>{
+              res1[2] = data.result.total_balance;
+            });
+            excelSheet.addRow(res1);
+          });
+          //console.log(this.potherAssets[this.potherAssets.length - 1].total_other_asset, this.otherAssets[this.otherAssets.length - 1].total_other_asset)
+          if(this.otherAssets.length > 0){
+            const empty1 = [''];
+            const empty1Row = excelSheet.addRow(empty1);
+            const ncAssetsTotal = ['','Total of Other Current Assets:' ,'', ''];
+            const ncAssetsTotalRow = excelSheet.addRow(ncAssetsTotal);
+            ncAssetsTotalRow.font = { bold: true };
+          }
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        };
+
+        if(this.nonAssets && this.nonAssets.length > 0){
+          const cAssets = ['','Non-Assets:','', ''];
+          const cAssetsRow = excelSheet.addRow(cAssets);
+          cAssetsRow.font = { bold: true };
+
+          this.nonAssets.forEach(data =>{
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.pnonAssets.forEach(data =>{
+              res[2] = data.result.total_balance;
+              console.log(res[2]);
+            });
+            excelSheet.addRow(res);
+          });
+
+          if(this.nonAssets.length > 0){
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const cAssetsTotal = ['','Total of Non-Current Assets' ,'', ''];
+            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
+            cAssetsTotalRow.font = { bold: true };
+          }
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        };
+
+        const totalAssets = ['','Total All Assets:' ,this.calculateLastYearAssetTotalBalance(), this.calculateAssetTotalBalance()];
+        const totalAssetsRow = excelSheet.addRow(totalAssets);
+        totalAssetsRow.font = { bold: true };
+        const empty = [''];
+        const emptyRow = excelSheet.addRow(empty);
+
+        if(this.liabilities && this.liabilities.length > 0){
+          const cAssets = ['','Current Liabilities:','', ''];
+          const cAssetsRow = excelSheet.addRow(cAssets);
+          cAssetsRow.font = { bold: true };
+
+          this.liabilities.forEach(data =>{
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.pliabilities.forEach(data =>{
+              res[2] = data.result.total_balance;
+              console.log(res[2]);
+            });
+            excelSheet.addRow(res);
+          });
+
+          if(this.liabilities.length > 0){
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const cAssetsTotal = ['','Total of Current Liabilities:' ,'',''];
+            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
+            cAssetsTotalRow.font = { bold: true };
+          }
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        };
+
+        spreadSheet.xlsx.writeBuffer().then(buffer => {
+          const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'FS Statement of Financial Condition.xlsx';
+          link.click();
+        });  
   }
 
   exportAsPdf: ExportAsConfig = {
@@ -80,10 +280,10 @@ export class FsFinconComponent implements OnInit {
     }
   }
 
-  exportAsExcel: ExportAsConfig = {
-    type: 'xlsx',
-    elementIdOrContent: 'fsFincon'
-  }
+  // exportAsExcel: ExportAsConfig = {
+  //   type: 'xlsx',
+  //   elementIdOrContent: 'fsFincon'
+  // }
 
   exportPDF() {
     this.exportAsService.save(this.exportAsPdf, 'FS-Financial-Condition').subscribe(() => {
@@ -91,11 +291,11 @@ export class FsFinconComponent implements OnInit {
     });
   }
 
-  exportEXCEL() {
-    this.exportAsService.save(this.exportAsExcel, 'FS-Financial-Condition').subscribe(() => {
-      // save started
-    });
-  }
+  // exportEXCEL() {
+  //   this.exportAsService.save(this.exportAsExcel, 'FS-Financial-Condition').subscribe(() => {
+  //     // save started
+  //   });
+  // }
 
   showSLedger(): void {
     this.http.get('http://127.0.0.1:8000/api/totaljour').subscribe(
@@ -528,6 +728,8 @@ calculateMemberEquity(): number {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-');
+    this.maxYear = year;
+    this.lastYear = year - 1;
     return this.maxDate;
   }
   

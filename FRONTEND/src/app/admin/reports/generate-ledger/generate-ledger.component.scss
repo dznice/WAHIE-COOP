@@ -43,7 +43,7 @@
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
@@ -71,7 +71,7 @@
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
@@ -94,7 +94,7 @@
       .btn-generate {
         width: 130px;
         height: 42px;
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         font-size: 0.9rem;
         text-align: center;
         cursor: pointer;
@@ -106,7 +106,7 @@
       }
 
       .btn-generate:hover {
-        background-color: var(--primary-color-dark);
+        background-color: var(--primary-color-light);
       }
     }
   }

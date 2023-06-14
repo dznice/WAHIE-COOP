@@ -15,7 +15,7 @@ npm i bn-ng-idle --legacy-peer-deps
 npm i ngx-ui-loader --legacy-peer-deps
 npm i ngx-export-as --legacy-peer-deps
 
-//npm i exceljs --legacy-peer-deps//
+npm i exceljs --legacy-peer-deps
 
 
 

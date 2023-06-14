@@ -22,10 +22,7 @@ main {
     align-items: center;
     grid-gap: 24px;
     box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.05);
-    //border: 1px solid var(--border-color);
     height: 9rem;
-    //justify-content: space-between;
-    //cursor: pointer;
 
     .card-icon {
       font-size: 50px;
@@ -70,6 +67,11 @@ main {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    border-radius: 0.625rem;
+    background-color: var(--panel-color);
+    padding: 0.5rem 1rem;
+    margin-top: .5rem;
+    box-shadow: 0 0 0 1px var(--border-color);
 
     .filter-field1 {
       display: flex;
@@ -90,12 +92,20 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
+      }
+
+      input:focus {
+        border: 1px solid var(--text-color-3);
+      }
+
+      input::placeholder {
+        color: var(--text-color-3);
       }
     }
 
@@ -118,14 +128,19 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
       }
+
+      input:focus {
+        border: 1px solid var(--text-color-3);
+      }
     }
+
     .filter-field3 {
       display: flex;
       width: calc(18% - 10px);
@@ -145,14 +160,19 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
       }
+
+      input:focus {
+        border: 1px solid var(--text-color-3);
+      }
     }
+    
     .filter-field4 {
       display: flex;
       width: calc(18% - 10px);
@@ -172,12 +192,20 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
+
+        option:checked { 
+          color: var(--text-color-3);
+        }
+      }
+
+      select:focus {
+        border: 1px solid var(--text-color-3);
       }
     }
     .filter-field5 {
@@ -199,12 +227,16 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
+        border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
+      }
+
+      select:focus {
+        border: 1px solid var(--text-color-3);
       }
     }
   }
@@ -213,7 +245,6 @@ main {
 /* Table */
 .table-container {
   margin: auto;
-  width: 100%;
 
   .table-content {
     width: 100%;
@@ -227,7 +258,6 @@ main {
 
     thead {
       th {
-        position: sticky;
         background-color: var(--primary-color);
         color: var(--white);
         text-align: left;
@@ -264,32 +294,33 @@ main {
           font-weight: 600;
 
           .overdue {
-            padding: .5rem 1.25rem;
+            padding: 0.5rem 1.25rem;
             background: var(--overdue-bg);
             color: var(--overdue-font);
-            border-radius: 0.45rem;
-            width: fit-content;
+            border-radius: 0.5rem;
+            text-align: center;
           }
-
+  
           .pending {
-            padding: .5rem 1.25rem;
+            padding: 0.5rem 1.25rem;
             background: var(--pending-bg);
             color: var(--pending-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
+            text-align: center;
           }
-
+  
           .paid {
             padding: .5rem 2.05rem;
             background: var(--paid-bg);
             color: var(--paid-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
             text-align: center;
           }
           .closed {
-            padding: .5rem 1.50rem;
+            padding: 0.5rem 1.5rem;
             background: var(--paid-bg);
             color: var(--paid-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
             text-align: center;
           }
         }
@@ -298,8 +329,8 @@ main {
       tr:hover {
         td {
           cursor: pointer;
-          color: var(--primary-color);
-          background-color: var(--panel-color);
+          color: var(--text-color-2);
+          background-color: var(--grey-2);
         }
       }
     }

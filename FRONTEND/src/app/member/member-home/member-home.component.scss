@@ -4,12 +4,13 @@ main {
 
   .title {
     color: var(--title-color);
-    border-bottom: .5px solid var(--border-color);
   }
 }
 
 /* Filtering */
 .recent-transaction {
+  margin-top: 1.5rem;
+
   .section-title {
     color: var(--title-color);
     margin-top: 2.5rem;
@@ -21,7 +22,11 @@ main {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    border-radius: 0.625rem;
+    background-color: var(--panel-color);
+    padding: 0.5rem 1rem;
     margin-top: 0.7rem;
+    border: 1.5px solid var(--border-color);
 
     .filter-field1 {
       display: flex;
@@ -42,12 +47,16 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        border: 1.6px solid var(--border-color);
         background-color: var(--panel-color);
-        border-radius: 0.45rem;
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
+      }
+
+      input:focus {
+        border: 1.6px solid var(--text-color-3);
       }
     }
 
@@ -70,14 +79,19 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
-        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        border: 1.6px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
       }
+
+      input:focus {
+        border: 1.6px solid var(--text-color-3);
+      }
     }
+
     .filter-field3 {
       display: flex;
       width: calc(25% - 10px);
@@ -97,14 +111,19 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
-        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        border: 1.6px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
       }
+
+      select:focus {
+        border: 1.6px solid var(--text-color-3);
+      }
     }
+
     .filter-field4 {
       display: flex;
       width: calc(25% - 10px);
@@ -124,39 +143,16 @@ main {
         font-size: 16px;
         font-weight: 500;
         color: var(--text-color-3);
-        border-radius: 0.45rem;
-        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        border: 1.6px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
         margin: 8px 0 0;
       }
-    }
-    .filter-field5 {
-      display: flex;
-      width: calc(25% - 10px);
-      flex-direction: column;
-      margin: 8px 0;
 
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-color-3);
-      }
-
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--text-color-3);
-        border-radius: 0.45rem;
-        border: 1px solid var(--border-color);
-        background-color: var(--panel-color);
-        padding: 0 10px;
-        height: 36px;
-        margin: 8px 0 0;
+      select:focus {
+        border: 1.6px solid var(--text-color-3);
       }
     }
   }
@@ -189,7 +185,8 @@ main {
         border-bottom: 1px solid var(--border-color);
       }
 
-      .th-bal, .th-pay {
+      .th-bal,
+      .th-pay {
         text-align: right;
       }
     }
@@ -207,7 +204,8 @@ main {
           border-right: 1px solid var(--border-color);
         }
 
-        .td-bal, .td-pay {
+        .td-bal,
+        .td-pay {
           text-align: right;
         }
 
@@ -216,32 +214,33 @@ main {
           font-weight: 600;
 
           .overdue {
-            padding: .5rem 1.25rem;
+            padding: 0.5rem 1.25rem;
             background: var(--overdue-bg);
             color: var(--overdue-font);
-            border-radius: 0.45rem;
-            width: fit-content;
+            border-radius: 0.5rem;
+            text-align: center;
           }
-
+  
           .pending {
-            padding: .5rem 1.25rem;
+            padding: 0.5rem 1.25rem;
             background: var(--pending-bg);
             color: var(--pending-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
+            text-align: center;
           }
-
+  
           .paid {
             padding: .5rem 2.05rem;
             background: var(--paid-bg);
             color: var(--paid-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
             text-align: center;
           }
           .closed {
-            padding: .5rem 1.50rem;
+            padding: 0.5rem 1.5rem;
             background: var(--paid-bg);
             color: var(--paid-font);
-            border-radius: 0.45rem;
+            border-radius: 0.5rem;
             text-align: center;
           }
         }
@@ -250,8 +249,8 @@ main {
       tr:hover {
         td {
           cursor: pointer;
-          color: var(--primary-color);
-          background-color: var(--panel-color);
+          color: var(--text-color-2);
+          background-color: var(--grey-2);
         }
       }
     }

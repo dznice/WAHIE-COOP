@@ -173,7 +173,7 @@ input {
 }
 
 .save:hover {
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-light);
 }
 
 .account {
@@ -182,26 +182,35 @@ input {
   text-align: center;
 }
 
-.back {
+.go-back {
   display: flex;
-  color: var(--grey-4);
-  font-size: 0.9rem;
-  align-items: center;
-  font-weight: 500;
-  transition: 0.3s;
-  cursor: pointer;
-  opacity: 80%;
-  margin-left: 30%;
-}
-
-.back {
+  justify-content: center;
   text-align: center;
-  text-decoration: none;
+
+  .back {
+    display: flex;
+    color: var(--grey-4);
+    font-size: 0.9rem;
+    align-items: center;
+    font-weight: 500;
+    transition: 0.3s;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+  } 
+  
+  .back:hover {
+    color: var(--grey-3);
+  }
+
+  .ti-arrow-left {
+    display: flex;
+    font-size: 18px;
+    text-align: center;
+    margin-right: .3rem;
+  }
 }
 
-.back:hover{
-  color: var(--grey-3);
-}
 
 span {
   height: 20px;
@@ -211,27 +220,21 @@ span {
   display: inline-block;
   color: var(--white);
   font-size: 10px;
-  padding-top: 0.1rem;
+  padding-top: 0.15rem;
+  transform: translate(50%, 50%);
 }
-
 .dot1 {
   margin-right: 5%;
 }
 .dot2 {
   margin-right: 5%;
+  
 }
 .dot3 {
   margin-right: 5%;
   background-color: var(--primary-color);
   color: var(--white);
-}
-.dot4 {
-  margin-right: 5%;
-}
-
-span:hover {
-  text-decoration: none;
-  cursor: context-menu;
+  transition: 1s;
 }
 
 @media (max-width: 850px) {

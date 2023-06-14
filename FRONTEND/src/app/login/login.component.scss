@@ -137,12 +137,10 @@ form {
   border: 2px solid var(--border-color); 
   border-radius: 0.6rem;
   padding: 20px;
-  font-weight: 500;
 }
 
 .input-field::placeholder {
   color: var(--grey-4);
-  font-weight: 500;
 }
 
 .eye {
@@ -166,7 +164,7 @@ form {
 }
 
 .forgot-pass:hover {
-  color: var(--primary-color-dark);
+  color: var(--primary-color-light);
 }
 
 .submit {
@@ -183,7 +181,7 @@ form {
 }
 
 .submit:hover {
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-light);
 }
 
 .account {
@@ -197,7 +195,7 @@ form {
 }
 
 .account a:hover {
-  color: var(--primary-color-dark);
+  color: var(--primary-color-light);
 }
 
 @media (max-width: 850px) {
