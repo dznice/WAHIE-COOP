@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
+import * as ExcelJS from 'exceljs';
 
 @Component({
   selector: 'app-fs-op',
@@ -17,6 +18,8 @@ export class FsOpComponent implements OnInit {
   pexpense: any[];
   item: any[];
   maxDate: any;
+  maxYear: any;
+  lastYear: any;
   oneYearAgo: any;
 
   constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService) {}
@@ -32,6 +35,158 @@ export class FsOpComponent implements OnInit {
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
+  }
+
+  generateExcel(): void{
+    // Create a new spreadsheet:
+      const spreadSheet = new ExcelJS.Workbook();
+      spreadSheet.creator = 'WAH-COOP';
+      spreadSheet.lastModifiedBy = 'Pogi';
+      spreadSheet.created = new Date();
+      spreadSheet.modified = new Date();
+
+    // Add a sheet
+    const excelSheet = spreadSheet.addWorksheet('Statement of Operations');
+
+        excelSheet.mergeCells(`A1:A4`);
+        excelSheet.getCell('A1').value = 'Logo Here'
+        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
+        excelSheet.getCell('A1').font = { size: 15, bold: true };
+        excelSheet.getCell('A1').border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
+
+        excelSheet.getColumn('A').width = 15;
+        excelSheet.getColumn('B').width = 35;
+        excelSheet.getColumn('C').width = 20;
+        excelSheet.getColumn('D').width = 20;
+
+        excelSheet.mergeCells(`B1:D1`);
+        excelSheet.getCell('B1').value = 'Provincial Employees Credit Cooperative';
+        excelSheet.getCell('B1').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B1').font = { size: 12 };
+        excelSheet.getCell('B1').border = {
+          top: { style: 'thin' },
+          right: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B2:D2`);
+        excelSheet.getCell('B2').value = 'PCEDO Office, Old IBP Bldg., Rotary Lane, San Vicente, Tarlac City';
+        excelSheet.getCell('B2').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B2').font = { size: 12 };
+        excelSheet.getCell('B2').border = {
+          right: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B3:D3`);
+        excelSheet.getCell('B3').value = 'Statement of Operations';
+        excelSheet.getCell('B3').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B3').font = { size: 12, bold: true};
+        excelSheet.getCell('B3').border = {
+          right: { style: 'thin' }
+        };
+        
+        excelSheet.mergeCells(`B4:D4`);
+        excelSheet.getCell('B4').value = 'As of ' + this.maxDate;
+        excelSheet.getCell('B4').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B4').font = { size: 12 };
+        excelSheet.getCell('B4').border = {
+          right: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B5:D5`);
+        excelSheet.getCell('B5').value = '';
+      
+        // Create the headers
+        const reportHeaders = ['','Accounts', 'Balance last ' + this.lastYear , 'Balance this ' + this.maxYear];
+        
+        // Add headers for employees with styling
+        const reportHeaderRow = excelSheet.addRow(reportHeaders);
+        reportHeaderRow.font = { bold: true };
+        reportHeaderRow.eachCell((cell) => {
+          cell.alignment = { horizontal: 'center' };
+        });
+
+        if(this.revenue && this.revenue.length > 0){
+          const cAssets = ['','Current Revenue:'];
+          const cAssetsRow = excelSheet.addRow(cAssets);
+          cAssetsRow.font = { bold: true };
+
+          this.revenue.forEach(data =>{
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.prevenue.forEach(data =>{
+              res[2] = data.result.total_balance;
+              console.log(res[2]);
+            });
+            excelSheet.addRow(res);
+          });
+
+          if(this.revenue.length > 0){
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const cAssetsTotal = ['','Total revenue:'];
+            if(this.revenue.length > 0 ? this.revenue[this.revenue.length - 1].total_revenue : ''){
+              cAssetsTotal[3] = this.revenue[this.revenue.length - 1].total_revenue;
+              
+            }
+            if(this.prevenue.length > 0 ? this.prevenue[this.prevenue.length - 1].total_revenue : ''){
+              cAssetsTotal[2] = this.prevenue[this.prevenue.length - 1].total_revenue;
+            
+            }
+            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
+            cAssetsTotalRow.font = { bold: true };
+          }
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        };
+
+        if(this.expense && this.expense.length > 0){
+          const cAssets = ['','Current Expense:'];
+          const cAssetsRow = excelSheet.addRow(cAssets);
+          cAssetsRow.font = { bold: true };
+
+          this.expense.forEach(data =>{
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.pexpense.forEach(data =>{
+              res[2] = data.result.total_balance;
+              console.log(res[2]);
+            });
+            excelSheet.addRow(res);
+          });
+
+          if(this.expense.length > 0){
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const cAssetsTotal = ['','Total Expenses:'];
+            if(this.expense.length > 0 ? this.expense[this.expense.length - 1].total_expenses : ''){
+              cAssetsTotal[3] = this.expense[this.expense.length - 1].total_expenses;
+              
+            }
+            if(this.pexpense.length > 0 ? this.pexpense[this.pexpense.length - 1].total_expenses : ''){
+              cAssetsTotal[2] = this.pexpense[this.pexpense.length - 1].total_expenses;
+            
+            }
+            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
+            cAssetsTotalRow.font = { bold: true };
+          }
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        };
+
+        
+        spreadSheet.xlsx.writeBuffer().then(buffer => {
+          const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'FS Statement of Operations.xlsx';
+          link.click();
+        });  
   }
 
   exportAsPdf: ExportAsConfig = {
@@ -52,22 +207,12 @@ export class FsOpComponent implements OnInit {
     }
   }
 
-  exportAsExcel: ExportAsConfig = {
-    type: 'xlsx',
-    elementIdOrContent: 'fsOp'
-  }
-
   exportPDF() {
     this.exportAsService.save(this.exportAsPdf, 'FS-Operations').subscribe(() => {
       // save started
     });
   }
 
-  exportEXCEL() {
-    this.exportAsService.save(this.exportAsExcel, 'FS-Operations').subscribe(() => {
-      // save started
-    });
-  }
 
   showSLedger(): void {
     this.http.get('http://127.0.0.1:8000/api/totaljour').subscribe(
@@ -219,6 +364,8 @@ export class FsOpComponent implements OnInit {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-');
+    this.maxYear = year;
+    this.lastYear = year - 1;
     return this.maxDate;
   }
   preLogo:any;

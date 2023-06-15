@@ -26,6 +26,7 @@ class LibJournalResource extends JsonResource
             'id' => $this->id,
             'journal_number' => $this->journal_number,
             'journal_name' => $this->journal_name,
+            'journal_type' => $this->journal_type,
         ];
     }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
-import { WahieService } from '../../../services/wahie.service';
 import * as ExcelJS from 'exceljs';
 
 @Component({
@@ -56,7 +55,6 @@ export class FsFinconComponent implements OnInit {
 
   constructor(private http:HttpClient, 
     private exportAsService: ExportAsService, 
-    private wahieService:WahieService,
     private toast:NgToastService) {}
     
   ngOnInit(): void {
@@ -135,83 +133,90 @@ export class FsFinconComponent implements OnInit {
       
         // Create the headers
         const reportHeaders = ['','Accounts', 'Balance last ' + this.lastYear , 'Balance this ' + this.maxYear];
-        
-        // Add headers for employees with styling
         const reportHeaderRow = excelSheet.addRow(reportHeaders);
-        reportHeaderRow.font = { bold: true };
+        const addedRow = excelSheet.getRow(excelSheet.rowCount);
+        addedRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        reportHeaderRow.font = { bold: true, size: 12};
         reportHeaderRow.eachCell((cell) => {
           cell.alignment = { horizontal: 'center' };
         });
 
         if(this.assets && this.assets.length > 0){
-          const cAssets = ['','Current Assets:','', ''];
-          const cAssetsRow = excelSheet.addRow(cAssets);
-          cAssetsRow.font = { bold: true };
+          const accounts = ['','Current Assets:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12 };
 
           this.assets.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
-            
+            const list = ['', data.result.journal_name, '' , data.result.total_balance];
             this.passets.forEach(data =>{
-              res[2] = data.result.total_balance;
-              console.log(res[2]);
+              list[2] = data.result.total_balance;
             });
-            excelSheet.addRow(res);
+            excelSheet.addRow(list);
           });
 
           if(this.assets.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const cAssetsTotal = ['','Total Assets:' ,this.passets[this.passets.length - 1].total_asset, this.assets[this.assets.length - 1].total_asset];
-            if(this.otherAssets.length > 0 ? this.otherAssets[this.otherAssets.length - 1].total_other_asset : ''){
-              cAssetsTotal[3] = this.assets[this.assets.length - 1].total_asset;
-              
-            }
-            if(this.potherAssets.length > 0 ? this.potherAssets[this.potherAssets.length - 1].total_other_asset : ''){
-              cAssetsTotal[2] = this.passets[this.passets.length - 1].total_asset;
-            
-            }
-            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
-            cAssetsTotalRow.font = { bold: true };
+            const accountsTotal = ['', 'Total Current Assets:' ,
+                                  this.passets.length > 0 ? this.passets[this.passets.length - 1].total_asset : '', 
+                                  this.assets.length > 0 ? this.assets[this.assets.length - 1].total_asset : ''];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12 };
           }
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
         };
 
         if(this.otherAssets && this.otherAssets.length > 0){
-          const ncAssets = ['','Other-Current Assets:','', ''];
-          const ncAssetsRow = excelSheet.addRow(ncAssets);
-          ncAssetsRow.font = { bold: true };
+          const accounts = ['','Other-Current Assets:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12 };
 
           this.otherAssets.forEach(data =>{
-            const res1 = ['', data.result.journal_name, '' , data.result.total_balance];
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
             
             this.potherAssets.forEach(data =>{
-              res1[2] = data.result.total_balance;
+              res[2] = data.result.total_balance;
             });
-            excelSheet.addRow(res1);
+            excelSheet.addRow(res);
           });
-          //console.log(this.potherAssets[this.potherAssets.length - 1].total_other_asset, this.otherAssets[this.otherAssets.length - 1].total_other_asset)
+          
           if(this.otherAssets.length > 0){
-            const empty1 = [''];
-            const empty1Row = excelSheet.addRow(empty1);
-            const ncAssetsTotal = ['','Total of Other Current Assets:' ,'', ''];
-            if(this.otherAssets.length > 0 ? this.otherAssets[this.otherAssets.length - 1].total_other_asset : ''){
-              ncAssetsTotal[3] = this.otherAssets[this.otherAssets.length - 1].total_other_asset;
-            }
-            if(this.potherAssets.length > 0 ? this.potherAssets[this.potherAssets.length - 1].total_other_asset : ''){
-              ncAssetsTotal[2] = this.potherAssets[this.potherAssets.length - 1].total_other_asset;
-            }
-            const ncAssetsTotalRow = excelSheet.addRow(ncAssetsTotal);
-            ncAssetsTotalRow.font = { bold: true };
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const accountsTotal = ['','Total of Other Current Assets:',
+                                  this.potherAssets.length > 0 ? this.potherAssets[this.potherAssets.length - 1].total_other_asset : '',
+                                  this.otherAssets.length > 0 ? this.otherAssets[this.otherAssets.length - 1].total_other_asset : ''];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12 };
           }
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
         };
 
         if(this.nonAssets && this.nonAssets.length > 0){
-          const cAssets = ['','Non-Assets:','', ''];
-          const cAssetsRow = excelSheet.addRow(cAssets);
-          cAssetsRow.font = { bold: true };
+          const accounts = ['','Non-Assets:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12 };
 
           this.nonAssets.forEach(data =>{
             const res = ['', data.result.journal_name, '' , data.result.total_balance];
@@ -226,30 +231,40 @@ export class FsFinconComponent implements OnInit {
           if(this.nonAssets.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const cAssetsTotal = ['','Total of Non-Current Assets' ,'', ''];
-            if(this.nonAssets.length > 0 ? this.nonAssets[this.nonAssets.length - 1].total_non_asset : ''){
-              cAssetsTotal[3] = this.nonAssets[this.nonAssets.length - 1].total_non_asset;
-            }
-            if(this.pnonAssets.length > 0 ? this.pnonAssets[this.pnonAssets.length - 1].total_non_asset : ''){
-              cAssetsTotal[2] = this.potherAssets[this.potherAssets.length - 1].total_non_asset;
-            }
-            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
-            cAssetsTotalRow.font = { bold: true };
+            const accountsTotal = ['','Total of Non-Current Assets:',
+                                  this.pnonAssets.length > 0 ? this.pnonAssets[this.pnonAssets.length - 1].total_non_asset : '',
+                                  this.nonAssets.length > 0 ? this.nonAssets[this.nonAssets.length - 1].total_non_asset : ''];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12 };
           }
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
         };
 
-        const totalAssets = ['','Total All Assets:' ,this.calculateLastYearAssetTotalBalance(), this.calculateAssetTotalBalance()];
+        const totalAssets = ['','TOTAL ALL ASSETS:' ,this.calculateLastYearAssetTotalBalance(), this.calculateAssetTotalBalance()];
         const totalAssetsRow = excelSheet.addRow(totalAssets);
-        totalAssetsRow.font = { bold: true };
-        const empty = [''];
-        const emptyRow = excelSheet.addRow(empty);
+        const addedTRow = excelSheet.getRow(excelSheet.rowCount);
+          addedTRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+        totalAssetsRow.font = { size: 12, bold: true };
+        const empty0 = [''];
+        const empty0Row = excelSheet.addRow(empty0);
 
         if(this.liabilities && this.liabilities.length > 0){
-          const cAssets = ['','Current Liabilities:','', ''];
-          const cAssetsRow = excelSheet.addRow(cAssets);
-          cAssetsRow.font = { bold: true };
+          const accounts = ['','Current Liabilities:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12 };
 
           this.liabilities.forEach(data =>{
             const res = ['', data.result.journal_name, '' , data.result.total_balance];
@@ -264,19 +279,134 @@ export class FsFinconComponent implements OnInit {
           if(this.liabilities.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const cAssetsTotal = ['','Total of Current Liabilities:' ,'',''];
-            if(this.pliabilities.length > 0 ? (this.pliabilities[this.pliabilities.length - 1].total_liability) : ''){
-              cAssetsTotal[3] = this.pliabilities[this.pliabilities.length - 1].total_liability;
-            }
-            if(this.pliabilities.length > 0 ? this.pliabilities[this.pliabilities.length - 1].total_liability : ''){
-              cAssetsTotal[2] = this.pliabilities[this.potherAssets.length - 1].total_liability;
-            }
-            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
-            cAssetsTotalRow.font = { bold: true };
+            const accountsTotal = ['','Total of Current Liabilities:',
+                                  this.pliabilities.length > 0 ? this.pliabilities[this.pliabilities.length - 1].total_liability : '',
+                                  this.liabilities.length > 0 ? (this.liabilities[this.liabilities.length - 1].total_liability) : '',];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12};
           }
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
         };
+
+        if(this.nonLiabilities && this.nonLiabilities.length > 0){
+          const accounts = ['','Non-Current Liabilities:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12 };
+
+          this.nonLiabilities.forEach(data =>{
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.pnonLiabilities.forEach(data =>{
+              res[2] = data.result.total_balance;
+              console.log(res[2]);
+            });
+            excelSheet.addRow(res);
+          });
+
+          if(this.nonLiabilities.length > 0){
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const accountsTotal = ['','Total of Non-Current Liabilities:',
+                                  this.pnonLiabilities.length > 0 ? this.pnonLiabilities[this.pnonLiabilities.length - 1].total_non_liability : '',
+                                  this.nonLiabilities.length > 0 ? (this.nonLiabilities[this.nonLiabilities.length - 1].total_non_liability) : ''];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12 };
+          }
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        };
+
+        if(this.equity && this.equity.length > 0){
+          const accounts = ['','Equity:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true , size: 12};
+
+          this.equity.forEach(data =>{
+            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+            
+            this.pequity.forEach(data =>{
+              res[2] = data.result.total_balance;
+              console.log(res[2]);
+            });
+            excelSheet.addRow(res);
+          });
+
+          if(this.equity.length > 0){
+            const empty = [''];
+            const emptyRow = excelSheet.addRow(empty);
+            const accountsTotal = ['','Total of Equity:', '',
+                                    this.equity.length > 0 ? (this.equity[this.equity.length - 1].total_equity) : ''];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12};
+          }
+          
+        };  
+
+        if(this.reserveFund !== 0 && this.cetFund !== 0 && this.cdFund !== 0 && this.optionalFund !== 0){
+          const accounts = ['','Statutory Funds:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12};
+
+          const rf  = ['','Reserve Fund', this.preserveFund, this.reserveFund];
+          const rfRow = excelSheet.addRow(rf);
+          const cetf  = ['','Coop. Education & Training Fund', this.preserveFund, this.reserveFund];
+          const cetfRow = excelSheet.addRow(cetf);
+          const cdf  = ['','Community Development Fund', this.preserveFund, this.reserveFund];
+          const cdfRow = excelSheet.addRow(cdf);
+          const of  = ['','Optional Fund', this.preserveFund, this.reserveFund];
+          const ofRow = excelSheet.addRow(of);
+
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+        }
+
+        const totalMEquity = ['','Total All Assets:' , this.calculateLastYearCombinedMemberEquity(), this.calculateCombinedMemberEquity()];
+        const totalMEquityRow = excelSheet.addRow(totalMEquity);
+        const addedMERow = excelSheet.getRow(excelSheet.rowCount);
+            addedMERow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+        totalMEquityRow.font = { bold: true, size: 12};
+        const empty1 = [''];
+        const empty1Row = excelSheet.addRow(empty1);
+
+        const totalLE = ['','TOTAL OF LIABILITY AND EQUITY:' , this.calculateLastYearCombinedTotalLiabilityandEquity(), this.calculateCombinedTotalLiabilityandEquity()];
+        const totalLERow = excelSheet.addRow(totalLE);
+        const addedLERow = excelSheet.getRow(excelSheet.rowCount);
+            addedLERow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+        totalLERow.font = { bold: true, size: 12 };
+        const empty2 = [''];
+        const empty2Row = excelSheet.addRow(empty2);
 
         spreadSheet.xlsx.writeBuffer().then(buffer => {
           const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -306,22 +436,11 @@ export class FsFinconComponent implements OnInit {
     }
   }
 
-  // exportAsExcel: ExportAsConfig = {
-  //   type: 'xlsx',
-  //   elementIdOrContent: 'fsFincon'
-  // }
-
   exportPDF() {
     this.exportAsService.save(this.exportAsPdf, 'FS-Financial-Condition').subscribe(() => {
       // save started
     });
   }
-
-  // exportEXCEL() {
-  //   this.exportAsService.save(this.exportAsExcel, 'FS-Financial-Condition').subscribe(() => {
-  //     // save started
-  //   });
-  // }
 
   showSLedger(): void {
     this.http.get('http://127.0.0.1:8000/api/totaljour').subscribe(
