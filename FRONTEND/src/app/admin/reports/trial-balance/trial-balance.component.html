@@ -42,45 +42,80 @@
         <thead>
           <tr>
             <th>Accounts</th>
-            <th class="th-cred">Credit</th>
-            <th class="th-deb">Debit</th>
+            <th class="th-cred">Debit</th>
+            <th class="th-deb">Credit</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of assets">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2"></td>
-            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-deb"></td>
           </tr>
           <tr *ngFor="let item of otherAssets">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2"></td>
-            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-deb"></td>
           </tr>
           <tr *ngFor="let item of nonAssets">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2"></td>
-            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            <td class="td-deb"></td>
           </tr>
           <tr *ngFor="let item of liabilities">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            <td class="td-deb"></td>
+            <td class="td-cred2"></td>
+            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           </tr>
           <tr *ngFor="let item of nonLiabilities">
             <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            <td class="td-deb"></td>
+            <td class="td-cred2"></td>
+            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
           </tr>
           <tr *ngFor="let item of equity">
+            <td>{{ item.result.journal_name }}</td>
+            <td class="td-cred2"></td>
+            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+          </tr>
+
+          <ng-container>
+            <tr>
+              <td>Reserve Fund</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            </tr>
+            <tr>
+              <td>Coop. Education & Training Fund</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+            </tr>
+            <tr>
+              <td>Community Development Fund</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>Optional Fund</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            </tr>
+      </ng-container>
+      <p class="hiddenCalculate">{{calculateTotalBalance()}}</p>
+
+          <tr *ngFor="let item of revenue">
             <td>{{ item.result.journal_name }}</td>
             <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             <td class="td-deb"></td>
           </tr>
+          <tr *ngFor="let item of expenses">
+            <td>{{ item.result.journal_name }}</td>
+            <td class="td-cred2"></td>
+            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+          </tr>
           <tr class="tr-total">
             <td class="total">Total</td>
-            <td class="td-deb2">{{ calculateLiabilityandEquityTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-            <td class="td-cred3">{{ calculateAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="td-cred3">{{ calculateAssetandRevenueTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="td-deb2">{{ calculateLiabilityEquityandExpensesTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
           </tr>
         </tbody>
       </table>

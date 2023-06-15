@@ -24,6 +24,8 @@ export class TrialBalanceComponent implements OnInit {
   liabilities : any[];
   nonLiabilities : any[];
   equity : any[];
+  revenue : any[];
+  expenses : any[];
 
   constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService) {}
     
@@ -32,6 +34,11 @@ export class TrialBalanceComponent implements OnInit {
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
+    this.totalBalance = this.calculateTotalBalance();
+    this.reserveFund = this.totalBalance * 0.1;
+    this.cetFund = this.totalBalance * 0.05;
+    this.cdFund = this.totalBalance * 0.03;
+    this.optionalFund = this.totalBalance * 0.07;
   }
 
   exportAsPdf: ExportAsConfig = {
@@ -87,25 +94,82 @@ export class TrialBalanceComponent implements OnInit {
     this.liabilities = [];
     this.nonLiabilities = [];
     this.equity = [];
+    this.revenue = [];
+    this.expenses = [];
   
     for (const item of this.ledgers) {
       const journalName = item.result.journType.toLowerCase(); // Convert to lowercase for case-insensitive comparison
       console.log('Journal Name:', journalName);
 
       if (['cash and cash equivalents', 'loans and receivables', 'financial assets', 'biologicals assets'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.assets.push(item);
+        }
       } else if (journalName === 'other current assets') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.otherAssets.push(item);
+        }
       } else if (['non current assets', 'biological assets', 'intangible assets'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.nonAssets.push(item);
+        }
       } else if (['liabilities', 'other current liabilities'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.liabilities.push(item);
+        }
       } else if (['current liabilities', 'other non-current liabilities'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.nonLiabilities.push(item);
+        }
       } else if (journalName === 'equity') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.equity.push(item);
+        }
+      } else if (['revenue', 'cost of goods sold' , 'cost of services'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
+        this.revenue.push(item);
+        }
+      } else if (['expense', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
+        this.expenses.push(item);
+        }
       } 
     }
+  }
+
+  
+  reserveFund : any;
+  cetFund : any;
+  cdFund : any;
+  optionalFund : any;
+  statutoryFund : any;
+  totalBalance : any;
+
+  calculateTotalBalance(): number {
+    let totalBalance = 0;
+    let totalExpenses = 0;
+    let totalRevenue = 0;
+    let statutoryFund = 0;
+  
+    for (const item of this.revenue) {
+      totalRevenue += item.result.total_balance;
+    }
+  
+    for (const item of this.expenses) {
+      totalExpenses += item.result.total_balance;
+    }
+
+    totalBalance = totalRevenue - totalExpenses;
+
+    this.reserveFund = totalBalance * 0.1;
+    this.cetFund = totalBalance * 0.05;
+    this.cdFund = totalBalance * 0.03;
+    this.optionalFund = totalBalance * 0.07;
+  
+    this.statutoryFund = this.reserveFund+this.cetFund+this.cdFund+this.optionalFund;
+    totalBalance = this.reserveFund+this.cetFund+this.cdFund+this.optionalFund;
+
+    return totalBalance;
   }
   
   
@@ -149,7 +213,7 @@ export class TrialBalanceComponent implements OnInit {
     
   }
   
-  calculateAssetTotalBalance(): number {
+  calculateAssetandRevenueTotalBalance(): number {
     let totalBalance = 0;
   
     for (const item of this.assets) {
@@ -163,11 +227,14 @@ export class TrialBalanceComponent implements OnInit {
     for (const item of this.nonAssets) {
       totalBalance += item.result.total_balance;
     }
+    for (const item of this.revenue) {
+      totalBalance += item.result.total_balance;
+    }
   
     return totalBalance;
   }
 
-  calculateLiabilityandEquityTotalBalance(): number {
+  calculateLiabilityEquityandExpensesTotalBalance(): number {
     let totalBalance = 0;
   
     for (const item of this.liabilities) {
@@ -181,6 +248,11 @@ export class TrialBalanceComponent implements OnInit {
     for (const item of this.equity) {
       totalBalance += item.result.total_balance;
     }
+    for (const item of this.expenses) {
+      totalBalance += item.result.total_balance;
+    }
+
+    totalBalance = totalBalance + this.calculateTotalBalance();
   
     return totalBalance;
   }

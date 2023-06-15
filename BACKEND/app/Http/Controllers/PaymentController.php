@@ -72,19 +72,29 @@ class PaymentController extends Controller
                                 $matchingCredit->users_id = $request->userId;
                             
                                 if ($value['credit'] == 0) {
-                                    // Only credit amount is provided
+                                    // Only Debit amount is provided
+                                    if ( $value['debit'] < $matchingCredit->credit_amount ?: $matchingCredit->debit_amount ){
                                     $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
                                     $matchingCredit->debit_amount += $value['debit'];
+                                    }else{
+                                        $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
+                                        $matchingCredit->debit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
+                                    }
                                 } else {
-                                    // Only debit amount is provided
+                                    // Only Credit amount is provided
+                                    if ( $value['credit'] < $matchingCredit->debit_amount ?: $matchingCredit->credit_amount ){
                                     $matchingCredit->credit_amount += $value['credit'];
-                                    $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->debit_amount;
+                                    $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                    }else{
+                                        $matchingCredit->credit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                        $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                    }
                                 }
                             
                                 $matchingCredit->journals_id = $value['account'];
                                 $matchingCredit->save();
                             
-                                $payment += $debit;
+                                $payment += $value['debit'];
                             }
                         
                     
@@ -104,6 +114,8 @@ class PaymentController extends Controller
 
                     $credits = Credits::find($request->transactionNo);
                     $credits->users_id = $request->userId;
+                    $credits->credit_amount = 0;
+                    $credits->debit_amount = 0;
                     $credits-> journals_id = null;
                     $credits-> payables_id = $pays;
                     $credits->save();

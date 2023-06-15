@@ -378,74 +378,58 @@ export class FsFinconComponent implements OnInit {
         this.nonLiabilities.push(item);
         }
       } else if (['revenue', 'cost of goods sold', 'cost of services'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.revenue.push(item);
+        }
       } else if (['expenses', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
         this.expense.push(item);
+        }
       } else if (journalName === 'equity') {
         // this.equity.push(item);
         if (item.result.journal_name === 'Subscribed Share Capital - Common') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.sscc.push(item);
+          }
         } else if (item.result.journal_name === 'Subscription Receivable - Common') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.src.push(item);
+          }
         } else if (item.result.journal_name === 'Subscriptions Receivable Preferred') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.srp.push(item);
+          }
         } else if (item.result.journal_name === 'Paid-up Share Capital-Preferred') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.pscp.push(item);
+          }
         } else if (item.result.journal_name === 'Treasury Shares Capital -Preferred') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.tscp.push(item);
+          }
         } else if (item.result.journal_name === 'Deposit for Share Capital Subscription') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.dscp.push(item);
+          }
         } else if (item.result.journal_name === 'Undivided Net Surplus') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.uns.push(item);
+          }
         } else if (item.result.journal_name === 'Net Loss') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.nl.push(item);
+          }
         } else if (item.result.journal_name === 'Donations/Grants') {
+        if (item.result.total_balance !== null && item.result.total_balance !== 0) {
           this.dg.push(item);
+          }
       } 
     
     } 
   }
 }
 
-calculateMemberEquity(): number {
-  let totalBalance = 0;
 
-  for (const item of this.sscc) {
-    totalBalance += item.result.total_balance;
-  }
-
-  for (const item of this.src) {
-    totalBalance += item.result.total_balance;
-  }
-
-  for (const item of this.srp) {
-    totalBalance += item.result.total_balance;
-  }
-  for (const item of this.pscp) {
-    totalBalance += item.result.total_balance;
-  }
-
-  for (const item of this.tscp) {
-    totalBalance += item.result.total_balance;
-  }
-
-  for (const item of this.dscp) {
-    totalBalance += item.result.total_balance;
-  }
-  for (const item of this.uns) {
-    totalBalance += item.result.total_balance;
-  }
-
-  for (const item of this.nl) {
-    totalBalance += item.result.total_balance;
-  }
-
-  for (const item of this.dg) {
-    totalBalance += item.result.total_balance;
-  }
-
-  return totalBalance;
-}
   
   
   showPastSLedger(): void {
@@ -503,33 +487,135 @@ calculateMemberEquity(): number {
         this.pnonLiabilities.push(items);
         }
       } else if (['revenue', 'cost of goods sold', 'cost of services'].includes(journalName)) {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
         this.prevenue.push(items);
+        }
       } else if (['expenses', 'other items – subsidy/ gain (losses)'].includes(journalName)) {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
         this.pexpense.push(items);
+        }
       } else if (journalName === 'equity') {
         // this.pequity.push(items);
         if (items.result.journal_name === 'Subscribed Share Capital - Common') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.psscc.push(items);
+          }
         } else if (items.result.journal_name === 'Subscription Receivable - Common') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.psrc.push(items);
+          }
         } else if (items.result.journal_name === 'Subscriptions Receivable Preferred') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.psrp.push(items);
+          }
         } else if (items.result.journal_name === 'Paid-up Share Capital-Preferred') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.ppscp.push(items);
+          }
         } else if (items.result.journal_name === 'Treasury Shares Capital -Preferred') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.ptscp.push(items);
+          }
         } else if (items.result.journal_name === 'Deposit for Share Capital Subscription') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.pdscp.push(items);
+          }
         } else if (items.result.journal_name === 'Undivided Net Surplus') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.puns.push(items);
+          }
         } else if (items.result.journal_name === 'Net Loss') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.pnl.push(items);
+          }
         } else if (items.result.journal_name === 'Donations/Grants') {
+        if (items.result.total_balance !== null && items.result.total_balance !== 0) {
           this.pdg.push(items);
+          }
       } 
       } 
     }
     
+  }
+
+  calculateMemberEquity(): number {
+    let totalBalance = 0;
+  
+    for (const item of this.sscc) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.src) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.srp) {
+      totalBalance += item.result.total_balance;
+    }
+    for (const item of this.pscp) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.tscp) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.dscp) {
+      totalBalance += item.result.total_balance;
+    }
+    for (const item of this.uns) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.nl) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.dg) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    return totalBalance;
+  }
+
+  calculateLastYearMemberEquity(): number {
+    let totalBalance = 0;
+  
+    for (const item of this.psscc) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.psrc) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.psrp) {
+      totalBalance += item.result.total_balance;
+    }
+    for (const item of this.ppscp) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.ptscp) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.pdscp) {
+      totalBalance += item.result.total_balance;
+    }
+    for (const item of this.puns) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.pnl) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    for (const item of this.pdg) {
+      totalBalance += item.result.total_balance;
+    }
+  
+    return totalBalance;
   }
 
   calculateAssetTotalBalance(): number {
@@ -600,59 +686,6 @@ calculateMemberEquity(): number {
     return totalBalance;
   }
 
-  calculateFSCEquityTotalBalance(): number {
-    let totalBalance = 0;
-  
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Subscribed Share Capital - Common' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-  
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Subscription Receivable - Common' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-  
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Subscriptions Receivable Preferred' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-    
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Paid-up Share Capital-Preferred' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Treasury Shares Capital -Preferred' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Deposit for Share Capital Subscription' ? item.value : 0;
-      totalBalance += value;
-    }
-    
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Undivided Net Surplus' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-    
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Net Loss' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-
-    for (const item of this.ledgers) {
-      const value = item.journal_name === 'Donations/Grants' ? item.result.total_balance : 0;
-      totalBalance += value;
-    }
-  
-    return totalBalance;
-    console.log(totalBalance)
-  }
-
-  
   reserveFund : any;
   cetFund : any;
   cdFund : any;
@@ -688,7 +721,7 @@ calculateMemberEquity(): number {
 
   calculateCombinedMemberEquity(): number {
     const statutoryFund = this.calculateTotalBalance();
-    const memberEquity = this.calculateFSCEquityTotalBalance();
+    const memberEquity = this.calculateMemberEquity();
     const combinedTotalBalance = statutoryFund + memberEquity;
     return combinedTotalBalance;
   }
@@ -734,14 +767,14 @@ calculateMemberEquity(): number {
 
   calculateLastYearCombinedMemberEquity(): number {
     const statutoryFund = this.calculateLastYearTotalBalance();
-    const memberEquity = this.calculateFSCEquityTotalBalance();
+    const memberEquity = this.calculateLastYearMemberEquity();
     const combinedTotalBalance = statutoryFund + memberEquity;
     return combinedTotalBalance;
   }
 
   calculateLastYearCombinedTotalLiabilityandEquity(): number {
     const liabiltyBalance = this.calculateLiabilityTotalBalance();
-    const membersEquity = this.calculateCombinedMemberEquity();
+    const membersEquity = this.calculateLastYearCombinedMemberEquity();
     const combinedTotalBalance = liabiltyBalance + membersEquity;
     return combinedTotalBalance;
   }
