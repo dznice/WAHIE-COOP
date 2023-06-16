@@ -79,6 +79,13 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
         validator: this.passwordMatch('new_pass', 'retype_pass'),
       }
     );
+
+    this.showRegions();
+    this.showProvinces();
+    this.showCities();
+    this.showBarangay();
+    this.showBarangayDesc();
+    this.logSelectedValues();
   }
 
   id: any = localStorage.getItem('userData');
@@ -158,5 +165,182 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
           }
         );
     }
+  }
+
+
+  selectedRegion: any;
+  selectedProvince: any;
+  selectedCity: any;
+  selectedBarangay: any;
+
+  province: any;
+  cities: any;
+  barangay: any;
+
+  isDisplayed: boolean = true;
+  
+  civilStatus: string[] = ['Single', 'Married'];
+  employmentStatus: string[] = ['Employed', 'Unemployed', 'Self-employed'];
+  // disabling spouse when single
+  isSpouseDisabled: boolean = false;
+  onSpouseChange() {
+    if (this.updateMemberform.civil_status === this.civilStatus[0]) {
+      this.isSpouseDisabled = true;
+    } else {
+      this.isSpouseDisabled = false;
+    }
+  }
+
+  // disabling occupation when unemployed
+  isOccupationDisabled: boolean = false;
+  isCompAddDisabled: boolean = false;
+  onEmploymentChange() {
+    if (this.updateMemberform.employment_status === this.employmentStatus[1]) {
+      this.isOccupationDisabled = true;
+      this.isCompAddDisabled = true;
+    } else {
+      this.isOccupationDisabled = false;
+      this.isCompAddDisabled = false;
+    }
+  }
+
+  logSelectedValues() {
+    console.log('Selected Region:', this.updateMemberform.selectedRegion);
+    console.log('Selected Province:', this.updateMemberform.selectedProvince);
+    console.log('Selected City:', this.updateMemberform.selectedCity);
+    console.log('Selected Barangay:', this.updateMemberform.selectedBarangay);
+  }
+
+  showRegions() {
+    this.http.get('http://127.0.0.1:8000/api/region').subscribe((res: any) => {
+      console.log(res);
+      this.region = res;
+    });
+  }
+
+  showProvinces() {
+    if (this.updateMemberform.selectedRegion) {
+      console.log(this.selectedRegion);
+      this.updateMemberform.selectedRegionDescription = this.region.find(
+        (reg: { region_code: null }) =>
+          reg.region_code === this.updateMemberform.selectedRegion
+      )?.region_description;
+      this.http
+        .get(
+          `http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`
+        )
+        .subscribe((res: any) => {
+          console.log(res);
+          this.province = res;
+        });
+    } else {
+      this.province = [];
+    }
+  }
+
+  showCities() {
+    if (this.updateMemberform.selectedProvince) {
+      console.log(this.selectedProvince);
+      this.updateMemberform.selectedProvinceDescription = this.province.find(
+        (prov: { province_code: null }) =>
+          prov.province_code === this.updateMemberform.selectedProvince
+      )?.province_description;
+      this.http
+        .get(
+          `http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`
+        )
+        .subscribe((res: any) => {
+          console.log(res);
+          this.cities = res;
+        });
+    } else {
+      this.cities = [];
+    }
+  }
+
+  showBarangay() {
+    if (this.updateMemberform.selectedCity) {
+      console.log(this.selectedCity);
+      this.updateMemberform.selectedCityDescription = this.cities.find(
+        (city: { city_municipality_code: null }) =>
+          city.city_municipality_code === this.updateMemberform.selectedCity
+      )?.city_municipality_description;
+      this.http
+        .get(
+          `http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`
+        )
+        .subscribe((res: any) => {
+          console.log(res);
+          this.barangay = res;
+        });
+    } else {
+      this.barangay = [];
+    }
+  }
+
+  showBarangayDesc() {
+    if (this.updateMemberform.selectedBarangay) {
+      console.log(this.selectedBarangay);
+
+      this.http
+        .get(
+          `http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`
+        )
+        .subscribe((res: any) => {
+          console.log(res);
+          this.barangay = res;
+        });
+    } else {
+      this.barangay = [];
+    }
+  }
+
+  editProfile = 2;
+  edit(index:any){
+    this.editProfile = index;
+  }
+  public updateMemberform = {
+    email: this.email,
+    tin_number: null,
+    civil_status: null,
+    spouse: null,
+    employment_status: null,
+    occupation: null,
+    company_address: null,
+
+
+    selectedRegion: null,
+    current_address: null,
+    selectedCity: null,
+    selectedProvince: null,
+    postal_code: null,
+    selectedBarangay: null,
+    selectedRegionDescription: null,
+    selectedProvinceDescription: null,
+    selectedCityDescription: null,
+    selectedBarangayDescription: null,
+  };
+
+  updateProfile(){
+console.log(this.updateMemberform)
+    this.http
+    .post(
+      'http://127.0.0.1:8000/api/profileUpdate' + '/' + this.email,
+      this.updateMemberform
+    )
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        location.reload();
+      },
+      error => {
+        this.toast.warning({
+          detail: 'Input is required',
+          summary: 'Please Check',
+          duration: 2000,
+          sticky: false,
+          position: 'tr',
+        });
+      })
   }
 }

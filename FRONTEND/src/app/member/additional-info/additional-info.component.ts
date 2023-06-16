@@ -103,31 +103,6 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     this.getmemberId();
   }
 
-  // updateMemberInfo = new FormGroup({
-  // tin_number : new FormControl("", [Validators.required]),
-  // spouse : new FormControl(""),
-  // employment_status : new FormControl("", [Validators.required]),
-  // occupation : new FormControl(""),
-  // company_address : new FormControl("",[Validators.required]),
-  // address : new FormControl("", [Validators.required]),
-  // current_address : new FormControl("", [Validators.required]),
-  // city_town : new FormControl("", [Validators.required]),
-  // province : new FormControl("", [Validators.required]),
-  // postal_code : new FormControl("", [Validators.required]),
-  // barangay : new FormControl("", [Validators.required]),
-
-  // })
-
-  // getControl(name: any): AbstractControl | null{
-  //   return this.updateMemberInfo.get(name)
-  // }
-
-  // onSubmit(){
-  //   this.submitted = true;
-  //   if(this.updateMemberInfo.invalid){
-  //     return;
-  //   }
-  // }
 
   ngOnInit() {
     this._document.body.classList.add('body');
@@ -161,14 +136,22 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
 
   email = sessionStorage.getItem('email');
   memberId: string = '';
+  name:string = '';
+  addDisabled = 1;
 
   getmemberId() {
     this.http
       .get('http://127.0.0.1:8000/api/members/' + this.email)
       .subscribe((res: any) => {
-        console.log('mem' + res);
-        this.memberId = res;
+        console.log('mem' + res.id);
+        this.memberId = res.id;
+        this.name = res.first_name;
+
       });
+  }
+
+  checkBene(){
+
   }
 
   id = localStorage.getItem('userData');
@@ -206,6 +189,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
   onEsc(event: KeyboardEvent) {
     console.log(event);
     this.showDel(2);
+    this.showSkipModal(2);
   }
 
   delModal = -1;
@@ -230,8 +214,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
     employment_status: null,
     occupation: null,
     company_address: null,
-    address: null,
-    job_title: null,
+
 
     memId: this.memberId,
     row: this.row,
@@ -271,9 +254,9 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
           this.token.handle(sessionStorage.getItem('ftoken'));
           this.route.navigateByUrl('member/member-home');
         },
-        (error) => {
+        error => {
           this.toast.warning({
-            detail: 'Input required',
+            detail: 'Input is required',
             summary: 'Please Check',
             duration: 2000,
             sticky: false,
@@ -380,4 +363,33 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
       this.barangay = [];
     }
   }
-}
+
+  skipModal= -1
+
+  showSkipModal(index: number) {
+    this.skipModal = index;
+  }
+  
+  skipInfo(){
+    this.http.post('http://127.0.0.1:8000/api/skipAddInfo' + '/' + this.email, this.skipModal)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        this.token.handle(sessionStorage.getItem('ftoken'));
+        this.route.navigateByUrl('member/member-home');
+        this.toast.success({
+          detail: 'Success!',
+          summary: 'Hello, '+ this.name+'!',
+          duration: 2000,
+          sticky: false,
+          position: 'tr',
+        });
+      
+      }
+    );
+  }
+
+
+
+  }
+

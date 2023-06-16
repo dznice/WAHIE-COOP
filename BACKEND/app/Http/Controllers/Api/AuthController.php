@@ -55,8 +55,8 @@ class AuthController extends Controller {
 
         public function getmemberId($email){
          $members = Members::where('email', '=', $email)->first();
-            $memberId = $members->id;
-         return response()->json($memberId);
+  
+         return response()->json($members);
          }
 
     public function register(Request $request){
@@ -281,10 +281,13 @@ class AuthController extends Controller {
 
 
             public function memberInfo(Request $request, $email){
+              
+              
 
+
+                
                 $members = Members::where('email', '=', $email)->first();
                     $members->spouse = $request->spouse;
-                    $members->address = $request->address;
                     $members->civil_status = $request->civil_status;
                     $members->tin_number = $request->tin_number;
                     $members->occupation = $request->occupation;
@@ -292,30 +295,47 @@ class AuthController extends Controller {
                     $members->company_address = $request->company_address;
                     $members->address = $request->current_address.' ' . $request->selectedBarangayDescription .' ' .
                     $request->selectedCityDescription .' ' . $request->selectedProvinceDescription .' ' . $request->selectedRegionDescription .' ' . $request->postal_code;
+                    
                     $members->save();
 
-                   
+                    
                     
 
                     $bene = $request->input();
-                    foreach($bene['row'] as $key=>$value)
-                    {
-                             BenificiaryMembers::create([
-                            'benificiary_id' =>  $members->id,
-                            'benificiary_name' =>  $value['benificiary_name'],
-                            'benificiary_birthdate'=>  $value['benificiary_birthdate'],
-                            'benificiary_relation' =>  $value['benificiary_relation'],
-                            ]);
-                     }
-                     $user = User::where('email', '=', $email)->first();
-                     $user->fillInfo = 0;
-                     $user->save();
+                   
+
+                    
+                        foreach($bene['row'] as $key=>$value){
+                           
+                                 BenificiaryMembers::create([
+                                'benificiary_id' =>  $members->id,
+                                'benificiary_name' =>  $value['benificiary_name'],
+                                'benificiary_birthdate'=>  $value['benificiary_birthdate'],
+                                'benificiary_relation' =>  $value['benificiary_relation'],
+                                ]);
+                         }
+
+                        
+
+                     
+               
+                        $user = User::where('email', '=', $email)->first();
+                        $user->fillInfo = 0;
+                        $user->save();
+                  
+                      
                 return response()->json($members);
+            
 
             }
 
             
-
+            public function skipAddInfo($email){
+                $user = User::where('email', '=', $email)->first();
+                $user->fillInfo = 0;
+                $user->save();
+                return response()->json($user);      
+            }
 
 
 

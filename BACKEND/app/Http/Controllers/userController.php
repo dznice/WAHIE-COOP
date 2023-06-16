@@ -39,6 +39,32 @@ class userController extends Controller
         return response()->json($members);
     }
 
+    public function profileUpdate(Request $request,$email){
+        $returnData = array(
+            'status' => 'error',
+            'message' => 'ERROR'
+        );
+
+            if($request->civil_status == null || $request->employment_status == null || $request->tin_number == null ||
+             $request->postal_code == null || $request->selectedBarangay == null){
+                return response()->json($returnData,401);
+            }
+
+        $members = Members::where('email', '=', $email)->first();
+
+        $members->spouse = $request->spouse;
+        $members->civil_status = $request->civil_status;
+        $members->tin_number = $request->tin_number;
+        $members->occupation = $request->occupation;
+        $members->employment_status = $request->employment_status;
+        $members->company_address = $request->company_address;
+        $members->address = $request->current_address.' ' . $request->selectedBarangayDescription .' ' .
+        $request->selectedCityDescription .' ' . $request->selectedProvinceDescription .' ' . $request->selectedRegionDescription .' ' . $request->postal_code;
+        
+        $members->save();   
+        return response()->json($members);
+    }
+
     public function navChangePass(Request $request){
         $user = User::find($request->userId);
         $returnData = array(

@@ -2,6 +2,7 @@
   <div class="modal_container">
     <header>Additional Information</header>
 
+  
     <form #updatememInfo="ngForm" class="additional-info" *ngIf="isDisplayed">
       <div class="fields">
         <div class="text-wrap">
@@ -15,7 +16,7 @@
             id="civil_status"
             name="civil_status"
             (change)="onSpouseChange()"
-            required
+            
           >
             <ng-option
               *ngFor="let civil_status of civilStatus"
@@ -59,7 +60,7 @@
             id="employment_status"
             name="employment_status"
             (change)="onEmploymentChange()"
-            required
+            
           >
             <ng-option
               *ngFor="let employment_status of employmentStatus"
@@ -95,6 +96,7 @@
         </div>
         <div class="tabs">
           <input
+         
             type="radio"
             class="tabs__radio"
             name="tabs-coop"
@@ -116,15 +118,15 @@
                   name="current_address"
                   type="text"
                   placeholder="House No./Street/Block"
-                  required
                 />
                 <ng-select
                   class="region"
                   [(ngModel)]="updateMemberform.selectedRegion"
                   (click)="showProvinces()"
                   [ngModelOptions]="{ standalone: true }"
-                  required
+                  
                   placeholder="Choose Region"
+     
                 >
                   <ng-option
                     *ngFor="let reg of region"
@@ -142,8 +144,9 @@
                   [(ngModel)]="updateMemberform.selectedProvince"
                   (click)="showCities()"
                   [ngModelOptions]="{ standalone: true }"
-                  required
+                  
                   placeholder="Choose Province"
+        
                 >
                   <ng-option
                     *ngFor="let prov of province"
@@ -158,8 +161,9 @@
                   [(ngModel)]="updateMemberform.selectedCity"
                   (click)="showBarangay()"
                   [ngModelOptions]="{ standalone: true }"
-                  required
+                  
                   placeholder="Choose City/Municipality"
+            
                 >
                   <ng-option
                     *ngFor="let city of cities"
@@ -175,9 +179,9 @@
                 <ng-select
                   class="barangay"
                   [(ngModel)]="updateMemberform.selectedBarangay"
-                  [ngModelOptions]="{ standalone: true }"
-                  required
+                  [ngModelOptions]="{ standalone: true }" 
                   placeholder="Choose Barangay"
+              
                 >
                   <ng-option
                     *ngFor="let brgy of barangay"
@@ -194,7 +198,8 @@
                   name="barangay"
                   type="text"
                   placeholder="Postal Code"
-                  required
+                  
+             
                 />
               </div>
             </div>
@@ -205,6 +210,7 @@
             class="tabs__radio"
             name="tabs-coop"
             id="Beneficiaries"
+           
           />
 
           <label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
@@ -233,7 +239,7 @@
                       name="benificiary_name"
                       id=" benificiary_name"
                       [ngModelOptions]="{ standalone: true }"
-                      required
+                      
                     />
                   </td>
 
@@ -245,7 +251,7 @@
                       id=" benificiary_birthdate"
                       [ngModelOptions]="{ standalone: true }"
                       max="{{ maxDate }}"
-                      required
+                      
                     />
                   </td>
 
@@ -256,7 +262,7 @@
                       id=" benificiary_relation"
                       [(ngModel)]="item.benificiary_relation"
                       [ngModelOptions]="{ standalone: true }"
-                      required
+                      
                     />
                   </td>
 
@@ -305,10 +311,32 @@
           <span class="btnTextb">Logout</span>
         </button>
     
+        <button type="submit" (click)="showSkipModal(1)" class="btn-submit">
+          Setup Later
+        </button>
         <button type="submit" (click)="memberInfo()" class="btn-submit">
           Update
         </button>
       </div>
     </form>
   </div>
+
+  <section>
+    <div>
+      <div class="modal-bg" *ngIf="skipModal === 1">
+        <div class="modal-wrapper">
+          <div class="modal-header">
+            <span class="header-title">Are you sure?</span>
+            <i class="ti ti-x" (click)="showSkipModal(2)"></i>
+          </div>
+  
+          <div class="modal-footer">
+            <button class="btn btn-close" (click)="showSkipModal(2)">Cancel</button>
+            <button class="btn btn-save" (click)="skipInfo() ">Proceed</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>

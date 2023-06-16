@@ -60,12 +60,14 @@ Route::get('/users/myProfile/{id}', [App\Http\Controllers\userController::class,
 Route::get('/members', [App\Http\Controllers\Api\AuthController::class, 'members']);
 Route::get('/members/{email}', [App\Http\Controllers\Api\AuthController::class, 'getmemberId']);
 Route::post('/memberInfo/{email}', [App\Http\Controllers\Api\AuthController::class, 'memberInfo']);
+Route::post('/memberInfo/{email}', [App\Http\Controllers\Api\AuthController::class, 'memberInfo']);
 Route::get('/beneficiaries', [App\Http\Controllers\userController::class, 'beneficiaries']);
 
 Route::get('/memberList', [App\Http\Controllers\userController::class, 'memberList']);
 Route::get('/memberList/{id}', [App\Http\Controllers\userController::class, 'memberInfo']);
-Route::get('/memberAccounting/{id}', [App\Http\Controllers\Api\AuthController::class, 'memberAccounting']);
+Route::post('/skipAddInfo/{id}', [App\Http\Controllers\Api\AuthController::class, 'skipAddInfo']);
 Route::get('/memberAccount/{email}', [App\Http\Controllers\userController::class, 'memberAccount']);
+Route::post('/profileUpdate/{email}', [App\Http\Controllers\userController::class, 'profileUpdate']);
 
 
 Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::class, 'superChange']);
