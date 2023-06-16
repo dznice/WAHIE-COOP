@@ -31,7 +31,9 @@ export class SlAccountsComponent implements OnChanges {
 
   showReport: boolean;
   public ledgers: any;
+  public brokenledgers: any;
   public pledgers: any;
+  public brokenpledgers: any;
   public accInfos: any;
   public memInfos: any;
 
@@ -60,7 +62,9 @@ export class SlAccountsComponent implements OnChanges {
     this.showLibJournalInfo(this.formData.account);
     this.showMemberInfo(this.formData.member);
     this.showSLedger(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
+    this.sLegderBroken(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
     this.showPastSLedger(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
+    this.showPastSLedgerBroken(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
     // console.log(this.slData);
     // console.log(this.PastslData);
   }
@@ -86,11 +90,29 @@ export class SlAccountsComponent implements OnChanges {
     });
   }
 
+  sLegderBroken(mem:any, acc:any, sd:any, ed:any): void{
+    this.brokenledgers = this.wahieService.sLegderBroken(mem, acc, sd, ed).subscribe(brokenledger=>{
+      this.brokenledgers = brokenledger;
+       console.log(this.brokenledgers); 
+
+       this.calculateExampleBroken();
+    });
+  }
+
   showPastSLedger(mem:any, acc:any, sd:any, ed:any): void{
     this.pledgers = this.wahieService.pastLegder(mem, acc, sd, ed).subscribe(pledger=>{
       this.pledgers = pledger;
        
       this.calculateExample();
+    });
+  }
+
+  showPastSLedgerBroken(mem:any, acc:any, sd:any, ed:any): void{
+    this.brokenpledgers = this.wahieService.pastLegderBroken(mem, acc, sd, ed).subscribe(brokenpledger=>{
+      this.brokenpledgers = brokenpledger;
+      console.log(this.brokenpledgers); 
+       
+      this.calculateExampleBroken();
     });
   }
 
@@ -101,6 +123,20 @@ export class SlAccountsComponent implements OnChanges {
         for (let items of this.pledgers) {
           if (item.result.journId === items.result.journId) {
             item.example = item.result.total_balance - items.result.total_balance;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  calculateExampleBroken(): void {
+    if (this.brokenledgers && this.brokenpledgers) {
+      for (let itemb of this.brokenledgers) {
+        
+        for (let itemsb of this.brokenpledgers) {
+          if (itemb.result.transactNumber === itemsb.result.transactNumber) {
+            itemb.examplebroken = itemb.result.total_balance - itemsb.result.total_balance;
             break;
           }
         }
