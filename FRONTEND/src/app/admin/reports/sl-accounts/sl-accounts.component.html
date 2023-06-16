@@ -71,15 +71,23 @@
               <td class="td-bal">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             </tr>
           </ng-container>
-          <tr class="tr-total">
+          <!-- <tr class="tr-total">
             <td class="td-total">Total</td>
             <td class="td-total"></td>
             <td class="td-total"></td>
             <td class="td-total"></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
+      <label class="invo-number">Notes: </label> 
+      <ul class="res">
+        <li  *ngFor="let note of notes">{{ note }}</li>
+      </ul>
     </div>
   </section>
 </section>
+<div class="notess">
+  <input class="display" type = "text" [(ngModel)]="newNote" placeholder="Enter a Note">
+  <button class="btn-addNote" (click)="addNote()"> Add Note</button> 
+</div>
 </main>
