@@ -9,6 +9,21 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrls: ['./sl-accounts.component.scss']
 })
 export class SlAccountsComponent implements OnChanges {
+  //add notes
+  notes: string[] = [];
+  newNote: string ='';
+
+  addNote(){
+    if(this.newNote) {
+      this.notes.push(this.newNote);
+      this.newNote='';
+    }
+  }
+
+  saveNotes(){
+    localStorage.setItem('notes', JSON.stringify(this.notes));
+  }
+
   @Input() formData: any;
   //@Input() trial: any;
   // @Input() slData: any[];
@@ -34,6 +49,12 @@ export class SlAccountsComponent implements OnChanges {
   }
 
   ngOnInit(): void{
+    //save note
+    const savedNotes = localStorage.getItem('notes');
+    if (savedNotes) {
+      this.notes = JSON.parse(savedNotes);
+    }
+
     this.getLogo();
     this.formatDate();
     this.showLibJournalInfo(this.formData.account);
