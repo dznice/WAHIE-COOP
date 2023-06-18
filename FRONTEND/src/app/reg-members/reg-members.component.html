@@ -38,6 +38,9 @@
                 </div>
                 <div class="text-wrap">
                   <input formControlName="pass" [type]="changetype ? 'password' : 'text'" name="pass" id="reg-pass" placeholder="Password" required
+                  minlength="8" 
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@_-.$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" 
+                    title="Password must be at least 8 characters, one letter, one number and one special character:"
                     [(ngModel)]="form.password" [(ngModel)]="passwords" />
                   <span class="eye" (click)="viewpass()"><i [ngClass]="visible ? 'ti ti-eye-closed' : 'ti ti-eye'"></i></span><br />
                 </div>

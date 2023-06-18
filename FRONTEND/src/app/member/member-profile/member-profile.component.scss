@@ -199,11 +199,12 @@ span {
     border-radius: 0.6rem;
   }
 
+
   .eyecurrent {
     content: "\ea9a";
     position: absolute;
-    left: 50%;
-    bottom: 69%;
+    left: 36%;
+    top: 16%;
     cursor: pointer;
     font-size: 1.3rem;
     color: var(--eye-color);
@@ -212,8 +213,8 @@ span {
   .eye {
     content: "\ea9a";
     position: absolute;
-    left: 50%;
-    bottom: 57.5%;
+    left: 36%;
+    top: 50%;
     cursor: pointer;
     font-size: 1.3rem;
     color: var(--eye-color);
@@ -222,8 +223,8 @@ span {
   .eye2 {
     content: "\ea9a";
     position: absolute;
-    left: 50%;
-    bottom: 46.5%;
+    left: 36%;
+    top: 84%;
     cursor: pointer;
     font-size: 1.3rem;
     color: var(--eye-color);
@@ -310,35 +311,6 @@ label {
   color: var(--title-color);
 }
 
-.eyecurrent {
-  content: "\ea9a";
-  position: absolute;
-  left: 50%;
-  bottom: 69%;
-  cursor: pointer;
-  font-size: 1.3rem;
-  color: var(--eye-color);
-}
-
-.eye {
-  content: "\ea9a";
-  position: absolute;
-  left: 50%;
-  bottom: 46%;
-  cursor: pointer;
-  font-size: 1.3rem;
-  color: var(--eye-color);
-}
-
-.eye2 {
-  content: "\ea9a";
-  position: absolute;
-  left: 50%;
-  bottom: 26%;
-  cursor: pointer;
-  font-size: 1.3rem;
-  color: var(--eye-color);
-}
 
 .text-danger1 {
   color: var(--red);
@@ -347,6 +319,7 @@ label {
 
 .change {
   margin-top: 1rem;
+  position: relative;
 
   label {
     color: var(--text-color-3);

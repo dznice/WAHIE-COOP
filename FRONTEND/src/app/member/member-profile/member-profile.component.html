@@ -143,17 +143,21 @@
                     <div class="input-field">
                       <label for="Current">Current</label>
                       <input [type]="chcurrent ?'password':'text'" formControlName="current_pass" id="current_pass" name="current_pass" required [(ngModel)]="form.current_pass" />
-                      <span class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+                      <div class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                     </div>
                     <div class="input-field">
                       <label for="New">New Password</label>
-                      <input [type]="changetype?'password':'text'" id="new_pass" name="new_pass" formControlName="new_pass" required [(ngModel)]="form.new_pass" />
-                      <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+                      <input [type]="changetype?'password':'text'" id="new_pass" name="new_pass" formControlName="new_pass" required [(ngModel)]="form.new_pass" 
+                      minlength="8" 
+                      pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@_-.$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" 
+                      title="Password must be at least 8 characters, one letter, one number and one special character:"/>
+                
+                      <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                     </div>
                     <div class="input-field">
                       <label for="Retype New">Confirm New Password</label>
                       <input [type]="cchangetype?'password':'text'" id="retype_pass" name="retype_pass" formControlName="retype_pass" required [(ngModel)]="form.retype_pass" />
-                      <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
+                      <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                     </div>
                   </div>
                   <div class="text-danger1"
