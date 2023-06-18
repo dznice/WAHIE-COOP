@@ -105,8 +105,6 @@ export class AddPaymentComponent implements OnInit {
     // endDate:this.builder.control(''),
     payables:this.builder.array([
       this.Generaterow(),
-      this.Generaterow(),
-      this.Generaterow(),
       this.Generaterow()]),
     totaldebit:this.builder.control(0),
     totalcredit:this.builder.control(0),

@@ -73,21 +73,25 @@ class PaymentController extends Controller
                             
                                 if ($value['credit'] == 0) {
                                     // Only Debit amount is provided
-                                    if ( $value['debit'] < $matchingCredit->credit_amount ?: $matchingCredit->debit_amount ){
+                                    $creditValue = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                    $credVal = $value['debit'];
+                                    if ( ($matchingCredit->debit_amount + $credVal) < ($matchingCredit->credit_amount ?: $matchingCredit->debit_amount) ){
                                     $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
                                     $matchingCredit->debit_amount += $value['debit'];
                                     }else{
                                         $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
                                         $matchingCredit->debit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
                                     }
-                                } else {
+                                } else if ($value['debit'] == 0){
                                     // Only Credit amount is provided
-                                    if ( $value['credit'] < $matchingCredit->debit_amount ?: $matchingCredit->credit_amount ){
+                                    $debitValue = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
+                                    $debVal = $value['credit'];
+                                    if ( ($matchingCredit->credit_amount + $debVal) < ($matchingCredit->debit_amount ?: $matchingCredit->credit_amount) ){
                                     $matchingCredit->credit_amount += $value['credit'];
                                     $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
                                     }else{
-                                        $matchingCredit->credit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
-                                        $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                    $matchingCredit->credit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                    $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
                                     }
                                 }
                             
@@ -124,12 +128,12 @@ class PaymentController extends Controller
                     $debits = new Debits;
                     $debits->credits_id = $request->credsId;
                     $debits->orig_amount = $request->orig_amount;
-                    $debits->open_balance = $request->open_balance - $debit;
+                    $debits->open_balance = $request->open_balance - $payment;
                     $debits->payables_id =  $request->paysId;
                     $debits->paymentMethod = $request->paymentMethod;
                     $debits->pay_date = $request->paymentDate;
                     $debits->due_date =  $request->due_date;
-                    $balanse = $request->open_balance - $debit;
+                    $balanse = $request->open_balance - $payment;
 
                     if ( $balanse == 0)
                     {
@@ -142,7 +146,7 @@ class PaymentController extends Controller
                     $debiti = Debits::find($request->debsId);
                     $debiti->paymentIdentifier = "Closed";
                     $debiti->status = "Closed";
-                    $debiti->payment =  $debit;
+                    $debiti->payment =  $payment;
                     $debiti->pay_date = $request->paymentDate;
                     $debiti->open_balance = null;
                     $debiti->credits_id = $creds;
