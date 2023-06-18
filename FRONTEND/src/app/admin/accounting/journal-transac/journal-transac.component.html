@@ -1,34 +1,24 @@
 <main id="trialFile">
   <div class="head" *ngFor="let e of journalLogs; let i = index">
-    <h1 class="title" *ngIf="i < 1" >Journal Entry no.{{ e.journal_no }}</h1>
+    <h1 class="title" *ngIf="i < 1">Journal Entry no.{{ e.journal_no }}</h1>
   </div>
 
-
   <div class="header" *ngFor="let e of journalLogs; let i = index">
-    <div class="journadate"  *ngIf="i < 1" >
+    <div class="journadate" *ngIf="i < 1">
       <label>Journal Date</label>
-      <input class="headinput" type="text" disabled value="{{ e.journal_date | date:'mediumDate' }}"/>
+      <input class="headinput" type="text" disabled value="{{ e.journal_date | date:'mediumDate' }}" />
     </div>
-    <div class="journadate"  *ngIf="i < 1" >
+    <div class="journadate" *ngIf="i < 1">
       <label>Due Date</label>
-      <input class="headinput" type="text" disabled value="{{ e.due_date | date:'mediumDate' }}"/>
+      <input class="headinput" type="text" disabled value="{{ e.due_date | date:'mediumDate' }}" />
     </div>
-    <div class="journadate"  *ngIf="i < 1" >
+    <div class="journadate" *ngIf="i < 1">
       <label>Interest</label>
-      <input class="headinput" type="text" disabled  value="{{ e.interest }}"/>
+      <input class="headinput" type="text" disabled value="{{ e.interest }}" />
     </div>
-    <div class="journadate"  *ngIf="i < 1" >
+    <div class="journadate" *ngIf="i < 1">
       <label>Surcharge</label>
-      <input class="headinput" type="text" disabled value="{{ e.interest_amount | currency:'PHP':'symbol-narrow':'1.2-2'}}"/>
-    </div>
-
-      <div class="export" *ngIf="i < 1">
-      <label> Export PDF</label>
-      <button (click)="exportPDF()" class="ti ti-file-text export-icon" ></button>
-    </div>
-    <div  class="export" *ngIf="i < 1">
-      <label> Export Excel</label>
-      <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet export-icon"></button>
+      <input class="headinput" type="text" disabled value="{{ e.interest_amount | currency:'PHP':'symbol-narrow':'1.2-2'}}" />
     </div>
   </div>
 
@@ -36,16 +26,16 @@
     <table class="table-content">
       <thead>
         <tr>
-        <th>No.</th>
-        <th>Account</th>
-        <th class="th-debit">Debit</th>
-        <th class="th-credit">Credit</th>
-        <th>Description</th>
-        <th>Name</th>
+          <th>No.</th>
+          <th>Account</th>
+          <th class="th-debit">Debit</th>
+          <th class="th-credit">Credit</th>
+          <th>Description</th>
+          <th>Name</th>
         </tr>
       </thead>
 
-      <tbody >
+      <tbody>
         <tr *ngFor="let e of journalLogs.reverse(); let i = index">
           <td>{{ i+1 }}</td>
           <td>{{ e.entrylogs.journal_name }}</td>

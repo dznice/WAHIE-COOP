@@ -45,7 +45,7 @@
         </li>
       </ng-template>
 
-      <li class="card" *ngIf="revenue.length > 0 ; else noExp">
+      <li class="card" *ngIf="revenue.length > 0 ; else noRev">
         <div>
           <i class="ti ti-chart-pie card-icon"></i>
         </div>
@@ -55,6 +55,17 @@
         </div>
       </li>
     
+      <ng-template #noRev>
+        <li class="card"> 
+          <div>
+            <i class="ti ti-chart-pie card-icon"></i>
+          </div>
+          <div class="text">
+            <span class="card-topic">Revenue</span>
+            <h2> {{ 0 | currency:'PHP':'symbol-narrow':'1.2-2' }}</h2>
+          </div>
+        </li>
+      </ng-template>
     </ul>
   </section>
 
@@ -122,7 +133,11 @@
             <td>{{ e.debit.cred.transac.transaction_number }}</td>
             <td>{{ e.debit.cred.transac.member.first_name }} {{ e.debit.cred.transac.member.last_name }}</td>
             <td>{{ e.debit.due_date | date:'mediumDate' }}</td>
-            <td class="td-bal">{{ e.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="td-bal">
+              <span [ngClass]="{'bal-overdue': e.status == 'Overdue'}">
+                {{ e.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+              </span>
+            </td>
             <td class="td-pay">{{ e.payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             <td class="status">
               <span [ngClass]="{'pending': e.status == 'Pending',

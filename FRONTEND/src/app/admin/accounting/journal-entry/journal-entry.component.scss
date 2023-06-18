@@ -6,24 +6,23 @@
   font-family: "Poppins", sans-serif;
 }
 
-
 main {
   width: 100%;
   height: 95vh;
   animation: transitionIn 0.75s;
   background-color: var(--panel-color);
-  padding: .75rem 1.5rem;
-  border-radius: .75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
-  // margin-left: -0.75rem;
-  // margin-right: -0.75rem;
-    
+  //margin-left: -0.75rem;
+  //margin-right: -0.75rem;
+
   .title {
     color: var(--title-color);
     margin-bottom: 10px;
     font-weight: 600;
     font-size: 28px;
-  } 
+  }
 }
 
 .header {
@@ -67,8 +66,7 @@ select {
   outline: none;
   font-size: 14px;
   font-weight: 400;
-  color: #333;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 0 15px;
   height: 36px;
   margin: 2px 0;
@@ -95,25 +93,25 @@ thead th {
   font-weight: 500;
   color: var(--title-color);
 }
+
 .journallabel22 {
   font-size: 16px;
   font-weight: 500;
   color: var(--title-color);
   text-align: left;
 }
+
 .headinput {
   outline: none;
   font-size: 14px;
   font-weight: 400;
-  color: #333;
-  border-radius: .5rem;
-  border: 1px solid #aaa;
+  border-radius: 0.5rem;
   padding: 0 14px;
   height: 34px;
   margin: 2px 4px;
   border: 1px solid var(--border-color);
   background-color: var(--panel-color);
-  color: var(--text-color-3);
+  color: var(--text-color-2);
 }
 
 /* buttons */
@@ -159,7 +157,7 @@ thead th {
   background-color: transparent;
   // display: flex;
   // justify-content: space-between;
-  position: relative; 
+  position: relative;
   margin-top: 1rem;
 
   .save {
@@ -168,9 +166,9 @@ thead th {
     margin-left: 10px;
     background-color: var(--primary-color);
     color: var(--white);
-    float:right;
-    bottom:0;
-    right:0;
+    float: right;
+    bottom: 0;
+    right: 0;
   }
 
   .save:hover {
@@ -180,50 +178,40 @@ thead th {
   .back {
     height: 40px;
     width: 90px;
-    background-color: var(--grey-3);
-    color: var(--white);
-    float:left;
-    bottom:0;
-    left:0;
+    background-color: transparent;
+    box-shadow: 0 0 0 1px var(--border-color);
+    color: var(--text-color-2);
+    float: left;
+    bottom: 0;
+    left: 0;
   }
 
   .back:hover {
-    background-color: var(--grey-4);
+    background-color: var(--grey-2);
   }
 }
 
-.total {
-  color: var(--text-color-2);
-}
-
-.totals {
-  background-color: var(--panel-color);
-  display: flex;
-  justify-content: flex-end;
-  position: fixed;
-  bottom: 0;
-  margin: 14px 0;
-  float: left;
-}
 .totaltext {
   margin-right: 20px;
 }
 
 .totalsbot {
   text-align: right;
-
-  .totalinput {
-    outline: none;
-    font-size: 14px;
-    font-weight: 400;
-    color: #333;
-    border-radius: 5px;
-    border: 1px solid #aaa;
-    padding: 0 14px;
-    height: 34px;
-    margin: 0px 0px;
-    width: 100%;
+  
+  .total {
+    .totalnum {
+      color: var(--text-color-2);
+      margin-right: 8px;
+    }
   }
+}
+
+.accounts {
+  max-width: 300px;
+}
+
+.member-name {
+  max-width: 300px;
 }
 
 //ng-select
@@ -240,6 +228,17 @@ thead th {
   color: var(--text-color-2);
 }
 
+.ng-select.try ::ng-deep .ng-select-container {
+  .ng-input {
+    > input {
+      font-family: "Poppins", sans-serif;
+      color: var(--text-color-2);
+      padding: 3px 5px;
+      
+    }
+  }
+}
+
 .ng-select.try ::ng-deep .ng-control {
   min-height: 0px;
   border-radius: 0.5rem;
@@ -247,7 +246,7 @@ thead th {
 
 .ng-select.try ::ng-deep .ng-dropdown-panel {
   width: 100%;
-  margin-top: .36rem;
+  margin-top: 0.36rem;
   border-radius: 0.5rem;
   border-top: 1px solid var(--border-color);
   background-color: var(--panel-color);
@@ -261,11 +260,7 @@ thead th {
   background-color: var(--select-hover);
 }
 
-.ng-select.try
-  ::ng-deep
-  .ng-dropdown-panel
-  .ng-dropdown-panel-items
-  .ng-option {
+.ng-select.try ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
   color: var(--text-color-2);
 }
 

@@ -207,6 +207,10 @@ main {
         .td-bal,
         .td-pay {
           text-align: right;
+
+          .bal-overdue {
+            color: var(--red-focus);
+          }
         }
 
         .status {

@@ -24,10 +24,10 @@
             <label> Due Date </label>
             <input class="headinput" type="date" formControlName="due_date" />
           </div>
-          <!-- <div class="interest">
-            <label> Interest % </label>
+          <div class="interest">
+            <label> OR No. </label>
             <input class="headinput" type="number" formControlName="interest" />
-          </div> -->
+          </div>
         </div>
 
         <div class="right-field">
@@ -44,18 +44,28 @@
 
           <thead>
             <th class="journallabel22">No.</th>
+            <th class="journallabel2">Name</th>
             <th class="journallabel2">Account</th>
+            <th class="journallabel2">Description</th>
             <th class="journallabel2">Debits</th>
             <th class="journallabel2">Credits</th>
-            <th class="journallabel2">Description</th>
-            <th class="journallabel2">Name</th>
           </thead>
 
           <tbody>
             <tr *ngFor="let item of entryRow.controls; let i = index" [formGroupName]="i">
               <td class="journallabel">{{ i + 1 }}</td>
-              <td class="beneinput">
-                <ng-select class="try" formControlName="account" [clearable]="false" #select>
+
+              <td class="beneinput member-name">
+                <ng-select class="try" formControlName="name" (change)="getNameID(i)" [editableSearchTerm]="true">
+                  <ng-option class="try" *ngFor="let member of members" [value]="member.id">
+                    {{ member.id }} {{ member.first_name }}
+                    {{ member.middle_name }} {{ member.last_name }}
+                  </ng-option>
+                </ng-select>
+              </td>
+
+              <td class="beneinput accounts">
+                <ng-select class="try" formControlName="account" [editableSearchTerm]="true" #select>
                   <ng-template ng-header-tmp>
                     <div (click)="show(1)" (click)="closeSelect(select)" class="ng-header">
                       <a class="submit">
@@ -72,22 +82,14 @@
               </td>
 
               <td class="beneinput">
-                <input type="number" formControlName="debit" (change)="autoZero(i)" required />
-              </td>
-              <td class="beneinput">
-                <input type="number" formControlName="credit" (change)="autoZero(i)" required />
-              </td>
-              <td class="beneinput">
                 <input type="text" formControlName="description" />
               </td>
 
               <td class="beneinput">
-                <ng-select class="try" formControlName="name" (change)="getNameID(i)" [clearable]="false">
-                  <ng-option class="try" *ngFor="let member of members" [value]="member.id">
-                    {{ member.id }} {{ member.first_name }}
-                    {{ member.middle_name }} {{ member.last_name }}
-                  </ng-option>
-                </ng-select>
+                <input type="number" formControlName="debit" (change)="autoZero(i)" required />
+              </td>
+              <td class="beneinput">
+                <input type="number" formControlName="credit" (change)="autoZero(i)" required />
               </td>
 
               <td>
@@ -124,18 +126,14 @@
               </section>
 
             </tr>
-            <br />
 
             <tr class="totalsbot">
               <td></td>
-              <td><label class="totaltext"> TOTAL</label></td>
-              <td class="total">
-                {{ total_debit }}
-              </td>
-              <td class="total">
-                {{ total_credit }}
-              </td>
               <td></td>
+              <td></td>
+              <td><label class="totaltext">TOTAL</label></td>
+              <td class="total"><label class="totalnum">{{ total_debit }}</label></td>
+              <td class="total"><label class="totalnum">{{ total_credit }}</label></td>
             </tr>
           </tbody>
         </table>
