@@ -26,10 +26,13 @@ export class TrialBalanceComponent implements OnInit {
   equity : any[];
   revenue : any[];
   expenses : any[];
+  oneYearAgo: any;
+  maxDate: any;
 
   constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService) {}
     
   ngOnInit(): void {
+    this.formatDate();
     this.getLogo();
     this.showSLedger();
     this.showPastSLedger();
@@ -288,6 +291,17 @@ export class TrialBalanceComponent implements OnInit {
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }
+  }
+
+  private formatDate() {
+    const d = new Date();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-');
+    return this.maxDate;
   }
 
 }

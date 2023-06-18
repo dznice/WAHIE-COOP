@@ -45,9 +45,7 @@
         <thead>
           <tr>
             <th>Particulars</th>
-            <ng-container *ngFor="let items of pledgers; let i = index">
-              <th class="th-bal" *ngIf="i === pledgers.length - 1">Starting Balance of {{ items.startingBalanceYear | date:'mediumDate'}}</th>
-            </ng-container>
+            <th class="th-bal">Starting Balance of {{ oneYearAgo | date:'y'}}</th>
             <th class="th-bal">Payment this {{ maxDate | date:'y' }}</th>
             <th class="th-bal2">Current Balance of {{ maxDate | date:'mediumDate' }}</th>
           

@@ -36,8 +36,8 @@ export class SlAccountsComponent implements OnChanges {
   public brokenpledgers: any;
   public accInfos: any;
   public memInfos: any;
-
-  maxDate: any;
+  public oneYearAgo: any;
+  public maxDate: any;
   constructor( private wahieService:WahieService, private toast:NgToastService, private http:HttpClient){
 
   }
@@ -65,6 +65,8 @@ export class SlAccountsComponent implements OnChanges {
     this.sLegderBroken(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
     this.showPastSLedger(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
     this.showPastSLedgerBroken(this.formData.member, this.formData.account, this.formData.startDate, this.formData.endDate);
+    this.oneYearAgo = new Date(this.maxDate);
+    this.oneYearAgo.setFullYear(this.oneYearAgo.getFullYear() - 1);
     // console.log(this.slData);
     // console.log(this.PastslData);
   }
