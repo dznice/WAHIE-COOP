@@ -78,7 +78,7 @@
 
               </tr>
             </ng-container>
-<br>
+
               <!-- Current Assets -->
               <ng-container *ngIf="expense && expense.length > 0">
                 <tr class="tr-total">
@@ -150,7 +150,7 @@
               <td class="total-cred">{{ this.pstatutoryFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
               <td class="total-deb">{{ this.statutoryFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
             </tr>
-
+            <br>
             <tr class="totals">
               <td class="totass">Net Surplus after SF:</td>
               <td class="total-cred">{{ this.pnetFundAfterSF | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>

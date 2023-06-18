@@ -293,7 +293,7 @@
                           {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
                         </ng-container>
                       </ng-container>
-                    </td>
+                    </td> 
                     <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
                   </tr>
                 </ng-container>
@@ -411,7 +411,7 @@
             
           </ng-container>
           <br>
-          <tr class="tr-total">
+          <tr class="tr-totals">
             <td class="totass">Total of Member Equity:</td>
             <td class="total-cred">{{ calculateLastYearCombinedMemberEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
             <td class="total-deb">{{ calculateCombinedMemberEquity() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
