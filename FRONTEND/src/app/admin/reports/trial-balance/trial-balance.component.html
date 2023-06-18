@@ -2,127 +2,124 @@
 
   <div class="sticky-div">
     <span class="report-name">Trial Balance</span>
-    <br/> 
-</div>
-  <br/>
-  <br/>
+    <br />
+  </div>
+  <br />
+  <br />
 
   <div class="print">
     <div class="save"> Save report as:
     </div>
-    <div class="PDF"> 
-        <button (click)="exportPDF()" class="ti ti-file-text PDF-icon" ></button>
-        <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet excel-icon"></button>
+    <div class="PDF">
+      <button (click)="exportPDF()" class="ti ti-file-text PDF-icon"></button>
+      <button (click)="exportEXCEL()" class="ti ti-file-spreadsheet excel-icon"></button>
     </div>
-    </div>
-    
-    <section class="main-section">
-      <header>
-        <div class="container">
-          <div class="logo">
+  </div>
+
+  <section class="main-section">
+    <header>
+      <div class="container">
+        <div class="logo">
           <label class="-label" for="file">
-          <span class="coop-name"><label for="logo">
-            <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)" class="addimg"/>
-          <img [src]="preLogo"  height="10px" width="10px" i class="ti ti-camera" ></label></span>
-        </label>
-    
-        
-         </div>
-         </div>
-        </header>
+            <span class="coop-name"><label for="logo">
+                <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)" class="addimg" />
+                <img [src]="preLogo" height="10px" width="10px" i class="ti ti-camera"></label></span>
+          </label>
+
+
+        </div>
+      </div>
+    </header>
     <header class="second">
-    <h3> WAH-Cooperative</h3>
-    <h4 class="report_name">Trial Balance</h4>
-    <span class="date-today">As of {{ maxDate | date:'mediumDate' }}</span>
-  </header>
+      <h3> WAH-Cooperative</h3>
+      <h4 class="report_name">Trial Balance</h4>
+      <span class="date-today">As of {{ maxDate | date:'mediumDate' }}</span>
+    </header>
 
-  <section class="tabler-section">
-    <div class="table-container">
-      <table class="table-content">
-        <thead>
-          <tr>
-            <th>Accounts</th>
-            <th class="th-cred">Debit</th>
-            <th class="th-deb">Credit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of assets">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            <td class="td-deb"></td>
-          </tr>
-          <tr *ngFor="let item of otherAssets">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            <td class="td-deb"></td>
-          </tr>
-          <tr *ngFor="let item of nonAssets">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            <td class="td-deb"></td>
-          </tr>
-          <tr *ngFor="let item of liabilities">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2"></td>
-            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-          </tr>
-          <tr *ngFor="let item of nonLiabilities">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2"></td>
-            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-          </tr>
-          <tr *ngFor="let item of equity">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2"></td>
-            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-          </tr>
+    <section class="tabler-section">
+      <div class="table-container">
+        <table class="table-content">
+          <thead>
+            <tr>
+              <th>Accounts</th>
+              <th class="th-cred">Debit</th>
+              <th class="th-deb">Credit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of assets">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb"></td>
+            </tr>
+            <tr *ngFor="let item of otherAssets">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb"></td>
+            </tr>
+            <tr *ngFor="let item of nonAssets">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb"></td>
+            </tr>
+            <tr *ngFor="let item of liabilities">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+            </tr>
+            <tr *ngFor="let item of nonLiabilities">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+            </tr>
+            <tr *ngFor="let item of equity">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+            </tr>
 
-          <ng-container>
-            <tr>
-              <td>Reserve Fund</td>
-              <td class="td-cred2"></td>
-              <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            </tr>
-            <tr>
-              <td>Coop. Education & Training Fund</td>
-              <td class="td-cred2"></td>
-              <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            </tr>
-            <tr>
-              <td>Community Development Fund</td>
-              <td class="td-cred2"></td>
-              <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-            </tr>
-            <tr>
-              <td>Optional Fund</td>
-              <td class="td-cred2"></td>
-              <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-            </tr>
-      </ng-container>
-      <p class="hiddenCalculate">{{calculateTotalBalance()}}</p>
+            <ng-container>
+              <tr>
+                <td>Reserve Fund</td>
+                <td class="td-cred2"></td>
+                <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              </tr>
+              <tr>
+                <td>Coop. Education & Training Fund</td>
+                <td class="td-cred2"></td>
+                <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              </tr>
+              <tr>
+                <td>Community Development Fund</td>
+                <td class="td-cred2"></td>
+                <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              </tr>
+              <tr>
+                <td>Optional Fund</td>
+                <td class="td-cred2"></td>
+                <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              </tr>
+            </ng-container>
+            <p class="hiddenCalculate">{{calculateTotalBalance()}}</p>
 
-          <tr *ngFor="let item of revenue">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-            <td class="td-deb"></td>
-          </tr>
-          <tr *ngFor="let item of expenses">
-            <td>{{ item.result.journal_name }}</td>
-            <td class="td-cred2"></td>
-            <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-          </tr>
-          <tr class="tr-total">
-            <td class="total">Total</td>
-            <td class="td-cred3">{{ calculateAssetandRevenueTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-            <td class="td-deb2">{{ calculateLiabilityEquityandExpensesTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            <tr *ngFor="let item of revenue">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb"></td>
+            </tr>
+            <tr *ngFor="let item of expenses">
+              <td>{{ item.result.journal_name }}</td>
+              <td class="td-cred2"></td>
+              <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+            </tr>
+            <tr class="tr-total">
+              <td class="total">Total</td>
+              <td class="td-cred3">{{ calculateAssetandRevenueTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="td-deb2">{{ calculateLiabilityEquityandExpensesTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </section>
-  </section>
-  
-
-
 </main>

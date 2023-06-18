@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
@@ -118,7 +118,13 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
       this.suffix = res.suffix;
       this.email = res.email;
       this.address = res.address;
-      this.mobile_number = [res.mobile_number.slice(0, 3),'-', res.mobile_number.slice(3, 6), '-', res.mobile_number.slice(6),].join('');
+      this.mobile_number = [
+        res.mobile_number.slice(0, 3),
+        '-',
+        res.mobile_number.slice(3, 6),
+        '-',
+        res.mobile_number.slice(6),
+      ].join('');
       this.birthdate = res.birthdate;
       this.civil_status = res.civil_status;
       this.company_address = res.company_address;
@@ -149,24 +155,41 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.changePass.invalid) {
-      this.toast.warning({detail: 'Password not match', summary: 'Please check the password', duration: 2000, sticky: false, position: 'tr'});
+      this.toast.warning({
+        detail: 'Password not match',
+        summary: 'Please check the password',
+        duration: 2000,
+        sticky: false,
+        position: 'tr',
+      });
     } else {
       console.log(this.email);
       this.http
         .post('http://127.0.0.1:8000/api/users/changePass/' + this.email, this.form)
         .subscribe(
           (res: any) => {
-            this.toast.success({detail: 'Success', summary: 'Password changed successfuly', duration: 2000, sticky: false, position: 'tr'});
+            this.toast.success({
+              detail: 'Success',
+              summary: 'Password changed successfuly',
+              duration: 2000,
+              sticky: false,
+              position: 'tr',
+            });
             this.route.navigateByUrl('member/member-home');
           },
 
           (error) => {
-            this.toast.error({detail: 'Invalid current password', summary: 'Please check the password you input', duration: 2000, sticky: false, position: 'tr'});
+            this.toast.error({
+              detail: 'Invalid current password',
+              summary: 'Please check the password you input',
+              duration: 2000,
+              sticky: false,
+              position: 'tr',
+            });
           }
         );
     }
   }
-
 
   selectedRegion: any;
   selectedProvince: any;
@@ -178,7 +201,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
   barangay: any;
 
   isDisplayed: boolean = true;
-  
+
   civilStatus: string[] = ['Single', 'Married'];
   employmentStatus: string[] = ['Employed', 'Unemployed', 'Self-employed'];
   // disabling spouse when single
@@ -222,13 +245,10 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     if (this.updateMemberform.selectedRegion) {
       console.log(this.selectedRegion);
       this.updateMemberform.selectedRegionDescription = this.region.find(
-        (reg: { region_code: null }) =>
-          reg.region_code === this.updateMemberform.selectedRegion
+        (reg: { region_code: null }) => reg.region_code === this.updateMemberform.selectedRegion
       )?.region_description;
       this.http
-        .get(
-          `http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`
-        )
+        .get(`http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`)
         .subscribe((res: any) => {
           console.log(res);
           this.province = res;
@@ -246,9 +266,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
           prov.province_code === this.updateMemberform.selectedProvince
       )?.province_description;
       this.http
-        .get(
-          `http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`
-        )
+        .get(`http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`)
         .subscribe((res: any) => {
           console.log(res);
           this.cities = res;
@@ -266,9 +284,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
           city.city_municipality_code === this.updateMemberform.selectedCity
       )?.city_municipality_description;
       this.http
-        .get(
-          `http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`
-        )
+        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
         .subscribe((res: any) => {
           console.log(res);
           this.barangay = res;
@@ -283,9 +299,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
       console.log(this.selectedBarangay);
 
       this.http
-        .get(
-          `http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`
-        )
+        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
         .subscribe((res: any) => {
           console.log(res);
           this.barangay = res;
@@ -296,9 +310,16 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
   }
 
   editProfile = 2;
-  edit(index:any){
+  edit(index: any) {
     this.editProfile = index;
   }
+
+  @HostListener('window:keydown.esc', ['$event'])
+  onEsc(event: KeyboardEvent) {
+    console.log(event);
+    this.edit(2);
+  }
+
   public updateMemberform = {
     email: this.email,
     tin_number: null,
@@ -307,7 +328,6 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     employment_status: null,
     occupation: null,
     company_address: null,
-
 
     selectedRegion: null,
     current_address: null,
@@ -321,26 +341,24 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     selectedBarangayDescription: null,
   };
 
-  updateProfile(){
-console.log(this.updateMemberform)
+  updateProfile() {
+    console.log(this.updateMemberform);
     this.http
-    .post(
-      'http://127.0.0.1:8000/api/profileUpdate' + '/' + this.email,
-      this.updateMemberform
-    )
-    .subscribe(
-      (res: any) => {
-        console.log(res);
-        location.reload();
-      },
-      error => {
-        this.toast.warning({
-          detail: 'Input is required',
-          summary: 'Please Check',
-          duration: 2000,
-          sticky: false,
-          position: 'tr',
-        });
-      })
+      .post('http://127.0.0.1:8000/api/profileUpdate' + '/' + this.email, this.updateMemberform)
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          location.reload();
+        },
+        (error) => {
+          this.toast.warning({
+            detail: 'Input is required',
+            summary: 'Please Check',
+            duration: 2000,
+            sticky: false,
+            position: 'tr',
+          });
+        }
+      );
   }
 }

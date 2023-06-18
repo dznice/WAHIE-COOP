@@ -199,6 +199,10 @@ export class AddPaymentComponent implements OnInit {
     //this.route.navigateByUrl('admin/accounting')
   }
 
+  back() {
+    this.route.navigateByUrl('admin/accounting');
+  }
+
   @HostListener('window:keydown.esc', ['$event'])
   onEsc(event: KeyboardEvent) {
     console.log(event);

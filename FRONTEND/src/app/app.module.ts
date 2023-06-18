@@ -68,9 +68,9 @@ import { ExportAsModule } from 'ngx-export-as';
 import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generate-ledger.component';
 import { TrialBalanceComponent } from './admin/reports/trial-balance/trial-balance.component';
 import { SlAccountsComponent } from './admin/reports/sl-accounts/sl-accounts.component';
-import { SlMembersComponent } from './admin/reports/sl-members/sl-members.component';
 import { FsFinconComponent } from './admin/reports/fs-fincon/fs-fincon.component';
 import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
+import { MinusSignToParens } from './admin/reports/minus-sign-to-parens.pipe';
 
 @NgModule({
   declarations: [
@@ -127,9 +127,9 @@ import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
     GenerateLedgerComponent,
     TrialBalanceComponent,
     SlAccountsComponent,
-    SlMembersComponent,
     FsFinconComponent,
     FsOpComponent,
+    MinusSignToParens
   ],
   imports: [
     BrowserModule,

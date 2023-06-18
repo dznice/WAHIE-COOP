@@ -18,7 +18,7 @@
     </div>
     <div class="journadate" *ngIf="i < 1">
       <label>Surcharge</label>
-      <input class="headinput" type="text" disabled value="{{ e.interest_amount | currency:'PHP':'symbol-narrow':'1.2-2'}}" />
+      <input class="headinput" type="text" disabled value="{{ e.interest_amount | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}" />
     </div>
   </div>
 

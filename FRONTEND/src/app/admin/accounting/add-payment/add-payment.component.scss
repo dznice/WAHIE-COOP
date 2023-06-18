@@ -83,34 +83,45 @@ input {
   outline: none;
   font-size: 14px;
   font-weight: 400;
-  color: var(--text-color-2);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   background-color: var(--panel-color);
+  color: var(--text-color-2);
   height: 36px;
   width: 100%;
   min-width: 300px;
+
+  .ng-input {
+    > input {
+      font-family: "Poppins", sans-serif;
+      color: var(--text-color-2);
+      padding: 3px 5px;
+      
+    }
+  }
 }
 
 .ng-select.trial ::ng-deep .ng-control {
   min-height: 0px;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
+  //border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
 }
 
 .ng-select.trial ::ng-deep .ng-dropdown-panel {
   width: 100%;
-  // position: absolute;
-  //max-width: 300px;
-  //margin-left: 10px;
+  text-align: left;
+  margin-top: 0.36rem;
+  border-radius: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--panel-color);
 }
 
 .ng-select.payMethod ::ng-deep .ng-control,
 .ng-select.depositCash ::ng-deep .ng-control,
 .ng-select.transactionNum ::ng-deep .ng-control {
   min-height: 0px;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
+  //border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
 }
 
 .ng-select.payMethod ::ng-deep .ng-dropdown-panel,
@@ -118,8 +129,10 @@ input {
 .ng-select.transactionNum ::ng-deep .ng-dropdown-panel {
   width: 100%;
   position: absolute;
-  //max-width: 300px;
-  //margin-left: 10px;
+  margin-top: 0.36rem;
+  border-radius: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--panel-color);
 }
 
 .ng-select.payMethod ::ng-deep .ng-select-container,
@@ -127,59 +140,35 @@ input {
 .ng-select.transactionNum ::ng-deep .ng-select-container {
   height: 36px;
   outline: none;
-  font-size: 12.3px;
+  font-size: 12.5px;
   font-weight: 400;
-  color: var(--text-color-2);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   background-color: var(--panel-color);
+  color: var(--text-color-2);
+
+  .ng-input {
+    > input {
+      font-family: "Poppins", sans-serif;
+      color: var(--text-color-2);
+      padding: 3px 5px;
+      
+    }
+  }
 }
-
-// .payMethod ::ng-deep .ng-select-container,
-// .depositCash ::ng-deep .ng-select-container,
-// .transactionNum ::ng-deep .ng-select-container,
-// .referenceNum ::ng-deep .ng-select-container{
-//     height: 36px;
-//     outline: none;
-//     font-size: 12.3px;
-//     font-weight: 400;
-//     color: var(--text-color-2);
-//     border-radius: 5px;
-//     border: 1px solid var(--border-color);
-//     padding: 0 0px;
-//     background-color: var(--panel-color);
-//   }
-
-//   .payMethod ::ng-deep .ng-select-container .ng-placeholder,
-//   .depositCash ::ng-deep .ng-select-container .ng-placeholder,
-// //   .payMethod ::ng-deep .ng-select-container .ng-value,
-//   .depositCash ::ng-deep .ng-select-container .ng-value,
-//   .transactionNum ::ng-deep .ng-select-container .ng-value,
-//   .transactionNum ::ng-deep .ng-select-container .ng-placeholder,
-//   .referenceNum ::ng-deep .ng-select-container .ng-value,
-//   .referenceNum ::ng-deep .ng-select-container .ng-placeholder{
-//     color: var(--text-color-2);
-//   }
-
-// //   .payMethod ::ng-deep .ng-dropdown-panel,
-//   .depositCash ::ng-deep .ng-dropdown-panel,
-//   .transactionNum ::ng-deep .ng-dropdown-panel,
-//   .referenceNum ::ng-deep .ng-dropdown-panel{
-//     width: 100%;
-//   }
 
 .ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-option,
 .ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-option,
 .ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-option,
 .ng-select.trial ::ng-deep .ng-dropdown-panel .ng-option {
-  background-color: var(--panel-color);
+  background-color: transparent;
 }
 
 .ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-option:hover,
 .ng-select.depositCash ::ng-deep .ng-dropdown-panel .ng-option:hover,
 .ng-select.transactionNum ::ng-deep .ng-dropdown-panel .ng-option:hover,
 .ng-select.trial ::ng-deep .ng-dropdown-panel .ng-option:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--select-hover);
 }
 
 .ng-select.payMethod ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
@@ -188,16 +177,6 @@ input {
 .ng-select.trial ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
   color: var(--text-color-2);
 }
-
-//   .payMethod ::ng-deep  .ng-select-container .ng-value-container .ng-value{
-//     caret-color: initial !important;
-//     background-color:  transparent !important;
-//     box-shadow: none !important;
-//   }
-
-//   .payMethod .ng-select-container .ng-value-container .ng-input > input{
-//     background-color: var(--panel-color);
-//   }
 
 .sub_header {
   text-align: left;
@@ -222,7 +201,7 @@ input {
       font-weight: 400;
       color: var(--text-color-3);
       background-color: var(--panel-color);
-      border-radius: 5px;
+      border-radius: 0.5rem;
       border: 1px solid var(--border-color);
       padding: 0 10px;
     }
@@ -243,26 +222,48 @@ input {
   width: 98.4%;
   height: 85vh;
   overflow-y: scroll;
+
+  table {
+    tbody {
+      tr {
+        .td-debit,
+        .td-credit {
+          text-align: right;
+        }
+      }
+    }
+  }
 }
 
 table {
-  // width: 111.5%;
-  // font-size: 16px;
-  // text-align: center;
-  // margin: 0 auto;
-  // border-style: hidden;
-  // border-color: #aaa;
-  width: 100%;
+  width: 99%;
   font-size: 0.9rem;
   border-collapse: collapse;
-  border-radius: 0.625rem;
+  border-radius: 0.425rem;
   border-style: hidden;
   box-shadow: 0 0 0 1px var(--border-color);
+  margin-left: 1px;
+  margin-top: 2px;
+
+  tbody {
+
+    td {
+      border-bottom-left-radius: 0.425rem;
+      border-bottom-right-radius: 0.425rem;
+    }
+  }
+}
+
+.th-left {
+  border-top-left-radius: 0.425rem;
+}
+
+.radius {
+  border-top-right-radius: 0.425rem;
 }
 
 table th {
-  position: sticky;
-  background-color: var(--grey-alt);
+  background-color: var(--table-header);
   color: var(--title-color);
   text-align: left;
   font-weight: bold;
@@ -276,7 +277,7 @@ table th {
 
 .tablePayment1 input {
   outline: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   height: 36px;
   margin: 2px 0;
@@ -288,7 +289,7 @@ table th {
 .tablePayment input {
   padding-left: 8px;
   outline: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   background-color: var(--panel-color);
   color: var(--text-color-2);
@@ -320,7 +321,7 @@ table .th-right {
 .right-cont tbody {
   tr {
     border-bottom: 1px solid var(--border-color);
-    background-color: var(--panel-color);
+    // /background-color: var(--panel-color);
 
     td {
       text-align: left;
@@ -328,6 +329,7 @@ table .th-right {
       padding: 1px 16px;
       border-right: 1px solid var(--border-color);
       width: 28%;
+      border-radius: 0.425rem;
     }
 
     td:first-child {
@@ -349,8 +351,8 @@ table .th-right {
     height: 40px;
     width: 80px;
     background-color: var(--primary-color);
-    color: #ffffff;
-    border-radius: 5px;
+    //color: #ffffff;
+    border-radius: 0.5rem;
     cursor: pointer;
     padding: 6px 13px;
     margin-top: 1rem;
@@ -369,7 +371,7 @@ table .th-right {
   background: none;
   background-color: none;
   color: var(--green);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   outline: none;
   font-weight: 600;
   cursor: pointer;
@@ -383,7 +385,7 @@ table .th-right {
   background: none;
   background-color: none;
   color: var(--red);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   outline: none;
   font-weight: 600;
   cursor: pointer;
@@ -415,7 +417,7 @@ table .th-right {
   width: 65%;
   margin-top: -5.5rem;
   margin-bottom: -5rem;
-  position: sticky;
+  // position: sticky;
 
   .cancel {
     margin-left: 1%;

@@ -7,103 +7,96 @@
   animation: transitionIn 0.75s;
   size: letter;
   height: 110%;
-  
 }
 
-.report-name{
+.report-name {
   font-size: 30px;
   font-weight: 600;
   color: var(--title-color);
 }
-.report_name{
+.report_name {
   font-size: 30px;
   font-weight: 600;
 }
 
-
-.sticky-div{
-
+.sticky-div {
   padding: 10px;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color:var(--panel-color);
+  background-color: var(--panel-color);
   height: 70px;
   width: auto;
   flex-wrap: wrap;
-  color:#fff9f9;
   padding-left: 2rem;
-  margin:-20px -35px 0px -35px ;
+  margin:-20px -25px 0px -35px ;
   z-index: 1000000;
- 
-.dates{
-display: flex;
 
-  .to{
-    color: var(--text-color-2);
-    padding: 1rem 1rem;
-    
-  }
-
-    
-  .filter-field2 {
+  .dates {
     display: flex;
-    width: calc(18% - 10px);
-    flex-direction: column;
-    margin: 8px 0;
 
-    label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--dark-grey);
+    .to {
+      color: var(--text-color-2);
+      padding: 1rem 1rem;
     }
 
-    input,
-    select {
-      outline: none;
-      font-family: "Poppins", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text-color-3);
-      border-radius: 0.5rem;
-      border: 1px solid var(--border-color);
-      background-color: var(--panel-color);
-      padding: 0 10px;
-      height: 30px;
-      margin: 8px 0 0;
-    }
-  }
-  .filter-field3 {
-    display: flex;
-    width: calc(18% - 10px);
-    flex-direction: column;
-    margin: 8px 0;
+    .filter-field2 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
 
-    label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-color-3);
-    }
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark-grey);
+      }
 
-    input,
-    select {
-      padding-right: 2rem;
-      outline: none;
-      font-family: "Poppins", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text-color-3);
-      border-radius: 0.5rem;
-      border: 1px solid var(--border-color);
-      background-color: var(--panel-color);
-      padding: 0 10px;
-      height: 30px;
-      margin: 8px 0 0;
+      input,
+      select {
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-color-3);
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
+        padding: 0 10px;
+        height: 30px;
+        margin: 8px 0 0;
+      }
+    }
+    .filter-field3 {
+      display: flex;
+      width: calc(18% - 10px);
+      flex-direction: column;
+      margin: 8px 0;
+
+      label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-color-3);
+      }
+
+      input,
+      select {
+        padding-right: 2rem;
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-color-3);
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+        background-color: var(--panel-color);
+        padding: 0 10px;
+        height: 30px;
+        margin: 8px 0 0;
+      }
     }
   }
 }
-}
-
 
 .container {
   padding-left: 2rem;
@@ -118,17 +111,15 @@ display: flex;
 
   $circleSize: 55px;
   $fontColor: rgb(250, 250, 250);
-  
-  .ti-camera{
+
+  .ti-camera {
     font-size: 55px;
     cursor: pointer;
     border-radius: 100%;
     color: var(--title-color);
-    
   }
-  .ti-camera:hover{
+  .ti-camera:hover {
     background-color: var(--grey-2);
-    
   }
   .logo {
     margin-right: auto;
@@ -136,108 +127,93 @@ display: flex;
     transition: all 0.3s ease;
     transition: all 0.3s ease;
     width: fit-content;
-  
-  
+
     img {
       position: absolute;
       width: $circleSize;
       height: $circleSize;
       z-index: 0;
     }
-  
+
     .-label {
       cursor: pointer;
       height: $circleSize;
       width: $circleSize;
     }
-  
+
     &:hover {
       .-label {
-       
         background-color: rgba(174, 170, 170, 0.8);
         z-index: 1000000;
       }
     }
-  
-
   }
 }
 
-.head{
+.head {
   text-align: left;
-} 
-  .print{
-    background-color: var(--panel-color);
-    color: var(--text-color-3);
-    margin: auto;
-    width: 800px;
-    border: 1px solid var(--text-color-2);
-    border-bottom: none;
-    display: flex;
-    flex-direction: row;
+}
+.print {
+  background-color: var(--panel-color);
+  color: var(--text-color-3);
+  margin: auto;
+  width: 800px;
+  border: 1px solid var(--text-color-2);
+  border-bottom: none;
+  display: flex;
+  flex-direction: row;
 
-    .save{
-      width: 70%;
-      height: 5vh;
-      padding-left: 1rem;
-      padding-top: .5rem;
-      color: var(--text-color-2);
-    }
-      
-    .PDF{
-      display: flex;
-      padding-left: 55%;
-      margin-top: .1rem;
-      width: 70%;
-    }
-
-    .PDF-icon{
-      padding-top: .2rem;
-      font-size: 28px;
-      background: none;
-      padding-right: .4rem;
-      color: var(--secondary-color);
-      
-    }
-    .excel-icon{
-      padding-top: .2rem;
-      font-size: 28px;
-      background: none; 
-      color: var(--secondary-color);
-    
-    }
+  .save {
+    width: 70%;
+    height: 5vh;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    color: var(--text-color-2);
   }
 
+  .PDF {
+    display: flex;
+    padding-left: 55%;
+    margin-top: 0.1rem;
+    width: 70%;
+  }
 
-.main-section{
+  .PDF-icon {
+    padding-top: 0.2rem;
+    font-size: 28px;
+    background: none;
+    padding-right: 0.4rem;
+    color: var(--secondary-color);
+  }
+  .excel-icon {
+    padding-top: 0.2rem;
+    font-size: 28px;
+    background: none;
+    color: var(--secondary-color);
+  }
+}
+
+.main-section {
   padding-top: 2rem;
   margin: auto;
   width: 800px;
   border: 1px solid var(--text-color-2);
   border-top: none;
-  border-bottom:  2px solid var(--text-color-2) ;
-  border-top:1px solid var(--text-color-2) ;
+  border-bottom: 2px solid var(--text-color-2);
+  border-top: 1px solid var(--text-color-2);
   background-color: var(--panel-color);
-  
 }
 
 header {
   text-align: center;
 
-
   .coop-name {
     font-size: 26px;
     font-weight: 200;
     margin-bottom: 1rem;
-    
-
   }
 }
-.td-cred2{
-  border-left: 1px dotted var(--text-color-2);
-  text-align: right;
-  
-}
+
 /* Table */
 .table-container {
   margin: auto;
@@ -258,42 +234,23 @@ header {
         border-top: 1px solid var(--text-color-2);
         border-bottom: 1px solid var(--text-color-2);
         color: var(--text-color-2);
-        
       }
 
-      .th-cred, .th-deb {
+      .th-cred,
+      .th-deb {
         border-left: 1px dotted var(--border-color);
         padding-left: 13rem;
       }
-
-
-    }
-    .total {
-      text-align: left;
-      font-weight: 900;
-      font-size: larger;
-      padding: 16px 16px;
     }
 
-    .td-deb2, .td-cred3, .td-deb {
-      text-align: right;
-      
-      
-    }
     tbody {
       tr {
-        //border-bottom: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
         color: var(--text-color-2);
         background-color: var(--panel-color);
 
         td {
-          padding: 16px 36px;
-        }
-
-        .td-deb, .td-cred {
-          text-align: right;
-
+          padding: 16px 20px;
         }
       }
 
@@ -302,22 +259,33 @@ header {
         border-left: none;
         border-right: none;
         border-top: none;
-        border-color: var(--text-color-2);
-        border-top: 1px double var(--border-color);
-        
-        //border-bottom: 2px double var(--black);
+        border-bottom: 5px double var(--text-color-3);
 
-        .td-debtot, .td-credtot {
-          text-align: right;
+        .total {
+          text-align: left;
+          font-weight: 900;
+          font-size: larger;
+          padding: 16px 16px;
         }
       }
 
       tr:hover {
         td {
-          cursor: pointer;
-          background-color: var(--grey);
+          cursor: pointer;;
+          background-color: var(--grey-2);
           // color: var(--primary-color);
         }
+      }
+
+      .td-cred2 {
+        border-left: 1px dotted var(--text-color-2);
+        text-align: right;
+      }
+
+      .td-deb,
+      .td-deb2,
+      .td-cred3 {
+        text-align: right;
       }
     }
   }

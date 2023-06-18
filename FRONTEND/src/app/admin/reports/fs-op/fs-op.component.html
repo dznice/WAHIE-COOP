@@ -63,18 +63,18 @@
                 <td class="td-cred">
                   <ng-container *ngFor="let items of prevenue">
                     <ng-container *ngIf="item.result.journId === items.result.journId">
-                      {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                      {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                     </ng-container>
                   </ng-container>
                 </td>
-                <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               </tr>
             </ng-container>
             <!-- Total of all Current revenue -->
             <tr class="totals">
                 <td class="totass">Total revenue:</td>
-                <td class="total-cred" *ngIf="revenue.length > 0">{{( prevenue.length > 0 ? prevenue[prevenue.length - 1].total_revenue : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-                <td class="total-deb" *ngIf="revenue.length > 0">{{( revenue.length > 0 ? revenue[revenue.length - 1].total_revenue : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                <td class="total-cred" *ngIf="revenue.length > 0">{{( prevenue.length > 0 ? prevenue[prevenue.length - 1].total_revenue : 0) | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+                <td class="total-deb" *ngIf="revenue.length > 0">{{( revenue.length > 0 ? revenue[revenue.length - 1].total_revenue : 0) | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
 
               </tr>
             </ng-container>
@@ -93,25 +93,25 @@
                 <td class="td-cred">
                   <ng-container *ngFor="let items of pexpense">
                     <ng-container *ngIf="item.result.journId === items.result.journId">
-                      {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                      {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                     </ng-container>
                   </ng-container>
                 </td>
-                <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                <td class="td-deb">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               </tr>
             </ng-container>
             <!-- Total of Other Current Assets -->
             <tr class="totals">
               <td class="totass">Total Expenses:</td>
-              <td class="total-cred" *ngIf="expense.length > 0">{{ (pexpense.length > 0 ? pexpense[pexpense.length - 1].total_expenses : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-              <td class="total-deb" *ngIf="expense.length > 0">{{ (expense.length > 0 ? expense[expense.length - 1].total_expenses : 0) | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td class="total-cred" *ngIf="expense.length > 0">{{ (pexpense.length > 0 ? pexpense[pexpense.length - 1].total_expenses : 0) | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="total-deb" *ngIf="expense.length > 0">{{ (expense.length > 0 ? expense[expense.length - 1].total_expenses : 0) | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
           </ng-container>
 <br>
             <tr class="totals">
               <td class="totass">Net Surplus Before Other Item:</td>
-              <td class="total-cred">{{ calculateLastYearTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="total-deb">{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="total-cred">{{ calculateLastYearTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="total-deb">{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
 <br>
             <ng-container *ngIf="this.reserveFund && this.cetFund && this.dueToUnion && this.cdFund && this.optionalFund !== 0">
@@ -121,58 +121,58 @@
                 </tr>
             <tr>
               <td>Reserve Fund</td>
-              <td class="td-cred">{{ this.preserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="td-cred">{{ this.preserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
             <tr>
               <td>Coop. Education & Training Fund</td>
-              <td class="td-cred">{{ this.pcetFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="td-cred">{{ this.pcetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
             <tr>
               <td>Due to Union/Federation (CETF)</td>
-              <td class="td-cred">{{ this.pdueToUnion | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="td-deb">{{ this.dueToUnion | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="td-cred">{{ this.pdueToUnion | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb">{{ this.dueToUnion | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
             <tr>
               <td>Community Development Fund</td>
-              <td class="td-cred">{{ this.pcdFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-              <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td class="td-cred">{{ this.pcdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
             <tr>
               <td>Optional Fund</td>
-              <td class="td-cred">{{ this.poptionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-              <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td class="td-cred">{{ this.poptionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
 
             <tr class="totals">
               <td class="totass">Total Statutory Fund:</td>
-              <td class="total-cred">{{ this.pstatutoryFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="total-deb">{{ this.statutoryFund | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="total-cred">{{ this.pstatutoryFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="total-deb">{{ this.statutoryFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
             <br>
             <tr class="totals">
               <td class="totass">Net Surplus after SF:</td>
-              <td class="total-cred">{{ this.pnetFundAfterSF | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="total-deb">{{ this.netFundAfterSF | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="total-cred">{{ this.pnetFundAfterSF | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="total-deb">{{ this.netFundAfterSF | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
 
             <tr>
               <td>IoC 70%</td>
-              <td class="td-cred">{{ this.pioc | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="td-deb">{{ this.ioc | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="td-cred">{{ this.pioc | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb">{{ this.ioc | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
 
             <tr>
               <td>Patronage Refund 30%</td>
-              <td class="td-cred">{{ this.ppatRef | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="td-deb">{{ this.patRef | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="td-cred">{{ this.ppatRef | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="td-deb">{{ this.patRef | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
 
             <tr class="totals">
               <td class="totass">Total Net Surplus as Distributed:</td>
-              <td class="total-cred">{{ calculateLastYearTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
-              <td class="total-deb">{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2'}}</td>
+              <td class="total-cred">{{ calculateLastYearTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
+              <td class="total-deb">{{ calculateTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
           </ng-container>
           

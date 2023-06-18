@@ -9,7 +9,7 @@
         <div class="table-filter">
             <div class="filter-field1">
                 <label>Journal Account</label>
-                <ng-select formControlName="account">
+                <ng-select formControlName="account" class="account">
                     <ng-option *ngFor="let libJournal of libJournals" [value]="libJournal.id">
                         {{ libJournal.journal_number }}
                         {{ libJournal.journal_name }}
@@ -18,7 +18,7 @@
             </div>
             <div class="filter-field1">
                 <label>Member</label>
-                <ng-select formControlName="member">
+                <ng-select formControlName="member" class="member">
                     <ng-option *ngFor="let member of members"[value]="member.id">
                         {{ member.last_name }}, {{ member.first_name }}{{ member.middle_name }} 
                     </ng-option>

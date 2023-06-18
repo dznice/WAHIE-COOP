@@ -2,70 +2,35 @@
   <div class="modal_container">
     <header>Additional Information</header>
 
-  
+
     <form #updatememInfo="ngForm" class="additional-info" *ngIf="isDisplayed">
       <div class="fields">
         <div class="text-wrap">
           <label for="civil_status">Civil Status</label>
-          <ng-select
-            class="civStatus"
-            [searchable]="false"
-            [clearable]="false"
-            [(ngModel)]="updateMemberform.civil_status"
-            [ngModelOptions]="{ standalone: true }"
-            id="civil_status"
-            name="civil_status"
-            (change)="onSpouseChange()"
-            
-          >
-            <ng-option
-              *ngFor="let civil_status of civilStatus"
-              [value]="civil_status"
-            >
+          <ng-select class="civStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.civil_status"
+            [ngModelOptions]="{ standalone: true }" id="civil_status" name="civil_status" (change)="onSpouseChange()">
+            <ng-option *ngFor="let civil_status of civilStatus" [value]="civil_status">
               {{ civil_status }}
             </ng-option>
           </ng-select>
         </div>
         <div class="text-wrap">
           <label for="tin_number">TIN Number </label>
-          <input
-            [(ngModel)]="updateMemberform.tin_number"
-            [ngModelOptions]="{ standalone: true }"
-            name="tin_number"
-            type="text"
-            placeholder="e.g. 000 – 123 – 456 – 001"
-          />
+          <input [(ngModel)]="updateMemberform.tin_number" [ngModelOptions]="{ standalone: true }" name="tin_number" type="text"
+            placeholder="e.g. 000 – 123 – 456 – 001" />
         </div>
 
         <div class="text-wrap">
           <label for="spouse">Spouse</label>
-          <input
-            [(ngModel)]="updateMemberform.spouse"
-            [ngModelOptions]="{ standalone: true }"
-            type="text"
-            name="spouse"
-            placeholder=""
-            [disabled]="isSpouseDisabled"
-          />
+          <input [(ngModel)]="updateMemberform.spouse" [ngModelOptions]="{ standalone: true }" type="text" name="spouse" placeholder=""
+            [disabled]="isSpouseDisabled" />
         </div>
 
         <div class="text-wrap">
           <label>Employment Status</label>
-          <ng-select
-            class="empStatus"
-            [searchable]="false"
-            [clearable]="false"
-            [(ngModel)]="updateMemberform.employment_status"
-            [ngModelOptions]="{ standalone: true }"
-            id="employment_status"
-            name="employment_status"
-            (change)="onEmploymentChange()"
-            
-          >
-            <ng-option
-              *ngFor="let employment_status of employmentStatus"
-              [value]="employment_status"
-            >
+          <ng-select class="empStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.employment_status"
+            [ngModelOptions]="{ standalone: true }" id="employment_status" name="employment_status" (change)="onEmploymentChange()">
+            <ng-option *ngFor="let employment_status of employmentStatus" [value]="employment_status">
               {{ employment_status }}
             </ng-option>
           </ng-select>
@@ -73,36 +38,17 @@
 
         <div class="text-wrap">
           <label for="occupation">Occupation</label>
-          <input
-            [(ngModel)]="updateMemberform.occupation"
-            [ngModelOptions]="{ standalone: true }"
-            type="text"
-            name="occupation"
-            placeholder=""
-            [disabled]="isOccupationDisabled"
-          />
+          <input [(ngModel)]="updateMemberform.occupation" [ngModelOptions]="{ standalone: true }" type="text" name="occupation" placeholder=""
+            [disabled]="isOccupationDisabled" />
         </div>
 
         <div class="text-wrap">
           <label for="company_address">Company Address</label>
-          <input
-            [(ngModel)]="updateMemberform.company_address"
-            [ngModelOptions]="{ standalone: true }"
-            type="text"
-            name="company_address"
-            placeholder="e.g. 015 Zamora Street, Tarlac City"
-            [disabled]="isCompAddDisabled"
-          />
+          <input [(ngModel)]="updateMemberform.company_address" [ngModelOptions]="{ standalone: true }" type="text" name="company_address"
+            placeholder="e.g. 015 Zamora Street, Tarlac City" [disabled]="isCompAddDisabled" />
         </div>
         <div class="tabs">
-          <input
-         
-            type="radio"
-            class="tabs__radio"
-            name="tabs-coop"
-            id="Address"
-            checked
-          />
+          <input type="radio" class="tabs__radio" name="tabs-coop" id="Address" checked />
 
           <!-- ADDRESS -->
           <label for="Address" class="tabs__label">Address</label>
@@ -111,27 +57,11 @@
             <label class="cAddress">Current Address</label><br />
             <div class="row3">
               <div class="input-field18">
-                <input
-                  class="address"
-                  [(ngModel)]="updateMemberform.current_address"
-                  [ngModelOptions]="{ standalone: true }"
-                  name="current_address"
-                  type="text"
-                  placeholder="House No./Street/Block"
-                />
-                <ng-select
-                  class="region"
-                  [(ngModel)]="updateMemberform.selectedRegion"
-                  (click)="showProvinces()"
-                  [ngModelOptions]="{ standalone: true }"
-                  
-                  placeholder="Choose Region"
-     
-                >
-                  <ng-option
-                    *ngFor="let reg of region"
-                    [value]="reg.region_code"
-                  >
+                <input class="address" [(ngModel)]="updateMemberform.current_address" [ngModelOptions]="{ standalone: true }" name="current_address" type="text"
+                  placeholder="House No./Street/Block" />
+                <ng-select class="region" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }"
+                  placeholder="Choose Region">
+                  <ng-option *ngFor="let reg of region" [value]="reg.region_code">
                     {{ reg.region_description }}
                     {{ reg.journal_name }}
                   </ng-option>
@@ -139,36 +69,16 @@
               </div>
 
               <div class="input-field18">
-                <ng-select
-                  class="province"
-                  [(ngModel)]="updateMemberform.selectedProvince"
-                  (click)="showCities()"
-                  [ngModelOptions]="{ standalone: true }"
-                  
-                  placeholder="Choose Province"
-        
-                >
-                  <ng-option
-                    *ngFor="let prov of province"
-                    [value]="prov.province_code"
-                  >
+                <ng-select class="province" [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }"
+                  placeholder="Choose Province">
+                  <ng-option *ngFor="let prov of province" [value]="prov.province_code">
                     {{ prov.province_description }}
                     {{ prov.journal_name }}
                   </ng-option>
                 </ng-select>
-                <ng-select
-                  class="municipality"
-                  [(ngModel)]="updateMemberform.selectedCity"
-                  (click)="showBarangay()"
-                  [ngModelOptions]="{ standalone: true }"
-                  
-                  placeholder="Choose City/Municipality"
-            
-                >
-                  <ng-option
-                    *ngFor="let city of cities"
-                    [value]="city.city_municipality_code"
-                  >
+                <ng-select class="municipality" [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()" [ngModelOptions]="{ standalone: true }"
+                  placeholder="Choose City/Municipality">
+                  <ng-option *ngFor="let city of cities" [value]="city.city_municipality_code">
                     {{ city.city_municipality_description }}
                     {{ city.journal_name }}
                   </ng-option>
@@ -176,42 +86,20 @@
               </div>
 
               <div class="input-field18">
-                <ng-select
-                  class="barangay"
-                  [(ngModel)]="updateMemberform.selectedBarangay"
-                  [ngModelOptions]="{ standalone: true }" 
-                  placeholder="Choose Barangay"
-              
-                >
-                  <ng-option
-                    *ngFor="let brgy of barangay"
-                    [value]="brgy.barangay_code"
-                  >
+                <ng-select class="barangay" [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }"
+                  placeholder="Choose Barangay">
+                  <ng-option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
                     {{ brgy.barangay_description }}
                     {{ brgy.journal_name }}
                   </ng-option>
                 </ng-select>
-                <input
-                  class="postalCode"
-                  [(ngModel)]="updateMemberform.postal_code"
-                  [ngModelOptions]="{ standalone: true }"
-                  name="barangay"
-                  type="text"
-                  placeholder="Postal Code"
-                  
-             
-                />
+                <input class="postalCode" [(ngModel)]="updateMemberform.postal_code" [ngModelOptions]="{ standalone: true }" name="barangay" type="text"
+                  placeholder="Postal Code" />
               </div>
             </div>
           </div>
 
-          <input
-            type="radio"
-            class="tabs__radio"
-            name="tabs-coop"
-            id="Beneficiaries"
-           
-          />
+          <input type="radio" class="tabs__radio" name="tabs-coop" id="Beneficiaries" />
 
           <label for="Beneficiaries" class="tabs__label">Beneficiaries</label>
           <div class="tabs__content">
@@ -233,37 +121,18 @@
                   </td>
 
                   <td class="beneinput">
-                    <input
-                      type="text"
-                      [(ngModel)]="item.benificiary_name"
-                      name="benificiary_name"
-                      id=" benificiary_name"
-                      [ngModelOptions]="{ standalone: true }"
-                      
-                    />
+                    <input type="text" [(ngModel)]="item.benificiary_name" name="benificiary_name" id=" benificiary_name"
+                      [ngModelOptions]="{ standalone: true }" />
                   </td>
 
                   <td class="beneinput">
-                    <input
-                      type="date"
-                      [(ngModel)]="item.benificiary_birthdate"
-                      name="benificiary_birthdate"
-                      id=" benificiary_birthdate"
-                      [ngModelOptions]="{ standalone: true }"
-                      max="{{ maxDate }}"
-                      
-                    />
+                    <input type="date" [(ngModel)]="item.benificiary_birthdate" name="benificiary_birthdate" id=" benificiary_birthdate"
+                      [ngModelOptions]="{ standalone: true }" max="{{ maxDate }}" />
                   </td>
 
                   <td class="beneinput">
-                    <input
-                      type="text"
-                      name="benificiary_relation"
-                      id=" benificiary_relation"
-                      [(ngModel)]="item.benificiary_relation"
-                      [ngModelOptions]="{ standalone: true }"
-                      
-                    />
+                    <input type="text" name="benificiary_relation" id=" benificiary_relation" [(ngModel)]="item.benificiary_relation"
+                      [ngModelOptions]="{ standalone: true }" />
                   </td>
 
                   <td class="delbut">
@@ -310,13 +179,12 @@
         <button type="submit" (click)="logout($event)" class="btn-logout">
           <span class="btnTextb">Logout</span>
         </button>
-    
-        <button type="submit" (click)="showSkipModal(1)" class="btn-submit">
-          Setup Later
-        </button>
-        <button type="submit" (click)="memberInfo()" class="btn-submit">
-          Update
-        </button>
+
+        <div class="btn-grpright">
+          <button type="submit" (click)="showSkipModal(1)" class="btn-skip">Setup Later</button>
+          <button type="submit" (click)="memberInfo()" class="btn-submit">Update</button>
+        </div>
+
       </div>
     </form>
   </div>
@@ -326,14 +194,19 @@
       <div class="modal-bg" *ngIf="skipModal === 1">
         <div class="modal-wrapper">
           <div class="modal-header">
-            <span class="header-title">Are you sure?</span>
+            <span class="header-title">Confirmation</span>
             <i class="ti ti-x" (click)="showSkipModal(2)"></i>
           </div>
-  
+
+          <div class="modal-body">
+            <span class="text-bold">Are you sure you want to skip account setup?</span>
+            <br>
+            <span class="text-muted">This cannot be undone.</span>
+          </div>
+
           <div class="modal-footer">
             <button class="btn btn-close" (click)="showSkipModal(2)">Cancel</button>
-            <button class="btn btn-save" (click)="skipInfo() ">Proceed</button>
-
+            <button class="btn btn-save" (click)="skipInfo()">Proceed</button>
           </div>
         </div>
       </div>

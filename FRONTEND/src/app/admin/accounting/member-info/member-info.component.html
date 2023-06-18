@@ -11,24 +11,28 @@
       <div class="mem-contact">
         <div class="mem-info company">{{ info.company_name }}</div>
         <div class="mem-info email">{{ info.email }}</div>
-        <div class="mem-info contact">(+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-", info.mobile_number.slice(6)].join('')
-          }}</div>
+        <div class="mem-info contact">
+          (+63) {{ [info.mobile_number.slice(0, 3), "-", info.mobile_number.slice(3,6), "-", info.mobile_number.slice(6)].join('')}}
+        </div>
       </div>
-      <div class="mem-payables" *ngFor="let bal of membalance">
-        <div class="open-bal" *ngIf="id == bal.id">
-          <div class="open-bar"></div>
-          <div class="open-val">
-            <div class="open-money">{{ bal.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
-            <div class="open-label">OPEN</div>
+
+      <div class="mem-payables">
+        <ng-container *ngFor="let bal of membalance">
+          <div class="open-bal" *ngIf="id == bal.id">
+            <div class="open-bar"></div>
+            <div class="open-val">
+              <div class="open-money">{{ bal.total_open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
+              <div class="open-label">OPEN</div>
+            </div>
           </div>
-        </div>
-        <div class="overdue-bal" *ngIf="id == bal.id">
-          <div class="overdue-bar"></div>
-          <div class="overdue-val">
-            <div class="overdue-money">{{ bal.total_payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
-            <div class="overdue-label">OVERDUE</div>
+          <div class="overdue-bal" *ngIf="id == bal.id">
+            <div class="overdue-bar"></div>
+            <div class="overdue-val">
+              <div class="overdue-money">{{ bal.total_payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</div>
+              <div class="overdue-label">OVERDUE</div>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </div>
@@ -75,8 +79,8 @@
             <th>Type</th>
             <th>No.</th>
             <th>Due Date</th>
-            <th>Balance</th>
-            <th>Payment</th>
+            <th class="th-bal">Balance</th>
+            <th class="th-pay">Payment</th>
             <th>Status</th>
           </thead>
           <tbody *ngFor="let acc of account.reverse() | filter: type | filterInfoDate: startDate: endDate
@@ -86,8 +90,12 @@
               <td>{{ acc.debit.cred.entries.entry_name }}</td>
               <td>{{ acc.debit.cred.transac.transaction_number }}</td>
               <td>{{ acc.debit.cred.due_date }}</td>
-              <td>{{ acc.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-              <td>{{ acc.payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td class="td-bal">
+                <span [ngClass]="{'bal-overdue': acc.status == 'Overdue'}">
+                  {{ acc.open_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                </span>
+              </td>
+              <td class="td-pay">{{ acc.payment | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
               <td class="status">
                 <span [ngClass]="{'pending': acc.status== 'Pending',
                                 'overdue': acc.status == 'Overdue',
@@ -106,10 +114,9 @@
 
       </div>
 
-
-
       <input type="radio" class="tabs__radio" name="tabs-coop" id="Member Details" />
       <label for="Member Details" class="tabs__label">Member Details</label>
+
       <div class="tabs__content">
         <div class="member_information">
           <div class="information_row">
@@ -190,40 +197,41 @@
 
                   <td class="fieldsdata">{{ info.company_address }}</td>
                 </tr>
-                <!-- <tr>
-                <th class="fields" width="30%">Beneficiaries</th>
 
-                <td class="fieldsdata"></td>
-              </tr> -->
               </div>
             </table>
           </div>
-          <div class="information_row">
-            <th class="fields">Beneficiaries</th>
 
-            <thead>
-              <th class="fields" width="30%">Name</th>
-              <th class="fields" width="30%">Date of Birth</th>
-              <th class="fields" width="30%">Relationship</th>
-            </thead>
-            <tbody>
-              <table *ngFor="let b of ben">
-                <div *ngIf="id == b.benificiary_id">
+          <div class="information_row">
+            <th class="fields bene-header">Beneficiaries</th>
+
+            <table>
+
+              <thead>
+                <th class="fields" width="30%">Name</th>
+                <th class="fields" width="30%">Date of Birth</th>
+                <th class="fields" width="30%">Relationship</th>
+              </thead>
+
+              <ng-container *ngFor="let b of ben">
+                <tbody *ngIf="id == b.benificiary_id">
                   <td class="fieldsdata" width="30%">
                     {{ b.benificiary_name }}
                   </td>
                   <td class="fieldsdata" width="30%">
                     {{ b.benificiary_birthdate }}
                   </td>
-                  <td class="fieldsdata" width="30%">
+                  <td class="fieldsdata" width="50%">
                     {{ b.benificiary_relation }}
                   </td>
                   <br />
-                </div>
-              </table>
-            </tbody>
+                </tbody>
+              </ng-container>
+
+            </table>
           </div>
         </div>
+
       </div>
     </div>
   </div>

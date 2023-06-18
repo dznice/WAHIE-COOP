@@ -65,11 +65,11 @@
           <div class="journals">
             <table *ngIf="selectedTNo > 0" formArrayName="payables">
               <thead>
-                <th>No.</th>
+                <th class="th-left">No.</th>
                 <th>Account</th>
                 <th class="th-right">Debits</th>
-                <th class="th-right">Credits</th>
-                <th><a class="addbut" (click)="addRow()"><i class="ti ti-square-rounded-plus"></i></a></th>
+                <th class="th-right ">Credits</th>
+                <th class="radius"><a class="addbut" (click)="addRow()"><i class="ti ti-square-rounded-plus"></i></a></th>
               </thead>
 
               <tbody>
@@ -143,10 +143,10 @@
           <div class="right-table">
             <table>
               <thead>
-                <th>No.</th>
+                <th class="th-left">No.</th>
                 <th>Account</th>
                 <th class="th-right">Debits</th>
-                <th class="th-right">Credits</th>
+                <th class="th-right radius">Credits</th>
               </thead>
               <tbody>
                 <tr *ngFor="let item of recents">
@@ -156,10 +156,10 @@
                   <td class="td-center">
                     <span>{{item.journal_number}} {{item.journal_name}}</span>
                   </td>
-                  <td class="td-center">
+                  <td class="td-debit">
                     <span>{{item.debit_amount}}</span>
                   </td>
-                  <td class="td-center">
+                  <td class="td-credit">
                     <span>{{item.credit_amount}}</span>
                   </td>
                 </tr>
@@ -170,7 +170,7 @@
 
       </div>
       <div class="footer">
-        <button class="cancel" type="button">Cancel</button>
+        <button class="cancel" type="button" (click)="back()">Cancel</button>
         <button class="save" type="submit">Save</button>
       </div>
     </form>

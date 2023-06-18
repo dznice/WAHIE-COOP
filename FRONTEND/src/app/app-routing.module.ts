@@ -45,7 +45,6 @@ import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generat
 import { FsFinconComponent } from './admin/reports/fs-fincon/fs-fincon.component';
 import { FsOpComponent } from './admin/reports/fs-op/fs-op.component';
 import { SlAccountsComponent } from './admin/reports/sl-accounts/sl-accounts.component';
-import { SlMembersComponent } from './admin/reports/sl-members/sl-members.component';
 import { TrialBalanceComponent } from './admin/reports/trial-balance/trial-balance.component';
 
 
@@ -135,7 +134,6 @@ const routes: Routes = [
       {path: 'reports/fs-fincon', component: FsFinconComponent},
       {path: 'reports/fs-op', component: FsOpComponent},
       {path: 'reports/sl-accounts', component: SlAccountsComponent},
-      {path: 'reports/sl-members', component: SlMembersComponent},
       {path: 'reports/trial-balance', component: TrialBalanceComponent},
       {path: 'inventory', component: InventoryComponent},
       {path: 'admin-body', component: AdminBodyComponent}

@@ -127,37 +127,39 @@ main {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-}
-.tabs__label {
-  color: var(--title-color);
-  padding: 10px 16px;
-  cursor: pointer;
-}
 
-.tabs__radio {
-  display: none;
-}
+  .tabs__radio {
+    display: none;
+  }
 
-.tabs__content {
-  order: 1;
-  width: 100%;
-  line-height: 1.5;
-  font-size: 0.9em;
-  display: none;
-  border-top: 1px solid var(--border-color);
-}
+  .tabs__label {
+    color: var(--title-color);
+    padding: 10px 16px;
+    cursor: pointer;
+  }
 
-.tabs__radio:checked + .tabs__label {
-  font-weight: bold;
-  color: var(--title-color);
-  border-bottom: 4px solid var(--title-color);
-}
+  .tabs__content {
+    order: 1;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 0.9em;
+    display: none;
+    border-top: 1px solid var(--border-color);
+  }
 
-.tabs__radio:checked + .tabs__label + .tabs__content {
-  display: block;
-  width: 100%;
-}
+  .tabs__radio:checked + .tabs__label {
+    font-weight: bold;
+    color: var(--title-color);
+    border-bottom: 4px solid var(--title-color);
+  }
+  
+  .tabs__radio:checked + .tabs__label + .tabs__content {
+    display: block;
+    width: 100%;
+  }
+} 
 
+/* Table Filters */
 .table-filter {
   display: flex;
   align-items: center;
@@ -229,6 +231,10 @@ main {
       border-right: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
     }
+
+    .th-bal, .th-pay {
+      text-align: right;
+    }
   }
 
   tbody {
@@ -242,6 +248,14 @@ main {
         font-weight: 500;
         padding: 16px 16px;
         border-right: 1px solid var(--border-color);
+      }
+
+      .td-bal, .td-pay {
+        text-align: right;
+
+        .bal-overdue {
+          color: var(--red-focus);
+        }
       }
 
       .status {
@@ -312,18 +326,27 @@ main {
     margin: 8px 0px;
     padding: 0px 20px;
 
+    
+
     .fields {
       padding: 6px 10px;
       border-bottom: 1px solid var(--border-color);
       margin: 0px 6%;
-      color: var(--title-color);
+      color: var(--primary-color);
     }
+
     .fieldsdata {
       border-bottom: 1px solid var(--border-color);
-      color: var(--text-color-3);
+      color: var(--text-color-2);
       font-weight: 600;
       font-size: 14px;
+      padding-left: .65rem;
       text-transform: capitalize;
+    }
+
+    .bene-header {
+      margin: 0px 0;
     }
   }
 }
+

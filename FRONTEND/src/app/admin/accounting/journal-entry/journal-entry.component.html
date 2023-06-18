@@ -58,8 +58,7 @@
               <td class="beneinput member-name">
                 <ng-select class="try" formControlName="name" (change)="getNameID(i)" [editableSearchTerm]="true">
                   <ng-option class="try" *ngFor="let member of members" [value]="member.id">
-                    {{ member.id }} {{ member.first_name }}
-                    {{ member.middle_name }} {{ member.last_name }}
+                    {{ member.id }} {{ member.first_name }}{{ member.middle_name }} {{ member.last_name }}
                   </ng-option>
                 </ng-select>
               </td>

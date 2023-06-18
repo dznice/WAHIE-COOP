@@ -29,8 +29,8 @@
 
   <header class="second">
     <h3> WAH-Cooperative</h3>
-    <h4 class="report-name" *ngIf="formData.account!=''">Subsidiary Ledger for {{accInfos.journal_name}}</h4>
-    <h4 class="report-name" *ngIf="formData.member!='' && formData.account==''">Subsidiary Ledger for {{memInfos.first_name}} {{memInfos.middle_name}} {{memInfos.last_name}}</h4>
+    <h4 class="report-name" *ngIf="formData.account!=''">Subsidiary Ledger for <br/> {{accInfos.journal_name}}</h4>
+    <h4 class="report-name" *ngIf="formData.member!='' && formData.account==''">Subsidiary Ledger for <br/> {{memInfos.first_name}} {{memInfos.middle_name}} {{memInfos.last_name}}</h4>
     <h4 class="report-name" *ngIf="formData.member=='' && formData.account==''">Subsidiary Ledger for All Accounts</h4>
     <span class="date-today">As of {{ maxDate | date:'mediumDate' }}</span>
     <h5 class="date-today" *ngIf="formData.startDate!='' && formData.endDate!=''">This report based from {{formData.startDate | date:'mediumDate'}} to {{formData.endDate | date:'mediumDate'}}</h5>
@@ -62,13 +62,13 @@
                   <ng-container *ngFor="let itemsb of brokenpledgers">
                     <ng-container *ngIf="itemb.result.transactNumber === itemsb.result.transactNumber">
                       <ng-container *ngIf="itemsb.result.total_balance > 0">
-                        {{ itemsb.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        {{ itemsb.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </ng-container>
                   </td>
-                  <td class="td-baln" *ngIf="itemb.result.total_balance > 0">{{ itemb.examplebroken | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-                  <td class="td-bals" *ngIf="itemb.result.total_balance > 0">{{ itemb.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+                  <td class="td-baln" *ngIf="itemb.result.total_balance > 0">{{ itemb.examplebroken | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+                  <td class="td-bals" *ngIf="itemb.result.total_balance > 0">{{ itemb.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
                 </ng-container>
               </tr>
             </ng-container>
@@ -78,12 +78,12 @@
               <td class="td-bal">
                 <ng-container *ngFor="let items of pledgers">
                   <ng-container *ngIf="item.result.journId === items.result.journId">
-                    {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}
+                    {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                   </ng-container>
                 </ng-container>
               </td>
-              <td class="td-bald">{{ item.example | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
-              <td class="td-bald">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' }}</td>
+              <td class="td-bald">{{ item.example | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="td-bald">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
           </ng-container>
           <!-- <tr class="tr-total">

@@ -1,6 +1,6 @@
 <main>
   <h1 class="heading">Profile Settings</h1>
-  <button (click)="edit(1)">Edit Profile</button>
+
   <section class="content">
     <input type="radio" checked id="home" name="slider" />
     <input type="radio" id="blog" name="slider" />
@@ -18,28 +18,32 @@
         <i class="ti ti-shield-lock"></i>
         <span class="title">Password</span>
       </label>
-      <div class="slider"></div>
     </div>
 
     <div class="text-content">
       <div class="home text">
 
-        <div class="top-content">
-          <table>
-            <div class="row">
-              <tr>
-                <label>Full Name</label>
-                <td  class="fieldsdata1" id="fieldsdataRow">{{ first_name }} {{ middle_name }} {{ last_name }} {{ suffix }}</td>
-              </tr>
-              <tr>
-                <label>Email Address</label>
-                <td class="fieldsdata1" id="fieldsdataRow">{{ email }}</td>
-              </tr>
-            </div>
-          </table>
+        <div class="btn-grp">
+          <button (click)="edit(1)" class="btn-edit">Edit Profile</button>
         </div>
 
         <div class="first-tab">
+
+          <div class="top-content">
+            <table>
+              <div class="row">
+                <tr>
+                  <label>Full Name</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ first_name }} {{ middle_name }} {{ last_name }} {{ suffix }}</td>
+                </tr>
+                <tr>
+                  <label>Email Address</label>
+                  <td class="fieldsdata1" id="fieldsdataRow">{{ email }}</td>
+                </tr>
+              </div>
+            </table>
+          </div>
+
           <div class="fields">
             <span>Additional Information</span>
             <table>
@@ -142,21 +146,22 @@
                   <div class="change">
                     <div class="input-field">
                       <label for="Current">Current</label>
-                      <input [type]="chcurrent ?'password':'text'" formControlName="current_pass" id="current_pass" name="current_pass" required [(ngModel)]="form.current_pass" />
+                      <input [type]="chcurrent ?'password':'text'" formControlName="current_pass" id="current_pass" name="current_pass" required
+                        [(ngModel)]="form.current_pass" />
                       <div class="eyecurrent" (click)="ccurrent()"><i [ngClass]="current?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                     </div>
                     <div class="input-field">
                       <label for="New">New Password</label>
-                      <input [type]="changetype?'password':'text'" id="new_pass" name="new_pass" formControlName="new_pass" required [(ngModel)]="form.new_pass" 
-                      minlength="8" 
-                      pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@_-.$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" 
-                      title="Password must be at least 8 characters, one letter, one number and one special character:"/>
-                
+                      <input [type]="changetype?'password':'text'" id="new_pass" name="new_pass" formControlName="new_pass" required [(ngModel)]="form.new_pass"
+                        minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@_-.$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                        title="Password must be at least 8 characters, one letter, one number and one special character:" />
+
                       <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                     </div>
                     <div class="input-field">
                       <label for="Retype New">Confirm New Password</label>
-                      <input [type]="cchangetype?'password':'text'" id="retype_pass" name="retype_pass" formControlName="retype_pass" required [(ngModel)]="form.retype_pass" />
+                      <input [type]="cchangetype?'password':'text'" id="retype_pass" name="retype_pass" formControlName="retype_pass" required
+                        [(ngModel)]="form.retype_pass" />
                       <div class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
                     </div>
                   </div>
@@ -178,231 +183,127 @@
 
 
   <section>
-    <div>
-      <div class="modal-bg" *ngIf="editProfile === 1">
-        <div class="modal-wrapper">
-          <div class="modal-header">
-            <i class="ti ti-x" (click)="edit(2)"></i>
-            <div class="modal-body">
-            <form #updatememInfo="ngForm" class="additional-info" *ngIf="isDisplayed">
-              <div class="fields">
-                <div class="text-wrap">
-                  <label for="civil_status">Civil Status</label>
-                
-                  <ng-select
-                    class="civStatus"
-                    [searchable]="false"
-                    [clearable]="false"
-                    [(ngModel)]="updateMemberform.civil_status"
-                    [ngModelOptions]="{ standalone: true }"
-                    id="civil_status"
-                    name="civil_status"           
-                    (change)="onSpouseChange()"    
-                                
-                  >
-             
-                    <ng-option
-                      *ngFor="let civil_status of civilStatus"
-                      value="{{ civil_status }}"
-                   
-                    >
-                      {{ civil_status }}
-                    </ng-option>
-                   
-                  </ng-select>
-                </div>
-                <div class="text-wrap">
-                  <label for="tin_number">TIN Number </label>
-                  <input
-                    [(ngModel)]="updateMemberform.tin_number"
-                    [ngModelOptions]="{ standalone: true }"
-                    name="tin_number"
-                    type="text"
-                    placeholder="e.g. 000 – 123 – 456 – 001"
-                  />
-                </div>
-        
-                <div class="text-wrap">
-                  <label for="spouse">Spouse</label>
-                  <input
-                    [(ngModel)]="updateMemberform.spouse"
-                    [ngModelOptions]="{ standalone: true }"
-                    type="text"
-                    name="spouse"
-                    id="fspouse"
-                    placeholder=""
-                  
-                    [disabled]="isSpouseDisabled"
-                  />
-                </div>
-        
-                <div class="text-wrap">
-                  <label>Employment Status</label>
-                  <ng-select
-                    class="empStatus"
-                    [searchable]="false"
-                    [clearable]="false"
-                    [(ngModel)]="updateMemberform.employment_status"
-                    [ngModelOptions]="{ standalone: true }"
-                    id="employment_status"
-                    name="employment_status"
-                    (change)="onEmploymentChange()"
-                    
-                  >
-                    <ng-option
-                      *ngFor="let employment_status of employmentStatus"
-                      [value]="employment_status"
-                    >
-                      {{ employment_status }}
-                    </ng-option>
-                  </ng-select>
-                </div>
-        
-                <div class="text-wrap">
-                  <label for="occupation">Occupation</label>
-                  <input
-                    [(ngModel)]="updateMemberform.occupation"
-                    [ngModelOptions]="{ standalone: true }"
-                    type="text"
-                    name="occupation"
-                    placeholder=""
-                    [disabled]="isOccupationDisabled"
-                  />
-                </div>
-        
-                <div class="text-wrap">
-                  <label for="company_address">Company Address</label>
-                  <input
-                    [(ngModel)]="updateMemberform.company_address"
-                    [ngModelOptions]="{ standalone: true }"
-                    type="text"
-                    name="company_address"
-                    placeholder="e.g. 015 Zamora Street, Tarlac City"
-                    [disabled]="isCompAddDisabled"
-                  />
-                </div>
-                <div class="tabs">
-                  <input
-                 
-                    type="radio"
-                    class="tabs__radio"
-                    name="tabs-coop"
-                    id="Address"
-                    checked
-                  />
-        
-                  <!-- ADDRESS -->
-                  <label for="Address" class="tabs__label">Address</label>
-        
-                  <div class="tabs__content">
-                    <label class="cAddress">Current Address</label><br />
-                    <div class="row3">
-                      <div class="input-field18">
-                        <input
-                          class="address"
-                          [(ngModel)]="updateMemberform.current_address"
-                          [ngModelOptions]="{ standalone: true }"
-                          name="current_address"
-                          type="text"
-                          placeholder="House No./Street/Block"
-                        />
-                        <ng-select
-                          class="region"
-                          [(ngModel)]="updateMemberform.selectedRegion"
-                          (click)="showProvinces()"
-                          [ngModelOptions]="{ standalone: true }"
-                          
-                          placeholder="Choose Region"
-             
-                        >
-                          <ng-option
-                            *ngFor="let reg of region"
-                            [value]="reg.region_code"
-                          >
-                            {{ reg.region_description }}
-                            {{ reg.journal_name }}
-                          </ng-option>
-                        </ng-select>
-                      </div>
-        
-                      <div class="input-field18">
-                        <ng-select
-                          class="province"
-                          [(ngModel)]="updateMemberform.selectedProvince"
-                          (click)="showCities()"
-                          [ngModelOptions]="{ standalone: true }"
-                          
-                          placeholder="Choose Province"
-                
-                        >
-                          <ng-option
-                            *ngFor="let prov of province"
-                            [value]="prov.province_code"
-                          >
-                            {{ prov.province_description }}
-                            {{ prov.journal_name }}
-                          </ng-option>
-                        </ng-select>
-                        <ng-select
-                          class="municipality"
-                          [(ngModel)]="updateMemberform.selectedCity"
-                          (click)="showBarangay()"
-                          [ngModelOptions]="{ standalone: true }"
-                          
-                          placeholder="Choose City/Municipality"
-                    
-                        >
-                          <ng-option
-                            *ngFor="let city of cities"
-                            [value]="city.city_municipality_code"
-                          >
-                            {{ city.city_municipality_description }}
-                            {{ city.journal_name }}
-                          </ng-option>
-                        </ng-select>
-                      </div>
-        
-                      <div class="input-field18">
-                        <ng-select
-                          class="barangay"
-                          [(ngModel)]="updateMemberform.selectedBarangay"
-                          [ngModelOptions]="{ standalone: true }" 
-                          placeholder="Choose Barangay"
-                      
-                        >
-                          <ng-option
-                            *ngFor="let brgy of barangay"
-                            [value]="brgy.barangay_code"
-                          >
-                            {{ brgy.barangay_description }}
-                            {{ brgy.journal_name }}
-                          </ng-option>
-                        </ng-select>
-                        <input
-                          class="postalCode"
-                          [(ngModel)]="updateMemberform.postal_code"
-                          [ngModelOptions]="{ standalone: true }"
-                          name="barangay"
-                          type="text"
-                          placeholder="Postal Code"
-                          
-                        />
-      
+    <div class="modal-bg" *ngIf="editProfile === 1">
+      <div class="modal-wrapper">
+        <div class="modal-header">
+          <span class="header-title">Edit Profile</span>
+          <i class="ti ti-x" (click)="edit(2)"></i>
+        </div>
+
+        <div class="modal-body">
+          <form #updatememInfo="ngForm" class="additional-info" *ngIf="isDisplayed">
+            <div class="fields">
+              <div class="text-wrap">
+                <label for="civil_status">Civil Status</label>
+
+                <ng-select class="civStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.civil_status"
+                  [ngModelOptions]="{ standalone: true }" id="civil_status" name="civil_status" (change)="onSpouseChange()">
+
+                  <ng-option *ngFor="let civil_status of civilStatus" value="{{ civil_status }}">
+                    {{ civil_status }}
+                  </ng-option>
+
+                </ng-select>
+              </div>
+              <div class="text-wrap">
+                <label for="tin_number">TIN Number </label>
+                <input [(ngModel)]="updateMemberform.tin_number" [ngModelOptions]="{ standalone: true }" name="tin_number" type="text"
+                  placeholder="e.g. 000 – 123 – 456 – 001" />
+              </div>
+
+              <div class="text-wrap">
+                <label for="spouse">Spouse</label>
+                <input [(ngModel)]="updateMemberform.spouse" [ngModelOptions]="{ standalone: true }" type="text" name="spouse" id="fspouse" placeholder=""
+                  [disabled]="isSpouseDisabled" />
+              </div>
+
+              <div class="text-wrap">
+                <label>Employment Status</label>
+                <ng-select class="empStatus" [searchable]="false" [clearable]="false" [(ngModel)]="updateMemberform.employment_status"
+                  [ngModelOptions]="{ standalone: true }" id="employment_status" name="employment_status" (change)="onEmploymentChange()">
+                  <ng-option *ngFor="let employment_status of employmentStatus" [value]="employment_status">
+                    {{ employment_status }}
+                  </ng-option>
+                </ng-select>
+              </div>
+
+              <div class="text-wrap">
+                <label for="occupation">Occupation</label>
+                <input [(ngModel)]="updateMemberform.occupation" [ngModelOptions]="{ standalone: true }" type="text" name="occupation" placeholder=""
+                  [disabled]="isOccupationDisabled" />
+              </div>
+
+              <div class="text-wrap">
+                <label for="company_address">Company Address</label>
+                <input [(ngModel)]="updateMemberform.company_address" [ngModelOptions]="{ standalone: true }" type="text" name="company_address"
+                  placeholder="e.g. 015 Zamora Street, Tarlac City" [disabled]="isCompAddDisabled" />
+              </div>
+              <div class="tabs">
+                <input type="radio" class="tabs__radio" name="tabs-coop" id="Address" checked />
+
+                <!-- ADDRESS -->
+                <label for="Address" class="tabs__label">Address</label>
+
+                <div class="tabs__content">
+                  <label class="cAddress">Current Address</label>
+                  <br />
+                  <div class="row3">
+                    <div class="input-field18">
+                      <input class="address" [(ngModel)]="updateMemberform.current_address" [ngModelOptions]="{ standalone: true }" name="current_address"
+                        type="text" placeholder="House No./Street/Block" />
+
+                      <ng-select class="region" [(ngModel)]="updateMemberform.selectedRegion" (click)="showProvinces()" [ngModelOptions]="{ standalone: true }"
+                        placeholder="Choose Region">
+                        <ng-option *ngFor="let reg of region" [value]="reg.region_code">
+                          {{ reg.region_description }}
+                          {{ reg.journal_name }}
+                        </ng-option>
+                      </ng-select>
                     </div>
+
+                    <div class="input-field18">
+                      <ng-select class="province" [(ngModel)]="updateMemberform.selectedProvince" (click)="showCities()" [ngModelOptions]="{ standalone: true }"
+                        placeholder="Choose Province">
+                        <ng-option *ngFor="let prov of province" [value]="prov.province_code">
+                          {{ prov.province_description }}
+                          {{ prov.journal_name }}
+                        </ng-option>
+                      </ng-select>
+
+                      <ng-select class="municipality" [(ngModel)]="updateMemberform.selectedCity" (click)="showBarangay()"
+                        [ngModelOptions]="{ standalone: true }" placeholder="Choose City/Municipality">
+                        <ng-option *ngFor="let city of cities" [value]="city.city_municipality_code">
+                          {{ city.city_municipality_description }}
+                          {{ city.journal_name }}
+                        </ng-option>
+                      </ng-select>
+                    </div>
+
+                    <div class="input-field18">
+                      <ng-select class="barangay" [(ngModel)]="updateMemberform.selectedBarangay" [ngModelOptions]="{ standalone: true }"
+                        placeholder="Choose Barangay">
+                        <ng-option *ngFor="let brgy of barangay" [value]="brgy.barangay_code">
+                          {{ brgy.barangay_description }}
+                          {{ brgy.journal_name }}
+                        </ng-option>
+                      </ng-select>
+
+                      <input class="postalCode" [(ngModel)]="updateMemberform.postal_code" [ngModelOptions]="{ standalone: true }" name="barangay" type="text"
+                        placeholder="Postal Code" />
+                    </div>
+
                   </div>
                 </div>
               </div>
-        
-              <div class="footer"></div>
-                <button type="submit" (click)="updateProfile()" class="btn-submit">
-                  Update
-                </button>
-              </div>
-            </form>
-
-          </div>
+            </div>
+          </form>
         </div>
-      </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-close" type="button" (click)="edit(2)">Close</button>
+          <button class="btn btn-save" type="submit" (click)="updateProfile()">Update</button>
+        </div>
+
       </div>
     </div>
   </section>

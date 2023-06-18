@@ -26,7 +26,7 @@ main {
   overflow: hidden;
   margin: 0 15px;
   border-radius: 20px;
-  background-color: #fff;
+  background-color: var(--white);
 
   header {
     position: relative;
@@ -40,7 +40,7 @@ main {
   position: relative;
   margin-top: 12px;
   min-height: 400px;
-  background-color: #fff;
+  background-color: var(--white);
   overflow: hidden;
 }
 
@@ -66,11 +66,11 @@ form .fields .text-wrap {
 
 .text-wrap input,
 select {
-  outline-color: #3f0f88;
+  outline-color: var(--primary-color);
   border: 1.6px solid var(--border-color);
   font-size: 14px;
   font-weight: 400;
-  color: #333;
+  color: var(--text-color-3);
   border-radius: 0.45rem;
   padding: 0 15px;
   height: 36px;
@@ -78,11 +78,11 @@ select {
 }
 
 .text-wrap1 input {
-  outline-color: #3f0f88;
+  outline-color: var(--primary-color);
   border: 1.6px solid var(--border-color);
   font-size: 14px;
   font-weight: 400;
-  color: #333;
+  color: var(--text-color-3);
   border-radius: 0.45rem;
   padding: 0 15px;
   height: 36px;
@@ -211,7 +211,7 @@ select {
   border: 1.6px solid var(--border-color);
   font-size: 14px;
   font-weight: 400;
-  color: #333;
+  color: var(--text-color-3);
   border-radius: 0.45rem;
   padding: 0 11px;
   height: 36px;
@@ -267,7 +267,7 @@ form .fields .tabs__content {
   margin-top: 0.5rem;
   //margin-bottom: 0rem;
   position: sticky;
-  background-color: #fff;
+  background-color: var(--white);
   width: 100%;
   height: 14%;
 
@@ -334,7 +334,7 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
   font-size: 24px;
   background: none;
   background-color: none;
-  color: #fd7f7f;
+  color: var(--red);
   border-radius: 5px;
   outline: none;
   font-weight: 600;
@@ -342,7 +342,7 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
   margin-bottom: 0.25rem;
 }
 .delbut:hover {
-  color: #ff0000;
+  color: var(--red-focus);
 }
 
 .footer {
@@ -350,20 +350,6 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
   justify-content: space-between;
   align-items: center;
   padding: 30px 0px 0px;
-
-  .btn-submit {
-    height: 45px;
-    width: 100px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    margin-bottom: 2px;
-    margin-left: 2px;
-  }
-
-  .btn-submit:hover {
-    background-color: var(--primary-color-light);
-    color: var(--white);
-  }
 
   .btn-logout {
     height: 45px;
@@ -377,6 +363,37 @@ form .fields .tabs__radio:checked + .tabs__label + .tabs__content {
 
   .btn-logout:hover {
     background-color: var(--grey-2);
+  }
+
+  .btn-grpright {
+
+    .btn-skip {
+      height: 45px;
+      width: 120px;
+      background-color: transparent;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      margin-right: .5rem;
+    }
+  
+    .btn-skip:hover {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-submit {
+      height: 45px;
+      width: 100px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      margin-bottom: 2px;
+      margin-left: 2px;
+    }
+  
+    .btn-submit:hover {
+      background-color: var(--primary-color-light);
+      color: var(--white);
+    }
   }
 }
 
