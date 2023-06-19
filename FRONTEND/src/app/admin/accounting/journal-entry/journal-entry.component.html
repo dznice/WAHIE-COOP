@@ -45,10 +45,10 @@
           <thead>
             <th class="journallabel22">No.</th>
             <th class="journallabel2">Name</th>
-            <th class="journallabel2">Account</th>
             <th class="journallabel2">Description</th>
-            <th class="journallabel2">Debits</th>
-            <th class="journallabel2">Credits</th>
+            <th class="journallabel2">Account</th>
+            <th class="journallabel2">Debit</th>
+            <th class="journallabel2">Credit</th>
           </thead>
 
           <tbody>
@@ -61,6 +61,10 @@
                     {{ member.id }} {{ member.first_name }}{{ member.middle_name }} {{ member.last_name }}
                   </ng-option>
                 </ng-select>
+              </td>
+
+              <td class="beneinput">
+                <input type="text" formControlName="description" />
               </td>
 
               <td class="beneinput accounts">
@@ -78,10 +82,6 @@
                     {{ libJournal.journal_type }}
                   </ng-option>
                 </ng-select>
-              </td>
-
-              <td class="beneinput">
-                <input type="text" formControlName="description" />
               </td>
 
               <td class="beneinput">

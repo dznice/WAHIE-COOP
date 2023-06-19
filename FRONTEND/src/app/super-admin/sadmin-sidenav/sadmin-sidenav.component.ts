@@ -224,6 +224,13 @@ export class SadminSidenavComponent implements OnInit {
         .post('http://127.0.0.1:8000/api/users/navChangePass', this.passForm)
         .subscribe(
           (res: any) => {
+            this.toast.success({
+              detail: 'Password successfully changed',
+              summary: 'Please continue your work',
+              duration: 3000,
+              sticky: false,
+              position: 'tr',
+            });
             console.log(res);
           },
           (error) => {

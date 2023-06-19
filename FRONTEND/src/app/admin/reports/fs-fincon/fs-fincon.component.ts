@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
+import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
 import * as ExcelJS from 'exceljs';
 // import { jsPDF } from "jspdf";
@@ -77,30 +77,52 @@ export class FsFinconComponent implements OnInit {
   // public convertToPDF(size:any) {
   //   // Get the HTML element to convert to PDF
   //   const element = document.getElementById('contentToConvert');
+  // public convertToPDF(size:any) {
+  //   // Get the HTML element to convert to PDF
+  //   const element = document.getElementById('contentToConvert');
   
+  //   if (element) {
+  //     // Create a new jsPDF instance
+  //     const doc = new jspdf('p', 'pt', size);
   //   if (element) {
   //     // Create a new jsPDF instance
   //     const doc = new jspdf('p', 'pt', size);
       
   //     // Set the scale for the html2canvas conversion
   //     const scale = 3; // Adjust the scale value as needed
+  //     // Set the scale for the html2canvas conversion
+  //     const scale = 3; // Adjust the scale value as needed
 
   //     //doc.addImage(imgLogo, 'PNG', 5, 5, 40, 40);
+  //     //doc.addImage(imgLogo, 'PNG', 5, 5, 40, 40);
   
+  //     // Convert the HTML element to an image using html2canvas with the specified scale
+  //       html2canvas(element, { scale: scale }).then((canvas) => {
+  //       // Get the image data URL
   //     // Convert the HTML element to an image using html2canvas with the specified scale
   //       html2canvas(element, { scale: scale }).then((canvas) => {
   //       // Get the image data URL
         
   //       const imgData = canvas.toDataURL('image/png');
   //       // Add the image to the PDF
+  //       const imgData = canvas.toDataURL('image/png');
+  //       // Add the image to the PDF
         
+  //       doc.addImage(imgData, 'PNG', 10, 0, 610, 1000);
   //       doc.addImage(imgData, 'PNG', 10, 0, 610, 1000);
 
   //       // Save the PDF
   //       doc.save('sample.pdf');
   //       doc.text('My PDF Document', 10, 10);
   //     })
+  //       // Save the PDF
+  //       doc.save('sample.pdf');
+  //       doc.text('My PDF Document', 10, 10);
+  //     })
       
+  //     ;
+  //   }
+  // }
   //     ;
   //   }
   // }
@@ -1060,7 +1082,7 @@ html2pdf().from(element).set(opt).save();
   getLogo(){
     this.id = localStorage.getItem('userData')
     this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
-      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      this.preLogo=  'http://127.0.0.1:8000/storage/image/'+ res
     });
   }
   
@@ -1082,6 +1104,7 @@ html2pdf().from(element).set(opt).save();
       this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
         this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
         this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+    
       }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});

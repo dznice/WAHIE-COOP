@@ -34,8 +34,8 @@
                 <button class="btn btn-close" type="button" (click)="showDel(2)">
                   Close
                 </button>
-                <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button>
-                <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
+                <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button> -->
+                <!-- <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
                 <button (click)="download('a4')" class="btn btn-save" >A4</button>
                 <button (click)="download('legal')" class="btn btn-save" >Legal</button>
               </div>
@@ -103,9 +103,9 @@
                 <td class="totass">Total Assets:</td>
 
                 <td class="total-cred" *ngIf="assets.length > 0">{{ passets.length > 0 ? (passets[passets.length - 1].total_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : ''  }}</td>
                 <td class="total-deb" *ngIf="assets.length > 0">{{ assets.length > 0 ? (assets[assets.length - 1].total_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
               </tr>
               <br />
             </ng-container>
@@ -135,9 +135,9 @@
               <tr class="totals">
                 <td class="totass">Total of Other Current Assets:</td>
                 <td class="total-cred" *ngIf="otherAssets.length > 0">{{ potherAssets.length > 0 ? (potherAssets[potherAssets.length - 1].total_other_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : ''  }}</td>
                 <td class="total-deb" *ngIf="otherAssets.length > 0">{{ otherAssets.length > 0 ? (otherAssets[otherAssets.length - 1].total_other_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens ) : '' }}</td>
               </tr>
               <br />
             </ng-container>
@@ -166,9 +166,9 @@
               <tr class="totals">
                 <td class="totass">Total of Non-Current Assets:</td>
                 <td class="total-cred" *ngIf="nonAssets.length > 0">{{ pnonAssets.length > 0 ? (pnonAssets[pnonAssets.length - 1].total_non_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
                 <td class="total-deb" *ngIf="nonAssets.length > 0">{{ nonAssets.length > 0 ? (nonAssets[nonAssets.length - 1].total_non_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
               </tr>
 
             </ng-container>
@@ -205,9 +205,9 @@
               <tr class="totals">
                 <td class="totass">Total of Current Liabilities:</td>
                 <td class="total-cred" *ngIf="liabilities.length > 0">{{ pliabilities.length > 0 ? (pliabilities[pliabilities.length - 1].total_liability |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
                 <td class="total-deb" *ngIf="liabilities.length > 0">{{ liabilities.length > 0 ? (liabilities[liabilities.length - 1].total_liability |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
               </tr>
             </ng-container>
 
@@ -249,7 +249,7 @@
                     <ng-container *ngFor="let items of pequity">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens  }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -261,7 +261,7 @@
                 <td class="totass">Total of Equity:</td>
                 <td class="total-cred"></td>
                 <td class="total-deb" *ngIf="equity.length > 0">{{ equity.length > 0 ? (equity[equity.length - 1].total_equity |
-                  currency:'PHP':'symbol-narrow':'1.2-2') : '' }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
               </tr>
             </ng-container>
 
@@ -280,7 +280,7 @@
                     <ng-container *ngFor="let items of psscc">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -297,7 +297,7 @@
                     <ng-container *ngFor="let items of psrc">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -314,7 +314,7 @@
                     <ng-container *ngFor="let items of psrp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -331,7 +331,7 @@
                     <ng-container *ngFor="let items of ppscp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -348,7 +348,7 @@
                     <ng-container *ngFor="let items of ptscp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -365,7 +365,7 @@
                     <ng-container *ngFor="let items of pdscp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -382,7 +382,7 @@
                     <ng-container *ngFor="let items of puns">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -399,7 +399,7 @@
                     <ng-container *ngFor="let items of pnl">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -416,7 +416,7 @@
                     <ng-container *ngFor="let items of pdg">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens  }}
                       </ng-container>
                     </ng-container>
                   </td>

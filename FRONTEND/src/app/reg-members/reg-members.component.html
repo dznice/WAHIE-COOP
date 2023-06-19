@@ -10,7 +10,14 @@
     </div>
     <div class="inner-box">
       <div class="reg-wrap">
-        <form [formGroup]="registerForm" ngNativeValidate (ngSubmit)="regMember()" #memberRegistration="ngForm" *ngIf="isDisplayed" @slideright2>
+        <form
+          [formGroup]="registerForm"
+          ngNativeValidate
+          (ngSubmit)="regMember()"
+          #memberRegistration="ngForm"
+          *ngIf="isDisplayed"
+          @slideright2
+        >
           <div class="fullNamePage">
             <div class="info1" [@formState2]="info1State">
               <div class="whlogo">
@@ -32,55 +39,124 @@
 
               <div class="text_field1">
                 <div class="text-wrap">
-                  <input type="text" name="email" formControlName="email" id="reg-email" placeholder="Email" required [(ngModel)]="form.email"
-                    [(ngModel)]="emails" />
+                  <input
+                    type="text"
+                    name="email"
+                    formControlName="email"
+                    id="reg-email"
+                    placeholder="Email"
+                    required
+                    [(ngModel)]="form.email"
+                    [(ngModel)]="emails"
+                  />
                   <br />
                 </div>
                 <div class="text-wrap">
-                  <input formControlName="pass" [type]="changetype ? 'password' : 'text'" name="pass" id="reg-pass" placeholder="Password" required
-                  minlength="8" 
-                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@_-.$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" 
+                  <input
+                    formControlName="pass"
+                    [type]="changetype ? 'password' : 'text'"
+                    name="pass"
+                    id="reg-pass"
+                    placeholder="Password"
+                    required
+                    minlength="8"
+                    pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" 
                     title="Password must be at least 8 characters, one letter, one number and one special character:"
-                    [(ngModel)]="form.password" [(ngModel)]="passwords" />
-                  <span class="eye" (click)="viewpass()"><i [ngClass]="visible ? 'ti ti-eye-closed' : 'ti ti-eye'"></i></span><br />
+                    [(ngModel)]="form.password"
+                    [(ngModel)]="passwords"
+                  />
+                  <span class="eye" (click)="viewpass()"
+                    ><i
+                      [ngClass]="visible ? 'ti ti-eye-closed' : 'ti ti-eye'"
+                    ></i></span
+                  ><br />
                 </div>
 
                 <div>
-                  <strength-meter [value]="registerForm.value.pass" (measure)="onStrengthChange($event)"></strength-meter>
+                  <strength-meter
+                    [value]="registerForm.value.pass"
+                    (measure)="onStrengthChange($event)"
+                  ></strength-meter>
                 </div>
 
                 <div class="text-wrap">
-                  <input formControlName="cpass" [type]="cchangetype ? 'password' : 'text'" name="cpass" id="con-pass" placeholder="Confirm Password" required
-                    [(ngModel)]="form.confirm_pass" [(ngModel)]="cpasswords" />
-                  <span class="eye2" (click)="cviewpass()"><i [ngClass]="cvisible ? 'ti ti-eye-closed' : 'ti ti-eye'"></i></span>
+                  <input
+                    formControlName="cpass"
+                    [type]="cchangetype ? 'password' : 'text'"
+                    name="cpass"
+                    id="con-pass"
+                    placeholder="Confirm Password"
+                    required
+                    [(ngModel)]="form.confirm_pass"
+                    [(ngModel)]="cpasswords"
+                  />
+                  <span class="eye2" (click)="cviewpass()"
+                    ><i
+                      [ngClass]="cvisible ? 'ti ti-eye-closed' : 'ti ti-eye'"
+                    ></i
+                  ></span>
                 </div>
-                <div class="notMatch" *ngIf="
+                <div
+                  class="notMatch"
+                  *ngIf="
                     registerForm.get('cpass')!.touched &&
                     registerForm.get('cpass')!.invalid &&
                     registerForm.controls['cpass'].errors!['passwordMatch']
-                  ">
+                  "
+                >
                   <small> Password not match </small>
                 </div>
               </div>
-              <div *ngIf="emails !=='' && passwords !=='' && cpasswords !=='' && chkEnable.checked ">
-                <button class="submit" (click)="toggle()" [disabled]=" cpasswords !== passwords">
+              <div
+                *ngIf="
+                  emails !== '' &&
+                  passwords !== '' &&
+                  passwords !== '(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$' &&
+                  cpasswords !== '' &&
+                  chkEnable.checked
+                "
+              >
+                <button
+                  class="submit"
+                  (click)="toggle()"
+                  [disabled]="cpasswords !== passwords"
+                >
                   Next
                 </button>
               </div>
 
-              <div *ngIf="emails ==='' || passwords ==='' || cpasswords ==='' || !chkEnable.checked ">
-                <button class="submit">
-                  Next
-                </button>
+              <div
+                *ngIf="
+                  emails === '' ||
+                  passwords === '' ||
+                  cpasswords === '' ||
+                  !chkEnable.checked
+                "
+              >
+                <button class="submit">Next</button>
               </div>
               <div class="terms">
                 <!-- <span class="check" (click)="checkBox()"><i [ngClass]="checkvisible?'ti ti-square':'ti ti-square-check-filled'"></i></span>   -->
-                <input formControlName="chckbox" name="chckbox" class="check" id="cb1" type="checkbox" required [ngClass]="{
+                <input
+                  formControlName="chckbox"
+                  name="chckbox"
+                  class="check"
+                  id="cb1"
+                  type="checkbox"
+                  required
+                  [ngClass]="{
                     'is-invalid': submitted && frm['chckbox'].errors
-                  }" #chkEnable [(ngModel)]="isChecked" (change)="(submitted)" />
+                  }"
+                  #chkEnable
+                  [(ngModel)]="isChecked"
+                  (change)="(submitted)"
+                />
                 <label for="cb1"></label>
                 <p for="acceptTerms">
-                  I agree to the <a class="condition" (click)="showTerms(1)">Terms & Condition</a>
+                  I agree to the
+                  <a class="condition" (click)="showTerms(1)"
+                    >Terms & Condition</a
+                  >
                 </p>
               </div>
             </div>
@@ -97,50 +173,121 @@
 
               <div class="text_field2">
                 <div class="text-wrap">
-                  <input type="text" name="first_name" formControlName="first_name" id="reg-first-name" placeholder="First Name" required
-                    [(ngModel)]="form.first_name" />
+                  <input
+                    type="text"
+                    name="first_name"
+                    formControlName="first_name"
+                    id="reg-first-name"
+                    placeholder="First Name"
+                    required
+                    [(ngModel)]="form.first_name"
+                  />
                   <br />
                 </div>
 
                 <div class="text-wrap">
-                  <input type="text" name="middle_name" formControlName="middle_name" id="reg-middle_name" [(ngModel)]="form.middle_name"
-                    placeholder="Middle Name" />
+                  <input
+                    type="text"
+                    name="middle_name"
+                    formControlName="middle_name"
+                    id="reg-middle_name"
+                    [(ngModel)]="form.middle_name"
+                    placeholder="Middle Name"
+                  />
                 </div>
 
                 <div class="text-wrap" class="text-wrap2">
-                  <input class="mName" type="text" name="last_name" formControlName="last_name" id="reg_last_name" placeholder="Last Name" required
-                    [(ngModel)]="form.last_name" />
+                  <input
+                    class="mName"
+                    type="text"
+                    name="last_name"
+                    formControlName="last_name"
+                    id="reg_last_name"
+                    placeholder="Last Name"
+                    required
+                    [(ngModel)]="form.last_name"
+                  />
                   <br />
-                  <input class="nSuffix" type="text" name="suffix" id="reg-suffix" [(ngModel)]="form.suffix" placeholder="Suffix" /><br />
+                  <input
+                    class="nSuffix"
+                    type="text"
+                    name="suffix"
+                    id="reg-suffix"
+                    [(ngModel)]="form.suffix"
+                    placeholder="Suffix"
+                  /><br />
                 </div>
 
                 <div class="text-wrap">
-                  <ng-select [searchable]="false" [clearable]="false" class="selectGender" [(ngModel)]="form.gender" id="gender" name="gender"
-                    formControlName="gender" placeholder="Gender">
+                  <ng-select
+                    [searchable]="false"
+                    [clearable]="false"
+                    class="selectGender"
+                    [(ngModel)]="form.gender"
+                    id="gender"
+                    name="gender"
+                    formControlName="gender"
+                    placeholder="Gender"
+                  >
                     <ng-option *ngFor="let gender of genders" [value]="gender">
                       {{ gender }}
                     </ng-option>
                   </ng-select>
-                  <input class="dateOfBirth" type="text" max="{{ maxDate }}" name="birthdate" formControlName="birthdate" id="birthdate" required
-                    [(ngModel)]="form.birthdate" placeholder="Date of Birth" onfocus="this.type='date'" onblur="this.type='text'" /><br />
+                  <input
+                    class="dateOfBirth"
+                    type="text"
+                    max="{{ maxDate }}"
+                    name="birthdate"
+                    formControlName="birthdate"
+                    id="birthdate"
+                    required
+                    [(ngModel)]="form.birthdate"
+                    placeholder="Date of Birth"
+                    onfocus="this.type='date'"
+                    onblur="this.type='text'"
+                  /><br />
                 </div>
 
                 <div class="text-wrap">
-                  <input type="number" name="mobile_number" formControlName="mobile_number" id="mobile_number" placeholder="Mobile Number" required
-                    [(ngModel)]="form.mobile_number" />
+                  <input
+                    type="number"
+                    name="mobile_number"
+                    formControlName="mobile_number"
+                    id="mobile_number"
+                    placeholder="Mobile Number"
+                    required
+                    [(ngModel)]="form.mobile_number"
+                  />
                   <br />
                 </div>
 
                 <div class="text-wrap">
-                  <input type="text" name="company_name" formControlName="company_name" id="company_name" placeholder="Company Name" required
-                    [(ngModel)]="form.company_name" />
+                  <input
+                    type="text"
+                    name="company_name"
+                    formControlName="company_name"
+                    id="company_name"
+                    placeholder="Company Name"
+                    required
+                    [(ngModel)]="form.company_name"
+                  />
                   <br />
                 </div>
 
                 <div class="text-wrap">
-                  <ng-select [searchable]="false" [clearable]="false" class="selectDept" [(ngModel)]="form.department" formControlName="department"
-                    id="department" placeholder="Department">
-                    <ng-option *ngFor="let item of depts" [value]="item.department_name">
+                  <ng-select
+                    [searchable]="false"
+                    [clearable]="false"
+                    class="selectDept"
+                    [(ngModel)]="form.department"
+                    formControlName="department"
+                    id="department"
+                    placeholder="Department"
+                  >
+                    <ng-option
+                      *ngFor="let item of depts"
+                      [value]="item.department_name"
+                    >
                       {{ item.department_name }}
                     </ng-option>
                   </ng-select>
@@ -163,27 +310,36 @@
   <div class="modal-bg" *ngIf="termsModal === 1">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <span class="header-title">Terms and Conditions</span>
+        <span class="header-title">Privacy Statements</span>
       </div>
 
       <div class="modal-body">
         <ol>
           <li>
-            <h3>Terms of use</h3>
+            <h3>Introductions</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-              quidem doloribus cumque vero, culpa voluptates dolorum
-              reprehenderit nihil nisi odit necessitatibus voluptate
-              voluptatibus magni ducimus sed accusamus illo nobis veniam.
+              WAHffle respects your individual privacy and protects any personal
+              information that you share with us. We commit to secure the
+              individual’s right to privacy and ensure the trustworthiness of
+              processing of individual’s personal information.
+            </p>
+            <p>
+              WAHffle strives to comply with the Data Privacy Act of 2012 that is
+              designed to protect your privacy. We intend to adhere to the
+              principles set forth in this Privacy Statement and recognize your
+              need for appropriate protection and management of any personal
+              information. In other words, our goal is to provide protection for
+              your privacy regardless of what types of device or application to
+              access our Services. By using our Services, you consent to the
+              collection, storage, processing, transferring, disclosure, and
+              other usage of the Information described in this Privacy Statement
+              and Terms of Service Agreement.
             </p>
           </li>
           <li>
-            <h3>Intellectual property rights</h3>
+            <h3>Information Collection</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-              quidem doloribus cumque vero, culpa voluptates dolorum
-              reprehenderit nihil nisi odit necessitatibus voluptate
-              voluptatibus magni ducimus sed accusamus illo nobis veniam.
+              We may collect, store and transfer the following information:
             </p>
           </li>
           <li>
