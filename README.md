@@ -17,6 +17,7 @@ npm i ngx-ui-loader --legacy-peer-deps
 npm i exceljs --legacy-peer-deps
 npm i jspdf --legacy-peer-deps
 npm i html2canvas --legacy-peer-deps
+npm i html2pdf.js --legacy-peer-deps
 
 
 

@@ -201,6 +201,8 @@ html2pdf().from(element).set(opt).save();
       extension: 'png'
     });
 
+    
+
     excelSheet.addImage(imageId, 'A1:A4');
         
 
