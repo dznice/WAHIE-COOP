@@ -947,11 +947,15 @@ public function totaljourmem(Request $request)
             case 'financial assets':
             case 'biologicals assets':
                 $total_balance = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 $total_asset += $total_balance;
                 break;
             //Other Current Assets
             case 'other current assets':
                 $total_balance = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 $total_other_asset += $total_balance ;
                 break;
             //Non Current Assets
@@ -959,28 +963,38 @@ public function totaljourmem(Request $request)
             case 'biological assets':
             case 'intangible assets':
                 $total_balance = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 $total_non_asset += $total_balance ;
                 break;
 
             case 'inventories':
                 $total_balance = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 break;
         //Liabilities
             //CURRENT Liability
             case 'liabilities':
             case 'other current liabilities':
                 $total_balance = $total->total_credit_amount - $total->total_debit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 $total_liability += $total_balance;
                 break;
             //Non CURRENT Liability
             case 'non current liabilities':
             case 'other non-current liabilities':
                 $total_balance = $total->total_credit_amount - $total->total_debit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 $total_non_liability += $total_balance;
                 break;
         //Equity
         case 'equity':
             $total_balance = $total->total_credit_amount - $total->total_debit_amount;
+            $totalc = $total->total_credit_amount;
+            $totald = $total->total_debit_amount;
             $total_equity += $total_balance;
             break;
         
@@ -989,12 +1003,16 @@ public function totaljourmem(Request $request)
             case 'cost of goods sold':
             case 'cost of services':
                 $total_balance = $total->total_debit_amount - $total->total_credit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 $total_revenue += $total_balance;
                 break;
         //Expenses
             case 'expenses':
             case 'other items – subsidy/ gain (losses)':
                 $total_balance = $total->total_credit_amount - $total->total_debit_amount;
+                $totalc = $total->total_credit_amount;
+                $totald = $total->total_debit_amount;
                 $total_expenses += $total_balance;
                 break;
         }
