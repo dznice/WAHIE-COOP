@@ -291,6 +291,114 @@ header {
   }
 }
 
+  /* Delete Modal */
+  .del-modal {
+    position: fixed;
+    background: var(--modal-overlay);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+    .modal-wrapper {
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      -moz-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform 0.4s, top 0.4s;
+      background: var(--panel-color);
+      border-radius: 1rem;
+      max-width: 400px;
+      width: 100%;
+  
+      .modal-header {
+        padding: 30px 25px;
+        height: 60px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        .header-title {
+          font-weight: 600;
+          font-size: 20px;
+          color: var(--text-color-2);
+          margin-top: 0.15rem;
+        }
+  
+        .ti-x {
+          font-size: 20px;
+          color: var(--text-color-3);
+          cursor: pointer;
+          transition: all 0.2s ease;
+          padding: 4px;
+          margin-top: -3px;
+          margin-right: -6px;
+        }
+  
+        .ti-x:hover {
+          background-color: var(--grey-2);
+          border-radius: 100%;
+        }
+      }
+  
+      .modal-body {
+        padding: 20px 25px 20px;
+  
+        .text-bold {
+          font-size: 15px;
+          font-weight: 500;
+          color: var(--text-color-2);
+        }
+  
+        .text-muted {
+          opacity: 55%;
+          color: var(--text-color-2);
+        }
+      }
+  
+      .modal-footer {
+        padding: 18px 25px;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+  
+        .btn {
+          width: 100px;
+          height: 42px;
+          border-radius: 0.5rem;
+          font-size: 0.9rem;
+          text-align: center;
+          cursor: pointer;
+        }
+  
+        .btn-save {
+          background-color: var(--primary-color);
+          color: var(--white);
+          margin-left: 1rem;
+        }
+  
+        .btn-save:hover {
+          background-color: var(--primary-color-light);
+        }
+  
+        .btn-close {
+          background-color: transparent;
+          box-shadow: 0 0 0 1px var(--border-color);
+          color: var(--text-color-2);
+        }
+  
+        .btn-close:hover {
+          background-color: var(--grey-2);
+        }
+      }
+    }
+  }
+
 @page {
   size: letter;
 }

@@ -2,7 +2,7 @@ import { Component, Input , OnInit, OnChanges, SimpleChanges } from '@angular/co
 import { WahieService } from '../../../services/wahie.service';
 import { NgToastService } from 'ng-angular-popup';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
+import * as html2pdf from 'html2pdf.js';
 import * as ExcelJS from 'exceljs';
 
 @Component({
@@ -71,6 +71,25 @@ export class SlAccountsComponent implements OnChanges {
     this.oneYearAgo.setFullYear(this.oneYearAgo.getFullYear() - 1);
     // console.log(this.slData);
     // console.log(this.PastslData);
+  }
+
+  delModal = -1;
+  showDel(index: number) {
+    this.delModal = index;
+  }
+
+  download(size:any){
+    var element = document.getElementById('contentToConvert');
+var opt = {
+  margin:       0.2,
+  filename:     'output.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { scale: 3 },
+  jsPDF:        { unit: 'in', format: size, orientation: 'portrait' }
+};
+ 
+// New Promise-based usage:
+html2pdf().from(element).set(opt).save();
   }
 
   generateExcel(): void{

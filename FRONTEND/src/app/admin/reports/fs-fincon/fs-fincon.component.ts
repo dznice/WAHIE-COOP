@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { NgToastService } from 'ng-angular-popup';
 import * as ExcelJS from 'exceljs';
 // import { jsPDF } from "jspdf";
-import html2canvas from 'html2canvas';
-import jspdf from 'jspdf';
 //import html2canvas from 'html2canvas';
-import autoTable from 'jspdf-autotable';
+//import jspdf from 'jspdf';
+//import html2canvas from 'html2canvas';
+//import autoTable from 'jspdf-autotable';
 // import * as fs from 'fs';
 // import fetch from 'node-fetch';
+import * as html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-fs-fincon',
@@ -60,7 +61,7 @@ export class FsFinconComponent implements OnInit {
   pdg : any[];
 
   constructor(private http:HttpClient, 
-    private toast:NgToastService) {}
+    private toast:NgToastService,) {}
     
   ngOnInit(): void {
     this.getLogo();
@@ -73,98 +74,109 @@ export class FsFinconComponent implements OnInit {
     console.log(this.maxDate)
   }
 
-  public convertToPDF(size:any) {
-    // Get the HTML element to convert to PDF
-    const element = document.getElementById('contentToConvert');
+  // public convertToPDF(size:any) {
+  //   // Get the HTML element to convert to PDF
+  //   const element = document.getElementById('contentToConvert');
   
-    if (element) {
-      // Create a new jsPDF instance
-      const doc = new jspdf('p', 'pt', size);
+  //   if (element) {
+  //     // Create a new jsPDF instance
+  //     const doc = new jspdf('p', 'pt', size);
       
-      // Set the scale for the html2canvas conversion
-      const scale = 3; // Adjust the scale value as needed
+  //     // Set the scale for the html2canvas conversion
+  //     const scale = 3; // Adjust the scale value as needed
 
-      //doc.addImage(imgLogo, 'PNG', 5, 5, 40, 40);
+  //     //doc.addImage(imgLogo, 'PNG', 5, 5, 40, 40);
   
-      // Convert the HTML element to an image using html2canvas with the specified scale
-        html2canvas(element, { scale: scale }).then((canvas) => {
-        // Get the image data URL
+  //     // Convert the HTML element to an image using html2canvas with the specified scale
+  //       html2canvas(element, { scale: scale }).then((canvas) => {
+  //       // Get the image data URL
         
-        const imgData = canvas.toDataURL('image/png');
-        // Add the image to the PDF
+  //       const imgData = canvas.toDataURL('image/png');
+  //       // Add the image to the PDF
         
-        doc.addImage(imgData, 'PNG', 10, 0, 610, 1000);
+  //       doc.addImage(imgData, 'PNG', 10, 0, 610, 1000);
 
-        // Save the PDF
-        doc.save('sample.pdf');
-        doc.text('My PDF Document', 10, 10);
-      })
+  //       // Save the PDF
+  //       doc.save('sample.pdf');
+  //       doc.text('My PDF Document', 10, 10);
+  //     })
       
-      ;
-    }
-  }
+  //     ;
+  //   }
+  // }
 
   delModal = -1;
   showDel(index: number) {
     this.delModal = index;
   }
 
-  generatePDF() {
-    // Create a new jsPDF instance
-    const doc = new jspdf();
-  
-    // Set the font size and style
-    doc.setFontSize(16);
-  
-    // Add a title to the first page
-    doc.text('My PDF Document', 10, 10);
-  
-    // Set the font size and style for regular text
-    doc.setFontSize(12);
-  
-    // Add paragraphs of text to the first page
-    doc.text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 10, 30);
-    doc.text('Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.', 10, 45);
-    
-  
-    // Add an image to the second page
-    //const imgData = 'path/to/image.png';
-    doc.addPage();
-    doc.text('Page 2', 10, 10);
-    //doc.addImage(imgData, 'PNG', 10, 30, 100, 0);
-  
-    // Add a table to the third page
-    doc.addPage();
-    doc.text('Page 3', 10, 10);
-  
-    // const tableData = [
-    //   ['Name', 'Age', 'Country'],
-    //   ['John Doe', '30', 'USA'],
-    //   ['Jane Smith', '25', 'Canada'],
-    //   ['Robert Johnson', '35', 'UK']
-    // ];
-  
-    // // doc.autoTable({
-    // //   startY: 30,
-    // //   head: [tableData[0]],
-    // //   body: tableData.slice(1)
-    // // });
-
-    autoTable(doc, {
-      head: [['Name', 'Email', 'Country']],
-      body: [
-        ['David', 'david@example.com', 'Sweden'],
-        ['Castille', 'castille@example.com', 'Spain'],
-        // ...
-      ],
-    })
-  
-    // Save the PDF
-    doc.save('sample.pdf');
+  download(size:any){
+    var element = document.getElementById('contentToConvert');
+var opt = {
+  margin:       0,
+  filename:     'output.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { scale: 3 },
+  jsPDF:        { unit: 'in', format: size, orientation: 'portrait' }
+};
+ 
+// New Promise-based usage:
+html2pdf().from(element).set(opt).save();
   }
 
+  // generatePDF() {
+  //   // Create a new jsPDF instance
+  //   const doc = new jspdf();
+  
+  //   // Set the font size and style
+  //   doc.setFontSize(16);
+  
+  //   // Add a title to the first page
+  //   doc.text('My PDF Document', 10, 10);
+  
+  //   // Set the font size and style for regular text
+  //   doc.setFontSize(12);
+  
+  //   // Add paragraphs of text to the first page
+  //   doc.text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 10, 30);
+  //   doc.text('Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.', 10, 45);
+    
+  
+  //   // Add an image to the second page
+  //   //const imgData = 'path/to/image.png';
+  //   doc.addPage();
+  //   doc.text('Page 2', 10, 10);
+  //   //doc.addImage(imgData, 'PNG', 10, 30, 100, 0);
+  
+  //   // Add a table to the third page
+  //   doc.addPage();
+  //   doc.text('Page 3', 10, 10);
+  
+  //   // const tableData = [
+  //   //   ['Name', 'Age', 'Country'],
+  //   //   ['John Doe', '30', 'USA'],
+  //   //   ['Jane Smith', '25', 'Canada'],
+  //   //   ['Robert Johnson', '35', 'UK']
+  //   // ];
+  
+  //   // // doc.autoTable({
+  //   // //   startY: 30,
+  //   // //   head: [tableData[0]],
+  //   // //   body: tableData.slice(1)
+  //   // // });
 
-
+  //   autoTable(doc, {
+  //     head: [['Name', 'Email', 'Country']],
+  //     body: [
+  //       ['David', 'david@example.com', 'Sweden'],
+  //       ['Castille', 'castille@example.com', 'Spain'],
+  //       // ...
+  //     ],
+  //   })
+  
+  //   // Save the PDF
+  //   doc.save('sample.pdf');
+  // }
 
   generateExcel(): void{
     // Create a new spreadsheet:
@@ -186,7 +198,7 @@ export class FsFinconComponent implements OnInit {
 
     const imageId = spreadSheet.addImage({
       buffer: this.preLogo,
-      extension: 'jpeg'
+      extension: 'png'
     });
 
     excelSheet.addImage(imageId, 'A1:A4');
@@ -548,13 +560,13 @@ export class FsFinconComponent implements OnInit {
 
   // exportAsPdf: ExportAsConfig = {
   //   type: 'pdf',
-  //   elementIdOrContent: 'fsFincon',
+  //   elementIdOrContent: 'contentToConvert',
   //   options: {
   //     image: { type: 'jpeg', quality: 1 },
   //     html2canvas:  { scale: 1},
   //     margin:  [2, 2, 2, 2],
   //     fontSize: 1,
-  //     //pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+  //     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
   //     jsPDF: {
   //       orientation: 'portrait',
   //       format: 'letter',

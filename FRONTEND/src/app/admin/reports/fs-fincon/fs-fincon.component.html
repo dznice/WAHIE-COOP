@@ -9,7 +9,7 @@
 
   <div class="print">
     <div class="save"> Save report as:
-    </div>
+    </div> 
     <div class="PDF"> 
         <button (click)="showDel(1)"  class="ti ti-file-text PDF-icon" ></button>
         <button (click)="generateExcel()" class="ti ti-file-spreadsheet excel-icon"></button>
@@ -34,8 +34,10 @@
                 <button class="btn btn-close" type="button" (click)="showDel(2)">
                   Close
                 </button>
-                <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button>
-                <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button>
+                <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button>
+                <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
+                <button (click)="download('a4')" class="btn btn-save" >A4</button>
+                <button (click)="download('legal')" class="btn btn-save" >Legal</button>
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgToastService } from 'ng-angular-popup';
 import * as ExcelJS from 'exceljs';
+import * as html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-fs-op',
@@ -34,6 +35,25 @@ export class FsOpComponent implements OnInit {
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
+  }
+
+  delModal = -1;
+  showDel(index: number) {
+    this.delModal = index;
+  }
+
+  download(size:any){
+    var element = document.getElementById('contentToConvert');
+var opt = {
+  margin:       0,
+  filename:     'output.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { scale: 3 },
+  jsPDF:        { unit: 'in', format: size, orientation: 'portrait' }
+};
+ 
+// New Promise-based usage:
+html2pdf().from(element).set(opt).save();
   }
 
   generateExcel(): void{

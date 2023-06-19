@@ -5,15 +5,43 @@
     <div class="save"> Save report as:
     </div>
     <div class="PDF"> 
-        <button  class="ti ti-file-text PDF-icon" ></button>
+        <button (click)="showDel(1)" class="ti ti-file-text PDF-icon" ></button>
         <button (click)="generateExcel()" class="ti ti-file-spreadsheet excel-icon"></button>
         
-        
     </div>
+
+    <section>
+      <div>
+        <div class="del-modal" *ngIf="delModal === 1">
+          <div class="modal-wrapper">
+            <div class="modal-header">
+              <span class="header-title">Select Size:</span>
+              <i class="ti ti-x" (click)="showDel(2)"></i>
+            </div>
+
+            <div class="modal-body">
+              <span class="text-bold">Choose A Paper Size?</span>
+              <br>
+              <span class="text-muted">This cannot be undone.</span>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-close" type="button" (click)="showDel(2)">
+                Close
+              </button>
+              <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button>
+              <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
+              <button (click)="download('a4')" class="btn btn-save" >A4</button>
+              <button (click)="download('legal')" class="btn btn-save" >Legal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 </div>
 
 
-<section class="main-section" id="reportContent">
+<section class="main-section" id="contentToConvert">
   <header>
     <div class="container">
       <div class="logo">
