@@ -1,7 +1,6 @@
 import{ Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray,FormGroup } from '@angular/forms';
 import { WahieService } from '../../../services/wahie.service';
-import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
 
 @Component({
@@ -17,44 +16,10 @@ export class GenerateLedgerComponent {
   pastTableData: any[];
   constructor(
     private builder:FormBuilder, 
-    private wahieService:WahieService, 
-    private exportAsService: ExportAsService, 
+    private wahieService:WahieService,  
     private toast: NgToastService
   ){
     //this.tableData = [];
-  }
-
-  exportAsPdf: ExportAsConfig = {
-    type: 'pdf',
-    elementIdOrContent: 'trialFile',
-    options: {
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas:  { scale: 3},
-      margin:  [5, 2, 5, 2],
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-      jsPDF: {
-        orientation: 'portrait',
-        format: 'letter',
-        precision: 16
-      }
-    }
-  }
-
-  exportAsExcel: ExportAsConfig = {
-    type: 'xlsx',
-    elementIdOrContent: 'trialFile'
-  }
-
-  exportPDF() {
-    this.exportAsService.save(this.exportAsPdf, 'Reports').subscribe(() => {
-      // save started
-    });
-  }
-
-  exportEXCEL() {
-    this.exportAsService.save(this.exportAsExcel, 'Reports').subscribe(() => {
-      // save started
-    });
   }
   
   ngOnInit(): void {

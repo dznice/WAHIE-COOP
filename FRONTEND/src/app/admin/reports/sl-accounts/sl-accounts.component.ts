@@ -3,6 +3,8 @@ import { WahieService } from '../../../services/wahie.service';
 import { NgToastService } from 'ng-angular-popup';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import * as ExcelJS from 'exceljs';
+
 @Component({
   selector: 'app-sl-accounts',
   templateUrl: './sl-accounts.component.html',
@@ -69,6 +71,232 @@ export class SlAccountsComponent implements OnChanges {
     this.oneYearAgo.setFullYear(this.oneYearAgo.getFullYear() - 1);
     // console.log(this.slData);
     // console.log(this.PastslData);
+  }
+
+  generateExcel(): void{
+    // Create a new spreadsheet:
+      const spreadSheet = new ExcelJS.Workbook();
+      spreadSheet.creator = 'WAH-COOP';
+      spreadSheet.lastModifiedBy = 'Pogi';
+      spreadSheet.created = new Date();
+      spreadSheet.modified = new Date();
+
+    // Add a sheet
+    const excelSheet = spreadSheet.addWorksheet('Subsidiary Ledger');
+
+        excelSheet.mergeCells(`A1:A4`);
+        excelSheet.getCell('A1').value = 'Logo Here'
+        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
+        excelSheet.getCell('A1').font = { size: 15, bold: true };
+        excelSheet.getCell('A1').border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
+
+        const imageId = spreadSheet.addImage({
+          buffer: this.preLogo,
+          extension: 'png'
+        });
+        excelSheet.addImage(imageId, 'A1:A4');
+        
+        excelSheet.getColumn('A').width = 12;
+        excelSheet.getColumn('B').width = 30;
+        excelSheet.getColumn('C').width = 16;
+        excelSheet.getColumn('D').width = 16;
+        excelSheet.getColumn('E').width = 16;
+
+        excelSheet.mergeCells(`B1:E1`);
+        excelSheet.getCell('B1').value = 'Provincial Employees Credit Cooperative';
+        excelSheet.getCell('B1').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B1').font = { size: 12 };
+        excelSheet.getCell('B1').border = {
+          top: { style: 'thin' },
+          right: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B2:E2`);
+        excelSheet.getCell('B2').value = 'PCEDO Office, Old IBP Bldg., Rotary Lane, San Vicente, Tarlac City';
+        excelSheet.getCell('B2').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B2').font = { size: 12 };
+        excelSheet.getCell('B2').border = {
+          right: { style: 'thin' }
+        };
+        
+        if(this.formData.account!=''){
+          excelSheet.mergeCells(`B3:E3`);
+          excelSheet.getCell('B3').value = 'Subsidiary Ledger for ' + this.accInfos.journal_name;
+          excelSheet.getCell('B3').alignment = { horizontal: 'center'};
+          excelSheet.getCell('B3').font = { size: 12, bold: true};
+          excelSheet.getCell('B3').border = {
+            right: { style: 'thin' }
+          };
+        }
+
+        if(this.formData.member!='' && this.formData.account==''){
+          excelSheet.mergeCells(`B3:E3`);
+          excelSheet.getCell('B3').value = 'Subsidiary Ledger for ' + this.memInfos.first_name + ' ' + this.memInfos.middle_name + ' ' + this.memInfos.last_name;
+          excelSheet.getCell('B3').alignment = { horizontal: 'center'};
+          excelSheet.getCell('B3').font = { size: 12, bold: true};
+          excelSheet.getCell('B3').border = {
+            right: { style: 'thin' }
+          };
+        }
+
+        if(this.formData.member=='' && this.formData.account==''){
+          excelSheet.mergeCells(`B3:E3`);
+          excelSheet.getCell('B3').value = 'Subsidiary Ledger for All Accounts';
+          excelSheet.getCell('B3').alignment = { horizontal: 'center'};
+          excelSheet.getCell('B3').font = { size: 12, bold: true};
+          excelSheet.getCell('B3').border = {
+            right: { style: 'thin' }
+          };
+        }
+        
+        excelSheet.mergeCells(`B4:E4`);
+        excelSheet.getCell('B4').value = 'As of ' + this.maxDate;
+        excelSheet.getCell('B4').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B4').font = { size: 12 };
+        excelSheet.getCell('B4').border = {
+          right: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
+
+        if(this.formData.startDate!='' && this.formData.endDate!=''){
+          excelSheet.mergeCells(`B5:E5`);
+          excelSheet.getCell('B5').value = 'This report based from ' + this.formData.startDate + ' to '+ this.formData.endDate ;
+          excelSheet.getCell('B5').alignment = { horizontal: 'center'};
+          excelSheet.getCell('B5').font = { size: 10 };
+          excelSheet.getCell('B5').border = {
+            right: { style: 'thin' },
+            bottom: { style: 'thin' }
+          };
+
+          excelSheet.mergeCells(`B6:E6`);
+          excelSheet.getCell('B6').value = '';
+        }else{
+
+          excelSheet.mergeCells(`B5:E5`);
+          excelSheet.getCell('B5').value = '';
+        }
+
+        
+        // Create the headers
+        const reportHeaders = ['','Particulars', '' , 'Payment this '+this.maxDate, 'Current Balance of '+this.maxDate ];
+        this.pledgers.forEach((data, index) =>{
+          console.log(index)
+        if(index === this.pledgers.length - 1){
+            reportHeaders[2] = 'Starting Balance of '+data.startingBalanceYear;
+          }
+        });
+        const reportHeaderRow = excelSheet.addRow(reportHeaders);
+        const addedRow = excelSheet.getRow(excelSheet.rowCount);
+        addedRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        reportHeaderRow.font = { bold: true, size: 12};
+        reportHeaderRow.eachCell((cell) => {
+          cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
+        });
+
+        this.ledgers.forEach(data =>{
+          const list = [''];
+          this.brokenledgers.forEach(data1=>{
+            if(data1.result.total_balance > 0){
+              if(data.result.journal_name === data1.result.journal_name){
+                list[1]= 'Transaction #'+data1.result.transactNumber+ ', '+data1.result.transactDate;
+                this.brokenledgers.forEach(data2=>{
+                  if(data1.result.transactNumber === data2.result.transactNumber){
+                    if(data2.result.total_balance > 0){
+                      list[2]=data2.result.total_balance;
+                    }
+                  }
+                });
+              }
+              list[3]=data1.examplebroken;
+              list[4]=data1.result.total_balance;
+            }
+            excelSheet.addRow(list);
+          });
+          const empty = ['','','','',''];
+          const emptyRow = excelSheet.addRow(empty);
+          const addedRow = excelSheet.getRow(excelSheet.rowCount);
+          addedRow.eachCell((cell) => {
+            cell.border = {
+              top: { style: 'thin' },
+              bottom: { style: 'thin' },
+            };
+          });
+
+          const empty2 = [''];
+          const emptyRow1 = excelSheet.addRow(empty2);
+
+          const res=['', data.result.name ? data.result.name : data.result.journal_name,
+                      '', data.example, data.result.total_balance];
+          this.pledgers.forEach(data4=>{
+            if(data.result.journId === data4.result.journId){
+              res[2]=data4.result.total_balance;
+            }
+          });
+          excelSheet.addRow(res);
+          const added1Row = excelSheet.getRow(excelSheet.rowCount);
+          added1Row.eachCell((cell) => {
+            cell.border = {
+              top: { style: 'thin' },
+              bottom: { style: 'thin' },
+            };
+          });
+        });
+
+        const noteRow = ['Notes:','','','',''];
+        excelSheet.addRow(noteRow);
+        const added1Row = excelSheet.getRow(excelSheet.rowCount);
+          added1Row.eachCell((cell) => {
+            cell.border = {
+              bottom: { style: 'thin' },
+            };
+          });
+
+        this.notes.forEach((data, index) =>{
+          const list = ['', this.notes[index] ,'','',''];
+          excelSheet.addRow(list);
+          
+        });
+
+        const emptyRow = ['','','','',''];
+        excelSheet.addRow(emptyRow);
+        const added2Row = excelSheet.getRow(excelSheet.rowCount);
+          added2Row.eachCell((cell) => {
+            cell.border = {
+              top: { style: 'thin' },
+            };
+          });
+
+        const empty = [''];
+        const empty3Row = excelSheet.addRow(empty);
+
+        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate, ''];
+        const generatedRow = excelSheet.addRow(generated);
+        const addedgRow = excelSheet.getRow(excelSheet.rowCount);
+        addedgRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        generatedRow.font = { size: 11, italic: true };
+
+        spreadSheet.xlsx.writeBuffer().then(buffer => {
+          const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Subsidiary Ledger.xlsx';
+          link.click();
+        });  
   }
 
   showLibJournalInfo(accID:any): void{
@@ -174,7 +402,6 @@ export class SlAccountsComponent implements OnChanges {
       upload.onload = (event:any)=>(
         this.preLogo = event.target.result
 
-      
       );   
       var myFormData = new FormData();
       this.id = localStorage.getItem('userData')

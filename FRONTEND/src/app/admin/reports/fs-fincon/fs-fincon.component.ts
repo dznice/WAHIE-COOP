@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
+//import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
 import * as ExcelJS from 'exceljs';
+// import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
+//import html2canvas from 'html2canvas';
+import autoTable from 'jspdf-autotable';
+// import * as fs from 'fs';
+// import fetch from 'node-fetch';
 
 @Component({
   selector: 'app-fs-fincon',
@@ -52,9 +59,7 @@ export class FsFinconComponent implements OnInit {
   pnl : any[];
   pdg : any[];
 
-
   constructor(private http:HttpClient, 
-    private exportAsService: ExportAsService, 
     private toast:NgToastService) {}
     
   ngOnInit(): void {
@@ -68,6 +73,99 @@ export class FsFinconComponent implements OnInit {
     console.log(this.maxDate)
   }
 
+  public convertToPDF(size:any) {
+    // Get the HTML element to convert to PDF
+    const element = document.getElementById('contentToConvert');
+  
+    if (element) {
+      // Create a new jsPDF instance
+      const doc = new jspdf('p', 'pt', size);
+      
+      // Set the scale for the html2canvas conversion
+      const scale = 3; // Adjust the scale value as needed
+
+      //doc.addImage(imgLogo, 'PNG', 5, 5, 40, 40);
+  
+      // Convert the HTML element to an image using html2canvas with the specified scale
+        html2canvas(element, { scale: scale }).then((canvas) => {
+        // Get the image data URL
+        
+        const imgData = canvas.toDataURL('image/png');
+        // Add the image to the PDF
+        
+        doc.addImage(imgData, 'PNG', 10, 0, 610, 1000);
+
+        // Save the PDF
+        doc.save('sample.pdf');
+        doc.text('My PDF Document', 10, 10);
+      })
+      
+      ;
+    }
+  }
+
+  delModal = -1;
+  showDel(index: number) {
+    this.delModal = index;
+  }
+
+  generatePDF() {
+    // Create a new jsPDF instance
+    const doc = new jspdf();
+  
+    // Set the font size and style
+    doc.setFontSize(16);
+  
+    // Add a title to the first page
+    doc.text('My PDF Document', 10, 10);
+  
+    // Set the font size and style for regular text
+    doc.setFontSize(12);
+  
+    // Add paragraphs of text to the first page
+    doc.text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 10, 30);
+    doc.text('Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.', 10, 45);
+    
+  
+    // Add an image to the second page
+    //const imgData = 'path/to/image.png';
+    doc.addPage();
+    doc.text('Page 2', 10, 10);
+    //doc.addImage(imgData, 'PNG', 10, 30, 100, 0);
+  
+    // Add a table to the third page
+    doc.addPage();
+    doc.text('Page 3', 10, 10);
+  
+    // const tableData = [
+    //   ['Name', 'Age', 'Country'],
+    //   ['John Doe', '30', 'USA'],
+    //   ['Jane Smith', '25', 'Canada'],
+    //   ['Robert Johnson', '35', 'UK']
+    // ];
+  
+    // // doc.autoTable({
+    // //   startY: 30,
+    // //   head: [tableData[0]],
+    // //   body: tableData.slice(1)
+    // // });
+
+    autoTable(doc, {
+      head: [['Name', 'Email', 'Country']],
+      body: [
+        ['David', 'david@example.com', 'Sweden'],
+        ['Castille', 'castille@example.com', 'Spain'],
+        // ...
+      ],
+    })
+  
+    // Save the PDF
+    doc.save('sample.pdf');
+  }
+
+
+
+
   generateExcel(): void{
     // Create a new spreadsheet:
       const spreadSheet = new ExcelJS.Workbook();
@@ -79,15 +177,20 @@ export class FsFinconComponent implements OnInit {
     // Add a sheet
     const excelSheet = spreadSheet.addWorksheet('Statement of Financial Condition');
 
-        excelSheet.mergeCells(`A1:A4`);
-        excelSheet.getCell('A1').value = 'Logo Here'
-        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
-        excelSheet.getCell('A1').font = { size: 15, bold: true };
-        excelSheet.getCell('A1').border = {
-          top: { style: 'thin' },
-          left: { style: 'thin' },
-          bottom: { style: 'thin' }
-        };
+    excelSheet.mergeCells(`A1:A4`);
+    excelSheet.getCell('A1').border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' }
+    };
+
+    const imageId = spreadSheet.addImage({
+      buffer: this.preLogo,
+      extension: 'jpeg'
+    });
+
+    excelSheet.addImage(imageId, 'A1:A4');
+        
 
         excelSheet.getColumn('A').width = 15;
         excelSheet.getColumn('B').width = 35;
@@ -371,12 +474,25 @@ export class FsFinconComponent implements OnInit {
 
           const rf  = ['','Reserve Fund', this.preserveFund, this.reserveFund];
           const rfRow = excelSheet.addRow(rf);
-          const cetf  = ['','Coop. Education & Training Fund', this.preserveFund, this.reserveFund];
+          const cetf  = ['','Coop. Education & Training Fund', this.pcetFund, this.cetFund];
           const cetfRow = excelSheet.addRow(cetf);
-          const cdf  = ['','Community Development Fund', this.preserveFund, this.reserveFund];
+          const cdf  = ['','Community Development Fund', this.pcdFund, this.cdFund];
           const cdfRow = excelSheet.addRow(cdf);
-          const of  = ['','Optional Fund', this.preserveFund, this.reserveFund];
+          const of  = ['','Optional Fund', this.poptionalFund, this.optionalFund];
           const ofRow = excelSheet.addRow(of);
+          const empty0 = [''];
+          const emptyRow0 = excelSheet.addRow(empty0);
+
+          const totalSF  = ['','Total Statutory Fund:', this.pstatutoryFund, this.statutoryFund];
+          const totalSFRow = excelSheet.addRow(totalSF);
+          const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+          totalSFRow.font = { bold: true, size: 12};
 
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
@@ -408,6 +524,18 @@ export class FsFinconComponent implements OnInit {
         const empty2 = [''];
         const empty2Row = excelSheet.addRow(empty2);
 
+        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate ];
+        const generatedRow = excelSheet.addRow(generated);
+        const addedgRow = excelSheet.getRow(excelSheet.rowCount);
+        addedgRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        generatedRow.font = { size: 11, italic: true };
+
+      
         spreadSheet.xlsx.writeBuffer().then(buffer => {
           const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
           const url = window.URL.createObjectURL(data);
@@ -415,32 +543,32 @@ export class FsFinconComponent implements OnInit {
           link.href = url;
           link.download = 'FS Statement of Financial Condition.xlsx';
           link.click();
-        });  
+        });   
   }
 
-  exportAsPdf: ExportAsConfig = {
-    type: 'pdf',
-    elementIdOrContent: 'fsFincon',
-    options: {
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas:  { scale: 1},
-      margin:  [2, 2, 2, 2],
-      fontSize: 1,
-      //pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-      jsPDF: {
-        orientation: 'portrait',
-        format: 'letter',
-        defaultFontSize: 1,
-        precision: 16
-      }
-    }
-  }
+  // exportAsPdf: ExportAsConfig = {
+  //   type: 'pdf',
+  //   elementIdOrContent: 'fsFincon',
+  //   options: {
+  //     image: { type: 'jpeg', quality: 1 },
+  //     html2canvas:  { scale: 1},
+  //     margin:  [2, 2, 2, 2],
+  //     fontSize: 1,
+  //     //pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+  //     jsPDF: {
+  //       orientation: 'portrait',
+  //       format: 'letter',
+  //       defaultFontSize: 1,
+  //       precision: 16
+  //     }
+  //   }
+  // }
 
-  exportPDF() {
-    this.exportAsService.save(this.exportAsPdf, 'FS-Financial-Condition').subscribe(() => {
-      // save started
-    });
-  }
+  // exportPDF() {
+  //   this.exportAsService.save(this.exportAsPdf, 'FS-Financial-Condition').subscribe(() => {
+  //     // save started
+  //   });
+  // }
 
   showSLedger(): void {
     this.http.get('http://127.0.0.1:8000/api/totaljour').subscribe(

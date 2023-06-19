@@ -6,20 +6,21 @@
     </div>
     <div class="PDF"> 
         <button  class="ti ti-file-text PDF-icon" ></button>
-        <button  class="ti ti-file-spreadsheet excel-icon"></button>
+        <button (click)="generateExcel()" class="ti ti-file-spreadsheet excel-icon"></button>
+        
         
     </div>
 </div>
 
 
-<section class="main-section">
+<section class="main-section" id="reportContent">
   <header>
     <div class="container">
       <div class="logo">
       <label class="-label" for="file">
       <span class="coop-name"><label for="logo">
         <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)" class="addimg"/>
-      <img [src]="preLogo"  height="10px" width="10px" i class="ti ti-camera" ></label></span>
+      <img [src]="preLogo"  height="10px" width="10px" i class="ti ti-camera" /></label></span>
     </label>
 
     
@@ -73,7 +74,7 @@
               </tr>
             </ng-container>
             
-              <tr>
+            <tr>
               <td>{{ item.result.name ? item.result.name : item.result.journal_name }}</td>
               <td class="td-bal">
                 <ng-container *ngFor="let items of pledgers">

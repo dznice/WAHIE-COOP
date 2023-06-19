@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
+import * as ExcelJS from 'exceljs';
 
 @Component({
   selector: 'app-trial-balance',
@@ -26,14 +26,17 @@ export class TrialBalanceComponent implements OnInit {
   equity : any[];
   revenue : any[];
   expenses : any[];
-  oneYearAgo: any;
   maxDate: any;
+  maxYear: any;
+  oneYearAgo: any;
+  lastYear: any;
 
-  constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService) {}
+  constructor(private http:HttpClient, private toast:NgToastService) {}
     
   ngOnInit(): void {
     this.formatDate();
     this.getLogo();
+    this.formatDate();
     this.showSLedger();
     this.showPastSLedger();
     this.processLedgerData();
@@ -44,39 +47,202 @@ export class TrialBalanceComponent implements OnInit {
     this.optionalFund = this.totalBalance * 0.07;
   }
 
-  exportAsPdf: ExportAsConfig = {
-    type: 'pdf',
-    elementIdOrContent: 'trialBalance',
-    options: {
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas:  { scale: 3},
-      margin:  [5, 2, 5, 2],
-      fontSize: 12,
-      //pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-      jsPDF: {
-        orientation: 'portrait',
-        format: 'letter',
-        defaultFontSize: 12,
-        //precision: 16
-      }
-    }
-  }
+  generateExcel(): void{
+    // Create a new spreadsheet:
+      const spreadSheet = new ExcelJS.Workbook();
+      spreadSheet.creator = 'WAH-COOP';
+      spreadSheet.lastModifiedBy = 'Pogi';
+      spreadSheet.created = new Date();
+      spreadSheet.modified = new Date();
 
-  exportAsExcel: ExportAsConfig = {
-    type: 'xlsx',
-    elementIdOrContent: 'trialBalance'
-  }
+    // Add a sheet
+    const excelSheet = spreadSheet.addWorksheet('Trial Balance');
 
-  exportPDF() {
-    this.exportAsService.save(this.exportAsPdf, 'Trial-Balance').subscribe(() => {
-      // save started
-    });
-  }
+        excelSheet.mergeCells(`A1:A4`);
+        excelSheet.getCell('A1').value = 'Logo Here'
+        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
+        excelSheet.getCell('A1').font = { size: 15, bold: true };
+        excelSheet.getCell('A1').border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
 
-  exportEXCEL() {
-    this.exportAsService.save(this.exportAsExcel, 'Trial-Balance').subscribe(() => {
-      // save started
-    });
+        const imageId = spreadSheet.addImage({
+          buffer: this.preLogo,
+          extension: 'png'
+        });
+        excelSheet.addImage(imageId, 'A1:A4');
+        
+
+        excelSheet.getColumn('A').width = 15;
+        excelSheet.getColumn('B').width = 35;
+        excelSheet.getColumn('C').width = 20;
+        excelSheet.getColumn('D').width = 20;
+
+        excelSheet.mergeCells(`B1:D1`);
+        excelSheet.getCell('B1').value = 'Provincial Employees Credit Cooperative';
+        excelSheet.getCell('B1').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B1').font = { size: 12 };
+        excelSheet.getCell('B1').border = {
+          top: { style: 'thin' },
+          right: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B2:D2`);
+        excelSheet.getCell('B2').value = 'PCEDO Office, Old IBP Bldg., Rotary Lane, San Vicente, Tarlac City';
+        excelSheet.getCell('B2').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B2').font = { size: 12 };
+        excelSheet.getCell('B2').border = {
+          right: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B3:D3`);
+        excelSheet.getCell('B3').value = 'Trial Balance';
+        excelSheet.getCell('B3').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B3').font = { size: 12, bold: true};
+        excelSheet.getCell('B3').border = {
+          right: { style: 'thin' }
+        };
+        
+        excelSheet.mergeCells(`B4:D4`);
+        excelSheet.getCell('B4').value = 'As of ' + this.maxDate;
+        excelSheet.getCell('B4').alignment = { horizontal: 'center'};
+        excelSheet.getCell('B4').font = { size: 12 };
+        excelSheet.getCell('B4').border = {
+          right: { style: 'thin' },
+          bottom: { style: 'thin' }
+        };
+
+        excelSheet.mergeCells(`B5:D5`);
+        excelSheet.getCell('B5').value = '';
+      
+        // Create the headers
+        const reportHeaders = ['','Accounts', 'Debit' , 'Credit'];
+        const reportHeaderRow = excelSheet.addRow(reportHeaders);
+        const addedRow = excelSheet.getRow(excelSheet.rowCount);
+        addedRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        reportHeaderRow.font = { bold: true, size: 12};
+        reportHeaderRow.eachCell((cell) => {
+          cell.alignment = { horizontal: 'center' };
+        });
+
+        this.assets.forEach(data =>{
+          const list = ['', data.result.journal_name, data.result.total_balance , ''];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+        this.otherAssets.forEach(data =>{
+          const list = ['', data.result.journal_name, data.result.total_balance , ''];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+        this.nonAssets.forEach(data =>{
+          const list = ['', data.result.journal_name, data.result.total_balance , ''];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+        this.liabilities.forEach(data =>{
+          const list = ['', data.result.journal_name, '', data.result.total_balance];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+        this.nonLiabilities.forEach(data =>{
+          const list = ['', data.result.journal_name, '', data.result.total_balance];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+        this.equity.forEach(data =>{
+          const list = ['', data.result.journal_name, '', data.result.total_balance];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+        const empty = [''];
+        const emptyRow = excelSheet.addRow(empty);
+
+        const rf  = ['','Reserve Fund', '', this.reserveFund];
+        const rfRow = excelSheet.addRow(rf);
+        const cetf  = ['','Coop. Education & Training Fund', '', this.cetFund];
+        const cetfRow = excelSheet.addRow(cetf);
+        const cdf  = ['','Community Development Fund', '', this.cdFund];
+        const cdfRow = excelSheet.addRow(cdf);
+        const of  = ['','Optional Fund', '', this.optionalFund];
+        const ofRow = excelSheet.addRow(of);
+        
+        this.revenue.forEach(data =>{
+          const list = ['', data.result.journal_name, data.result.total_balance, ''];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+        this.expenses.forEach(data =>{
+          const list = ['', data.result.journal_name, '', data.result.total_balance];
+          this.passets.forEach(data =>{
+            list[2] = data.result.total_balance;
+          });
+          excelSheet.addRow(list);
+        });
+
+  
+        const empty2Row = excelSheet.addRow(empty);
+
+        const total = ['','Total' , this.calculateAssetandRevenueTotalBalance(), this.calculateLiabilityEquityandExpensesTotalBalance()];
+        const totalRow = excelSheet.addRow(total);
+        const addedTRow = excelSheet.getRow(excelSheet.rowCount);
+            addedTRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+        totalRow.font = { bold: true, size: 12};
+
+        const empty3Row = excelSheet.addRow(empty);
+
+        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate ];
+        const generatedRow = excelSheet.addRow(generated);
+        const addedgRow = excelSheet.getRow(excelSheet.rowCount);
+        addedgRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        generatedRow.font = { size: 11, italic: true };
+
+        spreadSheet.xlsx.writeBuffer().then(buffer => {
+          const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const url = window.URL.createObjectURL(data);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Trial Balance.xlsx';
+          link.click();
+        });  
   }
   
   showSLedger(): void {
@@ -293,7 +459,7 @@ export class TrialBalanceComponent implements OnInit {
     }
   }
 
-  private formatDate() {
+  formatDate() {
     const d = new Date();
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
@@ -301,6 +467,8 @@ export class TrialBalanceComponent implements OnInit {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-');
+    this.maxYear = year;
+    this.lastYear = year - 1;
     return this.maxDate;
   }
 

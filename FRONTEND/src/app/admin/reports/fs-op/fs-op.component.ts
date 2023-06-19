@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
 import * as ExcelJS from 'exceljs';
 
@@ -22,7 +21,7 @@ export class FsOpComponent implements OnInit {
   lastYear: any;
   oneYearAgo: any;
 
-  constructor(private http:HttpClient, private exportAsService: ExportAsService, private toast:NgToastService) {}
+  constructor(private http:HttpClient, private toast:NgToastService) {}
     
 
   
@@ -57,6 +56,12 @@ export class FsOpComponent implements OnInit {
           left: { style: 'thin' },
           bottom: { style: 'thin' }
         };
+
+        const imageId = spreadSheet.addImage({
+          buffer: this.preLogo,
+          extension: 'png'
+        });
+        excelSheet.addImage(imageId, 'A1:A4');
 
         excelSheet.getColumn('A').width = 15;
         excelSheet.getColumn('B').width = 35;
@@ -105,22 +110,28 @@ export class FsOpComponent implements OnInit {
         
         // Add headers for employees with styling
         const reportHeaderRow = excelSheet.addRow(reportHeaders);
-        reportHeaderRow.font = { bold: true };
+        const addedRow = excelSheet.getRow(excelSheet.rowCount);
+        addedRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        reportHeaderRow.font = { bold: true, size: 12};
         reportHeaderRow.eachCell((cell) => {
           cell.alignment = { horizontal: 'center' };
         });
 
         if(this.revenue && this.revenue.length > 0){
-          const cAssets = ['','Current Revenue:'];
-          const cAssetsRow = excelSheet.addRow(cAssets);
-          cAssetsRow.font = { bold: true };
+          const accounts = ['','Current Revenue:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12 };
 
           this.revenue.forEach(data =>{
             const res = ['', data.result.journal_name, '' , data.result.total_balance];
             
             this.prevenue.forEach(data =>{
               res[2] = data.result.total_balance;
-              console.log(res[2]);
             });
             excelSheet.addRow(res);
           });
@@ -128,26 +139,27 @@ export class FsOpComponent implements OnInit {
           if(this.revenue.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const cAssetsTotal = ['','Total revenue:'];
-            if(this.revenue.length > 0 ? this.revenue[this.revenue.length - 1].total_revenue : ''){
-              cAssetsTotal[3] = this.revenue[this.revenue.length - 1].total_revenue;
-              
-            }
-            if(this.prevenue.length > 0 ? this.prevenue[this.prevenue.length - 1].total_revenue : ''){
-              cAssetsTotal[2] = this.prevenue[this.prevenue.length - 1].total_revenue;
-            
-            }
-            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
-            cAssetsTotalRow.font = { bold: true };
+            const accountsTotal = ['','Total revenue:', 
+                                  this.prevenue.length > 0 ? this.prevenue[this.prevenue.length - 1].total_revenue : '',
+                                  this.revenue.length > 0 ? this.revenue[this.revenue.length - 1].total_revenue : ''];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12};
           }
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
         };
 
         if(this.expense && this.expense.length > 0){
-          const cAssets = ['','Current Expense:'];
-          const cAssetsRow = excelSheet.addRow(cAssets);
-          cAssetsRow.font = { bold: true };
+          const accounts = ['','Current Expense:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12 };
 
           this.expense.forEach(data =>{
             const res = ['', data.result.journal_name, '' , data.result.total_balance];
@@ -162,22 +174,120 @@ export class FsOpComponent implements OnInit {
           if(this.expense.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const cAssetsTotal = ['','Total Expenses:'];
-            if(this.expense.length > 0 ? this.expense[this.expense.length - 1].total_expenses : ''){
-              cAssetsTotal[3] = this.expense[this.expense.length - 1].total_expenses;
-              
-            }
-            if(this.pexpense.length > 0 ? this.pexpense[this.pexpense.length - 1].total_expenses : ''){
-              cAssetsTotal[2] = this.pexpense[this.pexpense.length - 1].total_expenses;
-            
-            }
-            const cAssetsTotalRow = excelSheet.addRow(cAssetsTotal);
-            cAssetsTotalRow.font = { bold: true };
+            const accountsTotal = ['','Total Expenses:', 
+                                  this.pexpense.length > 0 ? this.pexpense[this.pexpense.length - 1].total_expenses : '',
+                                  this.expense.length > 0 ? this.expense[this.expense.length - 1].total_expenses : ''];
+            const accountsTotalRow = excelSheet.addRow(accountsTotal);
+            const addedRow = excelSheet.getRow(excelSheet.rowCount);
+            addedRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+            accountsTotalRow.font = { bold: true, size: 12 };
           }
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
         };
 
+        const totalNSBOI = ['','Net Surplus Before Other Item:' ,this.calculateLastYearTotalBalance(), this.calculateTotalBalance()];
+        const totalNSBOIRow = excelSheet.addRow(totalNSBOI);
+        const addedTRow = excelSheet.getRow(excelSheet.rowCount);
+          addedTRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+        totalNSBOIRow.font = { size: 12, bold: true };
+        const empty0 = [''];
+        const empty0Row = excelSheet.addRow(empty0);
+
+        if(this.reserveFund !== 0 && this.cetFund !== 0 && this.cdFund !== 0 && this.optionalFund !== 0 && this.dueToUnion !== 0){
+          const accounts = ['','Distributed as Follows:','',''];
+          const accountsRow = excelSheet.addRow(accounts);
+          const addedTRow = excelSheet.getRow(excelSheet.rowCount);
+            addedTRow.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+          accountsRow.font = { bold: true, size: 12};
+
+          const rf  = ['','Reserve Fund', this.preserveFund, this.reserveFund];
+          const rfRow = excelSheet.addRow(rf);
+          const cetf  = ['','Coop. Education & Training Fund', this.pcetFund, this.cetFund];
+          const cetfRow = excelSheet.addRow(cetf);
+          const duf  = ['','Due to Union/Federation (CETF)', this.pdueToUnion, this.dueToUnion];
+          const dufRow = excelSheet.addRow(duf);
+          const cdf  = ['','Community Development Fund', this.pcdFund, this.cdFund];
+          const cdfRow = excelSheet.addRow(cdf);
+          const of  = ['','Optional Fund', this.poptionalFund, this.optionalFund];
+          const ofRow = excelSheet.addRow(of);
+
+          const empty = [''];
+          const emptyRow = excelSheet.addRow(empty);
+
+          const totalSF  = ['','Total Statutory Fund:', this.pstatutoryFund, this.statutoryFund];
+          const totalSFRow = excelSheet.addRow(totalSF);
+          const addedRow0 = excelSheet.getRow(excelSheet.rowCount);
+            addedRow0.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+          totalSFRow.font = { bold: true, size: 12};
+
+          const totalNSSF  = ['','Net Surplus after SF:', this.pnetFundAfterSF, this.netFundAfterSF];
+          const totalNSSFRow = excelSheet.addRow(totalNSSF);
+          const addedRow1 = excelSheet.getRow(excelSheet.rowCount);
+            addedRow1.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+          totalNSSFRow.font = { bold: true, size: 12};
+
+          const emptyRow0 = excelSheet.addRow(empty);
+
+          const ioc70  = ['','IoC 70%',  this.pioc,  this.ioc];
+          const ioc70Row = excelSheet.addRow(ioc70);
+          totalNSSFRow.font = { bold: true};
+
+          const pf30  = ['','Patronage Refund 30%',  this.ppatRef,  this.patRef];
+          const pf30Row = excelSheet.addRow(pf30);
+          totalNSSFRow.font = { bold: true};
+
+          const emptyRow1 = excelSheet.addRow(empty);
+
+          const totalNSD  = ['','Total Net Surplus as Distributed:', this.calculateLastYearTotalBalance(), this.calculateTotalBalance()];
+          const totalNSDRow = excelSheet.addRow(totalNSD);
+          const addedRow2 = excelSheet.getRow(excelSheet.rowCount);
+            addedRow2.eachCell((cell) => {
+              cell.border = {
+                top: { style: 'thin' },
+                bottom: { style: 'thin' },
+              };
+            });
+          totalNSDRow.font = { bold: true, size: 12};
+        }
+        const empty = [''];
+        const empty3Row = excelSheet.addRow(empty);
+
+        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate ];
+        const generatedRow = excelSheet.addRow(generated);
+        const addedgRow = excelSheet.getRow(excelSheet.rowCount);
+        addedgRow.eachCell((cell) => {
+          cell.border = {
+            top: { style: 'thin' },
+            bottom: { style: 'thin' },
+          };
+        });
+        generatedRow.font = { size: 11, italic: true };
         
         spreadSheet.xlsx.writeBuffer().then(buffer => {
           const data = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -188,31 +298,6 @@ export class FsOpComponent implements OnInit {
           link.click();
         });  
   }
-
-  exportAsPdf: ExportAsConfig = {
-    type: 'pdf',
-    elementIdOrContent: 'fsOp',
-    options: {
-      image: { type: 'jpeg', quality: 1 },
-      html2canvas:  { scale: 3},
-      margin:  [5, 2, 5, 2],
-      fontSize: 12,
-      // pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-      jsPDF: {
-        orientation: 'portrait',
-        format: 'letter',
-        defaultFontSize: 12,
-        //precision: 16
-      }
-    }
-  }
-
-  exportPDF() {
-    this.exportAsService.save(this.exportAsPdf, 'FS-Operations').subscribe(() => {
-      // save started
-    });
-  }
-
 
   showSLedger(): void {
     this.http.get('http://127.0.0.1:8000/api/totaljour').subscribe(
