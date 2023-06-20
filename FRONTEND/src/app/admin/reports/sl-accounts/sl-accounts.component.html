@@ -83,9 +83,9 @@
         <tbody>
           <ng-container *ngFor="let item of ledgers">
             <ng-container *ngFor="let itemb of brokenledgers">
-              <tr *ngIf="itemb.result.status === 'Paid'">
+              <tr *ngIf="itemb.result.status === 'CloseTransact'">
                 <ng-container *ngIf="item.result.journal_name === itemb.result.journal_name">
-                  <td class="td-baln" > Transaction #{{ itemb.result.payables_id }}, {{ itemb.result.transactDate | date:'mediumDate' }}</td>
+                  <td class="td-baln" > Transaction #{{ itemb.result.transactNumber }}, {{ itemb.result.transactDate | date:'mediumDate' }}</td>
                   <td class="td-baln">
                     
                   <ng-container *ngFor="let itemsb of brokenpledgers">

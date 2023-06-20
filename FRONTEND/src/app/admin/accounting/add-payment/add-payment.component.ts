@@ -128,7 +128,7 @@ export class AddPaymentComponent implements OnInit {
 
   showRecentTransactions(mem:any, tran:any){
     this.recentdebs = this.wahieService.listTransaction(mem, tran).subscribe((recent:any)=>{
-      this.recents = recent.filter((item: any) => item.credit_amount !== item.debit_amount && item.status !== "Closed");
+      this.recents = recent.filter((item: any) => item.credit_amount !== item.debit_amount && item.status !== "Closed" && item.status !== "CloseTransact");
       const lastData = this.recents[this.recents.length - 1]; // Get the last data
       const paysId = lastData ? lastData.paysId : null; // Retrieve the paysId from the last data or set to null if there is no data
       this.paymentForm.get("paysId")?.setValue(paysId);
@@ -138,7 +138,7 @@ export class AddPaymentComponent implements OnInit {
 
   showRecentDebitTransactions(mem:any, tran:any){
     this.recentdebs = this.wahieService.listDebitTransaction(mem, tran).subscribe((recentdeb:any)=>{
-      this.recentdebs = recentdeb.filter((item: any) => item.credit_amount !== item.debit_amount && item.status !== "Closed");
+      this.recentdebs = recentdeb.filter((item: any) => item.credit_amount !== item.debit_amount && item.status !== "Closed" && item.status !== "CloseTransact");
       const lastData = this.recentdebs[this.recentdebs.length - 1]; // Get the last data
       const open_balance = lastData ? lastData.open_balance : null; // Retrieve the paysId from the last data or set to null if there is no data
       this.paymentForm.get("open_balance")?.setValue(open_balance);

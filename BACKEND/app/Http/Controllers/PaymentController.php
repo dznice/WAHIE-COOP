@@ -57,7 +57,8 @@ class PaymentController extends Controller
                     $creditss = Credits::where('payables_id', $request->paysId)->get();
 
                     foreach ($paymentData['payables'] as $key => $value) {
-                                $matchingCredits = $creditss->where('journals_id', $value['account']);
+                        $matchingCredits = $creditss->where('journals_id', $value['account'])
+                                                    ->where('status', '!=', 'CloseTransact');
         
                                 if ($matchingCredits->isNotEmpty()) {
                             foreach ($matchingCredits as $matchingCredit) {
@@ -68,8 +69,8 @@ class PaymentController extends Controller
                                     $creditValue = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
                                     $credVal = $value['debit'];
                                     if ( ($matchingCredit->debit_amount + $credVal) < ($matchingCredit->credit_amount ?: $matchingCredit->debit_amount) ){
-                                    $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
-                                    $matchingCredit->debit_amount += $value['debit'];
+                                        $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
+                                        $matchingCredit->debit_amount += $value['debit'];
                                     }else{
                                         $matchingCredit->credit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
                                         $matchingCredit->debit_amount = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
@@ -79,11 +80,11 @@ class PaymentController extends Controller
                                     $debitValue = $matchingCredit->credit_amount ?: $matchingCredit->debit_amount;
                                     $debVal = $value['credit'];
                                     if ( ($matchingCredit->credit_amount + $debVal) < ($matchingCredit->debit_amount ?: $matchingCredit->credit_amount) ){
-                                    $matchingCredit->credit_amount += $value['credit'];
-                                    $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                        $matchingCredit->credit_amount += $value['credit'];
+                                        $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
                                     }else{
-                                    $matchingCredit->credit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
-                                    $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                        $matchingCredit->credit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
+                                        $matchingCredit->debit_amount = $matchingCredit->debit_amount ?: $matchingCredit->credit_amount;
                                     }
                                 }
                             
@@ -112,13 +113,13 @@ class PaymentController extends Controller
                     foreach ($paymentData['payables'] as $key => $value) {
                         $matchCredit = new Credits();
                         $matchCredit->users_id = $request->userId;
-                        $matchCredit->payables_id = $pays;
+                        $matchCredit->payables_id = $request->paysId;
                         $matchCredit->credit_amount = $value['credit'];
                         $matchCredit->debit_amount = $value['debit'];
                         $matchCredit->journals_id = $value['account'];
-                        $matchCredit->status = "Paid";
+                        $matchCredit->status = "CloseTransact";
                         $matchCredit->save();
-                }
+                    }
             
 
                     $credits = Credits::find($request->transactionNo);

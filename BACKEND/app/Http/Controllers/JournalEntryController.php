@@ -89,11 +89,21 @@ class JournalEntryController extends Controller
                 $credits-> payables_id = $pays;
                 $credits->save();
 
-
                 $creditssd = $value['credit'];
-            $cre = $creditss + $creditssd;
+                $cre = $creditss + $creditssd;
+            }
 
+            foreach ($entryData['entries'] as $key => $value)
+            {
+                $crediters = new Credits;
 
+                $crediters->users_id = $request->userId;
+                $crediters-> payables_id = $pays;
+                $crediters->journals_id = $value['account'];
+                $crediters->debit_amount = floatval($value['debit']);
+                $crediters->credit_amount = floatval($value['credit']);
+                $crediters->status = "CloseTransact";
+                $crediters->save();
             }
 
             $interate = $request->totalcredit * $rate;

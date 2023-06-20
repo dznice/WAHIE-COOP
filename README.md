@@ -13,7 +13,6 @@ npm i @ng-select/ng-select --legacy-peer-deps
 npm i ng-angular-popup --legacy-peer-deps
 npm i bn-ng-idle --legacy-peer-deps
 npm i ngx-ui-loader --legacy-peer-deps
-
 npm i exceljs --legacy-peer-deps
 npm i jspdf --legacy-peer-deps
 npm i html2canvas --legacy-peer-deps
