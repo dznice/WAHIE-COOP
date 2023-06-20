@@ -156,31 +156,31 @@
                 </tr>
             <tr>
               <td>Reserve Fund</td>
-              <td class="td-cred"></td>
+              <td><input type="text" id="reserveFund" value= '{{ reserveFundGet()}}' size="1" (keyup.enter)="reserveFundStore()" ></td><!--Note-->
               <td class="td-cred">{{ this.preserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
             <tr>
               <td>Coop. Education & Training Fund</td>
-              <td class="td-cred"></td>
+              <td><input type="text" id="coopEduc" value= '{{ coopEducGet() }}' size="1" (keyup.enter)="coopEducStore()" ></td><!--Note-->
               <td class="td-cred">{{ this.pcetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
             <tr>
               <td>Due to Union/Federation (CETF)</td>
-              <td class="td-cred"></td>
+              <td><input type="text" id="cetf" value= '{{ cetfGet()}}' size="1" (keyup.enter)="cetfStore()" ></td><!--Note-->
               <td class="td-cred">{{ this.pdueToUnion | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               <td class="td-deb">{{ this.dueToUnion | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
             <tr>
               <td>Community Development Fund</td>
-              <td class="td-cred"></td>
+              <td><input type="text" id="cdf" value= '{{ cdfGet()}}' size="1" (keyup.enter)="cdfStore()" ></td><!--Note-->
               <td class="td-cred">{{ this.pcdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
             <tr>
               <td>Optional Fund</td>
-              <td class="td-cred"></td>
+              <td><input type="text" id="opFund" value= '{{ opFundGet()}}' size="1" (keyup.enter)="opFundStore()" ></td><!--Note-->
               <td class="td-cred">{{ this.poptionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
@@ -201,14 +201,14 @@
 
             <tr>
               <td>IoC 70%</td>
-              <td class="td-cred"></td>
+              <td><input type="text" id="ioc" value= '{{ iocGet()}}' size="1" (keyup.enter)="iocStore()" ></td><!--Note-->
               <td class="td-cred">{{ this.pioc | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               <td class="td-deb">{{ this.ioc | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>
 
             <tr>
               <td>Patronage Refund 30%</td>
-              <td class="td-cred"></td>
+              <td><input type="text" id="patRef" value= '{{ patRefStore()}}' size="1" (keyup.enter)="patRefStore()" ></td><!--Note-->
               <td class="td-cred">{{ this.ppatRef | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               <td class="td-deb">{{ this.patRef | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
             </tr>

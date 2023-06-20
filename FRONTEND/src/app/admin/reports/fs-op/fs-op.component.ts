@@ -533,4 +533,94 @@ html2pdf().from(element).set(opt).save();
   expenseGet(index:any){
   return sessionStorage.getItem('revenue'+index)
   }
+
+
+  reserveFundStore(){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("reserveFund")).value
+    this.noteKey ='reserveFundOP'
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  reserveFundGet(){
+  return sessionStorage.getItem('revenueOP')
+  }
+
+  coopEducStore(){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("coopEduc")).value
+    this.noteKey ='coopEducOP'
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  coopEducGet(){
+  return sessionStorage.getItem('coopEducOP')
+  }
+
+  cetfStore(){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("cetf")).value
+    this.noteKey ='cetfOP'
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  cetfGet(){
+  return sessionStorage.getItem('cetfOP')
+  }
+
+  cdfStore(){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("cdf")).value
+    this.noteKey ='cdfOP'
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  cdfGet(){
+  return sessionStorage.getItem('cdfOP')
+  }
+
+  
+  opFundStore(){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("opFund")).value
+    this.noteKey ='opFundOP'
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  opFundGet(){
+  return sessionStorage.getItem('opFundOP')
+  }
+
+  iocStore(){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("ioc")).value
+    this.noteKey ='iocOP'
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  iocGet(){
+  return sessionStorage.getItem('iocOP')
+  }
+
+  patRefStore(){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("patRef")).value
+    this.noteKey ='patRefOP'
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  patRefGet(){
+  return sessionStorage.getItem('patRefOP')
+  }
+
+
+  
+  
 }
