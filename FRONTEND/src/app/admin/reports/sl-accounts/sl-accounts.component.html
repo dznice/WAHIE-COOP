@@ -74,8 +74,8 @@
         <thead>
           <tr>
             <th>Particulars</th>
-            <th class="th-bal">Balance last {{ oneYearAgo | date:'y'}}</th>
-            <th class="th-bal">Debit of {{ maxDate | date:'y' }}</th>
+            <th class="th-bal">Balance of {{ oneYearAgo | date:'y'}}</th>
+            <th class="th-bal" >Debit of {{ maxDate | date:'y' }}</th>
             <th class="th-bal2" colspan="2">Credit of {{ maxDate | date:'y' }}</th>
             
           </tr>
@@ -132,16 +132,8 @@
           </tr> -->
         </tbody>
       </table>
-      <label >Notes: </label> 
-      <ul class="res">
-        <li  *ngFor="let note of notes">{{ note }}</li>
-      </ul>
     </div>
   </section>
 </section>
 <br/>
-<div class="notess">
-  <input class="display" type = "text" [(ngModel)]="newNote" placeholder="Enter a Note">
-  <button class="btn-addNote" (click)="addNote()"> Add Note</button> 
-</div>
 </main>

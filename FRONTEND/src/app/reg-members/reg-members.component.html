@@ -53,6 +53,8 @@
                 </div>
                 <div class="text-wrap">
                   <input
+                    (input)="checkPasswordValidity()"
+                    [(ngModel)]="passwords"
                     formControlName="pass"
                     [type]="changetype ? 'password' : 'text'"
                     name="pass"
@@ -108,19 +110,22 @@
                   <small> Password not match </small>
                 </div>
               </div>
+              
               <div
                 *ngIf="
                   emails !== '' &&
                   passwords !== '' &&
-                  passwords !== '(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$' &&
+                  passwords !== '(?=.*[0-9])(?=.*[!@#$%^&*()_])[a-zA-Z0-9!@#$%^&*()_]{8,16}$' &&
                   cpasswords !== '' &&
+                  
                   chkEnable.checked
                 "
               >
                 <button
                   class="submit"
                   (click)="toggle()"
-                  [disabled]="cpasswords !== passwords"
+                  [disabled]="cpasswords !== passwords" 
+                  [disabled]="!isPasswordValid"
                 >
                   Next
                 </button>
@@ -130,10 +135,10 @@
                 *ngIf="
                   emails === '' ||
                   passwords === '' ||
-                
+                  passwords === '(?=.*[0-9])(?=.*[!@#$%^&*()_])[a-zA-Z0-9!@#$%^&*()_]{8,16}$' ||
                   cpasswords === '' ||
-                  !chkEnable.checked ||
-                  passwords === '(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$' 
+                  !chkEnable.checked 
+                  
                 "
               >
                 <button class="submit">Next</button>

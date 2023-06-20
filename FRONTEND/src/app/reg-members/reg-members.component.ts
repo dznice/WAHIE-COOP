@@ -29,6 +29,13 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegMembersComponent implements OnInit, OnDestroy {
+  isPasswordValid: boolean = false;
+  checkPasswordValidity(): void {
+    const specialCharRegex = /[!@#$%^&*()_,.?":{}|<>]/;
+    const digitRegex = /\d/;
+  
+    this.isPasswordValid = specialCharRegex.test(this.passwords) && digitRegex.test(this.passwords);
+  }
 
   emails="";
   passwords="";
