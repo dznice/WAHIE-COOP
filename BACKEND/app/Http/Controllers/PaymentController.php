@@ -53,6 +53,7 @@ class PaymentController extends Controller
                     $pays = $payables->id;
 
                     $payment = 0;
+                    
 
                     $creditss = Credits::where('payables_id', $request->paysId)->get();
 
@@ -122,12 +123,12 @@ class PaymentController extends Controller
                     }
             
 
-                    $credits = Credits::find($request->transactionNo);
+                    $credits = new Credits();
                     $credits->users_id = $request->userId;
                     $credits->credit_amount = 0;
                     $credits->debit_amount = 0;
                     $credits-> journals_id = null;
-                    $credits-> payables_id = $pays;
+                    $credits-> payables_id = $request->paysId;
                     $credits->save();
                     $creds = $credits->id;
 
