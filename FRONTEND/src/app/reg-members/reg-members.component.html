@@ -40,7 +40,7 @@
               <div class="text_field1">
                 <div class="text-wrap">
                   <input
-                    type="text"
+                    type="email"
                     name="email"
                     formControlName="email"
                     id="reg-email"
@@ -60,7 +60,8 @@
                     placeholder="Password"
                     required
                     minlength="8"
-                    pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" 
+                    maxlength="16"
+                    pattern="(?=.*[0-9])(?=.*[!@#$%^&*()_])[a-zA-Z0-9!@#$%^&*()_]{8,16}$" 
                     title="Password must be at least 8 characters, one letter, one number and one special character:"
                     [(ngModel)]="form.password"
                     [(ngModel)]="passwords"
@@ -111,7 +112,7 @@
                 *ngIf="
                   emails !== '' &&
                   passwords !== '' &&
-                  passwords !== '(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$' &&
+                  passwords !== '(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$' &&
                   cpasswords !== '' &&
                   chkEnable.checked
                 "
@@ -129,8 +130,10 @@
                 *ngIf="
                   emails === '' ||
                   passwords === '' ||
+                
                   cpasswords === '' ||
-                  !chkEnable.checked
+                  !chkEnable.checked ||
+                  passwords === '(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$' 
                 "
               >
                 <button class="submit">Next</button>

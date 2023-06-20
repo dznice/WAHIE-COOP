@@ -85,8 +85,8 @@
             <label class="input-label" for="password">New Password</label>
             <input class="input-field" [type]="changetype?'password':'text'" type="password"  formControlName="new_pass"
             
-            name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password required minlength="8"
-            pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" 
+            name="new_pass" id= "new_pass" [(ngModel)]="passForm.new_pass" #password required minlength="8" maxlength="16"
+            pattern="(?=.*[0-9])(?=.*[!@#$%^&*()_])[a-zA-Z0-9!@#$%^&*()_]{8,16}$" 
             title="Password must be at least 8 characters, one letter, one number and one special character:" />
             <span class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></span><br>
           </div>
