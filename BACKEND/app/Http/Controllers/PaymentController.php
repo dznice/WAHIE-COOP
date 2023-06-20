@@ -110,33 +110,16 @@ class PaymentController extends Controller
 
                     
                     foreach ($paymentData['payables'] as $key => $value) {
-                        $matchCredits = $creditss->where('journals_id', $value['account']);
-
-                        if ($matchCredits->isNotEmpty()) {
-                    foreach ($matchCredits as $matchCredit ) {
+                        $matchCredit = new Credits();
                         $matchCredit->users_id = $request->userId;
-                        $matchCredit->payables_id = $request->paysId;
+                        $matchCredit->payables_id = $pays;
                         $matchCredit->credit_amount = $value['credit'];
                         $matchCredit->debit_amount = $value['debit'];
                         $matchCredit->journals_id = $value['account'];
                         $matchCredit->status = "Paid";
                         $matchCredit->save();
-                    }
-                
-            
-            
-                } else {
-                    // Create a new record
-                    $newerCredits = new Credits();
-                    $newCredits->payables_id = $request->paysId;
-                    $newCredits->users_id = $request->userId;
-                    $newCredits->credit_amount = $value['credit'];
-                    $newCredits->debit_amount = $value['debit'];
-                    $newCredits->journals_id = $value['account'];
-                    $newCredits->status = "Paid";
-                    $newCredits->save();
                 }
-            }
+            
 
                     $credits = Credits::find($request->transactionNo);
                     $credits->users_id = $request->userId;

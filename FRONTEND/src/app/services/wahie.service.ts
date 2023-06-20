@@ -98,6 +98,20 @@ export class WahieService {
                    return this.http.get<any[]>(`${this.url}/api/accounts?id=${mem_id}`, { params });
   }
 
+  
+  public sLegderBroken(memId: any, journId: any, startD: any, endD: any) {
+    let params = new HttpParams()
+      .set('status', 'Paid')
+      .set('member_id', memId)
+      .set('journal_ids', journId)
+      .set('start_date', startD)
+      .set('end_date', endD);
+  
+    return this.http.get<any[]>(`${this.url}/api/totaljourbroken`, { params });
+  }
+  
+  
+
 
   public getJournalLogs(journalNo: number): Observable<any> {
     const url = `${this.url}/api/journalLog/${journalNo}`;
@@ -125,9 +139,6 @@ export class WahieService {
     return this.http.get<any[]>(`${this.url}/api/totaljour?member_id=${memId}&journal_ids=${journId}&start_date=${startD}&end_date=${endD}`);
   }
 
-  public sLegderBroken(memId:any, journId:any, startD:any, endD:any){
-    return this.http.get<any[]>(`${this.url}/api/totaljourbroken?member_id=${memId}&journal_ids=${journId}&start_date=${startD}&end_date=${endD}`);
-  }
 
   public pastLegder(memId:any, journId:any, startD:any, endD:any){
     return this.http.get<any[]>(`${this.url}/api/totaljourlastyear?member_id=${memId}&journal_ids=${journId}&start_date=${startD}&end_date=${endD}`);
