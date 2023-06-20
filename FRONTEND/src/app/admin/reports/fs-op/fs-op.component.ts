@@ -505,4 +505,32 @@ html2pdf().from(element).set(opt).save();
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }
   }
+
+  jsonObject:any
+  val:any;
+  noteKey:any;
+  note:any[];
+  revenueStore(i:any){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("revenue"+(i))).value
+    this.noteKey ='revenue' + i
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  revenueGet(index:any){
+  return sessionStorage.getItem('revenue'+index)
+  }
+
+  expenseStore(i:any){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("revenue"+(i))).value
+    this.noteKey ='revenue' + i
+   sessionStorage.setItem(this.noteKey, this.val)
+  
+  } 
+  
+  expenseGet(index:any){
+  return sessionStorage.getItem('revenue'+index)
+  }
 }

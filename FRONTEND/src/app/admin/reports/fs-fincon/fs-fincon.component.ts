@@ -1093,14 +1093,23 @@ html2pdf().from(element).set(opt).save();
   chLogo(event:any){
     let fileType = event.target.files[0].type;
     let file =  event.target.files[0];
+    let fileName = event.target.files[0].type;
+    const filePath = `assets/image`;
+    
+    const fileContent = event;
+    const fileBlob = new Blob([fileContent], { type: 'text/plain' });
+
     if(fileType.match(/image\/*/)){
       let upload = new FileReader();
       upload.readAsDataURL(event.target.files[0]);
       upload.onload = (event:any)=>(
         this.preLogo = event.target.result
 
-      
       );   
+
+
+      
+
       var myFormData = new FormData();
       this.id = localStorage.getItem('userData')
       myFormData.append('image', file);
@@ -1108,7 +1117,9 @@ html2pdf().from(element).set(opt).save();
       this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
         this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
         this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
-    
+
+        const fileUrl = `assets/image/${fileName}`;
+         this.http.post(fileUrl, fileName);
       }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});

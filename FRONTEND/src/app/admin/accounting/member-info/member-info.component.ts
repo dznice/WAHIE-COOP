@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { itemService } from './item.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-info',
@@ -15,7 +15,8 @@ export class MemberInfoComponent implements OnInit {
   constructor(
     private ItemService: itemService,
     private http: HttpClient,
-    private aRouter: ActivatedRoute
+    private aRouter: ActivatedRoute,
+    private route: Router
   ) {
     this.personalInfo();
     this.benInfo();
@@ -86,5 +87,15 @@ export class MemberInfoComponent implements OnInit {
       console.log(res);
       this.membalance = res;
     });
+  }
+  memberJournal(data: any) {
+    this.http
+      .get('http://127.0.0.1:8000/api/transacList/' + data)
+      .subscribe((res: any) => {
+        if (data != null) {
+          console.log(data);
+          this.route.navigateByUrl('admin/accounting/journal-transac/' + data);
+        }
+      });
   }
 }
