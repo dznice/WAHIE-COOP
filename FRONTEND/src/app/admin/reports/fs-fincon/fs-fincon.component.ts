@@ -60,6 +60,8 @@ export class FsFinconComponent implements OnInit {
   pnl : any[];
   pdg : any[];
 
+  note : any[];
+
   constructor(private http:HttpClient, 
     private toast:NgToastService,) {}
     
@@ -72,6 +74,8 @@ export class FsFinconComponent implements OnInit {
     this.showPastSLedger();
     this.processLedgerData();
     console.log(this.maxDate)
+    
+
   }
 
   // public convertToPDF(size:any) {
@@ -1110,5 +1114,190 @@ html2pdf().from(element).set(opt).save();
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }
   }
+
+  jsonObject:any
+  val:any;
+  noteKey:any;
+  CurrentAssetStore(i:any){
+    this.jsonObject = JSON.stringify(this.note);
+    this.val = (<HTMLInputElement>document.getElementById("curAsset"+(i))).value
+    this.noteKey ='CurrentAsset' + i
+   sessionStorage.setItem(this.noteKey, this.val)
+
+  } 
+
+CurrentAssetGet(index:any){
+  return sessionStorage.getItem('CurrentAsset'+index)
+}
+
+otherAssetStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("OtherAsset"+(i))).value
+  this.noteKey ='OtherAsset' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+otherAssetGet(index:any){
+return sessionStorage.getItem('OtherAsset'+index)
+}
+
+nonAssetStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("nonAsset"+(i))).value
+  this.noteKey ='nonAsset' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+nonAssetGet(index:any){
+return sessionStorage.getItem('nonAsset'+index)
+}
+
+CurrentLiabStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("curLiab"+(i))).value
+  this.noteKey ='curLiab' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+CurrentLiabGet(index:any){
+return sessionStorage.getItem('curLiab'+index)
+}
+
+nonLiabStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("nonLiab"+(i))).value
+  this.noteKey ='nonLiab' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+nonLiabGet(index:any){
+return sessionStorage.getItem('nonLiab'+index)
+}
+
+equityStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("equity"+(i))).value
+  this.noteKey ='equity' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+equityGet(index:any){
+return sessionStorage.getItem('equity'+index)
+}
+
+ssccStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("sscc"+(i))).value
+  this.noteKey ='sscc' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+ssccGet(index:any){
+return sessionStorage.getItem('sscc'+index)
+}
+
+srcStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("src"+(i))).value
+  this.noteKey ='src' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+srcGet(index:any){
+return sessionStorage.getItem('src'+index)
+}
+
+srpStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("srp"+(i))).value
+  this.noteKey ='srp' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+srpGet(index:any){
+return sessionStorage.getItem('srp'+index)
+}
+
+pscpStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("pscp"+(i))).value
+  this.noteKey ='pscp' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+pscpGet(index:any){
+return sessionStorage.getItem('pscp'+index)
+}
+
+tscpStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("tscp"+(i))).value
+  this.noteKey ='tscp' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+tscpGet(index:any){
+return sessionStorage.getItem('tscp'+index)
+}
+
+dscpStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("dscp"+(i))).value
+  this.noteKey ='dscp' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+dscpGet(index:any){
+return sessionStorage.getItem('nonAsset'+index)
+}
+
+unsStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("uns"+(i))).value
+  this.noteKey ='uns' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+unsGet(index:any){
+return sessionStorage.getItem('uns'+index)
+}
+
+nlStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("nl"+(i))).value
+  this.noteKey ='nl' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+nlGet(index:any){
+return sessionStorage.getItem('nl'+index)
+}
+
+dgStore(i:any){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("dg"+(i))).value
+  this.noteKey ='dg' + i
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+dgGet(index:any){
+return sessionStorage.getItem('nonAsset'+index)
+}
+
+
 
 }
