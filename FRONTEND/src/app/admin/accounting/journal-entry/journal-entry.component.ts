@@ -192,7 +192,7 @@ export class JournalEntryComponent implements OnInit {
   displayToast(message: string, title: string) {
     this.toast.error({
       detail: 'Failed',
-      summary: 'This Journal Number is Taken',
+      summary: 'This journal number is taken',
       duration: 2000,
       sticky: false,
       position: 'tr',

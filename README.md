@@ -20,8 +20,6 @@ npm i html2pdf.js --legacy-peer-deps
 
 
 
-
-
 To serve backend run the following commands:
 
 composer install
@@ -51,6 +49,6 @@ php artisan db:seed --class=PhilippineBarangaysTableSeeder
 
 if wala kayong storage sa backend:
 
---php artisan storage:link--
---create image folder sa loob ng storage--
---pokat niyo si coop-logo.png--
+php artisan storage:link
+create image folder sa loob ng storage
+pokat niyo si coop-logo.png

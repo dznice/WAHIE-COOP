@@ -257,7 +257,7 @@ export class AdditionalInfoComponent implements OnInit, OnDestroy {
         error => {
           this.toast.warning({
             detail: 'Input is required',
-            summary: 'Please Check',
+            summary: 'Please check',
             duration: 2000,
             sticky: false,
             position: 'tr',

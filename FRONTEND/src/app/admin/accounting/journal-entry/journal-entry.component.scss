@@ -67,7 +67,7 @@ select {
   font-size: 14px;
   font-weight: 400;
   border-radius: 0.5rem;
-  padding: 0 15px;
+  padding: 0 10px;
   height: 36px;
   margin: 2px 0;
   display: flex;
@@ -233,8 +233,8 @@ thead th {
     > input {
       font-family: "Poppins", sans-serif;
       color: var(--text-color-2);
-      padding: 3px 5px;
-      
+      padding: 3px 2px;
+      font-size: 14px;
     }
   }
 }
@@ -249,11 +249,18 @@ thead th {
   margin-top: 0.36rem;
   border-radius: 0.5rem;
   border-top: 1px solid var(--border-color);
+  border: 1px solid var(--border-color);
   background-color: var(--panel-color);
+  font-size: 14px;
+}
+
+.ng-select.select-acc ::ng-deep .ng-dropdown-panel {
+  width: 140%;
 }
 
 .ng-select.try ::ng-deep .ng-dropdown-panel .ng-option {
   background-color: transparent;
+  font-size: 14px;
 }
 
 .ng-select.try ::ng-deep .ng-dropdown-panel .ng-option:hover {
@@ -262,11 +269,13 @@ thead th {
 
 .ng-select.try ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
   color: var(--text-color-2);
+  font-size: 14px;
 }
 
 .ng-select.try {
   .ng-header {
     cursor: pointer;
+    color: var(--text-color-2);
   }
 }
 

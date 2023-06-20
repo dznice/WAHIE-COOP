@@ -1,38 +1,36 @@
 * {
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .main {
-    width: 100%;
-    animation: transitionIn 0.75s;
-    size: letter;
-  }
+  font-family: "Poppins", sans-serif;
+}
 
-  .report-name{
-    font-size: 30px;
-    font-weight: 600;
-    color: var(--title-color);
-  }
-  .report_name{
-    font-size: 30px;
-    font-weight: 600;
-  }
+.main {
+  width: 100%;
+  animation: transitionIn 0.75s;
+  size: letter;
+}
 
-  .sticky-div{
+.report-name {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--title-color);
+}
+.report_name {
+  font-size: 30px;
+  font-weight: 600;
+}
 
-    padding: 10px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    background-color:var(--panel-color);;
-    height: 70px;
-    width: auto;
-    flex-wrap: wrap;
-    color:#fff9f9;
-    padding-left: 2rem;
-    margin:-20px -25px 0px -35px ;
-    z-index: 1000000;
-   
+.sticky-div {
+  padding: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: var(--panel-color);
+  height: 70px;
+  width: auto;
+  flex-wrap: wrap;
+  color: #fff9f9;
+  padding-left: 2rem;
+  margin: -20px -25px 0px -35px;
+  z-index: 1000000;
 }
 
 .container {
@@ -48,17 +46,15 @@
 
   $circleSize: 55px;
   $fontColor: rgb(250, 250, 250);
-  
-  .ti-camera{
+
+  .ti-camera {
     font-size: 55px;
     cursor: pointer;
     border-radius: 100%;
     color: var(--title-color);
-    
   }
-  .ti-camera:hover{
+  .ti-camera:hover {
     background-color: var(--grey-2);
-    
   }
   .logo {
     margin-right: auto;
@@ -66,405 +62,344 @@
     transition: all 0.3s ease;
     transition: all 0.3s ease;
     width: fit-content;
-  
-  
+
     img {
       position: absolute;
       width: $circleSize;
       height: $circleSize;
       z-index: 0;
     }
-  
+
     .-label {
       cursor: pointer;
       height: $circleSize;
       width: $circleSize;
     }
-  
+
     &:hover {
       .-label {
-       
         background-color: rgba(174, 170, 170, 0.8);
         z-index: 1000000;
       }
     }
-  
-
   }
 }
 
-  .head{
-    text-align: left;
+.head {
+  text-align: left;
+}
+
+.print {
+  background-color: var(--panel-color);
+  color: var(--text-color-3);
+  margin: auto;
+  width: 800px;
+  border: 1px solid var(--black);
+  border-bottom: none;
+  display: flex;
+  flex-direction: row;
+
+  .save {
+    width: 70%;
+    height: 5vh;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    color: var(--text-color-2);
   }
 
-  .print{
-    background-color: var(--panel-color);
-    color: var(--text-color-3);
-    margin: auto;
-    width: 800px;
-    border: 1px solid var(--black);
-    border-bottom: none;
+  .PDF {
     display: flex;
-    flex-direction: row;
-
-    .save{
-      width: 70%;
-      height: 5vh;
-      padding-left: 1rem;
-      padding-top: .5rem;
-      color: var(--text-color-2);
-    }
-      
-    .PDF{
-      display: flex;
-      padding-left: 55%;
-      margin-top: .1rem;
-      width: 70%;
-    }
-
-    .PDF-icon{
-      padding-top: .2rem;
-      font-size: 28px;
-      background: none;
-      padding-right: .4rem;
-      color: var(--secondary-color);
-    }
-    .excel-icon{
-      padding-top: .2rem;
-      font-size: 28px;
-      background: none; 
-      color: var(--secondary-color);
-    }
+    padding-left: 55%;
+    margin-top: 0.1rem;
+    width: 70%;
   }
 
-
-  // .container{
-  //   display: flex;
-  //   flex-direction: row;
-
-  //   .left-cont{
-  //       width: 70%;
-  //       height: 80vh;
-  //       text-align: center;
-  //   }
-  //   .right-cont{
-  //       margin-right: -1.9rem;
-  //       margin-top: -3.6rem;
-  //       width: 40%;
-  //       padding: 30px;
-  //       height: 87vh;
-  //       border-radius: 5px;
-  //       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);  
-  //   }
-  // }
-
-
-
-
-  .main-section{
-    padding-top: 2rem;
-    margin: auto;
-    margin-bottom: 3rem;
-    width: 800px;
-    border: 1px solid var(--text-color-2);
-    border-top:1px solid var(--text-color-2) ;
-    border-bottom:  2px solid var(--text-color-2) ;
-    background-color: var(--panel-color);
-    
+  .PDF-icon {
+    padding-top: 0.2rem;
+    font-size: 28px;
+    background: none;
+    padding-right: 0.4rem;
+    color: var(--secondary-color);
   }
+  .excel-icon {
+    padding-top: 0.2rem;
+    font-size: 28px;
+    background: none;
+    color: var(--secondary-color);
+  }
+}
 
-  header {
-    text-align: center;
-  
-  
-    .coop-name {
-      font-size: 26px;
-      font-weight: 200;
-      margin-bottom: 1rem;
-      
+.main-section {
+  padding-top: 2rem;
+  margin: auto;
+  margin-bottom: 3rem;
+  width: 800px;
+  border: 1px solid var(--text-color-2);
+  border-top: 1px solid var(--text-color-2);
+  border-bottom: 2px solid var(--text-color-2);
+  background-color: var(--panel-color);
+}
+
+header {
+  text-align: center;
+
+  .coop-name {
+    font-size: 26px;
+    font-weight: 200;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Table */
+.table-container {
+  margin: auto;
+  width: 95%;
+
+  .table-content {
+    width: 50%;
+    margin: 20px 0;
+    font-size: 0.8rem;
+    overflow: hidden;
+    border-collapse: collapse;
+
+    thead {
+      th {
+        text-align: left;
+        font-weight: 400;
+        padding: 12px 16px;
+        border-top: 1px solid var(--text-color-2);
+        border-bottom: 1px solid var(--text-color-2);
+        color: var(--text-color-2);
+      }
+
+      .th-cred,
+      .th-deb,
+      .th-note {
+        border-left: 1px dotted var(--text-color-2);
+        text-align: right;
+      }
     }
-  }
-  
-  /* Table */
-  .table-container {
-    margin: auto;
-    width: 95%;
-    
-           
-  
-    .table-content {
-      width: 50%;
-      margin: 20px 0;
-      font-size: 0.8rem;
-      overflow: hidden;
-      border-collapse: collapse;
-  
-      thead {
-        th {
-          text-align: left;
-          font-weight: 400;
-          padding: 12px 16px;
-          border-top: 1px solid var(--text-color-2);
-          border-bottom: 1px solid var(--text-color-2);
-          color: var(--text-color-2);
+
+    tbody {
+      tr {
+        //border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--text-color-2);
+        color: var(--text-color-2);
+        background-color: var(--panel-color);
+
+        .titles {
+          padding: 16px 16px;
         }
-  
-        .th-cred, .th-deb {
-          border-left: 1px dotted var(--text-color-2);
+
+        td {
+          font-weight: 500;
+          padding: 16px 16px 16px 30px;
+
+          input {
+            border: 1px solid var(--border-color);
+            font-family: "Poppins", sans-serif;
+            text-align: right;
+            align-items: end;
+            background-color: var(--panel-color);
+            color: var(--text-color-2);
+          }
+        }
+
+        .td-note {
+          text-align: end;
+          padding: 16px 15px;
+
+          input {
+            width: 2rem;
+            text-align: right;
+            border-radius: 0.35rem;
+            border: 1px solid var(--border-color);
+            outline-color: var(--title-color);
+            height: 1.5rem;
+            padding: 5px;
+          }
+        }
+
+        .td-deb,
+        .td-cred {
+          text-align: right;
+        }
+        .total-cred,
+        .total-deb {
+          text-align: right;
+          border-bottom: 3px double var(--text-color-2);
+        }
+        .total-cred,
+        .total-deb,
+        .totass {
+          border-style: double;
+          border-left: none;
+          border-right: none;
+          border-bottom: 3px double var(--text-color-2);
+          border-color: var(--text-color-2);
+          background-color: var(--grey-2);
+        }
+      }
+
+      .tr-total {
+        border-style: double;
+        border-left: none;
+        border-right: none;
+        border-color: var(--text-color-2);
+
+        border-bottom: 3px double var(--text-color-2);
+
+        .td-debtot,
+        .td-credtot {
           text-align: right;
         }
       }
-  
-      tbody {
-        tr {
-          //border-bottom: 1px solid var(--border-color);
-          border-bottom: 1px solid var(--text-color-2);
-          color: var(--text-color-2);
-          background-color: var(--panel-color);
 
-          .titles{
-            padding: 16px 16px;
-          }
-          td {
-           
-            font-weight: 500;
-            padding: 16px 55px;
-          }
-  
-          .td-deb, .td-cred {
-            text-align: right;
-
-          }
-          .total-cred, .total-deb{
-            text-align: right;
-            border-top: 2px double var(--text-color-2);
-          }
-          .total-cred, .total-deb, .totass{
-            border-style: double;
-            border-left: none;
-            border-right: none;
-            border-top: 2px double var(--text-color-2);
-            border-color: var(--text-color-2);
-            background-color:var(--grey-2);
-            
-          
-          }
+      tr:hover {
+        td {
+          cursor: pointer;
+          background-color: var(--table-hover);
+          //padding-left: -20px;
         }
-  
-        .tr-total {
-          border-style: double;
+      }
+    }
+  }
+
+  .table-content {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.8rem;
+    overflow: hidden;
+    border-collapse: collapse;
+
+    tbody {
+      tr {
+        .titles {
+          padding: 16px 16px;
+        }
+
+        .titles2 {
           border-left: none;
           border-right: none;
           border-color: var(--text-color-2);
-          
-          border-bottom: 2px double var(--text-color-2);
-          
-  
-          .td-debtot, .td-credtot {
-            text-align: right;
-          }
-        }
-
-        
-
-        tr:hover {
-          td {
-            cursor: pointer;
-            background-color: var(--table-hover);
-            padding-left: -20px;
-          }
-        }
-
-      }
-    }
-    
-
-    .table-content {
-      width: 100%;
-      margin: 20px 0;
-      font-size: 0.8rem;
-      overflow: hidden;
-      border-collapse: collapse;
-  
-      thead {
-        th {
-        
-          text-align: left;
-          font-weight: 400;
-          padding: 12px 16px;
-          border-top: 1px solid var(--text-color-2);
-          border-bottom: 1px solid var(--text-color-2);
-        }
-  
-        .th-cred, .th-deb {
-          border-left: 1px dotted var(--text-color-2);
-          text-align: right;
-        }
-      }
-  
-      tbody {
-        tr {
-          //border-bottom: 1px solid var(--border-color);
-          
-          .titles{
-            padding: 16px 16px;
-          }
-          .titles2{
-            border-style: double;
-            border-left: none;
-            border-right: none;
-            border-color: var(--text-color-2);
-            border-top: 2px solid var(--text-color-2 );
-            padding: 16px 16px;
-            font-size: 0.9rem;
-
-          }
-
-          .total-deb2 {
-            border-style: double;
-            border-left: none;
-            border-right: none;
-            border-color: var(--text-color-2);
-            border-top: 2px solid var(--text-color-2);
-            text-align: right;
-            font-weight: 500;
-            font-size: 0.8rem;;
-            
-
-          }
-
-          .total-cred2 {
-            border-style: double;
-            border-left: none;
-            border-right: none;
-            border-color: var(--text-color-2);
-            border-top: 2px solid var(--text-color-2);
-            text-align: right;
-            font-weight: 500;
-            font-size:0.8rem;;
-            
-
-          }
-
-          td {
-           
-            font-weight: 500;
-            padding: 16px 55px;
-          }
-  
-          .td-deb2, .td-cred2 {
-            text-align: right;
-          }
-        }
-  
-        .tr-total2 {
-          border-style: double;
-          border-left: none;
-          border-right: none;
-          border-color: var(--subtext-color);
-          border-bottom: 2px double var(--subtext-color);
-         
-          
-  
-          //border-bottom: 2px double var(--black);
-  
-          .td-debtot2, .td-credtot2 {
-            text-align: right;
-          }
-        }
-  
-        tr:hover {
-          td {
-            cursor: pointer;
-            background-color: var(--grey);
-            // color: var(--primary-color);
-          }
-        }
-      }
-    }
-
-
-    .table-content {
-      width: 100%;
-      margin: 20px 0;
-      font-size: 0.8rem;
-      overflow: hidden;
-      border-collapse: collapse;
-  
-      thead {
-        th {
-          
-          text-align: left;
-          font-weight: 400;
-          padding: 12px 16px;
-          border-top: 1px solid var(--text-color-2);
-          border-bottom: 1px solid var(--text-color-2);
-        }
-  
-        .th-cred, .th-deb {
-          border-left: 1px dotted var(--border-color);
-          text-align: right;
-        }
-      }
-  
-      tbody {
-        tr {
-          //border-bottom: 1px solid var(--border-color);
-       
-          .titles{
-            padding: 16px 16px;
-          }
-          td {
-           
-            font-weight: 500;
-            padding: 16px 55px;
-          }
-          
-          .td-deb3, .td-cred3 {
-            text-align: right;
-          }
-        }
-  
-        .tr-total3 {
-          border-style: double;
-          border-left: none;
-          border-right: none;
-          border-color: var(--subtext-color);
-         
-          border-bottom: 2px double var(--subtext-color);
-          
-         
-          
-  
-          //border-bottom: 2px double var(--black);
-  
-          .td-debtot3, .td-credtot3 {
-            text-align: right;
-          }
-        }
-        .tr-total5{                                                    
-          border-style: double;
-          border-left: none;
-          border-right: none;
-          border-top: none;
-          border-color: var(--subtext-color);
+          border-top: 2px solid var(--text-color-2);
           padding: 16px 16px;
-
-          border-bottom: 2px double var(--subtext-color);
+          font-size: 0.9rem;
         }
-        tr:hover {
-          td {
-            cursor: pointer;
-            background-color: var(--table-hover);
-            // color: var(--primary-color);
-          }
+
+        .total-deb2 {
+          border-left: none;
+          border-right: none;
+          border-color: var(--text-color-2);
+          border-top: 2px solid var(--text-color-2);
+          text-align: right;
+          font-weight: 500;
+          font-size: 0.8rem;
+        }
+
+        .total-cred2 {
+          border-left: none;
+          border-right: none;
+          border-color: var(--text-color-2);
+          border-top: 2px solid var(--text-color-2);
+          text-align: right;
+          font-weight: 500;
+          font-size: 0.8rem;
+        }
+
+        td {
+          font-weight: 500;
+          padding: 16px 16px 16px 30px;
+        }
+
+        .td-deb2,
+        .td-cred2 {
+          text-align: right;
+        }
+      }
+
+      .tr-total2 {
+        border-style: double;
+        border-left: none;
+        border-right: none;
+        border-color: var(--subtext-color);
+        border-bottom: 3px double var(--subtext-color);
+
+        .td-debtot2,
+        .td-credtot2 {
+          text-align: right;
+        }
+      }
+
+      tr:hover {
+        td {
+          cursor: pointer;
+          background-color: var(--grey);
         }
       }
     }
   }
 
-  /* Delete Modal */
-.del-modal {
+  .table-content {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.8rem;
+    overflow: hidden;
+    border-collapse: collapse;
+
+    tbody {
+      tr {
+
+        .titles {
+          padding: 16px 16px;
+        }
+        td {
+          font-weight: 500;
+          padding: 16px 16px 16px 30px;
+        }
+
+        .td-deb3,
+        .td-cred3 {
+          text-align: right;
+        }
+      }
+
+      .tr-total3 {
+        border-style: double;
+        border-left: none;
+        border-right: none;
+        border-color: var(--subtext-color);
+
+        border-bottom: 3px double var(--subtext-color);
+
+        .td-debtot3,
+        .td-credtot3 {
+          text-align: right;
+        }
+      }
+      .tr-total5 {
+        border-style: double;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-color: var(--subtext-color);
+        padding: 16px 16px;
+
+        border-bottom: 3px double var(--subtext-color);
+      }
+      tr:hover {
+        td {
+          cursor: pointer;
+          background-color: var(--table-hover);
+          // color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+/* Modal */
+.modal-bg {
   position: fixed;
   background: var(--modal-overlay);
   top: 0;
@@ -570,8 +505,7 @@
     }
   }
 }
-  
-  @page {
-    size: letter;
-  }
-  
+
+@page {
+  size: letter;
+}

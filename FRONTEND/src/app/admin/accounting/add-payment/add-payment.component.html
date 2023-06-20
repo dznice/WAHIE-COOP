@@ -52,7 +52,7 @@
             <div class="customerPayment">
               <label> Transaction No. </label>
 
-              <ng-select class="transactionNum" formControlName="transactionNo" (change)="changeTNo()">
+              <ng-select class="transactionNum" formControlName="transactionNo" [clearable]="false" (change)="changeTNo()">
                 <ng-option *ngFor="let item of transactionNOs" [value]="item.transaction_number">
                   {{ item.transaction_number }}
                 </ng-option>
@@ -126,10 +126,9 @@
               <tfoot>
                 <tr class="total">
                   <td></td>
-                  <td>TOTAL</td>
-                  <td>{{ total_debit }}</td>
-                  <td>{{ total_credit }}</td>
-                  <td></td>
+                  <td class="td-total">TOTAL</td>
+                  <td class="td-totdeb">{{ total_debit | number:'1.2-2'}}</td>
+                  <td class="td-totcred">{{ total_credit | number:'1.2-2'}}</td>
                 </tr>
               </tfoot>
             </table>

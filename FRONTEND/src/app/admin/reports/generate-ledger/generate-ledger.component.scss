@@ -16,16 +16,102 @@
   flex-wrap: wrap;
   color: #fff9f9;
   padding-left: 2rem;
-  margin:-20px -25px 0px -35px ;
+  margin: -20px -25px 0px -35px;
   z-index: 1000000;
 
-  .table-filter {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  .filter-cont {
+    display: grid;
 
-    .filter-field1 {
+    .table-filter {
+      grid-column: 1;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+  
+      .filter-field1 {
+        display: flex;
+        //width: calc(60% / 2 - 4px);
+        flex-direction: column;
+        margin: 4px 0;
+  
+        label {
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--text-color-3);
+          margin: 0 4px;
+        }
+
+        .account, .member {
+          margin: 4px 8px 0 0;
+        }
+
+        .account ::ng-deep .ng-select-container,
+        .member ::ng-deep .ng-select-container {
+          font-family: "Poppins", sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--text-color-2);
+          border-radius: 0.5rem;
+          border: 1px solid var(--border-color);
+          background-color: var(--panel-color);
+          height: 36px;
+
+          .ng-input {
+            > input {
+              font-family: "Poppins", sans-serif;
+              color: var(--text-color-2);
+              font-size: 14px;
+              padding: 2px 0;
+            }
+          }
+        }
+  
+        .account ::ng-deep .ng-select-container {
+          min-width: 360px;
+          max-width: 360px;
+        }
+
+        .member ::ng-deep .ng-select-container {
+          min-width: 240px;
+          max-width: 240px;
+        }
+      
+        .account ::ng-deep .ng-control,
+        .member ::ng-deep .ng-control {
+          min-height: 0px;
+          border-radius: 0.5rem;
+        }
+  
+        .account ::ng-deep .ng-dropdown-panel,
+        .member ::ng-deep .ng-dropdown-panel {
+          width: 100%;
+          margin-top: 0.36rem;
+          border-radius: 0.5rem;
+          border: 1px solid var(--border-color);
+          background-color: var(--panel-color);
+          font-size: 14px;
+        }
+  
+        .account ::ng-deep .ng-dropdown-panel .ng-option,
+        .member ::ng-deep .ng-dropdown-panel .ng-option {
+          background-color: transparent;
+          font-size: 14px;
+        }
+  
+        .account ::ng-deep .ng-dropdown-panel .ng-option:hover,
+        .member ::ng-deep .ng-dropdown-panel .ng-option:hover {
+          background-color: var(--select-hover);
+        }
+  
+        .account ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
+        .member ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+          color: var(--text-color-2);
+          font-size: 14px;
+        }
+      }
+    }
+
+    .filter-field2 {
       display: flex;
       width: calc(20% - 10px);
       flex-direction: column;
@@ -43,98 +129,19 @@
         font-family: "Poppins", sans-serif;
         font-size: 16px;
         font-weight: 500;
-        color: var(--text-color-3);
-        border-radius: 0.5rem;
-        border: 1px solid var(--border-color);
-        background-color: var(--panel-color);
-        padding: 0 10px;
-        height: 36px;
-        margin: 8px 0 0;
-      }
-
-      .account ::ng-deep .ng-select-container , 
-      .member ::ng-deep .ng-select-container {
-        border-radius: 0.5rem;
-
-        .ng-input {
-          > input {
-            font-family: "Poppins", sans-serif;
-            color: var(--text-color-2);
-            padding: 3px 5px;
-            
-          }
-        }
-      }
-
-      .account ::ng-deep .ng-control,
-      .member ::ng-deep .ng-control {
-        min-height: 0px;
-        border-radius: 0.5rem;
-      }
-      
-      .account ::ng-deep .ng-dropdown-panel,
-      .member ::ng-deep .ng-dropdown-panel {
-        width: 100%;
-        margin-top: 0.36rem;
-        border-radius: 0.5rem;
-        border-top: 1px solid var(--border-color);
-        background-color: var(--panel-color);
-      }
-      
-      .account ::ng-deep .ng-dropdown-panel .ng-option,
-      .member ::ng-deep .ng-dropdown-panel .ng-option {
-        background-color: transparent;
-      }
-      
-      .account ::ng-deep .ng-dropdown-panel .ng-option:hover,
-      .member ::ng-deep .ng-dropdown-panel .ng-option:hover {
-        background-color: var(--select-hover);
-      }
-      
-      .account ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
-      .member ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
         color: var(--text-color-2);
-      }
-    }
-
-    .filter-field2 {
-      display: flex;
-      width: calc(18% - 10px);
-      flex-direction: column;
-      margin: 4px 0;
-
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-color-3);
-      }
-
-      input,
-      select {
-        outline: none;
-        font-family: "Poppins", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--text-color-3);
         border-radius: 0.5rem;
         border: 1px solid var(--border-color);
         background-color: var(--panel-color);
         padding: 0 10px;
         height: 36px;
-        //margin: 8px 0 0;
+        margin: 4px 8px 0 0;
       }
     }
-    .filter-field3 {
-      display: flex;
-      width: calc(15% - 10px);
-      flex-direction: column;
-      margin: 4px 0;
 
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-color-3);
-      }
+    .btn-grp {
+      grid-column: 2;
+      text-align: right;
 
       .btn-generate {
         width: 130px;
@@ -146,8 +153,8 @@
         background-color: var(--primary-color);
         color: var(--white);
         align-self: end;
-        margin-right: 2rem;
-        margin-top: 1rem;
+        margin-right: 1.45rem;
+        margin-top: 1.75rem;
       }
 
       .btn-generate:hover {

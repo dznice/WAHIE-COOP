@@ -9,41 +9,39 @@
 
   <div class="print">
     <div class="save"> Save report as:
-    </div> 
-    <div class="PDF"> 
-        <button (click)="showDel(1)"  class="ti ti-file-text PDF-icon" ></button>
-        <button (click)="generateExcel()" class="ti ti-file-spreadsheet excel-icon"></button>
-      </div>
+    </div>
+    <div class="PDF">
+      <button (click)="showDel(1)" class="ti ti-file-text PDF-icon"></button>
+      <button (click)="generateExcel()" class="ti ti-file-spreadsheet excel-icon"></button>
+    </div>
 
-      <section>
-        <div>
-          <div class="del-modal" *ngIf="delModal === 1">
-            <div class="modal-wrapper">
-              <div class="modal-header">
-                <span class="header-title">Select Size:</span>
-                <i class="ti ti-x" (click)="showDel(2)"></i>
-              </div>
+    <section>
+      <div>
+        <div class="modal-bg" *ngIf="delModal === 1">
+          <div class="modal-wrapper">
+            <div class="modal-header">
+              <span class="header-title">Select size:</span>
+              <i class="ti ti-x" (click)="showDel(2)"></i>
+            </div>
 
-              <div class="modal-body">
-                <span class="text-bold">Choose A Paper Size?</span>
-                <br>
-                <span class="text-muted">This cannot be undone.</span>
-              </div>
+            <div class="modal-body">
+              <span class="text-bold">Choose a paper size</span>
+            </div>
 
-              <div class="modal-footer">
-                <button class="btn btn-close" type="button" (click)="showDel(2)">
-                  Close
-                </button>
-                <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button> -->
-                <!-- <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
-                <button (click)="download('a4')" (click)="showDel(2)" class="btn btn-save" >A4</button>
-                <button (click)="download('legal')" (click)="showDel(2)" class="btn btn-save" >Legal</button>
-              </div>
+            <div class="modal-footer">
+              <button class="btn btn-close" type="button" (click)="showDel(2)">
+                Close
+              </button>
+              <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button> -->
+              <!-- <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
+              <button (click)="download('a4')" (click)="showDel(2)" class="btn btn-save">A4</button>
+              <button (click)="download('legal')" (click)="showDel(2)" class="btn btn-save">Legal</button>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  </div>
 
 
   <section class="main-section" id="contentToConvert">
@@ -72,7 +70,7 @@
           <thead>
             <tr>
               <th>Accounts</th>
-              <th>Note</th>
+              <th class="th-note">Note</th>
               <th class="th-cred">Balance last {{ oneYearAgo | date:'y' }}</th>
               <th class="th-deb">Balance this {{ maxDate | date:'y' }}</th>
             </tr>
@@ -87,10 +85,10 @@
                 <td></td>
                 <td></td>
               </tr>
-              <ng-container class="itemss" *ngFor="let item of assets;let i = index" >
+              <ng-container class="itemss" *ngFor="let item of assets;let i = index">
                 <tr>
                   <td>{{ item.result.journal_name }}</td>
-                  <td><input type="text"  id="curAsset{{i}}" value= '{{ CurrentAssetGet(i)}}' size="1" (keyup.enter)="CurrentAssetStore(i)"> </td><!--Note-->
+                  <td class="td-note"><input type="number" id="curAsset{{i}}" value='{{ CurrentAssetGet(i)}}' size="1" (keyup.enter)="CurrentAssetStore(i)"> </td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of passets">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -106,7 +104,7 @@
                 <td class="totass">Total Assets:</td>
                 <td class="total-cred"> </td> <!-- notes -->
                 <td class="total-cred" *ngIf="assets.length > 0">{{ passets.length > 0 ? (passets[passets.length - 1].total_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : ''  }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
                 <td class="total-deb" *ngIf="assets.length > 0">{{ assets.length > 0 ? (assets[assets.length - 1].total_asset |
                   currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
               </tr>
@@ -125,7 +123,7 @@
               <ng-container *ngFor="let item of otherAssets;let i=index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"  id="otherAsset{{i}}" value= '{{ otherAssetGet(i)}}' size="1" (keyup.enter)="otherAssetStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="otherAsset{{i}}" value='{{ otherAssetGet(i)}}' size="1" (keyup.enter)="otherAssetStore(i)"></td><!--Note-->
                   <td class="td-cred2">
                     <ng-container *ngFor="let items of potherAssets">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -141,7 +139,7 @@
                 <td class="totass">Total of Other Current Assets:</td>
                 <td class="total-cred"> </td><!--Note-->
                 <td class="total-cred" *ngIf="otherAssets.length > 0">{{ potherAssets.length > 0 ? (potherAssets[potherAssets.length - 1].total_other_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : ''  }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
                 <td class="total-deb" *ngIf="otherAssets.length > 0">{{ otherAssets.length > 0 ? (otherAssets[otherAssets.length - 1].total_other_asset |
                   currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens ) : '' }}</td>
               </tr>
@@ -151,40 +149,40 @@
             <!-- Non-Current Assets -->
             <ng-container *ngIf="nonAssets && nonAssets.length > 0">
               <tr class="tr-total3 tr-header">
-                <td class="titles">Non-Assets</td>
+                <td class="titles">Non-Current Assets</td>
                 <td></td>
                 <td></td>
               </tr>
               <ng-container *ngFor="let item of nonAssets;let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text" id="nonAsset{{i}}" value= '{{ nonAssetGet(i)}}' size="1" (keyup.enter)="nonAssetStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="nonAsset{{i}}" value='{{ nonAssetGet(i)}}' size="1" (keyup.enter)="nonAssetStore(i)"></td><!--Note-->
                   <td class="td-cred3">
-                    
+
                     <ng-container *ngFor="let items of pnonAssets">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
-                  
+
                   <td class="td-deb3">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
                 </tr>
               </ng-container>
               <!-- Total of Non-Current Assets -->
               <tr class="totals">
                 <td class="totass">Total of Non-Current Assets:</td>
-                <td class="total-cred" > </td> <!--Note---->
+                <td class="total-cred"> </td> <!--Note---->
                 <td class="total-cred" *ngIf="nonAssets.length > 0">{{ pnonAssets.length > 0 ? (pnonAssets[pnonAssets.length - 1].total_non_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : '' }}</td>
                 <td class="total-deb" *ngIf="nonAssets.length > 0">{{ nonAssets.length > 0 ? (nonAssets[nonAssets.length - 1].total_non_asset |
-                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : '' }}</td>
               </tr>
 
             </ng-container>
             <!-- Total of all assets -->
             <tr class="totals tr-allassets">
-              <td class="titles2">Total All Assets:</td>
+              <td class="titles2">Total of All Assets:</td>
               <td class="total-deb2"></td> <!--Note-->
               <td class="total-cred2">{{ calculateLastYearAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               <td class="total-deb2">{{ calculateAssetTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
@@ -203,7 +201,7 @@
               <ng-container *ngFor="let item of liabilities; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text" id="curLiab{{i}}" value= '{{ CurrentLiabGet(i)}}' size="1" (keyup.enter)="CurrentLiabStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="curLiab{{i}}" value='{{ CurrentLiabGet(i)}}' size="1" (keyup.enter)="CurrentLiabStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of pliabilities">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -219,9 +217,9 @@
                 <td class="totass">Total of Current Liabilities:</td>
                 <td class="total-cred"></td><!--Note-->
                 <td class="total-cred" *ngIf="liabilities.length > 0">{{ pliabilities.length > 0 ? (pliabilities[pliabilities.length - 1].total_liability |
-                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : '' }}</td>
                 <td class="total-deb" *ngIf="liabilities.length > 0">{{ liabilities.length > 0 ? (liabilities[liabilities.length - 1].total_liability |
-                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : '' }}</td>
               </tr>
             </ng-container>
 
@@ -233,7 +231,7 @@
               <ng-container *ngFor="let item of nonLiabilities; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"  id="nonLiab{{i}}" value= '{{ nonLiabGet(i)}}' size="1" (keyup.enter)="nonLiabStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="nonLiab{{i}}" value='{{ nonLiabGet(i)}}' size="1" (keyup.enter)="nonLiabStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of pnonLiabilities">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -247,9 +245,11 @@
               <!-- Total of Non-Current Liabilities -->
               <tr class="totals">
                 <td class="totass">Total of Non-Current Liabilities:</td>
-                <td class="total-cred" ></td><!--Note-->
-                <td class="total-cred" *ngIf="nonLiabilities.length > 0">{{ pnonLiabilities.length > 0 ? (pnonLiabilities[pnonLiabilities.length - 1].total_non_liability | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
-                <td class="total-deb" *ngIf="nonLiabilities.length > 0">{{ nonLiabilities.length > 0 ? (nonLiabilities[nonLiabilities.length - 1].total_non_liability | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
+                <td class="total-cred"></td><!--Note-->
+                <td class="total-cred" *ngIf="nonLiabilities.length > 0">{{ pnonLiabilities.length > 0 ? (pnonLiabilities[pnonLiabilities.length -
+                  1].total_non_liability | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
+                <td class="total-deb" *ngIf="nonLiabilities.length > 0">{{ nonLiabilities.length > 0 ? (nonLiabilities[nonLiabilities.length -
+                  1].total_non_liability | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens) : '' }}</td>
               </tr>
             </ng-container>
 
@@ -261,12 +261,12 @@
               <ng-container *ngFor="let item of equity; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"   id="equity{{i}}" value= '{{ equityGet(i)}}' size="1" (keyup.enter)="equityStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="equity{{i}}" value='{{ equityGet(i)}}' size="1" (keyup.enter)="equityStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of pequity">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens  }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -276,10 +276,10 @@
               <!-- Total of Equity -->
               <tr class="totals">
                 <td class="totass">Total of Equity:</td>
-                <td  class="total-cred"></td> <!--Note-->
+                <td class="total-cred"></td> <!--Note-->
                 <td class="total-cred"></td>
                 <td class="total-deb" *ngIf="equity.length > 0">{{ equity.length > 0 ? (equity[equity.length - 1].total_equity |
-                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : ''  }}</td>
+                  currency:'PHP':'symbol-narrow':'1.2-2'| minusSignToParens) : '' }}</td>
               </tr>
             </ng-container>
 
@@ -294,7 +294,7 @@
               <ng-container *ngFor="let item of sscc; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text" id="sscc{{i}}" value= '{{ ssccGet(i)}}' size="1" (keyup.enter)="ssccStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="sscc{{i}}" value='{{ ssccGet(i)}}' size="1" (keyup.enter)="ssccStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of psscc">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -312,7 +312,7 @@
               <ng-container *ngFor="let item of src; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text" id="src{{i}}" value= '{{ srcGet(i)}}' size="1" (keyup.enter)="srcStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="src{{i}}" value='{{ srcGet(i)}}' size="1" (keyup.enter)="srcStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of psrc">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -330,7 +330,7 @@
               <ng-container *ngFor="let item of srp; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text" id="srp{{i}}" value= '{{srpGet(i)}}' size="1" (keyup.enter)="srpStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="srp{{i}}" value='{{srpGet(i)}}' size="1" (keyup.enter)="srpStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of psrp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -348,7 +348,7 @@
               <ng-container *ngFor="let item of pscp; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"id="pscp{{i}}" value= '{{ pscpGet(i)}}' size="1" (keyup.enter)="pscpStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="pscp{{i}}" value='{{ pscpGet(i)}}' size="1" (keyup.enter)="pscpStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of ppscp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -366,7 +366,7 @@
               <ng-container *ngFor="let item of tscp; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"  id="tscp{{i}}" value= '{{tscpGet(i)}}' size="1" (keyup.enter)="tscpStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="tscp{{i}}" value='{{tscpGet(i)}}' size="1" (keyup.enter)="tscpStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of ptscp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -384,7 +384,7 @@
               <ng-container *ngFor="let item of dscp; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"  id="dscp{{i}}" value= '{{ dscpGet(i)}}' size="1" (keyup.enter)="dscpStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="dscp{{i}}" value='{{ dscpGet(i)}}' size="1" (keyup.enter)="dscpStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of pdscp">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -402,7 +402,7 @@
               <ng-container *ngFor="let item of uns ; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text" id="uns{{i}}" value= '{{ unsGet(i)}}' size="1" (keyup.enter)="unsStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="uns{{i}}" value='{{ unsGet(i)}}' size="1" (keyup.enter)="unsStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of puns">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -420,7 +420,7 @@
               <ng-container *ngFor="let item of nl; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"  id="nl{{i}}" value= '{{ nlGet(i)}}' size="1" (keyup.enter)="nlStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="nl{{i}}" value='{{ nlGet(i)}}' size="1" (keyup.enter)="nlStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of pnl">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -438,12 +438,12 @@
               <ng-container *ngFor="let item of dg ; let i = index">
                 <tr>
                   <td>{{item.result.journal_name }}</td>
-                  <td><input type="text"  id="dg{{i}}" value= '{{ dgGet(i)}}' size="1" (keyup.enter)="dgStore(i)"></td><!--Note-->
+                  <td class="td-note"><input type="number" id="dg{{i}}" value='{{ dgGet(i)}}' size="1" (keyup.enter)="dgStore(i)"></td><!--Note-->
                   <td class="td-cred">
                     <ng-container *ngFor="let items of pdg">
                       <ng-container *ngIf="item.result.journId === items.result.journId">
                         {{ items.result.total_balance !== null ? items.result.total_balance : item.result.last_year_balance |
-                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens  }}
+                        currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
                   </td>
@@ -458,25 +458,25 @@
               </tr>
               <tr>
                 <td>Reserve Fund</td>
-                <td><input type="text" id="reserveFund" value= '{{ reserveFundGet()}}' size="1" (keyup.enter)="reserveFundStore()" ></td><!--Note-->
+                <td class="td-note"><input type="number" id="reserveFund" value= '{{ reserveFundGet()}}' size="1" (keyup.enter)="reserveFundStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.preserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
                 <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               </tr>
               <tr>
                 <td>Coop. Education & Training Fund</td>
-                <td><input type="text" id="coopEduc" value= '{{ coopEducGet() }}' size="1" (keyup.enter)="coopEducStore()" ></td><!--Note-->
+                <td class="td-note"><input type="number" id="coopEduc" value= '{{ coopEducGet() }}' size="1" (keyup.enter)="coopEducStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.pcetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
                 <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               </tr>
               <tr>
                 <td>Community Development Fund</td>
-                <td><input type="text" id="cdf" value= '{{ cdfGet()}}' size="1" (keyup.enter)="cdfStore()" ></td><!--Note-->
+                <td class="td-note"><input type="number" id="cdf" value= '{{ cdfGet()}}' size="1" (keyup.enter)="cdfStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.pcdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
                 <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               </tr>
               <tr>
                 <td>Optional Fund</td>
-                <td><input type="text" id="opFund" value= '{{ opFundGet()}}' size="1" (keyup.enter)="opFundStore()" ></td><!--Note-->
+                <td class="td-note"><input type="number" id="opFund" value= '{{ opFundGet()}}' size="1" (keyup.enter)="opFundStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.poptionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
                 <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               </tr>
@@ -508,6 +508,5 @@
       </div>
     </section>
   </section>
-  </main>
-
-  
+  <br>
+</main>

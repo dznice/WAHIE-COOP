@@ -115,7 +115,7 @@
                 *ngIf="
                   emails !== '' &&
                   passwords !== '' &&
-                  passwords !== '(?=.*[0-9])(?=.*[!@#$%^&*()_])[a-zA-Z0-9!@#$%^&*()_]{8,16}$' &&
+                  passwords !== '(?=.*[0-9])(?=.*[!@#$%^&*()_)[a-zA-Z0-9!@#$%^&*()_]{8,16}$' &&
                   cpasswords !== '' &&
                   
                   chkEnable.checked
@@ -163,7 +163,7 @@
                 <p for="acceptTerms">
                   I agree to the
                   <a class="condition" (click)="showTerms(1)"
-                    >Terms & Condition</a
+                    >Privacy Policy.</a
                   >
                 </p>
               </div>
@@ -318,13 +318,13 @@
   <div class="modal-bg" *ngIf="termsModal === 1">
     <div class="modal-wrapper">
       <div class="modal-header">
-        <span class="header-title">Privacy Statements</span>
+        <span class="header-title">Privacy Policy of WAHffle</span>
       </div>
 
       <div class="modal-body">
         <ol>
           <li>
-            <h3>Introductions</h3>
+            <h3>Introduction</h3>
             <p>
               WAHffle respects your individual privacy and protects any personal
               information that you share with us. We commit to secure the
@@ -349,39 +349,138 @@
             <p>
               We may collect, store and transfer the following information:
             </p>
+            <ul>
+              <li>
+                Name and address
+              </li>
+              <li>
+                Contact information including email address
+              </li>
+              <li>
+                Demographic information such as postcode, age, gender and employment
+              </li>
+              <li>
+                Other information relevant to individual’s request and/or offers
+              </li>
+            </ul>
           </li>
           <li>
-            <h3>Prohibited activities</h3>
+            <h3>Purpose of Collected Data</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-              quidem doloribus cumque vero, culpa voluptates dolorum
-              reprehenderit nihil nisi odit necessitatibus voluptate
-              voluptatibus magni ducimus sed accusamus illo nobis veniam.
+              You consent that your collected Personal Information may be used:
+            </p>
+            <ul>
+              <li>
+                To help improve our data and services and customize user experience;
+              </li>
+              <li>
+                To participate in and facilitate transactions;
+              </li>
+              <li>
+                To deliver the products and services that you have requested;
+              </li>
+              <li>
+                To follow safety, security, public service or legal requirements and processes;
+              </li>
+              <li>
+                To process information for statistical, analytical, and research purposes; and
+              </li>
+              <li>
+                To identify and prevent errors and inefficiencies due to misuse of the platform;
+              </li>
+              <li>
+                To enforce our terms and conditions;
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h3>Security</h3>
+            <p>
+              We are committed to ensuring that your information is secure. In order to prevent unauthorized access or disclosure, we have put in place suitable
+              physical, electronic and managerial procedures to safeguard and secure the information we collect.
             </p>
           </li>
           <li>
-            <h3>Termination clause</h3>
+            <h3>Our Disclosure of your Personal Information to Third Parties</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-              quidem doloribus cumque vero, culpa voluptates dolorum
-              reprehenderit nihil nisi odit necessitatibus voluptate
-              voluptatibus magni ducimus sed accusamus illo nobis veniam.
+              We may share your personal information with third parties only in the ways that are described in this Privacy Statement:
+            </p>
+            <ul>
+              <li>
+                We may allow a potential acquirer or merger partner to review our databases, although we would restrict their use and disclosure of this data
+                during the diligence phase;
+              </li>
+              <li>
+                As required by law enforcement, government officials, or other third parties pursuant to a subpoena, court order, or other legal process or
+                requirement applicable to our Agency;
+              </li>
+              <li>
+                We may transfer personal information to third parties for any legally permissible purpose at our sole discretion; and
+              </li>
+              <li>
+                We may share your information with third parties with your consent or direction to do so.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h3>Limiting Use, Disclosure, Retention</h3>
+            <p>
+              WAHffle identifies the purposes for which the information is being collected before or at the time of collection. The collection of your personal
+              information will be limited to that which is needed for the purposes identified by us. Unless you consent or we are required by law, we will only
+              use the information for the purposes for which it was collected. If we will be processing your personal data for another purpose later on, we will
+              seek your further legal permission or consent; except where the other purpose is compatible with the original purpose. We will keep your personal
+              data only as long as required to serve those purposes. We will also retain and use your personal data for as long as necessary to comply with our
+              legal obligations, resolve disputes, and enforce our agreements.
             </p>
           </li>
           <li>
-            <h3>Governing law</h3>
+            <h3>Accuracy of Personal Data</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur,
-              quidem doloribus cumque vero, culpa voluptates dolorum
-              reprehenderit nihil nisi odit necessitatibus voluptate
-              voluptatibus magni ducimus sed accusamus illo nobis veniam.
+              We do our best to ensure that the personal data we hold and use is accurate. We rely on the clients we do business with to disclose to us all
+              relevant information and to inform us of any changes.
+            </p>
+          </li>
+          <li>
+            <h3>Additional Rights (RA 10173 Data Privacy Act of 2012)</h3>
+            <ul>
+              <li>
+                <b>Right of erasure or blocking.</b> You may have a broader right to erasure of personal data that we hold about you.
+              </li>
+              <li>
+                <b>Right to object.</b> You may have the right to request that we stop processing your personal data and/or to stop sending you marketing
+                communications.
+              </li>
+              <li>
+                <b>Right to restrict processing.</b> You may have the right to request that we restrict processing of your personal data in certain
+                circumstances.
+              </li>
+              <li>
+                <b>Right to access.</b> In certain circumstances, you may have the right to be provided with your personal data in a structured, machine
+                readable and
+                commonly used format and to request that we transfer the personal data to another data controller without hindrance.
+              </li>
+              <li>
+                If you would like to exercise any of the above rights, please contact our support team or contact our Data Protection Officer. We will consider
+                your request in accordance with applicable laws. To protect your privacy and security, we may take steps to verify your identity before
+                complying with the request.
+              </li>
+              <li>
+                You also have the right to complain to a data protection authority about our collection and use of your personal data.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h3>Changes to our Privacy Statement</h3>
+            <p>
+              WAHffle may amend this statement at any time by posting a new version. It is your responsibility to review this statement periodically as your
+              continued use of our products and services represents your agreement with the then-current statement.
             </p>
           </li>
         </ol>
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-close" (click)="showTerms(2)">Decline</button>
+        <button class="btn btn-close" (click)="declineTerms()">Decline</button>
         <button class="btn btn-save" (click)="acceptTerms()">Accept</button>
       </div>
     </div>

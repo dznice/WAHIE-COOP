@@ -1,46 +1,46 @@
 <main>
-
     <div class="sticky-div">
-        <br/>
+        <br />
         <form [formGroup]="ledgerForm" (ngSubmit)="onSubmit()">
-        <span class="report-name">Subsidiary Ledger</span>
-        <br/>
-        
-        <div class="table-filter">
-            <div class="filter-field1">
-                <label>Journal Account</label>
-                <ng-select formControlName="account" class="account">
-                    <ng-option *ngFor="let libJournal of libJournals" [value]="libJournal.id">
-                        {{ libJournal.journal_number }}
-                        {{ libJournal.journal_name }}
-                    </ng-option>
-                </ng-select>
+            <span class="report-name">Subsidiary Ledger</span>
+            <br />
+
+            <div class="filter-cont">
+                <div class="table-filter">
+                    <div class="filter-field1">
+                        <label>Journal Account</label>
+                        <ng-select formControlName="account" class="account">
+                            <ng-option *ngFor="let libJournal of libJournals" [value]="libJournal.id">
+                                {{ libJournal.journal_number }}
+                                {{ libJournal.journal_name }}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="filter-field1">
+                        <label>Member</label>
+                        <ng-select formControlName="member" class="member">
+                            <ng-option *ngFor="let member of members" [value]="member.id">
+                                {{ member.last_name }}, {{ member.first_name }}{{ member.middle_name }}
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="filter-field2">
+                        <label>Start Date</label>
+                        <input type="date" formControlName="startDate" max="{{ maxDate }}" (change)="denyDate()" />
+                    </div>
+                    <div class="filter-field2">
+                        <label>End Date</label>
+                        <input type="date" formControlName="endDate" max="{{ maxDate }}" (change)="denyDate()" />
+                    </div>
+                </div>
+
+                <div class="btn-grp">
+                    <button type="submit" class="btn-generate">Generate</button>
+                </div>
             </div>
-            <div class="filter-field1">
-                <label>Member</label>
-                <ng-select formControlName="member" class="member">
-                    <ng-option *ngFor="let member of members"[value]="member.id">
-                        {{ member.last_name }}, {{ member.first_name }}{{ member.middle_name }} 
-                    </ng-option>
-                </ng-select>
-            </div>
-            <div class="filter-field2">
-                <label>Start Date</label>
-                <input type="date" formControlName="startDate" max="{{ maxDate }}" (change)="denyDate()">
-            </div>
-            <div class="filter-field2">
-                <label>End Date</label>
-                <input type="date" formControlName="endDate" max="{{ maxDate }}" (change)="denyDate()">
-            </div>
-            <div class="filter-field3">
-                <button type="submit" class="btn-generate">Generate</button>
-            </div>
-            
-        </div>
-            
         </form>
+        <br>
     </div>
 
     <app-sl-accounts *ngIf="showReport" [formData]="submittedFormData"></app-sl-accounts>
-    <!-- <app-sl-members *ngIf="showReport" [formData]="submittedFormData"></app-sl-members> -->
 </main>

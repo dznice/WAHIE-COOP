@@ -5,7 +5,6 @@
     <br />
   </div>
   <br />
-  <br />
 
   <div class="print">
     <div class="save"> Save report as:
@@ -143,12 +142,13 @@
             </tr>
             <tr class="tr-total">
               <td class="total">Total</td>
-              <td class="td-cred3">{{ calculateAssetandRevenueTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
-              <td class="td-deb2">{{ calculateLiabilityEquityandExpensesTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="td-cred3"><b>{{ calculateAssetandRevenueTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</b></td>
+              <td class="td-deb2"><b>{{ calculateLiabilityEquityandExpensesTotalBalance() | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</b></td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
   </section>
+  <br>
 </main>

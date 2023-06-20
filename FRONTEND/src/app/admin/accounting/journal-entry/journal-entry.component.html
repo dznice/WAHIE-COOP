@@ -56,7 +56,7 @@
               <td class="journallabel">{{ i + 1 }}</td>
 
               <td class="beneinput member-name">
-                <ng-select class="try" formControlName="name" (change)="getNameID(i)" [editableSearchTerm]="true">
+                <ng-select class="try" formControlName="name" (change)="getNameID(i)" [editableSearchTerm]="true" [clearable]="false">
                   <ng-option class="try" *ngFor="let member of members" [value]="member.id">
                     {{ member.id }} {{ member.first_name }}{{ member.middle_name }} {{ member.last_name }}
                   </ng-option>
@@ -68,7 +68,7 @@
               </td>
 
               <td class="beneinput accounts">
-                <ng-select class="try" formControlName="account" [editableSearchTerm]="true" #select>
+                <ng-select class="try select-acc" formControlName="account" [editableSearchTerm]="true" #select>
                   <ng-template ng-header-tmp>
                     <div (click)="show(1)" (click)="closeSelect(select)" class="ng-header">
                       <a class="submit">
@@ -131,8 +131,8 @@
               <td></td>
               <td></td>
               <td><label class="totaltext">TOTAL</label></td>
-              <td class="total"><label class="totalnum">{{ total_debit }}</label></td>
-              <td class="total"><label class="totalnum">{{ total_credit }}</label></td>
+              <td class="total"><label class="totalnum">{{ total_debit | number:'1.2-2' }}</label></td>
+              <td class="total"><label class="totalnum">{{ total_credit | number:'1.2-2' }}</label></td>
             </tr>
           </tbody>
         </table>

@@ -1,5 +1,3 @@
-
-
 <main>
   <h1 class="title">Member Accounts</h1>
 
@@ -19,13 +17,11 @@
           <th>Status</th>
         </thead>
 
-        <tbody
-          *ngFor="
+        <tbody *ngFor="
             let user of memAccounts
               | search : searchText
               | paginate : { itemsPerPage: 10, currentPage: p }
-          "
-        >
+          ">
           <tr>
             <td (click)='memberInfo(user.email)'>{{ user.name }}</td>
             <td (click)='memberInfo(user.email)'>{{ user.email }}</td>
@@ -33,35 +29,19 @@
             <td>
               <div *ngIf="user.status == 0">
                 <label class="switch-toggle">
-                  <input
-                    class="switch"
-                    input
-                    type="checkbox"
-                    (click)="deactivateTOactivate(user)"
-                  />
+                  <input class="switch" input type="checkbox" (click)="deactivateTOactivate(user)" />
                   <div class="slider"></div>
                 </label>
               </div>
               <div *ngIf="user.status == 1">
                 <label class="switch-toggle">
-                  <input
-                    class="switch"
-                    input
-                    type="checkbox"
-                    [(ngModel)]="isChecked"
-                    (click)="activateUser(user)"
-                    (change)="changeSelection($event, index)"
-                  />
+                  <input class="switch" input type="checkbox" [(ngModel)]="isChecked" (click)="activateUser(user)" (change)="changeSelection($event, index)" />
                   <div class="slider"></div>
                 </label>
               </div>
 
               <div *ngIf="user.status == 2">
-                <button
-                  type="submit"
-                  (click)="activateUser2(user)"
-                  class="btn btn-success"
-                >
+                <button type="submit" (click)="activateUser2(user)" class="btn btn-success">
                   Activate
                 </button>
               </div>
@@ -73,11 +53,7 @@
   </div>
 
   <div class="pagination-controls">
-    <pagination-controls 
-        [responsive]=true
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="p = $event">
-      </pagination-controls>
+    <pagination-controls [responsive]=true previousLabel="Prev" nextLabel="Next" (pageChange)="p = $event">
+    </pagination-controls>
   </div>
 </main>

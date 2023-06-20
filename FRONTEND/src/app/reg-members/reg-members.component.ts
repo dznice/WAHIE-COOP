@@ -125,6 +125,19 @@ export class RegMembersComponent implements OnInit, OnDestroy {
     }
   }
 
+  declineTerms() {
+    if (this.isChecked == false) {
+      this.isChecked = false;
+      this.showTerms(2);
+    } else if (this.isChecked == true) {
+      this.isChecked = false;
+      this.showTerms(2);
+    } else {
+      this.isChecked = false;
+      this.showTerms(2);
+    }
+  }
+
   constructor(
     @Inject(DOCUMENT) private _document: any, private fb: FormBuilder, private backend: BackendService, private token: TokenService,
     private route: Router, private Auth: AuthGuardService, private toast: NgToastService, private http: HttpClient) {
