@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
@@ -57,7 +57,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     private backend: BackendService,
     private route: Router,
     private toast: NgToastService,
-    @Inject(DOCUMENT) private _document: any,
+    @Inject(DOCUMENT) private _document: any
   ) {
     this.myProfile();
     this.myBene();
@@ -101,7 +101,6 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     this.showBarangay();
     this.showBarangayDesc();
     this.logSelectedValues();
-
   }
 
   id: any = localStorage.getItem('userData');
@@ -134,13 +133,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
       this.suffix = res.suffix;
       this.email = res.email;
       this.address = res.address;
-      this.mobile_number = [
-        res.mobile_number.slice(0, 3),
-        '-',
-        res.mobile_number.slice(3, 6),
-        '-',
-        res.mobile_number.slice(6),
-      ].join('');
+      this.mobile_number = [res.mobile_number.slice(0, 3), '-', res.mobile_number.slice(3, 6), '-', res.mobile_number.slice(6)].join('');
       this.birthdate = res.birthdate;
       this.civil_status = res.civil_status;
       this.company_address = res.company_address;
@@ -180,30 +173,28 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
       });
     } else {
       console.log(this.email);
-      this.http
-        .post('http://127.0.0.1:8000/api/users/changePass/' + this.email, this.form)
-        .subscribe(
-          (res: any) => {
-            this.toast.success({
-              detail: 'Success',
-              summary: 'Password changed successfuly',
-              duration: 2000,
-              sticky: false,
-              position: 'tr',
-            });
-            this.route.navigateByUrl('member/member-home');
-          },
+      this.http.post('http://127.0.0.1:8000/api/users/changePass/' + this.email, this.form).subscribe(
+        (res: any) => {
+          this.toast.success({
+            detail: 'Success',
+            summary: 'Password changed successfuly',
+            duration: 2000,
+            sticky: false,
+            position: 'tr',
+          });
+          this.route.navigateByUrl('member/member-home');
+        },
 
-          (error) => {
-            this.toast.error({
-              detail: 'Invalid current password',
-              summary: 'Please check the password you input',
-              duration: 2000,
-              sticky: false,
-              position: 'tr',
-            });
-          }
-        );
+        (error) => {
+          this.toast.error({
+            detail: 'Invalid current password',
+            summary: 'Please check the password you input',
+            duration: 2000,
+            sticky: false,
+            position: 'tr',
+          });
+        }
+      );
     }
   }
 
@@ -263,12 +254,10 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
       this.updateMemberform.selectedRegionDescription = this.region.find(
         (reg: { region_code: null }) => reg.region_code === this.updateMemberform.selectedRegion
       )?.region_description;
-      this.http
-        .get(`http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`)
-        .subscribe((res: any) => {
-          console.log(res);
-          this.province = res;
-        });
+      this.http.get(`http://127.0.0.1:8000/api/province/${this.updateMemberform.selectedRegion}`).subscribe((res: any) => {
+        console.log(res);
+        this.province = res;
+      });
     } else {
       this.province = [];
     }
@@ -278,15 +267,12 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     if (this.updateMemberform.selectedProvince) {
       console.log(this.selectedProvince);
       this.updateMemberform.selectedProvinceDescription = this.province.find(
-        (prov: { province_code: null }) =>
-          prov.province_code === this.updateMemberform.selectedProvince
+        (prov: { province_code: null }) => prov.province_code === this.updateMemberform.selectedProvince
       )?.province_description;
-      this.http
-        .get(`http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`)
-        .subscribe((res: any) => {
-          console.log(res);
-          this.cities = res;
-        });
+      this.http.get(`http://127.0.0.1:8000/api/city/${this.updateMemberform.selectedProvince}`).subscribe((res: any) => {
+        console.log(res);
+        this.cities = res;
+      });
     } else {
       this.cities = [];
     }
@@ -296,15 +282,12 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     if (this.updateMemberform.selectedCity) {
       console.log(this.selectedCity);
       this.updateMemberform.selectedCityDescription = this.cities.find(
-        (city: { city_municipality_code: null }) =>
-          city.city_municipality_code === this.updateMemberform.selectedCity
+        (city: { city_municipality_code: null }) => city.city_municipality_code === this.updateMemberform.selectedCity
       )?.city_municipality_description;
-      this.http
-        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
-        .subscribe((res: any) => {
-          console.log(res);
-          this.barangay = res;
-        });
+      this.http.get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`).subscribe((res: any) => {
+        console.log(res);
+        this.barangay = res;
+      });
     } else {
       this.barangay = [];
     }
@@ -314,12 +297,10 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     if (this.updateMemberform.selectedBarangay) {
       console.log(this.selectedBarangay);
 
-      this.http
-        .get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`)
-        .subscribe((res: any) => {
-          console.log(res);
-          this.barangay = res;
-        });
+      this.http.get(`http://127.0.0.1:8000/api/barangay/${this.updateMemberform.selectedCity}`).subscribe((res: any) => {
+        console.log(res);
+        this.barangay = res;
+      });
     } else {
       this.barangay = [];
     }
@@ -334,6 +315,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
   onEsc(event: KeyboardEvent) {
     console.log(event);
     this.edit(2);
+    this.addBene(2);
   }
 
   public updateMemberform = {
@@ -359,133 +341,137 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
 
   updateProfile() {
     console.log(this.updateMemberform);
-    this.http
-      .post('http://127.0.0.1:8000/api/profileUpdate' + '/' + this.email, this.updateMemberform)
-      .subscribe(
-        (res: any) => {
-          console.log(res);
-          location.reload();
-        },
-        (error) => {
-          this.toast.warning({
-            detail: 'Input is required',
-            summary: 'Please Check',
-            duration: 2000,
-            sticky: false,
-            position: 'tr',
-          });
-        }
-      );
+    this.http.post('http://127.0.0.1:8000/api/profileUpdate' + '/' + this.email, this.updateMemberform).subscribe(
+      (res: any) => {
+        console.log(res);
+        location.reload();
+      },
+      (error) => {
+        this.toast.warning({
+          detail: 'Input is required',
+          summary: 'Please Check',
+          duration: 2000,
+          sticky: false,
+          position: 'tr',
+        });
+      }
+    );
   }
 
-  
   addBeneficiary = 2;
+  delBeneficiary = -1;
   addBene(index: any) {
     this.addBeneficiary = index;
   }
 
-//bene
-row = [
-  {
-    benificiary_name: '',
-    benificiary_birthdate: '',
-    benificiary_relation: '',
-  },
-  {
-    benificiary_name: '',
-    benificiary_birthdate: '',
-    benificiary_relation: '',
-  },
-  {
-    benificiary_name: '',
-    benificiary_birthdate: '',
-    benificiary_relation: '',
-  },
-];
+  delBene(index:any) {
+    this.delBeneficiary = index;
+  }
 
-addTable() {
-  const obj = {
-    benificiary_name: '',
-    benificiary_birthdate: '',
-    benificiary_relation: '',
-    required: true,
+  @ViewChild('clickDel') clickDel: ElementRef;
+
+  clickDelRow() {
+    this.clickDel.nativeElement.dispatchEvent(new MouseEvent('click'));
+  }
+  
+
+  //bene
+  row = [
+    {
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
+    },
+    {
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
+    },
+    {
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
+    },
+    {
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
+    }
+  ];
+
+  addTable() {
+    const obj = {
+      benificiary_name: '',
+      benificiary_birthdate: '',
+      benificiary_relation: '',
+      required: true,
+    };
+    this.row.push(obj);
+  }
+
+  delModal = -1;
+  showDel(index: number) {
+    this.delModal = index;
+  }
+
+  deleteRow(x: number) {
+    this.row.splice(x, 1);
+    this.showDel(2);
+  }
+
+  public updateBeneForm = {
+    row: this.row,
   };
-  this.row.push(obj);
+  updateBene() {
+    this.http.post('http://127.0.0.1:8000/api/beneUpdate' + '/' + this.email, this.updateBeneForm).subscribe(
+      (res: any) => {
+        location.reload();
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Beneficiary Added',
+          duration: 2000,
+          sticky: false,
+          position: 'tr',
+        });
+      },
+      (error) => {
+        this.toast.warning({
+          detail: 'Input is required',
+          summary: 'Please Check',
+          duration: 2000,
+          sticky: false,
+          position: 'tr',
+        });
+      }
+    );
+  }
+
+  beneDel: any;
+
+
+
+  deleteBene(id: any) {
+    console.log(id);
+    this.http.post('http://127.0.0.1:8000/api/beneRemove' + '/' + id, this.beneDel).subscribe(
+      (res: any) => {
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Beneficiary Removed',
+          duration: 2000,
+          sticky: false,
+          position: 'tr',
+        });
+        this.myBene();
+      },
+      (error) => {
+        this.toast.warning({
+          detail: 'Input is required',
+          summary: 'Please Check',
+          duration: 2000,
+          sticky: false,
+          position: 'tr',
+        });
+      }
+    );
+  }
 }
-
-delModal = -1;
-showDel(index: number) {
-  this.delModal = index;
-}
-
-deleteRow(x: number) {
-  //var delBtn = confirm(' Do you want to delete ?');
-  // if (delBtn == true) {
-  //   s
-  // }
-  this.row.splice(x, 1);
-  this.showDel(2);
-}
-
-public updateBeneForm = {
-
-  row: this.row,
-
-};
-updateBene(){
-  this.http
-  .post('http://127.0.0.1:8000/api/beneUpdate' + '/' + this.email, this.updateBeneForm)
-  .subscribe(
-    (res: any) => {
-      location.reload();
-    this.toast.success({
-      detail: 'Success',
-      summary: 'Beneficiary Added',
-      duration: 2000,
-      sticky: false,
-      position: 'tr',
-    });
-    },
-    (error) => {
-      this.toast.warning({
-        detail: 'Input is required',
-        summary: 'Please Check',
-        duration: 2000,
-        sticky: false,
-        position: 'tr',
-      });
-    }
-  );
-}
-
-beneDel:any
-deleteMember(id:any){
-  console.log(id)
-  this.http
-  .post('http://127.0.0.1:8000/api/beneRemove' + '/' + id, this.beneDel)
-  .subscribe(
-    (res: any) => {
-    this.toast.success({
-      detail: 'Success',
-      summary: 'Beneficiary Removed',
-      duration: 2000,
-      sticky: false,
-      position: 'tr',
-    });
-    this.myBene()
-    },
-    (error) => {
-      this.toast.warning({
-        detail: 'Input is required',
-        summary: 'Please Check',
-        duration: 2000,
-        sticky: false,
-        position: 'tr',
-      });
-    }
-  );
-}
-
-}
-
-

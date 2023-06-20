@@ -118,24 +118,52 @@
 
       <div class="blog text">
         <div class="btn-grp">
-          <button (click)="addBene(1)" class="btn-edit">Add Beneficiary</button>
+          <button (click)="addBene(1)" class="btn-edit btn-bene">Add Beneficiary</button>
         </div>
         <br>
         <div class="second-tab">
-          
+
           <span>Beneficiary</span>
-       
+
           <div class="fields">
             <table *ngFor="let b of ben">
               <tr *ngIf="memId == b.benificiary_id">
-                
+
                 <div class="row2">
                   <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_name }}</td>
                   <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_birthdate | date : "MM/dd/yyyy" }}</td>
                   <td class="fieldsdata2" id="fieldsdataRow2">{{ b.benificiary_relation }}</td>
-                  
+
                 </div>
-                <td><button (click)="deleteMember( b.id )">Remove</button></td>
+                <td><button class="delbut" (click)="delBene(1)"><i class="ti ti-square-rounded-x "></i></button></td>
+
+                <!-- Delete Modal -->
+                <section>
+                  <div>
+                    <div class="modal-bg del-modal" *ngIf="delBeneficiary === 1">
+                      <div class="modal-wrapper">
+                        <div class="modal-header">
+                          <span class="header-title">Confirm delete</span>
+                          <i class="ti ti-x" (click)="delBene(2)"></i>
+                        </div>
+
+                        <div class="modal-body">
+                          <span class="text-bold">Are you sure you want to delete this?</span>
+                          <br>
+                          <span class="text-muted">This cannot be undone.</span>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button class="btn btn-close" type="button" (click)="delBene(2)">
+                            Close
+                          </button>
+                          <button class="btn btn-save" (click)="deleteBene(b.id)">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                
                 <br />
               </tr>
             </table>
@@ -162,7 +190,7 @@
                     <div class="input-field">
                       <label for="New">New Password</label>
                       <input [type]="changetype?'password':'text'" id="new_pass" name="new_pass" formControlName="new_pass" required [(ngModel)]="form.new_pass"
-                        minlength="8" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" 
+                        minlength="8" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
                         title="Password must be at least 8 characters, one letter, one number and one special character:" />
 
                       <div class="eye" (click)="viewpass()"><i [ngClass]="visible?'ti ti-eye-closed':'ti ti-eye'"></i></div>
@@ -307,7 +335,6 @@
             </div>
           </form>
         </div>
-        
 
         <div class="modal-footer">
           <button class="btn btn-close" type="button" (click)="edit(2)">Close</button>
@@ -318,100 +345,97 @@
     </div>
   </section>
 
+</main>
 
+<section>
+  <div class="add-modal" *ngIf="addBeneficiary === 1">
+    <div class="modal-wrapper">
+      <div class="modal-header">
+        <span class="header-title">Add Beneficiary</span>
+        <i class="ti ti-x" (click)="addBene(2)"></i>
+      </div>
 
-  <section>
-    <div class="modal-bg" *ngIf="addBeneficiary === 1">
+      <div class="modal-body">
+        
+        <form #updateBeneForm="ngForm" class="additional-info" *ngIf="isDisplayed">
+          <div class="bene-content">
+            <div class="header">
+              <label for="benificiary_name">Name</label>
+              <label for="benificiary_birthdate" class="dob">Date Of Birth</label>
+              <label for="benificiary_relation" class="rel">Relationship</label>
+            </div>
+
+            <div class="scroll">
+              <table class="tablebene">
+
+                <tr *ngFor="let item of row; let x = index">
+                  <td class="addbut">
+                    <button class="addbut" (click)="addTable()">
+                      <i class="ti ti-square-rounded-plus"></i>
+                    </button>
+                  </td>
+
+                  <td class="beneinput">
+                    <input type="text" [(ngModel)]="item.benificiary_name" name="benificiary_name" id=" benificiary_name"
+                      [ngModelOptions]="{ standalone: true }" />
+                  </td>
+
+                  <td class="beneinput">
+                    <input type="date" [(ngModel)]="item.benificiary_birthdate" name="benificiary_birthdate" id=" benificiary_birthdate"
+                      [ngModelOptions]="{ standalone: true }" max="{{ maxDate }}" />
+                  </td>
+
+                  <td class="beneinput">
+                    <input type="text" name="benificiary_relation" id=" benificiary_relation" [(ngModel)]="item.benificiary_relation"
+                      [ngModelOptions]="{ standalone: true }" />
+                  </td>
+
+                  <td class="delbtn">
+                    <button class="delbtn" type="button">
+                      <i class="ti ti-square-rounded-x" (click)="showDel(1)"></i>
+                    </button>
+                    <button (click)="deleteRow(x)" hidden #clickDel></button>
+                  </td>
+
+                </tr>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-close" type="button" (click)="addBene(2)">Close</button>
+        <button class="btn btn-save" type="submit" (click)="updateBene()">Update</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+ <!-- Delete Modal -->
+ <section>
+  <div>
+    <div class="modal-bg del-modal" *ngIf="delModal === 1">
       <div class="modal-wrapper">
         <div class="modal-header">
-          <span class="header-title">Add Beneficiary</span>
-          <i class="ti ti-x" (click)="addBene(2)"></i>
+          <span class="header-title">Confirm delete</span>
+          <i class="ti ti-x" (click)="showDel(2)"></i>
         </div>
 
         <div class="modal-body">
-          <form #updateBeneForm="ngForm" class="additional-info" *ngIf="isDisplayed">
-            <div class="tabs__content">
-              <div class="header">
-                <label for="benificiary_name">Name</label>
-                <label for="benificiary_birthdate" class="dob">Date Of Birth</label>
-                <label for="benificiary_relation" class="rel">Relationship</label>
-              </div>
-  
-              <div class="scroll">
-                <table class="tablebene">
-                  <br />
-  
-                  <tr *ngFor="let item of row; let x = index">
-                    <td class="delbut">
-                      <button class="addbut" (click)="addTable()">
-                        <i class="ti ti-square-rounded-plus"></i>
-                      </button>
-                    </td>
-  
-                    <td class="beneinput">
-                      <input type="text" [(ngModel)]="item.benificiary_name" name="benificiary_name" id=" benificiary_name"
-                        [ngModelOptions]="{ standalone: true }" />
-                    </td>
-  
-                    <td class="beneinput">
-                      <input type="date" [(ngModel)]="item.benificiary_birthdate" name="benificiary_birthdate" id=" benificiary_birthdate"
-                        [ngModelOptions]="{ standalone: true }" max="{{ maxDate }}" />
-                    </td>
-  
-                    <td class="beneinput">
-                      <input type="text" name="benificiary_relation" id=" benificiary_relation" [(ngModel)]="item.benificiary_relation"
-                        [ngModelOptions]="{ standalone: true }" />
-                    </td>
-  
-                    <td class="delbut">
-                      <button class="delbut" type="button">
-                        <i class="ti ti-square-rounded-x" (click)="showDel(1)"></i>
-                      </button>
-                    </td>
-  
-                    <!-- Delete Modal -->
-                    <section>
-                      <div>
-                        <div class="modal-bg dept-modal" *ngIf="delModal === 1">
-                          <div class="modal-wrapper">
-                            <div class="modal-header">
-                              <span class="header-title">Confirm delete</span>
-                              <i class="ti ti-x" (click)="showDel(2)"></i>
-                            </div>
-  
-                            <div class="modal-body">
-                              <span class="text-bold">Are you sure you want to delete this?</span>
-                              <br>
-                              <span class="text-muted">This cannot be undone.</span>
-                            </div>
-  
-                            <div class="modal-footer">
-                              <button class="btn btn-close" type="button" (click)="showDel(2)">
-                                Close
-                              </button>
-                              <button class="btn btn-save" (click)="deleteRow(x)">Delete</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-  
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </form>
+          <span class="text-bold">Are you sure you want to delete this?</span>
+          <br>
+          <span class="text-muted">This cannot be undone.</span>
         </div>
-        
 
         <div class="modal-footer">
-          <button class="btn btn-close" type="button" (click)="addBene(2)">Close</button>
-          <button class="btn btn-save" type="submit" (click)="updateBene()">Update</button>
+          <button class="btn btn-close" type="button" (click)="showDel(2)">
+            Close
+          </button>
+          <button class="btn btn-save" (click)="clickDelRow()">Delete</button>
         </div>
-
       </div>
     </div>
-  </section>
-
-
-</main>
+  </div>
+</section>

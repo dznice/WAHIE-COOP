@@ -182,7 +182,6 @@ header {
 
     tbody {
       tr {
-        //border-bottom: 1px solid var(--border-color);
         border-bottom: 1px solid var(--text-color-2);
         color: var(--text-color-2);
         background-color: var(--panel-color);
@@ -213,7 +212,7 @@ header {
             width: 2rem;
             text-align: right;
             border-radius: 0.35rem;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--eye-color);
             outline-color: var(--title-color);
             height: 1.5rem;
             padding: 5px;
@@ -349,7 +348,6 @@ header {
 
     tbody {
       tr {
-
         .titles {
           padding: 16px 16px;
         }
