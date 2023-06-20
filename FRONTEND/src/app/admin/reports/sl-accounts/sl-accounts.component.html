@@ -83,7 +83,7 @@
         <tbody>
           <ng-container *ngFor="let item of ledgers">
             <ng-container *ngFor="let itemb of brokenledgers">
-              <tr>
+              <tr *ngIf="itemb.result.status === 'CloseTransact'">
                 <ng-container *ngIf="item.result.journal_name === itemb.result.journal_name">
                   <td class="td-baln" > Transaction #{{ itemb.result.transactNumber }}, {{ itemb.result.transactDate | date:'mediumDate' }}</td>
                   <td class="td-baln">
@@ -99,7 +99,6 @@
                   <td class="td-bals" >
                   <ng-container *ngIf="itemb.result.totald >0">
                     {{ itemb.result.totald | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
-                    
                   </ng-container>
                   </td>
                   
@@ -121,13 +120,17 @@
                   </ng-container>
                 </ng-container>
               </td>
-                <td class="td-bald">{{ calculateDebit(item.result.journal_name)  | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
-                <td class="td-bald">{{ calculateCredit(item.result.journal_name) | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="td-bald">{{ item.example | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+              <td class="td-bald">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
           </ng-container>
-          
+          <!-- <tr class="tr-total">
+            <td class="td-total">Total</td>
+            <td class="td-total"></td>
+            <td class="td-total"></td>
+            <td class="td-total"></td>
+          </tr> -->
         </tbody>
-        
       </table>
     </div>
   </section>
