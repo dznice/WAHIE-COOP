@@ -40,6 +40,9 @@ export class SlAccountsComponent implements OnChanges {
   public memInfos: any;
   public oneYearAgo: any;
   public maxDate: any;
+  public totalSc: number = 0;
+  public totalSd: number = 0;
+
   constructor( private wahieService:WahieService, private toast:NgToastService, private http:HttpClient){
 
   }
@@ -58,7 +61,6 @@ export class SlAccountsComponent implements OnChanges {
     if (savedNotes) {
       this.notes = JSON.parse(savedNotes);
     }
-
     this.getLogo();
     this.formatDate();
     this.showLibJournalInfo(this.formData.account);
@@ -433,5 +435,60 @@ html2pdf().from(element).set(opt).save();
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }
+
   }
+  getTotalCByJournId(journId: number): number {
+    let totalC = 0;
+    for (let item of this.ledgers){
+    for (let itemb of this.brokenledgers) {
+      if (item.result.journId === itemb.result.journId) {
+        totalC += itemb.result.totalc;
+      }
+    }
+  }
+    return totalC;
+  }
+  
+  sumTotalD: any;
+
+  totalC(){
+    for (let item of this.ledgers) {
+      for (let itemb of this.brokenledgers) {
+        if (item.result.journId === itemb.result.journId) {
+          this.sumTotalD += itemb.result.totald;
+        }
+      }
+    }
+  }
+  
+  example1: number;
+
+  calculateDebit(journalName: string): number {
+    let totaldSum = 0;
+    for (let item of this.ledgers) {
+      for (let itemb of this.brokenledgers) {
+        if (item.result.journal_name === itemb.result.journal_name && itemb.result.totald > 0 && item.result.journal_name === journalName) {
+          totaldSum += itemb.result.totald;
+        }
+      }
+    }
+    return totaldSum;
+  }
+
+  calculateCredit(journalName: string): number {
+    let totalcSum = 0;
+    for (let item of this.ledgers) {
+      for (let itemb of this.brokenledgers) {
+        if (item.result.journal_name === itemb.result.journal_name && itemb.result.totalc > 0 && item.result.journal_name === journalName) {
+          totalcSum += itemb.result.totalc;
+        }
+      }
+    }
+    return totalcSum;
+  }
+  
+
+
+  
+
 }
