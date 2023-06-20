@@ -53,7 +53,7 @@
         <label class="-label" for="file">
         <span class="coop-name"><label for="logo">
           <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)" class="addimg"/>
-        <img [src]="preLogo" height="10px" width="10px" i class="ti ti-camera" ></label></span>
+        <img src="{{ preLogo }}" height="10px" width="10px" i class="ti ti-camera" ></label></span>
       </label>
   
       
@@ -458,25 +458,25 @@
               </tr>
               <tr>
                 <td>Reserve Fund</td>
-                <td class="td-deb"> </td><!--Note-->
+                <td><input type="text" id="reserveFund" value= '{{ reserveFundGet()}}' size="1" (keyup.enter)="reserveFundStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.preserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
                 <td class="td-deb">{{ this.reserveFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               </tr>
               <tr>
                 <td>Coop. Education & Training Fund</td>
-                <td class="td-deb"> </td><!--Note-->
+                <td><input type="text" id="coopEduc" value= '{{ coopEducGet() }}' size="1" (keyup.enter)="coopEducStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.pcetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
                 <td class="td-deb">{{ this.cetFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens}}</td>
               </tr>
               <tr>
                 <td>Community Development Fund</td>
-                <td class="td-deb"> </td><!--Note-->
+                <td><input type="text" id="cdf" value= '{{ cdfGet()}}' size="1" (keyup.enter)="cdfStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.pcdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
                 <td class="td-deb">{{ this.cdFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               </tr>
               <tr>
                 <td>Optional Fund</td>
-                <td class="td-deb"> </td><!--Note-->
+                <td><input type="text" id="opFund" value= '{{ opFundGet()}}' size="1" (keyup.enter)="opFundStore()" ></td><!--Note-->
                 <td class="td-cred">{{ this.poptionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
                 <td class="td-deb">{{ this.optionalFund | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
               </tr>

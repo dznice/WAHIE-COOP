@@ -89,7 +89,7 @@
             <ng-container *ngFor="let item of revenue; let i = index">
               <tr>
                 <td>{{ item.result.journal_name }}</td>
-                <td><input type="text" id="revenue{{i}}" value= '{{ revenueGet(i)}}' size="1" (mouseleave)="revenueStore(i)" ></td><!--Note-->
+                <td><input type="text" id="revenue{{i}}" value= '{{ revenueGet(i)}}' size="1" (keyup.enter)="revenueStore(i)" ></td><!--Note-->
                 <td class="td-cred">
                   <ng-container *ngFor="let items of prevenue">
                     <ng-container *ngIf="item.result.journId === items.result.journId">

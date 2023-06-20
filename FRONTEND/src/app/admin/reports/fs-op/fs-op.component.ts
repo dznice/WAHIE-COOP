@@ -524,14 +524,14 @@ html2pdf().from(element).set(opt).save();
 
   expenseStore(i:any){
     this.jsonObject = JSON.stringify(this.note);
-    this.val = (<HTMLInputElement>document.getElementById("revenue"+(i))).value
-    this.noteKey ='revenue' + i
+    this.val = (<HTMLInputElement>document.getElementById("expense"+(i))).value
+    this.noteKey ='expense' + i
    sessionStorage.setItem(this.noteKey, this.val)
   
   } 
   
   expenseGet(index:any){
-  return sessionStorage.getItem('revenue'+index)
+  return sessionStorage.getItem('expense'+index)
   }
 
 
@@ -544,7 +544,7 @@ html2pdf().from(element).set(opt).save();
   } 
   
   reserveFundGet(){
-  return sessionStorage.getItem('revenueOP')
+  return sessionStorage.getItem('reserveFundOP')
   }
 
   coopEducStore(){

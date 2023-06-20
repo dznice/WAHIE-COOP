@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
 import * as ExcelJS from 'exceljs';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 // import { jsPDF } from "jspdf";
 //import html2canvas from 'html2canvas';
 //import jspdf from 'jspdf';
@@ -63,7 +64,7 @@ export class FsFinconComponent implements OnInit {
   note : any[];
 
   constructor(private http:HttpClient, 
-    private toast:NgToastService,) {}
+    private toast:NgToastService, private sanitizer: DomSanitizer) {}
     
   ngOnInit(): void {
     this.getLogo();
@@ -1086,18 +1087,16 @@ html2pdf().from(element).set(opt).save();
   getLogo(){
     this.id = localStorage.getItem('userData')
     this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
-      this.preLogo=  'http://127.0.0.1:8000/storage/image/'+ res
+      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      console.log(this.preLogo)
     });
   }
   
   chLogo(event:any){
     let fileType = event.target.files[0].type;
     let file =  event.target.files[0];
-    let fileName = event.target.files[0].type;
-    const filePath = `assets/image`;
-    
-    const fileContent = event;
-    const fileBlob = new Blob([fileContent], { type: 'text/plain' });
+    let fileName = event.target.files[0].name;
+
 
     if(fileType.match(/image\/*/)){
       let upload = new FileReader();
@@ -1107,9 +1106,6 @@ html2pdf().from(element).set(opt).save();
 
       );   
 
-
-      
-
       var myFormData = new FormData();
       this.id = localStorage.getItem('userData')
       myFormData.append('image', file);
@@ -1118,13 +1114,16 @@ html2pdf().from(element).set(opt).save();
         this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
         this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
 
-        const fileUrl = `assets/image/${fileName}`;
-         this.http.post(fileUrl, fileName);
+        
+  
+      
       }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }
   }
+
+  
 
   jsonObject:any
   val:any;
@@ -1309,6 +1308,66 @@ dgGet(index:any){
 return sessionStorage.getItem('nonAsset'+index)
 }
 
+reserveFundStore(){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("reserveFund")).value
+  this.noteKey ='reserveFundFinCon'
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+reserveFundGet(){
+return sessionStorage.getItem('reserveFundFinCon')
+}
+
+coopEducStore(){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("coopEduc")).value
+  this.noteKey ='coopEducFinCon'
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+coopEducGet(){
+return sessionStorage.getItem('coopEducFinCon')
+}
+
+cetfStore(){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("cetf")).value
+  this.noteKey ='cetfFinCon'
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+cetfGet(){
+return sessionStorage.getItem('cetfFinCon')
+}
+
+cdfStore(){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("cdf")).value
+  this.noteKey ='cdfFincon'
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+cdfGet(){
+return sessionStorage.getItem('cdfFincon')
+}
+
+
+opFundStore(){
+  this.jsonObject = JSON.stringify(this.note);
+  this.val = (<HTMLInputElement>document.getElementById("opFund")).value
+  this.noteKey ='opFundFinCon'
+ sessionStorage.setItem(this.noteKey, this.val)
+
+} 
+
+opFundGet(){
+return sessionStorage.getItem('opFundFinCon')
+}
 
 
 }
