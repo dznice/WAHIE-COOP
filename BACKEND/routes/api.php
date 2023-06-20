@@ -68,6 +68,8 @@ Route::get('/memberList/{id}', [App\Http\Controllers\userController::class, 'mem
 Route::post('/skipAddInfo/{id}', [App\Http\Controllers\Api\AuthController::class, 'skipAddInfo']);
 Route::get('/memberAccount/{email}', [App\Http\Controllers\userController::class, 'memberAccount']);
 Route::post('/profileUpdate/{email}', [App\Http\Controllers\userController::class, 'profileUpdate']);
+Route::post('/beneUpdate/{email}', [App\Http\Controllers\userController::class, 'beneUpdate']);
+Route::post('/beneRemove/{id}', [App\Http\Controllers\userController::class, 'beneRemove']);
 
 
 Route::post('/users/superChange/{id}', [App\Http\Controllers\userController::class, 'superChange']);

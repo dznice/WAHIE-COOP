@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/services/backend.service';
 import { NgToastService } from 'ng-angular-popup';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-member-profile',
@@ -23,6 +24,17 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
   ccurrent() {
     this.current = !this.current;
     this.chcurrent = !this.chcurrent;
+  }
+  maxDate: any;
+
+  private formatDate() {
+    const d = new Date();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    this.maxDate = [year, month, day].join('-');
   }
 
   visible: boolean = true;
@@ -44,7 +56,8 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private backend: BackendService,
     private route: Router,
-    private toast: NgToastService
+    private toast: NgToastService,
+    @Inject(DOCUMENT) private _document: any,
   ) {
     this.myProfile();
     this.myBene();
@@ -67,6 +80,8 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
   ngOnInit() {
+    this._document.body.classList.add('body');
+    this.formatDate();
     this.changePass = this.fb.group(
       {
         current_pass: new FormControl(null),
@@ -86,6 +101,7 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
     this.showBarangay();
     this.showBarangayDesc();
     this.logSelectedValues();
+
   }
 
   id: any = localStorage.getItem('userData');
@@ -361,4 +377,115 @@ export class MemberProfileComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  
+  addBeneficiary = 2;
+  addBene(index: any) {
+    this.addBeneficiary = index;
+  }
+
+//bene
+row = [
+  {
+    benificiary_name: '',
+    benificiary_birthdate: '',
+    benificiary_relation: '',
+  },
+  {
+    benificiary_name: '',
+    benificiary_birthdate: '',
+    benificiary_relation: '',
+  },
+  {
+    benificiary_name: '',
+    benificiary_birthdate: '',
+    benificiary_relation: '',
+  },
+];
+
+addTable() {
+  const obj = {
+    benificiary_name: '',
+    benificiary_birthdate: '',
+    benificiary_relation: '',
+    required: true,
+  };
+  this.row.push(obj);
 }
+
+delModal = -1;
+showDel(index: number) {
+  this.delModal = index;
+}
+
+deleteRow(x: number) {
+  //var delBtn = confirm(' Do you want to delete ?');
+  // if (delBtn == true) {
+  //   s
+  // }
+  this.row.splice(x, 1);
+  this.showDel(2);
+}
+
+public updateBeneForm = {
+
+  row: this.row,
+
+};
+updateBene(){
+  this.http
+  .post('http://127.0.0.1:8000/api/beneUpdate' + '/' + this.email, this.updateBeneForm)
+  .subscribe(
+    (res: any) => {
+      location.reload();
+    this.toast.success({
+      detail: 'Success',
+      summary: 'Beneficiary Added',
+      duration: 2000,
+      sticky: false,
+      position: 'tr',
+    });
+    },
+    (error) => {
+      this.toast.warning({
+        detail: 'Input is required',
+        summary: 'Please Check',
+        duration: 2000,
+        sticky: false,
+        position: 'tr',
+      });
+    }
+  );
+}
+
+beneDel:any
+deleteMember(id:any){
+  console.log(id)
+  this.http
+  .post('http://127.0.0.1:8000/api/beneRemove' + '/' + id, this.beneDel)
+  .subscribe(
+    (res: any) => {
+    this.toast.success({
+      detail: 'Success',
+      summary: 'Beneficiary Removed',
+      duration: 2000,
+      sticky: false,
+      position: 'tr',
+    });
+    this.myBene()
+    },
+    (error) => {
+      this.toast.warning({
+        detail: 'Input is required',
+        summary: 'Please Check',
+        duration: 2000,
+        sticky: false,
+        position: 'tr',
+      });
+    }
+  );
+}
+
+}
+
+

@@ -25,6 +25,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use  Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use PDO;
+use Intervention\Image\Facades\Image;
 
 class userController extends Controller
 {
@@ -300,6 +301,9 @@ class userController extends Controller
               $extension = $file->getClientOriginalExtension();
               $picture   = date('His').'-'.$filename;
               $file->move(public_path('/storage/image'), $picture);
+           
+           
+              
 
         $logo =  forLogo::where('adminId', '=', $id)->first();
         $logo->logo = $picture;
@@ -313,5 +317,29 @@ class userController extends Controller
         $logo =  forLogo::where('adminId', '=', $id)->first();
         $get = $logo->logo;
         return response()->json($get);
+    }
+
+    public function beneUpdate(Request $request, $email){
+
+
+        $users =  Members::where('email', '=', $email)->first();
+
+        $bene = $request->input();
+                                       
+        foreach($bene['row'] as $key=>$value){
+           
+                 BenificiaryMembers::create([
+                'benificiary_id' =>  $users->id,
+                'benificiary_name' =>  $value['benificiary_name'],
+                'benificiary_birthdate'=>  $value['benificiary_birthdate'],
+                'benificiary_relation' =>  $value['benificiary_relation'],
+                ]);
+         }
+    }
+
+    public function beneRemove($id){
+        $beneficiary = BenificiaryMembers::find($id);
+        $beneficiary->delete();
+        return response()->json($beneficiary);
     }
     }
