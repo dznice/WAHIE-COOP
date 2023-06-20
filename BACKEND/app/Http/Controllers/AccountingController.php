@@ -892,28 +892,28 @@ public function totaljourmem(Request $request)
     
     if ($startDate && $endDate) {
         $totalsQuery->whereBetween('transactions.transaction_date', [$startDate, $endDate]);
-        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date');
-        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }else{
-        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date');
-        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }
 
     if ($memberIds) {
         $totalsQuery->where('members.id', $memberIds);
-        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date');
-        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }else{
-        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date');
-        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }
     if ($journalIds) {
         $totalsQuery->where('lib_journals.id', $journalIds);
-        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date');
-        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }else{
-        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date');
-        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }
 
     $totals = $totalsQuery->get();
@@ -1025,6 +1025,8 @@ public function totaljourmem(Request $request)
             'total_balance' => $total_balance,
             'totalc' => $totalc,
             'totald' => $totald,
+            'payables_id' => $total->payables_id,
+            'status' => $total->status,
         ];
 
         if ($memberIds && isset($total->memberId)) {
