@@ -193,15 +193,6 @@ header {
         td {
           font-weight: 500;
           padding: 16px 16px 16px 30px;
-
-          input {
-            border: 1px solid var(--border-color);
-            font-family: "Poppins", sans-serif;
-            text-align: right;
-            align-items: end;
-            background-color: var(--panel-color);
-            color: var(--text-color-2);
-          }
         }
 
         .td-note {
@@ -215,7 +206,9 @@ header {
             border: 1px solid var(--eye-color);
             outline-color: var(--title-color);
             height: 1.5rem;
-            padding: 5px;
+            padding: 0px 1px 0px 0px;
+            background-color: var(--panel-color);
+            color: var(--text-color-2);
           }
         }
 
