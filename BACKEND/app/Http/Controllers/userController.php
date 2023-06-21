@@ -25,6 +25,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use  Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use PDO;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class userController extends Controller
@@ -317,6 +318,20 @@ class userController extends Controller
         $logo =  forLogo::where('adminId', '=', $id)->first();
         $get = $logo->logo;
         return response()->json($get);
+    }
+
+    public function showImage($filename)
+    {
+        $path = public_path('storage/image/' . $filename);
+
+        if (!file_exists($path)) {
+            return response()->json(['message' => 'Image not found'], 404);
+        }
+
+        $file = file_get_contents($path);
+        $type = mime_content_type($path);
+
+        return response($file)->header('Content-Type', $type);
     }
 
     public function beneUpdate(Request $request, $email){

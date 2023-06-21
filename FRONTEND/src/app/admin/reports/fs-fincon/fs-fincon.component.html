@@ -28,30 +28,30 @@
               <span class="text-bold">Choose a paper size</span>
             </div>
 
-            <div class="modal-footer">
-              <button class="btn btn-close" type="button" (click)="showDel(2)">
-                Close
-              </button>
-              <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button> -->
-              <!-- <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
-              <button (click)="download('a4')" (click)="showDel(2)" class="btn btn-save">A4</button>
-              <button (click)="download('legal')" (click)="showDel(2)" class="btn btn-save">Legal</button>
+              <div class="modal-footer">
+                <button class="btn btn-close" type="button" (click)="showDel(2)">
+                  Close
+                </button>
+                <!-- <button (click)="convertToPDF('a4')" class="btn btn-save" >A4</button> -->
+                <!-- <button (click)="convertToPDF('legal')" class="btn btn-save" >Legal</button> -->
+                <button (click)="download('a4')" class="btn btn-save" >A4</button>
+                <button (click)="download('legal')" class="btn btn-save" >Legal</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
+      </section>
+    </div>
 
 
-  <section class="main-section" id="contentToConvert">
+  <section class="main-section" id="contentToConvert" >
     <header>
       <div class="container">
         <div class="logo">
         <label class="-label" for="file">
         <span class="coop-name"><label for="logo">
           <input hidden accept="image/*" type="file" id="logo" (change)="chLogo($event)" class="addimg"/>
-        <img src="{{ preLogo }}" height="10px" width="10px" i class="ti ti-camera" ></label></span>
+        <img src="{{ logoApp }}" height="10px" width="10px" i class="ti ti-camera" ></label></span>
       </label>
   
       

@@ -44,16 +44,17 @@ export class FsOpComponent implements OnInit {
 
   download(size:any){
     var element = document.getElementById('contentToConvert');
-var opt = {
-  margin:       0,
-  filename:     'output.pdf',
-  image:        { type: 'jpeg', quality: 0.98 },
-  html2canvas:  { scale: 3 },
-  jsPDF:        { unit: 'in', format: size, orientation: 'portrait' }
-};
- 
-// New Promise-based usage:
-html2pdf().from(element).set(opt).save();
+    var container = document.createElement('div');
+    var opt = {
+      margin:       0,
+      filename:     'Statement of Operations.pdf',
+      image:        { type: 'jpeg', quality: 0.98},
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'mm', format: size, orientation: 'portrait' }
+    };
+    
+    // New Promise-based usage:
+    html2pdf().from(element).set(opt).save();
   }
 
   generateExcel(): void{
@@ -68,9 +69,6 @@ html2pdf().from(element).set(opt).save();
     const excelSheet = spreadSheet.addWorksheet('Statement of Operations');
 
         excelSheet.mergeCells(`A1:A4`);
-        excelSheet.getCell('A1').value = 'Logo Here'
-        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
-        excelSheet.getCell('A1').font = { size: 15, bold: true };
         excelSheet.getCell('A1').border = {
           top: { style: 'thin' },
           left: { style: 'thin' },
@@ -78,17 +76,19 @@ html2pdf().from(element).set(opt).save();
         };
 
         const imageId = spreadSheet.addImage({
-          buffer: this.preLogo,
+          base64: this.logoApp,
           extension: 'png'
         });
+    
         excelSheet.addImage(imageId, 'A1:A4');
 
-        excelSheet.getColumn('A').width = 15;
-        excelSheet.getColumn('B').width = 35;
-        excelSheet.getColumn('C').width = 20;
-        excelSheet.getColumn('D').width = 20;
+        excelSheet.getColumn('A').width = 13;
+        excelSheet.getColumn('B').width = 30;
+        excelSheet.getColumn('C').width = 15;
+        excelSheet.getColumn('D').width = 16;
+        excelSheet.getColumn('E').width = 16;
 
-        excelSheet.mergeCells(`B1:D1`);
+        excelSheet.mergeCells(`B1:E1`);
         excelSheet.getCell('B1').value = 'Provincial Employees Credit Cooperative';
         excelSheet.getCell('B1').alignment = { horizontal: 'center'};
         excelSheet.getCell('B1').font = { size: 12 };
@@ -97,7 +97,7 @@ html2pdf().from(element).set(opt).save();
           right: { style: 'thin' }
         };
 
-        excelSheet.mergeCells(`B2:D2`);
+        excelSheet.mergeCells(`B2:E2`);
         excelSheet.getCell('B2').value = 'PCEDO Office, Old IBP Bldg., Rotary Lane, San Vicente, Tarlac City';
         excelSheet.getCell('B2').alignment = { horizontal: 'center'};
         excelSheet.getCell('B2').font = { size: 12 };
@@ -105,7 +105,7 @@ html2pdf().from(element).set(opt).save();
           right: { style: 'thin' }
         };
 
-        excelSheet.mergeCells(`B3:D3`);
+        excelSheet.mergeCells(`B3:E3`);
         excelSheet.getCell('B3').value = 'Statement of Operations';
         excelSheet.getCell('B3').alignment = { horizontal: 'center'};
         excelSheet.getCell('B3').font = { size: 12, bold: true};
@@ -113,7 +113,7 @@ html2pdf().from(element).set(opt).save();
           right: { style: 'thin' }
         };
         
-        excelSheet.mergeCells(`B4:D4`);
+        excelSheet.mergeCells(`B4:E4`);
         excelSheet.getCell('B4').value = 'As of ' + this.maxDate;
         excelSheet.getCell('B4').alignment = { horizontal: 'center'};
         excelSheet.getCell('B4').font = { size: 12 };
@@ -122,11 +122,11 @@ html2pdf().from(element).set(opt).save();
           bottom: { style: 'thin' }
         };
 
-        excelSheet.mergeCells(`B5:D5`);
+        excelSheet.mergeCells(`B5:E5`);
         excelSheet.getCell('B5').value = '';
       
         // Create the headers
-        const reportHeaders = ['','Accounts', 'Balance last ' + this.lastYear , 'Balance this ' + this.maxYear];
+        const reportHeaders = ['','Accounts', 'Note', 'Balance last ' + this.lastYear , 'Balance this ' + this.maxYear];
         
         // Add headers for employees with styling
         const reportHeaderRow = excelSheet.addRow(reportHeaders);
@@ -139,7 +139,7 @@ html2pdf().from(element).set(opt).save();
         });
         reportHeaderRow.font = { bold: true, size: 12};
         reportHeaderRow.eachCell((cell) => {
-          cell.alignment = { horizontal: 'center' };
+          cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
         });
 
         if(this.revenue && this.revenue.length > 0){
@@ -147,11 +147,11 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12 };
 
-          this.revenue.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.revenue.forEach((data,index) =>{
+            const res = ['', data.result.journal_name, this.revenueGet(index), '' , data.result.total_balance];
             
             this.prevenue.forEach(data =>{
-              res[2] = data.result.total_balance;
+              res[3] = data.result.total_balance;
             });
             excelSheet.addRow(res);
           });
@@ -159,7 +159,7 @@ html2pdf().from(element).set(opt).save();
           if(this.revenue.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const accountsTotal = ['','Total revenue:', 
+            const accountsTotal = ['','Total revenue:', '',
                                   this.prevenue.length > 0 ? this.prevenue[this.prevenue.length - 1].total_revenue : '',
                                   this.revenue.length > 0 ? this.revenue[this.revenue.length - 1].total_revenue : ''];
             const accountsTotalRow = excelSheet.addRow(accountsTotal);
@@ -181,11 +181,11 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12 };
 
-          this.expense.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.expense.forEach((data,index) =>{
+            const res = ['', data.result.journal_name, this.expenseGet(index), '' , data.result.total_balance];
             
             this.pexpense.forEach(data =>{
-              res[2] = data.result.total_balance;
+              res[3] = data.result.total_balance;
               console.log(res[2]);
             });
             excelSheet.addRow(res);
@@ -194,7 +194,7 @@ html2pdf().from(element).set(opt).save();
           if(this.expense.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const accountsTotal = ['','Total Expenses:', 
+            const accountsTotal = ['','Total Expenses:', '',
                                   this.pexpense.length > 0 ? this.pexpense[this.pexpense.length - 1].total_expenses : '',
                                   this.expense.length > 0 ? this.expense[this.expense.length - 1].total_expenses : ''];
             const accountsTotalRow = excelSheet.addRow(accountsTotal);
@@ -211,7 +211,7 @@ html2pdf().from(element).set(opt).save();
           const emptyRow = excelSheet.addRow(empty);
         };
 
-        const totalNSBOI = ['','Net Surplus Before Other Item:' ,this.calculateLastYearTotalBalance(), this.calculateTotalBalance()];
+        const totalNSBOI = ['','Net Surplus Before Other Item:' ,'',this.calculateLastYearTotalBalance(), this.calculateTotalBalance()];
         const totalNSBOIRow = excelSheet.addRow(totalNSBOI);
         const addedTRow = excelSheet.getRow(excelSheet.rowCount);
           addedTRow.eachCell((cell) => {
@@ -225,7 +225,7 @@ html2pdf().from(element).set(opt).save();
         const empty0Row = excelSheet.addRow(empty0);
 
         if(this.reserveFund !== 0 && this.cetFund !== 0 && this.cdFund !== 0 && this.optionalFund !== 0 && this.dueToUnion !== 0){
-          const accounts = ['','Distributed as Follows:','',''];
+          const accounts = ['','Distributed as Follows:','','',''];
           const accountsRow = excelSheet.addRow(accounts);
           const addedTRow = excelSheet.getRow(excelSheet.rowCount);
             addedTRow.eachCell((cell) => {
@@ -236,21 +236,21 @@ html2pdf().from(element).set(opt).save();
             });
           accountsRow.font = { bold: true, size: 12};
 
-          const rf  = ['','Reserve Fund', this.preserveFund, this.reserveFund];
+          const rf  = ['','Reserve Fund', this.reserveFundGet(), this.preserveFund, this.reserveFund];
           const rfRow = excelSheet.addRow(rf);
-          const cetf  = ['','Coop. Education & Training Fund', this.pcetFund, this.cetFund];
+          const cetf  = ['','Coop. Education & Training Fund',this.coopEducGet(), this.pcetFund, this.cetFund];
           const cetfRow = excelSheet.addRow(cetf);
-          const duf  = ['','Due to Union/Federation (CETF)', this.pdueToUnion, this.dueToUnion];
+          const duf  = ['','Due to Union/Federation (CETF)', this.cdfGet(), this.pdueToUnion, this.dueToUnion];
           const dufRow = excelSheet.addRow(duf);
-          const cdf  = ['','Community Development Fund', this.pcdFund, this.cdFund];
+          const cdf  = ['','Community Development Fund',this.opFundGet(), this.pcdFund, this.cdFund];
           const cdfRow = excelSheet.addRow(cdf);
-          const of  = ['','Optional Fund', this.poptionalFund, this.optionalFund];
+          const of  = ['','Optional Fund',this.opFundGet() ,this.poptionalFund, this.optionalFund];
           const ofRow = excelSheet.addRow(of);
 
           const empty = [''];
           const emptyRow = excelSheet.addRow(empty);
 
-          const totalSF  = ['','Total Statutory Fund:', this.pstatutoryFund, this.statutoryFund];
+          const totalSF  = ['','Total Statutory Fund:', '', this.pstatutoryFund, this.statutoryFund];
           const totalSFRow = excelSheet.addRow(totalSF);
           const addedRow0 = excelSheet.getRow(excelSheet.rowCount);
             addedRow0.eachCell((cell) => {
@@ -261,7 +261,7 @@ html2pdf().from(element).set(opt).save();
             });
           totalSFRow.font = { bold: true, size: 12};
 
-          const totalNSSF  = ['','Net Surplus after SF:', this.pnetFundAfterSF, this.netFundAfterSF];
+          const totalNSSF  = ['','Net Surplus after SF:', '',this.pnetFundAfterSF, this.netFundAfterSF];
           const totalNSSFRow = excelSheet.addRow(totalNSSF);
           const addedRow1 = excelSheet.getRow(excelSheet.rowCount);
             addedRow1.eachCell((cell) => {
@@ -274,17 +274,17 @@ html2pdf().from(element).set(opt).save();
 
           const emptyRow0 = excelSheet.addRow(empty);
 
-          const ioc70  = ['','IoC 70%',  this.pioc,  this.ioc];
+          const ioc70  = ['','IoC 70%', '', this.pioc,  this.ioc];
           const ioc70Row = excelSheet.addRow(ioc70);
           totalNSSFRow.font = { bold: true};
 
-          const pf30  = ['','Patronage Refund 30%',  this.ppatRef,  this.patRef];
+          const pf30  = ['','Patronage Refund 30%', '', this.ppatRef,  this.patRef];
           const pf30Row = excelSheet.addRow(pf30);
           totalNSSFRow.font = { bold: true};
 
           const emptyRow1 = excelSheet.addRow(empty);
 
-          const totalNSD  = ['','Total Net Surplus as Distributed:', this.calculateLastYearTotalBalance(), this.calculateTotalBalance()];
+          const totalNSD  = ['','Total Net Surplus as Distributed:','', this.calculateLastYearTotalBalance(), this.calculateTotalBalance()];
           const totalNSDRow = excelSheet.addRow(totalNSD);
           const addedRow2 = excelSheet.getRow(excelSheet.rowCount);
             addedRow2.eachCell((cell) => {
@@ -298,7 +298,7 @@ html2pdf().from(element).set(opt).save();
         const empty = [''];
         const empty3Row = excelSheet.addRow(empty);
 
-        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate ];
+        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate,'' ];
         const generatedRow = excelSheet.addRow(generated);
         const addedgRow = excelSheet.getRow(excelSheet.rowCount);
         addedgRow.eachCell((cell) => {
@@ -473,33 +473,67 @@ html2pdf().from(element).set(opt).save();
     this.lastYear = year - 1;
     return this.maxDate;
   }
+
   preLogo:any;
+  generatedLogo:any;
+  logoApp:any;
   id:any;
   getLogo(){
     this.id = localStorage.getItem('userData')
     this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
-      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res;
+      this.generatedLogo = res;
+
+      this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+      .subscribe((imageBlob: Blob) => {
+        console.log(imageBlob);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.logoApp = reader.result as string;
+          // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+        };
+        reader.readAsDataURL(imageBlob);
+      });
     });
   }
   
   chLogo(event:any){
     let fileType = event.target.files[0].type;
     let file =  event.target.files[0];
+    let fileName = event.target.files[0].name;
+
+
     if(fileType.match(/image\/*/)){
       let upload = new FileReader();
       upload.readAsDataURL(event.target.files[0]);
       upload.onload = (event:any)=>(
         this.preLogo = event.target.result
 
-      
+
       );   
+
       var myFormData = new FormData();
       this.id = localStorage.getItem('userData')
       myFormData.append('image', file);
 
       this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
         this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
-        this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+        //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+
+        this.generatedLogo = res;
+
+        this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+        .subscribe((imageBlob: Blob) => {
+          console.log(imageBlob);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            this.logoApp = reader.result as string;
+            // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+          };
+          reader.readAsDataURL(imageBlob);
+        });
       }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});

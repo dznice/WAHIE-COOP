@@ -84,6 +84,14 @@ class JournalEntryController extends Controller
                 $credits-> journals_id = $value['account'];
                 $credits-> due_date = $request->due_date;
                 $credits-> interest = $rate;
+                // if($value['debit']==null && $value['credit']!=null){
+                //     $credits->debit_amount = 0;
+                //     $credits->credit_amount = floatval($value['credit']);
+                // }
+                // else if($value['credit']==null && value['debit']!=null){
+                //     $credits->credit_amount = 0;
+                //     $credits->debit_amount = floatval($value['debit']);
+                // }
                 $credits->debit_amount = floatval($value['debit']);
                 $credits->credit_amount = floatval($value['credit']);
                 $credits-> payables_id = $pays;
@@ -134,8 +142,16 @@ class JournalEntryController extends Controller
                 $jlogs->due_date = $request->due_date;
                 $jlogs->interest = $request->interest;
                 $jlogs->interest_amount = $interate;
-                $jlogs->debit_amount = $value['debit'];
-                $jlogs->credit_amount = $value['credit'];
+                // if($value['debit']=''&&$value['credit']!=''){
+                //     $jlogs->debit_amount = 0;
+                //     $jlogs->credit_amount = $value['credit'];
+                // }
+                // if($value['credit']=''&&$value['debit']!=''){
+                //     $jlogs->credit_amount = 0;
+                //     $jlogs->debit_amount = $value['debit'];
+                // }
+                $jlogs->credit_amount = floatval($value['credit']);
+                $jlogs->debit_amount = floatval($value['debit']);
                 $jlogs->description = $value['description'];
                 $jlogs->total_credit = $request->totalcredit;
                 $jlogs->total_debit = $request->totalcredit;

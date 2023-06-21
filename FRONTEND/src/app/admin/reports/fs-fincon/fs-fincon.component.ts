@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
+//import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
 import { NgToastService } from 'ng-angular-popup';
 import * as ExcelJS from 'exceljs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 // import { jsPDF } from "jspdf";
-//import html2canvas from 'html2canvas';
-//import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 //import html2canvas from 'html2canvas';
 //import autoTable from 'jspdf-autotable';
 // import * as fs from 'fs';
@@ -64,7 +64,8 @@ export class FsFinconComponent implements OnInit {
   note : any[];
 
   constructor(private http:HttpClient, 
-    private toast:NgToastService, private sanitizer: DomSanitizer) {}
+    private toast:NgToastService,
+    private sanitizer: DomSanitizer) {}
     
   ngOnInit(): void {
     this.getLogo();
@@ -75,13 +76,33 @@ export class FsFinconComponent implements OnInit {
     this.showPastSLedger();
     this.processLedgerData();
     console.log(this.maxDate)
+    console.log(this.logoApp)
     
-
   }
 
-  // public convertToPDF(size:any) {
-  //   // Get the HTML element to convert to PDF
-  //   const element = document.getElementById('contentToConvert');
+  // exportAsPdf: ExportAsConfig = {
+  //   type: 'pdf',
+  //   elementIdOrContent: 'fsFincon',
+  //   options: {
+  //     image: { type: 'jpeg', quality: 1 },
+  //     html2canvas:  { scale: 2},
+  //     margin:  [2, 2, 2, 2],
+  //     fontSize: 1,
+  //     jsPDF: {
+  //       orientation: 'portrait',
+  //       format: size ,
+  //       defaultFontSize: 1,
+  //       precision: 16
+  //     }
+  //   }
+  // }
+
+  // exportPDF(size:any) {
+  //   this.exportAsService.save(this.exportAsPdf(size), 'FS-Financial-Condition').subscribe(() => {
+  //     // save started
+  //   });
+  // }
+
   // public convertToPDF(size:any) {
   //   // Get the HTML element to convert to PDF
   //   const element = document.getElementById('contentToConvert');
@@ -89,48 +110,27 @@ export class FsFinconComponent implements OnInit {
   //   if (element) {
   //     // Create a new jsPDF instance
   //     const doc = new jspdf('p', 'pt', size);
-  //   if (element) {
-  //     // Create a new jsPDF instance
-  //     const doc = new jspdf('p', 'pt', size);
       
   //     // Set the scale for the html2canvas conversion
-  //     const scale = 3; // Adjust the scale value as needed
-  //     // Set the scale for the html2canvas conversion
-  //     const scale = 3; // Adjust the scale value as needed
-
-  //     //doc.addImage(imgLogo, 'PNG', 5, 5, 40, 40);
-  //     //doc.addImage(imgLogo, 'PNG', 5, 5, 40, 40);
+  //     const scale = 2; // Adjust the scale value as needed
   
   //     // Convert the HTML element to an image using html2canvas with the specified scale
   //       html2canvas(element, { scale: scale }).then((canvas) => {
   //       // Get the image data URL
-  //     // Convert the HTML element to an image using html2canvas with the specified scale
-  //       html2canvas(element, { scale: scale }).then((canvas) => {
-  //       // Get the image data URL
         
   //       const imgData = canvas.toDataURL('image/png');
+  //        //const imgData = canvas.toDataURL('image/png');
   //       // Add the image to the PDF
-  //       const imgData = canvas.toDataURL('image/png');
-  //       // Add the image to the PDF
-        
-  //       doc.addImage(imgData, 'PNG', 10, 0, 610, 1000);
-  //       doc.addImage(imgData, 'PNG', 10, 0, 610, 1000);
+  //       doc.addImage(imgData, 'PNG', 5, 5, 600,0);
+  //       //doc.addImage(urlI, 'PNG', 5, 5, 585, );
 
   //       // Save the PDF
   //       doc.save('sample.pdf');
   //       doc.text('My PDF Document', 10, 10);
-  //     })
-  //       // Save the PDF
-  //       doc.save('sample.pdf');
-  //       doc.text('My PDF Document', 10, 10);
-  //     })
-      
-  //     ;
+  //     });
   //   }
   // }
-  //     ;
-  //   }
-  // }
+    
 
   delModal = -1;
   showDel(index: number) {
@@ -139,71 +139,18 @@ export class FsFinconComponent implements OnInit {
 
   download(size:any){
     var element = document.getElementById('contentToConvert');
-var opt = {
-  margin:       0,
-  filename:     'output.pdf',
-  image:        { type: 'jpeg', quality: 0.98 },
-  html2canvas:  { scale: 3 },
-  jsPDF:        { unit: 'in', format: size, orientation: 'portrait' }
-};
- 
-// New Promise-based usage:
-html2pdf().from(element).set(opt).save();
-  }
-
-  // generatePDF() {
-  //   // Create a new jsPDF instance
-  //   const doc = new jspdf();
-  
-  //   // Set the font size and style
-  //   doc.setFontSize(16);
-  
-  //   // Add a title to the first page
-  //   doc.text('My PDF Document', 10, 10);
-  
-  //   // Set the font size and style for regular text
-  //   doc.setFontSize(12);
-  
-  //   // Add paragraphs of text to the first page
-  //   doc.text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 10, 30);
-  //   doc.text('Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.', 10, 45);
+    var container = document.createElement('div');
+    var opt = {
+      margin:       0,
+      filename:     'Statement of Financial Condition.pdf',
+      image:        { type: 'jpeg', quality: 0.98},
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'mm', format: size, orientation: 'portrait' }
+    };
     
-  
-  //   // Add an image to the second page
-  //   //const imgData = 'path/to/image.png';
-  //   doc.addPage();
-  //   doc.text('Page 2', 10, 10);
-  //   //doc.addImage(imgData, 'PNG', 10, 30, 100, 0);
-  
-  //   // Add a table to the third page
-  //   doc.addPage();
-  //   doc.text('Page 3', 10, 10);
-  
-  //   // const tableData = [
-  //   //   ['Name', 'Age', 'Country'],
-  //   //   ['John Doe', '30', 'USA'],
-  //   //   ['Jane Smith', '25', 'Canada'],
-  //   //   ['Robert Johnson', '35', 'UK']
-  //   // ];
-  
-  //   // // doc.autoTable({
-  //   // //   startY: 30,
-  //   // //   head: [tableData[0]],
-  //   // //   body: tableData.slice(1)
-  //   // // });
-
-  //   autoTable(doc, {
-  //     head: [['Name', 'Email', 'Country']],
-  //     body: [
-  //       ['David', 'david@example.com', 'Sweden'],
-  //       ['Castille', 'castille@example.com', 'Spain'],
-  //       // ...
-  //     ],
-  //   })
-  
-  //   // Save the PDF
-  //   doc.save('sample.pdf');
-  // }
+    // New Promise-based usage:
+    html2pdf().from(element).set(opt).save();
+  }
 
   generateExcel(): void{
     // Create a new spreadsheet:
@@ -224,21 +171,20 @@ html2pdf().from(element).set(opt).save();
     };
 
     const imageId = spreadSheet.addImage({
-      buffer: this.preLogo,
+      base64: this.logoApp,
       extension: 'png'
     });
-
-    
 
     excelSheet.addImage(imageId, 'A1:A4');
         
 
-        excelSheet.getColumn('A').width = 15;
-        excelSheet.getColumn('B').width = 35;
-        excelSheet.getColumn('C').width = 20;
-        excelSheet.getColumn('D').width = 20;
+      excelSheet.getColumn('A').width = 13;
+      excelSheet.getColumn('B').width = 30;
+      excelSheet.getColumn('C').width = 15;
+      excelSheet.getColumn('D').width = 16;
+      excelSheet.getColumn('E').width = 16;
 
-        excelSheet.mergeCells(`B1:D1`);
+        excelSheet.mergeCells(`B1:E1`);
         excelSheet.getCell('B1').value = 'Provincial Employees Credit Cooperative';
         excelSheet.getCell('B1').alignment = { horizontal: 'center'};
         excelSheet.getCell('B1').font = { size: 12 };
@@ -247,7 +193,7 @@ html2pdf().from(element).set(opt).save();
           right: { style: 'thin' }
         };
 
-        excelSheet.mergeCells(`B2:D2`);
+        excelSheet.mergeCells(`B2:E2`);
         excelSheet.getCell('B2').value = 'PCEDO Office, Old IBP Bldg., Rotary Lane, San Vicente, Tarlac City';
         excelSheet.getCell('B2').alignment = { horizontal: 'center'};
         excelSheet.getCell('B2').font = { size: 12 };
@@ -255,7 +201,7 @@ html2pdf().from(element).set(opt).save();
           right: { style: 'thin' }
         };
 
-        excelSheet.mergeCells(`B3:D3`);
+        excelSheet.mergeCells(`B3:E3`);
         excelSheet.getCell('B3').value = 'Statement of Financial Condition';
         excelSheet.getCell('B3').alignment = { horizontal: 'center'};
         excelSheet.getCell('B3').font = { size: 12, bold: true};
@@ -263,7 +209,7 @@ html2pdf().from(element).set(opt).save();
           right: { style: 'thin' }
         };
         
-        excelSheet.mergeCells(`B4:D4`);
+        excelSheet.mergeCells(`B4:E4`);
         excelSheet.getCell('B4').value = 'As of ' + this.maxDate;
         excelSheet.getCell('B4').alignment = { horizontal: 'center'};
         excelSheet.getCell('B4').font = { size: 12 };
@@ -272,11 +218,11 @@ html2pdf().from(element).set(opt).save();
           bottom: { style: 'thin' }
         };
 
-        excelSheet.mergeCells(`B5:D5`);
+        excelSheet.mergeCells(`B5:E5`);
         excelSheet.getCell('B5').value = '';
       
         // Create the headers
-        const reportHeaders = ['','Accounts', 'Balance last ' + this.lastYear , 'Balance this ' + this.maxYear];
+        const reportHeaders = ['','Accounts','Note' ,'Balance last ' + this.lastYear , 'Balance this ' + this.maxYear];
         const reportHeaderRow = excelSheet.addRow(reportHeaders);
         const addedRow = excelSheet.getRow(excelSheet.rowCount);
         addedRow.eachCell((cell) => {
@@ -287,7 +233,7 @@ html2pdf().from(element).set(opt).save();
         });
         reportHeaderRow.font = { bold: true, size: 12};
         reportHeaderRow.eachCell((cell) => {
-          cell.alignment = { horizontal: 'center' };
+          cell.alignment = { horizontal: 'center', vertical: 'middle', wrapText: true };
         });
 
         if(this.assets && this.assets.length > 0){
@@ -295,10 +241,10 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12 };
 
-          this.assets.forEach(data =>{
-            const list = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.assets.forEach((data,index) =>{
+            const list = ['', data.result.journal_name, this.CurrentAssetGet(index), '', data.result.total_balance];
             this.passets.forEach(data =>{
-              list[2] = data.result.total_balance;
+              list[3] = data.result.total_balance;
             });
             excelSheet.addRow(list);
           });
@@ -306,7 +252,7 @@ html2pdf().from(element).set(opt).save();
           if(this.assets.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const accountsTotal = ['', 'Total Current Assets:' ,
+            const accountsTotal = ['', 'Total Current Assets:' , '',
                                   this.passets.length > 0 ? this.passets[this.passets.length - 1].total_asset : '', 
                                   this.assets.length > 0 ? this.assets[this.assets.length - 1].total_asset : ''];
             const accountsTotalRow = excelSheet.addRow(accountsTotal);
@@ -328,11 +274,11 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12 };
 
-          this.otherAssets.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.otherAssets.forEach((data,index) =>{
+            const res = ['', data.result.journal_name, this.otherAssetGet(index), '' , data.result.total_balance];
             
             this.potherAssets.forEach(data =>{
-              res[2] = data.result.total_balance;
+              res[3] = data.result.total_balance;
             });
             excelSheet.addRow(res);
           });
@@ -340,7 +286,7 @@ html2pdf().from(element).set(opt).save();
           if(this.otherAssets.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const accountsTotal = ['','Total of Other Current Assets:',
+            const accountsTotal = ['','Total of Other Current Assets:', '',
                                   this.potherAssets.length > 0 ? this.potherAssets[this.potherAssets.length - 1].total_other_asset : '',
                                   this.otherAssets.length > 0 ? this.otherAssets[this.otherAssets.length - 1].total_other_asset : ''];
             const accountsTotalRow = excelSheet.addRow(accountsTotal);
@@ -362,12 +308,11 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12 };
 
-          this.nonAssets.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.nonAssets.forEach((data, index) =>{
+            const res = ['', data.result.journal_name, this.nonAssetGet(index), '' , data.result.total_balance];
             
             this.pnonAssets.forEach(data =>{
-              res[2] = data.result.total_balance;
-              console.log(res[2]);
+              res[3] = data.result.total_balance;
             });
             excelSheet.addRow(res);
           });
@@ -375,7 +320,7 @@ html2pdf().from(element).set(opt).save();
           if(this.nonAssets.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const accountsTotal = ['','Total of Non-Current Assets:',
+            const accountsTotal = ['','Total of Non-Current Assets:', '',
                                   this.pnonAssets.length > 0 ? this.pnonAssets[this.pnonAssets.length - 1].total_non_asset : '',
                                   this.nonAssets.length > 0 ? this.nonAssets[this.nonAssets.length - 1].total_non_asset : ''];
             const accountsTotalRow = excelSheet.addRow(accountsTotal);
@@ -392,7 +337,7 @@ html2pdf().from(element).set(opt).save();
           const emptyRow = excelSheet.addRow(empty);
         };
 
-        const totalAssets = ['','TOTAL ALL ASSETS:' ,this.calculateLastYearAssetTotalBalance(), this.calculateAssetTotalBalance()];
+        const totalAssets = ['','TOTAL ALL ASSETS:' ,'' ,this.calculateLastYearAssetTotalBalance() , this.calculateAssetTotalBalance()];
         const totalAssetsRow = excelSheet.addRow(totalAssets);
         const addedTRow = excelSheet.getRow(excelSheet.rowCount);
           addedTRow.eachCell((cell) => {
@@ -410,12 +355,11 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12 };
 
-          this.liabilities.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.liabilities.forEach((data, index) =>{
+            const res = ['', data.result.journal_name, this.CurrentLiabGet(index), '' , data.result.total_balance];
             
             this.pliabilities.forEach(data =>{
-              res[2] = data.result.total_balance;
-              console.log(res[2]);
+              res[3] = data.result.total_balance;
             });
             excelSheet.addRow(res);
           });
@@ -423,7 +367,7 @@ html2pdf().from(element).set(opt).save();
           if(this.liabilities.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const accountsTotal = ['','Total of Current Liabilities:',
+            const accountsTotal = ['','Total of Current Liabilities:', '',
                                   this.pliabilities.length > 0 ? this.pliabilities[this.pliabilities.length - 1].total_liability : '',
                                   this.liabilities.length > 0 ? (this.liabilities[this.liabilities.length - 1].total_liability) : '',];
             const accountsTotalRow = excelSheet.addRow(accountsTotal);
@@ -445,12 +389,11 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12 };
 
-          this.nonLiabilities.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.nonLiabilities.forEach((data, index) =>{
+            const res = ['', data.result.journal_name, this.nonLiabGet(index), '' , data.result.total_balance];
             
             this.pnonLiabilities.forEach(data =>{
-              res[2] = data.result.total_balance;
-              console.log(res[2]);
+              res[3] = data.result.total_balance;
             });
             excelSheet.addRow(res);
           });
@@ -458,7 +401,7 @@ html2pdf().from(element).set(opt).save();
           if(this.nonLiabilities.length > 0){
             const empty = [''];
             const emptyRow = excelSheet.addRow(empty);
-            const accountsTotal = ['','Total of Non-Current Liabilities:',
+            const accountsTotal = ['','Total of Non-Current Liabilities:', '',
                                   this.pnonLiabilities.length > 0 ? this.pnonLiabilities[this.pnonLiabilities.length - 1].total_non_liability : '',
                                   this.nonLiabilities.length > 0 ? (this.nonLiabilities[this.nonLiabilities.length - 1].total_non_liability) : ''];
             const accountsTotalRow = excelSheet.addRow(accountsTotal);
@@ -480,12 +423,11 @@ html2pdf().from(element).set(opt).save();
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true , size: 12};
 
-          this.equity.forEach(data =>{
-            const res = ['', data.result.journal_name, '' , data.result.total_balance];
+          this.equity.forEach((data, index) =>{
+            const res = ['', data.result.journal_name, this.equityGet(index),'' , data.result.total_balance];
             
-            this.pequity.forEach(data =>{
-              res[2] = data.result.total_balance;
-              console.log(res[2]);
+            this.pequity.forEach(datas =>{
+              res[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
             });
             excelSheet.addRow(res);
           });
@@ -508,23 +450,127 @@ html2pdf().from(element).set(opt).save();
           
         };  
 
-        if(this.reserveFund !== 0 && this.cetFund !== 0 && this.cdFund !== 0 && this.optionalFund !== 0){
-          const accounts = ['','Statutory Funds:'];
+        if((this.sscc && this.sscc.length > 0) || 
+            (this.src && this.src.length > 0) || 
+            (this.srp && this.srp.length > 0) || 
+            (this.pscp && this.pscp.length > 0) || 
+            (this.tscp && this.tscp.length > 0) || 
+            (this.dscp && this.dscp.length > 0) || 
+            (this.uns && this.uns.length > 0) || 
+            (this.nl && this.nl.length > 0) || 
+            (this.dg && this.dg.length > 0)){ 
+          const accounts = ['','Members Equity:'];
+          const accountsRow = excelSheet.addRow(accounts);
+          accountsRow.font = { bold: true, size: 12};
+        }
+
+        if(this.sscc && this.sscc.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.ssccGet(index), '' , data.result.total_balance];
+            this.psscc.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.src && this.src.length > 0){
+          this.src.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.srcGet(index), '' , data.result.total_balance];
+            this.psrc.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+        
+        if(this.srp && this.srp.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.srpGet(index), '' , data.result.total_balance];
+            this.psrp.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.pscp && this.pscp.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.pscpGet(index), '' , data.result.total_balance];
+            this.ppscp.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.tscp && this.tscp.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.tscpGet(index), '' , data.result.total_balance];
+            this.ptscp.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.dscp && this.dscp.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.dscpGet(index), '' , data.result.total_balance];
+            this.pdscp.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.uns && this.uns.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.unsGet(index), '' , data.result.total_balance];
+            this.puns.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.nl && this.nl.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.nlGet(index), '' , data.result.total_balance];
+            this.pnl.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.dg && this.dg.length > 0){
+          this.sscc.forEach((data, index) => {
+            const list = ['', data.result.journal_name, this.dgGet(index), '' , data.result.total_balance];
+            this.pdg.forEach(datas =>{
+              list[3] = datas.result.total_balance != null ? datas.result.total_balance : data.result.last_year_balance;
+            });
+            excelSheet.addRow(list);
+          });
+        }
+
+        if(this.reserveFund !== 0 && this.cetFund !== 0 && this.cdFund !== 0 && this.optionalFund !== 0){ 
+          const accounts = ['','Statutory Funds'];
           const accountsRow = excelSheet.addRow(accounts);
           accountsRow.font = { bold: true, size: 12};
 
-          const rf  = ['','Reserve Fund', this.preserveFund, this.reserveFund];
+          const rf  = ['','Reserve Fund', this.reserveFundGet(), this.preserveFund, this.reserveFund];
           const rfRow = excelSheet.addRow(rf);
-          const cetf  = ['','Coop. Education & Training Fund', this.pcetFund, this.cetFund];
+          const cetf  = ['','Coop. Education & Training Fund', this.coopEducGet(), this.pcetFund, this.cetFund];
           const cetfRow = excelSheet.addRow(cetf);
-          const cdf  = ['','Community Development Fund', this.pcdFund, this.cdFund];
+          const cdf  = ['','Community Development Fund',this.cdfGet(), this.pcdFund, this.cdFund];
           const cdfRow = excelSheet.addRow(cdf);
-          const of  = ['','Optional Fund', this.poptionalFund, this.optionalFund];
+          const of  = ['','Optional Fund', this.opFundGet(),this.poptionalFund, this.optionalFund];
           const ofRow = excelSheet.addRow(of);
           const empty0 = [''];
           const emptyRow0 = excelSheet.addRow(empty0);
 
-          const totalSF  = ['','Total Statutory Fund:', this.pstatutoryFund, this.statutoryFund];
+          const totalSF  = ['','Total Statutory Fund:','', this.pstatutoryFund, this.statutoryFund];
           const totalSFRow = excelSheet.addRow(totalSF);
           const addedRow = excelSheet.getRow(excelSheet.rowCount);
             addedRow.eachCell((cell) => {
@@ -539,7 +585,9 @@ html2pdf().from(element).set(opt).save();
           const emptyRow = excelSheet.addRow(empty);
         }
 
-        const totalMEquity = ['','Total All Assets:' , this.calculateLastYearCombinedMemberEquity(), this.calculateCombinedMemberEquity()];
+
+
+        const totalMEquity = ['','Total of Member Equity:' ,'', this.calculateLastYearCombinedMemberEquity(), this.calculateCombinedMemberEquity()];
         const totalMEquityRow = excelSheet.addRow(totalMEquity);
         const addedMERow = excelSheet.getRow(excelSheet.rowCount);
             addedMERow.eachCell((cell) => {
@@ -552,7 +600,7 @@ html2pdf().from(element).set(opt).save();
         const empty1 = [''];
         const empty1Row = excelSheet.addRow(empty1);
 
-        const totalLE = ['','TOTAL OF LIABILITY AND EQUITY:' , this.calculateLastYearCombinedTotalLiabilityandEquity(), this.calculateCombinedTotalLiabilityandEquity()];
+        const totalLE = ['','TOTAL OF LIABILITY AND EQUITY:' ,'', this.calculateLastYearCombinedTotalLiabilityandEquity(), this.calculateCombinedTotalLiabilityandEquity()];
         const totalLERow = excelSheet.addRow(totalLE);
         const addedLERow = excelSheet.getRow(excelSheet.rowCount);
             addedLERow.eachCell((cell) => {
@@ -565,7 +613,7 @@ html2pdf().from(element).set(opt).save();
         const empty2 = [''];
         const empty2Row = excelSheet.addRow(empty2);
 
-        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate ];
+        const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate,''];
         const generatedRow = excelSheet.addRow(generated);
         const addedgRow = excelSheet.getRow(excelSheet.rowCount);
         addedgRow.eachCell((cell) => {
@@ -1083,12 +1131,26 @@ html2pdf().from(element).set(opt).save();
 
 
   preLogo:any;
+  generatedLogo:any;
+  logoApp:any;
   id:any;
   getLogo(){
     this.id = localStorage.getItem('userData')
     this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
-      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
-      console.log(this.preLogo)
+      //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res;
+      this.generatedLogo = res;
+
+      this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+      .subscribe((imageBlob: Blob) => {
+        console.log(imageBlob);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.logoApp = reader.result as string;
+          // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+        };
+        reader.readAsDataURL(imageBlob);
+      });
     });
   }
   
@@ -1104,6 +1166,7 @@ html2pdf().from(element).set(opt).save();
       upload.onload = (event:any)=>(
         this.preLogo = event.target.result
 
+
       );   
 
       var myFormData = new FormData();
@@ -1112,11 +1175,21 @@ html2pdf().from(element).set(opt).save();
 
       this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
         this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
-        this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+        //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
 
-        
-  
-      
+        this.generatedLogo = res;
+
+        this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+        .subscribe((imageBlob: Blob) => {
+          console.log(imageBlob);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            this.logoApp = reader.result as string;
+            // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+          };
+          reader.readAsDataURL(imageBlob);
+        });
       }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});

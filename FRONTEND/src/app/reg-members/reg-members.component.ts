@@ -172,7 +172,7 @@ export class RegMembersComponent implements OnInit, OnDestroy {
     const year = d.getFullYear();
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
-    this.maxDate = [year, month, day].join('-');
+    this.maxDate = [year-18, month, day].join('-');
   }
 
   ngOnInit() {

@@ -226,8 +226,8 @@ export class AddPaymentComponent implements OnInit {
   Generaterow(){
     return this.builder.group({
       account:this.builder.control('', Validators.required),
-      debit:this.builder.control('', Validators.required),
-      credit:this.builder.control('', Validators.required),
+      debit:this.builder.control(''),
+      credit:this.builder.control(''),
       //description:this.builder.control(''),
       //dueDate:this.builder.control('',Validators.required),
     });
@@ -276,6 +276,7 @@ export class AddPaymentComponent implements OnInit {
       this.paymentForm.get("paymentDate")?.setValue(this.maxDate);
     }
   }
+
 
   private formatDate() {
     const d = new Date();
@@ -326,9 +327,9 @@ export class AddPaymentComponent implements OnInit {
         this.amount.get('credit')?.setValue('');
       }
     } else if (debit > 0) {
-      this.amount.get('credit')?.setValue(0);
+      this.amount.get('credit')?.setValue('');
     } else if (credit > 0) {
-      this.amount.get('debit')?.setValue(0);
+      this.amount.get('debit')?.setValue('');
     }
 
     this.balance_summary();
@@ -343,6 +344,16 @@ export class AddPaymentComponent implements OnInit {
       if (x.debit == '' && x.credit == '') {
         x.debit = 0;
         x.credit = 0;
+        this.total_debit = this.total_debit + x.debit;
+        this.total_credit = this.total_credit + x.credit;
+      }
+      else if (x.debit != '' && x.credit == ''){
+        x.credit = 0;
+        this.total_debit = this.total_debit + x.debit;
+        this.total_credit = this.total_credit + x.credit;
+      }
+      else if (x.debit == '' && x.credit != '') {
+        x.debit = 0;
         this.total_debit = this.total_debit + x.debit;
         this.total_credit = this.total_credit + x.credit;
       } else {

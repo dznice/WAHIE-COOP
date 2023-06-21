@@ -40,6 +40,8 @@ export class SlAccountsComponent implements OnChanges {
   public memInfos: any;
   public oneYearAgo: any;
   public maxDate: any;
+  maxYear: any;
+  lastYear: any;
   public totalSc: number = 0;
   public totalSd: number = 0;
 
@@ -82,16 +84,17 @@ export class SlAccountsComponent implements OnChanges {
 
   download(size:any){
     var element = document.getElementById('contentToConvert');
-var opt = {
-  margin:       0.2,
-  filename:     'output.pdf',
-  image:        { type: 'jpeg', quality: 0.98 },
-  html2canvas:  { scale: 3 },
-  jsPDF:        { unit: 'in', format: size, orientation: 'portrait' }
-};
- 
-// New Promise-based usage:
-html2pdf().from(element).set(opt).save();
+    var container = document.createElement('div');
+    var opt = {
+      margin:       0,
+      filename:     'Subsidiary Ledger.pdf',
+      image:        { type: 'jpeg', quality: 0.98},
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'mm', format: size, orientation: 'portrait' }
+    };
+    
+    // New Promise-based usage:
+    html2pdf().from(element).set(opt).save();
   }
 
   generateExcel(): void{
@@ -106,9 +109,6 @@ html2pdf().from(element).set(opt).save();
     const excelSheet = spreadSheet.addWorksheet('Subsidiary Ledger');
 
         excelSheet.mergeCells(`A1:A4`);
-        excelSheet.getCell('A1').value = 'Logo Here'
-        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
-        excelSheet.getCell('A1').font = { size: 15, bold: true };
         excelSheet.getCell('A1').border = {
           top: { style: 'thin' },
           left: { style: 'thin' },
@@ -116,9 +116,10 @@ html2pdf().from(element).set(opt).save();
         };
 
         const imageId = spreadSheet.addImage({
-          buffer: this.preLogo,
+          base64: this.logoApp,
           extension: 'png'
         });
+    
         excelSheet.addImage(imageId, 'A1:A4');
         
         excelSheet.getColumn('A').width = 12;
@@ -203,13 +204,7 @@ html2pdf().from(element).set(opt).save();
 
         
         // Create the headers
-        const reportHeaders = ['','Particulars', '' , 'Payment this '+this.maxDate, 'Current Balance of '+this.maxDate ];
-        this.pledgers.forEach((data, index) =>{
-          console.log(index)
-        if(index === this.pledgers.length - 1){
-            reportHeaders[2] = 'Starting Balance of '+data.startingBalanceYear;
-          }
-        });
+        const reportHeaders = ['','Particulars', 'Starting Balance of '+ this.lastYear , 'Payment this '+this.maxYear, 'Current Balance of '+this.maxYear ];
         const reportHeaderRow = excelSheet.addRow(reportHeaders);
         const addedRow = excelSheet.getRow(excelSheet.rowCount);
         addedRow.eachCell((cell) => {
@@ -226,37 +221,27 @@ html2pdf().from(element).set(opt).save();
         this.ledgers.forEach(data =>{
           const list = [''];
           this.brokenledgers.forEach(data1=>{
-            if(data1.result.total_balance > 0){
               if(data.result.journal_name === data1.result.journal_name){
                 list[1]= 'Transaction #'+data1.result.transactNumber+ ', '+data1.result.transactDate;
-                this.brokenledgers.forEach(data2=>{
+                this.brokenpledgers.forEach(data2=>{
                   if(data1.result.transactNumber === data2.result.transactNumber){
                     if(data2.result.total_balance > 0){
                       list[2]=data2.result.total_balance;
                     }
                   }
                 });
+                if(data1.result.totald >0){
+                  list[3]=data1.result.totald;
+                }
+                if(data1.result.totalc >0){
+                  list[4]=data1.result.totalc;
+                }
+                excelSheet.addRow(list);
               }
-              list[3]=data1.examplebroken;
-              list[4]=data1.result.total_balance;
-            }
-            excelSheet.addRow(list);
           });
-          const empty = ['','','','',''];
-          const emptyRow = excelSheet.addRow(empty);
-          const addedRow = excelSheet.getRow(excelSheet.rowCount);
-          addedRow.eachCell((cell) => {
-            cell.border = {
-              top: { style: 'thin' },
-              bottom: { style: 'thin' },
-            };
-          });
-
-          const empty2 = [''];
-          const emptyRow1 = excelSheet.addRow(empty2);
 
           const res=['', data.result.name ? data.result.name : data.result.journal_name,
-                      '', data.example, data.result.total_balance];
+                      '', this.calculateDebit(data.result.journal_name), this.calculateCredit(data.result.journal_name)];
           this.pledgers.forEach(data4=>{
             if(data.result.journId === data4.result.journId){
               res[2]=data4.result.total_balance;
@@ -270,34 +255,9 @@ html2pdf().from(element).set(opt).save();
               bottom: { style: 'thin' },
             };
           });
+          const empty2 = [''];
+          const emptyRow1 = excelSheet.addRow(empty2);
         });
-
-        const noteRow = ['Notes:','','','',''];
-        excelSheet.addRow(noteRow);
-        const added1Row = excelSheet.getRow(excelSheet.rowCount);
-          added1Row.eachCell((cell) => {
-            cell.border = {
-              bottom: { style: 'thin' },
-            };
-          });
-
-        this.notes.forEach((data, index) =>{
-          const list = ['', this.notes[index] ,'','',''];
-          excelSheet.addRow(list);
-          
-        });
-
-        const emptyRow = ['','','','',''];
-        excelSheet.addRow(emptyRow);
-        const added2Row = excelSheet.getRow(excelSheet.rowCount);
-          added2Row.eachCell((cell) => {
-            cell.border = {
-              top: { style: 'thin' },
-            };
-          });
-
-        const empty = [''];
-        const empty3Row = excelSheet.addRow(empty);
 
         const generated = ['Generated by', sessionStorage.getItem('name') , 'Date Generated:', this.maxDate, ''];
         const generatedRow = excelSheet.addRow(generated);
@@ -403,34 +363,73 @@ html2pdf().from(element).set(opt).save();
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
     this.maxDate = [year, month, day].join('-');
+    this.maxDate = [year, month, day].join('-');
+    this.maxYear = year;
+    this.lastYear = year - 1;
     return this.maxDate;
   }
+
+
   preLogo:any;
+  generatedLogo:any;
+  logoApp:any;
   id:any;
   getLogo(){
     this.id = localStorage.getItem('userData')
     this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
-      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res;
+      this.generatedLogo = res;
+
+      this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+      .subscribe((imageBlob: Blob) => {
+        console.log(imageBlob);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.logoApp = reader.result as string;
+          // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+        };
+        reader.readAsDataURL(imageBlob);
+      });
     });
   }
   
   chLogo(event:any){
     let fileType = event.target.files[0].type;
     let file =  event.target.files[0];
+    let fileName = event.target.files[0].name;
+
+
     if(fileType.match(/image\/*/)){
       let upload = new FileReader();
       upload.readAsDataURL(event.target.files[0]);
       upload.onload = (event:any)=>(
         this.preLogo = event.target.result
 
+
       );   
+
       var myFormData = new FormData();
       this.id = localStorage.getItem('userData')
       myFormData.append('image', file);
 
       this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
         this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
-        this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+        //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+
+        this.generatedLogo = res;
+
+        this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+        .subscribe((imageBlob: Blob) => {
+          console.log(imageBlob);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            this.logoApp = reader.result as string;
+            // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+          };
+          reader.readAsDataURL(imageBlob);
+        });
       }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});

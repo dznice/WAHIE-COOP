@@ -122,8 +122,8 @@ export class JournalEntryComponent implements OnInit {
     entries: this.builder.array([this.Generaterow(), this.Generaterow()]),
     userId: this.builder.control(this.useid),
     memberNo: this.builder.control(null),
-    totaldebit: this.builder.control(0),
-    totalcredit: this.builder.control(0),
+    totaldebit: this.builder.control('', Validators.required),
+    totalcredit: this.builder.control('', Validators.required),
   });
 
   due = new Date();
@@ -219,8 +219,8 @@ export class JournalEntryComponent implements OnInit {
   Generaterow() {
     return this.builder.group({
       account: this.builder.control('', Validators.required),
-      debit: this.builder.control('', Validators.required),
-      credit: this.builder.control('', Validators.required),
+      debit: this.builder.control(''),
+      credit: this.builder.control(''),
       description: this.builder.control(''),
       name: this.builder.control('', Validators.required),
     });
@@ -242,9 +242,9 @@ export class JournalEntryComponent implements OnInit {
         this.amount.get('credit')?.setValue('');
       }
     } else if (debit > 0) {
-      this.amount.get('credit')?.setValue(0);
+      this.amount.get('credit')?.setValue('');
     } else if (credit > 0) {
-      this.amount.get('debit')?.setValue(0);
+      this.amount.get('debit')?.setValue('');
     }
 
     this.balance_summary();
@@ -266,6 +266,16 @@ export class JournalEntryComponent implements OnInit {
       if (x.debit == '' && x.credit == '') {
         x.debit = 0;
         x.credit = 0;
+        this.total_debit = this.total_debit + x.debit;
+        this.total_credit = this.total_credit + x.credit;
+      }
+      else if (x.debit != '' && x.credit == ''){
+        x.credit = 0;
+        this.total_debit = this.total_debit + x.debit;
+        this.total_credit = this.total_credit + x.credit;
+      }
+      else if (x.debit == '' && x.credit != '') {
+        x.debit = 0;
         this.total_debit = this.total_debit + x.debit;
         this.total_credit = this.total_credit + x.credit;
       } else {

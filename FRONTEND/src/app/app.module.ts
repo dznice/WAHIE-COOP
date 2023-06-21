@@ -64,7 +64,6 @@ import { FilterMemberPipe } from './admin/accounting/filter-member.pipe';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { JournalTransacComponent } from './admin/accounting/journal-transac/journal-transac.component';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule, SPINNER } from 'ngx-ui-loader';
-import { ExportAsModule } from 'ngx-export-as';
 import { GenerateLedgerComponent } from './admin/reports/generate-ledger/generate-ledger.component';
 import { TrialBalanceComponent } from './admin/reports/trial-balance/trial-balance.component';
 import { SlAccountsComponent } from './admin/reports/sl-accounts/sl-accounts.component';
@@ -146,7 +145,6 @@ import { MinusSignToParens } from './admin/reports/minus-sign-to-parens.pipe';
     NgSelectModule,
     NgxUiLoaderModule,
     NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
-    ExportAsModule
   ],
   providers: [AuthGuardService, BnNgIdleService],
   bootstrap: [AppComponent]

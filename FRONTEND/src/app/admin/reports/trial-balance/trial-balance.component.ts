@@ -55,16 +55,17 @@ export class TrialBalanceComponent implements OnInit {
 
   download(size:any){
     var element = document.getElementById('contentToConvert');
-var opt = {
-  margin:       0,
-  filename:     'output.pdf',
-  image:        { type: 'jpeg', quality: 0.98 },
-  html2canvas:  { scale: 3 },
-  jsPDF:        { unit: 'in', format: size, orientation: 'portrait' }
-};
- 
-// New Promise-based usage:
-html2pdf().from(element).set(opt).save();
+    var container = document.createElement('div');
+    var opt = {
+      margin:       0,
+      filename:     'Trial Balance.pdf',
+      image:        { type: 'jpeg', quality: 0.98},
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'mm', format: size, orientation: 'portrait' }
+    };
+    
+    // New Promise-based usage:
+    html2pdf().from(element).set(opt).save();
   }
 
   generateExcel(): void{
@@ -89,11 +90,10 @@ html2pdf().from(element).set(opt).save();
         };
 
         const imageId = spreadSheet.addImage({
-          buffer: this.preLogo,
+          base64: this.logoApp,
           extension: 'png'
         });
         excelSheet.addImage(imageId, 'A1:A4');
-        
 
         excelSheet.getColumn('A').width = 15;
         excelSheet.getColumn('B').width = 35;
@@ -447,36 +447,70 @@ html2pdf().from(element).set(opt).save();
   }
   
   preLogo:any;
+  generatedLogo:any;
+  logoApp:any;
   id:any;
   getLogo(){
     this.id = localStorage.getItem('userData')
     this.http.get('http://127.0.0.1:8000/api/getLogo/' + this.id).subscribe((res: any) => {
-      this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+      //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res;
+      this.generatedLogo = res;
+
+      this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+      .subscribe((imageBlob: Blob) => {
+        console.log(imageBlob);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.logoApp = reader.result as string;
+          // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+        };
+        reader.readAsDataURL(imageBlob);
+      });
     });
   }
   
   chLogo(event:any){
     let fileType = event.target.files[0].type;
     let file =  event.target.files[0];
+    let fileName = event.target.files[0].name;
+
+
     if(fileType.match(/image\/*/)){
       let upload = new FileReader();
       upload.readAsDataURL(event.target.files[0]);
       upload.onload = (event:any)=>(
         this.preLogo = event.target.result
 
-      
+
       );   
+
       var myFormData = new FormData();
       this.id = localStorage.getItem('userData')
       myFormData.append('image', file);
 
       this.http.post('http://127.0.0.1:8000/api/chLogo/'+ this.id,myFormData).subscribe((res: any) => {
         this.toast.success({detail:'Success',summary:'Logo changed',duration:2000, sticky:false,position:'tr'});
-        this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+        //this.preLogo= 'http://127.0.0.1:8000/storage/image/'+ res
+
+        this.generatedLogo = res;
+
+        this.http.get('http://127.0.0.1:8000/api/images/'+res, { responseType: 'blob' })
+        .subscribe((imageBlob: Blob) => {
+          console.log(imageBlob);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            this.logoApp = reader.result as string;
+            // Proceed with exporting to PDF, ensuring that the captured HTML includes the image using the data URL
+
+          };
+          reader.readAsDataURL(imageBlob);
+        });
       }); 
     }else{
       this.toast.error({detail:'Error',summary:'Please upload correct image format',duration:2000, sticky:false,position:'tr'});
     }
+
   }
 
   formatDate() {

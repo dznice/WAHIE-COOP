@@ -83,6 +83,7 @@ Route::post('/dueDateSMS', [App\Http\Controllers\userController::class, 'dueDate
 Route::post('/sendDate', [App\Http\Controllers\userController::class, 'sendDate']);
 Route::get('/getLogo/{id}', [App\Http\Controllers\userController::class, 'getLogo']);
 Route::post('/chLogo/{id}', [App\Http\Controllers\userController::class, 'chLogo']);
+Route::get('images/{filename}', [App\Http\Controllers\userController::class, 'showImage']);
 
 
 
