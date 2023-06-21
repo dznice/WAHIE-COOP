@@ -72,7 +72,7 @@ export class TrialBalanceComponent implements OnInit {
     // Create a new spreadsheet:
       const spreadSheet = new ExcelJS.Workbook();
       spreadSheet.creator = 'WAH-COOP';
-      spreadSheet.lastModifiedBy = 'Pogi';
+      spreadSheet.lastModifiedBy = 'Admin';
       spreadSheet.created = new Date();
       spreadSheet.modified = new Date();
 
@@ -80,9 +80,6 @@ export class TrialBalanceComponent implements OnInit {
     const excelSheet = spreadSheet.addWorksheet('Trial Balance');
 
         excelSheet.mergeCells(`A1:A4`);
-        excelSheet.getCell('A1').value = 'Logo Here'
-        excelSheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle'};
-        excelSheet.getCell('A1').font = { size: 15, bold: true };
         excelSheet.getCell('A1').border = {
           top: { style: 'thin' },
           left: { style: 'thin' },

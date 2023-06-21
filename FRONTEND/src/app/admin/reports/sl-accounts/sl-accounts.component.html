@@ -80,6 +80,18 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let item of ledgers">
+            <tr>
+              <td>{{ item.result.name ? item.result.name : item.result.journal_name }}</td>
+              <td class="td-bal">
+                <ng-container *ngFor="let items of pledgers">
+                  <ng-container *ngIf="item.result.journId === items.result.journId">
+                    {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
+                  </ng-container>
+                </ng-container>
+              </td>
+                <td class="td-bald">{{ calculateDebit(item.result.journal_name)  | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+                <td class="td-bald"></td>
+            </tr>
             <ng-container *ngFor="let itemb of brokenledgers">
               <tr>
                 <ng-container *ngIf="item.result.journal_name === itemb.result.journal_name">
@@ -122,9 +134,8 @@
                 </ng-container>
               </tr>
             </ng-container>
-            
-            <tr>
-              <td>{{ item.result.name ? item.result.name : item.result.journal_name }}</td>
+            <tr class="tr-total">
+            <td class="totass">Total Amount Recieved</td>
               <td class="td-bal">
                 <ng-container *ngFor="let items of pledgers">
                   <ng-container *ngIf="item.result.journId === items.result.journId">
@@ -132,9 +143,23 @@
                   </ng-container>
                 </ng-container>
               </td>
-                <td class="td-bald">{{ calculateDebit(item.result.journal_name)  | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+                <td class="td-bald"></td>
                 <td class="td-bald">{{ calculateCredit(item.result.journal_name) | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
             </tr>
+
+            <tr class="tr-total">
+              <td class="totass">Total Balance</td>
+                <td class="td-baldz">
+                  <ng-container *ngFor="let items of pledgers">
+                    <ng-container *ngIf="item.result.journId === items.result.journId">
+                      {{ items.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
+                    </ng-container>
+                  </ng-container>
+                </td>
+                  <td class="td-baldz">{{ item.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}</td>
+                  <td class="td-baldz"></td>
+              </tr>
+            
           </ng-container>
           
         </tbody>
