@@ -45,6 +45,11 @@ export class SlAccountsComponent implements OnChanges {
   public totalSc: number = 0;
   public totalSd: number = 0;
 
+  totalcredNull = 1
+  totaldebNull = 1
+
+  name = 'hello'
+
   constructor( private wahieService:WahieService, private toast:NgToastService, private http:HttpClient){
 
   }

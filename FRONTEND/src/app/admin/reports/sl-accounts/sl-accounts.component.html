@@ -72,9 +72,9 @@
         <thead>
           <tr>
             <th>Particulars</th>
-            <th class="th-bal">Balance of {{ oneYearAgo | date:'y'}}</th>
-            <th class="th-bal" >Debit of {{ maxDate | date:'y' }}</th>
-            <th class="th-bal2" colspan="2">Credit of {{ maxDate | date:'y' }}</th>
+            <th class="th-bal">Balance as of {{ oneYearAgo | date:'y'}}</th>
+            <th class="th-bal" >Loan Amount</th>
+            <th class="th-bal2" colspan="2">Payment Recieved</th>
             
           </tr>
         </thead>
@@ -83,17 +83,30 @@
             <ng-container *ngFor="let itemb of brokenledgers">
               <tr>
                 <ng-container *ngIf="item.result.journal_name === itemb.result.journal_name">
-                  <td class="td-baln" > Transaction #{{ itemb.result.transactNumber }}, {{ itemb.result.transactDate | date:'mediumDate' }}</td>
+                  <td class="td-baln" *ngIf="itemb.result.totald > 0">
+                   
+                    <ng-container>Transaction #{{ itemb.result.payables_id }}, {{ itemb.result.transactDate | date:'mediumDate' }}</ng-container>
+            
+                  </td>
+                  <td class="td-baln" *ngIf="itemb.result.totalc > 0">
+                   
+                    <ng-container >Payment #{{ itemb.result.payables_id }}, {{ itemb.result.transactDate | date:'mediumDate' }}</ng-container>
+                 
+                  </td>
                   <td class="td-baln">
                     
                   <ng-container *ngFor="let itemsb of brokenpledgers">
+
                     <ng-container *ngIf="itemb.result.transactNumber === itemsb.result.transactNumber">
+
                       <ng-container *ngIf="itemsb.result.total_balance > 0">
                         {{ itemsb.result.total_balance | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}
                       </ng-container>
                     </ng-container>
+                    
                   </ng-container>
                   </td>
+
                   <td class="td-bals" >
                   <ng-container *ngIf="itemb.result.totald >0">
                     {{ itemb.result.totald | currency:'PHP':'symbol-narrow':'1.2-2' | minusSignToParens }}

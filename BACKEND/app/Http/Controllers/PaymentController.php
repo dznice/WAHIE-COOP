@@ -114,7 +114,7 @@ class PaymentController extends Controller
                     foreach ($paymentData['payables'] as $key => $value) {
                         $matchCredit = new Credits();
                         $matchCredit->users_id = $request->userId;
-                        $matchCredit->payables_id = $request->paysId;
+                        $matchCredit->payables_id = $pays;
                         $matchCredit->credit_amount = $value['credit'];
                         $matchCredit->debit_amount = $value['debit'];
                         $matchCredit->journals_id = $value['account'];
@@ -128,7 +128,7 @@ class PaymentController extends Controller
                     $credits->credit_amount = 0;
                     $credits->debit_amount = 0;
                     $credits-> journals_id = null;
-                    $credits-> payables_id = $request->paysId;
+                    $credits-> payables_id = $pays;
                     $credits->save();
                     $creds = $credits->id;
 

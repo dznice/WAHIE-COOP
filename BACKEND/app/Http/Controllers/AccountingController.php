@@ -923,8 +923,8 @@ public function totaljourmem(Request $request)
         $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status','credits.credit_amount as credAmount', 'credits.debit_amount as debAmount', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }else{
         $totalsQuery->where('credits.status', 'CloseTransact');
-        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status','credits.credit_amount','credits.debit_amount');
-        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date','credits.payables_id','credits.status','credits.credit_amount as credAmount', 'credits.debit_amount as debAmount', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
+        $totalsQuery->groupBy('lib_journals.id', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', 'transactions.id','credits.payables_id','credits.status','credits.credit_amount','credits.debit_amount');
+        $totalsQuery->select('lib_journals.id as journId', 'lib_journals.journal_name', 'lib_journals.journal_type', 'members.id as memberId', 'members.first_name', 'payables.transaction_number', 'transactions.transaction_date', 'transactions.id as transacId','credits.payables_id','credits.status','credits.credit_amount as credAmount', 'credits.debit_amount as debAmount', DB::raw('SUM(credits.credit_amount) as total_credit_amount'), DB::raw('SUM(credits.debit_amount) as total_debit_amount'));
     }
 
     $totals = $totalsQuery->get();
@@ -1050,6 +1050,7 @@ public function totaljourmem(Request $request)
 
         $entry = [
             'journId' => $total->journId,
+            'transacId' => $total->transacId,
             'transactNumber' => $total->transaction_number,
             'transactDate' => $total->transaction_date,
             'journal_name' => $total->journal_name,
