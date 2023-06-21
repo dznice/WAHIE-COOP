@@ -328,8 +328,10 @@ export class AddPaymentComponent implements OnInit {
       }
     } else if (debit > 0) {
       this.amount.get('credit')?.setValue('');
+      this.amount.get('debit')?.setValue(debit.toFixed(2));
     } else if (credit > 0) {
       this.amount.get('debit')?.setValue('');
+      this.amount.get('credit')?.setValue(credit.toFixed(2));
     }
 
     this.balance_summary();
@@ -349,11 +351,13 @@ export class AddPaymentComponent implements OnInit {
       }
       else if (x.debit != '' && x.credit == ''){
         x.credit = 0;
+        x.debit = parseFloat(x.debit);
         this.total_debit = this.total_debit + x.debit;
         this.total_credit = this.total_credit + x.credit;
       }
       else if (x.debit == '' && x.credit != '') {
         x.debit = 0;
+        x.credit = parseFloat(x.credit);
         this.total_debit = this.total_debit + x.debit;
         this.total_credit = this.total_credit + x.credit;
       } else {

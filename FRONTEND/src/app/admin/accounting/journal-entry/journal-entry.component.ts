@@ -27,6 +27,7 @@ export class JournalEntryComponent implements OnInit {
   total_debit: any;
   total_credit: any;
   maxDate: any;
+  formattedDebit: string = '';
 
   ngOnInit(): void {
     this.showLibJournal();
@@ -42,6 +43,10 @@ export class JournalEntryComponent implements OnInit {
       this.journalEntryForm.patchValue({ journal_no: newJournalNo });
     }
   }
+
+  // setTwoNumberDecimal($event) {
+  //   $event.target.value = parseFloat($event.target.value).toFixed(2);
+  // }
 
   close(event: MouseEvent) {
     event.preventDefault();
@@ -243,8 +248,10 @@ export class JournalEntryComponent implements OnInit {
       }
     } else if (debit > 0) {
       this.amount.get('credit')?.setValue('');
+      this.amount.get('debit')?.setValue(debit.toFixed(2));
     } else if (credit > 0) {
       this.amount.get('debit')?.setValue('');
+      this.amount.get('credit')?.setValue(credit.toFixed(2));
     }
 
     this.balance_summary();
@@ -271,11 +278,13 @@ export class JournalEntryComponent implements OnInit {
       }
       else if (x.debit != '' && x.credit == ''){
         x.credit = 0;
+        x.debit = parseFloat(x.debit);
         this.total_debit = this.total_debit + x.debit;
         this.total_credit = this.total_credit + x.credit;
       }
       else if (x.debit == '' && x.credit != '') {
         x.debit = 0;
+        x.credit = parseFloat(x.credit);
         this.total_debit = this.total_debit + x.debit;
         this.total_credit = this.total_credit + x.credit;
       } else {
