@@ -257,16 +257,15 @@ export class SlAccountsComponent implements OnChanges {
                     }
                   }
                 });
-                console.log(data1.result.totald > 0, data1.result.totalc > 0);
 
                 if(data1.result.totald > 0){
                   list[3]=data1.result.totald;
-                  //list[4]=data1.result.totalc;
+                  list[4]=data1.result.totalc;
                 }
                 
                 if(data1.result.totalc > 0){
                   list[4]=data1.result.totalc;
-                  //list[3]=data1.result.totald;
+                  list[3]=data1.result.totald;
                 }
 
                 excelSheet.addRow(list);
